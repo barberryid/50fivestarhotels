@@ -1,0 +1,192 @@
+---
+import type { HotelSeasonality } from '../data/hotelSeasonality';
+
+interface Props {
+  seasonality: HotelSeasonality;
+}
+
+const { seasonality } = Astro.props;
+const strips = [seasonality.weather, seasonality.price];
+---
+
+<section class="seasonality-section" aria-labelledby="seasonality-heading">
+  <div class="seasonality-header">
+    <p class="seasonality-kicker">Seasonality</p>
+    <h2 id="seasonality-heading">When to go</h2>
+  </div>
+
+  <div class="seasonality-cards">
+    {strips.map(strip => (
+      <article class="seasonality-card">
+        <div class="seasonality-copy">
+          <h3>{strip.title}</h3>
+          <p>{strip.summary}</p>
+          {strip.notes && <p class="seasonality-note">{strip.notes}</p>}
+        </div>
+
+        <div class="seasonality-scroll" role="region" aria-label={`${strip.title} by month`}>
+          <ol class="seasonality-months">
+            {strip.months.map(month => (
+              <li class="seasonality-month" data-label={month.label}>
+                <span class="seasonality-month-name">{month.month}</span>
+                <span class="seasonality-month-label">{month.label}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .seasonality-section {
+    margin: 2rem 0;
+  }
+
+  .seasonality-header {
+    margin-bottom: 0.9rem;
+  }
+
+  .seasonality-kicker {
+    color: #b88a44;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .seasonality-header h2 {
+    color: #1d2433;
+    font-size: clamp(1.45rem, 2.5vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .seasonality-cards {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .seasonality-card {
+    background: #ffffff;
+    border: 1px solid rgba(29, 36, 51, 0.08);
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 30px rgba(29, 36, 51, 0.04);
+    padding: 1rem;
+  }
+
+  .seasonality-copy {
+    display: grid;
+    gap: 0.35rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .seasonality-copy h3 {
+    color: #1d2433;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .seasonality-copy p {
+    color: rgba(29, 36, 51, 0.72);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .seasonality-copy .seasonality-note {
+    color: #6b7280;
+    font-size: 0.78rem;
+  }
+
+  .seasonality-scroll {
+    overflow-x: auto;
+    padding-bottom: 0.15rem;
+  }
+
+  .seasonality-months {
+    display: grid;
+    gap: 0.35rem;
+    grid-template-columns: repeat(12, minmax(4.6rem, 1fr));
+    list-style: none;
+    margin: 0;
+    min-width: 58rem;
+    padding: 0;
+  }
+
+  .seasonality-month {
+    align-items: center;
+    background: #f8f5ef;
+    border: 1px solid rgba(29, 36, 51, 0.1);
+    border-radius: 0.45rem;
+    color: #1d2433;
+    display: grid;
+    gap: 0.15rem;
+    justify-items: center;
+    min-height: 3.7rem;
+    padding: 0.45rem 0.35rem;
+    text-align: center;
+  }
+
+  .seasonality-month-name,
+  .seasonality-month-label {
+    display: block;
+    line-height: 1.1;
+  }
+
+  .seasonality-month-name {
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .seasonality-month-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+  }
+
+  .seasonality-month[data-label="Best"],
+  .seasonality-month[data-label="Cheapest"] {
+    background: #1f9a58;
+    border-color: #168148;
+    color: #ffffff;
+  }
+
+  .seasonality-month[data-label="Good"],
+  .seasonality-month[data-label="Good value"] {
+    background: #eaf4dd;
+    border-color: #cfe4b6;
+    color: #2f5d2f;
+  }
+
+  .seasonality-month[data-label="Possible"],
+  .seasonality-month[data-label="Average"] {
+    background: #fbf7ec;
+    border-color: #eadfc5;
+    color: #1d2433;
+  }
+
+  .seasonality-month[data-label="Avoid"],
+  .seasonality-month[data-label="Expensive"] {
+    background: #fae9dc;
+    border-color: #efcfb7;
+    color: #9a3f08;
+  }
+
+  .seasonality-month[data-label="Most expensive"] {
+    background: #f4d4ce;
+    border-color: #e7ada3;
+    color: #8f241c;
+  }
+
+  @media (min-width: 900px) {
+    .seasonality-card {
+      padding: 1.1rem;
+    }
+  }
+</style>

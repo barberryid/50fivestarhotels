@@ -4,6 +4,8 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Badge from '../components/Badge.astro';
 import ValueScore from '../components/ValueScore.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import SeasonalityCards from '../components/SeasonalityCards.astro';
+import { hotelSeasonality } from '../data/hotelSeasonality';
 
 interface Props {
   hotel: {
@@ -46,6 +48,7 @@ interface Props {
 
 const { hotel, relatedHotels = [] } = Astro.props;
 const gallery = hotel.gallery?.filter(image => image.src) ?? [];
+const seasonality = hotelSeasonality[hotel.slug];
 ---
 
 <BaseLayout title={hotel.seoTitle} description={hotel.seoDescription}>
@@ -114,6 +117,8 @@ const gallery = hotel.gallery?.filter(image => image.src) ?? [];
             </div>
           </div>
         </header>
+
+        {seasonality && <SeasonalityCards seasonality={seasonality} />}
 
         <!-- Highlights -->
         <div class="bg-[#58745A]/6 rounded-2xl p-6 mb-8">
