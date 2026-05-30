@@ -1,221 +1,174 @@
 ---
-const featuredHotels = [
-  {
-    name: "Hotel Majapahit Surabaya",
-    city: "Surabaya, Indonesia",
-    tier: "Often under €100",
-    description:
-      "A heritage-value five-star hotel with colonial architecture, strong atmosphere, and one of the best affordable-luxury stories in Java."
-  },
-  {
-    name: "The Phoenix Hotel Yogyakarta",
-    city: "Yogyakarta, Indonesia",
-    tier: "Often under €100 / €200",
-    description:
-      "A characterful heritage hotel near Borobudur and Prambanan, ideal for travellers who want culture, comfort, and strong value."
-  },
-  {
-    name: "The Raweekanlaya Bangkok",
-    city: "Bangkok, Thailand",
-    tier: "Often under €200",
-    description:
-      "A calm heritage-style retreat in Bangkok with gardens, wellness appeal, and a softer alternative to generic city hotels."
-  }
-];
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HotelCard from '../components/HotelCard.astro';
+import PriceTierCard from '../components/PriceTierCard.astro';
+import HotelComparisonTable from '../components/HotelComparisonTable.astro';
+
+const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
+allHotels.sort((a, b) => a.data.rank - b.data.rank);
+
+const featuredSlugs = ['hotel-majapahit-surabaya','phoenix-hotel-yogyakarta','majestic-hotel-kuala-lumpur','stamba-hotel-tbilisi','raweekanlaya-bangkok'];
+const featured = allHotels.filter(h => featuredSlugs.includes(h.data.slug));
+
+const under100Count = allHotels.filter(h => h.data.budgetTier === 'Under €100').length;
+const under200Count = allHotels.filter(h => h.data.budgetTier === 'Under €200').length;
+const under250Count = allHotels.filter(h => h.data.budgetTier === 'Under €250').length;
+
+const tableHotels = allHotels.map(h => ({
+  slug: h.data.slug,
+  rank: h.data.rank,
+  title: h.data.title,
+  city: h.data.city,
+  budgetTier: h.data.budgetTier,
+  valueScore: h.data.valueScore,
+  verdict: h.data.verdict,
+}));
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>50 Five-Star Hotels Without Five-Star Prices</title>
-    <meta
-      name="description"
-      content="Affordable five-star and near-five-star hotels around the world: luxury hotels, heritage hotels, spa hotels and city hotels that are unusually good value."
-    />
-  </head>
-
-  <body>
-    <main class="page">
-      <section class="hero">
-        <p class="eyebrow">Affordable luxury travel</p>
-        <h1>Five-star hotels without five-star prices.</h1>
-        <p class="intro">
-          50 Five-Star Hotels is a practical guide to luxury and luxury-adjacent
-          hotels that often cost far less than travellers expect.
+<BaseLayout
+  title="50 Five-Star Hotels | Five-Star Hotels Without Five-Star Prices"
+  description="A luxury editorial guide to affordable five-star and near-five-star hotels around the world, from heritage hotels in Java to spa stays, city hotels and smart splurges."
+>
+  <main>
+    <!-- Hero -->
+    <section class="bg-[#F8F5EF]">
+      <div class="max-w-6xl mx-auto px-5 py-20 md:py-28">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-5">Affordable luxury travel</p>
+        <h1 class="font-serif text-5xl md:text-7xl font-bold text-[#1D2433] leading-[0.95] tracking-tight max-w-3xl">
+          Five-star hotels without five-star prices.
+        </h1>
+        <p class="text-[#6B7280] text-xl mt-8 leading-relaxed max-w-2xl">
+          A luxury editorial guide to hotels where the price feels surprisingly modest for the setting, service, history or sense of occasion.
         </p>
-        <div class="actions">
-          <a href="#featured">View featured hotels</a>
-          <a href="#method">How we choose hotels</a>
+        <div class="flex flex-wrap gap-3 mt-10">
+          <a href="#featured" class="inline-flex items-center bg-[#1D2433] text-white font-semibold py-3.5 px-7 rounded-full hover:bg-[#B88A44] transition-colors no-underline text-sm">
+            Explore the best-value hotels
+          </a>
+          <a href="/under-100" class="inline-flex items-center bg-transparent text-[#1D2433] font-semibold py-3.5 px-7 rounded-full border border-[#1D2433]/20 hover:border-[#B88A44] hover:text-[#B88A44] transition-colors no-underline text-sm">
+            See hotels under €100
+          </a>
         </div>
-      </section>
+        <p class="text-[#6B7280] text-xs mt-5 leading-relaxed">
+          Prices change constantly. Every hotel here should be checked by date, room type, taxes and cancellation policy before booking.
+        </p>
+      </div>
+    </section>
 
-      <section class="section" id="featured">
-        <h2>Featured affordable five-star hotels</h2>
-        <div class="grid">
-          {featuredHotels.map((hotel) => (
-            <article class="card">
-              <p class="tier">{hotel.tier}</p>
-              <h3>{hotel.name}</h3>
-              <p class="city">{hotel.city}</p>
-              <p>{hotel.description}</p>
-            </article>
+    <!-- Editorial intro -->
+    <section class="bg-white border-y border-[#1D2433]/6">
+      <div class="max-w-4xl mx-auto px-5 py-16">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-5">The idea</p>
+        <p class="text-[#1D2433]/75 text-lg leading-relaxed mb-5">
+          Luxury is not priced evenly around the world. In some cities, a five-star or near-five-star hotel can cost less than a mid-range room elsewhere. The trick is knowing which hotels are genuinely worth considering — and which are simply cheap because the standard, location or maintenance is weaker than the star rating suggests.
+        </p>
+        <p class="text-[#1D2433]/75 text-lg leading-relaxed">
+          50 Five-Star Hotels focuses on the places where price, setting and experience come together: heritage hotels in Java, spa hotels in underrated European cities, Nile-side resorts in Luxor, design hotels in the Caucasus and city hotels that make an affordable trip feel far more special.
+        </p>
+      </div>
+    </section>
+
+    <!-- Editorial caution -->
+    <section class="bg-[#1D2433]/4 border-b border-[#1D2433]/6">
+      <div class="max-w-4xl mx-auto px-5 py-8">
+        <p class="text-[#1D2433]/70 text-sm leading-relaxed">
+          <strong class="text-[#1D2433]">A note on five-star labels:</strong> A five-star designation does not always mean international luxury. Some hotels here are true five-star properties; others are local or booking-site five-star hotels that are still interesting because the value is unusually strong. Each profile explains the difference clearly.
+        </p>
+      </div>
+    </section>
+
+    <!-- Price tier cards -->
+    <section class="max-w-6xl mx-auto px-5 py-20">
+      <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Browse by price</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1D2433] mb-10">Find hotels by budget</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <PriceTierCard
+          tier="Under €100"
+          href="/under-100"
+          tagline="Exceptional budget luxury"
+          description="The hotels that make travellers look twice. Five-star or near-five-star stays that can often appear below €100 outside peak dates."
+          count={under100Count}
+        />
+        <PriceTierCard
+          tier="Under €200"
+          href="/under-200"
+          tagline="Affordable indulgence"
+          description="Better locations, stronger brands and more reliable comfort. The largest and most diverse tier in the collection."
+          count={under200Count}
+        />
+        <PriceTierCard
+          tier="Under €250"
+          href="/under-250"
+          tagline="Smart splurge"
+          description="Special hotels that still feel restrained compared with normal luxury prices. The best for design and setting."
+          count={under250Count}
+        />
+      </div>
+    </section>
+
+    <!-- Featured hotels -->
+    <section id="featured" class="bg-[#F8F5EF] py-20">
+      <div class="max-w-6xl mx-auto px-5">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Start here</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1D2433] mb-4">Hotels that prove the idea.</h2>
+        <p class="text-[#6B7280] text-lg mb-10 max-w-2xl">Five hotels from the launch collection — chosen because each one makes the case for affordable luxury in a different way.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featured.map(h => (
+            <HotelCard hotel={h.data} featured={true} />
           ))}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section method" id="method">
-        <h2>How we choose hotels</h2>
-        <p>
-          We look for hotels where price, place, and experience combine into a
-          compelling travel idea. A hotel does not need to be perfect, but it
-          should offer unusually strong value for travellers who want comfort,
-          atmosphere, location, or a memorable stay.
-        </p>
-        <p>
-          We are honest about trade-offs: some hotels are true international
-          five-star properties, while others are local or booking-site five-star
-          hotels that are better described as upper-upscale bargains.
-        </p>
-      </section>
-    </main>
-  </body>
-</html>
+    <!-- Comparison table -->
+    <section class="max-w-6xl mx-auto px-5 py-20">
+      <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">The full list</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1D2433] mb-4">All 20 launch hotels at a glance</h2>
+      <p class="text-[#6B7280] text-lg mb-10 max-w-2xl">Ranked by value score. Click any hotel for the full editorial profile.</p>
+      <HotelComparisonTable hotels={tableHotels} title="" />
+      <div class="mt-8 text-center">
+        <a href="/destinations" class="inline-flex items-center text-[#B88A44] font-semibold hover:underline no-underline">
+          Browse all hotels by destination →
+        </a>
+      </div>
+    </section>
 
-<style>
-  :root {
-    --bg: #f8f5ef;
-    --text: #1d2433;
-    --muted: #6b7280;
-    --gold: #b88a44;
-    --green: #58745a;
-    --card: #ffffff;
-  }
+    <!-- How we choose -->
+    <section class="bg-white border-y border-[#1D2433]/6 py-20">
+      <div class="max-w-4xl mx-auto px-5">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Our method</p>
+        <h2 class="font-serif text-3xl font-bold text-[#1D2433] mb-8">How we choose hotels</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          {[
+            { factor: 'Price and value', desc: 'How does the rate compare to the local five-star market? What does the money actually buy?' },
+            { factor: 'Hotel character', desc: 'Is this a hotel with a genuine sense of place, or a generic box with a star rating?' },
+            { factor: 'Location and destination', desc: 'Is the city or destination interesting enough to justify the trip? What is there to do nearby?' },
+          ].map(item => (
+            <div>
+              <h3 class="font-serif text-lg font-bold text-[#1D2433] mb-2">{item.factor}</h3>
+              <p class="text-[#6B7280] text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+        <div class="mt-8">
+          <a href="/methodology" class="text-[#B88A44] font-semibold hover:underline no-underline text-sm">
+            Read the full methodology →
+          </a>
+        </div>
+      </div>
+    </section>
 
-  body {
-    margin: 0;
-    font-family:
-      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-  }
-
-  .page {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 48px 24px 72px;
-  }
-
-  .hero {
-    padding: 72px 0 56px;
-    max-width: 820px;
-  }
-
-  .eyebrow {
-    color: var(--gold);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.78rem;
-  }
-
-  h1 {
-    font-size: clamp(2.7rem, 7vw, 5.6rem);
-    line-height: 0.95;
-    margin: 16px 0 24px;
-    letter-spacing: -0.06em;
-  }
-
-  .intro {
-    font-size: 1.25rem;
-    line-height: 1.7;
-    color: var(--muted);
-    max-width: 680px;
-  }
-
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 32px;
-  }
-
-  .actions a {
-    display: inline-flex;
-    padding: 13px 18px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 700;
-    background: var(--text);
-    color: white;
-  }
-
-  .actions a + a {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid rgba(29, 36, 51, 0.22);
-  }
-
-  .section {
-    margin-top: 48px;
-  }
-
-  h2 {
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    letter-spacing: -0.04em;
-    margin-bottom: 24px;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-  }
-
-  .card {
-    background: var(--card);
-    border-radius: 24px;
-    padding: 26px;
-    box-shadow: 0 18px 45px rgba(29, 36, 51, 0.08);
-  }
-
-  .tier {
-    display: inline-flex;
-    color: var(--green);
-    background: rgba(88, 116, 90, 0.1);
-    padding: 7px 11px;
-    border-radius: 999px;
-    font-weight: 700;
-    font-size: 0.82rem;
-  }
-
-  h3 {
-    font-size: 1.35rem;
-    margin: 20px 0 6px;
-  }
-
-  .city {
-    color: var(--gold);
-    font-weight: 700;
-  }
-
-  .card p,
-  .method p {
-    line-height: 1.65;
-  }
-
-  .method {
-    max-width: 760px;
-  }
-
-  @media (max-width: 820px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
-
-    .page {
-      padding: 32px 18px 56px;
-    }
-  }
-</style>
+    <!-- Footer CTA -->
+    <section class="max-w-6xl mx-auto px-5 py-20 text-center">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1D2433] mb-4">
+        Find the hotel where the price feels mispriced.
+      </h2>
+      <p class="text-[#6B7280] text-lg mb-8 max-w-xl mx-auto">
+        Twenty hotels across Southeast Asia, Europe, the Middle East and the Caucasus — each one chosen because the value case is genuinely interesting.
+      </p>
+      <a href="/destinations" class="inline-flex items-center bg-[#1D2433] text-white font-semibold py-4 px-8 rounded-full hover:bg-[#B88A44] transition-colors no-underline">
+        Browse all 20 launch hotels
+      </a>
+    </section>
+  </main>
+</BaseLayout>

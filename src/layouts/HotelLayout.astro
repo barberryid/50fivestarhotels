@@ -1,0 +1,206 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Badge from '../components/Badge.astro';
+import ValueScore from '../components/ValueScore.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+
+interface Props {
+  hotel: {
+    title: string;
+    slug: string;
+    city: string;
+    country: string;
+    region: string;
+    budgetTier: string;
+    typicalPriceRange: string;
+    hotelType: string;
+    fiveStarStatus: string;
+    bestFor: string[];
+    valueScore: number;
+    verdict: string;
+    bookingUrl: string;
+    highlights: string[];
+    cautions: string[];
+    bestNearbyAttraction: string;
+    foodAngle: string;
+    seoTitle: string;
+    seoDescription: string;
+  };
+  relatedHotels?: Array<{slug: string; title: string; city: string; budgetTier: string}>;
+}
+
+const { hotel, relatedHotels = [] } = Astro.props;
+---
+
+<BaseLayout title={hotel.seoTitle} description={hotel.seoDescription}>
+  <main class="max-w-6xl mx-auto px-5 py-10">
+    <!-- Breadcrumbs -->
+    <div class="mb-8">
+      <Breadcrumbs crumbs={[
+        { label: 'Home', href: '/' },
+        { label: 'Hotels', href: '/destinations' },
+        { label: hotel.city, href: `/destinations#${hotel.city.toLowerCase().replace(/\s/g, '-')}` },
+        { label: hotel.title }
+      ]} />
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_320px] gap-12">
+      <!-- Main content -->
+      <article>
+        <!-- Hero image -->
+        <ImagePlaceholder
+          hotelName={hotel.title}
+          city={hotel.city}
+          country={hotel.country}
+          aspectRatio="aspect-[16/8]"
+        />
+
+        <!-- Hotel header -->
+        <header class="mt-8 mb-8">
+          <div class="flex flex-wrap gap-2 mb-4">
+            <Badge label={hotel.budgetTier} variant="tier" />
+            <Badge label={hotel.fiveStarStatus} variant="type" />
+          </div>
+          <h1 class="font-serif text-3xl md:text-4xl font-bold text-[#1D2433] leading-tight">{hotel.title}</h1>
+          <p class="text-[#B88A44] font-semibold mt-2">{hotel.city}, {hotel.country}</p>
+          <p class="text-[#6B7280] text-sm mt-1">{hotel.typicalPriceRange}</p>
+
+          <div class="mt-6 flex flex-wrap items-center gap-6">
+            <ValueScore score={hotel.valueScore} verdict={hotel.verdict} size="lg" />
+            <div class="flex flex-col gap-2">
+              <a
+                href={hotel.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center bg-[#1D2433] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#B88A44] transition-colors no-underline text-sm"
+              >
+                Check current rates on Booking.com
+              </a>
+              <p class="text-[10px] text-[#6B7280] leading-relaxed">
+                Prices change constantly. Check the final rate, taxes, room type and cancellation policy before booking.
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <!-- Highlights -->
+        <div class="bg-[#58745A]/6 rounded-2xl p-6 mb-8">
+          <h2 class="font-serif text-lg font-bold text-[#1D2433] mb-3">Why consider this hotel</h2>
+          <ul class="space-y-2">
+            {hotel.highlights.map(h => (
+              <li class="flex items-start gap-3 text-sm text-[#1D2433]/80">
+                <svg class="w-5 h-5 text-[#58745A] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                {h}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Cautions -->
+        {hotel.cautions.length > 0 && (
+          <div class="bg-[#B88A44]/6 rounded-2xl p-6 mb-8">
+            <h2 class="font-serif text-lg font-bold text-[#1D2433] mb-3">Worth knowing before you book</h2>
+            <ul class="space-y-2">
+              {hotel.cautions.map(c => (
+                <li class="flex items-start gap-3 text-sm text-[#1D2433]/80">
+                  <svg class="w-5 h-5 text-[#B88A44] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1-8a1 1 0 0 0-1 1v3a1 1 0 0 0 2 0V6a1 1 0 0 0-1-1z" clip-rule="evenodd"/>
+                  </svg>
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- Editorial content -->
+        <div class="prose prose-lg max-w-none
+          prose-headings:font-serif prose-headings:text-[#1D2433]
+          prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+          prose-p:text-[#1D2433]/80 prose-p:leading-relaxed
+          prose-strong:text-[#1D2433]
+          prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
+          <slot />
+        </div>
+
+        <!-- Booking CTA -->
+        <div class="mt-12 bg-[#1D2433] rounded-2xl p-8 text-white">
+          <h2 class="font-serif text-2xl font-bold mb-2">Ready to check rates?</h2>
+          <p class="text-white/60 text-sm mb-6">Prices vary significantly by date, room type and season. Check current availability before making any plans.</p>
+          <a
+            href={hotel.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#9a7338] transition-colors no-underline text-sm"
+          >
+            Check current rates on Booking.com →
+          </a>
+          <p class="text-white/30 text-[11px] mt-3">Standard search link. Prices change constantly. Always verify the final price, taxes and conditions.</p>
+        </div>
+
+        <div class="mt-8">
+          <AffiliateDisclosure compact={true} />
+        </div>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+        <!-- Quick facts -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-[#1D2433]/5 sticky top-24">
+          <h2 class="font-serif text-lg font-bold text-[#1D2433] mb-4">Quick facts</h2>
+          <dl class="space-y-4 text-sm">
+            <div>
+              <dt class="text-[#6B7280] text-xs uppercase tracking-wider font-semibold mb-1">Hotel type</dt>
+              <dd class="text-[#1D2433]">{hotel.hotelType}</dd>
+            </div>
+            <div>
+              <dt class="text-[#6B7280] text-xs uppercase tracking-wider font-semibold mb-1">Five-star status</dt>
+              <dd class="text-[#1D2433]">{hotel.fiveStarStatus}</dd>
+            </div>
+            <div>
+              <dt class="text-[#6B7280] text-xs uppercase tracking-wider font-semibold mb-1">Typical price range</dt>
+              <dd class="text-[#1D2433]">{hotel.typicalPriceRange}</dd>
+            </div>
+            <div>
+              <dt class="text-[#6B7280] text-xs uppercase tracking-wider font-semibold mb-1">Best for</dt>
+              <dd class="flex flex-wrap gap-1.5">
+                {hotel.bestFor.map(tag => (
+                  <span class="bg-[#F8F5EF] text-[#6B7280] px-2 py-0.5 rounded-full text-xs">{tag}</span>
+                ))}
+              </dd>
+            </div>
+            <div>
+              <dt class="text-[#6B7280] text-xs uppercase tracking-wider font-semibold mb-1">Best nearby</dt>
+              <dd class="text-[#1D2433]">{hotel.bestNearbyAttraction}</dd>
+            </div>
+            <div>
+              <dt class="text-[#6B7280] text-xs uppercase tracking-wider font-semibold mb-1">Food angle</dt>
+              <dd class="text-[#1D2433]">{hotel.foodAngle}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Related hotels -->
+        {relatedHotels.length > 0 && (
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-[#1D2433]/5">
+            <h2 class="font-serif text-lg font-bold text-[#1D2433] mb-4">Related hotels</h2>
+            <ul class="space-y-3">
+              {relatedHotels.map(r => (
+                <li>
+                  <a href={`/hotels/${r.slug}`} class="block no-underline group">
+                    <p class="text-sm font-medium text-[#1D2433] group-hover:text-[#B88A44] transition-colors leading-snug">{r.title}</p>
+                    <p class="text-xs text-[#6B7280] mt-0.5">{r.city} · {r.budgetTier}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </aside>
+    </div>
+  </main>
+</BaseLayout>

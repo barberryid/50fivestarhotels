@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const { title, description, canonical, ogImage = '/images/og-default.svg' } = Astro.props;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site ?? 'https://50fivestarhotels.com').href;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:image" content={ogImage} />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8" />

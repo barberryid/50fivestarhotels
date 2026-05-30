@@ -1,0 +1,111 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="How We Choose Hotels | 50 Five-Star Hotels"
+  description="The methodology behind 50 Five-Star Hotels — how we score, evaluate and categorise affordable five-star and near-five-star hotels."
+>
+  <div class="prose prose-lg max-w-none
+    prose-headings:font-serif prose-headings:text-[#1D2433]
+    prose-h1:text-4xl prose-h1:mb-8
+    prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+    prose-h3:text-lg prose-h3:mt-8
+    prose-p:text-[#1D2433]/75 prose-p:leading-relaxed
+    prose-strong:text-[#1D2433]
+    prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
+
+    <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest not-prose mb-4">Evaluation framework</p>
+    <h1>How we choose hotels</h1>
+
+    <p>
+      The best hotels for this site are not simply the cheapest. They are the hotels where price, place and experience combine into a compelling travel idea. A hotel that is cheap because it is mediocre, poorly located or poorly maintained does not belong here. A hotel that is cheap because it sits in a city where the cost base is lower — but where the quality, character and setting are genuinely interesting — does.
+    </p>
+
+    <h2>The scoring system</h2>
+
+    <p>Each hotel is assessed against six factors. The final value score is out of 100.</p>
+
+    <div class="not-prose overflow-x-auto rounded-2xl border border-[#1D2433]/8 my-8">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-[#1D2433] text-white text-left">
+            <th class="py-3 px-5 font-semibold">Factor</th>
+            <th class="py-3 px-5 font-semibold text-right">Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['Price/value versus local five-star market', '25%'],
+            ['Hotel character or luxury feel', '20%'],
+            ['Review strength and consistency', '15%'],
+            ['Location usefulness', '15%'],
+            ['Nearby sights, food and experiences', '15%'],
+            ['Risk level and hidden drawbacks', '10%'],
+          ].map(([factor, weight], i) => (
+            <tr class={`border-t border-[#1D2433]/6 ${i % 2 === 0 ? 'bg-white' : 'bg-[#F8F5EF]/60'}`}>
+              <td class="py-3 px-5 text-[#1D2433]/80">{factor}</td>
+              <td class="py-3 px-5 text-right font-bold text-[#58745A]">{weight}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Verdict labels</h2>
+
+    <div class="not-prose space-y-4 my-8">
+      {[
+        { label: 'Exceptional value', score: '85–100', desc: 'A hotel where the value case is so strong it feels like a genuine discovery. Price, place and experience align in a way that is hard to explain without booking it.' },
+        { label: 'Strong value', score: '75–84', desc: 'A hotel with a clearly compelling value proposition. Worth serious consideration for the right traveller.' },
+        { label: 'Good value', score: '65–74', desc: 'A decent value case, though with more caveats or a less exciting destination angle.' },
+        { label: 'Conditional value', score: '55–64', desc: 'Worth considering only if specific conditions apply — the price is right on a specific date, or the destination is a priority regardless.' },
+        { label: 'Reject for now', score: 'Below 55', desc: 'Excluded from the current list.' },
+      ].map(v => (
+        <div class="bg-white rounded-xl border border-[#1D2433]/6 p-5">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="font-serif font-bold text-[#1D2433]">{v.label}</span>
+            <span class="text-xs text-[#6B7280] bg-[#F8F5EF] px-2.5 py-1 rounded-full font-mono">{v.score}</span>
+          </div>
+          <p class="text-[#6B7280] text-sm leading-relaxed">{v.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <h2>Five-star categories</h2>
+
+    <p>Not all five-star hotels are equivalent. We use six categories to explain what a five-star designation means in each context.</p>
+
+    <div class="not-prose grid md:grid-cols-2 gap-4 my-8">
+      {[
+        { cat: 'True international five-star', desc: 'Meets international luxury chain standards. Reliable quality across all departments.' },
+        { cat: 'Local / booking-site five-star', desc: 'Rated five-star by local or booking-platform standards. Quality can vary; always read recent reviews.' },
+        { cat: 'Heritage-value five-star', desc: 'The five-star claim is secondary to the heritage identity. Character and atmosphere are the main draw.' },
+        { cat: 'Business five-star bargain', desc: 'A well-branded international hotel in a business-travel market where leisure pricing is often lower.' },
+        { cat: 'Near-luxury exception', desc: 'Technically not a five-star, but included because the value case is exceptional and the quality is close.' },
+        { cat: 'Questionable five-star', desc: 'The five-star label requires heavy qualification. Only included if the value case is otherwise strong.' },
+      ].map(item => (
+        <div class="bg-[#F8F5EF] rounded-xl p-5">
+          <h3 class="font-serif font-bold text-[#1D2433] mb-2 text-base">{item.cat}</h3>
+          <p class="text-[#6B7280] text-sm leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <h2>What we are not looking for</h2>
+
+    <p>
+      We are not looking for the cheapest hotels with a five-star label. We are not looking for hotels that were once excellent but have declined. We are not looking for hotels in destinations with no compelling reason to visit. And we are not looking for hotels where the value advantage is so marginal that it does not justify the effort of researching them.
+    </p>
+
+    <p>
+      The test is simple: does this hotel make a reasonably seasoned traveller think — "I did not realise I could have that kind of stay at that price"?
+    </p>
+
+    <h2>On prices</h2>
+
+    <p>
+      All price references on this site use careful, approximate language: "often seen around", "regularly appears", "commonly available outside peak dates". Hotel rates are highly dynamic and change by date, season, room type, nationality of booker, cancellation policy and promotional availability. No price reference should be taken as a guarantee or current availability. Always check directly for the dates you are considering.
+    </p>
+  </div>
+</PageLayout>

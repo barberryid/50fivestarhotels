@@ -1,0 +1,18 @@
+---
+interface Props {
+  label: string;
+  variant?: 'tier' | 'verdict' | 'type';
+}
+
+const { label, variant = 'tier' } = Astro.props;
+
+const classes = {
+  tier: 'bg-[#58745A]/12 text-[#58745A]',
+  verdict: 'bg-[#B88A44]/12 text-[#B88A44]',
+  type: 'bg-[#1D2433]/8 text-[#1D2433]',
+};
+---
+
+<span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-wide ${classes[variant]}`}>
+  {label}
+</span>

@@ -1,0 +1,54 @@
+---
+import Badge from './Badge.astro';
+
+interface Hotel {
+  slug: string;
+  rank: number;
+  title: string;
+  city: string;
+  budgetTier: string;
+  valueScore: number;
+  verdict: string;
+}
+
+interface Props {
+  hotels: Hotel[];
+  title?: string;
+}
+
+const { hotels, title = 'All hotels at a glance' } = Astro.props;
+---
+
+<section>
+  {title && <h2 class="font-serif text-2xl font-bold text-[#1D2433] mb-6">{title}</h2>}
+  <div class="overflow-x-auto rounded-2xl border border-[#1D2433]/8 shadow-sm">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="bg-[#1D2433] text-white text-left">
+          <th class="py-3 px-4 font-semibold">#</th>
+          <th class="py-3 px-4 font-semibold">Hotel</th>
+          <th class="py-3 px-4 font-semibold hidden sm:table-cell">City</th>
+          <th class="py-3 px-4 font-semibold">Tier</th>
+          <th class="py-3 px-4 font-semibold text-right">Score</th>
+          <th class="py-3 px-4 font-semibold hidden md:table-cell">Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        {hotels.map((h, i) => (
+          <tr class={`border-t border-[#1D2433]/6 hover:bg-[#B88A44]/4 transition-colors ${i % 2 === 0 ? 'bg-white' : 'bg-[#F8F5EF]/60'}`}>
+            <td class="py-3 px-4 text-[#6B7280] font-mono text-xs">{h.rank}</td>
+            <td class="py-3 px-4">
+              <a href={`/hotels/${h.slug}`} class="font-medium text-[#1D2433] hover:text-[#B88A44] transition-colors no-underline">
+                {h.title}
+              </a>
+            </td>
+            <td class="py-3 px-4 text-[#6B7280] hidden sm:table-cell">{h.city}</td>
+            <td class="py-3 px-4"><Badge label={h.budgetTier} variant="tier" /></td>
+            <td class="py-3 px-4 text-right font-bold text-[#58745A]">{h.valueScore}</td>
+            <td class="py-3 px-4 text-[#6B7280] hidden md:table-cell">{h.verdict}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

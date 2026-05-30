@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import HotelLayout from '../../layouts/HotelLayout.astro';
+
+export async function getStaticPaths() {
+  const hotels = await getCollection('hotels', ({ data }) => !data.draft);
+  return hotels.map(entry => ({
+    params: { slug: entry.data.slug },
+    props: { entry, all: hotels },
+  }));
+}
+
+const { entry, all } = Astro.props;
+const { Content } = await render(entry);
+
+const related = all
+  .filter(h => h.data.slug !== entry.data.slug && (
+    h.data.budgetTier === entry.data.budgetTier ||
+    h.data.region === entry.data.region
+  ))
+  .sort((a, b) => b.data.valueScore - a.data.valueScore)
+  .slice(0, 4)
+  .map(h => ({
+    slug: h.data.slug,
+    title: h.data.title,
+    city: h.data.city,
+    budgetTier: h.data.budgetTier,
+  }));
+---
+
+<HotelLayout hotel={entry.data} relatedHotels={related}>
+  <Content />
+</HotelLayout>

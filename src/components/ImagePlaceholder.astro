@@ -1,0 +1,28 @@
+---
+interface Props {
+  hotelName: string;
+  city: string;
+  country: string;
+  imageType?: string;
+  aspectRatio?: string;
+}
+
+const { hotelName, city, country, imageType = 'hotel', aspectRatio = 'aspect-[16/9]' } = Astro.props;
+---
+
+<!-- TODO: Replace placeholder with licensed hotel/city/attraction image and attribution from research/image-needs.md -->
+<div class={`${aspectRatio} bg-gradient-to-br from-[#1D2433] to-[#2D3748] rounded-2xl overflow-hidden flex flex-col items-center justify-center gap-3 p-6 text-center relative`}>
+  <svg class="w-10 h-10 text-[#B88A44] opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+  <div>
+    <p class="text-white/70 text-sm font-medium">{hotelName}</p>
+    <p class="text-white/40 text-xs mt-0.5">{city}, {country}</p>
+  </div>
+  <div class="absolute bottom-3 left-0 right-0 flex justify-center">
+    <span class="bg-[#B88A44]/20 text-[#B88A44] text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
+      {imageType} image needed
+    </span>
+  </div>
+</div>

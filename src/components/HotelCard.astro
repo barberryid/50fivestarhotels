@@ -1,0 +1,95 @@
+---
+import Badge from './Badge.astro';
+import ValueScore from './ValueScore.astro';
+import ImagePlaceholder from './ImagePlaceholder.astro';
+
+interface Props {
+  hotel: {
+    slug: string;
+    title: string;
+    city: string;
+    country: string;
+    budgetTier: string;
+    valueScore: number;
+    verdict: string;
+    highlights: string[];
+    cautions: string[];
+    fiveStarStatus: string;
+    typicalPriceRange: string;
+    bookingUrl: string;
+  };
+  featured?: boolean;
+}
+
+const { hotel, featured = false } = Astro.props;
+---
+
+<article class={`bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-[#1D2433]/5 flex flex-col ${featured ? 'ring-2 ring-[#B88A44]/20' : ''}`}>
+  <a href={`/hotels/${hotel.slug}`} class="block no-underline" tabindex="-1" aria-hidden="true">
+    <ImagePlaceholder
+      hotelName={hotel.title}
+      city={hotel.city}
+      country={hotel.country}
+      aspectRatio="aspect-[16/10]"
+    />
+  </a>
+
+  <div class="p-6 flex flex-col flex-1 gap-4">
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex-1">
+        <div class="flex flex-wrap gap-2 mb-3">
+          <Badge label={hotel.budgetTier} variant="tier" />
+          <Badge label={hotel.fiveStarStatus} variant="type" />
+        </div>
+        <a href={`/hotels/${hotel.slug}`} class="no-underline">
+          <h3 class="font-serif text-lg font-bold text-[#1D2433] hover:text-[#B88A44] transition-colors leading-snug">
+            {hotel.title}
+          </h3>
+        </a>
+        <p class="text-[#B88A44] text-sm font-medium mt-1">{hotel.city}, {hotel.country}</p>
+      </div>
+      <div class="shrink-0">
+        <ValueScore score={hotel.valueScore} verdict={hotel.verdict} size="sm" />
+      </div>
+    </div>
+
+    <p class="text-[#6B7280] text-sm">{hotel.typicalPriceRange}</p>
+
+    <ul class="space-y-1.5">
+      {hotel.highlights.slice(0, 2).map(h => (
+        <li class="flex items-start gap-2 text-sm text-[#1D2433]/80">
+          <svg class="w-4 h-4 text-[#58745A] shrink-0 mt-0.5" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm3.47 5.53a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06L7 9.94l3.47-3.47a.75.75 0 0 1 1.06.06z"/>
+          </svg>
+          {h}
+        </li>
+      ))}
+    </ul>
+
+    {hotel.cautions.length > 0 && (
+      <p class="text-xs text-[#6B7280] border-l-2 border-[#B88A44]/30 pl-3 italic">
+        Note: {hotel.cautions[0]}
+      </p>
+    )}
+
+    <div class="mt-auto pt-4 flex flex-col gap-2">
+      <a
+        href={hotel.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block text-center bg-[#1D2433] text-white text-sm font-semibold py-3 px-4 rounded-xl hover:bg-[#B88A44] transition-colors no-underline"
+      >
+        Check current rates on Booking.com
+      </a>
+      <a
+        href={`/hotels/${hotel.slug}`}
+        class="block text-center text-[#1D2433] text-sm font-medium py-2 px-4 rounded-xl border border-[#1D2433]/15 hover:border-[#B88A44] hover:text-[#B88A44] transition-colors no-underline"
+      >
+        Read full profile →
+      </a>
+      <p class="text-[10px] text-[#6B7280] text-center leading-relaxed">
+        Prices vary by date, room type, taxes and cancellation policy.
+      </p>
+    </div>
+  </div>
+</article>

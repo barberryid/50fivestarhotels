@@ -1,0 +1,69 @@
+---
+title: "Malak Regency Hotel"
+slug: "malak-regency-sarajevo"
+rank: 17
+city: "Sarajevo"
+country: "Bosnia and Herzegovina"
+region: "Europe"
+budgetTier: "Under €200"
+typicalPriceRange: "Often seen around €75–€130 outside peak dates"
+hotelType: "City hotel"
+fiveStarStatus: "Local five-star"
+bestFor:
+  - "Sarajevo city break"
+  - "Balkans travel"
+  - "history and culture"
+  - "off-the-beaten-path Europe"
+valueScore: 73
+verdict: "Good value"
+bookingUrl: "https://www.booking.com/searchresults.html?ss=Malak%20Regency%20Hotel%20Sarajevo%20Bosnia"
+image:
+  src: "/images/placeholders/malak-regency-sarajevo-placeholder.svg"
+  alt: "Placeholder for Malak Regency Hotel Sarajevo – licensed image needed"
+  attribution: "TODO: Replace with licensed hotel or Sarajevo city image"
+  todo: true
+highlights:
+  - "Good location for exploring Sarajevo's historic Baščaršija"
+  - "Sarajevo is one of the Balkans' most rewarding and complex cities"
+  - "Rates are very competitive by European standards"
+cautions:
+  - "Local five-star designation does not equate to international five-star standards"
+  - "Sarajevo requires engagement with its difficult recent history"
+bestNearbyAttraction: "Baščaršija (Ottoman bazaar quarter), Latin Bridge and War Tunnel Museum"
+foodAngle: "Ćevapi, burek, Bosnian coffee and the Baščaršija food culture"
+seoTitle: "Malak Regency Hotel Sarajevo Review: Affordable Five-Star in Bosnia"
+seoDescription: "A luxury editorial guide to Malak Regency Hotel Sarajevo — a well-priced five-star hotel in one of the Balkans' most historically significant cities."
+draft: false
+---
+
+## Why it is interesting
+
+Sarajevo is one of Europe's most extraordinary cities — a place where Ottoman, Austro-Hungarian and socialist architectural layers exist side by side, and where the memory of the 1990s siege has shaped a city that is simultaneously melancholy, resilient and deeply hospitable. It is not a typical European city break, but for travellers interested in history, culture and a destination that has not yet been smoothed into generic tourism, it is exceptional.
+
+## Why it is good value
+
+Bosnia and Herzegovina remains one of the most affordable countries in Europe. A hotel with a five-star designation here costs far less than comparable properties in Prague, Budapest or Vienna. The value proposition is strongest when understood in terms of European travel pricing rather than Southeast Asian comparisons.
+
+## Price notes
+
+Sarajevo's tourism season is concentrated in summer and the shoulder months. Rates are generally modest year-round by European standards. Check for local events, which can occasionally tighten availability in the small city-centre hotel market.
+
+## Location and nearby sights
+
+The Baščaršija — Sarajevo's Ottoman bazaar quarter — is the heart of the city and should be understood as the starting point for any visit. The Latin Bridge (site of Archduke Franz Ferdinand's assassination), the Gazi Husrev-beg Mosque, the yellow Austro-Hungarian buildings of the Ferhadija and the War Tunnel Museum (Tunnel of Hope) are all essential.
+
+## Food and things to do nearby
+
+Ćevapi — grilled minced meat in a flatbread with raw onion — is the city's signature food and genuinely good. Burek (layered filo pastry with meat or cheese), stuffed peppers, and Bosnian coffee (served with sugar and a delight in its own right) are all highlights. The Baščaršija has dozens of small, affordable restaurants.
+
+## Best time to book
+
+May–September is the most comfortable and popular period. Winters can be cold and snowy — atmospheric for the right traveller, challenging for others.
+
+## Watch out for
+
+The local five-star designation is a Bosnian market rating rather than international accreditation. The hotel is well positioned and reviewed, but should not be expected to match the facilities or polish of an international five-star chain. Sarajevo's recent history is also present and inescapable — which is ultimately what makes it compelling, but is worth approaching thoughtfully.
+
+## Verdict
+
+Good value. A well-priced hotel in one of Europe's most overlooked and rewarding cities, best suited to travellers with genuine interest in history and the Balkans.

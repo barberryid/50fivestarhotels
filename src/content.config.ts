@@ -1,0 +1,44 @@
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+const hotels = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/hotels' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    rank: z.number(),
+    city: z.string(),
+    country: z.string(),
+    region: z.string(),
+    budgetTier: z.enum(['Under €100', 'Under €200', 'Under €250']),
+    secondaryTier: z.string().optional(),
+    typicalPriceRange: z.string(),
+    hotelType: z.string(),
+    fiveStarStatus: z.string(),
+    bestFor: z.array(z.string()),
+    valueScore: z.number(),
+    verdict: z.enum([
+      'Exceptional value',
+      'Strong value',
+      'Good value',
+      'Conditional value',
+      'Reject for now',
+    ]),
+    bookingUrl: z.string(),
+    image: z.object({
+      src: z.string(),
+      alt: z.string(),
+      attribution: z.string().optional(),
+      todo: z.boolean().optional(),
+    }),
+    highlights: z.array(z.string()),
+    cautions: z.array(z.string()),
+    bestNearbyAttraction: z.string(),
+    foodAngle: z.string(),
+    seoTitle: z.string(),
+    seoDescription: z.string(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { hotels };

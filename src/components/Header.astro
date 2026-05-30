@@ -1,0 +1,78 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/under-100', label: 'Under €100' },
+  { href: '/under-200', label: 'Under €200' },
+  { href: '/under-250', label: 'Under €250' },
+  { href: '/destinations', label: 'Destinations' },
+  { href: '/methodology', label: 'How We Choose Hotels' },
+  { href: '/affiliate-disclosure', label: 'Affiliate Disclosure' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-[#F8F5EF]/95 backdrop-blur border-b border-[#1D2433]/8">
+  <div class="max-w-6xl mx-auto px-5 flex items-center justify-between h-16">
+    <a href="/" class="font-serif text-lg font-bold text-[#1D2433] hover:text-[#B88A44] transition-colors no-underline">
+      50 Five-Star Hotels
+    </a>
+
+    <nav class="hidden md:flex items-center gap-6" aria-label="Main navigation">
+      {navLinks.filter(l => l.href !== '/').map(link => (
+        <a
+          href={link.href}
+          class={`text-sm font-medium transition-colors no-underline ${
+            currentPath === link.href
+              ? 'text-[#B88A44]'
+              : 'text-[#6B7280] hover:text-[#1D2433]'
+          }`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Mobile menu button -->
+    <button
+      id="mobile-menu-btn"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="md:hidden p-2 rounded-lg text-[#1D2433] hover:bg-[#1D2433]/5 transition-colors"
+    >
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="19" y2="6"/>
+        <line x1="3" y1="11" x2="19" y2="11"/>
+        <line x1="3" y1="16" x2="19" y2="16"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-[#1D2433]/8 bg-[#F8F5EF]">
+    <nav class="max-w-6xl mx-auto px-5 py-4 flex flex-col gap-1" aria-label="Mobile navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`py-2 px-3 rounded-lg text-sm font-medium transition-colors no-underline ${
+            currentPath === link.href
+              ? 'text-[#B88A44] bg-[#B88A44]/8'
+              : 'text-[#1D2433] hover:bg-[#1D2433]/5'
+          }`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+</script>
