@@ -18,14 +18,14 @@ valueScore: 85
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Raweekanlaya%20Bangkok%20Wellness%20Cuisine%20Resort%20Thailand"
 image:
-  src: "/images/hotels/raweekanlaya-bangkok/web/raweekanlaya-bangkok-01-hero-raweekanlaya-bangkok-01.webp"
-  alt: "WAT BENCHAMABOPHIT ,BANGKOK in or near Bangkok, Thailand"
-  attribution: "Photo by Senda89 via Wikimedia Commons, CC BY-SA 3.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:WAT_BENCHAMABOPHIT_,BANGKOK.JPG"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Senda89"
-  license: "CC BY-SA 3.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0"
+  src: "/images/hotels/raweekanlaya-bangkok.jpg"
+  alt: "Wat Arun temple on the Chao Phraya River in Bangkok"
+  attribution: "Photo by Martijn Vonk on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/7KSiPWt82us"
+  sourceSite: "Unsplash"
+  photographer: "Martijn Vonk"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/raweekanlaya-bangkok/web/raweekanlaya-bangkok-01-hero-raweekanlaya-bangkok-01.webp"

@@ -18,14 +18,14 @@ valueScore: 76
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Boton%20Blue%20Hotel%20Spa%20Nha%20Trang%20Vietnam"
 image:
-  src: "/images/hotels/boton-blue-nha-trang/web/boton-blue-nha-trang-01-hero-boton-blue-nha-trang-01.webp"
-  alt: "Nha Trang Beach 2 in or near Nha Trang, Vietnam"
-  attribution: "Photo by Christophe95 via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Nha_Trang_Beach_2.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Christophe95"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/boton-blue-nha-trang.jpg"
+  alt: "Gentle ocean waves in Nha Trang Vietnam"
+  attribution: "Photo by Alexander Sinchenko on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/Yh_BDgkiPCI"
+  sourceSite: "Unsplash"
+  photographer: "Alexander Sinchenko"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/boton-blue-nha-trang/web/boton-blue-nha-trang-01-hero-boton-blue-nha-trang-01.webp"

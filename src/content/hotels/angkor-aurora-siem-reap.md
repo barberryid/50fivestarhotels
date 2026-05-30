@@ -18,14 +18,14 @@ valueScore: 83
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Angkor%20Aurora%20Siem%20Reap%20Cambodia"
 image:
-  src: "/images/hotels/angkor-aurora-siem-reap/web/angkor-aurora-siem-reap-01-hero-angkor-aurora.webp"
-  alt: "Preah Pithu T Monks - Siem Reap in or near Siem Reap, Cambodia"
-  attribution: "Photo by JJ Harrison (https://www.jjharrison.com.au/) via Wikimedia Commons, CC BY-SA 3.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Preah_Pithu_T_Monks_-_Siem_Reap.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "JJ Harrison (https://www.jjharrison.com.au/)"
-  license: "CC BY-SA 3.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0"
+  src: "/images/hotels/angkor-aurora-siem-reap.jpg"
+  alt: "Ancient temple architecture in Siem Reap"
+  attribution: "Photo by Mauro Lima on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/72WXJUS8F9k"
+  sourceSite: "Unsplash"
+  photographer: "Mauro Lima"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/angkor-aurora-siem-reap/web/angkor-aurora-siem-reap-01-hero-angkor-aurora.webp"

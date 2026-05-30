@@ -18,14 +18,14 @@ valueScore: 78
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Grand%20Hotel%20Yerevan%20Armenia"
 image:
-  src: "/images/hotels/grand-hotel-yerevan/web/grand-hotel-yerevan-01-hero-grand-hotel.webp"
-  alt: "Yerevan hotel, Yerevan 01 in or near Yerevan, Armenia"
-  attribution: "Photo by GeoO via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Yerevan_hotel,_Yerevan_01.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "GeoO"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/grand-hotel-yerevan.jpg"
+  alt: "Yerevan city view with Mount Ararat in the background"
+  attribution: "Photo by SnapSaga on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/KTxaCJiGW3o"
+  sourceSite: "Unsplash"
+  photographer: "SnapSaga"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/grand-hotel-yerevan/web/grand-hotel-yerevan-01-hero-grand-hotel.webp"

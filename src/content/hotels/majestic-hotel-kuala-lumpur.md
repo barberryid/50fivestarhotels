@@ -18,14 +18,14 @@ valueScore: 87
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Majestic%20Hotel%20Kuala%20Lumpur%20Autograph%20Collection%20Malaysia"
 image:
-  src: "/images/hotels/majestic-hotel-kuala-lumpur/web/majestic-hotel-kuala-lumpur-01-hero-majestic-hotel-kuala-lumpur-01.webp"
-  alt: "2016 Kuala Lumpur, Stacja kolejowa Kuala Lumpur (02) in or near Kuala Lumpur, Malaysia"
-  attribution: "Photo by Marcin Konsek via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:2016_Kuala_Lumpur,_Stacja_kolejowa_Kuala_Lumpur_(02).jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Marcin Konsek"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/majestic-hotel-kuala-lumpur.jpg"
+  alt: "Kuala Lumpur skyline with the Sultan Abdul Samad Building"
+  attribution: "Photo by Artem Korolev on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/jVNxB_yUto0"
+  sourceSite: "Unsplash"
+  photographer: "Artem Korolev"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/majestic-hotel-kuala-lumpur/web/majestic-hotel-kuala-lumpur-01-hero-majestic-hotel-kuala-lumpur-01.webp"

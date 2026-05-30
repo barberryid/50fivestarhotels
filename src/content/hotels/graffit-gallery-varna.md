@@ -18,14 +18,14 @@ valueScore: 71
 verdict: "Good value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Graffit%20Gallery%20Design%20Hotel%20Varna%20Bulgaria"
 image:
-  src: "/images/hotels/graffit-gallery-varna/web/graffit-gallery-varna-01-hero-graffit-gallery-varna-01.webp"
-  alt: "See Garden in Varna, Bulgaria2 in or near Varna, Bulgaria"
-  attribution: "Photo by Stanqo via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:See_Garden_in_Varna,_Bulgaria2.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Stanqo"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/graffit-gallery-varna.jpg"
+  alt: "Sunset waves on the Black Sea coast in Varna"
+  attribution: "Photo by Volodymyr Diadechko on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/16P9_E-XzNI"
+  sourceSite: "Unsplash"
+  photographer: "Volodymyr Diadechko"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/graffit-gallery-varna/web/graffit-gallery-varna-01-hero-graffit-gallery-varna-01.webp"

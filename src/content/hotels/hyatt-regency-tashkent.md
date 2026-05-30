@@ -18,14 +18,14 @@ valueScore: 79
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Hyatt%20Regency%20Tashkent%20Uzbekistan"
 image:
-  src: "/images/hotels/hyatt-regency-tashkent/web/hyatt-regency-tashkent-01-hero-hyatt-regency.webp"
-  alt: "Istiqlol003 in or near Tashkent, Uzbekistan"
-  attribution: "Photo by Azizbek Karimov via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Istiqlol003.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Azizbek Karimov"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/hyatt-regency-tashkent.jpg"
+  alt: "Hotel Uzbekistan architecture in Tashkent"
+  attribution: "Photo by Fey Marin on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/h-1yy3SpSZo"
+  sourceSite: "Unsplash"
+  photographer: "Fey Marin"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/hyatt-regency-tashkent/web/hyatt-regency-tashkent-01-hero-hyatt-regency.webp"

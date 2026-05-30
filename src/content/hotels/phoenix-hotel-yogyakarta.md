@@ -19,14 +19,14 @@ valueScore: 89
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Phoenix%20Hotel%20Yogyakarta%20Handwritten%20Collection%20Indonesia"
 image:
-  src: "/images/hotels/phoenix-hotel-yogyakarta/web/phoenix-hotel-yogyakarta-01-hero-phoenix-hotel-yogyakarta-01.webp"
-  alt: "Yogyakarta Indonesia halte-Mangkubumi-1-01 in or near Yogyakarta, Indonesia"
-  attribution: "Photo by CEphoto, Uwe Aranas via Wikimedia Commons, CC BY-SA 3.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Yogyakarta_Indonesia_halte-Mangkubumi-1-01.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "CEphoto, Uwe Aranas"
-  license: "CC BY-SA 3.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0"
+  src: "/images/hotels/phoenix-hotel-yogyakarta.jpg"
+  alt: "Borobudur Temple near Yogyakarta"
+  attribution: "Photo by Eugenia Clara on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/uCkq6wj3hm0"
+  sourceSite: "Unsplash"
+  photographer: "Eugenia Clara"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/phoenix-hotel-yogyakarta/web/phoenix-hotel-yogyakarta-01-hero-phoenix-hotel-yogyakarta-01.webp"

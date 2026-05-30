@@ -18,14 +18,14 @@ valueScore: 81
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Steigenberger%20Resort%20Achti%20Luxor%20Egypt"
 image:
-  src: "/images/hotels/steigenberger-resort-achti-luxor/web/steigenberger-resort-achti-luxor-01-hero-achti-luxor.webp"
-  alt: "Luxor Nile R05 in or near Luxor, Egypt"
-  attribution: "Photo by Marc Ryckaert via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Luxor_Nile_R05.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Marc Ryckaert"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/steigenberger-resort-achti-luxor.jpg"
+  alt: "Felucca sailing on the Nile River in Luxor"
+  attribution: "Photo by Anthony Chen on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/pp75Ya8DoFo"
+  sourceSite: "Unsplash"
+  photographer: "Anthony Chen"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/steigenberger-resort-achti-luxor/web/steigenberger-resort-achti-luxor-01-hero-achti-luxor.webp"

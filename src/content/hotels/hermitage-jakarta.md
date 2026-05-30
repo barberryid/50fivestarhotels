@@ -18,14 +18,14 @@ valueScore: 80
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Hermitage%20Tribute%20Portfolio%20Hotel%20Jakarta%20Indonesia"
 image:
-  src: "/images/hotels/hermitage-jakarta/web/hermitage-jakarta-01-hero-hermitage-jakarta-01.webp"
-  alt: "Kantor Kelurahan Menteng, Jakarta Pusat in or near Jakarta, Indonesia"
-  attribution: "Photo by Ezagren (bicara / talk) via Wikimedia Commons, Attribution"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Kantor_Kelurahan_Menteng,_Jakarta_Pusat.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Ezagren (bicara / talk)"
-  license: "Attribution"
-  licenseUrl: "Unknown / not listed"
+  src: "/images/hotels/hermitage-jakarta.jpg"
+  alt: "Jakarta cityscape under cloudy skies"
+  attribution: "Photo by David Kristianto on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/t4opnhS8hpM"
+  sourceSite: "Unsplash"
+  photographer: "David Kristianto"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/hermitage-jakarta/web/hermitage-jakarta-01-hero-hermitage-jakarta-01.webp"

@@ -18,14 +18,14 @@ valueScore: 72
 verdict: "Good value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Real%20Marina%20Hotel%20Spa%20Olhao%20Portugal"
 image:
-  src: "/images/hotels/real-marina-olhao/web/real-marina-olhao-01-hero-real-marina-olhao-01.webp"
-  alt: "Marina de Olhão by Juntas 3 in or near Olhao, Portugal"
-  attribution: "Photo by Juntas via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Marina_de_Olh%C3%A3o_by_Juntas_3.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Juntas"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/real-marina-olhao.jpg"
+  alt: "Ria Formosa waterfront near Olhao Portugal"
+  attribution: "Photo by Markus Kammermann on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/aJkt_wwuegU"
+  sourceSite: "Unsplash"
+  photographer: "Markus Kammermann"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/real-marina-olhao/web/real-marina-olhao-01-hero-real-marina-olhao-01.webp"

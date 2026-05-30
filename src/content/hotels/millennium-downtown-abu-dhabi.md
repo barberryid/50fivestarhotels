@@ -18,14 +18,14 @@ valueScore: 68
 verdict: "Good value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Millennium%20Downtown%20Abu%20Dhabi%20UAE"
 image:
-  src: "/images/hotels/millennium-downtown-abu-dhabi/web/millennium-downtown-abu-dhabi-01-hero-millennium-downtown-abu-dhabi-01.webp"
-  alt: "Abu dhabi skylines 2014 in or near Abu Dhabi, UAE"
-  attribution: "Photo by Wadiia via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Abu_dhabi_skylines_2014.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Wadiia"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/millennium-downtown-abu-dhabi.jpg"
+  alt: "Sheikh Zayed Grand Mosque in Abu Dhabi"
+  attribution: "Photo by Clarence E. Hsu on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/RZIL_MY1vOA"
+  sourceSite: "Unsplash"
+  photographer: "Clarence E. Hsu"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/millennium-downtown-abu-dhabi/web/millennium-downtown-abu-dhabi-01-hero-millennium-downtown-abu-dhabi-01.webp"

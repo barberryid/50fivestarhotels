@@ -18,14 +18,14 @@ valueScore: 73
 verdict: "Good value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Malak%20Regency%20Hotel%20Sarajevo%20Bosnia"
 image:
-  src: "/images/hotels/malak-regency-sarajevo/web/malak-regency-sarajevo-01-hero-malak-regency.webp"
-  alt: "Sarajevo City Hall 01 in or near Sarajevo, Bosnia and Herzegovina"
-  attribution: "Photo by Bernard Gagnon via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Sarajevo_City_Hall_01.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Bernard Gagnon"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/malak-regency-sarajevo.jpg"
+  alt: "View over Sarajevo city"
+  attribution: "Photo by Sarajevo slike on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/K_-oTDGgwL0"
+  sourceSite: "Unsplash"
+  photographer: "Sarajevo slike"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/malak-regency-sarajevo/web/malak-regency-sarajevo-01-hero-malak-regency.webp"

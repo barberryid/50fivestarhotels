@@ -18,14 +18,14 @@ valueScore: 82
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Royal%20Surakarta%20Heritage%20Solo%20Indonesia%20Handwritten"
 image:
-  src: "/images/hotels/royal-surakarta-heritage/web/royal-surakarta-heritage-01-hero-royal-surakarta-heritage-01.webp"
-  alt: "Keraton surakarta in or near Solo / Surakarta, Indonesia"
-  attribution: "Photo by Munaqo via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Keraton_surakarta.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Munaqo"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/royal-surakarta-heritage.jpg"
+  alt: "Keraton Surakarta historical building"
+  attribution: "Photo by Muhammad Fadil on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/rL7YFjc1PlI"
+  sourceSite: "Unsplash"
+  photographer: "Muhammad Fadil"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/royal-surakarta-heritage/web/royal-surakarta-heritage-01-hero-royal-surakarta-heritage-01.webp"

@@ -18,14 +18,14 @@ valueScore: 75
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=IM%20Hotel%20Makati%20Philippines"
 image:
-  src: "/images/hotels/im-hotel-makati/web/im-hotel-makati-01-hero-im-hotel.webp"
-  alt: "Manila Philippines Pizza-Taxi-in-Makati-Business-District-01 in or near Makati / Manila, Philippines"
-  attribution: "Photo by CEphoto, Uwe Aranas via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Manila_Philippines_Pizza-Taxi-in-Makati-Business-District-01.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "CEphoto, Uwe Aranas"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/im-hotel-makati.jpg"
+  alt: "High-rise architecture on Ayala Avenue in Makati"
+  attribution: "Photo by Eula Xandrea Dimapilis on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/DFzgKUNOAp0"
+  sourceSite: "Unsplash"
+  photographer: "Eula Xandrea Dimapilis"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/im-hotel-makati/web/im-hotel-makati-01-hero-im-hotel.webp"

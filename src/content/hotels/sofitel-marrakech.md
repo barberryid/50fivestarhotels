@@ -18,14 +18,14 @@ valueScore: 78
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Sofitel%20Marrakech%20Palais%20Imperial%20Spa%20Morocco"
 image:
-  src: "/images/hotels/sofitel-marrakech/web/sofitel-marrakech-01-hero-sofitel.webp"
-  alt: "SOFITEL HOTEL MARRAKECH MOROCCO APRIL 2013 (8712759223) in or near Marrakech, Morocco"
-  attribution: "Photo by calflier001 via Wikimedia Commons, CC BY-SA 2.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:SOFITEL_HOTEL_MARRAKECH_MOROCCO_APRIL_2013_(8712759223).jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "calflier001"
-  license: "CC BY-SA 2.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0"
+  src: "/images/hotels/sofitel-marrakech.jpg"
+  alt: "Rooftops and buildings in the Marrakech medina"
+  attribution: "Photo by Anne Nicole on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/FDhbmWw3dTg"
+  sourceSite: "Unsplash"
+  photographer: "Anne Nicole"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/sofitel-marrakech/web/sofitel-marrakech-01-hero-sofitel.webp"

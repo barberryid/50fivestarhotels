@@ -18,14 +18,14 @@ valueScore: 81
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Pleiada%20Boutique%20Hotel%20Spa%20Iasi%20Romania"
 image:
-  src: "/images/hotels/pleiada-boutique-hotel-iasi/web/pleiada-boutique-hotel-iasi-01-hero-pleiada-boutique-hotel-iasi-01.webp"
-  alt: "Iasi, Palatul Culturii8 in or near Iasi, Romania"
-  attribution: "Photo by Argenna via Wikimedia Commons, CC BY-SA 4.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Iasi,_Palatul_Culturii8.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Argenna"
-  license: "CC BY-SA 4.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  src: "/images/hotels/pleiada-boutique-hotel-iasi.jpg"
+  alt: "National Theater building in Iasi Romania"
+  attribution: "Photo by Matei Pruteanu on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/BpEju_xH720"
+  sourceSite: "Unsplash"
+  photographer: "Matei Pruteanu"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/pleiada-boutique-hotel-iasi/web/pleiada-boutique-hotel-iasi-01-hero-pleiada-boutique-hotel-iasi-01.webp"

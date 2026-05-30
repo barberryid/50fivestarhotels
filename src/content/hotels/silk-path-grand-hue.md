@@ -18,14 +18,14 @@ valueScore: 80
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Silk%20Path%20Grand%20Hue%20Hotel%20Spa%20Vietnam"
 image:
-  src: "/images/hotels/silk-path-grand-hue/web/silk-path-grand-hue-01-hero-silk-path-grand-hue-01.webp"
-  alt: "Hue Vietnam Citadel-of-Huế-11 in or near Hue, Vietnam"
-  attribution: "Photo by CEphoto, Uwe Aranas via Wikimedia Commons, CC BY-SA 3.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Hue_Vietnam_Citadel-of-Hu%E1%BA%BF-11.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "CEphoto, Uwe Aranas"
-  license: "CC BY-SA 3.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0"
+  src: "/images/hotels/silk-path-grand-hue.jpg"
+  alt: "Imperial citadel in Hue Vietnam"
+  attribution: "Photo by Nguyen Minh on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/lzjlYsMGYXg"
+  sourceSite: "Unsplash"
+  photographer: "Nguyen Minh"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/silk-path-grand-hue/web/silk-path-grand-hue-01-hero-silk-path-grand-hue-01.webp"

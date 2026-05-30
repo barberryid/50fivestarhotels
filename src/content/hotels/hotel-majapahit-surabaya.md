@@ -19,14 +19,14 @@ valueScore: 91
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Hotel%20Majapahit%20Surabaya%20MGallery%20Indonesia"
 image:
-  src: "/images/hotels/hotel-majapahit-surabaya/web/hotel-majapahit-surabaya-01-hero-heritage-building.webp"
-  alt: "Museum Bank Indonesia Surabaya (35194457663) in or near Surabaya, Indonesia"
-  attribution: "Photo by Ya, saya inBaliTimur via Wikimedia Commons, CC BY-SA 2.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Museum_Bank_Indonesia_Surabaya_(35194457663).jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "Ya, saya inBaliTimur"
-  license: "CC BY-SA 2.0"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0"
+  src: "/images/hotels/hotel-majapahit-surabaya.jpg"
+  alt: "Aerial view of Surabaya city buildings"
+  attribution: "Photo by Fauzan on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/gd5YFyQnN0g"
+  sourceSite: "Unsplash"
+  photographer: "Fauzan"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/hotel-majapahit-surabaya/web/hotel-majapahit-surabaya-01-hero-heritage-building.webp"

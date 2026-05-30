@@ -18,14 +18,14 @@ valueScore: 84
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Stamba%20Hotel%20Tbilisi%20Georgia"
 image:
-  src: "/images/hotels/stamba-hotel-tbilisi/web/stamba-hotel-tbilisi-01-hero-stamba-hotel.webp"
-  alt: "Kura River in the central part of Tbilisi, 2007-09-28 in or near Tbilisi, Georgia"
-  attribution: "Photo by EvgenyGenkin via Wikimedia Commons, CC BY 2.5"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Kura_River_in_the_central_part_of_Tbilisi,_2007-09-28.jpg"
-  sourceSite: "Wikimedia Commons"
-  photographer: "EvgenyGenkin"
-  license: "CC BY 2.5"
-  licenseUrl: "https://creativecommons.org/licenses/by/2.5"
+  src: "/images/hotels/stamba-hotel-tbilisi.jpg"
+  alt: "Urban hotel architecture in Tbilisi"
+  attribution: "Photo by Alex Batonisashvili on Unsplash."
+  sourcePageUrl: "https://unsplash.com/photos/YEqEXXkEidw"
+  sourceSite: "Unsplash"
+  photographer: "Alex Batonisashvili"
+  license: "Unsplash License"
+  licenseUrl: "https://unsplash.com/license"
   todo: false
 gallery:
   - src: "/images/hotels/stamba-hotel-tbilisi/web/stamba-hotel-tbilisi-01-hero-stamba-hotel.webp"
