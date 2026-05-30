@@ -1,0 +1,221 @@
+---
+const featuredHotels = [
+  {
+    name: "Hotel Majapahit Surabaya",
+    city: "Surabaya, Indonesia",
+    tier: "Often under €100",
+    description:
+      "A heritage-value five-star hotel with colonial architecture, strong atmosphere, and one of the best affordable-luxury stories in Java."
+  },
+  {
+    name: "The Phoenix Hotel Yogyakarta",
+    city: "Yogyakarta, Indonesia",
+    tier: "Often under €100 / €200",
+    description:
+      "A characterful heritage hotel near Borobudur and Prambanan, ideal for travellers who want culture, comfort, and strong value."
+  },
+  {
+    name: "The Raweekanlaya Bangkok",
+    city: "Bangkok, Thailand",
+    tier: "Often under €200",
+    description:
+      "A calm heritage-style retreat in Bangkok with gardens, wellness appeal, and a softer alternative to generic city hotels."
+  }
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>50 Five-Star Hotels Without Five-Star Prices</title>
+    <meta
+      name="description"
+      content="Affordable five-star and near-five-star hotels around the world: luxury hotels, heritage hotels, spa hotels and city hotels that are unusually good value."
+    />
+  </head>
+
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">Affordable luxury travel</p>
+        <h1>Five-star hotels without five-star prices.</h1>
+        <p class="intro">
+          50 Five-Star Hotels is a practical guide to luxury and luxury-adjacent
+          hotels that often cost far less than travellers expect.
+        </p>
+        <div class="actions">
+          <a href="#featured">View featured hotels</a>
+          <a href="#method">How we choose hotels</a>
+        </div>
+      </section>
+
+      <section class="section" id="featured">
+        <h2>Featured affordable five-star hotels</h2>
+        <div class="grid">
+          {featuredHotels.map((hotel) => (
+            <article class="card">
+              <p class="tier">{hotel.tier}</p>
+              <h3>{hotel.name}</h3>
+              <p class="city">{hotel.city}</p>
+              <p>{hotel.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="section method" id="method">
+        <h2>How we choose hotels</h2>
+        <p>
+          We look for hotels where price, place, and experience combine into a
+          compelling travel idea. A hotel does not need to be perfect, but it
+          should offer unusually strong value for travellers who want comfort,
+          atmosphere, location, or a memorable stay.
+        </p>
+        <p>
+          We are honest about trade-offs: some hotels are true international
+          five-star properties, while others are local or booking-site five-star
+          hotels that are better described as upper-upscale bargains.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    --bg: #f8f5ef;
+    --text: #1d2433;
+    --muted: #6b7280;
+    --gold: #b88a44;
+    --green: #58745a;
+    --card: #ffffff;
+  }
+
+  body {
+    margin: 0;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 48px 24px 72px;
+  }
+
+  .hero {
+    padding: 72px 0 56px;
+    max-width: 820px;
+  }
+
+  .eyebrow {
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+  }
+
+  h1 {
+    font-size: clamp(2.7rem, 7vw, 5.6rem);
+    line-height: 0.95;
+    margin: 16px 0 24px;
+    letter-spacing: -0.06em;
+  }
+
+  .intro {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 680px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .actions a {
+    display: inline-flex;
+    padding: 13px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    background: var(--text);
+    color: white;
+  }
+
+  .actions a + a {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(29, 36, 51, 0.22);
+  }
+
+  .section {
+    margin-top: 48px;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 26px;
+    box-shadow: 0 18px 45px rgba(29, 36, 51, 0.08);
+  }
+
+  .tier {
+    display: inline-flex;
+    color: var(--green);
+    background: rgba(88, 116, 90, 0.1);
+    padding: 7px 11px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    margin: 20px 0 6px;
+  }
+
+  .city {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .card p,
+  .method p {
+    line-height: 1.65;
+  }
+
+  .method {
+    max-width: 760px;
+  }
+
+  @media (max-width: 820px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .page {
+      padding: 32px 18px 56px;
+    }
+  }
+</style>
