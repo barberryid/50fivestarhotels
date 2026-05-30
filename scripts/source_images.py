@@ -201,19 +201,27 @@ def api_json(params):
     params = {"format": "json", "formatversion": "2", **params}
     url = "https://commons.wikimedia.org/w/api.php?" + urlencode(params)
     req = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(req, timeout=40) as response:
-        return json.loads(response.read().decode("utf-8"))
+    for attempt in range(5):
+        try:
+            with urlopen(req, timeout=40) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except HTTPError as exc:
+            if exc.code == 429 and attempt < 4:
+                time.sleep(12 + attempt * 8)
+                continue
+            raise
 
 
 def search_commons(query, limit=18):
     data = api_json({
         "action": "query",
         "generator": "search",
-        "gsrsearch": f"filetype:bitmap {query}",
+        "gsrsearch": query,
         "gsrnamespace": 6,
         "gsrlimit": limit,
         "prop": "imageinfo",
-        "iiprop": "url|size|mime|extmetadata|commonmetadata",
+        "iiprop": "url|size|mime|extmetadata|commonmetadata|thumburl",
+        "iiurlwidth": 2200,
     })
     return data.get("query", {}).get("pages", [])
 
@@ -230,7 +238,7 @@ def license_ok(short_name, license_url):
     text = f"{short_name} {license_url}".lower()
     if any(x in text for x in ["noncommercial", "non-commercial", "-nc", "by-nc", "no commercial"]):
         return False
-    if any(x in text for x in ["cc by", "cc0", "public domain", "pd-old", "attribution", "share alike", "by-sa"]):
+    if any(x in text for x in ["cc by", "cc0", "public domain", "pd-old", "attribution", "share alike", "by-sa", "gfdl", "free art license", "fal"]):
         return True
     return False
 
@@ -283,6 +291,24 @@ def choose_image(query, broader_queries):
             if not page_url or page_url in used_pages:
                 continue
             score, reason = score_page(page)
+            info_blob = (
+                page.get("title", "")
+                + " "
+                + clean_meta_value(info.get("extmetadata") or {}, "ImageDescription")
+                + " "
+                + clean_meta_value(info.get("extmetadata") or {}, "Credit")
+            ).lower()
+            stop_words = {
+                "hotel", "resort", "boutique", "travel", "city", "food", "market",
+                "street", "image", "architecture", "heritage", "garden", "luxury",
+                "indonesia", "vietnam", "romania", "egypt", "morocco",
+                "philippines", "portugal", "bulgaria", "malaysia", "thailand",
+                "georgia", "cambodia", "uzbekistan", "armenia", "bosnia",
+                "emirates", "united", "arab",
+            }
+            tokens = [tok for tok in re.findall(r"[a-z]{4,}", q.lower()) if tok not in stop_words]
+            if score is not None and tokens and not any(tok in info_blob for tok in tokens[:5]):
+                score, reason = None, "Wrong location or weak relevance"
             if score is None:
                 rejected.append([query, page.get("title", q), "Wikimedia Commons", page_url, reason, "Yes" if "Licence" in reason else "No", "Yes" if "resolution" in reason or "mime" in reason else "No", "Rejected by automated QC"])
                 continue
@@ -300,8 +326,16 @@ def choose_image(query, broader_queries):
 
 def download(url, dest):
     req = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(req, timeout=90) as response:
-        dest.write_bytes(response.read())
+    for attempt in range(5):
+        try:
+            with urlopen(req, timeout=90) as response:
+                dest.write_bytes(response.read())
+                return
+        except HTTPError as exc:
+            if exc.code == 429 and attempt < 4:
+                time.sleep(20 + attempt * 10)
+                continue
+            raise
 
 
 def optimize(src, dest):
@@ -367,7 +401,7 @@ def build_outputs():
             licence = clean_meta_value(meta, "LicenseShortName")
             licence_url = clean_meta_value(meta, "LicenseUrl")
             page_url = info.get("descriptionurl", "")
-            download_url = info.get("url", "")
+            download_url = info.get("thumburl") or info.get("url", "")
             ext = ext_from_mime(info.get("mime", ""), download_url)
             base = f"{slug}-{idx:02d}-{image_type.lower()}-{slugify(short_subject)}"
             original_name = f"{base}.{ext}"
@@ -398,7 +432,7 @@ def build_outputs():
                 "Recommended Attribution Text": attribution_text(title, creator, licence, page_url), "Commercial Use Allowed?": commercial, "Modification Allowed?": modification,
                 "Verification Date": TODAY, "Notes": notes, "Safe to Use?": safe, "Width": width, "Height": height, "Web File Size Bytes": web_size
             })
-            print(f"{image_id}: {safe} - {title[:90]}")
+            print((f"{image_id}: {safe} - {title[:90]}").encode("ascii", "replace").decode("ascii"))
             time.sleep(0.3)
 
 
@@ -550,3 +584,6 @@ if __name__ == "__main__":
     write_workbook()
     write_audit()
     print(f"DONE rows={len(rows)} safe={len([r for r in rows if r['Safe to Use?']=='Yes'])} review={len([r for r in rows if r['Safe to Use?']=='Review Needed'])}")
+
+
+
