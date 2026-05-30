@@ -11,7 +11,9 @@ MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", 
 TITLE_ALIASES = {
     "Hotel Majapahit Surabaya - MGallery": "hotel-majapahit-surabaya",
     "Hotel Majapahit Surabaya \u2013 MGallery": "hotel-majapahit-surabaya",
+    "Graffit Gallery Varna": "graffit-gallery-varna",
     "Grand Hotel Yerevan \u2013 Small Luxury Hotels of the World": "grand-hotel-yerevan",
+    "The Hermitage Jakarta": "hermitage-jakarta",
     "Sofitel Marrakech Lounge & Spa": "sofitel-marrakech",
 }
 

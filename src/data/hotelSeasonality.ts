@@ -2098,5 +2098,368 @@ export const hotelSeasonality: Record<string, HotelSeasonality> = {
       "lastChecked": "2026-05-30",
       "sources": "https://www.algarve-tourist.com/guides/algarve-weather-when-to-visit-best-month.html\nhttps://portugalgetaways.com/en-us/destination/algarve/plan-your-trip/best-time-travel-algarve\nhttps://www.kayak.com/Olhao-Hotels-Real-Marina-Hotel-Spa.344549.ksp\nhttps://www.be.kayak.com/Olhao-Hotels-Real-Marina-Hotel-Spa.344549.ksp"
     }
+  },
+  "graffit-gallery-varna": {
+    "hotel": "Graffit Gallery Varna",
+    "city": "Varna",
+    "country": "Bulgaria",
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        {
+          "month": "Jan",
+          "label": "Avoid"
+        },
+        {
+          "month": "Feb",
+          "label": "Avoid"
+        },
+        {
+          "month": "Mar",
+          "label": "Possible"
+        },
+        {
+          "month": "Apr",
+          "label": "Good"
+        },
+        {
+          "month": "May",
+          "label": "Good"
+        },
+        {
+          "month": "Jun",
+          "label": "Best"
+        },
+        {
+          "month": "Jul",
+          "label": "Best"
+        },
+        {
+          "month": "Aug",
+          "label": "Best"
+        },
+        {
+          "month": "Sep",
+          "label": "Best"
+        },
+        {
+          "month": "Oct",
+          "label": "Good"
+        },
+        {
+          "month": "Nov",
+          "label": "Possible"
+        },
+        {
+          "month": "Dec",
+          "label": "Avoid"
+        }
+      ],
+      "summary": "Best: Jun–Sep. Warm Black Sea weather is strongest; Apr–May and Oct are calmer shoulder months.",
+      "notes": "Avoid means simply not ideal, not impossible. Moving holidays/festivals may change crowds year by year.",
+      "confidenceLevel": "High",
+      "lastChecked": "2026-05-30",
+      "sources": "https://www.climatestotravel.com/climate/bulgaria/varna\nhttps://www.kayak.com/Varna-Hotels-Graffit-Gallery-Design-Hotel.601871.ksp\nhttps://www.kayak.ie/Varna-Hotels.12778.hotel.ksp\nhttps://www.skyscanner.net/hotels/bulgaria/varna-hotels/ci-27547366"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        {
+          "month": "Jan",
+          "label": "Cheapest"
+        },
+        {
+          "month": "Feb",
+          "label": "Cheapest"
+        },
+        {
+          "month": "Mar",
+          "label": "Good value"
+        },
+        {
+          "month": "Apr",
+          "label": "Cheapest"
+        },
+        {
+          "month": "May",
+          "label": "Good value"
+        },
+        {
+          "month": "Jun",
+          "label": "Expensive"
+        },
+        {
+          "month": "Jul",
+          "label": "Most expensive"
+        },
+        {
+          "month": "Aug",
+          "label": "Most expensive"
+        },
+        {
+          "month": "Sep",
+          "label": "Expensive"
+        },
+        {
+          "month": "Oct",
+          "label": "Average"
+        },
+        {
+          "month": "Nov",
+          "label": "Cheapest"
+        },
+        {
+          "month": "Dec",
+          "label": "Cheapest"
+        }
+      ],
+      "summary": "Cheapest: Nov–Feb; Apr. Most expensive: Jul–Aug; June and September can rise around Black Sea season.",
+      "notes": "Most expensive is used only where the evidence is strong. Ramadan/Eid, Easter, Christmas/New Year, school holidays and local festivals move year by year.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-05-30",
+      "sources": "https://www.climatestotravel.com/climate/bulgaria/varna\nhttps://www.kayak.com/Varna-Hotels-Graffit-Gallery-Design-Hotel.601871.ksp\nhttps://www.kayak.ie/Varna-Hotels.12778.hotel.ksp\nhttps://www.skyscanner.net/hotels/bulgaria/varna-hotels/ci-27547366"
+    }
+  },
+  "hermitage-jakarta": {
+    "hotel": "The Hermitage Jakarta",
+    "city": "Jakarta",
+    "country": "Indonesia",
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        {
+          "month": "Jan",
+          "label": "Avoid"
+        },
+        {
+          "month": "Feb",
+          "label": "Avoid"
+        },
+        {
+          "month": "Mar",
+          "label": "Avoid"
+        },
+        {
+          "month": "Apr",
+          "label": "Possible"
+        },
+        {
+          "month": "May",
+          "label": "Good"
+        },
+        {
+          "month": "Jun",
+          "label": "Best"
+        },
+        {
+          "month": "Jul",
+          "label": "Best"
+        },
+        {
+          "month": "Aug",
+          "label": "Best"
+        },
+        {
+          "month": "Sep",
+          "label": "Good"
+        },
+        {
+          "month": "Oct",
+          "label": "Possible"
+        },
+        {
+          "month": "Nov",
+          "label": "Possible"
+        },
+        {
+          "month": "Dec",
+          "label": "Avoid"
+        }
+      ],
+      "summary": "Best: Jun–Aug. Jakarta is driest then; Dec–Mar is wetter and can disrupt outdoor plans.",
+      "notes": "Avoid means simply not ideal, not impossible. Moving holidays/festivals may change crowds year by year.",
+      "confidenceLevel": "High",
+      "lastChecked": "2026-05-30",
+      "sources": "https://www.traveloka.com/en-sg/explore/guides/jakarta-weather-temperature-forecast/1002862\nhttps://www.vietjetair.com/en/pages/jakarta-weather-by-season-when-is-the-best-time-to-visit-1698723800683\nhttps://www.kayak.com/Jakarta-Hotels-The-Hermitage-a-Tribute-Portfolio-Hotel-Jakarta.742864.ksp\nhttps://www.kayak.com/Jakarta-Hotels.22380.hotel.ksp"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        {
+          "month": "Jan",
+          "label": "Good value"
+        },
+        {
+          "month": "Feb",
+          "label": "Good value"
+        },
+        {
+          "month": "Mar",
+          "label": "Cheapest"
+        },
+        {
+          "month": "Apr",
+          "label": "Expensive"
+        },
+        {
+          "month": "May",
+          "label": "Average"
+        },
+        {
+          "month": "Jun",
+          "label": "Average"
+        },
+        {
+          "month": "Jul",
+          "label": "Expensive"
+        },
+        {
+          "month": "Aug",
+          "label": "Good value"
+        },
+        {
+          "month": "Sep",
+          "label": "Cheapest"
+        },
+        {
+          "month": "Oct",
+          "label": "Expensive"
+        },
+        {
+          "month": "Nov",
+          "label": "Good value"
+        },
+        {
+          "month": "Dec",
+          "label": "Most expensive"
+        }
+      ],
+      "summary": "Cheapest: Mar; Sep. Most expensive: Dec; Apr, Jul and Oct can rise with business and holiday demand.",
+      "notes": "Most expensive is used only where the evidence is strong. Ramadan/Eid, Easter, Chinese New Year, Christmas/New Year, school holidays and local events move year by year.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-05-30",
+      "sources": "https://www.traveloka.com/en-sg/explore/guides/jakarta-weather-temperature-forecast/1002862\nhttps://www.vietjetair.com/en/pages/jakarta-weather-by-season-when-is-the-best-time-to-visit-1698723800683\nhttps://www.kayak.com/Jakarta-Hotels-The-Hermitage-a-Tribute-Portfolio-Hotel-Jakarta.742864.ksp\nhttps://www.kayak.com/Jakarta-Hotels.22380.hotel.ksp"
+    }
+  },
+  "millennium-downtown-abu-dhabi": {
+    "hotel": "Millennium Downtown Abu Dhabi",
+    "city": "Abu Dhabi",
+    "country": "United Arab Emirates",
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        {
+          "month": "Jan",
+          "label": "Best"
+        },
+        {
+          "month": "Feb",
+          "label": "Best"
+        },
+        {
+          "month": "Mar",
+          "label": "Best"
+        },
+        {
+          "month": "Apr",
+          "label": "Good"
+        },
+        {
+          "month": "May",
+          "label": "Possible"
+        },
+        {
+          "month": "Jun",
+          "label": "Avoid"
+        },
+        {
+          "month": "Jul",
+          "label": "Avoid"
+        },
+        {
+          "month": "Aug",
+          "label": "Avoid"
+        },
+        {
+          "month": "Sep",
+          "label": "Avoid"
+        },
+        {
+          "month": "Oct",
+          "label": "Good"
+        },
+        {
+          "month": "Nov",
+          "label": "Best"
+        },
+        {
+          "month": "Dec",
+          "label": "Best"
+        }
+      ],
+      "summary": "Best: Nov–Mar. Comfortable outdoor weather; Jun–Sep is usually too hot for most leisure plans.",
+      "notes": "Avoid means simply not ideal, not impossible. Moving holidays/festivals may change crowds year by year.",
+      "confidenceLevel": "High",
+      "lastChecked": "2026-05-30",
+      "sources": "https://visitabudhabi.ae/en/plan-your-trip/essential-info/weather-in-abu-dhabi\nhttps://visitabudhabi.ae/en/plan-your-trip/article-hub/things-to-do-by-season\nhttps://www.kayak.com/Abu-Dhabi-Hotels-Crowne-Plaza-Abu-Dhabi.159847.ksp\nhttps://www.kayak.com/Abu-Dhabi-Hotels.9457.hotel.ksp"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        {
+          "month": "Jan",
+          "label": "Expensive"
+        },
+        {
+          "month": "Feb",
+          "label": "Most expensive"
+        },
+        {
+          "month": "Mar",
+          "label": "Cheapest"
+        },
+        {
+          "month": "Apr",
+          "label": "Cheapest"
+        },
+        {
+          "month": "May",
+          "label": "Good value"
+        },
+        {
+          "month": "Jun",
+          "label": "Cheapest"
+        },
+        {
+          "month": "Jul",
+          "label": "Cheapest"
+        },
+        {
+          "month": "Aug",
+          "label": "Cheapest"
+        },
+        {
+          "month": "Sep",
+          "label": "Good value"
+        },
+        {
+          "month": "Oct",
+          "label": "Average"
+        },
+        {
+          "month": "Nov",
+          "label": "Expensive"
+        },
+        {
+          "month": "Dec",
+          "label": "Most expensive"
+        }
+      ],
+      "summary": "Cheapest: Mar–Apr; Jun–Aug. Most expensive: Dec–Feb; November can rise with winter demand and events.",
+      "notes": "Most expensive is used only where the evidence is strong. Ramadan/Eid, Easter, Christmas/New Year, school holidays and major Abu Dhabi events move year by year.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-05-30",
+      "sources": "https://visitabudhabi.ae/en/plan-your-trip/essential-info/weather-in-abu-dhabi\nhttps://visitabudhabi.ae/en/plan-your-trip/article-hub/things-to-do-by-season\nhttps://www.kayak.com/Abu-Dhabi-Hotels-Crowne-Plaza-Abu-Dhabi.159847.ksp\nhttps://www.kayak.com/Abu-Dhabi-Hotels.9457.hotel.ksp"
+    }
   }
 };
