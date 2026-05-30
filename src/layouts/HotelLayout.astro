@@ -3,7 +3,6 @@ import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Badge from '../components/Badge.astro';
 import ValueScore from '../components/ValueScore.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 
 interface Props {
@@ -27,11 +26,26 @@ interface Props {
     foodAngle: string;
     seoTitle: string;
     seoDescription: string;
+    image?: {
+      src: string;
+      alt: string;
+      attribution?: string;
+      sourcePageUrl?: string;
+    };
+    gallery?: Array<{
+      src: string;
+      alt: string;
+      type?: string;
+      subject?: string;
+      attribution?: string;
+      sourcePageUrl?: string;
+    }>;
   };
   relatedHotels?: Array<{slug: string; title: string; city: string; budgetTier: string}>;
 }
 
 const { hotel, relatedHotels = [] } = Astro.props;
+const gallery = hotel.gallery?.filter(image => image.src) ?? [];
 ---
 
 <BaseLayout title={hotel.seoTitle} description={hotel.seoDescription}>
@@ -50,12 +64,28 @@ const { hotel, relatedHotels = [] } = Astro.props;
       <!-- Main content -->
       <article>
         <!-- Hero image -->
-        <ImagePlaceholder
-          hotelName={hotel.title}
-          city={hotel.city}
-          country={hotel.country}
-          aspectRatio="aspect-[16/8]"
-        />
+        {hotel.image?.src && (
+          <figure class="m-0">
+            <div class="aspect-[16/8] overflow-hidden rounded-2xl bg-[#F8F5EF]">
+              <img
+                src={hotel.image.src}
+                alt={hotel.image.alt}
+                class="h-full w-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            {hotel.image.attribution && (
+              <figcaption class="mt-2 text-xs text-[#6B7280]">
+                {hotel.image.sourcePageUrl ? (
+                  <a href={hotel.image.sourcePageUrl} target="_blank" rel="noopener noreferrer" class="text-[#6B7280] hover:text-[#B88A44] no-underline">
+                    {hotel.image.attribution}
+                  </a>
+                ) : hotel.image.attribution}
+              </figcaption>
+            )}
+          </figure>
+        )}
 
         <!-- Hotel header -->
         <header class="mt-8 mb-8">
@@ -126,6 +156,42 @@ const { hotel, relatedHotels = [] } = Astro.props;
           prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
           <slot />
         </div>
+
+        {gallery.length > 0 && (
+          <section class="mt-12" aria-labelledby="image-gallery-heading">
+            <h2 id="image-gallery-heading" class="font-serif text-2xl md:text-3xl font-bold text-[#1D2433] mb-6">
+              Images from the stay and destination
+            </h2>
+            <div class="grid md:grid-cols-3 gap-4">
+              {gallery.map((image, index) => (
+                <figure class={`m-0 ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''}`}>
+                  <div class={`${index === 0 ? 'aspect-[16/10] h-full' : 'aspect-[4/3]'} overflow-hidden rounded-xl bg-[#F8F5EF]`}>
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      class="h-full w-full object-cover"
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </div>
+                  <figcaption class="mt-2 text-xs leading-relaxed text-[#6B7280]">
+                    <span class="font-medium text-[#1D2433]">{image.subject ?? image.type}</span>
+                    {image.attribution && (
+                      <>
+                        {' · '}
+                        {image.sourcePageUrl ? (
+                          <a href={image.sourcePageUrl} target="_blank" rel="noopener noreferrer" class="text-[#6B7280] hover:text-[#B88A44] no-underline">
+                            {image.attribution}
+                          </a>
+                        ) : image.attribution}
+                      </>
+                    )}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
 
         <!-- Booking CTA -->
         <div class="mt-12 bg-[#1D2433] rounded-2xl p-8 text-white">

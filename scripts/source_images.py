@@ -267,6 +267,14 @@ def score_page(page):
         score += 25
     if width >= 1600:
         score += 20
+    hard_reject_terms = [
+        "watermark", " map ", " airport", "bus stop", "coach", "ferry being loaded",
+        "military", "navy", "seal ", "logo", "street sign", "abandoned",
+        " cow", " cows ", " saigon", "ho chi minh", "bosque de piedra",
+        "stone forest", "rabbit year", "chinatown",
+    ]
+    if any(term in f" {lower_blob} " for term in hard_reject_terms):
+        return None, "Not visually suitable for luxury travel use"
     if "watermark" in lower_blob:
         score -= 50
     if "map" in lower_blob or "logo" in lower_blob or "seal" in lower_blob:
