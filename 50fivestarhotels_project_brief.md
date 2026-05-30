@@ -604,3 +604,125 @@ The guiding question for every inclusion should be:
 > **Would this hotel make someone excited to visit the destination because the value feels unusually good?**
 
 If the answer is yes, the hotel is a strong candidate for 50 Five-Star Hotels.
+
+---
+
+## Build status — as of 2026-05-30
+
+### Site is live
+
+The full launch site has been built, committed and pushed to GitHub. Cloudflare Pages deploys automatically from the `main` branch.
+
+- **Live URL:** https://50fivestarhotels.com / https://50fivestarhotels.pages.dev/
+- **GitHub:** https://github.com/barberryid/50fivestarhotels
+- **Build output:** 28 pages, zero errors
+
+### Tech stack confirmed
+
+| Layer | Technology |
+|---|---|
+| Framework | Astro 6.x (static output) |
+| CSS | Tailwind CSS v4 via `@tailwindcss/vite` |
+| Content | Astro Content Layer API (glob loader), Markdown |
+| Hosting | Cloudflare Pages |
+| Build command | `npm run build` |
+| Output directory | `dist` |
+
+**Astro 6 notes:**
+- Content collections use `import { glob } from 'astro/loaders'` in `src/content.config.ts`
+- Rendering Markdown entries uses `import { render } from 'astro:content'` then `await render(entry)` — not `entry.render()`
+- Content files live in `src/content/hotels/`
+
+### Launch hotel list (20 hotels)
+
+All 20 hotels are live as individual pages at `/hotels/[slug]`.
+
+| Rank | Hotel | City | Country | Tier | Score | Verdict |
+|---|---|---|---|---|---|---|
+| 1 | Hotel Majapahit Surabaya – MGallery | Surabaya | Indonesia | Under €100 | 91 | Exceptional value |
+| 2 | The Phoenix Hotel Yogyakarta – Handwritten | Yogyakarta | Indonesia | Under €100 | 89 | Exceptional value |
+| 3 | The Majestic Hotel Kuala Lumpur, Autograph | Kuala Lumpur | Malaysia | Under €200 | 87 | Exceptional value |
+| 4 | The Raweekanlaya Bangkok | Bangkok | Thailand | Under €200 | 85 | Exceptional value |
+| 5 | Stamba Hotel | Tbilisi | Georgia | Under €250 | 84 | Strong value |
+| 6 | Angkor Aurora | Siem Reap | Cambodia | Under €100 | 83 | Strong value |
+| 7 | The Royal Surakarta Heritage – Handwritten | Solo | Indonesia | Under €100 | 82 | Strong value |
+| 8 | Pleiada Boutique Hotel & Spa | Iași | Romania | Under €200 | 81 | Strong value |
+| 9 | Steigenberger Resort Achti Luxor | Luxor | Egypt | Under €200 | 81 | Strong value |
+| 10 | Silk Path Grand Hue Hotel & Spa | Hue | Vietnam | Under €100 | 80 | Strong value |
+| 11 | The Hermitage, a Tribute Portfolio Hotel | Jakarta | Indonesia | Under €200 | 80 | Strong value |
+| 12 | Hyatt Regency Tashkent | Tashkent | Uzbekistan | Under €200 | 79 | Strong value |
+| 13 | Grand Hotel Yerevan | Yerevan | Armenia | Under €200 | 78 | Strong value |
+| 14 | Sofitel Marrakech Palais Imperial & Spa | Marrakech | Morocco | Under €250 | 78 | Strong value |
+| 15 | Boton Blue Hotel & Spa | Nha Trang | Vietnam | Under €100 | 76 | Strong value |
+| 16 | I'M Hotel Makati | Makati | Philippines | Under €200 | 75 | Strong value |
+| 17 | Malak Regency Hotel | Sarajevo | Bosnia | Under €200 | 73 | Good value |
+| 18 | Real Marina Hotel & Spa | Olhão | Portugal | Under €200 | 72 | Good value |
+| 19 | Graffit Gallery Design Hotel | Varna | Bulgaria | Under €200 | 71 | Good value |
+| 20 | Millennium Downtown Abu Dhabi | Abu Dhabi | UAE | Under €200 | 68 | Good value |
+
+**Not in launch batch (future candidates):**
+- Meliá Yangon
+- NH Collection Bogotá WTC Royal
+- Grand Mercure Medan Angkasa
+- Novotel Ahmedabad
+- Mandarina Colombo
+
+### Site structure built
+
+```
+src/
+  components/         — Header, Footer, HotelCard, HotelComparisonTable,
+                        PriceTierCard, Badge, ValueScore, ImagePlaceholder,
+                        Breadcrumbs, AffiliateDisclosure, SeoHead, SectionHeading
+  content/hotels/     — 20 Markdown hotel files
+  content.config.ts   — Astro 6 Content Layer schema (glob loader)
+  layouts/            — BaseLayout, PageLayout, HotelLayout
+  pages/
+    index.astro
+    hotels/[slug].astro
+    under-100.astro
+    under-200.astro
+    under-250.astro
+    destinations.astro
+    methodology.astro
+    affiliate-disclosure.astro
+    about.astro
+  styles/global.css   — Tailwind v4 + brand tokens
+```
+
+### Images
+
+All hotel pages currently use `ImagePlaceholder.astro` components (dark gradient blocks with TODO labels). No licensed images have been added yet.
+
+- Placeholder SVG: `public/images/placeholders/luxury-hotel-placeholder.svg`
+- Image brief for all 20 hotels: `research/image-needs.md`
+
+Priority images needed first: Hotel Majapahit Surabaya, Phoenix Yogyakarta, Majestic KL, Stamba Tbilisi, Raweekanlaya Bangkok (the 5 featured on the homepage).
+
+Acceptable image sources: Wikimedia Commons (CC BY / CC BY-SA), Unsplash, Pexels, direct hotel press kits.
+
+### Booking.com links
+
+All booking links use standard Booking.com search URLs (`?ss=Hotel%20Name%20City%20Country`). These are **not affiliate links** at launch. Affiliate links need to be set up separately through the Booking.com Partner Programme and swapped in once approved.
+
+### Prose styling note
+
+Hotel editorial body text uses Tailwind `prose` classes. If body text appears unstyled after deployment, install `@tailwindcss/typography`:
+
+```
+npm install @tailwindcss/typography
+```
+
+Then add to `src/styles/global.css`:
+
+```css
+@plugin "@tailwindcss/typography";
+```
+
+### Next steps
+
+1. **Add licensed images** — use `research/image-needs.md` as the brief. Start with the 5 featured homepage hotels.
+2. **Set up Booking.com affiliate programme** — replace standard search links with affiliate links once approved.
+3. **Install @tailwindcss/typography** — for styled prose on hotel profile pages.
+4. **Expand to 50 hotels** — future candidates listed above plus the destination strategy in this brief.
+5. **Add city/destination pages** — longer-form SEO content for top destinations (Yogyakarta, Tbilisi, Marrakech, etc.).
