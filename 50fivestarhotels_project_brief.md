@@ -1058,3 +1058,9 @@ Validation:
 - robots.txt, sitemap, canonical/OG/Twitter metadata, and JSON-LD all present and correct.
 - `npm run build` completed successfully (65 pages).
 - Changes committed and pushed to `main`.
+
+Recommended follow-ups (identified, not yet actioned):
+- Add live profile pages for the 5 candidates that already have AI images but no content file: Meliá Yangon, Grand Mercure Medan Angkasa, NH Collection Bogotá WTC Royal, Novotel Ahmedabad, Mandarin Colombo. Their `public/images/hotels/*` assets are currently orphaned.
+- `destinations.astro` cards link to hotel pages but not to the richer per-city destination pages (`/destinations/<city>/`) — worth surfacing those routes from the destinations index.
+- Remove the unused `destinationSlugs` const in `src/pages/destinations/[slug].astro` (the route already defines its own `allowedSlugs`).
+- Replace Booking.com search links with affiliate links once the programme is approved.
