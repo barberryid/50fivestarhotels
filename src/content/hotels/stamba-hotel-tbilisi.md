@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Tbilisi is becoming a popular destination; prices have risen"
   - "More design-led than traditional luxury — service polish varies"
+whyCheap:
+  - "Georgia's low cost base and emerging luxury market price design hotels well below Western Europe."
+  - "Tbilisi is still under the radar for high-end tourism, so demand has not pushed rates up."
+  - "A favourable exchange rate stretches a European budget considerably further."
 bestNearbyAttraction: "Tbilisi old town, Narikala Fortress, sulfur baths"
 foodAngle: "Georgian cuisine — khachapuri, khinkali, natural wine and traditional feasting"
 seoTitle: "Stamba Hotel Tbilisi Review: Affordable Five-Star Design Hotel in Georgia"

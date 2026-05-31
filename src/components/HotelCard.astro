@@ -1,6 +1,5 @@
 ---
 import Badge from './Badge.astro';
-import ValueScore from './ValueScore.astro';
 
 interface Props {
   hotel: {
@@ -29,11 +28,12 @@ interface Props {
 }
 
 const { hotel, featured = false } = Astro.props;
+const scoreColor = hotel.valueScore >= 85 ? '#4F6547' : hotel.valueScore >= 75 ? '#B88A44' : '#6F685F';
 ---
 
-<article class={`bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-[#1D2433]/5 flex flex-col ${featured ? 'ring-2 ring-[#B88A44]/20' : ''}`}>
-  <a href={`/hotels/${hotel.slug}`} class="block no-underline" tabindex="-1" aria-hidden="true">
-    <div class="aspect-[16/10] overflow-hidden bg-[#F8F5EF]">
+<article class={`group bg-[#FFFDF8] rounded-[1.25rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#E2D4BF] flex flex-col ${featured ? 'ring-1 ring-[#B88A44]/25' : ''}`}>
+  <a href={`/hotels/${hotel.slug}`} class="block no-underline relative">
+    <div class="aspect-[4/3] overflow-hidden bg-[#F8F2E8]">
       <picture>
         {hotel.image?.srcSet?.large && <source media="(min-width: 900px)" srcset={hotel.image.srcSet.large} type="image/webp" />}
         {hotel.image?.srcSet?.small && <source media="(max-width: 899px)" srcset={hotel.image.srcSet.small} type="image/webp" />}
@@ -42,68 +42,65 @@ const { hotel, featured = false } = Astro.props;
           alt={hotel.image?.alt ?? `${hotel.title} in ${hotel.city}, ${hotel.country}`}
           loading="lazy"
           decoding="async"
-          class="h-full w-full object-cover"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
       </picture>
     </div>
-  </a>
+    <div class="editorial-overlay absolute inset-0 pointer-events-none"></div>
 
-  <div class="p-6 flex flex-col flex-1 gap-4">
-    <div class="flex items-start justify-between gap-3">
-      <div class="flex-1">
-        <div class="flex flex-wrap gap-2 mb-3">
-          <Badge label={hotel.budgetTier} variant="tier" />
-          <Badge label={hotel.fiveStarStatus} variant="type" />
-        </div>
-        <a href={`/hotels/${hotel.slug}`} class="no-underline">
-          <h3 class="font-serif text-lg font-bold text-[#1D2433] hover:text-[#B88A44] transition-colors leading-snug">
-            {hotel.title}
-          </h3>
-        </a>
-        <p class="text-[#B88A44] text-sm font-medium mt-1">{hotel.city}, {hotel.country}</p>
-      </div>
-      <div class="shrink-0">
-        <ValueScore score={hotel.valueScore} verdict={hotel.verdict} size="sm" />
-      </div>
+    <!-- Tier badge -->
+    <div class="absolute top-3 left-3">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#FFFDF8]/95 text-[#1F2428] backdrop-blur shadow-sm">
+        {hotel.budgetTier}
+      </span>
     </div>
 
-    <p class="text-[#6B7280] text-sm">{hotel.typicalPriceRange}</p>
+    <!-- Score pill -->
+    <div class="absolute top-3 right-3">
+      <span class="flex items-center justify-center w-11 h-11 rounded-full text-white font-serif font-bold text-base shadow-md" style={`background:${scoreColor}`}>
+        {hotel.valueScore}
+      </span>
+    </div>
 
-    <ul class="space-y-1.5">
-      {hotel.highlights.slice(0, 2).map(h => (
-        <li class="flex items-start gap-2 text-sm text-[#1D2433]/80">
-          <svg class="w-4 h-4 text-[#58745A] shrink-0 mt-0.5" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm3.47 5.53a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06L7 9.94l3.47-3.47a.75.75 0 0 1 1.06.06z"/>
-          </svg>
-          {h}
-        </li>
-      ))}
-    </ul>
+    <!-- Location overlaid -->
+    <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+      <p class="text-[0.7rem] uppercase tracking-widest text-white/80 font-semibold">{hotel.city}, {hotel.country}</p>
+    </div>
+  </a>
 
-    {hotel.cautions.length > 0 && (
-      <p class="text-xs text-[#6B7280] border-l-2 border-[#B88A44]/30 pl-3 italic">
-        Note: {hotel.cautions[0]}
-      </p>
+  <div class="p-5 flex flex-col flex-1 gap-3">
+    <a href={`/hotels/${hotel.slug}`} class="no-underline">
+      <h3 class="font-serif text-xl font-semibold text-[#1F2428] group-hover:text-[#B88A44] transition-colors leading-snug">
+        {hotel.title}
+      </h3>
+    </a>
+
+    <div class="flex items-center gap-2 flex-wrap">
+      <Badge label={hotel.fiveStarStatus} variant="type" />
+      <span class="text-xs font-semibold uppercase tracking-wider" style={`color:${scoreColor}`}>{hotel.verdict}</span>
+    </div>
+
+    {hotel.highlights[0] && (
+      <p class="text-[#1F2428]/75 text-sm leading-relaxed">{hotel.highlights[0]}</p>
     )}
 
-    <div class="mt-auto pt-4 flex flex-col gap-2">
+    <p class="text-[#6F685F] text-sm mt-auto pt-1">{hotel.typicalPriceRange}</p>
+
+    <div class="flex flex-col gap-2 pt-1">
       <a
         href={hotel.bookingUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="block text-center bg-[#1D2433] text-white text-sm font-semibold py-3 px-4 rounded-xl hover:bg-[#B88A44] transition-colors no-underline"
+        class="block text-center bg-[#1F2428] text-white text-sm font-semibold py-3 px-4 rounded-full hover:bg-[#B88A44] transition-colors no-underline"
       >
-        Check current rates on Booking.com
+        Check current rates
       </a>
       <a
         href={`/hotels/${hotel.slug}`}
-        class="block text-center text-[#1D2433] text-sm font-medium py-2 px-4 rounded-xl border border-[#1D2433]/15 hover:border-[#B88A44] hover:text-[#B88A44] transition-colors no-underline"
+        class="block text-center text-[#6F685F] text-sm font-medium hover:text-[#B88A44] transition-colors no-underline"
       >
         Read full profile →
       </a>
-      <p class="text-[10px] text-[#6B7280] text-center leading-relaxed">
-        Prices vary by date, room type, taxes and cancellation policy.
-      </p>
     </div>
   </div>
 </article>

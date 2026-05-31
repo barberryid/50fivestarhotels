@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Kuala Lumpur can be extremely hot and humid for walking between sights"
   - "The heritage wing and tower wing differ significantly in feel"
+whyCheap:
+  - "Kuala Lumpur has deep five-star inventory and intense competition, which suppresses rates across the city."
+  - "Malaysia's favourable exchange rate makes genuine luxury cheaper than in most other Asian capitals."
+  - "Gaps in the business-travel calendar open up affordable weekday and off-peak rates regularly."
 bestNearbyAttraction: "Merdeka Square, KL City Gallery and the colonial quarter"
 foodAngle: "Malaysian kopitiam culture, hawker food, nasi lemak and Petaling Street"
 seoTitle: "The Majestic Hotel Kuala Lumpur Review: Affordable Five-Star Heritage in Malaysia"

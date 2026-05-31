@@ -1,0 +1,32 @@
+---
+interface Props {
+  status: string;
+}
+
+const { status } = Astro.props;
+
+// Plain-English reality behind each editorial five-star classification.
+const explanations: Record<string, string> = {
+  'True international five-star': 'Comparable to what travellers expect from luxury hotels globally. The five-star label here is genuine.',
+  'Local/booking-site five-star': 'Marketed or classified as five-star, but closer to upper-upscale in practice. Strong value rather than true international luxury.',
+  'Local five-star': 'Classified as five-star locally, but closer to upper-upscale in practice. Judge it on value, not the star rating alone.',
+  'Booking-site five-star': 'Listed as five-star on booking platforms, but closer to upper-upscale. Interesting mainly because the value is unusually strong.',
+  'Heritage-value five-star': 'May not be flawless, but it has history, atmosphere and a distinctive character that a modern five-star box cannot fake.',
+  'Business five-star bargain': 'Good facilities and reliable service — more practical than romantic, but excellent value when the rate is low.',
+  'Near-luxury exception': 'Not clearly five-star, but the overall experience is good enough to be worth considering at the price.',
+  'Questionable five-star': 'Technically listed as five-star, but weaker than the rating suggests. Only worth it if the price is genuinely low.',
+};
+
+const note = explanations[status] ?? 'Read the profile below for an honest take on how this hotel’s five-star label holds up in practice.';
+---
+
+<div class="rounded-2xl border border-[#E2D4BF] bg-[#FFFDF8] p-6 shadow-sm">
+  <div class="flex items-center gap-2.5 mb-3">
+    <svg class="w-5 h-5 text-[#B88A44] shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.78L10 14.77 4.8 17.5l.99-5.78-4.21-4.1 5.82-.85L10 1.5z"/>
+    </svg>
+    <h3 class="font-serif text-lg font-semibold text-[#1F2428]">Five-star reality</h3>
+  </div>
+  <p class="text-sm font-semibold text-[#B88A44] mb-1.5">{status}</p>
+  <p class="text-sm text-[#1F2428]/75 leading-relaxed">{note}</p>
+</div>

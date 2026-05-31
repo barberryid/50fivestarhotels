@@ -68,6 +68,7 @@ const hotels = defineCollection({
     ).optional(),
     highlights: z.array(z.string()),
     cautions: z.array(z.string()),
+    whyCheap: z.array(z.string()).optional(),
     bestNearbyAttraction: z.string(),
     foodAngle: z.string(),
     seoTitle: z.string(),

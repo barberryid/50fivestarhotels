@@ -9,13 +9,13 @@ interface Props {
 const { crumbs } = Astro.props;
 ---
 
-<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-sm text-[#6B7280]">
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-sm text-[#6F685F]">
   {crumbs.map((crumb, i) => (
     <span class="flex items-center gap-2">
-      {i > 0 && <span aria-hidden="true" class="text-[#1D2433]/25">/</span>}
+      {i > 0 && <span aria-hidden="true" class="text-[#1F2428]/25">/</span>}
       {crumb.href
-        ? <a href={crumb.href} class="hover:text-[#1D2433] transition-colors no-underline">{crumb.label}</a>
-        : <span class="text-[#1D2433] font-medium">{crumb.label}</span>
+        ? <a href={crumb.href} class="hover:text-[#1F2428] transition-colors no-underline">{crumb.label}</a>
+        : <span class="text-[#1F2428] font-medium">{crumb.label}</span>
       }
     </span>
   ))}

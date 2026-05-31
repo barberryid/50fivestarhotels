@@ -105,6 +105,10 @@ highlights:
 cautions:
   - "Yogyakarta is very popular; prices spike during peak travel periods"
   - "Some areas of the hotel feel more dated than others"
+whyCheap:
+  - "Yogyakarta is a high-supply cultural destination where colonial-era hotels are priced largely for domestic travellers."
+  - "Low local labour and operating costs across Central Java keep nightly rates modest."
+  - "Strong competition among heritage and chain hotels near Malioboro holds prices down."
 bestNearbyAttraction: "Borobudur and Prambanan temples, Kraton Yogyakarta"
 foodAngle: "Gudeg, Malioboro street food, Javanese cuisine and traditional warungs"
 seoTitle: "The Phoenix Hotel Yogyakarta Review: Affordable Five-Star Heritage Near Borobudur"

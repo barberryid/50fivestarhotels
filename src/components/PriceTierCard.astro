@@ -11,16 +11,16 @@ const { tier, href, tagline, description, count } = Astro.props;
 ---
 
 <a href={href} class="block no-underline group">
-  <article class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg border border-[#1D2433]/5 transition-all group-hover:border-[#B88A44]/30 h-full flex flex-col gap-4">
+  <article class="bg-[#FFFDF8] rounded-2xl p-8 shadow-sm hover:shadow-lg border border-[#1F2428]/5 transition-all group-hover:border-[#B88A44]/30 h-full flex flex-col gap-4">
     <div>
-      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#58745A]/12 text-[#58745A] mb-4">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#4F6547]/12 text-[#4F6547] mb-4">
         {count} hotels
       </span>
-      <h3 class="font-serif text-2xl font-bold text-[#1D2433] group-hover:text-[#B88A44] transition-colors">{tier}</h3>
+      <h3 class="font-serif text-2xl font-bold text-[#1F2428] group-hover:text-[#B88A44] transition-colors">{tier}</h3>
       <p class="text-[#B88A44] text-sm font-semibold mt-1">{tagline}</p>
     </div>
-    <p class="text-[#6B7280] text-sm leading-relaxed flex-1">{description}</p>
-    <span class="text-[#1D2433] text-sm font-semibold group-hover:text-[#B88A44] transition-colors">
+    <p class="text-[#6F685F] text-sm leading-relaxed flex-1">{description}</p>
+    <span class="text-[#1F2428] text-sm font-semibold group-hover:text-[#B88A44] transition-colors">
       Browse hotels →
     </span>
   </article>

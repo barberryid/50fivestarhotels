@@ -1,0 +1,46 @@
+---
+interface Props {
+  bestWeather: string[];
+  cheapest: string[];
+  weatherSummary?: string;
+  priceSummary?: string;
+}
+
+const { bestWeather = [], cheapest = [], weatherSummary, priceSummary } = Astro.props;
+const hasAny = bestWeather.length > 0 || cheapest.length > 0;
+---
+
+{hasAny && (
+  <div class="rounded-2xl border border-[#E2D4BF] bg-[#FFFDF8] p-6 shadow-sm">
+    <div class="flex items-center gap-2.5 mb-4">
+      <svg class="w-5 h-5 text-[#B88A44] shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path d="M6 1a1 1 0 0 1 1 1v1h6V2a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h1V2a1 1 0 0 1 1-1zM4 7v9h12V7H4z"/>
+      </svg>
+      <h3 class="font-serif text-lg font-semibold text-[#1F2428]">Best months to book</h3>
+    </div>
+
+    {bestWeather.length > 0 && (
+      <div class="mb-4">
+        <p class="text-xs font-semibold uppercase tracking-wider text-[#6F685F] mb-2">Best weather</p>
+        <div class="flex flex-wrap gap-1.5">
+          {bestWeather.map(m => (
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#4F6547]/12 text-[#4F6547]">{m}</span>
+          ))}
+        </div>
+        {weatherSummary && <p class="text-xs text-[#6F685F] mt-2 leading-relaxed">{weatherSummary}</p>}
+      </div>
+    )}
+
+    {cheapest.length > 0 && (
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[#6F685F] mb-2">Cheapest value</p>
+        <div class="flex flex-wrap gap-1.5">
+          {cheapest.map(m => (
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#B88A44]/14 text-[#A8763A]">{m}</span>
+          ))}
+        </div>
+        {priceSummary && <p class="text-xs text-[#6F685F] mt-2 leading-relaxed">{priceSummary}</p>}
+      </div>
+    )}
+  </div>
+)}

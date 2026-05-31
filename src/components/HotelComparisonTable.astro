@@ -6,6 +6,7 @@ interface Hotel {
   rank: number;
   title: string;
   city: string;
+  country?: string;
   budgetTier: string;
   valueScore: number;
   verdict: string;
@@ -17,35 +18,55 @@ interface Props {
 }
 
 const { hotels, title = 'All hotels at a glance' } = Astro.props;
+
+const scoreColor = (s: number) => (s >= 85 ? '#4F6547' : s >= 75 ? '#B88A44' : '#6F685F');
+const verdictClass = (v: string) =>
+  v === 'Exceptional value'
+    ? 'bg-[#4F6547]/12 text-[#4F6547]'
+    : v === 'Strong value'
+      ? 'bg-[#B88A44]/14 text-[#A8763A]'
+      : 'bg-[#1F2428]/8 text-[#6F685F]';
 ---
 
 <section>
-  {title && <h2 class="font-serif text-2xl font-bold text-[#1D2433] mb-6">{title}</h2>}
-  <div class="overflow-x-auto rounded-2xl border border-[#1D2433]/8 shadow-sm">
-    <table class="w-full text-sm">
+  {title && <h2 class="font-serif text-2xl font-semibold text-[#1F2428] mb-6">{title}</h2>}
+  <div class="overflow-x-auto rounded-2xl border border-[#E2D4BF] shadow-sm bg-[#FFFDF8]">
+    <table class="w-full text-sm border-collapse">
       <thead>
-        <tr class="bg-[#1D2433] text-white text-left">
-          <th class="py-3 px-4 font-semibold">#</th>
-          <th class="py-3 px-4 font-semibold">Hotel</th>
-          <th class="py-3 px-4 font-semibold hidden sm:table-cell">City</th>
-          <th class="py-3 px-4 font-semibold">Tier</th>
-          <th class="py-3 px-4 font-semibold text-right">Score</th>
-          <th class="py-3 px-4 font-semibold hidden md:table-cell">Verdict</th>
+        <tr class="bg-[#1F2428] text-white text-left">
+          <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider w-10">#</th>
+          <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider">Hotel</th>
+          <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider hidden sm:table-cell">Where</th>
+          <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider hidden lg:table-cell">Tier</th>
+          <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider text-center">Score</th>
+          <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">Verdict</th>
         </tr>
       </thead>
       <tbody>
         {hotels.map((h, i) => (
-          <tr class={`border-t border-[#1D2433]/6 hover:bg-[#B88A44]/4 transition-colors ${i % 2 === 0 ? 'bg-white' : 'bg-[#F8F5EF]/60'}`}>
-            <td class="py-3 px-4 text-[#6B7280] font-mono text-xs">{h.rank}</td>
-            <td class="py-3 px-4">
-              <a href={`/hotels/${h.slug}`} class="font-medium text-[#1D2433] hover:text-[#B88A44] transition-colors no-underline">
+          <tr class={`border-t border-[#E2D4BF]/70 hover:bg-[#B88A44]/[0.06] transition-colors ${i % 2 === 0 ? 'bg-[#FFFDF8]' : 'bg-[#F8F2E8]/50'}`}>
+            <td class="py-4 px-4 text-[#B88A44] font-serif font-semibold text-base align-middle">{h.rank}</td>
+            <td class="py-4 px-4 align-middle">
+              <a href={`/hotels/${h.slug}`} class="font-serif font-semibold text-[#1F2428] hover:text-[#B88A44] transition-colors no-underline leading-snug">
                 {h.title}
               </a>
+              <div class="sm:hidden mt-1 text-[#6F685F] text-xs">{h.city}{h.country ? `, ${h.country}` : ''}</div>
             </td>
-            <td class="py-3 px-4 text-[#6B7280] hidden sm:table-cell">{h.city}</td>
-            <td class="py-3 px-4"><Badge label={h.budgetTier} variant="tier" /></td>
-            <td class="py-3 px-4 text-right font-bold text-[#58745A]">{h.valueScore}</td>
-            <td class="py-3 px-4 text-[#6B7280] hidden md:table-cell">{h.verdict}</td>
+            <td class="py-4 px-4 text-[#6F685F] hidden sm:table-cell align-middle">
+              <div class="text-[#1F2428] font-medium">{h.city}</div>
+              {h.country && <div class="text-xs text-[#6F685F]">{h.country}</div>}
+            </td>
+            <td class="py-4 px-4 hidden lg:table-cell align-middle"><Badge label={h.budgetTier} variant="tier" /></td>
+            <td class="py-4 px-4 text-center align-middle">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full text-white font-serif font-bold text-sm shadow-sm" style={`background:${scoreColor(h.valueScore)}`}>
+                {h.valueScore}
+              </span>
+            </td>
+            <td class="py-4 px-4 hidden md:table-cell align-middle">
+              <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${verdictClass(h.verdict)}`}>
+                {h.verdict}
+              </span>
+            </td>
           </tr>
         ))}
       </tbody>

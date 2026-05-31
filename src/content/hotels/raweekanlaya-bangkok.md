@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Not in Bangkok's main tourist zones — transport planning needed"
   - "The wellness positioning will not appeal to all travellers"
+whyCheap:
+  - "Bangkok has one of the world's deepest five-star markets, and oversupply keeps rates highly competitive."
+  - "Thailand's low operating costs and favourable exchange rate make even wellness resorts affordable."
+  - "Rates soften noticeably outside the cool high season and on weekdays."
 bestNearbyAttraction: "Grand Palace, Wat Pho, Chao Phraya riverside and Rattanakosin Island"
 foodAngle: "Thai wellness cuisine, herbal treatments, traditional Bangkok street food nearby"
 seoTitle: "The Raweekanlaya Bangkok Review: Affordable Wellness Five-Star Resort"

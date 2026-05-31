@@ -8,8 +8,14 @@ import HotelComparisonTable from '../components/HotelComparisonTable.astro';
 const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
 allHotels.sort((a, b) => a.data.rank - b.data.rank);
 
+const bySlug = Object.fromEntries(allHotels.map(h => [h.data.slug, h.data]));
+
 const featuredSlugs = ['hotel-majapahit-surabaya','phoenix-hotel-yogyakarta','majestic-hotel-kuala-lumpur','stamba-hotel-tbilisi','raweekanlaya-bangkok'];
 const featured = allHotels.filter(h => featuredSlugs.includes(h.data.slug));
+
+// Hero collage — a few of the strongest editorial images
+const heroImageSlugs = ['hotel-majapahit-surabaya','stamba-hotel-tbilisi','sofitel-marrakech','raweekanlaya-bangkok'];
+const heroImages = heroImageSlugs.map(s => bySlug[s]).filter(Boolean);
 
 const under100Count = allHotels.filter(h => h.data.budgetTier === 'Under €100').length;
 const under200Count = allHotels.filter(h => h.data.budgetTier === 'Under €200').length;
@@ -20,59 +26,134 @@ const tableHotels = allHotels.map(h => ({
   rank: h.data.rank,
   title: h.data.title,
   city: h.data.city,
+  country: h.data.country,
   budgetTier: h.data.budgetTier,
   valueScore: h.data.valueScore,
   verdict: h.data.verdict,
 }));
+
+// "Browse by feeling" — editorial moods, each with a representative image
+const feelings = [
+  { label: 'Heritage & history', note: 'Old walls, grand staircases and a sense of the past.', slug: 'hotel-majapahit-surabaya' },
+  { label: 'Spa & slow mornings', note: 'Wellness stays where the days unwind gently.', slug: 'raweekanlaya-bangkok' },
+  { label: 'Design & atmosphere', note: 'Hotels with a strong, distinctive sense of place.', slug: 'stamba-hotel-tbilisi' },
+  { label: 'City & food', note: 'A great base for markets, restaurants and street food.', slug: 'majestic-hotel-kuala-lumpur' },
+  { label: 'Beach & resort', note: 'Sea air, pools and easy holiday comfort.', slug: 'boton-blue-nha-trang' },
+  { label: 'Romantic escape', note: 'Special-occasion stays that feel quietly indulgent.', slug: 'sofitel-marrakech' },
+].map(f => ({ ...f, hotel: bySlug[f.slug] })).filter(f => f.hotel);
+
+// "Destination mood" — cities with a one-line atmosphere
+const moods = [
+  { slug: 'hotel-majapahit-surabaya', mood: 'Colonial Java, quietly grand' },
+  { slug: 'stamba-hotel-tbilisi', mood: 'Design-led Caucasus cool' },
+  { slug: 'sofitel-marrakech', mood: 'Warm light and palace gardens' },
+  { slug: 'raweekanlaya-bangkok', mood: 'Riverside wellness in the city' },
+  { slug: 'majestic-hotel-kuala-lumpur', mood: 'Heritage glamour, modern value' },
+  { slug: 'hermitage-jakarta', mood: 'Art-deco calm and serious food' },
+].map(m => ({ ...m, hotel: bySlug[m.slug] })).filter(m => m.hotel);
+
+const heroImg = (h) => h?.image?.srcSet?.large ?? h?.image?.src;
 ---
 
 <BaseLayout
   title="50 Five-Star Hotels | Five-Star Hotels Without Five-Star Prices"
-  description="A luxury editorial guide to affordable five-star and near-five-star hotels around the world, from heritage hotels in Java to spa stays, city hotels and smart splurges."
+  description="A warm editorial guide to affordable five-star and near-five-star hotels around the world, from heritage hotels in Java to spa stays, city hotels and smart splurges."
 >
   <main>
     <!-- Hero -->
-    <section class="bg-[#F8F5EF]">
-      <div class="max-w-6xl mx-auto px-5 py-20 md:py-28">
-        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-5">Affordable luxury travel</p>
-        <h1 class="font-serif text-5xl md:text-7xl font-bold text-[#1D2433] leading-[0.95] tracking-tight max-w-3xl">
-          Five-star hotels without five-star prices.
-        </h1>
-        <p class="text-[#6B7280] text-xl mt-8 leading-relaxed max-w-2xl">
-          A luxury editorial guide to hotels where the price feels surprisingly modest for the setting, service, history or sense of occasion.
-        </p>
-        <div class="flex flex-wrap gap-3 mt-10">
-          <a href="#featured" class="inline-flex items-center bg-[#1D2433] text-white font-semibold py-3.5 px-7 rounded-full hover:bg-[#B88A44] transition-colors no-underline text-sm">
-            Explore the best-value hotels
-          </a>
-          <a href="/under-100" class="inline-flex items-center bg-transparent text-[#1D2433] font-semibold py-3.5 px-7 rounded-full border border-[#1D2433]/20 hover:border-[#B88A44] hover:text-[#B88A44] transition-colors no-underline text-sm">
-            See hotels under €100
-          </a>
+    <section class="relative overflow-hidden">
+      <div class="max-w-6xl mx-auto px-5 pt-14 pb-20 md:pt-20 md:pb-28">
+        <div class="grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center">
+          <!-- Hero copy -->
+          <div>
+            <p class="text-[#B88A44] text-xs font-bold uppercase tracking-[0.18em] mb-5 flex items-center gap-2">
+              <span class="inline-block w-8 h-px bg-[#B88A44]"></span>
+              Affordable luxury travel
+            </p>
+            <h1 class="font-serif text-[2.7rem] sm:text-6xl md:text-7xl font-semibold text-[#1F2428] leading-[0.97] tracking-tight">
+              Five-star hotels<br />without five-star<br /><span class="text-[#B88A44] italic">prices.</span>
+            </h1>
+            <p class="text-[#6F685F] text-lg md:text-xl mt-7 leading-relaxed max-w-xl">
+              A warm, honest guide to hotels where the price feels surprisingly modest for the setting, service, history or sense of occasion.
+            </p>
+            <div class="flex flex-wrap gap-3 mt-9">
+              <a href="#featured" class="inline-flex items-center bg-[#1F2428] text-white font-semibold py-3.5 px-7 rounded-full hover:bg-[#B88A44] transition-colors no-underline text-sm">
+                Explore the best-value hotels
+              </a>
+              <a href="/under-100" class="inline-flex items-center bg-transparent text-[#1F2428] font-semibold py-3.5 px-7 rounded-full border border-[#1F2428]/20 hover:border-[#B88A44] hover:text-[#B88A44] transition-colors no-underline text-sm">
+                See hotels under €100
+              </a>
+            </div>
+            <p class="text-[#6F685F] text-xs mt-6 leading-relaxed max-w-md">
+              Prices change constantly. Every hotel here should be checked by date, room type, taxes and cancellation policy before booking.
+            </p>
+          </div>
+
+          <!-- Hero collage -->
+          <div class="relative">
+            <div class="grid grid-cols-5 grid-rows-6 gap-3 md:gap-4 h-[26rem] sm:h-[32rem] md:h-[34rem]">
+              <figure class="col-span-3 row-span-6 relative rounded-[1.4rem] overflow-hidden shadow-lg ring-1 ring-[#1F2428]/5 m-0">
+                {heroImages[0] && (
+                  <img src={heroImg(heroImages[0])} alt={heroImages[0].image?.alt ?? heroImages[0].title} loading="eager" decoding="async" fetchpriority="high" class="h-full w-full object-cover" />
+                )}
+                <div class="editorial-overlay absolute inset-0"></div>
+                <figcaption class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                  <p class="font-serif text-lg font-semibold leading-tight">{heroImages[0]?.city}</p>
+                  <p class="text-white/75 text-xs">{heroImages[0]?.country}</p>
+                </figcaption>
+              </figure>
+
+              <figure class="col-span-2 row-span-3 relative rounded-[1.2rem] overflow-hidden shadow-md ring-1 ring-[#1F2428]/5 m-0">
+                {heroImages[1] && (
+                  <img src={heroImg(heroImages[1])} alt={heroImages[1].image?.alt ?? heroImages[1].title} loading="eager" decoding="async" class="h-full w-full object-cover" />
+                )}
+                <div class="editorial-overlay absolute inset-0"></div>
+                <figcaption class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                  <p class="font-serif text-sm font-semibold leading-tight">{heroImages[1]?.city}</p>
+                </figcaption>
+              </figure>
+
+              <figure class="col-span-2 row-span-3 relative rounded-[1.2rem] overflow-hidden shadow-md ring-1 ring-[#1F2428]/5 m-0">
+                {heroImages[2] && (
+                  <img src={heroImg(heroImages[2])} alt={heroImages[2].image?.alt ?? heroImages[2].title} loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                )}
+                <div class="editorial-overlay absolute inset-0"></div>
+                <figcaption class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                  <p class="font-serif text-sm font-semibold leading-tight">{heroImages[2]?.city}</p>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- Floating value tag -->
+            <div class="absolute -bottom-4 -left-4 sm:-left-6 bg-[#FFFDF8] rounded-2xl shadow-lg ring-1 ring-[#E2D4BF] px-5 py-3.5 hidden sm:block">
+              <p class="text-[#B88A44] text-[0.65rem] font-bold uppercase tracking-widest">From the collection</p>
+              <p class="font-serif text-[#1F2428] text-lg font-semibold leading-tight">20 hotels, honestly scored</p>
+            </div>
+          </div>
         </div>
-        <p class="text-[#6B7280] text-xs mt-5 leading-relaxed">
-          Prices change constantly. Every hotel here should be checked by date, room type, taxes and cancellation policy before booking.
-        </p>
       </div>
     </section>
 
     <!-- Editorial intro -->
-    <section class="bg-white border-y border-[#1D2433]/6">
-      <div class="max-w-4xl mx-auto px-5 py-16">
+    <section class="bg-[#FFFDF8] border-y border-[#E2D4BF]">
+      <div class="max-w-4xl mx-auto px-5 py-16 md:py-20">
         <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-5">The idea</p>
-        <p class="text-[#1D2433]/75 text-lg leading-relaxed mb-5">
-          Luxury is not priced evenly around the world. In some cities, a five-star or near-five-star hotel can cost less than a mid-range room elsewhere. The trick is knowing which hotels are genuinely worth considering — and which are simply cheap because the standard, location or maintenance is weaker than the star rating suggests.
+        <p class="text-[#1F2428]/80 text-lg md:text-xl leading-relaxed mb-5 font-serif italic">
+          Luxury is not priced evenly around the world. In some cities, a five-star or near-five-star hotel can cost less than a mid-range room elsewhere.
         </p>
-        <p class="text-[#1D2433]/75 text-lg leading-relaxed">
+        <p class="text-[#6F685F] text-base md:text-lg leading-relaxed mb-5">
+          The trick is knowing which hotels are genuinely worth considering — and which are simply cheap because the standard, location or maintenance is weaker than the star rating suggests.
+        </p>
+        <p class="text-[#6F685F] text-base md:text-lg leading-relaxed">
           50 Five-Star Hotels focuses on the places where price, setting and experience come together: heritage hotels in Java, spa hotels in underrated European cities, Nile-side resorts in Luxor, design hotels in the Caucasus and city hotels that make an affordable trip feel far more special.
         </p>
       </div>
     </section>
 
     <!-- Editorial caution -->
-    <section class="bg-[#1D2433]/4 border-b border-[#1D2433]/6">
-      <div class="max-w-4xl mx-auto px-5 py-8">
-        <p class="text-[#1D2433]/70 text-sm leading-relaxed">
-          <strong class="text-[#1D2433]">A note on five-star labels:</strong> A five-star designation does not always mean international luxury. Some hotels here are true five-star properties; others are local or booking-site five-star hotels that are still interesting because the value is unusually strong. Each profile explains the difference clearly.
+    <section class="bg-[#F4EADC] border-b border-[#E2D4BF]">
+      <div class="max-w-4xl mx-auto px-5 py-7">
+        <p class="text-[#1F2428]/75 text-sm leading-relaxed">
+          <strong class="text-[#1F2428]">A note on five-star labels:</strong> A five-star designation does not always mean international luxury. Some hotels here are true five-star properties; others are local or booking-site five-star hotels that are still interesting because the value is unusually strong. Each profile explains the difference clearly.
         </p>
       </div>
     </section>
@@ -80,7 +161,7 @@ const tableHotels = allHotels.map(h => ({
     <!-- Price tier cards -->
     <section class="max-w-6xl mx-auto px-5 py-20">
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Browse by price</p>
-      <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1D2433] mb-10">Find hotels by budget</h2>
+      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-10">Find hotels by budget</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <PriceTierCard
           tier="Under €100"
@@ -106,15 +187,60 @@ const tableHotels = allHotels.map(h => ({
       </div>
     </section>
 
+    <!-- Browse by feeling -->
+    <section class="section-fade-sand border-y border-[#E2D4BF]">
+      <div class="max-w-6xl mx-auto px-5 py-20">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Browse by feeling</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-3">What kind of stay are you after?</h2>
+        <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">Sometimes you know the mood before the map. Start from how you want the trip to feel.</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+          {feelings.map(f => (
+            <a href="/destinations" class="group relative block aspect-[4/5] sm:aspect-[5/6] rounded-2xl overflow-hidden no-underline shadow-sm ring-1 ring-[#1F2428]/5">
+              <img src={heroImg(f.hotel)} alt={`${f.label} — ${f.hotel.city}`} loading="lazy" decoding="async" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="editorial-overlay absolute inset-0"></div>
+              <div class="absolute inset-0 p-4 md:p-5 flex flex-col justify-end text-white">
+                <h3 class="font-serif text-lg md:text-xl font-semibold leading-tight">{f.label}</h3>
+                <p class="text-white/80 text-xs md:text-sm mt-1 leading-snug">{f.note}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <!-- Featured hotels -->
-    <section id="featured" class="bg-[#F8F5EF] py-20">
+    <section id="featured" class="bg-[#F8F2E8] py-20">
       <div class="max-w-6xl mx-auto px-5">
         <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Start here</p>
-        <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1D2433] mb-4">Hotels that prove the idea.</h2>
-        <p class="text-[#6B7280] text-lg mb-10 max-w-2xl">Five hotels from the launch collection — chosen because each one makes the case for affordable luxury in a different way.</p>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">Hotels that prove the idea</h2>
+        <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">Five hotels from the launch collection — chosen because each one makes the case for affordable luxury in a different way.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
           {featured.map(h => (
             <HotelCard hotel={h.data} featured={true} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Destination mood -->
+    <section class="bg-[#FFFDF8] border-y border-[#E2D4BF] py-20">
+      <div class="max-w-6xl mx-auto px-5">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Destination mood</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-3">Places worth the trip</h2>
+        <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">A good hotel is only half the story. These are cities where the value and the place both pull their weight.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          {moods.map(m => (
+            <a href={`/destinations#${m.hotel.city.toLowerCase().replace(/\s/g, '-')}`} class="group block no-underline">
+              <div class="relative aspect-[3/2] rounded-2xl overflow-hidden shadow-sm ring-1 ring-[#1F2428]/5">
+                <img src={heroImg(m.hotel)} alt={`${m.hotel.city}, ${m.hotel.country}`} loading="lazy" decoding="async" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div class="editorial-overlay absolute inset-0"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                  <p class="font-serif text-xl font-semibold leading-tight">{m.hotel.city}</p>
+                  <p class="text-white/75 text-xs">{m.hotel.country}</p>
+                </div>
+              </div>
+              <p class="text-[#6F685F] text-sm mt-3 italic group-hover:text-[#B88A44] transition-colors">{m.mood}</p>
+            </a>
           ))}
         </div>
       </div>
@@ -123,8 +249,8 @@ const tableHotels = allHotels.map(h => ({
     <!-- Comparison table -->
     <section class="max-w-6xl mx-auto px-5 py-20">
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">The full list</p>
-      <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1D2433] mb-4">All 20 launch hotels at a glance</h2>
-      <p class="text-[#6B7280] text-lg mb-10 max-w-2xl">Ranked by value score. Click any hotel for the full editorial profile.</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">All 20 launch hotels at a glance</h2>
+      <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">Ranked by value score. Click any hotel for the full editorial profile.</p>
       <HotelComparisonTable hotels={tableHotels} title="" />
       <div class="mt-8 text-center">
         <a href="/destinations" class="inline-flex items-center text-[#B88A44] font-semibold hover:underline no-underline">
@@ -134,10 +260,10 @@ const tableHotels = allHotels.map(h => ({
     </section>
 
     <!-- How we choose -->
-    <section class="bg-white border-y border-[#1D2433]/6 py-20">
+    <section class="bg-[#FFFDF8] border-y border-[#E2D4BF] py-20">
       <div class="max-w-4xl mx-auto px-5">
         <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Our method</p>
-        <h2 class="font-serif text-3xl font-bold text-[#1D2433] mb-8">How we choose hotels</h2>
+        <h2 class="font-serif text-3xl font-semibold text-[#1F2428] mb-8">How we choose hotels</h2>
         <div class="grid md:grid-cols-3 gap-8">
           {[
             { factor: 'Price and value', desc: 'How does the rate compare to the local five-star market? What does the money actually buy?' },
@@ -145,8 +271,8 @@ const tableHotels = allHotels.map(h => ({
             { factor: 'Location and destination', desc: 'Is the city or destination interesting enough to justify the trip? What is there to do nearby?' },
           ].map(item => (
             <div>
-              <h3 class="font-serif text-lg font-bold text-[#1D2433] mb-2">{item.factor}</h3>
-              <p class="text-[#6B7280] text-sm leading-relaxed">{item.desc}</p>
+              <h3 class="font-serif text-lg font-semibold text-[#1F2428] mb-2">{item.factor}</h3>
+              <p class="text-[#6F685F] text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -160,13 +286,13 @@ const tableHotels = allHotels.map(h => ({
 
     <!-- Footer CTA -->
     <section class="max-w-6xl mx-auto px-5 py-20 text-center">
-      <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1D2433] mb-4">
+      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">
         Find the hotel where the price feels mispriced.
       </h2>
-      <p class="text-[#6B7280] text-lg mb-8 max-w-xl mx-auto">
+      <p class="text-[#6F685F] text-lg mb-8 max-w-xl mx-auto">
         Twenty hotels across Southeast Asia, Europe, the Middle East and the Caucasus — each one chosen because the value case is genuinely interesting.
       </p>
-      <a href="/destinations" class="inline-flex items-center bg-[#1D2433] text-white font-semibold py-4 px-8 rounded-full hover:bg-[#B88A44] transition-colors no-underline">
+      <a href="/destinations" class="inline-flex items-center bg-[#1F2428] text-white font-semibold py-4 px-8 rounded-full hover:bg-[#B88A44] transition-colors no-underline">
         Browse all 20 launch hotels
       </a>
     </section>

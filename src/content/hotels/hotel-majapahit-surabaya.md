@@ -92,6 +92,10 @@ highlights:
 cautions:
   - "Some rooms may feel more classic than contemporary"
   - "Not every traveller will experience it as a polished international five-star"
+whyCheap:
+  - "Surabaya is a business and industrial city rather than a leisure-tourism hub, so rates stay well below Bali or Jakarta."
+  - "Indonesia's favourable exchange rate and low local operating costs keep even a landmark heritage hotel affordable."
+  - "As a historic property rather than a new international five-star build, it competes on character and price."
 bestNearbyAttraction: "Surabaya old town, House of Sampoerna and Heroes Monument"
 foodAngle: "East Java food, local markets, rawon, sate and Surabaya street food"
 seoTitle: "Hotel Majapahit Surabaya Review: Affordable Five-Star Heritage in Java"

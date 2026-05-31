@@ -14,16 +14,16 @@ const credits = imageAttributions
   <main class="max-w-6xl mx-auto px-5 py-14">
     <header class="max-w-3xl mb-10">
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Licensing and attribution</p>
-      <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1D2433]">Image Credits</h1>
-      <p class="text-[#6B7280] text-lg leading-relaxed mt-5">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428]">Image Credits</h1>
+      <p class="text-[#6F685F] text-lg leading-relaxed mt-5">
         Credits for the safe-to-use images currently included in the hotel pages and galleries.
       </p>
     </header>
 
-    <div class="overflow-x-auto bg-white border border-[#1D2433]/8 rounded-2xl shadow-sm">
+    <div class="overflow-x-auto bg-[#FFFDF8] border border-[#1F2428]/8 rounded-2xl shadow-sm">
       <table class="min-w-full text-sm">
-        <thead class="bg-[#F8F5EF] text-left">
-          <tr class="text-[#1D2433]">
+        <thead class="bg-[#F8F2E8] text-left">
+          <tr class="text-[#1F2428]">
             <th class="px-4 py-3 font-semibold">Hotel</th>
             <th class="px-4 py-3 font-semibold">Image</th>
             <th class="px-4 py-3 font-semibold">Creator</th>
@@ -31,22 +31,22 @@ const credits = imageAttributions
             <th class="px-4 py-3 font-semibold">Licence</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-[#1D2433]/8">
+        <tbody class="divide-y divide-[#1F2428]/8">
           {credits.map(image => (
             <tr>
-              <td class="px-4 py-3 align-top text-[#1D2433] font-medium">{image.hotelName}</td>
-              <td class="px-4 py-3 align-top text-[#6B7280]">
-                <span class="block text-[#1D2433]">{image.imageType}: {image.subject}</span>
+              <td class="px-4 py-3 align-top text-[#1F2428] font-medium">{image.hotelName}</td>
+              <td class="px-4 py-3 align-top text-[#6F685F]">
+                <span class="block text-[#1F2428]">{image.imageType}: {image.subject}</span>
                 <span class="block text-xs mt-1">{image.localPathWeb}</span>
               </td>
-              <td class="px-4 py-3 align-top text-[#6B7280]">{image.photographer || 'Unknown / not listed'}</td>
+              <td class="px-4 py-3 align-top text-[#6F685F]">{image.photographer || 'Unknown / not listed'}</td>
               <td class="px-4 py-3 align-top">
                 {image.sourcePageUrl ? (
                   <a href={image.sourcePageUrl} target="_blank" rel="noopener noreferrer" class="text-[#B88A44] hover:underline no-underline">
                     {image.sourceSite}
                   </a>
                 ) : (
-                  <span class="text-[#6B7280]">{image.sourceSite}</span>
+                  <span class="text-[#6F685F]">{image.sourceSite}</span>
                 )}
               </td>
               <td class="px-4 py-3 align-top">
@@ -55,7 +55,7 @@ const credits = imageAttributions
                     {image.license}
                   </a>
                 ) : (
-                  <span class="text-[#6B7280]">{image.license}</span>
+                  <span class="text-[#6F685F]">{image.license}</span>
                 )}
               </td>
             </tr>

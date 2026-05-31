@@ -7,12 +7,12 @@ import PageLayout from '../layouts/PageLayout.astro';
   description="The methodology behind 50 Five-Star Hotels — how we score, evaluate and categorise affordable five-star and near-five-star hotels."
 >
   <div class="prose prose-lg max-w-none
-    prose-headings:font-serif prose-headings:text-[#1D2433]
+    prose-headings:font-serif prose-headings:text-[#1F2428]
     prose-h1:text-4xl prose-h1:mb-8
     prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
     prose-h3:text-lg prose-h3:mt-8
-    prose-p:text-[#1D2433]/75 prose-p:leading-relaxed
-    prose-strong:text-[#1D2433]
+    prose-p:text-[#1F2428]/75 prose-p:leading-relaxed
+    prose-strong:text-[#1F2428]
     prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
 
     <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest not-prose mb-4">Evaluation framework</p>
@@ -26,10 +26,10 @@ import PageLayout from '../layouts/PageLayout.astro';
 
     <p>Each hotel is assessed against six factors. The final value score is out of 100.</p>
 
-    <div class="not-prose overflow-x-auto rounded-2xl border border-[#1D2433]/8 my-8">
+    <div class="not-prose overflow-x-auto rounded-2xl border border-[#1F2428]/8 my-8">
       <table class="w-full text-sm">
         <thead>
-          <tr class="bg-[#1D2433] text-white text-left">
+          <tr class="bg-[#1F2428] text-white text-left">
             <th class="py-3 px-5 font-semibold">Factor</th>
             <th class="py-3 px-5 font-semibold text-right">Weight</th>
           </tr>
@@ -43,9 +43,9 @@ import PageLayout from '../layouts/PageLayout.astro';
             ['Nearby sights, food and experiences', '15%'],
             ['Risk level and hidden drawbacks', '10%'],
           ].map(([factor, weight], i) => (
-            <tr class={`border-t border-[#1D2433]/6 ${i % 2 === 0 ? 'bg-white' : 'bg-[#F8F5EF]/60'}`}>
-              <td class="py-3 px-5 text-[#1D2433]/80">{factor}</td>
-              <td class="py-3 px-5 text-right font-bold text-[#58745A]">{weight}</td>
+            <tr class={`border-t border-[#1F2428]/6 ${i % 2 === 0 ? 'bg-[#FFFDF8]' : 'bg-[#F8F2E8]/60'}`}>
+              <td class="py-3 px-5 text-[#1F2428]/80">{factor}</td>
+              <td class="py-3 px-5 text-right font-bold text-[#4F6547]">{weight}</td>
             </tr>
           ))}
         </tbody>
@@ -62,12 +62,12 @@ import PageLayout from '../layouts/PageLayout.astro';
         { label: 'Conditional value', score: '55–64', desc: 'Worth considering only if specific conditions apply — the price is right on a specific date, or the destination is a priority regardless.' },
         { label: 'Reject for now', score: 'Below 55', desc: 'Excluded from the current list.' },
       ].map(v => (
-        <div class="bg-white rounded-xl border border-[#1D2433]/6 p-5">
+        <div class="bg-[#FFFDF8] rounded-xl border border-[#1F2428]/6 p-5">
           <div class="flex items-center gap-3 mb-2">
-            <span class="font-serif font-bold text-[#1D2433]">{v.label}</span>
-            <span class="text-xs text-[#6B7280] bg-[#F8F5EF] px-2.5 py-1 rounded-full font-mono">{v.score}</span>
+            <span class="font-serif font-bold text-[#1F2428]">{v.label}</span>
+            <span class="text-xs text-[#6F685F] bg-[#F8F2E8] px-2.5 py-1 rounded-full font-mono">{v.score}</span>
           </div>
-          <p class="text-[#6B7280] text-sm leading-relaxed">{v.desc}</p>
+          <p class="text-[#6F685F] text-sm leading-relaxed">{v.desc}</p>
         </div>
       ))}
     </div>
@@ -85,9 +85,9 @@ import PageLayout from '../layouts/PageLayout.astro';
         { cat: 'Near-luxury exception', desc: 'Technically not a five-star, but included because the value case is exceptional and the quality is close.' },
         { cat: 'Questionable five-star', desc: 'The five-star label requires heavy qualification. Only included if the value case is otherwise strong.' },
       ].map(item => (
-        <div class="bg-[#F8F5EF] rounded-xl p-5">
-          <h3 class="font-serif font-bold text-[#1D2433] mb-2 text-base">{item.cat}</h3>
-          <p class="text-[#6B7280] text-sm leading-relaxed">{item.desc}</p>
+        <div class="bg-[#F8F2E8] rounded-xl p-5">
+          <h3 class="font-serif font-bold text-[#1F2428] mb-2 text-base">{item.cat}</h3>
+          <p class="text-[#6F685F] text-sm leading-relaxed">{item.desc}</p>
         </div>
       ))}
     </div>
