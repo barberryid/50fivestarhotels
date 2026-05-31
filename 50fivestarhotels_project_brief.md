@@ -624,36 +624,30 @@ The project has been reviewed against the current Git working tree on 2026-05-31
 **Latest committed/pushed state:**
 
 - **Current branch:** `main`
-- **Latest pushed commit:** `330d077` - `Use realistic-daylight images on all hotel cards`
+- **Latest pushed commit before this brief update:** `52f27fc` - `Update project brief for palm-free hero and daytime imagery`
 - **Recent committed updates after the AI image rollout:**
+  - `52f27fc` - updated this project brief for the palm-free homepage hero and daytime image usage
   - `330d077` - `HotelCard.astro` now prefers each hotel's brighter realistic-daylight render (falling back to editorial-dusk), so cards across the homepage, tier pages and destinations read lighter
   - `6217f5b` - switched the homepage "Browse by feeling" and "Destination mood" tiles to the realistic-daylight image variant and lightened the hero overlay tint
+  - `279ed1c` - replaced the favicon artwork with a simple black circular badge and centered bright yellow star whose points touch the circle edge; files are `Favicon.png` and `public/Favicon.png`
   - `d4efc93` - added a retouched palm-free version of the Steigenberger Luxor editorial-dusk image (central foreground palm removed) plus 1200/800 derivatives, and pointed the homepage hero at it (the hotel page keeps the original)
-  - `279ed1c` - simplified the favicon star mark
   - `1ce3ac6` - updated the project brief for overlay softening and card cleanup
   - `30cad4d` - softened the shared `editorial-overlay` gradient so photos read brighter, and removed the dark overlay from hotel card images (moved the city/country label into the card body)
   - `fa3e3c9` - updated the project brief for the warm redesign and `whyCheap` rollout
   - `bd06059` - populated `whyCheap` for all 20 hotels and rebuilt the homepage hero as a single full-bleed image (Steigenberger Resort Achti Luxor editorial dusk view)
   - `cfb0e79` - warm affordable-luxury visual redesign (palette sweep, Fraunces typography, editorial hero, image-led cards, "Browse by feeling" and "Destination mood" sections, upgraded comparison table, reusable trust components)
   - `7bfa10b` - updated project brief and local image workflow
-  - `f9ab64f` - updated favicon artwork in `Favicon.png` and `public/Favicon.png`
+  - `f9ab64f` - updated favicon artwork in `Favicon.png` and `public/Favicon.png` to use a black circular background while preserving the gold `5*` mark
   - `0e54288` - enriched hotel seasonality/weather data and expanded `SeasonalityCards.astro`
-  - `fb0d008` - simplified/updated the hotel page sidebar
+  - `fb0d008` - updated the hotel page sidebar: Quick Facts now scrolls normally with the page, and Related Hotels cards were removed from hotel detail pages
   - `8d6f699` - added the site favicon and connected it through `SeoHead.astro`
   - `c2fecf9` - added the remaining featured-hotel AI image assets
 
 **Current uncommitted local changes reviewed:**
 
-- `src/content/hotels/angkor-aurora-siem-reap.md` - updated the "Best time to book" section to use a more specific seasonality recommendation: December-February as the strongest Angkor temple window, January as especially comfortable, March/November as shoulder choices, and May-September as the cheaper value stretch with September/October called out as wettest.
-- `research/hotel-seasonality-weather-price.xlsx` - workbook has local seasonality/weather/price updates.
-- `50fivestarhotels.docx` - project document has local edits.
-- `AI_HOTEL_IMAGE_GENERATION_WORKFLOW.md` - new standalone workflow document for researching, generating, checking, saving, and integrating AI hotel images.
-- `images generated/` - local raw PNG generation outputs for Hotel Majapahit Surabaya and The Phoenix Hotel Yogyakarta.
-- `public/images/hotels/hotel-majapahit-surabaya/generated/` - local generated PNG asset for Hotel Majapahit Surabaya.
-- `public/images/hotels/phoenix-hotel-yogyakarta/generated/` - local generated PNG assets for The Phoenix Hotel Yogyakarta.
-- `research/~$hotel-seasonality-weather-price.xlsx` and `~$fivestarhotels.docx` - Office temporary lock files; do not commit these.
+- None at the time of this brief update; `git status --short` was clean before editing this file.
 
-**Deployment caution:** only committed files on `main` are reflected by Cloudflare Pages. The uncommitted local changes above should not be described as live until they are intentionally committed and pushed.
+**Deployment caution:** only committed files on `main` are reflected by Cloudflare Pages. Any future local edits should not be described as live until they are intentionally committed and pushed.
 
 ### Site is live
 
@@ -662,11 +656,11 @@ The full launch site has been built, committed and pushed to GitHub. Cloudflare 
 - **Live URL:** https://50fivestarhotels.com / https://50fivestarhotels.pages.dev/
 - **GitHub:** https://github.com/barberryid/50fivestarhotels
 - **Latest live URL check:** both production URLs returned HTTP 200 on 2026-05-31
-- **Latest local build check:** `npm run build` completed successfully on 2026-05-31 after the visual redesign and `whyCheap` rollout
+- **Latest local build check:** `npm.cmd run build` completed successfully on 2026-05-31 after the favicon star update
 - **Build output at latest build check:** 29 pages, zero errors
-- **Latest pushed commit:** `330d077` - `Use realistic-daylight images on all hotel cards`
+- **Latest pushed commit before this brief update:** `52f27fc` - `Update project brief for palm-free hero and daytime imagery`
 - **Latest local image expansion:** added AI image sets for Grand Hotel Yerevan, Hyatt Regency Tashkent, The Hermitage Jakarta, Sofitel Marrakech, The Majestic Hotel Kuala Lumpur, and Stamba Hotel on 2026-05-31
-- **Latest local editorial/data work:** Angkor Aurora seasonality wording plus workbook/document updates are present locally but uncommitted
+- **Latest favicon state:** black circular badge with transparent outside corners and a centered bright yellow star whose points touch the circle edge
 
 ### Visual redesign and trust system — 2026-05-31
 
@@ -679,6 +673,9 @@ The site was redesigned toward a warm, image-rich affordable-luxury editorial lo
 - **Image overlay:** the shared `.editorial-overlay` gradient in `global.css` is deliberately soft (transparent across the top, fading to ~60% at the bottom) so overlaid white text (hero copy, feeling/mood tile labels) stays legible without darkening the photos. It is applied to the hero and the feeling/mood tiles only — not to hotel cards. The full-bleed hero additionally uses a light flat tint (~28%) plus a soft bottom gradient.
 - **Trust components (`src/components/trust/`):** `WhyItsCheap`, `FiveStarReality`, `WatchOutFor`, `BestMonths` render as a "before you book" grid on every hotel page via `HotelLayout.astro`. FiveStarReality, WatchOutFor and BestMonths derive from existing data (fiveStarStatus, cautions, `hotelSeasonality`).
 - **`whyCheap` field:** an optional `whyCheap: string[]` frontmatter field was added to `content.config.ts` and **populated for all 20 hotels**, so the "Why it is cheap" panel renders site-wide. When adding a new hotel Markdown file, include a `whyCheap` value (2–3 concise, honest reasons grounded in the hotel's real value story) to keep this consistent.
+
+- **Hotel detail sidebar:** the Quick Facts card in `HotelLayout.astro` is no longer sticky; it scrolls with the rest of the page so it cannot cover lower content on long hotel pages. The Related Hotels sidebar card was removed entirely from hotel detail pages, and `src/pages/hotels/[slug].astro` no longer computes or passes related hotel data.
+- **Favicon:** the site favicon is served from `/Favicon.png` via `SeoHead.astro`, with the published asset in `public/Favicon.png` and a root source copy at `Favicon.png`. The current favicon is a black circular badge with transparent outside corners and a centered bright yellow five-point star whose points touch the circle edge.
 
 ### Tech stack confirmed
 
