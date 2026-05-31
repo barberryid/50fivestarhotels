@@ -617,15 +617,97 @@ If the answer is yes, the hotel is a strong candidate for 50 Five-Star Hotels.
 
 ## Build status — as of 2026-05-31
 
+### SEO expansion status - 2026-05-31
+
+The site has now had a major SEO architecture expansion committed and pushed to `main`.
+
+**Latest SEO commit:**
+
+- `8f25e0a` - `Improve SEO structure and landing pages`
+
+**What changed in that SEO expansion:**
+
+- `src/components/SeoHead.astro` now supports page title, description, canonical URL, absolute Open Graph/Twitter image URLs, robots/noindex handling, Google Search Console verification via `PUBLIC_GOOGLE_SITE_VERIFICATION`, and JSON-LD output.
+- `src/lib/seo.ts` centralises `SITE_URL`, canonical URL generation, absolute image URLs, site/publisher JSON-LD, BreadcrumbList JSON-LD, ItemList JSON-LD, and basic hotel image alt helpers.
+- `src/lib/regions.ts` maps hotel countries into broad SEO regions and region guide routes.
+- `astro.config.mjs` now sets `site: "https://50fivestarhotels.com"` and uses `@astrojs/sitemap`.
+- `public/robots.txt` points to `https://50fivestarhotels.com/sitemap-index.xml`.
+- `public/llms.txt` describes the site positioning and important pages for LLM/crawler discovery.
+- `public/images/social/default-og.webp` is a 1200 x 630 default Open Graph image generated from the palm-free Steigenberger Luxor hero.
+- Hotel pages now output conservative Hotel, Article, and Breadcrumb JSON-LD, use production canonicals, show a last-updated signal, add an "On this page" anchor nav, include price accuracy copy near booking CTAs, and link to related guides.
+- The homepage now includes WebSite, Organization, and ItemList JSON-LD and uses the production canonical.
+- The HTML sitemap lives at `/sitemap/`.
+- README now documents the Search Console verification env var and an SEO checklist before deploy.
+- `research/seo-content-roadmap.md` documents the next SEO content expansion path toward 50 hotels.
+
+**New SEO landing pages now built:**
+
+- `/cheap-five-star-hotels/`
+- `/affordable-luxury-hotels/`
+- `/cheapest-cities-five-star-hotels/`
+- `/affordable-five-star-hotels-europe/`
+- `/affordable-five-star-hotels-asia/`
+- `/luxury-hotels-on-a-budget/`
+
+**New destination pages now built:**
+
+- `/destinations/kuala-lumpur/`
+- `/destinations/bangkok/`
+- `/destinations/jakarta/`
+- `/destinations/marrakech/`
+- `/destinations/tashkent/`
+- `/destinations/yogyakarta/`
+- `/destinations/surabaya/`
+- `/destinations/luxor/`
+- `/destinations/siem-reap/`
+- `/destinations/tbilisi/`
+- `/destinations/hue/`
+- `/destinations/nha-trang/`
+- `/destinations/abu-dhabi/`
+- `/destinations/sarajevo/`
+- `/destinations/yerevan/`
+- `/destinations/iasi/`
+- `/destinations/varna/`
+- `/destinations/olhao/`
+- `/destinations/makati/`
+- `/destinations/solo/`
+
+**New regional pages now built:**
+
+- `/regions/asia/`
+- `/regions/europe/`
+- `/regions/middle-east-north-africa/`
+- `/regions/caucasus-central-asia/`
+
+**New supporting guide pages now built:**
+
+- `/guides/how-to-find-cheap-five-star-hotels/`
+- `/guides/when-are-five-star-hotels-cheapest/`
+- `/guides/five-star-hotel-ratings-explained/`
+- `/guides/heritage-hotels-under-200/`
+- `/guides/business-hotels-luxury-value/`
+
+**Latest validation after SEO expansion:**
+
+- `npm.cmd run build` completed successfully on 2026-05-31.
+- Build output: 65 pages, zero errors.
+- `dist/sitemap-index.xml`, `dist/robots.txt`, and `dist/llms.txt` exist.
+- Required SEO landing page outputs exist in `dist`.
+- No `50fivestarhotels.pages.dev` references were found in `dist`.
+- Spot checks confirmed one H1 plus title, description, canonical, Open Graph metadata, and JSON-LD on key pages.
+
+**Important limitation:** this confirms the commit was pushed to GitHub. Do not describe the SEO expansion as live until the relevant Cloudflare Pages deployment has completed successfully.
+
 ### Current local review status
 
-The project has been reviewed against the current Git working tree on 2026-05-31. The latest committed site state is on `main` / `origin/main`, and there are additional local files and edits that should be treated separately from the deployed production build.
+The project has been reviewed against the current Git working tree on 2026-05-31. The latest committed site state is on `main` / `origin/main`. After this brief update, this file itself is the only expected local edit unless additional work has been requested.
 
 **Latest committed/pushed state:**
 
 - **Current branch:** `main`
-- **Latest pushed commit before this brief update:** `52f27fc` - `Update project brief for palm-free hero and daytime imagery`
+- **Latest pushed commit before this brief update:** `8f25e0a` - `Improve SEO structure and landing pages`
 - **Recent committed updates after the AI image rollout:**
+  - `8f25e0a` - added SEO helpers, sitemap integration, robots/llms files, JSON-LD, SEO landing pages, destination pages, regional pages, supporting guides, HTML sitemap, related guide links, and SEO deployment docs
   - `52f27fc` - updated this project brief for the palm-free homepage hero and daytime image usage
   - `330d077` - `HotelCard.astro` now prefers each hotel's brighter realistic-daylight render (falling back to editorial-dusk), so cards across the homepage, tier pages and destinations read lighter
   - `6217f5b` - switched the homepage "Browse by feeling" and "Destination mood" tiles to the realistic-daylight image variant and lightened the hero overlay tint
@@ -645,7 +727,7 @@ The project has been reviewed against the current Git working tree on 2026-05-31
 
 **Current uncommitted local changes reviewed:**
 
-- None at the time of this brief update; `git status --short` was clean before editing this file.
+- None before editing this file; `git status --short` was clean immediately after pushing `8f25e0a`.
 
 **Deployment caution:** only committed files on `main` are reflected by Cloudflare Pages. Any future local edits should not be described as live until they are intentionally committed and pushed.
 
@@ -656,9 +738,9 @@ The full launch site has been built, committed and pushed to GitHub. Cloudflare 
 - **Live URL:** https://50fivestarhotels.com / https://50fivestarhotels.pages.dev/
 - **GitHub:** https://github.com/barberryid/50fivestarhotels
 - **Latest live URL check:** both production URLs returned HTTP 200 on 2026-05-31
-- **Latest local build check:** `npm.cmd run build` completed successfully on 2026-05-31 after the favicon star update
-- **Build output at latest build check:** 29 pages, zero errors
-- **Latest pushed commit before this brief update:** `52f27fc` - `Update project brief for palm-free hero and daytime imagery`
+- **Latest local build check:** `npm.cmd run build` completed successfully on 2026-05-31 after the SEO expansion
+- **Build output at latest build check:** 65 pages, zero errors
+- **Latest pushed commit before this brief update:** `8f25e0a` - `Improve SEO structure and landing pages`
 - **Latest local image expansion:** added AI image sets for Grand Hotel Yerevan, Hyatt Regency Tashkent, The Hermitage Jakarta, Sofitel Marrakech, The Majestic Hotel Kuala Lumpur, and Stamba Hotel on 2026-05-31
 - **Latest favicon state:** black circular badge with transparent outside corners and a centered bright yellow star whose points touch the circle edge
 
@@ -733,17 +815,22 @@ All 20 hotels are live as individual pages at `/hotels/[slug]`.
 
 ```
 src/
-  components/         — Header, Footer, HotelCard, HotelComparisonTable,
+  components/         - Header, Footer, HotelCard, HotelComparisonTable,
                         PriceTierCard, Badge, ValueScore, ImagePlaceholder,
                         Breadcrumbs, AffiliateDisclosure, SeoHead, SectionHeading,
-                        SeasonalityCards, PhotoCarousel
-  components/trust/   — FiveStarReality, WatchOutFor, WhyItsCheap, BestMonths
+                        SeasonalityCards, PhotoCarousel, RelatedGuides,
+                        LastUpdated, PriceAccuracyNote, SeoLandingPage,
+                        RegionPage, GuideArticle
+  components/trust/   - FiveStarReality, WatchOutFor, WhyItsCheap, BestMonths
                         (reusable "before you book" trust panel on hotel pages)
-  content/hotels/     — 20 Markdown hotel files
-  content.config.ts   — Astro 6 Content Layer schema (glob loader);
-                        includes optional whyCheap: string[] field
-  data/               — hotelSeasonality.ts, imageAttributions.json/csv
-  layouts/            — BaseLayout, PageLayout, HotelLayout
+  content/hotels/     - 20 Markdown hotel files
+  content.config.ts   - Astro 6 Content Layer schema (glob loader);
+                        includes optional whyCheap, seoTitle, seoDescription,
+                        focusKeyword, secondaryKeywords and lastUpdated fields
+  data/               - hotelSeasonality.ts, imageAttributions.json/csv
+  lib/                - seo.ts and regions.ts helpers for canonicals, JSON-LD,
+                        region routing and production URL consistency
+  layouts/            - BaseLayout, PageLayout, HotelLayout
   pages/
     index.astro
     hotels/[slug].astro
@@ -751,11 +838,30 @@ src/
     under-200.astro
     under-250.astro
     destinations.astro
+    destinations/[slug].astro
+    cheap-five-star-hotels.astro
+    affordable-luxury-hotels.astro
+    cheapest-cities-five-star-hotels.astro
+    affordable-five-star-hotels-europe.astro
+    affordable-five-star-hotels-asia.astro
+    luxury-hotels-on-a-budget.astro
+    sitemap.astro
     methodology.astro
     affiliate-disclosure.astro
     image-credits.astro
     about.astro
-  styles/global.css   — Tailwind v4 + brand tokens
+    guides/
+      how-to-find-cheap-five-star-hotels.astro
+      when-are-five-star-hotels-cheapest.astro
+      five-star-hotel-ratings-explained.astro
+      heritage-hotels-under-200.astro
+      business-hotels-luxury-value.astro
+    regions/
+      asia.astro
+      europe.astro
+      middle-east-north-africa.astro
+      caucasus-central-asia.astro
+  styles/global.css   - Tailwind v4 + brand tokens
 ```
 
 ### Images
@@ -859,10 +965,10 @@ Hotel editorial body text uses Tailwind `prose` classes. `@tailwindcss/typograph
 
 ### Next steps
 
-Immediate next priority: add live profile pages for the AI-image candidates not yet present in `src/content/hotels/` - Meliá Yangon, Grand Mercure Medan Angkasa, NH Collection Bogotá WTC Royal, Novotel Ahmedabad, and Mandarin Colombo. Their AI image assets already exist.
+Immediate next priority: add live profile pages for the AI-image candidates not yet present in `src/content/hotels/` - Meliá Yangon, Grand Mercure Medan Angkasa, NH Collection Bogotá WTC Royal, Novotel Ahmedabad, and Mandarin Colombo. Their AI image assets already exist. The main SEO scaffolding for landing pages, destination pages, regional pages, guide pages, sitemap, robots, llms and structured data is already in place.
 
 1. **Replace contextual images with hotel-specific images where possible** — use `research/image-audit.md`, `image-attributions.md`, and the gallery frontmatter as the working source.
 2. **Set up Booking.com affiliate programme** — replace standard search links with affiliate links once approved.
-3. **Expand to 50 hotels** — future candidates listed above plus the destination strategy in this brief.
-4. **Add city/destination pages** — longer-form SEO content for top destinations (Yogyakarta, Tbilisi, Marrakech, etc.).
+3. **Expand to 50 hotels** — future candidates listed above plus the destination strategy in this brief; use `research/seo-content-roadmap.md` as the working SEO roadmap.
+4. **Deepen existing city/destination pages** — the initial destination route is live for the 20 strongest cities, but individual pages should be enriched over time with more specific local sights, food, timing and hotel comparison detail.
 5. **Keep this brief current** — whenever hotels, routes, image systems, data files, affiliate status, or build/deploy details change, update this Build status section in the same change.
