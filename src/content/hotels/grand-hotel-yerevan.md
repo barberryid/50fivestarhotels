@@ -18,15 +18,11 @@ valueScore: 78
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Grand%20Hotel%20Yerevan%20Armenia"
 image:
-  src: "/images/hotels/grand-hotel-yerevan.jpg"
-  alt: "Yerevan city view with Mount Ararat in the background"
-  attribution: "Photo by SnapSaga on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/KTxaCJiGW3o"
-  sourceSite: "Unsplash"
-  photographer: "SnapSaga"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/grand-hotel-yerevan-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Grand Hotel Yerevan in Yerevan, Armenia"
+  srcSet:
+    large: "/images/hotels/responsive/grand-hotel-yerevan-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/grand-hotel-yerevan-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/grand-hotel-yerevan/web/grand-hotel-yerevan-01-hero-grand-hotel.webp"
     alt: "Yerevan hotel, Yerevan 01 in or near Yerevan, Armenia"
@@ -100,6 +96,19 @@ foodAngle: "Armenian cuisine — dolma, khorovats, lavash, brandy and Armenian c
 seoTitle: "Grand Hotel Yerevan Review: Affordable Five-Star in Armenia's Capital"
 seoDescription: "A luxury editorial guide to Grand Hotel Yerevan — a landmark hotel on Republic Square with strong value for Caucasus travellers."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/grand-hotel-yerevan-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Grand Hotel Yerevan in Yerevan, Armenia"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/grand-hotel-yerevan-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/grand-hotel-yerevan-editorial-dusk-800.webp"
+  - src: "/images/hotels/grand-hotel-yerevan-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Grand Hotel Yerevan in Yerevan, Armenia"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/grand-hotel-yerevan-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/grand-hotel-yerevan-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

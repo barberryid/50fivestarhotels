@@ -40,9 +40,15 @@ ${items.join('\n')}
 }
 
 function replaceBlock(frontmatter, key, replacement) {
-  const pattern = new RegExp(`^${key}:\\n(?:^[ \\t].*\\n|^\\n)*`, 'm');
-  if (pattern.test(frontmatter)) {
-    return frontmatter.replace(pattern, replacement);
+  const lines = frontmatter.split('\n');
+  const start = lines.findIndex((line) => line === `${key}:`);
+  if (start >= 0) {
+    let end = start + 1;
+    while (end < lines.length && (lines[end].startsWith(' ') || lines[end].trim() === '')) {
+      end += 1;
+    }
+    lines.splice(start, end - start, ...replacement.trimEnd().split('\n'));
+    return lines.join('\n');
   }
   return `${frontmatter.trimEnd()}\n${replacement}`;
 }

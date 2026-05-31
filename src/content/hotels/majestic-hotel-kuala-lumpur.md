@@ -18,15 +18,11 @@ valueScore: 87
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Majestic%20Hotel%20Kuala%20Lumpur%20Autograph%20Collection%20Malaysia"
 image:
-  src: "/images/hotels/majestic-hotel-kuala-lumpur.jpg"
-  alt: "Kuala Lumpur skyline with the Sultan Abdul Samad Building"
-  attribution: "Photo by Artem Korolev on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/jVNxB_yUto0"
-  sourceSite: "Unsplash"
-  photographer: "Artem Korolev"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/majestic-hotel-kuala-lumpur-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of The Majestic Hotel Kuala Lumpur, Autograph Collection in Kuala Lumpur, Malaysia"
+  srcSet:
+    large: "/images/hotels/responsive/majestic-hotel-kuala-lumpur-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/majestic-hotel-kuala-lumpur-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/majestic-hotel-kuala-lumpur/web/majestic-hotel-kuala-lumpur-01-hero-majestic-hotel-kuala-lumpur-01.webp"
     alt: "2016 Kuala Lumpur, Stacja kolejowa Kuala Lumpur (02) in or near Kuala Lumpur, Malaysia"
@@ -100,6 +96,19 @@ foodAngle: "Malaysian kopitiam culture, hawker food, nasi lemak and Petaling Str
 seoTitle: "The Majestic Hotel Kuala Lumpur Review: Affordable Five-Star Heritage in Malaysia"
 seoDescription: "A luxury editorial guide to The Majestic Hotel KL — an Autograph Collection hotel combining colonial grandeur with strong affordable-luxury value."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/majestic-hotel-kuala-lumpur-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of The Majestic Hotel Kuala Lumpur, Autograph Collection in Kuala Lumpur, Malaysia"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/majestic-hotel-kuala-lumpur-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/majestic-hotel-kuala-lumpur-editorial-dusk-800.webp"
+  - src: "/images/hotels/majestic-hotel-kuala-lumpur-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of The Majestic Hotel Kuala Lumpur, Autograph Collection in Kuala Lumpur, Malaysia"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/majestic-hotel-kuala-lumpur-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/majestic-hotel-kuala-lumpur-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

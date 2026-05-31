@@ -18,15 +18,11 @@ valueScore: 80
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Hermitage%20Tribute%20Portfolio%20Hotel%20Jakarta%20Indonesia"
 image:
-  src: "/images/hotels/hermitage-jakarta.jpg"
-  alt: "Jakarta cityscape under cloudy skies"
-  attribution: "Photo by David Kristianto on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/t4opnhS8hpM"
-  sourceSite: "Unsplash"
-  photographer: "David Kristianto"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/hermitage-jakarta-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of The Hermitage, a Tribute Portfolio Hotel, Jakarta in Jakarta, Indonesia"
+  srcSet:
+    large: "/images/hotels/responsive/hermitage-jakarta-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/hermitage-jakarta-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/hermitage-jakarta/web/hermitage-jakarta-01-hero-hermitage-jakarta-01.webp"
     alt: "Kantor Kelurahan Menteng, Jakarta Pusat in or near Jakarta, Indonesia"
@@ -100,6 +96,19 @@ foodAngle: "Indonesian food, soto ayam, satay, nasi goreng and Jakarta's diverse
 seoTitle: "The Hermitage Jakarta Review: Affordable Five-Star Heritage Hotel in Indonesia"
 seoDescription: "A luxury editorial guide to The Hermitage Jakarta — a Tribute Portfolio heritage hotel in Menteng, one of Jakarta's most atmospheric neighbourhoods."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/hermitage-jakarta-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of The Hermitage, a Tribute Portfolio Hotel, Jakarta in Jakarta, Indonesia"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/hermitage-jakarta-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/hermitage-jakarta-editorial-dusk-800.webp"
+  - src: "/images/hotels/hermitage-jakarta-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of The Hermitage, a Tribute Portfolio Hotel, Jakarta in Jakarta, Indonesia"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/hermitage-jakarta-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/hermitage-jakarta-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

@@ -393,3 +393,131 @@ Online source pages were reviewed only as visual research references. No online 
 
 ### Uncertainty / manual-review notes
 - No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Grand Hotel Yerevan - Yerevan, Armenia
+
+### Reference URLs reviewed
+- https://www.grandhotelyerevan.com/
+- https://www.grandhotelyerevan.com/pool/
+- https://www.hilton.com/en/hotels/evnghlx-grand-hotel-yerevan/gallery/
+
+### Observed visual features
+- Architecture: historic 1920s city grand hotel on Abovyan Street, graceful Armenian classicism and early Soviet-era civic scale
+- Entrance/facade: elegant stone facade and formal entrance facing central Yerevan, close to Charles Aznavour Square
+- Pool/garden/courtyard: seasonal open-air rooftop pool with city views, refined loungers and a compact urban-resort feeling
+- Colours/materials: warm pink-beige Armenian tuff stone, cream trim, dark metal railings, soft gold lobby glow, blue rooftop pool
+- Setting: central Kentron district of Yerevan, historic city streets and Mount Ararat atmosphere in the wider destination context
+- Useful details to preserve: preserve the older grand-hotel character and Abovyan Street urban scale; avoid turning it into a modern glass tower
+
+### Recommended image direction
+- Dusk image: historic facade and entrance glowing at dusk, with hints of Yerevan street life and warm tuff stone
+- Daylight image: rooftop pool or formal facade in crisp Armenian daylight, elegant but believable city-hotel mood
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Hyatt Regency Tashkent - Tashkent, Uzbekistan
+
+### Reference URLs reviewed
+- https://www.hyatt.com/hyatt-regency/en-US/tasrt-hyatt-regency-tashkent/gallery
+- https://www.hyatt.com/hyatt-regency/en-US/tasrt-hyatt-regency-tashkent
+
+### Observed visual features
+- Architecture: large contemporary international business hotel with pale stone, glass and a broad modern facade
+- Entrance/facade: polished Hyatt arrival in central Tashkent, formal porte cochere and clean corporate luxury
+- Pool/garden/courtyard: indoor pool and wellness facilities; exterior image should emphasize business-hotel presence and landscaped approach
+- Colours/materials: cream stone, glass, warm interior light, understated Uzbek pattern cues, blue pool tones if interior pool is suggested
+- Setting: central Tashkent near cultural landmarks and broad avenues, modern Silk Road capital context
+- Useful details to preserve: keep it a credible international business hotel, not a fantasy palace or resort
+
+### Recommended image direction
+- Dusk image: front facade and porte cochere with warm windows and Tashkent evening avenue atmosphere
+- Daylight image: clean modern exterior from a landscaped approach in bright Central Asian daylight
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## The Hermitage, a Tribute Portfolio Hotel, Jakarta - Jakarta, Indonesia
+
+### Reference URLs reviewed
+- https://www.marriott.com/en-us/hotels/jkttx-the-hermitage-a-tribute-portfolio-hotel-jakarta/overview/
+- https://www.marriott.com/en-us/hotels/jkttx-the-hermitage-a-tribute-portfolio-hotel-jakarta/photos/
+
+### Observed visual features
+- Architecture: restored 1920s Art Deco heritage building in Menteng, white colonial-era facade with refined proportions
+- Entrance/facade: daytime hotel entrance and elegant exterior building, formal but compact urban heritage arrival
+- Pool/garden/courtyard: rooftop pool and La Vue rooftop bar with Jakarta skyline views; also a small courtyard cafe feel
+- Colours/materials: white plaster, black trim, Art Deco lines, tropical greenery, warm brass lighting, blue rooftop pool
+- Setting: Menteng district of Jakarta, leafy embassy-era streets and dense city skyline beyond the roof
+- Useful details to preserve: preserve Art Deco heritage and city boutique scale; avoid making it a sprawling colonial resort
+
+### Recommended image direction
+- Dusk image: rooftop pool and bar with Jakarta skyline glow, Art Deco building character still visible
+- Daylight image: white heritage facade and formal entrance on a leafy Menteng street
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Sofitel Marrakech Palais Imperial & Spa - Marrakech, Morocco
+
+### Reference URLs reviewed
+- https://sofitel.accor.com/en/hotels/3569.html
+- https://sofitel.accor.com/en/hotels/3569/wellness-pool.html
+
+### Observed visual features
+- Architecture: Moorish palace-inspired resort hotel with arches, ochre walls, palms and refined French-Moroccan luxury
+- Entrance/facade: palatial Marrakech arrival with arcades and warm lantern light, not a generic desert palace
+- Pool/garden/courtyard: heated seasonal outdoor pool, palm garden, pool lounge and spa resort ambience
+- Colours/materials: terracotta and ochre plaster, cream stone, deep green palms, turquoise pool water, lantern gold at dusk
+- Setting: Hivernage district of Marrakech, close to gardens, medina energy and Atlas Mountains atmosphere
+- Useful details to preserve: lean into Moroccan resort elegance while keeping the real urban Hivernage hotel scale
+
+### Recommended image direction
+- Dusk image: pool garden and Moorish arches glowing with lanterns and violet Marrakech sky
+- Daylight image: palace-style facade and palm-framed pool in natural warm daylight
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## The Majestic Hotel Kuala Lumpur, Autograph Collection - Kuala Lumpur, Malaysia
+
+### Reference URLs reviewed
+- https://www.marriott.com/en-us/hotels/kulak-the-majestic-hotel-kuala-lumpur-autograph-collection/overview/
+- https://www.marriott.com/en-us/hotels/kulak-the-majestic-hotel-kuala-lumpur-autograph-collection/photos/
+
+### Observed visual features
+- Architecture: heritage-meets-modern Kuala Lumpur grand hotel, original colonial Majestic wing plus taller modern Tower Wing
+- Entrance/facade: classic white colonial facade and formal arrival near the old railway station and heritage district
+- Pool/garden/courtyard: outdoor pool at the Tower Wing and separate Majestic Spa outdoor pool, with polished urban-luxury setting
+- Colours/materials: white plaster, black trim, marble, polished dark timber, tropical greenery, muted Kuala Lumpur skyline
+- Setting: Jalan Sultan Hishamuddin near KL railway heritage buildings and the city centre
+- Useful details to preserve: keep the colonial Art Deco glamour and urban KL context; do not make it a tropical beach resort
+
+### Recommended image direction
+- Dusk image: white heritage facade and modern tower lights with elegant colonial glamour
+- Daylight image: pool terrace or heritage facade in clear tropical city daylight, refined and realistic
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Stamba Hotel - Tbilisi, Georgia
+
+### Reference URLs reviewed
+- https://www.designhotels.com/hotels/georgia/tbilisi/stamba-hotel/
+- https://www.designhotels.com/hotels/georgia/tbilisi/stamba-hotel/gallery/
+- https://www.archdaily.com/928510/stamba-hotel-adjara-arch-group
+
+### Observed visual features
+- Architecture: converted former Soviet-era publishing house, industrial brick and concrete shell with dramatic design-hotel scale
+- Entrance/facade: urban Vera/Rustaveli-area frontage shared with creative hospitality venues, understated from street level
+- Pool/garden/courtyard: famous glass-bottomed pool suspended above a five-storey atrium, plus verdant courtyard garden and amphitheater
+- Colours/materials: aged brick, raw concrete, black steel, warm amber interior light, deep green plants, brass and leather accents
+- Setting: creative central Tbilisi design district, former printing-house complex with cultural ecosystem atmosphere
+- Useful details to preserve: make it design-forward and industrial-luxury; avoid generic Georgian old-town hotel or glass high-rise cues
+
+### Recommended image direction
+- Dusk image: dramatic atrium/courtyard with industrial brick, hanging greenery, glass pool glow and warm design-hotel lighting
+- Daylight image: converted publishing-house facade or courtyard garden with industrial details and natural Tbilisi daylight
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.

@@ -18,15 +18,11 @@ valueScore: 78
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Sofitel%20Marrakech%20Palais%20Imperial%20Spa%20Morocco"
 image:
-  src: "/images/hotels/sofitel-marrakech.jpg"
-  alt: "Rooftops and buildings in the Marrakech medina"
-  attribution: "Photo by Anne Nicole on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/FDhbmWw3dTg"
-  sourceSite: "Unsplash"
-  photographer: "Anne Nicole"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/sofitel-marrakech-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Sofitel Marrakech Palais Imperial & Spa in Marrakech, Morocco"
+  srcSet:
+    large: "/images/hotels/responsive/sofitel-marrakech-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/sofitel-marrakech-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/sofitel-marrakech/web/sofitel-marrakech-01-hero-sofitel.webp"
     alt: "SOFITEL HOTEL MARRAKECH MOROCCO APRIL 2013 (8712759223) in or near Marrakech, Morocco"
@@ -100,6 +96,19 @@ foodAngle: "Moroccan tagine, couscous, pastilla, mint tea and souk food culture"
 seoTitle: "Sofitel Marrakech Review: Affordable International Five-Star in Morocco"
 seoDescription: "A luxury editorial guide to Sofitel Marrakech Palais Imperial & Spa — a full international five-star hotel with gardens, pool and strong Marrakech access."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/sofitel-marrakech-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Sofitel Marrakech Palais Imperial & Spa in Marrakech, Morocco"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/sofitel-marrakech-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/sofitel-marrakech-editorial-dusk-800.webp"
+  - src: "/images/hotels/sofitel-marrakech-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Sofitel Marrakech Palais Imperial & Spa in Marrakech, Morocco"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/sofitel-marrakech-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/sofitel-marrakech-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

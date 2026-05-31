@@ -18,15 +18,11 @@ valueScore: 84
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Stamba%20Hotel%20Tbilisi%20Georgia"
 image:
-  src: "/images/hotels/stamba-hotel-tbilisi.jpg"
-  alt: "Urban hotel architecture in Tbilisi"
-  attribution: "Photo by Alex Batonisashvili on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/YEqEXXkEidw"
-  sourceSite: "Unsplash"
-  photographer: "Alex Batonisashvili"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/stamba-hotel-tbilisi-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Stamba Hotel in Tbilisi, Georgia"
+  srcSet:
+    large: "/images/hotels/responsive/stamba-hotel-tbilisi-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/stamba-hotel-tbilisi-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/stamba-hotel-tbilisi/web/stamba-hotel-tbilisi-01-hero-stamba-hotel.webp"
     alt: "Kura River in the central part of Tbilisi, 2007-09-28 in or near Tbilisi, Georgia"
@@ -100,6 +96,19 @@ foodAngle: "Georgian cuisine — khachapuri, khinkali, natural wine and traditio
 seoTitle: "Stamba Hotel Tbilisi Review: Affordable Five-Star Design Hotel in Georgia"
 seoDescription: "A luxury editorial guide to Stamba Hotel Tbilisi — a converted Soviet printing house turned striking design hotel in one of Europe's most exciting cities."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/stamba-hotel-tbilisi-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Stamba Hotel in Tbilisi, Georgia"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/stamba-hotel-tbilisi-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/stamba-hotel-tbilisi-editorial-dusk-800.webp"
+  - src: "/images/hotels/stamba-hotel-tbilisi-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Stamba Hotel in Tbilisi, Georgia"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/stamba-hotel-tbilisi-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/stamba-hotel-tbilisi-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

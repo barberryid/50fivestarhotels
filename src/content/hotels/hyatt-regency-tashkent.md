@@ -18,15 +18,11 @@ valueScore: 79
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Hyatt%20Regency%20Tashkent%20Uzbekistan"
 image:
-  src: "/images/hotels/hyatt-regency-tashkent.jpg"
-  alt: "Hotel Uzbekistan architecture in Tashkent"
-  attribution: "Photo by Fey Marin on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/h-1yy3SpSZo"
-  sourceSite: "Unsplash"
-  photographer: "Fey Marin"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/hyatt-regency-tashkent-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Hyatt Regency Tashkent in Tashkent, Uzbekistan"
+  srcSet:
+    large: "/images/hotels/responsive/hyatt-regency-tashkent-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/hyatt-regency-tashkent-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/hyatt-regency-tashkent/web/hyatt-regency-tashkent-01-hero-hyatt-regency.webp"
     alt: "Istiqlol003 in or near Tashkent, Uzbekistan"
@@ -100,6 +96,19 @@ foodAngle: "Uzbek plov, samsa, shashlik and the Central Asian tea house culture"
 seoTitle: "Hyatt Regency Tashkent Review: Affordable International Five-Star in Uzbekistan"
 seoDescription: "A luxury editorial guide to Hyatt Regency Tashkent — a full international five-star hotel at a price that reflects Central Asia's excellent value."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/hyatt-regency-tashkent-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Hyatt Regency Tashkent in Tashkent, Uzbekistan"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/hyatt-regency-tashkent-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/hyatt-regency-tashkent-editorial-dusk-800.webp"
+  - src: "/images/hotels/hyatt-regency-tashkent-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Hyatt Regency Tashkent in Tashkent, Uzbekistan"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/hyatt-regency-tashkent-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/hyatt-regency-tashkent-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

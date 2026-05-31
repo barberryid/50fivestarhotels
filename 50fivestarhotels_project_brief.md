@@ -619,6 +619,7 @@ The full launch site has been built, committed and pushed to GitHub. Cloudflare 
 - **Latest local build check:** `npm run build` completed successfully on 2026-05-31
 - **Build output:** 29 pages, zero errors
 - **Latest pushed commit:** `29d9fa0` - `Add AI-generated hotel image carousel assets`
+- **Latest local image expansion:** added AI image sets for Grand Hotel Yerevan, Hyatt Regency Tashkent, The Hermitage Jakarta, Sofitel Marrakech, The Majestic Hotel Kuala Lumpur, and Stamba Hotel on 2026-05-31
 
 ### Tech stack confirmed
 
@@ -709,11 +710,11 @@ Hotel pages now use local image assets from `public/images/hotels/` rather than 
 - central image attribution data in `src/data/imageAttributions.json` and `src/data/imageAttributions.csv`
 - a public image credits route at `/image-credits/`
 
-AI-generated hotel image assets were added on 2026-05-31 for the 19 hotel candidates in the AI image brief:
+AI-generated hotel image assets were added on 2026-05-31 for 25 hotel candidates in the AI image brief:
 
-- **Master AI images:** 38 WebP files in `public/images/hotels/`
+- **Master AI images:** 50 WebP files in `public/images/hotels/`
 - **Master size:** 1600 x 1000 px, 16:10 landscape
-- **Responsive derivatives:** 76 WebP files in `public/images/hotels/responsive/`
+- **Responsive derivatives:** 100 WebP files in `public/images/hotels/responsive/`
 - **Derivative sizes:** 1200 x 750 and 800 x 500
 - **Image types per hotel:** editorial dusk first, realistic daylight second
 - **Research log:** `research/images/hotel-ai-image-reference-research.md`
@@ -721,14 +722,14 @@ AI-generated hotel image assets were added on 2026-05-31 for the 19 hotel candid
 - **Generation audit:** `research/images/hotel-ai-image-audit.md`
 - **Generation script:** `scripts/generate-hotel-ai-images.js`
 
-AI images are integrated into the live hotel Markdown files where the matching hotel page currently exists. For those pages:
+AI images are integrated into all 20 live hotel Markdown files. For those pages:
 
 - the editorial dusk image is the primary card/hero image
 - both AI images are listed in `generatedGallery`
 - `PhotoCarousel.astro` renders the two-image carousel on the hotel detail page
 - `HotelCard.astro`, `HotelLayout.astro`, and `PhotoCarousel.astro` use responsive image metadata where present
 
-Five AI-image candidates currently have generated image assets but no live hotel profile Markdown file yet:
+Five additional AI-image candidates currently have generated image assets but no live hotel profile Markdown file yet:
 
 - Meliá Yangon
 - Grand Mercure Medan Angkasa
@@ -744,10 +745,10 @@ Five AI-image candidates currently have generated image assets but no live hotel
 
 Current AI image generation audit summary:
 
-- Total AI-image hotels: 19
-- Required AI images: 38
-- AI images generated: 38
-- AI images approved: 38
+- Total AI-image hotels: 25
+- Required AI images: 50
+- AI images generated: 50
+- AI images approved: 50
 - AI images needing manual review: 0
 - AI images pending: 0
 - Model requested: `gpt-image-2`
