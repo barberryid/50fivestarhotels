@@ -133,7 +133,7 @@ Khmer cuisine deserves more attention than it typically receives. Fish amok (ste
 
 ## Best time to book
 
-November to March is the dry season and most comfortable for temple visits. The wet season (June–October) is significantly hotter and wetter but rates drop, and the surrounding rice fields are vivid green — a different but still compelling experience.
+December to February is the strongest window for Angkor temple days, with January especially comfortable on weather and humidity. March and November are still good shoulder choices. May to September is usually the cheapest stretch, though September and October are the wettest months and best treated as a value trade-off rather than the classic first-choice season.
 
 ## Watch out for
 

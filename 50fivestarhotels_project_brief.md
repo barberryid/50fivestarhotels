@@ -609,6 +609,34 @@ If the answer is yes, the hotel is a strong candidate for 50 Five-Star Hotels.
 
 ## Build status — as of 2026-05-31
 
+### Current local review status
+
+The project has been reviewed against the current Git working tree on 2026-05-31. The latest committed site state is on `main` / `origin/main`, and there are additional local files and edits that should be treated separately from the deployed production build.
+
+**Latest committed/pushed state:**
+
+- **Current branch:** `main`
+- **Latest pushed commit:** `f9ab64f` - `Update favicon artwork`
+- **Recent committed updates after the AI image rollout:**
+  - `f9ab64f` - updated favicon artwork in `Favicon.png` and `public/Favicon.png`
+  - `0e54288` - enriched hotel seasonality/weather data and expanded `SeasonalityCards.astro`
+  - `fb0d008` - simplified/updated the hotel page sidebar
+  - `8d6f699` - added the site favicon and connected it through `SeoHead.astro`
+  - `c2fecf9` - added the remaining featured-hotel AI image assets
+
+**Current uncommitted local changes reviewed:**
+
+- `src/content/hotels/angkor-aurora-siem-reap.md` - updated the "Best time to book" section to use a more specific seasonality recommendation: December-February as the strongest Angkor temple window, January as especially comfortable, March/November as shoulder choices, and May-September as the cheaper value stretch with September/October called out as wettest.
+- `research/hotel-seasonality-weather-price.xlsx` - workbook has local seasonality/weather/price updates.
+- `50fivestarhotels.docx` - project document has local edits.
+- `AI_HOTEL_IMAGE_GENERATION_WORKFLOW.md` - new standalone workflow document for researching, generating, checking, saving, and integrating AI hotel images.
+- `images generated/` - local raw PNG generation outputs for Hotel Majapahit Surabaya and The Phoenix Hotel Yogyakarta.
+- `public/images/hotels/hotel-majapahit-surabaya/generated/` - local generated PNG asset for Hotel Majapahit Surabaya.
+- `public/images/hotels/phoenix-hotel-yogyakarta/generated/` - local generated PNG assets for The Phoenix Hotel Yogyakarta.
+- `research/~$hotel-seasonality-weather-price.xlsx` and `~$fivestarhotels.docx` - Office temporary lock files; do not commit these.
+
+**Deployment caution:** only committed files on `main` are reflected by Cloudflare Pages. The uncommitted local changes above should not be described as live until they are intentionally committed and pushed.
+
 ### Site is live
 
 The full launch site has been built, committed and pushed to GitHub. Cloudflare Pages deploys automatically from the `main` branch.
@@ -616,10 +644,11 @@ The full launch site has been built, committed and pushed to GitHub. Cloudflare 
 - **Live URL:** https://50fivestarhotels.com / https://50fivestarhotels.pages.dev/
 - **GitHub:** https://github.com/barberryid/50fivestarhotels
 - **Latest live URL check:** both production URLs returned HTTP 200 on 2026-05-31
-- **Latest local build check:** `npm run build` completed successfully on 2026-05-31
-- **Build output:** 29 pages, zero errors
-- **Latest pushed commit:** `29d9fa0` - `Add AI-generated hotel image carousel assets`
+- **Latest local build check:** `npm.cmd run build` completed successfully on 2026-05-31 after the local brief/content review
+- **Build output at latest build check:** 29 pages, zero errors
+- **Latest pushed commit:** `f9ab64f` - `Update favicon artwork`
 - **Latest local image expansion:** added AI image sets for Grand Hotel Yerevan, Hyatt Regency Tashkent, The Hermitage Jakarta, Sofitel Marrakech, The Majestic Hotel Kuala Lumpur, and Stamba Hotel on 2026-05-31
+- **Latest local editorial/data work:** Angkor Aurora seasonality wording plus workbook/document updates are present locally but uncommitted
 
 ### Tech stack confirmed
 
@@ -721,6 +750,7 @@ AI-generated hotel image assets were added on 2026-05-31 for 25 hotel candidates
 - **Prompt file:** `research/images/hotel-ai-image-prompts.json`
 - **Generation audit:** `research/images/hotel-ai-image-audit.md`
 - **Generation script:** `scripts/generate-hotel-ai-images.js`
+- **Reusable workflow doc:** `AI_HOTEL_IMAGE_GENERATION_WORKFLOW.md`
 
 AI images are integrated into all 20 live hotel Markdown files. For those pages:
 
@@ -742,6 +772,7 @@ Five additional AI-image candidates currently have generated image assets but no
 - Image audit: `research/image-audit.md`
 - Human-readable image attribution log: `image-attributions.md`
 - Attribution workbook: `research/image-attributions.xlsx`
+- Local raw PNG outputs currently exist for Hotel Majapahit Surabaya and The Phoenix Hotel Yogyakarta in `images generated/` and in hotel-specific `generated/` folders under `public/images/hotels/`. Treat these as local generation artifacts until they are reviewed and intentionally integrated.
 
 Current AI image generation audit summary:
 
@@ -781,6 +812,12 @@ Hotel pages now support seasonality cards via:
 - `research/hotel-seasonality-weather-price.xlsx`
 
 Seasonality appears on a hotel page when that hotel slug exists in `hotelSeasonality`.
+
+Latest local seasonality/editorial review:
+
+- `src/data/hotelSeasonality.ts` and `SeasonalityCards.astro` were enriched in committed work at `0e54288`.
+- The workbook `research/hotel-seasonality-weather-price.xlsx` currently has local uncommitted updates.
+- Angkor Aurora's hotel profile has a local uncommitted update making its best-booking guidance more precise: December-February is now the strongest temple/weather window, March and November are shoulder choices, and May-September is framed as the cheaper value period with wet-season caveats.
 
 ### Prose styling
 
