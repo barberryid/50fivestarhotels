@@ -14,8 +14,15 @@ const featuredSlugs = ['hotel-majapahit-surabaya','phoenix-hotel-yogyakarta','ma
 const featured = allHotels.filter(h => featuredSlugs.includes(h.data.slug));
 
 // Full-bleed hero — the first image from the Steigenberger Resort Achti Luxor
-// hotel page (its AI editorial dusk view).
+// hotel page (its AI editorial dusk view), retouched to remove the central
+// foreground palm tree. The hotel page itself keeps the original image.
 const heroHotel = bySlug['steigenberger-resort-achti-luxor'];
+const heroImage = {
+  large: '/images/hotels/responsive/steigenberger-resort-achti-luxor-editorial-dusk-no-center-palm-1200.webp',
+  small: '/images/hotels/responsive/steigenberger-resort-achti-luxor-editorial-dusk-no-center-palm-800.webp',
+  src: '/images/hotels/steigenberger-resort-achti-luxor-editorial-dusk-no-center-palm.webp',
+  alt: heroHotel?.image?.alt ?? heroHotel?.title ?? 'Steigenberger Resort Achti, Luxor at dusk',
+};
 
 const under100Count = allHotels.filter(h => h.data.budgetTier === 'Under €100').length;
 const under200Count = allHotels.filter(h => h.data.budgetTier === 'Under €200').length;
@@ -63,20 +70,18 @@ const heroImg = (h) => h?.image?.srcSet?.large ?? h?.image?.src;
     <!-- Hero -->
     <section class="relative isolate flex items-center justify-center min-h-[78vh] md:min-h-[86vh] overflow-hidden">
       <!-- Full-bleed background image -->
-      {heroHotel && (
-        <picture class="absolute inset-0 -z-10">
-          {heroHotel.image?.srcSet?.large && <source media="(min-width: 768px)" srcset={heroHotel.image.srcSet.large} type="image/webp" />}
-          {heroHotel.image?.srcSet?.small && <source media="(max-width: 767px)" srcset={heroHotel.image.srcSet.small} type="image/webp" />}
-          <img
-            src={heroHotel.image?.srcSet?.large ?? heroHotel.image?.src}
-            alt={heroHotel.image?.alt ?? heroHotel.title}
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-            class="h-full w-full object-cover"
-          />
-        </picture>
-      )}
+      <picture class="absolute inset-0 -z-10">
+        <source media="(min-width: 768px)" srcset={heroImage.large} type="image/webp" />
+        <source media="(max-width: 767px)" srcset={heroImage.small} type="image/webp" />
+        <img
+          src={heroImage.large}
+          alt={heroImage.alt}
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+          class="h-full w-full object-cover"
+        />
+      </picture>
       <!-- Warm legibility overlay -->
       <div class="absolute inset-0 -z-10 bg-[#1F2428]/45"></div>
       <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[#1F2428]/35 via-transparent to-[#1F2428]/70"></div>
