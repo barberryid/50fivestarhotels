@@ -607,7 +607,7 @@ If the answer is yes, the hotel is a strong candidate for 50 Five-Star Hotels.
 
 ---
 
-## Build status — as of 2026-05-30
+## Build status — as of 2026-05-31
 
 ### Site is live
 
@@ -615,14 +615,17 @@ The full launch site has been built, committed and pushed to GitHub. Cloudflare 
 
 - **Live URL:** https://50fivestarhotels.com / https://50fivestarhotels.pages.dev/
 - **GitHub:** https://github.com/barberryid/50fivestarhotels
-- **Build output:** 28 pages, zero errors
+- **Latest live URL check:** both production URLs returned HTTP 200 on 2026-05-31
+- **Latest local build check:** `npm run build` completed successfully on 2026-05-31
+- **Build output:** 29 pages, zero errors
+- **Latest pushed commit:** `29d9fa0` - `Add AI-generated hotel image carousel assets`
 
 ### Tech stack confirmed
 
 | Layer | Technology |
 |---|---|
 | Framework | Astro 6.x (static output) |
-| CSS | Tailwind CSS v4 via `@tailwindcss/vite` |
+| CSS | Tailwind CSS v4 via `@tailwindcss/vite`, with `@tailwindcss/typography` installed |
 | Content | Astro Content Layer API (glob loader), Markdown |
 | Hosting | Cloudflare Pages |
 | Build command | `npm run build` |
@@ -637,28 +640,30 @@ The full launch site has been built, committed and pushed to GitHub. Cloudflare 
 
 All 20 hotels are live as individual pages at `/hotels/[slug]`.
 
+**Maintenance instruction:** when a new hotel Markdown file is added under `src/content/hotels/`, update this launch hotel list in the same change. This brief should always list every live hotel currently present in `src/content/hotels/`, using the hotel frontmatter as the source of truth for exact title, city, country, tier, score, and verdict.
+
 | Rank | Hotel | City | Country | Tier | Score | Verdict |
 |---|---|---|---|---|---|---|
-| 1 | Hotel Majapahit Surabaya – MGallery | Surabaya | Indonesia | Under €100 | 91 | Exceptional value |
-| 2 | The Phoenix Hotel Yogyakarta – Handwritten | Yogyakarta | Indonesia | Under €100 | 89 | Exceptional value |
-| 3 | The Majestic Hotel Kuala Lumpur, Autograph | Kuala Lumpur | Malaysia | Under €200 | 87 | Exceptional value |
-| 4 | The Raweekanlaya Bangkok | Bangkok | Thailand | Under €200 | 85 | Exceptional value |
+| 1 | Hotel Majapahit Surabaya – MGallery Collection | Surabaya | Indonesia | Under €100 | 91 | Exceptional value |
+| 2 | The Phoenix Hotel Yogyakarta – Handwritten Collection | Yogyakarta | Indonesia | Under €100 | 89 | Exceptional value |
+| 3 | The Majestic Hotel Kuala Lumpur, Autograph Collection | Kuala Lumpur | Malaysia | Under €200 | 87 | Exceptional value |
+| 4 | The Raweekanlaya Bangkok Wellness Cuisine Resort | Bangkok | Thailand | Under €200 | 85 | Exceptional value |
 | 5 | Stamba Hotel | Tbilisi | Georgia | Under €250 | 84 | Strong value |
 | 6 | Angkor Aurora | Siem Reap | Cambodia | Under €100 | 83 | Strong value |
 | 7 | The Royal Surakarta Heritage – Handwritten | Solo | Indonesia | Under €100 | 82 | Strong value |
 | 8 | Pleiada Boutique Hotel & Spa | Iași | Romania | Under €200 | 81 | Strong value |
 | 9 | Steigenberger Resort Achti Luxor | Luxor | Egypt | Under €200 | 81 | Strong value |
 | 10 | Silk Path Grand Hue Hotel & Spa | Hue | Vietnam | Under €100 | 80 | Strong value |
-| 11 | The Hermitage, a Tribute Portfolio Hotel | Jakarta | Indonesia | Under €200 | 80 | Strong value |
+| 11 | The Hermitage, a Tribute Portfolio Hotel, Jakarta | Jakarta | Indonesia | Under €200 | 80 | Strong value |
 | 12 | Hyatt Regency Tashkent | Tashkent | Uzbekistan | Under €200 | 79 | Strong value |
 | 13 | Grand Hotel Yerevan | Yerevan | Armenia | Under €200 | 78 | Strong value |
 | 14 | Sofitel Marrakech Palais Imperial & Spa | Marrakech | Morocco | Under €250 | 78 | Strong value |
 | 15 | Boton Blue Hotel & Spa | Nha Trang | Vietnam | Under €100 | 76 | Strong value |
 | 16 | I'M Hotel Makati | Makati | Philippines | Under €200 | 75 | Strong value |
-| 17 | Malak Regency Hotel | Sarajevo | Bosnia | Under €200 | 73 | Good value |
+| 17 | Malak Regency Hotel | Sarajevo | Bosnia and Herzegovina | Under €200 | 73 | Good value |
 | 18 | Real Marina Hotel & Spa | Olhão | Portugal | Under €200 | 72 | Good value |
 | 19 | Graffit Gallery Design Hotel | Varna | Bulgaria | Under €200 | 71 | Good value |
-| 20 | Millennium Downtown Abu Dhabi | Abu Dhabi | UAE | Under €200 | 68 | Good value |
+| 20 | Millennium Downtown Abu Dhabi | Abu Dhabi | United Arab Emirates | Under €200 | 68 | Good value |
 
 **Not in launch batch (future candidates):**
 - Meliá Yangon
@@ -673,9 +678,11 @@ All 20 hotels are live as individual pages at `/hotels/[slug]`.
 src/
   components/         — Header, Footer, HotelCard, HotelComparisonTable,
                         PriceTierCard, Badge, ValueScore, ImagePlaceholder,
-                        Breadcrumbs, AffiliateDisclosure, SeoHead, SectionHeading
+                        Breadcrumbs, AffiliateDisclosure, SeoHead, SectionHeading,
+                        SeasonalityCards, PhotoCarousel
   content/hotels/     — 20 Markdown hotel files
   content.config.ts   — Astro 6 Content Layer schema (glob loader)
+  data/               — hotelSeasonality.ts, imageAttributions.json/csv
   layouts/            — BaseLayout, PageLayout, HotelLayout
   pages/
     index.astro
@@ -686,18 +693,76 @@ src/
     destinations.astro
     methodology.astro
     affiliate-disclosure.astro
+    image-credits.astro
     about.astro
   styles/global.css   — Tailwind v4 + brand tokens
 ```
 
 ### Images
 
-All hotel pages currently use `ImagePlaceholder.astro` components (dark gradient blocks with TODO labels). No licensed images have been added yet.
+Hotel pages now use local image assets from `public/images/hotels/` rather than only placeholder blocks. Each live hotel has:
+
+- a primary image referenced from frontmatter
+- gallery image metadata in the hotel Markdown file
+- original and web image files where available
+- inline attribution where provided
+- central image attribution data in `src/data/imageAttributions.json` and `src/data/imageAttributions.csv`
+- a public image credits route at `/image-credits/`
+
+AI-generated hotel image assets were added on 2026-05-31 for the 19 hotel candidates in the AI image brief:
+
+- **Master AI images:** 38 WebP files in `public/images/hotels/`
+- **Master size:** 1600 x 1000 px, 16:10 landscape
+- **Responsive derivatives:** 76 WebP files in `public/images/hotels/responsive/`
+- **Derivative sizes:** 1200 x 750 and 800 x 500
+- **Image types per hotel:** editorial dusk first, realistic daylight second
+- **Research log:** `research/images/hotel-ai-image-reference-research.md`
+- **Prompt file:** `research/images/hotel-ai-image-prompts.json`
+- **Generation audit:** `research/images/hotel-ai-image-audit.md`
+- **Generation script:** `scripts/generate-hotel-ai-images.js`
+
+AI images are integrated into the live hotel Markdown files where the matching hotel page currently exists. For those pages:
+
+- the editorial dusk image is the primary card/hero image
+- both AI images are listed in `generatedGallery`
+- `PhotoCarousel.astro` renders the two-image carousel on the hotel detail page
+- `HotelCard.astro`, `HotelLayout.astro`, and `PhotoCarousel.astro` use responsive image metadata where present
+
+Five AI-image candidates currently have generated image assets but no live hotel profile Markdown file yet:
+
+- Meliá Yangon
+- Grand Mercure Medan Angkasa
+- NH Collection Bogotá WTC Royal
+- Novotel Ahmedabad
+- Mandarin Colombo
 
 - Placeholder SVG: `public/images/placeholders/luxury-hotel-placeholder.svg`
 - Image brief for all 20 hotels: `research/image-needs.md`
+- Image audit: `research/image-audit.md`
+- Human-readable image attribution log: `image-attributions.md`
+- Attribution workbook: `research/image-attributions.xlsx`
 
-Priority images needed first: Hotel Majapahit Surabaya, Phoenix Yogyakarta, Majestic KL, Stamba Tbilisi, Raweekanlaya Bangkok (the 5 featured on the homepage).
+Current AI image generation audit summary:
+
+- Total AI-image hotels: 19
+- Required AI images: 38
+- AI images generated: 38
+- AI images approved: 38
+- AI images needing manual review: 0
+- AI images pending: 0
+- Model requested: `gpt-image-2`
+- Quality requested: `high`
+
+Current contextual/licensed image audit summary:
+
+- Total hotels: 20
+- Required images: 120
+- Images downloaded: 120
+- Images marked safe to use: 120
+- Images needing review: 0
+- Hotels still missing true licensed hotel-specific images: 20
+
+The AI images are fully generated originals and should not be described as downloaded source images. Online hotel photos were used only as visual research references. The older contextual/licensed images remain useful for destination context and attribution-backed image credits, but many are destination, nearby-attraction, or contextual images rather than direct hotel press images.
 
 Acceptable image sources: Wikimedia Commons (CC BY / CC BY-SA), Unsplash, Pexels, direct hotel press kits.
 
@@ -705,15 +770,20 @@ Acceptable image sources: Wikimedia Commons (CC BY / CC BY-SA), Unsplash, Pexels
 
 All booking links use standard Booking.com search URLs (`?ss=Hotel%20Name%20City%20Country`). These are **not affiliate links** at launch. Affiliate links need to be set up separately through the Booking.com Partner Programme and swapped in once approved.
 
-### Prose styling note
+### Seasonality data
 
-Hotel editorial body text uses Tailwind `prose` classes. If body text appears unstyled after deployment, install `@tailwindcss/typography`:
+Hotel pages now support seasonality cards via:
 
-```
-npm install @tailwindcss/typography
-```
+- `src/components/SeasonalityCards.astro`
+- `src/data/hotelSeasonality.ts`
+- `scripts/generate_hotel_seasonality.py`
+- `research/hotel-seasonality-weather-price.xlsx`
 
-Then add to `src/styles/global.css`:
+Seasonality appears on a hotel page when that hotel slug exists in `hotelSeasonality`.
+
+### Prose styling
+
+Hotel editorial body text uses Tailwind `prose` classes. `@tailwindcss/typography` is installed and enabled in `src/styles/global.css`:
 
 ```css
 @plugin "@tailwindcss/typography";
@@ -721,8 +791,10 @@ Then add to `src/styles/global.css`:
 
 ### Next steps
 
-1. **Add licensed images** — use `research/image-needs.md` as the brief. Start with the 5 featured homepage hotels.
+Immediate next priority: add live profile pages for the AI-image candidates not yet present in `src/content/hotels/` - Meliá Yangon, Grand Mercure Medan Angkasa, NH Collection Bogotá WTC Royal, Novotel Ahmedabad, and Mandarin Colombo. Their AI image assets already exist.
+
+1. **Replace contextual images with hotel-specific images where possible** — use `research/image-audit.md`, `image-attributions.md`, and the gallery frontmatter as the working source.
 2. **Set up Booking.com affiliate programme** — replace standard search links with affiliate links once approved.
-3. **Install @tailwindcss/typography** — for styled prose on hotel profile pages.
-4. **Expand to 50 hotels** — future candidates listed above plus the destination strategy in this brief.
-5. **Add city/destination pages** — longer-form SEO content for top destinations (Yogyakarta, Tbilisi, Marrakech, etc.).
+3. **Expand to 50 hotels** — future candidates listed above plus the destination strategy in this brief.
+4. **Add city/destination pages** — longer-form SEO content for top destinations (Yogyakarta, Tbilisi, Marrakech, etc.).
+5. **Keep this brief current** — whenever hotels, routes, image systems, data files, affiliate status, or build/deploy details change, update this Build status section in the same change.
