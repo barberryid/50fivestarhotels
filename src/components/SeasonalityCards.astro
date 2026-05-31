@@ -6,7 +6,31 @@ interface Props {
 }
 
 const { seasonality } = Astro.props;
-const strips = [seasonality.weather, seasonality.price];
+const weatherMonths = seasonality.months.map(({ month, weather, tempC, tempF, humidity }) => ({
+  month,
+  label: weather,
+  tempC,
+  tempF,
+  humidity,
+}));
+const priceMonths = seasonality.months.map(({ month, price }) => ({
+  month,
+  label: price,
+}));
+const cards = [
+  {
+    ...seasonality.weather,
+    kind: 'weather',
+    ariaLabel: 'Weather comfort, temperature and humidity by month',
+    months: weatherMonths,
+  },
+  {
+    ...seasonality.price,
+    kind: 'price',
+    ariaLabel: 'Typical price value by month',
+    months: priceMonths,
+  },
+];
 ---
 
 <section class="seasonality-section" aria-labelledby="seasonality-heading">
@@ -16,20 +40,26 @@ const strips = [seasonality.weather, seasonality.price];
   </div>
 
   <div class="seasonality-cards">
-    {strips.map(strip => (
-      <article class="seasonality-card">
+    {cards.map(card => (
+      <article class="seasonality-card" data-card-kind={card.kind}>
         <div class="seasonality-copy">
-          <h3>{strip.title}</h3>
-          <p>{strip.summary}</p>
-          {strip.notes && <p class="seasonality-note">{strip.notes}</p>}
+          <h3>{card.title}</h3>
+          <p>{card.kind === 'weather' ? 'Weather comfort, average temperature and humidity.' : 'Typical monthly price value.'}</p>
+          {card.summary && <p class="seasonality-note">{card.summary}</p>}
         </div>
 
-        <div class="seasonality-scroll" role="region" aria-label={`${strip.title} by month`}>
+        <div class="seasonality-scroll" role="region" aria-label={card.ariaLabel}>
           <ol class="seasonality-months">
-            {strip.months.map(month => (
+            {card.months.map(month => (
               <li class="seasonality-month" data-label={month.label}>
                 <span class="seasonality-month-name">{month.month}</span>
                 <span class="seasonality-month-label">{month.label}</span>
+                {card.kind === 'weather' && (
+                  <>
+                    <span class="seasonality-temp">{month.tempC}°C / {month.tempF}°F</span>
+                    <span class="seasonality-humidity" data-short={`${month.humidity}% hum.`}>{month.humidity}% humidity</span>
+                  </>
+                )}
               </li>
             ))}
           </ol>
@@ -113,10 +143,10 @@ const strips = [seasonality.weather, seasonality.price];
   .seasonality-months {
     display: grid;
     gap: 0.35rem;
-    grid-template-columns: repeat(12, minmax(4.6rem, 1fr));
+    grid-template-columns: repeat(12, minmax(5.4rem, 1fr));
     list-style: none;
     margin: 0;
-    min-width: 58rem;
+    min-width: 66rem;
     padding: 0;
   }
 
@@ -127,15 +157,21 @@ const strips = [seasonality.weather, seasonality.price];
     border-radius: 0.45rem;
     color: #1d2433;
     display: grid;
-    gap: 0.15rem;
+    gap: 0.2rem;
     justify-items: center;
-    min-height: 3.7rem;
+    min-height: 3.8rem;
     padding: 0.45rem 0.35rem;
     text-align: center;
   }
 
+  .seasonality-card[data-card-kind="weather"] .seasonality-month {
+    min-height: 5.6rem;
+  }
+
   .seasonality-month-name,
-  .seasonality-month-label {
+  .seasonality-month-label,
+  .seasonality-temp,
+  .seasonality-humidity {
     display: block;
     line-height: 1.1;
   }
@@ -146,21 +182,55 @@ const strips = [seasonality.weather, seasonality.price];
   }
 
   .seasonality-month-label {
-    font-size: 0.68rem;
+    background: #f3f4f6;
+    border: 1px solid #dfe3e8;
+    border-radius: 999px;
+    color: #374151;
+    font-size: 0.62rem;
     font-weight: 800;
+    padding: 0.2rem 0.35rem;
+    text-align: center;
+  }
+
+  .seasonality-temp,
+  .seasonality-humidity {
+    color: rgba(29, 36, 51, 0.74);
+    font-size: 0.68rem;
+    font-weight: 700;
   }
 
   .seasonality-month[data-label="Best"],
   .seasonality-month[data-label="Cheapest"] {
+    background: #f1f8ec;
+    border-color: #168148;
+    color: #1d2433;
+  }
+
+  .seasonality-month[data-label="Best"] .seasonality-month-label,
+  .seasonality-month[data-label="Cheapest"] .seasonality-month-label {
     background: #1f9a58;
     border-color: #168148;
     color: #ffffff;
+  }
+
+  .seasonality-month[data-label="Best"] .seasonality-temp,
+  .seasonality-month[data-label="Best"] .seasonality-humidity,
+  .seasonality-month[data-label="Cheapest"] .seasonality-temp,
+  .seasonality-month[data-label="Cheapest"] .seasonality-humidity {
+    color: rgba(29, 36, 51, 0.74);
   }
 
   .seasonality-month[data-label="Good"],
   .seasonality-month[data-label="Good value"] {
     background: #eaf4dd;
     border-color: #cfe4b6;
+    color: #2f5d2f;
+  }
+
+  .seasonality-month[data-label="Good"] .seasonality-month-label,
+  .seasonality-month[data-label="Good value"] .seasonality-month-label {
+    background: #dbeec9;
+    border-color: #bddc9f;
     color: #2f5d2f;
   }
 
@@ -171,6 +241,13 @@ const strips = [seasonality.weather, seasonality.price];
     color: #1d2433;
   }
 
+  .seasonality-month[data-label="Possible"] .seasonality-month-label,
+  .seasonality-month[data-label="Average"] .seasonality-month-label {
+    background: #f3ead4;
+    border-color: #dfcfac;
+    color: #5d4b2e;
+  }
+
   .seasonality-month[data-label="Avoid"],
   .seasonality-month[data-label="Expensive"] {
     background: #fae9dc;
@@ -178,10 +255,42 @@ const strips = [seasonality.weather, seasonality.price];
     color: #9a3f08;
   }
 
+  .seasonality-month[data-label="Avoid"] .seasonality-month-label,
+  .seasonality-month[data-label="Expensive"] .seasonality-month-label {
+    background: #f2d3bd;
+    border-color: #e5b58f;
+    color: #8a3908;
+  }
+
   .seasonality-month[data-label="Most expensive"] {
     background: #f4d4ce;
     border-color: #e7ada3;
     color: #8f241c;
+  }
+
+  .seasonality-month[data-label="Most expensive"] .seasonality-month-label {
+    background: #e9b4ac;
+    border-color: #da9388;
+    color: #7e2019;
+  }
+
+  @media (max-width: 640px) {
+    .seasonality-months {
+      grid-template-columns: repeat(12, minmax(5.9rem, 1fr));
+      min-width: 72rem;
+    }
+
+    .seasonality-card[data-card-kind="weather"] .seasonality-month {
+      min-height: 5.2rem;
+    }
+
+    .seasonality-humidity {
+      font-size: 0;
+    }
+
+    .seasonality-humidity::after {
+      content: attr(data-short);
+    }
   }
 
   @media (min-width: 900px) {
