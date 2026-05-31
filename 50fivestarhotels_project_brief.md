@@ -698,6 +698,61 @@ The site has now had a major SEO architecture expansion committed and pushed to 
 
 **Important limitation:** this confirms the commit was pushed to GitHub. Do not describe the SEO expansion as live until the relevant Cloudflare Pages deployment has completed successfully.
 
+### Destination-card AI image completion - 2026-05-31
+
+The `/destinations/` page now has AI-generated editorial destination-card images for all 20 launch destination cards. The images are destination/trip-idea assets rather than hotel photos: landmarks, old towns, gardens, cultural districts, coastlines, bazaars, and city atmospheres.
+
+**Committed and pushed destination-image updates:**
+
+- `e99ca38` - `Add AI destination images to destinations page`
+- `308b44d` - `Add remaining AI destination images`
+
+**Implementation details:**
+
+- Final WebP assets live in `public/images/destinations/`.
+- Source PNGs are retained in `public/images/destinations/source/`, matching the convention established by the first destination-image batch.
+- `src/data/destinationImages.ts` maps each destination slug to `src`, `alt`, `credit`, and `subject` metadata.
+- `src/pages/destinations.astro` uses the manifest to render the image at the top of each destination card with `aspect-ratio: 16 / 10`, `object-fit: cover`, lazy loading, and text below the image.
+- `scripts/generate_destination_ai_images.js` contains the repeatable OpenAI Images API workflow for the full destination-image set, with skip-existing behaviour unless `--force` is passed.
+- Research, prompts, and audit records are kept in:
+  - `research/destination-ai-image-reference-research.md`
+  - `research/destination-ai-image-prompts.md`
+  - `research/destination-image-audit.md`
+
+**Destination-card image subjects now complete:**
+
+| Destination | Image subject |
+|---|---|
+| Siem Reap | Angkor Wat sunrise |
+| Yogyakarta | Borobudur sunrise |
+| Surabaya | Surabaya Old Town / House of Sampoerna heritage atmosphere |
+| Kuala Lumpur | Merdeka Square / Sultan Abdul Samad Building |
+| Bangkok | Wat Pho / old Bangkok temple district |
+| Solo | Javanese palace courtyard |
+| Hue | Imperial City / Citadel gate |
+| Nha Trang | Po Nagar Cham Towers |
+| Makati | Intramuros colonial street |
+| Varna | Sea Garden / Black Sea promenade |
+| Tashkent | Tashkent Metro mosaics |
+| Yerevan | Cascade Complex / Mount Ararat atmosphere |
+| Luxor | Hot air balloons over the Nile / West Bank |
+| Marrakech | Jardin Majorelle-inspired Moroccan garden |
+| Abu Dhabi | Sheikh Zayed Grand Mosque |
+| Jakarta | Historic Kota Tua restaurant atmosphere |
+| Sarajevo | Bascarsija Ottoman bazaar street |
+| Olhao | Ria Formosa boats and lagoon islands |
+| Tbilisi | Old Tbilisi sulfur baths / Narikala hillside |
+| Iasi | Palace of Culture |
+
+**Validation after destination-image completion:**
+
+- `npm.cmd run build` completed successfully on 2026-05-31.
+- Build output remained 65 pages, zero errors.
+- Browser-side checks found 20 destination cards and 20 destination image tags on `/destinations/`.
+- Direct local asset checks returned HTTP 200 for all 20 manifest image paths.
+- Mobile check showed no horizontal overflow (`clientWidth` and `scrollWidth` both 390).
+- Online reference pages were used only for visual research; no online/source photos were downloaded or used as website assets.
+
 ### Current local review status
 
 The project has been reviewed against the current Git working tree on 2026-05-31. The latest committed site state is on `main` / `origin/main`. After this brief update, this file itself is the only expected local edit unless additional work has been requested.
@@ -705,8 +760,11 @@ The project has been reviewed against the current Git working tree on 2026-05-31
 **Latest committed/pushed state:**
 
 - **Current branch:** `main`
-- **Latest pushed commit before this brief update:** `8f25e0a` - `Improve SEO structure and landing pages`
+- **Latest pushed commit before this brief update:** `308b44d` - `Add remaining AI destination images`
 - **Recent committed updates after the AI image rollout:**
+  - `308b44d` - added the remaining 10 AI destination-card images so all 20 launch destination cards on `/destinations/` now have optimized WebP images and retained source PNGs
+  - `e99ca38` - added the first 10 AI destination-card images, destination image manifest, research/prompt/audit docs, generator script, and image card rendering on `/destinations/`
+  - `8ed9e96` - updated this project brief for the SEO expansion
   - `8f25e0a` - added SEO helpers, sitemap integration, robots/llms files, JSON-LD, SEO landing pages, destination pages, regional pages, supporting guides, HTML sitemap, related guide links, and SEO deployment docs
   - `52f27fc` - updated this project brief for the palm-free homepage hero and daytime image usage
   - `330d077` - `HotelCard.astro` now prefers each hotel's brighter realistic-daylight render (falling back to editorial-dusk), so cards across the homepage, tier pages and destinations read lighter
@@ -727,7 +785,7 @@ The project has been reviewed against the current Git working tree on 2026-05-31
 
 **Current uncommitted local changes reviewed:**
 
-- None before editing this file; `git status --short` was clean immediately after pushing `8f25e0a`.
+- None before editing this file; `git status --short` was clean immediately after pushing `308b44d`.
 
 **Deployment caution:** only committed files on `main` are reflected by Cloudflare Pages. Any future local edits should not be described as live until they are intentionally committed and pushed.
 
@@ -738,10 +796,10 @@ The full launch site has been built, committed and pushed to GitHub. Cloudflare 
 - **Live URL:** https://50fivestarhotels.com / https://50fivestarhotels.pages.dev/
 - **GitHub:** https://github.com/barberryid/50fivestarhotels
 - **Latest live URL check:** both production URLs returned HTTP 200 on 2026-05-31
-- **Latest local build check:** `npm.cmd run build` completed successfully on 2026-05-31 after the SEO expansion
+- **Latest local build check:** `npm.cmd run build` completed successfully on 2026-05-31 after all 20 destination-card images were completed
 - **Build output at latest build check:** 65 pages, zero errors
-- **Latest pushed commit before this brief update:** `8f25e0a` - `Improve SEO structure and landing pages`
-- **Latest local image expansion:** added AI image sets for Grand Hotel Yerevan, Hyatt Regency Tashkent, The Hermitage Jakarta, Sofitel Marrakech, The Majestic Hotel Kuala Lumpur, and Stamba Hotel on 2026-05-31
+- **Latest pushed commit before this brief update:** `308b44d` - `Add remaining AI destination images`
+- **Latest local image expansion:** all 20 `/destinations/` cards now have AI-generated editorial destination images, documented in `research/destination-image-audit.md`
 - **Latest favicon state:** black circular badge with transparent outside corners and a centered bright yellow star whose points touch the circle edge
 
 ### Visual redesign and trust system — 2026-05-31
@@ -827,7 +885,8 @@ src/
   content.config.ts   - Astro 6 Content Layer schema (glob loader);
                         includes optional whyCheap, seoTitle, seoDescription,
                         focusKeyword, secondaryKeywords and lastUpdated fields
-  data/               - hotelSeasonality.ts, imageAttributions.json/csv
+  data/               - hotelSeasonality.ts, imageAttributions.json/csv,
+                        destinationImages.ts
   lib/                - seo.ts and regions.ts helpers for canonicals, JSON-LD,
                         region routing and production URL consistency
   layouts/            - BaseLayout, PageLayout, HotelLayout
@@ -934,6 +993,20 @@ The AI images are fully generated originals and should not be described as downl
 
 Acceptable image sources: Wikimedia Commons (CC BY / CC BY-SA), Unsplash, Pexels, direct hotel press kits.
 
+Destination-card AI image assets were completed on 2026-05-31 for all 20 launch destinations:
+
+- **Final destination images:** 20 optimized WebP files in `public/images/destinations/`
+- **Source files:** 20 PNG files in `public/images/destinations/source/`
+- **Master size:** 1600 x 1000 px, 16:10 landscape
+- **Image manifest:** `src/data/destinationImages.ts`
+- **Page integration:** `src/pages/destinations.astro`
+- **Research log:** `research/destination-ai-image-reference-research.md`
+- **Prompt file:** `research/destination-ai-image-prompts.md`
+- **Generation audit:** `research/destination-image-audit.md`
+- **Generation script:** `scripts/generate_destination_ai_images.js`
+
+The destination-card images are also fully generated originals. Online pages were reviewed only for visual research and landmark/destination cues; no online/source photos were used as final website assets.
+
 ### Booking.com links
 
 All booking links use standard Booking.com search URLs (`?ss=Hotel%20Name%20City%20Country`). These are **not affiliate links** at launch. Affiliate links need to be set up separately through the Booking.com Partner Programme and swapped in once approved.
@@ -952,8 +1025,7 @@ Seasonality appears on a hotel page when that hotel slug exists in `hotelSeasona
 Latest local seasonality/editorial review:
 
 - `src/data/hotelSeasonality.ts` and `SeasonalityCards.astro` were enriched in committed work at `0e54288`.
-- The workbook `research/hotel-seasonality-weather-price.xlsx` currently has local uncommitted updates.
-- Angkor Aurora's hotel profile has a local uncommitted update making its best-booking guidance more precise: December-February is now the strongest temple/weather window, March and November are shoulder choices, and May-September is framed as the cheaper value period with wet-season caveats.
+- No seasonality files were changed as part of the latest destination-card image work.
 
 ### Prose styling
 
