@@ -18,15 +18,11 @@ valueScore: 81
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Steigenberger%20Resort%20Achti%20Luxor%20Egypt"
 image:
-  src: "/images/hotels/steigenberger-resort-achti-luxor.jpg"
-  alt: "Felucca sailing on the Nile River in Luxor"
-  attribution: "Photo by Anthony Chen on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/pp75Ya8DoFo"
-  sourceSite: "Unsplash"
-  photographer: "Anthony Chen"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/steigenberger-resort-achti-luxor-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Steigenberger Resort Achti in Luxor, Egypt"
+  srcSet:
+    large: "/images/hotels/responsive/steigenberger-resort-achti-luxor-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/steigenberger-resort-achti-luxor-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/steigenberger-resort-achti-luxor/web/steigenberger-resort-achti-luxor-01-hero-achti-luxor.webp"
     alt: "Luxor Nile R05 in or near Luxor, Egypt"
@@ -100,6 +96,19 @@ foodAngle: "Egyptian mezze, grilled meats, koshary and traditional tea culture"
 seoTitle: "Steigenberger Resort Achti Luxor Review: Affordable Five-Star Nile Hotel"
 seoDescription: "A luxury editorial guide to Steigenberger Resort Achti Luxor — a strong-value international five-star resort on the Nile with access to Egypt's greatest ancient sites."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/steigenberger-resort-achti-luxor-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Steigenberger Resort Achti in Luxor, Egypt"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/steigenberger-resort-achti-luxor-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/steigenberger-resort-achti-luxor-editorial-dusk-800.webp"
+  - src: "/images/hotels/steigenberger-resort-achti-luxor-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Steigenberger Resort Achti in Luxor, Egypt"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/steigenberger-resort-achti-luxor-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/steigenberger-resort-achti-luxor-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

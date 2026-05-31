@@ -18,15 +18,11 @@ valueScore: 68
 verdict: "Good value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Millennium%20Downtown%20Abu%20Dhabi%20UAE"
 image:
-  src: "/images/hotels/millennium-downtown-abu-dhabi.jpg"
-  alt: "Sheikh Zayed Grand Mosque in Abu Dhabi"
-  attribution: "Photo by Clarence E. Hsu on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/RZIL_MY1vOA"
-  sourceSite: "Unsplash"
-  photographer: "Clarence E. Hsu"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/millennium-downtown-abu-dhabi-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Millennium Downtown in Abu Dhabi, UAE"
+  srcSet:
+    large: "/images/hotels/responsive/millennium-downtown-abu-dhabi-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/millennium-downtown-abu-dhabi-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/millennium-downtown-abu-dhabi/web/millennium-downtown-abu-dhabi-01-hero-millennium-downtown-abu-dhabi-01.webp"
     alt: "Abu dhabi skylines 2014 in or near Abu Dhabi, UAE"
@@ -100,6 +96,19 @@ foodAngle: "Emirati cuisine, dates, luqaimat, shawarma and Abu Dhabi's diverse d
 seoTitle: "Millennium Downtown Abu Dhabi Review: Affordable Five-Star in the UAE"
 seoDescription: "A luxury editorial guide to Millennium Downtown Abu Dhabi — an international five-star hotel at rates that undercut much of the city's typical luxury pricing."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/millennium-downtown-abu-dhabi-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Millennium Downtown in Abu Dhabi, UAE"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/millennium-downtown-abu-dhabi-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/millennium-downtown-abu-dhabi-editorial-dusk-800.webp"
+  - src: "/images/hotels/millennium-downtown-abu-dhabi-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Millennium Downtown in Abu Dhabi, UAE"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/millennium-downtown-abu-dhabi-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/millennium-downtown-abu-dhabi-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

@@ -19,15 +19,11 @@ valueScore: 91
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Hotel%20Majapahit%20Surabaya%20MGallery%20Indonesia"
 image:
-  src: "/images/hotels/hotel-majapahit-surabaya.jpg"
-  alt: "Aerial view of Surabaya city buildings"
-  attribution: "Photo by Fauzan on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/gd5YFyQnN0g"
-  sourceSite: "Unsplash"
-  photographer: "Fauzan"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/hotel-majapahit-surabaya-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Hotel Majapahit Surabaya - MGallery in Surabaya, Indonesia"
+  srcSet:
+    large: "/images/hotels/responsive/hotel-majapahit-surabaya-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/hotel-majapahit-surabaya-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/hotel-majapahit-surabaya/web/hotel-majapahit-surabaya-01-hero-heritage-building.webp"
     alt: "Museum Bank Indonesia Surabaya (35194457663) in or near Surabaya, Indonesia"
@@ -101,6 +97,19 @@ foodAngle: "East Java food, local markets, rawon, sate and Surabaya street food"
 seoTitle: "Hotel Majapahit Surabaya Review: Affordable Five-Star Heritage in Java"
 seoDescription: "A luxury editorial guide to Hotel Majapahit Surabaya, one of the strongest affordable five-star hotel candidates in Indonesia."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/hotel-majapahit-surabaya-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Hotel Majapahit Surabaya - MGallery in Surabaya, Indonesia"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/hotel-majapahit-surabaya-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/hotel-majapahit-surabaya-editorial-dusk-800.webp"
+  - src: "/images/hotels/hotel-majapahit-surabaya-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Hotel Majapahit Surabaya - MGallery in Surabaya, Indonesia"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/hotel-majapahit-surabaya-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/hotel-majapahit-surabaya-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

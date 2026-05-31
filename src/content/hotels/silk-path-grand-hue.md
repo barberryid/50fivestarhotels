@@ -18,15 +18,11 @@ valueScore: 80
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Silk%20Path%20Grand%20Hue%20Hotel%20Spa%20Vietnam"
 image:
-  src: "/images/hotels/silk-path-grand-hue.jpg"
-  alt: "Imperial citadel in Hue Vietnam"
-  attribution: "Photo by Nguyen Minh on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/lzjlYsMGYXg"
-  sourceSite: "Unsplash"
-  photographer: "Nguyen Minh"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/silk-path-hotel-hue-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Silk Path Hotel in Hue, Vietnam"
+  srcSet:
+    large: "/images/hotels/responsive/silk-path-hotel-hue-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/silk-path-hotel-hue-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/silk-path-grand-hue/web/silk-path-grand-hue-01-hero-silk-path-grand-hue-01.webp"
     alt: "Hue Vietnam Citadel-of-Huế-11 in or near Hue, Vietnam"
@@ -100,6 +96,19 @@ foodAngle: "Hue cuisine — bun bo Hue, banh khoai, imperial court food traditio
 seoTitle: "Silk Path Grand Hue Hotel & Spa Review: Affordable Five-Star in Vietnam's Imperial City"
 seoDescription: "A luxury editorial guide to Silk Path Grand Hue Hotel & Spa — a well-positioned affordable five-star hotel in Vietnam's most historically rich city."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/silk-path-hotel-hue-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Silk Path Hotel in Hue, Vietnam"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/silk-path-hotel-hue-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/silk-path-hotel-hue-editorial-dusk-800.webp"
+  - src: "/images/hotels/silk-path-hotel-hue-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Silk Path Hotel in Hue, Vietnam"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/silk-path-hotel-hue-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/silk-path-hotel-hue-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

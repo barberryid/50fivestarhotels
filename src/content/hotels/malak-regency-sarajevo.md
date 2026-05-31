@@ -18,15 +18,11 @@ valueScore: 73
 verdict: "Good value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Malak%20Regency%20Hotel%20Sarajevo%20Bosnia"
 image:
-  src: "/images/hotels/malak-regency-sarajevo.jpg"
-  alt: "View over Sarajevo city"
-  attribution: "Photo by Sarajevo slike on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/K_-oTDGgwL0"
-  sourceSite: "Unsplash"
-  photographer: "Sarajevo slike"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/malak-regency-sarajevo-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Malak Regency Hotel in Sarajevo, Bosnia and Herzegovina"
+  srcSet:
+    large: "/images/hotels/responsive/malak-regency-sarajevo-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/malak-regency-sarajevo-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/malak-regency-sarajevo/web/malak-regency-sarajevo-01-hero-malak-regency.webp"
     alt: "Sarajevo City Hall 01 in or near Sarajevo, Bosnia and Herzegovina"
@@ -100,6 +96,19 @@ foodAngle: "Ćevapi, burek, Bosnian coffee and the Baščaršija food culture"
 seoTitle: "Malak Regency Hotel Sarajevo Review: Affordable Five-Star in Bosnia"
 seoDescription: "A luxury editorial guide to Malak Regency Hotel Sarajevo — a well-priced five-star hotel in one of the Balkans' most historically significant cities."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/malak-regency-sarajevo-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Malak Regency Hotel in Sarajevo, Bosnia and Herzegovina"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/malak-regency-sarajevo-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/malak-regency-sarajevo-editorial-dusk-800.webp"
+  - src: "/images/hotels/malak-regency-sarajevo-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Malak Regency Hotel in Sarajevo, Bosnia and Herzegovina"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/malak-regency-sarajevo-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/malak-regency-sarajevo-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

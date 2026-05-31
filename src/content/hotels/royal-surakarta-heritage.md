@@ -18,15 +18,11 @@ valueScore: 82
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Royal%20Surakarta%20Heritage%20Solo%20Indonesia%20Handwritten"
 image:
-  src: "/images/hotels/royal-surakarta-heritage.jpg"
-  alt: "Keraton Surakarta historical building"
-  attribution: "Photo by Muhammad Fadil on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/rL7YFjc1PlI"
-  sourceSite: "Unsplash"
-  photographer: "Muhammad Fadil"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/royal-surakarta-heritage-solo-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of The Royal Surakarta Heritage - Handwritten Collection in Solo, Indonesia"
+  srcSet:
+    large: "/images/hotels/responsive/royal-surakarta-heritage-solo-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/royal-surakarta-heritage-solo-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/royal-surakarta-heritage/web/royal-surakarta-heritage-01-hero-royal-surakarta-heritage-01.webp"
     alt: "Keraton surakarta in or near Solo / Surakarta, Indonesia"
@@ -100,6 +96,19 @@ foodAngle: "Javanese cuisine, nasi liwet Solo, satay and traditional warungs"
 seoTitle: "The Royal Surakarta Heritage Review: Affordable Five-Star Hotel in Solo, Java"
 seoDescription: "A luxury editorial guide to The Royal Surakarta Heritage — a Handwritten Collection hotel steeped in Javanese royal history and surprisingly affordable."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/royal-surakarta-heritage-solo-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of The Royal Surakarta Heritage - Handwritten Collection in Solo, Indonesia"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/royal-surakarta-heritage-solo-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/royal-surakarta-heritage-solo-editorial-dusk-800.webp"
+  - src: "/images/hotels/royal-surakarta-heritage-solo-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of The Royal Surakarta Heritage - Handwritten Collection in Solo, Indonesia"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/royal-surakarta-heritage-solo-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/royal-surakarta-heritage-solo-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

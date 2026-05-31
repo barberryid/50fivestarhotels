@@ -18,15 +18,11 @@ valueScore: 75
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=IM%20Hotel%20Makati%20Philippines"
 image:
-  src: "/images/hotels/im-hotel-makati.jpg"
-  alt: "High-rise architecture on Ayala Avenue in Makati"
-  attribution: "Photo by Eula Xandrea Dimapilis on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/DFzgKUNOAp0"
-  sourceSite: "Unsplash"
-  photographer: "Eula Xandrea Dimapilis"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/im-hotel-makati-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of I'M Hotel in Makati, Philippines"
+  srcSet:
+    large: "/images/hotels/responsive/im-hotel-makati-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/im-hotel-makati-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/im-hotel-makati/web/im-hotel-makati-01-hero-im-hotel.webp"
     alt: "Manila Philippines Pizza-Taxi-in-Makati-Business-District-01 in or near Makati / Manila, Philippines"
@@ -100,6 +96,19 @@ foodAngle: "Filipino cuisine, lechon, sinigang, kare-kare and Makati's dining sc
 seoTitle: "I'M Hotel Makati Review: Affordable Five-Star Design Hotel in Manila"
 seoDescription: "A luxury editorial guide to I'M Hotel Makati — a well-designed five-star hotel in Manila's most upscale district at a price that makes Philippine luxury accessible."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/im-hotel-makati-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of I'M Hotel in Makati, Philippines"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/im-hotel-makati-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/im-hotel-makati-editorial-dusk-800.webp"
+  - src: "/images/hotels/im-hotel-makati-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of I'M Hotel in Makati, Philippines"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/im-hotel-makati-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/im-hotel-makati-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

@@ -5,6 +5,7 @@ import Badge from '../components/Badge.astro';
 import ValueScore from '../components/ValueScore.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import SeasonalityCards from '../components/SeasonalityCards.astro';
+import PhotoCarousel from '../components/PhotoCarousel.astro';
 import { hotelSeasonality } from '../data/hotelSeasonality';
 
 interface Props {
@@ -31,9 +32,23 @@ interface Props {
     image?: {
       src: string;
       alt: string;
+      srcSet?: {
+        large: string;
+        small: string;
+      };
       attribution?: string;
       sourcePageUrl?: string;
     };
+    generatedGallery?: Array<{
+      src: string;
+      srcSet?: {
+        large: string;
+        small: string;
+      };
+      type?: string;
+      alt: string;
+      caption?: string;
+    }>;
     gallery?: Array<{
       src: string;
       alt: string;
@@ -49,6 +64,7 @@ interface Props {
 
 const { hotel, relatedHotels = [] } = Astro.props;
 const gallery = hotel.gallery?.filter(image => image.src) ?? [];
+const generatedGallery = hotel.generatedGallery?.filter(image => image.src) ?? [];
 const seasonality = hotelSeasonality[hotel.slug];
 const creditLabel = (sourceSite?: string) => sourceSite ? `Image credit: ${sourceSite}` : 'Image credit';
 ---
@@ -69,16 +85,22 @@ const creditLabel = (sourceSite?: string) => sourceSite ? `Image credit: ${sourc
       <!-- Main content -->
       <article class="min-w-0">
         <!-- Hero image -->
-        {hotel.image?.src && (
+        {generatedGallery.length > 1 ? (
+          <PhotoCarousel images={generatedGallery} label={`${hotel.title} generated photos`} />
+        ) : hotel.image?.src && (
           <figure class="m-0">
             <div class="aspect-[16/8] overflow-hidden rounded-2xl bg-[#F8F5EF]">
-              <img
-                src={hotel.image.src}
-                alt={hotel.image.alt}
-                class="h-full w-full object-cover"
-                loading="eager"
-                decoding="async"
-              />
+              <picture>
+                {hotel.image.srcSet?.large && <source media="(min-width: 900px)" srcset={hotel.image.srcSet.large} type="image/webp" />}
+                {hotel.image.srcSet?.small && <source media="(max-width: 899px)" srcset={hotel.image.srcSet.small} type="image/webp" />}
+                <img
+                  src={hotel.image.src}
+                  alt={hotel.image.alt}
+                  class="h-full w-full object-cover"
+                  loading="eager"
+                  decoding="async"
+                />
+              </picture>
             </div>
             {hotel.image.attribution && (
               <figcaption class="mt-2 text-xs text-[#6B7280]">

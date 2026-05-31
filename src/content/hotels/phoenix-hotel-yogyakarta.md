@@ -19,15 +19,24 @@ valueScore: 89
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Phoenix%20Hotel%20Yogyakarta%20Handwritten%20Collection%20Indonesia"
 image:
-  src: "/images/hotels/phoenix-hotel-yogyakarta.jpg"
-  alt: "Borobudur Temple near Yogyakarta"
-  attribution: "Photo by Eugenia Clara on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/uCkq6wj3hm0"
-  sourceSite: "Unsplash"
-  photographer: "Eugenia Clara"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/phoenix-hotel-yogyakarta-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of The Phoenix Hotel Yogyakarta - Handwritten Collection in Yogyakarta, Indonesia"
+  srcSet:
+    large: "/images/hotels/responsive/phoenix-hotel-yogyakarta-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/phoenix-hotel-yogyakarta-editorial-dusk-800.webp"
+generatedGallery:
+  - src: "/images/hotels/phoenix-hotel-yogyakarta-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of The Phoenix Hotel Yogyakarta - Handwritten Collection in Yogyakarta, Indonesia"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/phoenix-hotel-yogyakarta-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/phoenix-hotel-yogyakarta-editorial-dusk-800.webp"
+  - src: "/images/hotels/phoenix-hotel-yogyakarta-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of The Phoenix Hotel Yogyakarta - Handwritten Collection in Yogyakarta, Indonesia"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/phoenix-hotel-yogyakarta-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/phoenix-hotel-yogyakarta-realistic-daylight-800.webp"
 gallery:
   - src: "/images/hotels/phoenix-hotel-yogyakarta/web/phoenix-hotel-yogyakarta-01-hero-phoenix-hotel-yogyakarta-01.webp"
     alt: "Yogyakarta Indonesia halte-Mangkubumi-1-01 in or near Yogyakarta, Indonesia"

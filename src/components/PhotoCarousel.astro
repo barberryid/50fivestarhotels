@@ -1,0 +1,185 @@
+---
+interface CarouselImage {
+  src: string;
+  srcSet?: {
+    large: string;
+    small: string;
+  };
+  type?: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  images: CarouselImage[];
+  label: string;
+}
+
+const { images, label } = Astro.props;
+---
+
+<figure class="photo-carousel" data-carousel aria-label={label}>
+  <div class="photo-carousel-track" data-carousel-track>
+    {images.map((image, index) => (
+      <div class="photo-carousel-slide" id={`carousel-slide-${index + 1}`}>
+        <picture>
+          <source media="(min-width: 1100px)" srcset={image.src} type="image/webp" />
+          <source media="(min-width: 700px)" srcset={image.srcSet?.large ?? image.src} type="image/webp" />
+          <img
+            src={image.srcSet?.small ?? image.src}
+            alt={image.alt}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        </picture>
+      </div>
+    ))}
+  </div>
+
+  <div class="photo-carousel-controls">
+    <button type="button" class="photo-carousel-button" data-carousel-prev aria-label="Previous photo">
+      &larr;
+    </button>
+    <div class="photo-carousel-dots" aria-hidden="true">
+      {images.map((_, index) => (
+        <span class="photo-carousel-dot" data-carousel-dot={index}></span>
+      ))}
+    </div>
+    <button type="button" class="photo-carousel-button" data-carousel-next aria-label="Next photo">
+      &rarr;
+    </button>
+  </div>
+
+  {images[0]?.caption && (
+    <figcaption class="photo-carousel-caption">{images[0].caption}</figcaption>
+  )}
+</figure>
+
+<script>
+  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('[data-carousel-track]');
+    const slides = Array.from(carousel.querySelectorAll('.photo-carousel-slide'));
+    const dots = Array.from(carousel.querySelectorAll('[data-carousel-dot]'));
+    const prev = carousel.querySelector('[data-carousel-prev]');
+    const next = carousel.querySelector('[data-carousel-next]');
+
+    if (!track || slides.length < 2) return;
+
+    let current = 0;
+
+    const update = (index) => {
+      current = (index + slides.length) % slides.length;
+      slides[current].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      dots.forEach((dot, dotIndex) => {
+        dot.toggleAttribute('data-active', dotIndex === current);
+      });
+    };
+
+    prev?.addEventListener('click', () => update(current - 1));
+    next?.addEventListener('click', () => update(current + 1));
+    dots.forEach((dot, index) => dot.addEventListener('click', () => update(index)));
+    update(0);
+  });
+</script>
+
+<style>
+  .photo-carousel {
+    margin: 0;
+  }
+
+  .photo-carousel-track {
+    aspect-ratio: 16 / 8;
+    background: #f8f5ef;
+    border-radius: 1rem;
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .photo-carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .photo-carousel-slide {
+    min-width: 0;
+    overflow: hidden;
+    scroll-snap-align: start;
+  }
+
+  .photo-carousel-slide picture,
+  .photo-carousel-slide img {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .photo-carousel-slide img {
+    object-fit: cover;
+  }
+
+  .photo-carousel-controls {
+    align-items: center;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  .photo-carousel-button {
+    align-items: center;
+    background: #1d2433;
+    border: 0;
+    border-radius: 999px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-weight: 800;
+    height: 2.25rem;
+    justify-content: center;
+    line-height: 1;
+    transition: background 160ms ease;
+    width: 2.25rem;
+  }
+
+  .photo-carousel-button:hover,
+  .photo-carousel-button:focus-visible {
+    background: #b88a44;
+  }
+
+  .photo-carousel-dots {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .photo-carousel-dot {
+    background: rgba(29, 36, 51, 0.2);
+    border-radius: 999px;
+    display: block;
+    height: 0.45rem;
+    width: 0.45rem;
+  }
+
+  .photo-carousel-dot[data-active] {
+    background: #b88a44;
+    width: 1.1rem;
+  }
+
+  .photo-carousel-caption {
+    color: #6b7280;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .photo-carousel-track {
+      aspect-ratio: 4 / 3;
+      border-radius: 0.75rem;
+    }
+  }
+</style>

@@ -28,6 +28,10 @@ const hotels = defineCollection({
     image: z.object({
       src: z.string(),
       alt: z.string(),
+      srcSet: z.object({
+        large: z.string(),
+        small: z.string(),
+      }).optional(),
       attribution: z.string().optional(),
       sourcePageUrl: z.string().optional(),
       sourceSite: z.string().optional(),
@@ -36,6 +40,18 @@ const hotels = defineCollection({
       licenseUrl: z.string().optional(),
       todo: z.boolean().optional(),
     }),
+    generatedGallery: z.array(
+      z.object({
+        src: z.string(),
+        srcSet: z.object({
+          large: z.string(),
+          small: z.string(),
+        }).optional(),
+        type: z.enum(['editorial-dusk', 'realistic-daylight']).optional(),
+        alt: z.string(),
+        caption: z.string().optional(),
+      })
+    ).optional(),
     gallery: z.array(
       z.object({
         src: z.string(),

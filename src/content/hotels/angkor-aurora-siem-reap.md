@@ -18,15 +18,11 @@ valueScore: 83
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Angkor%20Aurora%20Siem%20Reap%20Cambodia"
 image:
-  src: "/images/hotels/angkor-aurora-siem-reap.jpg"
-  alt: "Ancient temple architecture in Siem Reap"
-  attribution: "Photo by Mauro Lima on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/72WXJUS8F9k"
-  sourceSite: "Unsplash"
-  photographer: "Mauro Lima"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/angkor-aurora-siem-reap-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Angkor Aurora in Siem Reap, Cambodia"
+  srcSet:
+    large: "/images/hotels/responsive/angkor-aurora-siem-reap-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/angkor-aurora-siem-reap-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/angkor-aurora-siem-reap/web/angkor-aurora-siem-reap-01-hero-angkor-aurora.webp"
     alt: "Preah Pithu T Monks - Siem Reap in or near Siem Reap, Cambodia"
@@ -100,6 +96,19 @@ foodAngle: "Khmer cuisine, amok, lok lak and the Siem Reap Pub Street area"
 seoTitle: "Angkor Aurora Siem Reap Review: Affordable Five-Star Hotel Near Angkor Wat"
 seoDescription: "A luxury editorial guide to Angkor Aurora Siem Reap — a well-reviewed boutique hotel at a price that makes Cambodia even more accessible."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/angkor-aurora-siem-reap-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Angkor Aurora in Siem Reap, Cambodia"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/angkor-aurora-siem-reap-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/angkor-aurora-siem-reap-editorial-dusk-800.webp"
+  - src: "/images/hotels/angkor-aurora-siem-reap-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Angkor Aurora in Siem Reap, Cambodia"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/angkor-aurora-siem-reap-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/angkor-aurora-siem-reap-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

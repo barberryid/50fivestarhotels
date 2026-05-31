@@ -11,6 +11,7 @@
     "@astrojs/check": "latest",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "latest",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.3.0",
     "typescript": "latest"
   },

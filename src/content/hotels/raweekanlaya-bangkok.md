@@ -18,15 +18,11 @@ valueScore: 85
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Raweekanlaya%20Bangkok%20Wellness%20Cuisine%20Resort%20Thailand"
 image:
-  src: "/images/hotels/raweekanlaya-bangkok.jpg"
-  alt: "Wat Arun temple on the Chao Phraya River in Bangkok"
-  attribution: "Photo by Martijn Vonk on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/7KSiPWt82us"
-  sourceSite: "Unsplash"
-  photographer: "Martijn Vonk"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/raweekanlaya-bangkok-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of The Raweekanlaya Bangkok Wellness Cuisine Resort in Bangkok, Thailand"
+  srcSet:
+    large: "/images/hotels/responsive/raweekanlaya-bangkok-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/raweekanlaya-bangkok-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/raweekanlaya-bangkok/web/raweekanlaya-bangkok-01-hero-raweekanlaya-bangkok-01.webp"
     alt: "WAT BENCHAMABOPHIT ,BANGKOK in or near Bangkok, Thailand"
@@ -100,6 +96,19 @@ foodAngle: "Thai wellness cuisine, herbal treatments, traditional Bangkok street
 seoTitle: "The Raweekanlaya Bangkok Review: Affordable Wellness Five-Star Resort"
 seoDescription: "A luxury editorial guide to The Raweekanlaya Bangkok — a calm, wellness-focused five-star retreat at a price that surprises most travellers."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/raweekanlaya-bangkok-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of The Raweekanlaya Bangkok Wellness Cuisine Resort in Bangkok, Thailand"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/raweekanlaya-bangkok-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/raweekanlaya-bangkok-editorial-dusk-800.webp"
+  - src: "/images/hotels/raweekanlaya-bangkok-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of The Raweekanlaya Bangkok Wellness Cuisine Resort in Bangkok, Thailand"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/raweekanlaya-bangkok-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/raweekanlaya-bangkok-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

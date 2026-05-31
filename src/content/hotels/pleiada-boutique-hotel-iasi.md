@@ -18,15 +18,11 @@ valueScore: 81
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Pleiada%20Boutique%20Hotel%20Spa%20Iasi%20Romania"
 image:
-  src: "/images/hotels/pleiada-boutique-hotel-iasi.jpg"
-  alt: "National Theater building in Iasi Romania"
-  attribution: "Photo by Matei Pruteanu on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/BpEju_xH720"
-  sourceSite: "Unsplash"
-  photographer: "Matei Pruteanu"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/pleiada-boutique-hotel-iasi-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Pleiada Boutique Hotel & Spa in Iasi, Romania"
+  srcSet:
+    large: "/images/hotels/responsive/pleiada-boutique-hotel-iasi-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/pleiada-boutique-hotel-iasi-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/pleiada-boutique-hotel-iasi/web/pleiada-boutique-hotel-iasi-01-hero-pleiada-boutique-hotel-iasi-01.webp"
     alt: "Iasi, Palatul Culturii8 in or near Iasi, Romania"
@@ -100,6 +96,19 @@ foodAngle: "Romanian cuisine, Moldavian specialities, local wine from the Iași 
 seoTitle: "Pleiada Boutique Hotel Iași Review: Affordable Five-Star Spa in Romania"
 seoDescription: "A luxury editorial guide to Pleiada Boutique Hotel & Spa in Iași — a strong-value Romanian spa hotel in one of Eastern Europe's most underrated cities."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/pleiada-boutique-hotel-iasi-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Pleiada Boutique Hotel & Spa in Iasi, Romania"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/pleiada-boutique-hotel-iasi-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/pleiada-boutique-hotel-iasi-editorial-dusk-800.webp"
+  - src: "/images/hotels/pleiada-boutique-hotel-iasi-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Pleiada Boutique Hotel & Spa in Iasi, Romania"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/pleiada-boutique-hotel-iasi-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/pleiada-boutique-hotel-iasi-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

@@ -18,15 +18,11 @@ valueScore: 72
 verdict: "Good value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Real%20Marina%20Hotel%20Spa%20Olhao%20Portugal"
 image:
-  src: "/images/hotels/real-marina-olhao.jpg"
-  alt: "Ria Formosa waterfront near Olhao Portugal"
-  attribution: "Photo by Markus Kammermann on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/aJkt_wwuegU"
-  sourceSite: "Unsplash"
-  photographer: "Markus Kammermann"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/real-marina-hotel-spa-olhao-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Real Marina Hotel & Spa in Olhao, Portugal"
+  srcSet:
+    large: "/images/hotels/responsive/real-marina-hotel-spa-olhao-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/real-marina-hotel-spa-olhao-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/real-marina-olhao/web/real-marina-olhao-01-hero-real-marina-olhao-01.webp"
     alt: "Marina de Olhão by Juntas 3 in or near Olhao, Portugal"
@@ -100,6 +96,19 @@ foodAngle: "Algarve seafood, fresh fish, arroz de marisco and the Olhão market"
 seoTitle: "Real Marina Hotel & Spa Olhão Review: Affordable Five-Star in the Algarve"
 seoDescription: "A luxury editorial guide to Real Marina Hotel & Spa in Olhão — a spa hotel with Ria Formosa views and excellent seafood access in the less-touristy Algarve."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/real-marina-hotel-spa-olhao-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Real Marina Hotel & Spa in Olhao, Portugal"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/real-marina-hotel-spa-olhao-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/real-marina-hotel-spa-olhao-editorial-dusk-800.webp"
+  - src: "/images/hotels/real-marina-hotel-spa-olhao-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Real Marina Hotel & Spa in Olhao, Portugal"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/real-marina-hotel-spa-olhao-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/real-marina-hotel-spa-olhao-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting

@@ -18,15 +18,11 @@ valueScore: 76
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Boton%20Blue%20Hotel%20Spa%20Nha%20Trang%20Vietnam"
 image:
-  src: "/images/hotels/boton-blue-nha-trang.jpg"
-  alt: "Gentle ocean waves in Nha Trang Vietnam"
-  attribution: "Photo by Alexander Sinchenko on Unsplash."
-  sourcePageUrl: "https://unsplash.com/photos/Yh_BDgkiPCI"
-  sourceSite: "Unsplash"
-  photographer: "Alexander Sinchenko"
-  license: "Unsplash License"
-  licenseUrl: "https://unsplash.com/license"
-  todo: false
+  src: "/images/hotels/boton-blue-hotel-spa-nha-trang-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Boton Blue Hotel & Spa in Nha Trang, Vietnam"
+  srcSet:
+    large: "/images/hotels/responsive/boton-blue-hotel-spa-nha-trang-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/boton-blue-hotel-spa-nha-trang-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/boton-blue-nha-trang/web/boton-blue-nha-trang-01-hero-boton-blue-nha-trang-01.webp"
     alt: "Nha Trang Beach 2 in or near Nha Trang, Vietnam"
@@ -100,6 +96,19 @@ foodAngle: "Vietnamese seafood, bun cha ca, banh mi and the Nha Trang street foo
 seoTitle: "Boton Blue Hotel & Spa Nha Trang Review: Affordable Five-Star Coastal Hotel"
 seoDescription: "A luxury editorial guide to Boton Blue Hotel & Spa in Nha Trang — a well-reviewed coastal spa hotel at a price that makes Vietnam's beach scene accessible."
 draft: false
+generatedGallery:
+  - src: "/images/hotels/boton-blue-hotel-spa-nha-trang-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Boton Blue Hotel & Spa in Nha Trang, Vietnam"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/boton-blue-hotel-spa-nha-trang-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/boton-blue-hotel-spa-nha-trang-editorial-dusk-800.webp"
+  - src: "/images/hotels/boton-blue-hotel-spa-nha-trang-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Boton Blue Hotel & Spa in Nha Trang, Vietnam"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/boton-blue-hotel-spa-nha-trang-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/boton-blue-hotel-spa-nha-trang-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting
