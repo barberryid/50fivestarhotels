@@ -59,10 +59,9 @@ interface Props {
       sourceSite?: string;
     }>;
   };
-  relatedHotels?: Array<{slug: string; title: string; city: string; budgetTier: string}>;
 }
 
-const { hotel, relatedHotels = [] } = Astro.props;
+const { hotel } = Astro.props;
 const gallery = hotel.gallery?.filter(image => image.src) ?? [];
 const generatedGallery = hotel.generatedGallery?.filter(image => image.src) ?? [];
 const seasonality = hotelSeasonality[hotel.slug];
@@ -246,7 +245,7 @@ const creditLabel = (sourceSite?: string) => sourceSite ? `Image credit: ${sourc
       <!-- Sidebar -->
       <aside class="space-y-6">
         <!-- Quick facts -->
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-[#1D2433]/5 sticky top-24">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-[#1D2433]/5">
           <h2 class="font-serif text-lg font-bold text-[#1D2433] mb-4">Quick facts</h2>
           <dl class="space-y-4 text-sm">
             <div>
@@ -280,22 +279,6 @@ const creditLabel = (sourceSite?: string) => sourceSite ? `Image credit: ${sourc
           </dl>
         </div>
 
-        <!-- Related hotels -->
-        {relatedHotels.length > 0 && (
-          <div class="bg-white rounded-2xl p-6 shadow-sm border border-[#1D2433]/5">
-            <h2 class="font-serif text-lg font-bold text-[#1D2433] mb-4">Related hotels</h2>
-            <ul class="space-y-3">
-              {relatedHotels.map(r => (
-                <li>
-                  <a href={`/hotels/${r.slug}`} class="block no-underline group">
-                    <p class="text-sm font-medium text-[#1D2433] group-hover:text-[#B88A44] transition-colors leading-snug">{r.title}</p>
-                    <p class="text-xs text-[#6B7280] mt-0.5">{r.city} · {r.budgetTier}</p>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </aside>
     </div>
   </main>

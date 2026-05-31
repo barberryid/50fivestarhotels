@@ -10,24 +10,10 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry, all } = Astro.props;
+const { entry } = Astro.props;
 const { Content } = await render(entry);
-
-const related = all
-  .filter(h => h.data.slug !== entry.data.slug && (
-    h.data.budgetTier === entry.data.budgetTier ||
-    h.data.region === entry.data.region
-  ))
-  .sort((a, b) => b.data.valueScore - a.data.valueScore)
-  .slice(0, 4)
-  .map(h => ({
-    slug: h.data.slug,
-    title: h.data.title,
-    city: h.data.city,
-    budgetTier: h.data.budgetTier,
-  }));
 ---
 
-<HotelLayout hotel={entry.data} relatedHotels={related}>
+<HotelLayout hotel={entry.data}>
   <Content />
 </HotelLayout>
