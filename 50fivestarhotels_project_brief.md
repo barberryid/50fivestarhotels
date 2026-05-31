@@ -624,8 +624,13 @@ The project has been reviewed against the current Git working tree on 2026-05-31
 **Latest committed/pushed state:**
 
 - **Current branch:** `main`
-- **Latest pushed commit:** `30cad4d` - `Lighten image overlay and clean up hotel card photos`
+- **Latest pushed commit:** `330d077` - `Use realistic-daylight images on all hotel cards`
 - **Recent committed updates after the AI image rollout:**
+  - `330d077` - `HotelCard.astro` now prefers each hotel's brighter realistic-daylight render (falling back to editorial-dusk), so cards across the homepage, tier pages and destinations read lighter
+  - `6217f5b` - switched the homepage "Browse by feeling" and "Destination mood" tiles to the realistic-daylight image variant and lightened the hero overlay tint
+  - `d4efc93` - added a retouched palm-free version of the Steigenberger Luxor editorial-dusk image (central foreground palm removed) plus 1200/800 derivatives, and pointed the homepage hero at it (the hotel page keeps the original)
+  - `279ed1c` - simplified the favicon star mark
+  - `1ce3ac6` - updated the project brief for overlay softening and card cleanup
   - `30cad4d` - softened the shared `editorial-overlay` gradient so photos read brighter, and removed the dark overlay from hotel card images (moved the city/country label into the card body)
   - `fa3e3c9` - updated the project brief for the warm redesign and `whyCheap` rollout
   - `bd06059` - populated `whyCheap` for all 20 hotels and rebuilt the homepage hero as a single full-bleed image (Steigenberger Resort Achti Luxor editorial dusk view)
@@ -659,7 +664,7 @@ The full launch site has been built, committed and pushed to GitHub. Cloudflare 
 - **Latest live URL check:** both production URLs returned HTTP 200 on 2026-05-31
 - **Latest local build check:** `npm run build` completed successfully on 2026-05-31 after the visual redesign and `whyCheap` rollout
 - **Build output at latest build check:** 29 pages, zero errors
-- **Latest pushed commit:** `30cad4d` - `Lighten image overlay and clean up hotel card photos`
+- **Latest pushed commit:** `330d077` - `Use realistic-daylight images on all hotel cards`
 - **Latest local image expansion:** added AI image sets for Grand Hotel Yerevan, Hyatt Regency Tashkent, The Hermitage Jakarta, Sofitel Marrakech, The Majestic Hotel Kuala Lumpur, and Stamba Hotel on 2026-05-31
 - **Latest local editorial/data work:** Angkor Aurora seasonality wording plus workbook/document updates are present locally but uncommitted
 
@@ -668,9 +673,10 @@ The full launch site has been built, committed and pushed to GitHub. Cloudflare 
 The site was redesigned toward a warm, image-rich affordable-luxury editorial look (commits `cfb0e79` and `bd06059`, both live on `main`). Key changes:
 
 - **Palette and typography:** the functional palette was swept onto the warm palette documented under "Visual and brand direction" above; headings now use Fraunces, body uses Inter. New colour tokens (sand, terracotta, warm border, warning surface) live in `src/styles/global.css`. A one-off sweep script is kept at `scripts/warm-palette-sweep.mjs`.
-- **Homepage (`src/pages/index.astro`):** the hero is now a single full-bleed image (the first/editorial-dusk image from the Steigenberger Resort Achti Luxor hotel page) with centered overlaid copy, styled after the editorial inspiration site. New sections added: "Browse by feeling" (mood tiles) and "Destination mood" (cities with a one-line atmosphere).
+- **Homepage (`src/pages/index.astro`):** the hero is a single full-bleed image with centered overlaid copy, styled after the editorial inspiration site. The hero image is a **retouched, palm-free version** of the Steigenberger Resort Achti Luxor editorial-dusk render (`…-editorial-dusk-no-center-palm.webp`, with 1200/800 derivatives), referenced via a dedicated `heroImage` object — the Steigenberger hotel page itself still uses the original image. New sections added: "Browse by feeling" (mood tiles) and "Destination mood" (cities with a one-line atmosphere).
+- **Daytime imagery:** to keep the homepage feeling bright, the "Browse by feeling" and "Destination mood" tiles, and **all hotel cards** (`HotelCard.astro`), now prefer each hotel's brighter **realistic-daylight** AI render (from `generatedGallery`, `type: realistic-daylight`) instead of the darker editorial-dusk image, falling back to the dusk image where a daylight variant is missing. Index tiles use a `dayImg()` helper; cards compute `cardImage` the same way.
 - **Cards and table:** `HotelCard.astro` is more image-led and less dense (tier badge and score pill on the photo, single primary CTA). Card photos are left clean — the city/country label sits in the card body, not over the image. `HotelComparisonTable.astro` gained circular score pills, verdict badges, country, and more spacing.
-- **Image overlay:** the shared `.editorial-overlay` gradient in `global.css` is deliberately soft (transparent across the top, fading to ~60% at the bottom) so overlaid white text (hero copy, feeling/mood tile labels) stays legible without darkening the photos. It is applied to the hero and the feeling/mood tiles only — not to hotel cards.
+- **Image overlay:** the shared `.editorial-overlay` gradient in `global.css` is deliberately soft (transparent across the top, fading to ~60% at the bottom) so overlaid white text (hero copy, feeling/mood tile labels) stays legible without darkening the photos. It is applied to the hero and the feeling/mood tiles only — not to hotel cards. The full-bleed hero additionally uses a light flat tint (~28%) plus a soft bottom gradient.
 - **Trust components (`src/components/trust/`):** `WhyItsCheap`, `FiveStarReality`, `WatchOutFor`, `BestMonths` render as a "before you book" grid on every hotel page via `HotelLayout.astro`. FiveStarReality, WatchOutFor and BestMonths derive from existing data (fiveStarStatus, cautions, `hotelSeasonality`).
 - **`whyCheap` field:** an optional `whyCheap: string[]` frontmatter field was added to `content.config.ts` and **populated for all 20 hotels**, so the "Why it is cheap" panel renders site-wide. When adding a new hotel Markdown file, include a `whyCheap` value (2–3 concise, honest reasons grounded in the hotel's real value story) to keep this consistent.
 
