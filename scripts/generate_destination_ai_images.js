@@ -106,6 +106,96 @@ const jobs = [
     prompt:
       'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no fake signage, no surreal architecture. Create a realistic editorial travel photograph of the Palace of Culture in Iasi, Romania. Show the ornate neo-Gothic palace facade in elegant daylight or soft golden hour, with a clean public square foreground and refined European city-break mood. Balanced landscape composition, no text, no logos, no crowds dominating the image.',
   },
+  {
+    destination: 'Surabaya',
+    slug: 'surabaya',
+    subject: 'Surabaya Old Town / House of Sampoerna heritage atmosphere',
+    filename: 'surabaya-old-town-house-of-sampoerna-ai',
+    alt: 'Historic colonial architecture in Surabaya Old Town, Indonesia',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph of Surabaya Old Town, Indonesia, inspired by the House of Sampoerna heritage district. Show elegant Dutch-colonial architecture, whitewashed or pale historic facades, shaded arcades, tropical greenery, and warm late-afternoon light. The image should feel atmospheric, historic, refined and connected to Surabaya colonial heritage. No copied exact building layout, no crowds dominating the image.',
+  },
+  {
+    destination: 'Kuala Lumpur',
+    slug: 'kuala-lumpur',
+    subject: 'Merdeka Square',
+    filename: 'merdeka-square-kuala-lumpur-ai',
+    alt: 'Sultan Abdul Samad Building at Merdeka Square in Kuala Lumpur, Malaysia',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph of Merdeka Square in Kuala Lumpur, Malaysia, with the Sultan Abdul Samad Building as the main architectural subject. Show Moorish arches, copper-toned domes, the clock tower, a broad civic square, tropical city greenery, and warm golden-hour light. No distorted clock tower, no modern skyscrapers dominating the scene.',
+  },
+  {
+    destination: 'Bangkok',
+    slug: 'bangkok',
+    subject: 'Old Bangkok temple district',
+    filename: 'wat-pho-bangkok-ai',
+    alt: 'Ornate temple architecture in old Bangkok, Thailand',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph of old Bangkok, Thailand, inspired by Wat Pho and the Grand Palace temple district. Show ornate Thai temple roofs, golden chedi details, glazed ceramic patterns, warm cream and gold tones, and soft morning light. No crowds dominating the image, no fantasy temple shapes, no over-saturated colours.',
+  },
+  {
+    destination: 'Solo',
+    slug: 'solo',
+    subject: 'Javanese palace courtyard',
+    filename: 'mangkunegaran-palace-solo-ai',
+    alt: 'Traditional Javanese palace courtyard in Solo, Indonesia',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph of a royal Javanese palace courtyard in Solo, Indonesia, inspired by Mangkunegaran Palace or Keraton Surakarta. Show carved timber columns, open pendopo architecture, patterned floor tiles, refined Javanese symmetry, warm interior shade, and tropical courtyard greenery. No fantasy palace elements.',
+  },
+  {
+    destination: 'Hue',
+    slug: 'hue',
+    subject: 'Imperial City',
+    filename: 'hue-imperial-city-ai',
+    alt: 'Imperial City citadel gate in Hue, Vietnam',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph of the Imperial City in Hue, Vietnam. Show a historic citadel gate with red and gold imperial details, stone walls, tiled roofs, a calm moat or courtyard foreground, and soft humid daylight. No crowds dominating the scene, no fantasy palace architecture.',
+  },
+  {
+    destination: 'Nha Trang',
+    slug: 'nha-trang',
+    subject: 'Po Nagar Cham Towers',
+    filename: 'po-nagar-towers-nha-trang-ai',
+    alt: 'Po Nagar Cham Towers in Nha Trang, Vietnam',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph of Po Nagar Cham Towers in Nha Trang, Vietnam. Show warm red-brick Cham temple towers on a gentle rise, tropical greenery, a hint of the coastal city or blue sea in the background, and clean daylight or soft golden-hour light. No crowds dominating the image, no fantasy ruins.',
+  },
+  {
+    destination: 'Makati',
+    slug: 'makati',
+    subject: 'Intramuros',
+    filename: 'intramuros-manila-ai',
+    alt: 'Historic colonial street in Intramuros, Manila, Philippines',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph of Intramuros in Manila, Philippines. Show a colonial-era stone street, Spanish-era walls, warm lantern light or late-afternoon sun, tropical greenery, old wooden balconies, and a refined heritage-city atmosphere. No beach or resort cues.',
+  },
+  {
+    destination: 'Varna',
+    slug: 'varna',
+    subject: 'Sea Garden',
+    filename: 'varna-sea-garden-ai',
+    alt: 'Sea Garden and Black Sea promenade in Varna, Bulgaria',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph of Varna, Bulgaria, focused on the Sea Garden and Black Sea promenade. Show leafy park paths, elegant coastal landscaping, glimpses of the Black Sea, warm summer daylight, and a relaxed European seaside-city mood. No crowded beach scene, no Mediterranean cliches.',
+  },
+  {
+    destination: 'Tashkent',
+    slug: 'tashkent',
+    subject: 'Tashkent Metro',
+    filename: 'tashkent-metro-mosaics-ai',
+    alt: 'Decorative metro station interior in Tashkent, Uzbekistan',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph inspired by the Tashkent Metro in Uzbekistan. Show a grand underground station with elegant Soviet-modern architecture, mosaic or ceramic decorative panels, marble columns, warm symmetrical lighting, and a refined Silk Road capital atmosphere. No readable station signs, no crowds dominating the frame.',
+  },
+  {
+    destination: 'Yerevan',
+    slug: 'yerevan',
+    subject: 'Cascade Complex',
+    filename: 'yerevan-cascade-ararat-ai',
+    alt: 'Cascade Complex with Mount Ararat atmosphere in Yerevan, Armenia',
+    prompt:
+      'Create a realistic editorial travel photograph for an affordable-luxury travel website. Landscape composition, 16:10 aspect ratio, natural light, premium but believable colour grading, sharp but not overprocessed, no text, no logos, no watermark, no readable signage, no surreal architecture. Create a realistic editorial travel photograph of Yerevan, Armenia, focused on the Cascade Complex with Mount Ararat atmosphere in the distance. Show pale stone steps, outdoor sculpture or architectural terraces, warm Armenian tuff city tones, soft golden-hour light, and a hazy mountain backdrop. No fantasy mountain scale, no crowds dominating the image.',
+  },
 ];
 
 const negativePrompt =

@@ -221,3 +221,223 @@ Online pages were reviewed only as visual references. No downloaded or source ph
 
 ### Manual review notes
 - Reject if it becomes a fantasy castle or incorrect central-European landmark.
+
+## Surabaya - House of Sampoerna / Old Town
+
+### Reference URLs reviewed
+- https://www.indonesia.travel/gb/en/destinations/java/surabaya
+- https://www.houseofsampoerna.museum/
+- https://tourism.surabaya.go.id/
+
+### Observed visual features
+- Architecture / landscape: Dutch-colonial facades, shaded arcades, mature street trees, tropical old-town scale.
+- Colours: pale plaster, dark timber, warm roof tones, green planting, golden afternoon light.
+- Light: late-afternoon side light works well for heritage texture.
+- Composition: old street perspective with facades and trees framing the card.
+- Important details to preserve: Surabaya colonial heritage mood without readable branding.
+- Details to avoid: Singapore-like polish, Jakarta Kota Tua exactness, House of Sampoerna signage.
+
+### Recommended AI image direction
+- Main prompt direction: Surabaya Old Town colonial street inspired by the House of Sampoerna district.
+- Alternative prompt direction: shaded arcade and pale heritage facade with tropical greenery.
+
+### Manual review notes
+- The accepted image should feel Indonesian and tropical rather than generic European colonial.
+
+## Kuala Lumpur - Merdeka Square / Sultan Abdul Samad Building
+
+### Reference URLs reviewed
+- https://www.visitkl.gov.my/
+- https://www.malaysia.travel/
+- https://www.dbkl.gov.my/
+
+### Observed visual features
+- Architecture / landscape: Moorish arches, copper-toned domes, clock tower, broad civic lawn and square.
+- Colours: warm brick, cream trim, copper domes, green lawn, tropical city planting.
+- Light: golden hour emphasizes heritage detail without making the city look theatrical.
+- Composition: wide civic square foreground and the building as a long horizontal subject.
+- Important details to preserve: clock tower and Sultan Abdul Samad proportions.
+- Details to avoid: fantasy mosque forms, dominating modern skyscrapers, warped tower geometry.
+
+### Recommended AI image direction
+- Main prompt direction: Sultan Abdul Samad Building across Merdeka Square in warm golden-hour light.
+- Alternative prompt direction: lower civic-square view with palm and lawn foreground.
+
+### Manual review notes
+- Check that the clock tower remains believable and not over-elongated.
+
+## Bangkok - Wat Pho / Old Bangkok Temple District
+
+### Reference URLs reviewed
+- https://www.watpho.com/
+- https://www.royalgrandpalace.th/en/home
+- https://www.tourismthailand.org/Attraction/wat-pho
+
+### Observed visual features
+- Architecture / landscape: Thai rooflines, chedi forms, glazed ceramic decoration, cream and gold surfaces.
+- Colours: warm gold, cream, red-orange roof tile, green ceramic accents.
+- Light: morning light and clean shade keep the ornate detail legible.
+- Composition: layered temple roofs and chedi details with a calm courtyard.
+- Important details to preserve: old Bangkok temple district cues, not resort imagery.
+- Details to avoid: fantasy temple silhouettes, oversaturation, crowds dominating the foreground.
+
+### Recommended AI image direction
+- Main prompt direction: Wat Pho-inspired temple detail and courtyard in soft morning light.
+- Alternative prompt direction: Grand Palace district roofline and chedi layering without exact replication.
+
+### Manual review notes
+- Reject if it reads as a beach destination or fantasy Thai palace.
+
+## Solo - Mangkunegaran Palace / Keraton Courtyard
+
+### Reference URLs reviewed
+- https://puromangkunegaran.com/en/
+- https://surakarta.go.id/
+- https://www.indonesia.travel/gb/en/destinations/java/solo
+
+### Observed visual features
+- Architecture / landscape: pendopo pavilion, carved timber columns, patterned floor tiles, open shaded courtyards.
+- Colours: dark timber, cream plaster, muted green plants, warm interior shade.
+- Light: filtered daylight under roof eaves gives a refined palace mood.
+- Composition: columns and tiled floor create symmetry and depth.
+- Important details to preserve: Javanese royal-court feel and intimate scale.
+- Details to avoid: Balinese temple forms, Thai ornament, generic Southeast Asian fantasy.
+
+### Recommended AI image direction
+- Main prompt direction: Mangkunegaran-style palace courtyard with carved columns and tiled floor.
+- Alternative prompt direction: open pendopo framed by tropical greenery.
+
+### Manual review notes
+- Check columns and rooflines for AI distortions.
+
+## Hue - Imperial City / Citadel Gate
+
+### Reference URLs reviewed
+- https://whc.unesco.org/en/list/678/
+- https://hueworldheritage.org.vn/
+- https://vietnam.travel/places-to-go/central-vietnam/hue
+
+### Observed visual features
+- Architecture / landscape: citadel gates, red and gold details, tiled roofs, stone walls, moat or courtyard foreground.
+- Colours: imperial red, gold accents, aged stone, green water, humid sky.
+- Light: soft daylight suits Hue's humid atmosphere.
+- Composition: gate centered or slightly angled with water/courtyard foreground.
+- Important details to preserve: Vietnamese imperial architecture rather than generic East Asian palace forms.
+- Details to avoid: Chinese palace pastiche, Japanese temple cues, fantasy rooflines.
+
+### Recommended AI image direction
+- Main prompt direction: Hue Imperial City gate with moat or courtyard foreground.
+- Alternative prompt direction: citadel wall and tiled gate in soft humid light.
+
+### Manual review notes
+- Ensure the subject reads as Hue, not Beijing or Kyoto.
+
+## Nha Trang - Po Nagar Cham Towers
+
+### Reference URLs reviewed
+- https://vietnam.travel/places-to-go/central-vietnam/nha-trang
+- https://khanhhoa.gov.vn/
+- https://nhatrang-travel.com/
+
+### Observed visual features
+- Architecture / landscape: red-brick Cham towers, tropical planting, hilltop setting, coastal city or sea beyond.
+- Colours: warm brick, green foliage, blue coastal background, natural daylight.
+- Light: clean daylight or soft golden hour suits the brick texture.
+- Composition: towers on a rise with greenery and sea/city context.
+- Important details to preserve: Cham tower proportions and Nha Trang coastal context.
+- Details to avoid: Angkor, Bagan, Borobudur or Indian temple confusion.
+
+### Recommended AI image direction
+- Main prompt direction: Po Nagar Cham Towers with tropical greenery and coastal background.
+- Alternative prompt direction: closer red-brick tower view with sea haze behind.
+
+### Manual review notes
+- Reject if the towers become fantasy ruins.
+
+## Makati / Manila - Intramuros Colonial Street
+
+### Reference URLs reviewed
+- https://intramuros.gov.ph/
+- https://www.visitphilippines.org/
+- https://guidetothephilippines.ph/articles/what-to-experience/intramuros-manila-travel-guide
+
+### Observed visual features
+- Architecture / landscape: stone walls, colonial street scale, wooden balconies, tropical greenery.
+- Colours: weathered stone, dark timber, warm lanterns, green plants.
+- Light: late afternoon or early evening gives heritage warmth.
+- Composition: street perspective with wall texture and balconies framing depth.
+- Important details to preserve: tropical Manila context.
+- Details to avoid: purely European or Latin American old town, resort or beach cues.
+
+### Recommended AI image direction
+- Main prompt direction: Intramuros colonial street with stone walls, balconies and tropical greenery.
+- Alternative prompt direction: warmer evening lantern scene in a heritage lane.
+
+### Manual review notes
+- Use this for the Makati card because the hotel copy references Intramuros as a nearby cultural reason to visit.
+
+## Varna - Sea Garden / Black Sea Promenade
+
+### Reference URLs reviewed
+- https://visit.varna.bg/
+- https://bulgariatravel.org/
+- https://varnacitycard.com/sea-garden-varna/
+
+### Observed visual features
+- Architecture / landscape: leafy park paths, coastal landscaping, promenade railings, Black Sea glimpses.
+- Colours: deep green park canopy, blue sea, pale paving, warm summer daylight.
+- Light: clear summer light, softened by tree shade.
+- Composition: park path leading toward sea glimpses works well in a card crop.
+- Important details to preserve: Black Sea city mood rather than generic resort beach.
+- Details to avoid: Mediterranean resort cliches, crowded sand scene, tropical palms-only look.
+
+### Recommended AI image direction
+- Main prompt direction: Sea Garden path and Black Sea promenade in warm daylight.
+- Alternative prompt direction: shaded park foreground with sea and promenade beyond.
+
+### Manual review notes
+- The accepted image should feel like a city park by the sea, not a beach-club ad.
+
+## Tashkent - Metro Mosaics
+
+### Reference URLs reviewed
+- https://uzbekistan.travel/en/o/tashkent-metro/
+- https://uzbekistan.travel/en/i/tashkent/
+- https://tashkent.uz/
+
+### Observed visual features
+- Architecture / landscape: grand underground station halls, columns, marble, mosaics and ceramic panels.
+- Colours: warm stone, blue-green Uzbek decorative accents, gold lighting.
+- Light: symmetrical warm interior lighting with polished floor reflections.
+- Composition: centered station perspective with columns framing depth.
+- Important details to preserve: Uzbek design cues and Soviet-modern station scale.
+- Details to avoid: Moscow Metro copy, Cyrillic or readable signage, heavy crowds.
+
+### Recommended AI image direction
+- Main prompt direction: Tashkent Metro-inspired station with mosaics, marble columns and warm symmetry.
+- Alternative prompt direction: decorative panel and platform perspective with no signage.
+
+### Manual review notes
+- Check for fake readable station signs.
+
+## Yerevan - Cascade Complex / Mount Ararat Atmosphere
+
+### Reference URLs reviewed
+- https://visityerevan.am/
+- https://armenia.travel/
+- https://www.cmf.am/Cascade
+
+### Observed visual features
+- Architecture / landscape: Cascade terraces and steps, pale stone, sculpture garden, city view, Mount Ararat haze.
+- Colours: pale stone, pink-orange tuff city tones, soft blue-grey mountain distance.
+- Light: golden hour gives warmth without making Ararat too theatrical.
+- Composition: elevated terrace/city foreground and mountain atmosphere behind.
+- Important details to preserve: believable city-to-mountain scale.
+- Details to avoid: fantasy-large Ararat, fake monuments, postcard oversaturation.
+
+### Recommended AI image direction
+- Main prompt direction: Cascade Complex terraces with Yerevan city and hazy Mount Ararat atmosphere.
+- Alternative prompt direction: sculpture garden and steps with softer mountain background.
+
+### Manual review notes
+- Accepted image keeps Ararat visible but not unrealistically close.
