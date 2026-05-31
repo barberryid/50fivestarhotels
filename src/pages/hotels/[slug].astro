@@ -10,10 +10,10 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, all } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<HotelLayout hotel={entry.data}>
+<HotelLayout hotel={entry.data} allHotels={all}>
   <Content />
 </HotelLayout>

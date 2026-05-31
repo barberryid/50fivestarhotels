@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HotelCard from '../../components/HotelCard.astro';
+import RelatedGuides from '../../components/RelatedGuides.astro';
+import LastUpdated from '../../components/LastUpdated.astro';
+import PriceAccuracyNote from '../../components/PriceAccuracyNote.astro';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../../lib/seo';
+import { countryRegion, regionSlug } from '../../lib/regions';
+
+const slugify = (value: string) =>
+  value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+const destinationSlugs = [
+  'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo',
+];
+
+export async function getStaticPaths() {
+  const all = await getCollection('hotels', ({ data }) => !data.draft);
+  const slugifyPath = (value: string) =>
+    value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const allowedSlugs = [
+    'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo',
+  ];
+  const cities = new Map();
+  for (const h of all) {
+    const slug = slugifyPath(h.data.city);
+    if (allowedSlugs.includes(slug)) {
+      if (!cities.has(slug)) cities.set(slug, []);
+      cities.get(slug).push(h);
+    }
+  }
+  return Array.from(cities.entries()).map(([slug, hotels]) => ({
+    params: { slug },
+    props: { hotels: hotels.sort((a, b) => a.data.rank - b.data.rank), all },
+  }));
+}
+
+const { hotels, all } = Astro.props;
+const primary = hotels[0].data;
+const city = primary.city;
+const country = primary.country;
+const region = countryRegion(country);
+const tierPath = primary.budgetTier.includes('100') ? '/under-100/' : primary.budgetTier.includes('200') ? '/under-200/' : '/under-250/';
+const path = `/destinations/${slugify(city)}/`;
+const nearby = all
+  .map((h) => h.data)
+  .filter((h) => h.city !== city && (h.country === country || countryRegion(h.country) === region))
+  .slice(0, 4);
+const relatedItems = [
+  { title: primary.title, description: `Read the full hotel profile in ${city}.`, href: `/hotels/${primary.slug}/` },
+  { title: `${primary.budgetTier} hotels`, description: 'Compare the right price tier for this destination.', href: tierPath },
+  { title: 'Cheapest Cities for Five-Star Hotels', description: 'See how this city compares with other value destinations.', href: '/cheapest-cities-five-star-hotels/' },
+  { title: `Affordable five-star hotels in ${region}`, description: 'Browse the wider regional guide.', href: regionSlug(region) },
+  { title: 'How We Choose Hotels', description: 'Understand the value score and five-star reality checks.', href: '/methodology/' },
+  ...nearby.slice(0, 3).map((h) => ({ title: `Affordable luxury in ${h.city}`, description: `${h.country} - ${h.budgetTier}`, href: `/destinations/${slugify(h.city)}/` })),
+];
+const title = `Best Affordable Five-Star Hotels in ${city}`;
+const description = `A practical guide to affordable luxury hotels in ${city}, ${country}, including the best current five-star hotel pick, value timing, cautions, and nearby trip ideas.`;
+const jsonLd = [
+  breadcrumbJsonLd([{ name: 'Home', url: canonicalUrl('/') }, { name: 'Destinations', url: canonicalUrl('/destinations/') }, { name: city, url: canonicalUrl(path) }]),
+  itemListJsonLd(`Affordable luxury hotels in ${city}`, hotels),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={path} image={primary.image?.src} jsonLd={jsonLd}>
+  <main>
+    <section class="bg-[#F8F2E8] border-b border-[#1F2428]/6">
+      <div class="max-w-4xl mx-auto px-5 py-16">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">{country} destination guide</p>
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">Best Affordable Five-Star Hotels in {city}</h1>
+        <p class="text-[#6F685F] text-lg leading-relaxed">{city} is interesting for affordable luxury because the hotel value story is tied to the place itself: local costs, hotel supply, timing, and the kind of trip the destination rewards. The current site recommends {hotels.length === 1 ? 'one hotel' : `${hotels.length} hotels`} here, with honest cautions rather than blanket claims.</p>
+        <div class="mt-6 flex flex-col gap-3"><LastUpdated date="2026-05-31" /><PriceAccuracyNote /></div>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-5 py-14 grid lg:grid-cols-[minmax(0,1fr)_320px] gap-10">
+      <article class="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-[#1F2428] prose-p:text-[#1F2428]/75 prose-p:leading-relaxed prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
+        <h2>Best hotel currently recommended</h2>
+        <p>The strongest current pick is <a href={`/hotels/${primary.slug}/`}>{primary.title}</a>. It sits in the {primary.budgetTier.toLowerCase()} tier and is included because the value score, destination appeal, and five-star reality check are strong enough to justify a full profile.</p>
+
+        <h2>Why five-star hotels can be good value here</h2>
+        <p>In {city}, the value case comes from a combination of local pricing, hotel competition, and destination positioning. Travellers can often get more comfort for the money than in better-known luxury markets, especially when they avoid peak demand and compare the final rate carefully.</p>
+
+        <h2>When to book for lower prices</h2>
+        <p>Check shoulder periods, weekdays or weekends depending on the city’s business/leisure pattern, and dates outside major public holidays. Rates can move quickly, so the best approach is to compare several date combinations before treating any hotel as a bargain.</p>
+
+        <h2>What to watch out for</h2>
+        <p>The main risk is assuming that every five-star label means the same thing. Read the hotel’s five-star status, recent reviews, room category notes, and booking conditions. A locally rated five-star hotel can still be excellent value, but expectations should be calibrated.</p>
+
+        <h2>Nearby sights, food, and trip ideas</h2>
+        <p>{primary.bestNearbyAttraction} gives this hotel a stronger reason to exist than price alone. Food and local culture matter too: {primary.foodAngle}. The best affordable luxury trips combine the hotel with a clear destination idea.</p>
+
+        <h2>Related affordable luxury destinations</h2>
+        <p>{nearby.length > 0 ? `Travellers considering ${city} may also want to compare ${nearby.slice(0, 3).map((h) => h.city).join(', ')}.` : 'For wider planning, compare this destination with the regional and price-tier guides linked below.'}</p>
+      </article>
+
+      <aside class="space-y-4">
+        <div class="rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-5">
+          <h2 class="font-serif text-lg font-semibold text-[#1F2428] mb-3">Destination snapshot</h2>
+          <dl class="space-y-3 text-sm">
+            <div><dt class="text-[#6F685F]">Country</dt><dd class="font-medium text-[#1F2428]">{country}</dd></div>
+            <div><dt class="text-[#6F685F]">Region</dt><dd class="font-medium text-[#1F2428]">{region}</dd></div>
+            <div><dt class="text-[#6F685F]">Likely budget tier</dt><dd class="font-medium text-[#1F2428]">{primary.budgetTier}</dd></div>
+            <div><dt class="text-[#6F685F]">Best current hotel</dt><dd><a class="text-[#B88A44] no-underline hover:underline" href={`/hotels/${primary.slug}/`}>{primary.title}</a></dd></div>
+          </dl>
+        </div>
+      </aside>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-5 pb-16">
+      <h2 class="font-serif text-3xl font-semibold text-[#1F2428] mb-8">Hotels in {city}</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {hotels.map((h) => <HotelCard hotel={h.data} />)}
+      </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-5 pb-16">
+      <RelatedGuides items={relatedItems} />
+    </section>
+  </main>
+</BaseLayout>

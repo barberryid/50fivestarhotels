@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const all = await getCollection('hotels', ({ data }) => !data.draft);
+const pick = ['pleiada-boutique-hotel-iasi','real-marina-olhao','graffit-gallery-varna','malak-regency-sarajevo','stamba-hotel-tbilisi','grand-hotel-yerevan'];
+const hotels = pick.map((slug) => all.find((h) => h.data.slug === slug)).filter(Boolean);
+---
+
+<SeoLandingPage
+  title="Affordable Five-Star Hotels in Europe"
+  description="A curated guide to affordable five-star and near-five-star hotels in Europe, the Caucasus, and Europe-adjacent destinations where value is stronger."
+  path="/affordable-five-star-hotels-europe/"
+  h1="Affordable Five-Star Hotels in Europe"
+  kicker="Europe value guide"
+  intro={[
+    'Affordable five-star hotels in Europe are easiest to find away from the obvious luxury capitals. The strongest value tends to appear in Eastern Europe, the Balkans, Black Sea cities, smaller Portuguese destinations, and parts of the Caucasus.',
+    'This page includes Europe proper plus Caucasus destinations that many travellers consider on wider European itineraries. The wording is intentionally flexible rather than making rigid geopolitical claims.',
+  ]}
+  sections={[
+    { heading: 'Where European five-star value is most realistic', body: [
+      'Iași, Varna, Sarajevo, and Olhão can price very differently from Paris, Rome, London, or Amsterdam. Lower local costs and less international luxury pressure make boutique spa hotels, city hotels, and marina hotels more accessible.',
+      'Tbilisi and Yerevan sit in the Caucasus and work well for travellers building Europe-adjacent trips. They can offer design, history, food, and hotel atmosphere at rates that still surprise many visitors.',
+    ] },
+    { heading: 'Best current European and Europe-adjacent picks', body: [
+      'Pleiada Boutique Hotel & Spa is one of the cleanest value cases in the region because Iași is underrated and the hotel has a clear spa-boutique identity. Real Marina Hotel & Spa is useful for Algarve travellers who want water and seafood without the most obvious resort-town pricing.',
+      'Graffit Gallery Design Hotel and Malak Regency Hotel are more local five-star plays. Stamba Hotel is the design-led splurge, while Grand Hotel Yerevan offers a classic central hotel story in a city that remains relatively good value.',
+    ] },
+    { heading: 'What to watch out for', body: [
+      'European five-star labels vary by country and can be generous. A local five-star property may be clean, comfortable, and good value without feeling like international luxury. Recent room photos, breakfast reviews, parking details, and spa access terms matter.',
+      'Seasonality is also strong. Algarve and Black Sea hotels can rise in summer; city hotels can change around events and weekends.',
+    ] },
+  ]}
+  hotels={hotels}
+  tableTitle="Affordable five-star hotels in Europe at a glance"
+  itemListName="Affordable five-star hotels in Europe"
+  related={[
+    { title: 'Affordable Luxury Hotels', href: '/affordable-luxury-hotels/' },
+    { title: 'Affordable Five-Star Hotels in Asia', href: '/affordable-five-star-hotels-asia/' },
+    { title: 'Cheapest Cities for Five-Star Hotels', href: '/cheapest-cities-five-star-hotels/' },
+    { title: 'Affordable Five-Star Hotels in Europe Region Guide', href: '/regions/europe/' },
+  ]}
+/>

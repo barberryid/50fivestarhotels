@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HotelCard from './HotelCard.astro';
+import HotelComparisonTable from './HotelComparisonTable.astro';
+import RelatedGuides from './RelatedGuides.astro';
+import LastUpdated from './LastUpdated.astro';
+import PriceAccuracyNote from './PriceAccuracyNote.astro';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../lib/seo';
+import { countryRegion } from '../lib/regions';
+
+interface Props {
+  regionName: string;
+  title: string;
+  description: string;
+  path: string;
+  includeRegions: string[];
+  intro: string;
+  watchOuts: string[];
+}
+
+const { regionName, title, description, path, includeRegions, intro, watchOuts } = Astro.props;
+const all = await getCollection('hotels', ({ data }) => !data.draft);
+const hotels = all
+  .filter((h) => includeRegions.includes(countryRegion(h.data.country)))
+  .sort((a, b) => a.data.rank - b.data.rank);
+const tableHotels = hotels.map((h) => ({
+  slug: h.data.slug,
+  rank: h.data.rank,
+  title: h.data.title,
+  city: h.data.city,
+  country: h.data.country,
+  budgetTier: h.data.budgetTier,
+  valueScore: h.data.valueScore,
+  verdict: h.data.verdict,
+  fiveStarStatus: h.data.fiveStarStatus,
+  bestFor: h.data.bestFor,
+  cautions: h.data.cautions,
+}));
+const jsonLd = [
+  breadcrumbJsonLd([{ name: 'Home', url: canonicalUrl('/') }, { name: regionName, url: canonicalUrl(path) }]),
+  itemListJsonLd(`Affordable five-star hotels in ${regionName}`, hotels),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={path} image={hotels[0]?.data.image?.src} jsonLd={jsonLd}>
+  <main>
+    <section class="bg-[#F8F2E8] border-b border-[#1F2428]/6">
+      <div class="max-w-4xl mx-auto px-5 py-16">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Regional value guide</p>
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">{title}</h1>
+        <p class="text-[#6F685F] text-lg leading-relaxed">{intro}</p>
+        <div class="mt-6 flex flex-col gap-3"><LastUpdated date="2026-05-31" /><PriceAccuracyNote /></div>
+      </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-5 py-14 prose prose-lg prose-headings:font-serif prose-headings:text-[#1F2428] prose-p:text-[#1F2428]/75 prose-p:leading-relaxed">
+      <h2>Why this region can offer strong five-star value</h2>
+      <p>Affordable luxury works best when hotel quality, destination appeal, and local pricing move in the traveller’s favour. In {regionName}, the strongest hotels tend to sit in cities where international-standard comfort or distinctive local character costs less than it would in more saturated luxury markets.</p>
+      <p>The right approach is to compare the hotel against its local market, then ask whether the place itself justifies the trip. A good rate is useful only when the destination, location, and hotel reality all hold together.</p>
+      <h2>Watch-outs</h2>
+      {watchOuts.map((item) => <p>{item}</p>)}
+    </section>
+
+    <section class="max-w-6xl mx-auto px-5 pb-16">
+      <h2 class="font-serif text-3xl font-semibold text-[#1F2428] mb-8">Hotels in this region</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {hotels.map((h) => <HotelCard hotel={h.data} />)}
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-5 pb-16">
+      <HotelComparisonTable hotels={tableHotels} title={`${regionName} hotels at a glance`} />
+    </section>
+
+    <section class="max-w-4xl mx-auto px-5 pb-16">
+      <RelatedGuides items={[
+        { title: 'Affordable Luxury Hotels', href: '/affordable-luxury-hotels/' },
+        { title: 'Cheap Five-Star Hotels', href: '/cheap-five-star-hotels/' },
+        { title: 'Cheapest Cities for Five-Star Hotels', href: '/cheapest-cities-five-star-hotels/' },
+        { title: 'How We Choose Hotels', href: '/methodology/' },
+      ]} />
+    </section>
+  </main>
+</BaseLayout>

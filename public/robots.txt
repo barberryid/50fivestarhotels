@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://50fivestarhotels.com/sitemap-index.xml

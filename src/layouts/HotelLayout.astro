@@ -6,11 +6,16 @@ import ValueScore from '../components/ValueScore.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import SeasonalityCards from '../components/SeasonalityCards.astro';
 import PhotoCarousel from '../components/PhotoCarousel.astro';
+import RelatedGuides from '../components/RelatedGuides.astro';
+import LastUpdated from '../components/LastUpdated.astro';
+import PriceAccuracyNote from '../components/PriceAccuracyNote.astro';
 import FiveStarReality from '../components/trust/FiveStarReality.astro';
 import WatchOutFor from '../components/trust/WatchOutFor.astro';
 import WhyItsCheap from '../components/trust/WhyItsCheap.astro';
 import BestMonths from '../components/trust/BestMonths.astro';
 import { hotelSeasonality } from '../data/hotelSeasonality';
+import { absoluteUrl, breadcrumbJsonLd, canonicalUrl, imageUrl, publisherJsonLd } from '../lib/seo';
+import { countryRegion, regionSlug } from '../lib/regions';
 
 interface Props {
   hotel: {
@@ -34,6 +39,9 @@ interface Props {
     foodAngle: string;
     seoTitle: string;
     seoDescription: string;
+    focusKeyword?: string;
+    secondaryKeywords?: string[];
+    lastUpdated?: string;
     image?: {
       src: string;
       alt: string;
@@ -64,9 +72,10 @@ interface Props {
       sourceSite?: string;
     }>;
   };
+  allHotels?: any[];
 }
 
-const { hotel } = Astro.props;
+const { hotel, allHotels = [] } = Astro.props;
 const gallery = hotel.gallery?.filter(image => image.src) ?? [];
 const generatedGallery = hotel.generatedGallery?.filter(image => image.src) ?? [];
 const seasonality = hotelSeasonality[hotel.slug];
@@ -75,9 +84,69 @@ const creditLabel = (sourceSite?: string) => sourceSite ? `Image credit: ${sourc
 // Derive best-month signals from seasonality data for the trust panel
 const bestWeatherMonths = seasonality?.weather.months.filter(m => m.label === 'Best').map(m => m.month) ?? [];
 const cheapestMonths = seasonality?.price.months.filter(m => m.label === 'Cheapest').map(m => m.month) ?? [];
+const pageUrl = canonicalUrl(`/hotels/${hotel.slug}/`);
+const hotelDescription = hotel.seoDescription;
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: 'Home', url: absoluteUrl('/') },
+  { name: 'Hotels', url: absoluteUrl('/destinations/') },
+  { name: hotel.title, url: pageUrl },
+]);
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${hotel.title}: affordable five-star hotel in ${hotel.city}`,
+  description: hotelDescription,
+  image: imageUrl(hotel.image?.src),
+  author: {
+    '@type': 'Organization',
+    name: '50 Five-Star Hotels',
+  },
+  publisher: publisherJsonLd(),
+  mainEntityOfPage: pageUrl,
+  dateModified: hotel.lastUpdated,
+};
+const hotelJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Hotel',
+  name: hotel.title,
+  url: pageUrl,
+  image: imageUrl(hotel.image?.src),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: hotel.city,
+    addressCountry: hotel.country,
+  },
+  starRating: hotel.fiveStarStatus?.toLowerCase().includes('five-star')
+    ? {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      }
+    : undefined,
+  description: hotelDescription,
+};
+const citySlug = hotel.city.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const tierPath = hotel.budgetTier.includes('100') ? '/under-100/' : hotel.budgetTier.includes('200') ? '/under-200/' : '/under-250/';
+const region = countryRegion(hotel.country);
+const relatedHotels = allHotels
+  .map((entry) => entry.data ?? entry)
+  .filter((entry) => entry.slug !== hotel.slug && (entry.city === hotel.city || entry.country === hotel.country || entry.budgetTier === hotel.budgetTier))
+  .slice(0, 3);
+const relatedGuides = [
+  { title: `${hotel.budgetTier} hotels`, description: 'Compare hotels in the same price tier.', href: tierPath },
+  { title: `Affordable luxury in ${hotel.city}`, description: `Read the destination guide for ${hotel.city}.`, href: `/destinations/${citySlug}/` },
+  { title: 'Cheapest cities for five-star hotels', description: 'See where luxury pricing is most often mispriced.', href: '/cheapest-cities-five-star-hotels/' },
+  { title: 'How we choose hotels', description: 'The scoring method, five-star reality checks, and booking cautions.', href: '/methodology/' },
+  { title: `Affordable five-star hotels in ${region}`, description: 'Browse hotels in the same broad region.', href: regionSlug(region) },
+  ...relatedHotels.map((entry) => ({
+    title: entry.title,
+    description: `${entry.city}, ${entry.country} - ${entry.budgetTier}`,
+    href: `/hotels/${entry.slug}/`,
+  })),
+];
 ---
 
-<BaseLayout title={hotel.seoTitle} description={hotel.seoDescription}>
+<BaseLayout title={hotel.seoTitle} description={hotel.seoDescription} canonical={`/hotels/${hotel.slug}/`} image={hotel.image?.src} type="article" jsonLd={[breadcrumbLd, articleJsonLd, hotelJsonLd]}>
   <main class="max-w-6xl mx-auto px-5 py-10">
     <!-- Breadcrumbs -->
     <div class="mb-8">
@@ -106,7 +175,10 @@ const cheapestMonths = seasonality?.price.months.filter(m => m.label === 'Cheape
                   alt={hotel.image.alt}
                   class="h-full w-full object-cover"
                   loading="eager"
+                  fetchpriority="high"
                   decoding="async"
+                  width="1200"
+                  height="600"
                 />
               </picture>
             </div>
@@ -131,6 +203,12 @@ const cheapestMonths = seasonality?.price.months.filter(m => m.label === 'Cheape
           <h1 class="font-serif text-3xl md:text-4xl font-bold text-[#1F2428] leading-tight">{hotel.title}</h1>
           <p class="text-[#B88A44] font-semibold mt-2">{hotel.city}, {hotel.country}</p>
           <p class="text-[#6F685F] text-sm mt-1">{hotel.typicalPriceRange}</p>
+          <p class="text-[#1F2428]/75 text-base leading-relaxed mt-4 max-w-3xl">
+            A practical guide to this affordable five-star hotel in {hotel.city}, {hotel.country} - a five-star hotel without five-star prices in the {hotel.budgetTier.toLowerCase()} tier when the dates line up.
+          </p>
+          <div class="mt-4">
+            <LastUpdated date={hotel.lastUpdated ?? '2026-05-31'} />
+          </div>
 
           <div class="mt-6 flex flex-wrap items-center gap-6">
             <ValueScore score={hotel.valueScore} verdict={hotel.verdict} size="lg" />
@@ -143,12 +221,26 @@ const cheapestMonths = seasonality?.price.months.filter(m => m.label === 'Cheape
               >
                 Check current rates on Booking.com
               </a>
-              <p class="text-[10px] text-[#6F685F] leading-relaxed">
-                Prices change constantly. Check the final rate, taxes, room type and cancellation policy before booking.
-              </p>
+              <PriceAccuracyNote />
             </div>
           </div>
         </header>
+
+        <nav aria-label="On this page" class="mb-8 rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-4">
+          <p class="mb-3 text-xs font-bold uppercase tracking-widest text-[#B88A44]">On this page</p>
+          <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            {[
+              ['Why it is interesting', '#why-it-is-interesting'],
+              ['Why it is good value', '#why-it-is-good-value'],
+              ['Five-star reality', '#five-star-reality'],
+              ['Best months', '#best-months'],
+              ['Location and nearby sights', '#location-and-nearby-sights'],
+              ['Food and things to do nearby', '#food-and-things-to-do-nearby'],
+              ['Watch out for', '#watch-out-for'],
+              ['Verdict', '#verdict'],
+            ].map(([label, href]) => <a href={href} class="text-[#6F685F] no-underline hover:text-[#B88A44]">{label}</a>)}
+          </div>
+        </nav>
 
         {seasonality && <SeasonalityCards seasonality={seasonality} />}
 
@@ -197,6 +289,8 @@ const cheapestMonths = seasonality?.price.months.filter(m => m.label === 'Cheape
                       class="h-full w-full object-cover"
                       loading={index === 0 ? 'eager' : 'lazy'}
                       decoding="async"
+                      width="800"
+                      height="600"
                     />
                   </div>
                   <figcaption class="mt-2 text-xs leading-relaxed text-[#6F685F]">
@@ -241,12 +335,13 @@ const cheapestMonths = seasonality?.price.months.filter(m => m.label === 'Cheape
           >
             Check current rates on Booking.com →
           </a>
-          <p class="text-white/30 text-[11px] mt-3">Standard search link. Prices change constantly. Always verify the final price, taxes and conditions.</p>
+          <p class="text-white/60 text-[11px] mt-3">Prices vary by date, taxes, room type, and cancellation policy. Always check the final rate before booking.</p>
         </div>
 
         <div class="mt-8">
           <AffiliateDisclosure compact={true} />
         </div>
+        <RelatedGuides items={relatedGuides} />
       </article>
 
       <!-- Sidebar -->

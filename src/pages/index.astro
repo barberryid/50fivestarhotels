@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HotelCard from '../components/HotelCard.astro';
 import PriceTierCard from '../components/PriceTierCard.astro';
 import HotelComparisonTable from '../components/HotelComparisonTable.astro';
+import { itemListJsonLd, publisherJsonLd, websiteJsonLd } from '../lib/seo';
 
 const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
 allHotels.sort((a, b) => a.data.rank - b.data.rank);
@@ -66,11 +67,15 @@ const dayImg = (h) => {
   const day = h?.generatedGallery?.find((g) => g.type === 'realistic-daylight');
   return day?.srcSet?.large ?? day?.src ?? heroImg(h);
 };
+const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best affordable five-star hotels worldwide', allHotels)];
 ---
 
 <BaseLayout
-  title="50 Five-Star Hotels | Five-Star Hotels Without Five-Star Prices"
-  description="A warm editorial guide to affordable five-star and near-five-star hotels around the world, from heritage hotels in Java to spa stays, city hotels and smart splurges."
+  title="50 Five-Star Hotels Without Five-Star Prices"
+  description="Discover affordable five-star and near-five-star hotels around the world, from under-€100 heritage stays to smart luxury splurges under €250."
+  canonical="/"
+  image={heroImage.src}
+  jsonLd={jsonLd}
 >
   <main>
     <!-- Hero -->

@@ -1,0 +1,14 @@
+---
+interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+const formatted = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(new Date(`${date}T00:00:00Z`));
+---
+
+<p class="text-xs font-medium uppercase tracking-wider text-[#6F685F]">Last updated: {formatted}</p>

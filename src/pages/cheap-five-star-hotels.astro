@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const all = await getCollection('hotels', ({ data }) => !data.draft);
+const priority = [
+  'hotel-majapahit-surabaya',
+  'phoenix-hotel-yogyakarta',
+  'royal-surakarta-heritage',
+  'angkor-aurora-siem-reap',
+  'silk-path-grand-hue',
+  'boton-blue-nha-trang',
+];
+const hotels = priority.map((slug) => all.find((h) => h.data.slug === slug)).filter(Boolean);
+---
+
+<SeoLandingPage
+  title="Cheap Five-Star Hotels That Are Actually Worth Considering"
+  description="A practical guide to cheap five-star and near-five-star hotels where the low price still comes with comfort, character, and a real reason to visit."
+  path="/cheap-five-star-hotels/"
+  h1="Cheap Five-Star Hotels That Are Actually Worth Considering"
+  kicker="Cheap five-star hotels"
+  intro={[
+    'Cheap five-star hotels do exist, but the phrase needs careful handling. A five-star label can mean different things depending on the country, the booking platform, the local classification system, and the age of the property.',
+    'The point of this guide is not to chase the lowest possible nightly rate. It is to identify hotels where a low price still comes with comfort, atmosphere, useful location, and a destination worth visiting.',
+  ]}
+  sections={[
+    {
+      heading: 'What cheap five-star really means',
+      body: [
+        'On this site, cheap five-star usually means a hotel that can often appear under €100, or close to it, outside peak dates. Some are local or booking-site five-star properties rather than universally polished international luxury hotels. That distinction matters, because the star label is only one part of the value story.',
+        'A good cheap five-star hotel should still feel like an upgrade from ordinary accommodation. It might offer heritage architecture, a proper pool, a better breakfast, larger rooms, an interesting neighbourhood, or a city that makes the whole trip richer.',
+      ],
+    },
+    {
+      heading: 'Best cheap five-star hotels in the current list',
+      body: [
+        'The strongest examples right now are in Indonesia, Cambodia, and Vietnam. Hotel Majapahit Surabaya and The Phoenix Hotel Yogyakarta are especially compelling because they combine heritage character with rates that can look almost implausible from a European or North American perspective.',
+        'The Royal Surakarta Heritage, Angkor Aurora, Silk Path Grand Hue, and Boton Blue Hotel & Spa are also worth checking when dates are flexible. Their value depends heavily on season, room type, and whether the local five-star label matches your expectations.',
+      ],
+    },
+    {
+      heading: 'Best destinations for cheap five-star hotels',
+      body: [
+        'Surabaya, Yogyakarta, Solo, Siem Reap, Hue, and Nha Trang are strong because the destination itself is affordable. Lower operating costs, competitive hotel supply, and a local market that does not price luxury like London, Paris, or Singapore can make the same comfort level feel dramatically cheaper.',
+        'The best cheap five-star destinations are rarely the obvious trophy cities. They are often second cities, heritage cities, temple gateways, or coastal cities with enough hotel supply to keep rates honest.',
+      ],
+    },
+    {
+      heading: 'Why some five-star hotels are so affordable',
+      body: [
+        'A low rate is not always a warning sign. Sometimes it reflects currency, labour costs, seasonality, weaker business demand, or a destination that has not been fully repriced by international tourism. Business hotels can be cheaper at weekends, while resort hotels can fall sharply outside local holiday periods.',
+        'The caution is that some hotels are cheap because the product is tired, the location is inconvenient, or the five-star classification is generous. That is why every hotel profile includes a five-star reality check and booking cautions.',
+      ],
+    },
+    {
+      heading: 'What to watch out for before booking',
+      body: [
+        'Always compare the room category, breakfast, taxes, service charges, cancellation terms, and recent reviews. A headline rate can look excellent until the final booking page adds taxes or places you in the least attractive room type.',
+        'Photos also need context. A hotel can have one beautiful lobby and still have uneven rooms. Look for recent guest photos, renovation notes, and comments about maintenance, air conditioning, noise, and location.',
+      ],
+    },
+    {
+      heading: 'Best time to find low rates',
+      body: [
+        'Cheap five-star rates are most realistic outside public holidays, school breaks, major events, and peak weather windows. Shoulder seasons are often the sweet spot because the destination is still enjoyable but demand is softer.',
+        'For the current collection, check Indonesia outside major domestic holidays, Siem Reap outside the highest temple-tourism months, and Vietnam beach or heritage cities away from local holiday peaks.',
+      ],
+    },
+    {
+      heading: 'Related price guides',
+      body: [
+        'Use the under-€100 page for the most aggressive value cases, under-€200 for more reliable affordable luxury, and under-€250 for smart splurges where design, location, or brand strength justify paying a little more.',
+      ],
+    },
+  ]}
+  hotels={hotels}
+  tableTitle="Cheap five-star hotels at a glance"
+  itemListName="Cheap five-star hotels worth considering"
+  related={[
+    { title: 'Best Five-Star Hotels Under €100 Worldwide', href: '/under-100/', description: 'The strongest budget luxury hook on the site.' },
+    { title: 'Best Five-Star Hotels Under €200 Worldwide', href: '/under-200/', description: 'More reliable comfort while staying value-focused.' },
+    { title: 'Affordable Luxury Hotels', href: '/affordable-luxury-hotels/', description: 'A broader guide for travellers who want value without bargain-bin framing.' },
+    { title: 'Cheapest Cities for Five-Star Hotels', href: '/cheapest-cities-five-star-hotels/', description: 'Where luxury often prices lower by destination.' },
+  ]}
+/>

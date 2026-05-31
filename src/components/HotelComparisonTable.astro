@@ -10,6 +10,9 @@ interface Hotel {
   budgetTier: string;
   valueScore: number;
   verdict: string;
+  fiveStarStatus?: string;
+  bestFor?: string[];
+  cautions?: string[];
 }
 
 interface Props {
@@ -40,6 +43,9 @@ const verdictClass = (v: string) =>
           <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider hidden lg:table-cell">Tier</th>
           <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider text-center">Score</th>
           <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">Verdict</th>
+          <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider hidden xl:table-cell">Five-star reality</th>
+          <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider hidden xl:table-cell">Best for</th>
+          <th class="py-4 px-4 font-semibold text-xs uppercase tracking-wider hidden xl:table-cell">Main caution</th>
         </tr>
       </thead>
       <tbody>
@@ -67,6 +73,9 @@ const verdictClass = (v: string) =>
                 {h.verdict}
               </span>
             </td>
+            <td class="py-4 px-4 text-[#6F685F] hidden xl:table-cell align-middle">{h.fiveStarStatus ?? 'See profile'}</td>
+            <td class="py-4 px-4 text-[#6F685F] hidden xl:table-cell align-middle">{h.bestFor?.slice(0, 2).join(', ') ?? 'Value travellers'}</td>
+            <td class="py-4 px-4 text-[#6F685F] hidden xl:table-cell align-middle">{h.cautions?.[0] ?? 'Rates vary by date'}</td>
           </tr>
         ))}
       </tbody>

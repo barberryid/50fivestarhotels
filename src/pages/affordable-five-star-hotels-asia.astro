@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const all = await getCollection('hotels', ({ data }) => !data.draft);
+const pick = ['hotel-majapahit-surabaya','phoenix-hotel-yogyakarta','royal-surakarta-heritage','raweekanlaya-bangkok','angkor-aurora-siem-reap','silk-path-grand-hue','boton-blue-nha-trang','hermitage-jakarta','hyatt-regency-tashkent','im-hotel-makati','majestic-hotel-kuala-lumpur'];
+const hotels = pick.map((slug) => all.find((h) => h.data.slug === slug)).filter(Boolean);
+---
+
+<SeoLandingPage
+  title="Affordable Five-Star Hotels in Asia"
+  description="A guide to affordable five-star and near-five-star hotels in Asia, from Java heritage stays to Bangkok wellness, Vietnam value, and Central Asian business luxury."
+  path="/affordable-five-star-hotels-asia/"
+  h1="Affordable Five-Star Hotels in Asia"
+  kicker="Asia value guide"
+  intro={[
+    'Asia is currently the strongest region for affordable five-star hotels in this collection. The best examples combine lower local costs with cities that are genuinely rewarding to visit.',
+    'The range is broad: Java heritage hotels, Bangkok wellness calm, Vietnam coastal and imperial-city value, Kuala Lumpur heritage glamour, Jakarta art-deco atmosphere, and Tashkent international business comfort.',
+  ]}
+  sections={[
+    { heading: 'Why Asia is strong for affordable luxury', body: [
+      'In many Asian cities, good service, large rooms, and serious hotel facilities can cost far less than comparable stays in Western Europe or North America. That does not mean every five-star label is equal, but it does create real opportunities for travellers who choose carefully.',
+      'The best value comes where the destination is not over-reliant on international luxury demand: Surabaya, Yogyakarta, Solo, Hue, Siem Reap, Nha Trang, and Tashkent all show different versions of this pricing advantage.',
+    ] },
+    { heading: 'Best heritage-value hotels in Asia', body: [
+      'Hotel Majapahit Surabaya, The Phoenix Hotel Yogyakarta, The Royal Surakarta Heritage, and The Majestic Hotel Kuala Lumpur are the natural starting points for travellers who want atmosphere as much as facilities.',
+      'These hotels are not interchangeable. Some are more polished, some are more historic, and some are more locally classified than internationally luxurious. Their shared appeal is that they make a trip feel more special than the price suggests.',
+    ] },
+    { heading: 'Best city and resort-style value', body: [
+      'The Raweekanlaya Bangkok is a calm wellness-focused stay in a city where hotel choice can feel overwhelming. Silk Path Grand Hue and Boton Blue Hotel & Spa show Vietnam’s ability to deliver comfort at modest rates, while Angkor Aurora keeps Siem Reap accessible for temple-focused trips.',
+      'The Hermitage Jakarta, Hyatt Regency Tashkent, and I’M Hotel Makati are more urban value plays. They suit travellers who want a comfortable base in a major city rather than a resort fantasy.',
+    ] },
+    { heading: 'Watch-outs before booking in Asia', body: [
+      'Check taxes, breakfast, cancellation terms, and whether the quoted room is the one shown in the most attractive photos. In tropical cities, recent comments on air conditioning, humidity, pool maintenance, and noise are also worth reading.',
+      'Peak holiday calendars matter. Domestic travel periods can move prices more than international visitors expect.',
+    ] },
+  ]}
+  hotels={hotels}
+  tableTitle="Affordable five-star hotels in Asia at a glance"
+  itemListName="Affordable five-star hotels in Asia"
+  related={[
+    { title: 'Cheap Five-Star Hotels', href: '/cheap-five-star-hotels/' },
+    { title: 'Best Five-Star Hotels Under €100 Worldwide', href: '/under-100/' },
+    { title: 'Affordable Five-Star Hotels in Europe', href: '/affordable-five-star-hotels-europe/' },
+    { title: 'Affordable Five-Star Hotels in Asia Region Guide', href: '/regions/asia/' },
+  ]}
+/>

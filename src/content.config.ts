@@ -73,6 +73,9 @@ const hotels = defineCollection({
     foodAngle: z.string(),
     seoTitle: z.string(),
     seoDescription: z.string(),
+    focusKeyword: z.string().optional(),
+    secondaryKeywords: z.array(z.string()).optional(),
+    lastUpdated: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });

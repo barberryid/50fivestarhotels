@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const all = await getCollection('hotels', ({ data }) => !data.draft);
+const pick = ['majestic-hotel-kuala-lumpur','raweekanlaya-bangkok','stamba-hotel-tbilisi','sofitel-marrakech','steigenberger-resort-achti-luxor','pleiada-boutique-hotel-iasi','hotel-majapahit-surabaya','hermitage-jakarta','hyatt-regency-tashkent'];
+const hotels = pick.map((slug) => all.find((h) => h.data.slug === slug)).filter(Boolean);
+---
+
+<SeoLandingPage
+  title="Affordable Luxury Hotels: Where Five-Star Comfort Costs Less"
+  description="Discover affordable luxury hotels where comfort, atmosphere, and destination value matter more than chasing the cheapest possible room."
+  path="/affordable-luxury-hotels/"
+  h1="Affordable Luxury Hotels: Where Five-Star Comfort Costs Less"
+  kicker="Affordable luxury hotels"
+  intro={[
+    'Affordable luxury is a more useful phrase than cheap luxury. It allows room for comfort, atmosphere, design, heritage, and location while still asking whether the price makes sense.',
+    'The hotels here are for travellers who want a stay to feel special, but who do not want generic luxury-hotel marketing or trophy-city pricing.',
+  ]}
+  sections={[
+    { heading: 'What affordable luxury means', body: [
+      'Affordable luxury is not about pretending a €90 room is the same as a palace hotel in Paris. It means the gap between what you pay and what the stay feels like is unusually favourable.',
+      'The best examples have one or two memorable strengths: a heritage building, a garden setting, a real spa, a strong food neighbourhood, a dramatic destination, or a brand standard that is normally priced much higher elsewhere.',
+    ] },
+    { heading: 'Best affordable luxury hotels in Asia', body: [
+      'Asia produces some of the site’s strongest value stories because hospitality standards can be high while local operating costs remain comparatively low. Kuala Lumpur, Bangkok, Surabaya, Yogyakarta, Hue, Nha Trang, Jakarta, and Siem Reap all show different versions of this pattern.',
+      'The Majestic Hotel Kuala Lumpur is the classic heritage-and-brand example. Hotel Majapahit and The Phoenix Hotel Yogyakarta lean more heavily into history and place. The Raweekanlaya Bangkok is interesting because it feels calmer and more resort-like than its urban location suggests.',
+    ] },
+    { heading: 'Best affordable luxury hotels in Europe', body: [
+      'Europe is harder for cheap five-star hotels, but there are pockets of value in Eastern Europe, the Balkans, the Black Sea, and less obvious Portuguese destinations. Iași, Varna, Sarajevo, and Olhão can be far more forgiving than major capitals.',
+      'In these destinations, affordable luxury often means boutique spa hotels, local five-star properties, or design hotels that would cost much more in better-known cities.',
+    ] },
+    { heading: 'Best affordable luxury hotels in the Middle East and North Africa', body: [
+      'Luxor and Marrakech show two different routes to value. Luxor can make a Nile-side resort feel accessible because the destination remains comparatively affordable. Marrakech is more volatile, but outside peak windows a full international five-star resort can still become a smart splurge.',
+      'Abu Dhabi can also produce business-hotel bargains when demand softens, though taxes, location, and room category deserve close attention.',
+    ] },
+    { heading: 'Heritage hotels that feel more special than their price', body: [
+      'Heritage hotels are often the richest value category because atmosphere is not easy to replicate. A historic building, a long-standing local role, and a sense of place can make a stay memorable even when the facilities are less glossy than a new luxury tower.',
+      'The trade-off is that heritage hotels can be uneven. Some rooms may feel classic rather than contemporary, and the charm may matter more than flawless hardware.',
+    ] },
+    { heading: 'Smart splurge hotels under €250', body: [
+      'A hotel under €250 is not cheap in absolute terms, but it can still be a strong luxury-to-price ratio when the destination, design, or brand is compelling. Stamba Hotel and Sofitel Marrakech are good examples: the point is not the lowest rate, but the feeling that the stay would cost far more elsewhere.',
+    ] },
+    { heading: 'How to choose without being misled by star ratings', body: [
+      'Read the five-star status carefully, compare recent reviews, and ask what the hotel is actually good at. A local five-star with character may be a better choice than an international brand with a tired room. Equally, a famous brand can be worth paying more for when consistency matters.',
+    ] },
+  ]}
+  hotels={hotels}
+  tableTitle="Affordable luxury hotels at a glance"
+  itemListName="Affordable luxury hotels with strong value"
+  related={[
+    { title: 'Cheap Five-Star Hotels', href: '/cheap-five-star-hotels/', description: 'Lower-priced hotels that still deserve consideration.' },
+    { title: 'Luxury Hotels on a Budget', href: '/luxury-hotels-on-a-budget/', description: 'Practical tactics for finding good luxury value.' },
+    { title: 'Affordable Five-Star Hotels in Asia', href: '/affordable-five-star-hotels-asia/', description: 'The strongest region for the current collection.' },
+    { title: 'Affordable Five-Star Hotels in Europe', href: '/affordable-five-star-hotels-europe/', description: 'Europe and Europe-adjacent value picks.' },
+  ]}
+/>

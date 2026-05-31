@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const all = await getCollection('hotels', ({ data }) => !data.draft);
+const hotels = all
+  .filter((h) => ['Exceptional value', 'Strong value'].includes(h.data.verdict))
+  .sort((a, b) => a.data.rank - b.data.rank)
+  .slice(0, 9);
+---
+
+<SeoLandingPage
+  title="Luxury Hotels on a Budget"
+  description="A practical guide to finding luxury hotels on a budget, including countries, seasons, business-hotel patterns, resort pricing, and five-star reality checks."
+  path="/luxury-hotels-on-a-budget/"
+  h1="Luxury Hotels on a Budget"
+  kicker="Practical value guide"
+  intro={[
+    'Luxury hotels on a budget are easiest to find when you stop thinking only about discount codes and start thinking about geography, seasonality, demand patterns, and star-rating reality.',
+    'The best budget-luxury stays are not necessarily the cheapest rooms. They are the hotels where the experience feels more generous than the final rate.',
+  ]}
+  sections={[
+    { heading: 'How to find luxury hotels on a budget', body: [
+      'Start with destinations where luxury is naturally less expensive. Then compare the hotel against the local market, not against a fantasy global standard. A €120 five-star hotel in Kuala Lumpur can be excellent value even if a €120 hotel in another city would be ordinary.',
+      'Search flexible dates, compare room categories, and check whether breakfast, taxes, resort fees, and cancellation are included. The final booking screen matters more than the headline price.',
+    ] },
+    { heading: 'Countries where luxury is often mispriced', body: [
+      'Indonesia, Malaysia, Thailand, Cambodia, Vietnam, Uzbekistan, Egypt, Morocco, Romania, Bulgaria, Bosnia and Herzegovina, Georgia, and Armenia all appear in the current collection because they can produce unusually good luxury-to-price ratios.',
+      'The common thread is not cheapness alone. It is a mix of lower local costs, strong hotel supply, interesting destinations, and rates that have not been pulled fully into the most expensive global luxury market.',
+    ] },
+    { heading: 'Why business hotels can be cheaper at weekends', body: [
+      'International business hotels often price for corporate weekday demand. In some cities, leisure travellers can find better rates on weekends, public-holiday edges, or periods when conferences are absent.',
+      'This is especially relevant for hotels in Jakarta, Tashkent, Abu Dhabi, Makati, and other business-heavy markets. The hotel may be very comfortable while the destination requires a little more planning.',
+    ] },
+    { heading: 'Why resort hotels can be cheaper in low season', body: [
+      'Resort-style hotels are more exposed to weather, school holidays, and local vacation calendars. Outside peak windows, a hotel with pools, gardens, spa facilities, or river views can become dramatically more affordable.',
+      'The caution is that low season may mean heat, rain, closures, or lower atmosphere. Good value only matters if the trip still works for you.',
+    ] },
+    { heading: 'How to avoid weak five-star hotels', body: [
+      'Do not rely on the star label alone. Read recent reviews, look at guest photos, compare the lowest room category, and ask whether the hotel’s strength matches your trip. A strong breakfast, a good pool, or a heritage building may matter more than marble in the lobby.',
+      'Watch for repeated complaints about maintenance, service inconsistency, old bathrooms, noise, weak locations, or misleading photos. A cheap five-star hotel with the wrong drawbacks is not good value.',
+    ] },
+    { heading: 'How to compare taxes, breakfast, room type, and cancellation policy', body: [
+      'Two rates that look similar can produce very different trips. Breakfast can be expensive at five-star hotels, taxes can change the final total, and non-refundable rates are only a bargain if your plans are fixed.',
+      'Room type matters too. The cheapest room in a grand hotel may face a service area or be much smaller than the photos suggest. Compare like with like before deciding the value is real.',
+    ] },
+    { heading: 'Best current examples from the site', body: [
+      'Hotel Majapahit Surabaya, The Phoenix Hotel Yogyakarta, The Majestic Hotel Kuala Lumpur, The Raweekanlaya Bangkok, Stamba Hotel, Steigenberger Resort Achti Luxor, and Hyatt Regency Tashkent all illustrate different ways luxury can become more affordable.',
+    ] },
+  ]}
+  hotels={hotels}
+  tableTitle="Luxury hotels on a budget at a glance"
+  itemListName="Luxury hotels on a budget"
+  related={[
+    { title: 'Affordable Luxury Hotels', href: '/affordable-luxury-hotels/' },
+    { title: 'Cheap Five-Star Hotels', href: '/cheap-five-star-hotels/' },
+    { title: 'Cheapest Cities for Five-Star Hotels', href: '/cheapest-cities-five-star-hotels/' },
+    { title: 'How to Find Cheap Five-Star Hotels', href: '/guides/how-to-find-cheap-five-star-hotels/' },
+  ]}
+/>
