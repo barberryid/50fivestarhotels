@@ -66,7 +66,7 @@ button:focus-visible {
   background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-soft) 100%);
 }
 
-/* Warm gradient for hero / image overlays */
+/* Warm gradient for hero / image overlays — soft, only as deep as text needs */
 .editorial-overlay {
-  background: linear-gradient(180deg, rgba(31,36,40,0) 30%, rgba(31,36,40,0.82) 100%);
+  background: linear-gradient(180deg, rgba(31,36,40,0) 45%, rgba(31,36,40,0.6) 100%);
 }

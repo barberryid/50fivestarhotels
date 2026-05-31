@@ -46,7 +46,6 @@ const scoreColor = hotel.valueScore >= 85 ? '#4F6547' : hotel.valueScore >= 75 ?
         />
       </picture>
     </div>
-    <div class="editorial-overlay absolute inset-0 pointer-events-none"></div>
 
     <!-- Tier badge -->
     <div class="absolute top-3 left-3">
@@ -62,18 +61,17 @@ const scoreColor = hotel.valueScore >= 85 ? '#4F6547' : hotel.valueScore >= 75 ?
       </span>
     </div>
 
-    <!-- Location overlaid -->
-    <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-      <p class="text-[0.7rem] uppercase tracking-widest text-white/80 font-semibold">{hotel.city}, {hotel.country}</p>
-    </div>
   </a>
 
   <div class="p-5 flex flex-col flex-1 gap-3">
-    <a href={`/hotels/${hotel.slug}`} class="no-underline">
-      <h3 class="font-serif text-xl font-semibold text-[#1F2428] group-hover:text-[#B88A44] transition-colors leading-snug">
-        {hotel.title}
-      </h3>
-    </a>
+    <div>
+      <p class="text-[0.7rem] uppercase tracking-widest text-[#B88A44] font-semibold mb-1.5">{hotel.city}, {hotel.country}</p>
+      <a href={`/hotels/${hotel.slug}`} class="no-underline">
+        <h3 class="font-serif text-xl font-semibold text-[#1F2428] group-hover:text-[#B88A44] transition-colors leading-snug">
+          {hotel.title}
+        </h3>
+      </a>
+    </div>
 
     <div class="flex items-center gap-2 flex-wrap">
       <Badge label={hotel.fiveStarStatus} variant="type" />
