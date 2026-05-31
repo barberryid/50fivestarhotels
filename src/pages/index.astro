@@ -60,6 +60,10 @@ const moods = [
   { slug: 'hermitage-jakarta', mood: 'Art-deco calm and serious food' },
 ].map(m => ({ ...m, hotel: bySlug[m.slug] })).filter(m => m.hotel);
 
+// Slug for per-city destination pages (matches src/pages/destinations/[slug].astro)
+const citySlug = (city) =>
+  city.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 const heroImg = (h) => h?.image?.srcSet?.large ?? h?.image?.src;
 // Brighter "realistic daylight" variant for the feeling/mood tiles
 // (the default image is the darker editorial-dusk render).
@@ -221,7 +225,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
         <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">A good hotel is only half the story. These are cities where the value and the place both pull their weight.</p>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {moods.map(m => (
-            <a href={`/destinations#${m.hotel.city.toLowerCase().replace(/\s/g, '-')}`} class="group block no-underline">
+            <a href={`/destinations/${citySlug(m.hotel.city)}/`} class="group block no-underline">
               <div class="relative aspect-[3/2] rounded-2xl overflow-hidden shadow-sm ring-1 ring-[#1F2428]/5">
                 <img src={dayImg(m.hotel)} alt={`${m.hotel.city}, ${m.hotel.country}`} loading="lazy" decoding="async" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div class="editorial-overlay absolute inset-0"></div>

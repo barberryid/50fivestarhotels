@@ -1044,3 +1044,17 @@ Immediate next priority: add live profile pages for the AI-image candidates not 
 3. **Expand to 50 hotels** — future candidates listed above plus the destination strategy in this brief; use `research/seo-content-roadmap.md` as the working SEO roadmap.
 4. **Deepen existing city/destination pages** — the initial destination route is live for the 20 strongest cities, but individual pages should be enriched over time with more specific local sights, food, timing and hotel comparison detail.
 5. **Keep this brief current** — whenever hotels, routes, image systems, data files, affiliate status, or build/deploy details change, update this Build status section in the same change.
+
+## Maintenance note — 2026-05-31
+
+Claude Code inspected the project for build errors, broken links, missing image references, data inconsistencies, SEO basics, accessibility issues, and safe usability improvements.
+
+Implemented changes:
+- Fixed two dead in-page links (`/destinations#city`) that pointed at non-existent anchors, repointing them to the real per-city destination pages (`/destinations/<city>/`) in `HotelLayout.astro` breadcrumbs and the homepage "Destination mood" tiles.
+- Removed two stray LibreOffice lock files (`.~lock.*.xlsx#`) from git tracking and added the pattern to `.gitignore`.
+
+Validation:
+- All 405 image references in `src/` resolve to files in `public/`; no missing assets.
+- robots.txt, sitemap, canonical/OG/Twitter metadata, and JSON-LD all present and correct.
+- `npm run build` completed successfully (65 pages).
+- Changes committed and pushed to `main`.

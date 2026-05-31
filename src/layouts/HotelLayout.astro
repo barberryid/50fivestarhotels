@@ -153,7 +153,7 @@ const relatedGuides = [
       <Breadcrumbs crumbs={[
         { label: 'Home', href: '/' },
         { label: 'Hotels', href: '/destinations' },
-        { label: hotel.city, href: `/destinations#${hotel.city.toLowerCase().replace(/\s/g, '-')}` },
+        { label: hotel.city, href: `/destinations/${citySlug}/` },
         { label: hotel.title }
       ]} />
     </div>
