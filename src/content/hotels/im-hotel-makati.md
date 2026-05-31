@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Manila traffic can be severe — plan for it"
   - "More practical as a city base than as a destination in itself"
+whyCheap:
+  - "The Philippines has a low cost base and a soft peso, so design-led city hotels stay affordable by international standards."
+  - "Makati is a business and financial district, so rates ease on weekends and outside the convention calendar."
+  - "It is a polished local five-star boutique rather than a grand international brand, competing on style and price."
 bestNearbyAttraction: "Ayala Triangle Gardens, Poblacion neighbourhood and Intramuros old city"
 foodAngle: "Filipino cuisine, lechon, sinigang, kare-kare and Makati's dining scene"
 seoTitle: "I'M Hotel Makati Review: Affordable Five-Star Design Hotel in Manila"

@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Siem Reap's recovery post-pandemic has been uneven"
   - "The five-star rating is local rather than international"
+whyCheap:
+  - "Cambodia's very low cost base makes boutique resorts inexpensive even by regional standards."
+  - "Siem Reap has far more hotel rooms than its visitor numbers require, so competition drives rates down."
+  - "It is a local five-star built around the Angkor visit, competing on price rather than brand prestige."
 bestNearbyAttraction: "Angkor Wat, Bayon Temple and Angkor Thom"
 foodAngle: "Khmer cuisine, amok, lok lak and the Siem Reap Pub Street area"
 seoTitle: "Angkor Aurora Siem Reap Review: Affordable Five-Star Hotel Near Angkor Wat"

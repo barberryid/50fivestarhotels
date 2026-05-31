@@ -13,9 +13,9 @@ const bySlug = Object.fromEntries(allHotels.map(h => [h.data.slug, h.data]));
 const featuredSlugs = ['hotel-majapahit-surabaya','phoenix-hotel-yogyakarta','majestic-hotel-kuala-lumpur','stamba-hotel-tbilisi','raweekanlaya-bangkok'];
 const featured = allHotels.filter(h => featuredSlugs.includes(h.data.slug));
 
-// Hero collage — a few of the strongest editorial images
-const heroImageSlugs = ['hotel-majapahit-surabaya','stamba-hotel-tbilisi','sofitel-marrakech','raweekanlaya-bangkok'];
-const heroImages = heroImageSlugs.map(s => bySlug[s]).filter(Boolean);
+// Full-bleed hero — the first image from the Steigenberger Resort Achti Luxor
+// hotel page (its AI editorial dusk view).
+const heroHotel = bySlug['steigenberger-resort-achti-luxor'];
 
 const under100Count = allHotels.filter(h => h.data.budgetTier === 'Under €100').length;
 const under200Count = allHotels.filter(h => h.data.budgetTier === 'Under €200').length;
@@ -61,75 +61,50 @@ const heroImg = (h) => h?.image?.srcSet?.large ?? h?.image?.src;
 >
   <main>
     <!-- Hero -->
-    <section class="relative overflow-hidden">
-      <div class="max-w-6xl mx-auto px-5 pt-14 pb-20 md:pt-20 md:pb-28">
-        <div class="grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center">
-          <!-- Hero copy -->
-          <div>
-            <p class="text-[#B88A44] text-xs font-bold uppercase tracking-[0.18em] mb-5 flex items-center gap-2">
-              <span class="inline-block w-8 h-px bg-[#B88A44]"></span>
-              Affordable luxury travel
-            </p>
-            <h1 class="font-serif text-[2.7rem] sm:text-6xl md:text-7xl font-semibold text-[#1F2428] leading-[0.97] tracking-tight">
-              Five-star hotels<br />without five-star<br /><span class="text-[#B88A44] italic">prices.</span>
-            </h1>
-            <p class="text-[#6F685F] text-lg md:text-xl mt-7 leading-relaxed max-w-xl">
-              A warm, honest guide to hotels where the price feels surprisingly modest for the setting, service, history or sense of occasion.
-            </p>
-            <div class="flex flex-wrap gap-3 mt-9">
-              <a href="#featured" class="inline-flex items-center bg-[#1F2428] text-white font-semibold py-3.5 px-7 rounded-full hover:bg-[#B88A44] transition-colors no-underline text-sm">
-                Explore the best-value hotels
-              </a>
-              <a href="/under-100" class="inline-flex items-center bg-transparent text-[#1F2428] font-semibold py-3.5 px-7 rounded-full border border-[#1F2428]/20 hover:border-[#B88A44] hover:text-[#B88A44] transition-colors no-underline text-sm">
-                See hotels under €100
-              </a>
-            </div>
-            <p class="text-[#6F685F] text-xs mt-6 leading-relaxed max-w-md">
-              Prices change constantly. Every hotel here should be checked by date, room type, taxes and cancellation policy before booking.
-            </p>
-          </div>
+    <section class="relative isolate flex items-center justify-center min-h-[78vh] md:min-h-[86vh] overflow-hidden">
+      <!-- Full-bleed background image -->
+      {heroHotel && (
+        <picture class="absolute inset-0 -z-10">
+          {heroHotel.image?.srcSet?.large && <source media="(min-width: 768px)" srcset={heroHotel.image.srcSet.large} type="image/webp" />}
+          {heroHotel.image?.srcSet?.small && <source media="(max-width: 767px)" srcset={heroHotel.image.srcSet.small} type="image/webp" />}
+          <img
+            src={heroHotel.image?.srcSet?.large ?? heroHotel.image?.src}
+            alt={heroHotel.image?.alt ?? heroHotel.title}
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        </picture>
+      )}
+      <!-- Warm legibility overlay -->
+      <div class="absolute inset-0 -z-10 bg-[#1F2428]/45"></div>
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[#1F2428]/35 via-transparent to-[#1F2428]/70"></div>
 
-          <!-- Hero collage -->
-          <div class="relative">
-            <div class="grid grid-cols-5 grid-rows-6 gap-3 md:gap-4 h-[26rem] sm:h-[32rem] md:h-[34rem]">
-              <figure class="col-span-3 row-span-6 relative rounded-[1.4rem] overflow-hidden shadow-lg ring-1 ring-[#1F2428]/5 m-0">
-                {heroImages[0] && (
-                  <img src={heroImg(heroImages[0])} alt={heroImages[0].image?.alt ?? heroImages[0].title} loading="eager" decoding="async" fetchpriority="high" class="h-full w-full object-cover" />
-                )}
-                <div class="editorial-overlay absolute inset-0"></div>
-                <figcaption class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                  <p class="font-serif text-lg font-semibold leading-tight">{heroImages[0]?.city}</p>
-                  <p class="text-white/75 text-xs">{heroImages[0]?.country}</p>
-                </figcaption>
-              </figure>
-
-              <figure class="col-span-2 row-span-3 relative rounded-[1.2rem] overflow-hidden shadow-md ring-1 ring-[#1F2428]/5 m-0">
-                {heroImages[1] && (
-                  <img src={heroImg(heroImages[1])} alt={heroImages[1].image?.alt ?? heroImages[1].title} loading="eager" decoding="async" class="h-full w-full object-cover" />
-                )}
-                <div class="editorial-overlay absolute inset-0"></div>
-                <figcaption class="absolute bottom-0 left-0 right-0 p-3 text-white">
-                  <p class="font-serif text-sm font-semibold leading-tight">{heroImages[1]?.city}</p>
-                </figcaption>
-              </figure>
-
-              <figure class="col-span-2 row-span-3 relative rounded-[1.2rem] overflow-hidden shadow-md ring-1 ring-[#1F2428]/5 m-0">
-                {heroImages[2] && (
-                  <img src={heroImg(heroImages[2])} alt={heroImages[2].image?.alt ?? heroImages[2].title} loading="lazy" decoding="async" class="h-full w-full object-cover" />
-                )}
-                <div class="editorial-overlay absolute inset-0"></div>
-                <figcaption class="absolute bottom-0 left-0 right-0 p-3 text-white">
-                  <p class="font-serif text-sm font-semibold leading-tight">{heroImages[2]?.city}</p>
-                </figcaption>
-              </figure>
-            </div>
-            <!-- Floating value tag -->
-            <div class="absolute -bottom-4 -left-4 sm:-left-6 bg-[#FFFDF8] rounded-2xl shadow-lg ring-1 ring-[#E2D4BF] px-5 py-3.5 hidden sm:block">
-              <p class="text-[#B88A44] text-[0.65rem] font-bold uppercase tracking-widest">From the collection</p>
-              <p class="font-serif text-[#1F2428] text-lg font-semibold leading-tight">20 hotels, honestly scored</p>
-            </div>
-          </div>
+      <!-- Centered hero copy -->
+      <div class="max-w-3xl mx-auto px-5 py-24 text-center text-white">
+        <p class="text-[#E8D7B4] text-xs sm:text-sm font-bold uppercase tracking-[0.22em] mb-6 flex items-center justify-center gap-3">
+          <span class="inline-block w-8 h-px bg-[#D8BD8A]"></span>
+          Affordable luxury travel
+          <span class="inline-block w-8 h-px bg-[#D8BD8A]"></span>
+        </p>
+        <h1 class="font-serif text-[2.9rem] sm:text-6xl md:text-7xl font-semibold leading-[0.98] tracking-tight [text-shadow:0_2px_24px_rgba(31,36,40,0.45)]">
+          Five-star hotels without five-star <span class="text-[#E8C988] italic">prices.</span>
+        </h1>
+        <p class="text-white/85 text-lg md:text-xl mt-7 leading-relaxed max-w-2xl mx-auto">
+          A warm, honest guide to hotels where the price feels surprisingly modest for the setting, service, history or sense of occasion.
+        </p>
+        <div class="flex flex-wrap gap-3 justify-center mt-10">
+          <a href="#featured" class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-3.5 px-8 rounded-full hover:bg-white hover:text-[#1F2428] transition-colors no-underline text-sm">
+            Explore the best-value hotels
+          </a>
+          <a href="/under-100" class="inline-flex items-center bg-white/10 backdrop-blur text-white font-semibold py-3.5 px-8 rounded-full border border-white/40 hover:bg-white hover:text-[#1F2428] transition-colors no-underline text-sm">
+            See hotels under €100
+          </a>
         </div>
+        <p class="text-white/65 text-xs mt-7 leading-relaxed max-w-md mx-auto">
+          Prices change constantly. Every hotel here should be checked by date, room type, taxes and cancellation policy before booking.
+        </p>
       </div>
     </section>
 

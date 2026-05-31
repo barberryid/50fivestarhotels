@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Jakarta is challenging to navigate — traffic can be severe"
   - "The city is a transport and business hub more than a leisure destination"
+whyCheap:
+  - "Jakarta is a business capital rather than a leisure-tourism magnet, so even landmark hotels are competitively priced."
+  - "Indonesia's favourable exchange rate and low local costs keep an art-deco heritage hotel affordable."
+  - "Weekday business demand softens at weekends, opening up the best rates."
 bestNearbyAttraction: "National Monument (Monas), Kota Tua (Old Batavia) and National Museum"
 foodAngle: "Indonesian food, soto ayam, satay, nasi goreng and Jakarta's diverse restaurant scene"
 seoTitle: "The Hermitage Jakarta Review: Affordable Five-Star Heritage Hotel in Indonesia"

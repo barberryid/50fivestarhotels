@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Nha Trang is heavily developed and very busy during peak periods"
   - "The local five-star designation varies in its international equivalent"
+whyCheap:
+  - "Vietnam's low operating costs and favourable exchange rate make beachfront spa hotels remarkably cheap."
+  - "Nha Trang has a large supply of resort rooms, so competition holds rates down outside the summer peak."
+  - "It is a local five-star rather than an international brand, so you pay for the setting, not the badge."
 bestNearbyAttraction: "Po Nagar Cham Towers, Nha Trang beach and the offshore islands"
 foodAngle: "Vietnamese seafood, bun cha ca, banh mi and the Nha Trang street food scene"
 seoTitle: "Boton Blue Hotel & Spa Nha Trang Review: Affordable Five-Star Coastal Hotel"

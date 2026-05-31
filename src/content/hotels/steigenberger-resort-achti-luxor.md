@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Egypt requires security and travel context awareness"
   - "Luxor is a destination-focused city rather than a city-break destination"
+whyCheap:
+  - "Egypt's weak currency and low cost base make an international five-star Nile resort remarkably cheap."
+  - "Luxor's brutal summer heat collapses demand, so low-season rates fall sharply."
+  - "Heavy resort supply along the Nile keeps competition strong and prices keen."
 bestNearbyAttraction: "Valley of the Kings, Karnak Temple and Luxor Temple"
 foodAngle: "Egyptian mezze, grilled meats, koshary and traditional tea culture"
 seoTitle: "Steigenberger Resort Achti Luxor Review: Affordable Five-Star Nile Hotel"

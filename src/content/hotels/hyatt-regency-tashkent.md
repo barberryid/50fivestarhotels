@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Tashkent itself is more of a transit hub than a must-see destination"
   - "Uzbekistan requires visa planning for some nationalities"
+whyCheap:
+  - "Uzbekistan's low cost base means a genuine international five-star brand costs a fraction of its Western equivalent."
+  - "Tashkent is primarily a business destination, so rates ease on weekends and outside event periods."
+  - "Central Asia is still off most luxury-travel radars, so demand has not pushed prices up."
 bestNearbyAttraction: "Hazrati Imam complex, Tashkent Metro (Soviet mosaics), Chorsu Bazaar"
 foodAngle: "Uzbek plov, samsa, shashlik and the Central Asian tea house culture"
 seoTitle: "Hyatt Regency Tashkent Review: Affordable International Five-Star in Uzbekistan"

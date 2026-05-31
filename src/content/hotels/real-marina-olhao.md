@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Olhão is a working town, not a polished resort — some prefer it, some don't"
   - "The main Algarve beach resorts are a short drive away, not walking distance"
+whyCheap:
+  - "Olhão is a working Algarve town rather than a resort hotspot, so it undercuts nearby tourist centres."
+  - "Outside the summer peak, Algarve spa hotels discount heavily to fill rooms."
+  - "It is a local five-star spa hotel, competing on its marina setting rather than an international brand."
 bestNearbyAttraction: "Ria Formosa Natural Park and the barrier island beaches"
 foodAngle: "Algarve seafood, fresh fish, arroz de marisco and the Olhão market"
 seoTitle: "Real Marina Hotel & Spa Olhão Review: Affordable Five-Star in the Algarve"

@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Iași is not well known internationally — requires specific interest"
   - "Transport connections are less convenient than Bucharest"
+whyCheap:
+  - "Romania's low cost base prices boutique spa hotels well below Western Europe."
+  - "Iași is a university and cultural city rather than a tourist magnet, so rates stay modest."
+  - "A low local cost base lets a small luxury hotel offer five-star comforts cheaply."
 bestNearbyAttraction: "Palace of Culture and the Alexandru Ioan Cuza University complex"
 foodAngle: "Romanian cuisine, Moldavian specialities, local wine from the Iași region"
 seoTitle: "Pleiada Boutique Hotel Iași Review: Affordable Five-Star Spa in Romania"

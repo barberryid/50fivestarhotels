@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Local five-star designation does not equate to international five-star standards"
   - "Sarajevo requires engagement with its difficult recent history"
+whyCheap:
+  - "Bosnia sits outside the eurozone with a low cost base, so its top hotels stay inexpensive."
+  - "Sarajevo's high-end tourism is still developing, so five-star rates remain modest."
+  - "It is a local five-star city hotel, competing on value rather than international luxury polish."
 bestNearbyAttraction: "Baščaršija (Ottoman bazaar quarter), Latin Bridge and War Tunnel Museum"
 foodAngle: "Ćevapi, burek, Bosnian coffee and the Baščaršija food culture"
 seoTitle: "Malak Regency Hotel Sarajevo Review: Affordable Five-Star in Bosnia"

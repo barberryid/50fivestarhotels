@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Service consistency can vary by review period"
   - "The region requires attention to current geopolitical context"
+whyCheap:
+  - "Armenia's low cost base and modest tourism demand keep even a landmark grand hotel inexpensive."
+  - "Yerevan is still an emerging destination, so high-end rates have not caught up with Western Europe."
+  - "A favourable exchange rate stretches a European budget considerably further."
 bestNearbyAttraction: "Republic Square fountains, the Cascade complex and views to Mount Ararat"
 foodAngle: "Armenian cuisine — dolma, khorovats, lavash, brandy and Armenian coffee"
 seoTitle: "Grand Hotel Yerevan Review: Affordable Five-Star in Armenia's Capital"

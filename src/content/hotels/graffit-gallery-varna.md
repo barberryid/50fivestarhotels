@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Varna is a summer-focused destination — off-season is very quiet"
   - "The design hotel standard is ambitious for the local market"
+whyCheap:
+  - "Bulgaria is one of the EU's cheapest countries, so design hotels are priced well below Western Europe."
+  - "Varna is a Black Sea city that is busy in summer but quiet and inexpensive the rest of the year."
+  - "A low local cost base lets a boutique design hotel undercut comparable properties elsewhere in Europe."
 bestNearbyAttraction: "Varna Roman Baths, Sea Garden park and the Black Sea beaches"
 foodAngle: "Bulgarian cuisine, black sea fish, shopska salad and Varna's summer restaurant scene"
 seoTitle: "Graffit Gallery Design Hotel Varna Review: Affordable Five-Star on Bulgaria's Black Sea"

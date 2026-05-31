@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Marrakech prices have risen significantly in recent years"
   - "The hotel sits outside the Medina — a different experience from a riad"
+whyCheap:
+  - "Morocco's low cost base lets an international five-star brand price well below its European sisters."
+  - "Marrakech has a deep supply of luxury hotels, so competition keeps rates honest outside peak weeks."
+  - "Fierce summer heat and the shoulder seasons bring the strongest rates on a genuine Sofitel."
 bestNearbyAttraction: "Koutoubia Mosque, Jardin Majorelle, the Medina and Jemaa el-Fnaa"
 foodAngle: "Moroccan tagine, couscous, pastilla, mint tea and souk food culture"
 seoTitle: "Sofitel Marrakech Review: Affordable International Five-Star in Morocco"

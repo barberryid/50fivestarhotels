@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Hue can be rainy and grey outside the best travel window"
   - "The local five-star designation should be understood in the Vietnamese context"
+whyCheap:
+  - "Vietnam's low operating costs and favourable exchange rate keep even a grand city hotel cheap."
+  - "Hue is a heritage city with limited high-season pressure, so rates stay low much of the year."
+  - "It is a local five-star rather than an international brand, so the price reflects the market, not a badge."
 bestNearbyAttraction: "Imperial City (Citadel), Thien Mu Pagoda and Perfume River"
 foodAngle: "Hue cuisine — bun bo Hue, banh khoai, imperial court food traditions"
 seoTitle: "Silk Path Grand Hue Hotel & Spa Review: Affordable Five-Star in Vietnam's Imperial City"

@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Abu Dhabi is an expensive city overall; this is value within that context"
   - "The Millennium brand is reliable but not architecturally distinctive"
+whyCheap:
+  - "Abu Dhabi has a large oversupply of five-star rooms, and intense competition pushes rates down."
+  - "Fierce summer heat collapses demand, so genuine international five-stars turn cheap in low season."
+  - "Midweek and non-event dates open up the strongest rates in a city built for business travel."
 bestNearbyAttraction: "Sheikh Zayed Grand Mosque and the Corniche"
 foodAngle: "Emirati cuisine, dates, luqaimat, shawarma and Abu Dhabi's diverse dining"
 seoTitle: "Millennium Downtown Abu Dhabi Review: Affordable Five-Star in the UAE"

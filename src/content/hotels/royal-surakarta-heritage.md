@@ -91,6 +91,10 @@ highlights:
 cautions:
   - "Solo is a less obvious destination than Yogyakarta for first-time visitors"
   - "International flight connections are more limited than Yogyakarta"
+whyCheap:
+  - "Solo is a quiet Javanese cultural city rather than a tourist hotspot, so rates stay very low."
+  - "Indonesia's favourable exchange rate and low local costs keep a royal heritage hotel affordable."
+  - "It trades on palace-era character rather than modern international five-star fittings."
 bestNearbyAttraction: "Keraton Surakarta (royal palace), Mangkunegaran Palace"
 foodAngle: "Javanese cuisine, nasi liwet Solo, satay and traditional warungs"
 seoTitle: "The Royal Surakarta Heritage Review: Affordable Five-Star Hotel in Solo, Java"
