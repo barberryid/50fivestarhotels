@@ -13,6 +13,7 @@ import FiveStarReality from '../components/trust/FiveStarReality.astro';
 import WatchOutFor from '../components/trust/WatchOutFor.astro';
 import WhyItsCheap from '../components/trust/WhyItsCheap.astro';
 import BestMonths from '../components/trust/BestMonths.astro';
+import { hotelAirQuality } from '../data/hotelAirQuality';
 import { hotelSeasonality } from '../data/hotelSeasonality';
 import { absoluteUrl, breadcrumbJsonLd, canonicalUrl, imageUrl, publisherJsonLd } from '../lib/seo';
 import { countryRegion, regionSlug } from '../lib/regions';
@@ -79,6 +80,7 @@ const { hotel, allHotels = [] } = Astro.props;
 const gallery = hotel.gallery?.filter(image => image.src) ?? [];
 const generatedGallery = hotel.generatedGallery?.filter(image => image.src) ?? [];
 const seasonality = hotelSeasonality[hotel.slug];
+const airQuality = hotelAirQuality[hotel.slug];
 const creditLabel = (sourceSite?: string) => sourceSite ? `Image credit: ${sourceSite}` : 'Image credit';
 
 // Derive best-month signals from seasonality data for the trust panel
@@ -242,7 +244,7 @@ const relatedGuides = [
           </div>
         </nav>
 
-        {seasonality && <SeasonalityCards seasonality={seasonality} />}
+        {seasonality && <SeasonalityCards seasonality={seasonality} airQuality={airQuality} />}
 
         <!-- Highlights -->
         <div class="bg-[#4F6547]/6 rounded-2xl p-6 mb-8">

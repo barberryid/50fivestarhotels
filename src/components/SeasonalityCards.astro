@@ -1,11 +1,33 @@
 ---
 import type { HotelSeasonality } from '../data/hotelSeasonality';
+import type { HotelAirQuality } from '../data/hotelAirQuality';
 
 interface Props {
   seasonality: HotelSeasonality;
+  airQuality?: HotelAirQuality;
 }
 
-const { seasonality } = Astro.props;
+const { seasonality, airQuality } = Astro.props;
+const monthEntries = [
+  { key: 'jan', abbr: 'Jan', full: 'January' },
+  { key: 'feb', abbr: 'Feb', full: 'February' },
+  { key: 'mar', abbr: 'Mar', full: 'March' },
+  { key: 'apr', abbr: 'Apr', full: 'April' },
+  { key: 'may', abbr: 'May', full: 'May' },
+  { key: 'jun', abbr: 'Jun', full: 'June' },
+  { key: 'jul', abbr: 'Jul', full: 'July' },
+  { key: 'aug', abbr: 'Aug', full: 'August' },
+  { key: 'sep', abbr: 'Sep', full: 'September' },
+  { key: 'oct', abbr: 'Oct', full: 'October' },
+  { key: 'nov', abbr: 'Nov', full: 'November' },
+  { key: 'dec', abbr: 'Dec', full: 'December' },
+] as const;
+const formatMonthList = (months: string[]) => {
+  if (months.length === 0) return '';
+  if (months.length === 12) return 'year-round';
+  if (months.length === 1) return months[0];
+  return `${months.slice(0, -1).join(', ')} and ${months.at(-1)}`;
+};
 const weatherMonths = seasonality.months.map(({ month, weather, tempC, tempF, humidity }) => ({
   month,
   label: weather,
@@ -17,20 +39,59 @@ const priceMonths = seasonality.months.map(({ month, price }) => ({
   month,
   label: price,
 }));
+const airQualityMonths = airQuality
+  ? monthEntries
+      .map(({ key, abbr, full }) => {
+        const month = airQuality.months[key];
+        if (!month) return undefined;
+
+        const pm25Text = month.pm25 === undefined ? undefined : `estimated PM2.5 ${month.pm25} µg/m³`;
+        const aqiText = month.aqi === undefined ? undefined : `AQI ${month.aqi}`;
+        const details = [pm25Text, aqiText].filter(Boolean).join(', ');
+        const ariaLabel = details
+          ? `${full}: ${month.label} air quality, ${details}.`
+          : `${full}: ${month.label} air quality estimate.`;
+
+        return {
+          month: abbr,
+          label: month.label,
+          ariaLabel,
+          title: ariaLabel,
+        };
+      })
+      .filter(Boolean)
+  : [];
+const hasAirQuality = airQualityMonths.length >= 6;
+const airQualityBestMonths = formatMonthList(airQuality?.bestMonths ?? []);
+const airQualitySummary = airQuality
+  ? `Best air quality is usually ${airQualityBestMonths === 'year-round' ? airQualityBestMonths : `in ${airQualityBestMonths}`}. ${airQuality.caution}`
+  : '';
 const cards = [
   {
     ...seasonality.weather,
     kind: 'weather',
     ariaLabel: 'Weather comfort, temperature and humidity by month',
+    helper: 'Weather comfort, average temperature and humidity.',
     months: weatherMonths,
   },
+  ...(hasAirQuality ? [{
+    title: 'Air quality by month',
+    summary: airQualitySummary,
+    kind: 'air-quality',
+    ariaLabel: 'Monthly air quality',
+    helper: 'Monthly PM2.5-based estimate. Check live air quality before booking if you are sensitive to pollution.',
+    months: airQualityMonths,
+    methodology: 'Based on monthly PM2.5 estimates from public air-quality datasets and modelled historical data. Local pollution can vary by weather, fires, dust, traffic, and live conditions.',
+  }] : []),
   {
     ...seasonality.price,
     kind: 'price',
     ariaLabel: 'Typical price value by month',
+    helper: 'Typical monthly price value.',
     months: priceMonths,
   },
 ];
+const airQualityLegend = ['Excellent', 'Good', 'Moderate', 'Poor', 'Avoid'];
 ---
 
 <section class="seasonality-section" aria-labelledby="seasonality-heading">
@@ -44,14 +105,14 @@ const cards = [
       <article class="seasonality-card" data-card-kind={card.kind}>
         <div class="seasonality-copy">
           <h3>{card.title}</h3>
-          <p>{card.kind === 'weather' ? 'Weather comfort, average temperature and humidity.' : 'Typical monthly price value.'}</p>
+          <p>{card.helper}</p>
           {card.summary && <p class="seasonality-note">{card.summary}</p>}
         </div>
 
         <div class="seasonality-scroll" role="region" aria-label={card.ariaLabel}>
           <ol class="seasonality-months">
             {card.months.map(month => (
-              <li class="seasonality-month" data-label={month.label}>
+              <li class="seasonality-month" data-label={month.label} aria-label={month.ariaLabel} title={month.title}>
                 <span class="seasonality-month-name">{month.month}</span>
                 <span class="seasonality-month-label">{month.label}</span>
                 {card.kind === 'weather' && (
@@ -64,6 +125,20 @@ const cards = [
             ))}
           </ol>
         </div>
+
+        {card.kind === 'air-quality' && (
+          <>
+            <div class="air-quality-legend" aria-label="Air quality scale">
+              {airQualityLegend.map(label => (
+                <span class="air-quality-legend-item" data-label={label}>
+                  <span class="air-quality-legend-swatch"></span>
+                  <span>{label}</span>
+                </span>
+              ))}
+            </div>
+            <p class="air-quality-methodology">{card.methodology}</p>
+          </>
+        )}
       </article>
     ))}
   </div>
@@ -98,6 +173,7 @@ const cards = [
   .seasonality-cards {
     display: grid;
     gap: 1rem;
+    min-width: 0;
   }
 
   .seasonality-card {
@@ -105,6 +181,7 @@ const cards = [
     border: 1px solid #e2d4bf;
     border-radius: 0.75rem;
     box-shadow: 0 10px 30px rgba(31, 36, 40, 0.04);
+    min-width: 0;
     padding: 1rem;
   }
 
@@ -136,6 +213,7 @@ const cards = [
   }
 
   .seasonality-scroll {
+    min-width: 0;
     overflow-x: auto;
     padding-bottom: 0.15rem;
   }
@@ -274,6 +352,95 @@ const cards = [
     color: #7e2019;
   }
 
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-scroll {
+    overflow-x: visible;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-months {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    min-width: 0;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month {
+    border-color: transparent;
+    color: #ffffff;
+    min-height: 4rem;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month-label {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month[data-label="Excellent"],
+  .air-quality-legend-item[data-label="Excellent"] .air-quality-legend-swatch {
+    background: #8faf8a;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month[data-label="Good"],
+  .air-quality-legend-item[data-label="Good"] .air-quality-legend-swatch {
+    background: #b7c99a;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month[data-label="Moderate"],
+  .air-quality-legend-item[data-label="Moderate"] .air-quality-legend-swatch {
+    background: #d8b36a;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month[data-label="Poor"],
+  .air-quality-legend-item[data-label="Poor"] .air-quality-legend-swatch {
+    background: #c8794a;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month[data-label="Avoid"],
+  .air-quality-legend-item[data-label="Avoid"] .air-quality-legend-swatch {
+    background: #8f3f45;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month[data-label="Good"],
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month[data-label="Moderate"] {
+    color: #1f2428;
+  }
+
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month[data-label="Good"] .seasonality-month-label,
+  .seasonality-card[data-card-kind="air-quality"] .seasonality-month[data-label="Moderate"] .seasonality-month-label {
+    background: rgba(255, 253, 248, 0.45);
+    border-color: rgba(31, 36, 40, 0.08);
+    color: #1f2428;
+  }
+
+  .air-quality-legend {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.7rem;
+    margin-top: 0.75rem;
+  }
+
+  .air-quality-legend-item {
+    align-items: center;
+    color: #6b7280;
+    display: inline-flex;
+    font-size: 0.72rem;
+    font-weight: 700;
+    gap: 0.3rem;
+  }
+
+  .air-quality-legend-swatch {
+    border-radius: 999px;
+    display: inline-block;
+    height: 0.55rem;
+    width: 0.55rem;
+  }
+
+  .air-quality-methodology {
+    color: #6b7280;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    margin: 0.65rem 0 0;
+  }
+
   @media (max-width: 640px) {
     .seasonality-months {
       grid-template-columns: repeat(12, minmax(5.9rem, 1fr));
@@ -290,6 +457,20 @@ const cards = [
 
     .seasonality-humidity::after {
       content: attr(data-short);
+    }
+
+    .seasonality-card[data-card-kind="air-quality"] .seasonality-months {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      min-width: 0;
+    }
+
+    .seasonality-card[data-card-kind="air-quality"] .seasonality-month {
+      min-height: 3.1rem;
+      padding: 0.4rem 0.2rem;
+    }
+
+    .seasonality-card[data-card-kind="air-quality"] .seasonality-month-label {
+      display: none;
     }
   }
 
