@@ -833,9 +833,9 @@ The site was redesigned toward a warm, image-rich affordable-luxury editorial lo
 - Rendering Markdown entries uses `import { render } from 'astro:content'` then `await render(entry)` — not `entry.render()`
 - Content files live in `src/content/hotels/`
 
-### Launch hotel list (20 hotels)
+### Launch hotel list (21 hotels)
 
-All 20 hotels are live as individual pages at `/hotels/[slug]`.
+All 21 hotels are live as individual pages at `/hotels/[slug]`. Nepal (Pokhara) joined the collection on 2026-06-05 as the first **South Asia** destination.
 
 **Maintenance instruction:** when a new hotel Markdown file is added under `src/content/hotels/`, update this launch hotel list in the same change. This brief should always list every live hotel currently present in `src/content/hotels/`, using the hotel frontmatter as the source of truth for exact title, city, country, tier, score, and verdict.
 
@@ -858,9 +858,10 @@ All 20 hotels are live as individual pages at `/hotels/[slug]`.
 | 15 | Boton Blue Hotel & Spa | Nha Trang | Vietnam | Under €100 | 76 | Strong value |
 | 16 | I'M Hotel Makati | Makati | Philippines | Under €200 | 75 | Strong value |
 | 17 | Malak Regency Hotel | Sarajevo | Bosnia and Herzegovina | Under €200 | 73 | Good value |
-| 18 | Real Marina Hotel & Spa | Olhão | Portugal | Under €200 | 72 | Good value |
-| 19 | Graffit Gallery Design Hotel | Varna | Bulgaria | Under €200 | 71 | Good value |
-| 20 | Millennium Downtown Abu Dhabi | Abu Dhabi | United Arab Emirates | Under €200 | 68 | Good value |
+| 18 | Bar Peepal Resort | Pokhara | Nepal | Under €100 | 73 | Good value |
+| 19 | Real Marina Hotel & Spa | Olhão | Portugal | Under €200 | 72 | Good value |
+| 20 | Graffit Gallery Design Hotel | Varna | Bulgaria | Under €200 | 71 | Good value |
+| 21 | Millennium Downtown Abu Dhabi | Abu Dhabi | United Arab Emirates | Under €200 | 68 | Good value |
 
 **Not in launch batch (future candidates):**
 - Meliá Yangon
@@ -881,7 +882,7 @@ src/
                         RegionPage, GuideArticle
   components/trust/   - FiveStarReality, WatchOutFor, WhyItsCheap, BestMonths
                         (reusable "before you book" trust panel on hotel pages)
-  content/hotels/     - 20 Markdown hotel files
+  content/hotels/     - 21 Markdown hotel files
   content.config.ts   - Astro 6 Content Layer schema (glob loader);
                         includes optional whyCheap, seoTitle, seoDescription,
                         focusKeyword, secondaryKeywords and lastUpdated fields
@@ -1064,3 +1065,12 @@ Recommended follow-ups (identified, not yet actioned):
 - `destinations.astro` cards link to hotel pages but not to the richer per-city destination pages (`/destinations/<city>/`) — worth surfacing those routes from the destinations index.
 - Remove the unused `destinationSlugs` const in `src/pages/destinations/[slug].astro` (the route already defines its own `allowedSlugs`).
 - Replace Booking.com search links with affiliate links once the programme is approved.
+
+### Bar Peepal Resort, Pokhara added — 2026-06-05
+
+- New hotel: **Bar Peepal Resort**, Pokhara, **Nepal** — `src/content/hotels/bar-peepal-resort-pokhara.md` (rank 18, score 73, Good value, Under €100, local five-star). First **Nepal** / **South Asia** entry on the site.
+- `region` frontmatter set to `South Asia`; added `South Asia` to the `regionOrder` in `destinations.astro`; added `Nepal: 'Asia'` to `lib/regions.ts` so the hotel shows on the Asia region page and uses Asia regional links.
+- Added `pokhara` to the destination route slug lists in `src/pages/destinations/[slug].astro` → `/destinations/pokhara/` is live.
+- Re-ranked the tail of the list: Real Marina 18→19, Graffit Gallery 19→20, Millennium Downtown 20→21. Updated hardcoded "20 hotels" counts on `index.astro` and `about.astro` to 21.
+- Seasonality added to `src/data/hotelSeasonality.ts` (Pokhara: clear Oct–Nov & Jan–Feb, Jun–Sep monsoon).
+- Images: 6 Wikimedia Commons images sourced + converted to WebP under `public/images/hotels/bar-peepal-resort-pokhara/web/` (hero = Annapurna/Phewa view, CC BY 3.0). The page hero/og currently uses the sourced Wikimedia hero. The two ChatGPT AI heroes (editorial-dusk / realistic-daylight) are **pending from Gary** — prompts in `research/bar-peepal-resort-pokhara-image-prompts.md`; placeholder `.txt` markers and the exact frontmatter swap YAML are in place. Research note: `research/bar-peepal-resort-pokhara.md`.

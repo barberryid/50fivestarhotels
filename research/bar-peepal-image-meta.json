@@ -1,0 +1,80 @@
+[
+  {
+    "idx": 1,
+    "type": "Hero",
+    "found": true,
+    "src": "/images/hotels/bar-peepal-resort-pokhara/web/bar-peepal-resort-pokhara-01-hero-pokhara-annapurna.webp",
+    "subject": "The Annapurna range from Pokhara",
+    "creator": "Jmhullot",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:The_Annapurna_range_from_Pokhara.jpg",
+    "attribution": "Photo by Jmhullot via Wikimedia Commons, CC BY 3.0",
+    "matchedQuery": "Pokhara Annapurna"
+  },
+  {
+    "idx": 2,
+    "type": "Hotel",
+    "found": true,
+    "src": "/images/hotels/bar-peepal-resort-pokhara/web/bar-peepal-resort-pokhara-02-hotel-pokhara-lakeside.webp",
+    "subject": "Pokhara Lakeside",
+    "creator": "Bijay chaurasia",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Pokhara_Lakeside.JPG",
+    "attribution": "Photo by Bijay chaurasia via Wikimedia Commons, CC BY-SA 4.0",
+    "matchedQuery": "Pokhara Lakeside"
+  },
+  {
+    "idx": 3,
+    "type": "City",
+    "found": true,
+    "src": "/images/hotels/bar-peepal-resort-pokhara/web/bar-peepal-resort-pokhara-03-city-phewa-lake.webp",
+    "subject": "Phewa Lake (फेवा ताल)",
+    "creator": "Bijay chaurasia",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Phewa_Lake_(%E0%A4%AB%E0%A5%87%E0%A4%B5%E0%A4%BE_%E0%A4%A4%E0%A4%BE%E0%A4%B2).JPG",
+    "attribution": "Photo by Bijay chaurasia via Wikimedia Commons, CC BY-SA 4.0",
+    "matchedQuery": "Phewa Lake boats"
+  },
+  {
+    "idx": 4,
+    "type": "Attraction",
+    "found": true,
+    "src": "/images/hotels/bar-peepal-resort-pokhara/web/bar-peepal-resort-pokhara-04-attraction-machhapuchhre.webp",
+    "subject": "Machhapuchchhre (Fishtail Mountain) 1",
+    "creator": "Gaurav Dhwaj Khadka",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Machhapuchchhre_(Fishtail_Mountain)_1.jpg",
+    "attribution": "Photo by Gaurav Dhwaj Khadka via Wikimedia Commons, CC BY-SA 4.0",
+    "matchedQuery": "Machhapuchhre"
+  },
+  {
+    "idx": 5,
+    "type": "Food",
+    "found": true,
+    "src": "/images/hotels/bar-peepal-resort-pokhara/web/bar-peepal-resort-pokhara-05-food-nepali-food.webp",
+    "subject": "Dal Bhat Tarkari",
+    "creator": "Gaurav Dhwaj Khadka",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Dal_Bhat_Tarkari.jpg",
+    "attribution": "Photo by Gaurav Dhwaj Khadka via Wikimedia Commons, CC BY-SA 4.0",
+    "matchedQuery": "Dal bhat"
+  },
+  {
+    "idx": 6,
+    "type": "Secondary",
+    "found": true,
+    "src": "/images/hotels/bar-peepal-resort-pokhara/web/bar-peepal-resort-pokhara-06-secondary-world-peace-pagoda.webp",
+    "subject": "Nepal, Pokhara, World Peace Pagoda",
+    "creator": "Wolkenkratzer",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Nepal,_Pokhara,_World_Peace_Pagoda.JPG",
+    "attribution": "Photo by Wolkenkratzer via Wikimedia Commons, CC BY-SA 3.0",
+    "matchedQuery": "World Peace Pagoda Pokhara"
+  }
+]

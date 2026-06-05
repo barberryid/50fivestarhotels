@@ -12,7 +12,7 @@ const slugify = (value: string) =>
   value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 const destinationSlugs = [
-  'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo',
+  'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo','pokhara',
 ];
 
 export async function getStaticPaths() {
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
   const slugifyPath = (value: string) =>
     value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const allowedSlugs = [
-    'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo',
+    'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo','pokhara',
   ];
   const cities = new Map();
   for (const h of all) {

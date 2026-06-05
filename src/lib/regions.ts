@@ -5,6 +5,7 @@ export const countryRegions: Record<string, string> = {
   Cambodia: 'Asia',
   Vietnam: 'Asia',
   Philippines: 'Asia',
+  Nepal: 'Asia',
   Uzbekistan: 'Central Asia',
   Georgia: 'Caucasus',
   Armenia: 'Caucasus',

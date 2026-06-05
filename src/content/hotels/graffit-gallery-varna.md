@@ -1,7 +1,7 @@
 ---
 title: "Graffit Gallery Design Hotel"
 slug: "graffit-gallery-varna"
-rank: 19
+rank: 20
 city: "Varna"
 country: "Bulgaria"
 region: "Europe"

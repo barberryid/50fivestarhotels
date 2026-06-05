@@ -5108,5 +5108,69 @@ export const hotelSeasonality: Record<string, HotelSeasonality> = {
         "humidity": 66
       }
     ]
+  },
+  "bar-peepal-resort-pokhara": {
+    "hotel": "Bar Peepal Resort",
+    "city": "Pokhara",
+    "country": "Nepal",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Best" },
+        { "month": "Feb", "label": "Best" },
+        { "month": "Mar", "label": "Good" },
+        { "month": "Apr", "label": "Good" },
+        { "month": "May", "label": "Possible" },
+        { "month": "Jun", "label": "Avoid" },
+        { "month": "Jul", "label": "Avoid" },
+        { "month": "Aug", "label": "Avoid" },
+        { "month": "Sep", "label": "Avoid" },
+        { "month": "Oct", "label": "Best" },
+        { "month": "Nov", "label": "Best" },
+        { "month": "Dec", "label": "Good" }
+      ],
+      "summary": "Best: Oct–Nov and Jan–Feb. Peak clarity for Annapurna views. Jun–Sep is monsoon — avoid unless the price trade-off is compelling.",
+      "notes": "Avoid means simply not ideal, not impossible. Monsoon timing shifts year to year, and clear mountain mornings can still appear in the shoulder months.",
+      "confidenceLevel": "High",
+      "lastChecked": "2026-06-05",
+      "sources": "https://www.holidify.com/places/pokhara/best-time-to-visit.html\nhttps://weather-and-climate.com/average-monthly-Rainfall-Temperature-Sunshine,pokhara,Nepal"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Average" },
+        { "month": "Feb", "label": "Average" },
+        { "month": "Mar", "label": "Good value" },
+        { "month": "Apr", "label": "Good value" },
+        { "month": "May", "label": "Cheapest" },
+        { "month": "Jun", "label": "Cheapest" },
+        { "month": "Jul", "label": "Cheapest" },
+        { "month": "Aug", "label": "Cheapest" },
+        { "month": "Sep", "label": "Cheapest" },
+        { "month": "Oct", "label": "Expensive" },
+        { "month": "Nov", "label": "Most expensive" },
+        { "month": "Dec", "label": "Expensive" }
+      ],
+      "summary": "Cheapest: Jun–Sep (monsoon). Most expensive: Oct–Nov. Best weather-to-price balance: Jan–Feb and Mar–Apr.",
+      "notes": "Rates move with trekking demand; peak season (Oct–Nov) and the winter view window (Jan–Feb) carry the highest prices.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-05",
+      "sources": "https://www.booking.com/hotel/np/bar-peepal-resort.html"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Best", "price": "Average", "tempC": 10, "tempF": 50, "humidity": 75 },
+      { "month": "Feb", "weather": "Best", "price": "Average", "tempC": 13, "tempF": 55, "humidity": 70 },
+      { "month": "Mar", "weather": "Good", "price": "Good value", "tempC": 18, "tempF": 64, "humidity": 65 },
+      { "month": "Apr", "weather": "Good", "price": "Good value", "tempC": 22, "tempF": 72, "humidity": 68 },
+      { "month": "May", "weather": "Possible", "price": "Cheapest", "tempC": 24, "tempF": 75, "humidity": 75 },
+      { "month": "Jun", "weather": "Avoid", "price": "Cheapest", "tempC": 25, "tempF": 77, "humidity": 88 },
+      { "month": "Jul", "weather": "Avoid", "price": "Cheapest", "tempC": 25, "tempF": 77, "humidity": 90 },
+      { "month": "Aug", "weather": "Avoid", "price": "Cheapest", "tempC": 25, "tempF": 77, "humidity": 90 },
+      { "month": "Sep", "weather": "Avoid", "price": "Cheapest", "tempC": 24, "tempF": 75, "humidity": 88 },
+      { "month": "Oct", "weather": "Best", "price": "Expensive", "tempC": 20, "tempF": 68, "humidity": 72 },
+      { "month": "Nov", "weather": "Best", "price": "Most expensive", "tempC": 15, "tempF": 59, "humidity": 70 },
+      { "month": "Dec", "weather": "Good", "price": "Expensive", "tempC": 11, "tempF": 52, "humidity": 74 }
+    ]
   }
 };
