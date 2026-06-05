@@ -886,8 +886,8 @@ src/
   content.config.ts   - Astro 6 Content Layer schema (glob loader);
                         includes optional whyCheap, seoTitle, seoDescription,
                         focusKeyword, secondaryKeywords and lastUpdated fields
-  data/               - hotelSeasonality.ts, imageAttributions.json/csv,
-                        destinationImages.ts
+  data/               - hotelSeasonality.ts, hotelAirQuality.ts,
+                        imageAttributions.json/csv, destinationImages.ts
   lib/                - seo.ts and regions.ts helpers for canonicals, JSON-LD,
                         region routing and production URL consistency
   layouts/            - BaseLayout, PageLayout, HotelLayout
@@ -1018,15 +1018,28 @@ Hotel pages now support seasonality cards via:
 
 - `src/components/SeasonalityCards.astro`
 - `src/data/hotelSeasonality.ts`
+- `src/data/hotelAirQuality.ts`
 - `scripts/generate_hotel_seasonality.py`
 - `research/hotel-seasonality-weather-price.xlsx`
+- `research/hotel-air-quality-monthly.xlsx`
 
 Seasonality appears on a hotel page when that hotel slug exists in `hotelSeasonality`.
+
+Air-quality bars appear inside the same seasonality section when that hotel slug exists in `hotelAirQuality`.
 
 Latest local seasonality/editorial review:
 
 - `src/data/hotelSeasonality.ts` and `SeasonalityCards.astro` were enriched in committed work at `0e54288`.
 - No seasonality files were changed as part of the latest destination-card image work.
+
+Latest air-quality update:
+
+- Monthly air-quality bars were added in commit `9f8d33c` and pushed to `main` on 2026-06-05.
+- `SeasonalityCards.astro` now renders cards in this order on hotel pages with matching data: **Best time for weather**, **Air quality by month**, **Best time for price**.
+- `src/data/hotelAirQuality.ts` stores workbook-derived PM2.5 estimates, US AQI estimates, labels, confidence levels, best months, cautions, and source URLs for 20 launch hotels.
+- The card uses the workbook scale: Excellent, Good, Moderate, Poor, Avoid. Desktop displays one 12-month row; mobile wraps to two rows of six months with a compact legend and accessible PM2.5/AQI labels.
+- Bar Peepal Resort, Pokhara currently has no matching row in `research/hotel-air-quality-monthly.xlsx`, so its air-quality card is hidden until data is added.
+- Validation for the air-quality launch: `npm.cmd run build` passed; browser checks confirmed the required order, desktop one-row bar, mobile two-row wrap, and no page-level horizontal overflow.
 
 ### Prose styling
 
