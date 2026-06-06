@@ -10,18 +10,19 @@ interface Props {
   canonical?: string;
   ogImage?: string;
   image?: string;
+  keywords?: string[] | string;
   type?: 'website' | 'article';
   noindex?: boolean;
   jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
-const { title, description, canonical, ogImage, image, type, noindex, jsonLd } = Astro.props;
+const { title, description, canonical, ogImage, image, keywords, type, noindex, jsonLd } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <SeoHead title={title} description={description} canonical={canonical} ogImage={ogImage} image={image} type={type} noindex={noindex} jsonLd={jsonLd} />
+    <SeoHead title={title} description={description} canonical={canonical} ogImage={ogImage} image={image} keywords={keywords} type={type} noindex={noindex} jsonLd={jsonLd} />
   </head>
   <body>
     <Header />

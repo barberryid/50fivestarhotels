@@ -1,7 +1,7 @@
 ---
 title: "Malak Regency Hotel"
 slug: "malak-regency-sarajevo"
-rank: 17
+rank: 27
 city: "Sarajevo"
 country: "Bosnia and Herzegovina"
 region: "Europe"

@@ -1,63 +1,58 @@
-# Bar Peepal Resort — ChatGPT hero image prompts
+# Bar Peepal Resort - ChatGPT hero image prompts
 
-Two prompts for the AI-generated hero images, matching the editorial, realistic, architectural travel-photography style of the existing hotel heroes on the site (see `angkor-aurora-siem-reap-editorial-dusk.webp` etc.).
+Two AI-generated hero images for Bar Peepal Resort in Pokhara, Nepal. Match the existing site style: realistic architectural travel photography, polished editorial composition, no text, no logos, no watermarks.
 
-**Workflow**
-1. Generate both images in ChatGPT (or equivalent), 16:8-ish landscape, high resolution.
-2. Save the originals to: `C:\Users\Gary\code\50fivestarhotels\images generated\`
-3. Rename / move to the final filenames below.
+Final destination:
 
-## Image 1 — Editorial dusk
+`C:\Users\Gary\code\50fivestarhotels\public\images\hotels\`
 
-**Final filename:** `bar-peepal-resort-pokhara-editorial-dusk.webp`
-**Placed at:** `public/images/hotels/bar-peepal-resort-pokhara-editorial-dusk.webp`
-**Responsive variants:** `public/images/hotels/responsive/bar-peepal-resort-pokhara-editorial-dusk-1200.webp` and `-800.webp`
+## Image 1 - Editorial dusk
 
-**Prompt:**
+Final filename:
 
-> Editorial-style, photorealistic dusk view of a luxury boutique resort in Pokhara, Nepal. A modern multi-storey property with a glowing rooftop infinity pool reflecting a soft twilight sky in shades of amber, rose and deep blue. Warm terrace and interior lighting spill across stone-and-timber architecture. In the background, the calm expanse of Phewa Lake and the silhouetted Himalayan skyline, with the distinctive twin peak of Machhapuchhre (Fishtail Mountain) and the Annapurna range catching the last alpenglow. Lush sub-tropical garden and palms in the foreground. Tranquil, aspirational, high-end travel-magazine atmosphere. Shot like premium architectural travel photography, wide 16:8 landscape framing, natural depth of field, no people, no text, no logos, no watermarks.
+`bar-peepal-resort-pokhara-editorial-dusk.webp`
 
-## Image 2 — Realistic daylight
+Prompt:
 
-**Final filename:** `bar-peepal-resort-pokhara-realistic-daylight.webp`
-**Placed at:** `public/images/hotels/bar-peepal-resort-pokhara-realistic-daylight.webp`
-**Responsive variants:** `public/images/hotels/responsive/bar-peepal-resort-pokhara-realistic-daylight-1200.webp` and `-800.webp`
-
-**Prompt:**
-
-> Photorealistic daytime exterior of a boutique resort in Pokhara, Nepal, under a clear blue sky with a few high white clouds. The resort facade in warm stone and timber, fronted by a turquoise pool terrace with loungers and a manicured tropical garden. Beyond the property, Phewa Lake glints in the sun and the snow-capped Annapurna range with Machhapuchhre (Fishtail Mountain) rises sharply on the horizon. Bright, crisp natural midday light, vivid but natural colours, realistic travel-photography style, wide 16:8 landscape framing, no people, no text, no logos, no watermarks.
-
-## Notes
-
-- Keep both images free of recognisable real-brand signage — they are illustrative AI renders, not photographs of the actual building.
-- The page currently uses the sourced Wikimedia hero (slot 01, the Annapurna/Phewa view) so nothing 404s until the AI heroes exist.
-- After placing the two `.webp` heroes and their four responsive variants (and deleting the matching `.txt` placeholder markers in `public/images/hotels/` and `public/images/hotels/responsive/`), update the frontmatter in `src/content/hotels/bar-peepal-resort-pokhara.md`. Replace the `image:` block with:
-
-```yaml
-image:
-  src: "/images/hotels/bar-peepal-resort-pokhara-editorial-dusk.webp"
-  alt: "AI-generated editorial dusk view of Bar Peepal Resort in Pokhara, Nepal"
-  srcSet:
-    large: "/images/hotels/responsive/bar-peepal-resort-pokhara-editorial-dusk-1200.webp"
-    small: "/images/hotels/responsive/bar-peepal-resort-pokhara-editorial-dusk-800.webp"
+```text
+Use case: photorealistic-natural
+Asset type: hotel hero image for a luxury travel editorial website
+Primary request: Create an editorial-style AI-generated dusk view of a luxury boutique resort in Pokhara, Nepal.
+Scene/backdrop: A multi-storey hillside boutique resort overlooking Phewa Lake, with silhouetted Himalayan peaks in the distance, including the distinctive Machhapuchhre / Fishtail Mountain profile.
+Subject: The resort exterior with a rooftop infinity pool glowing at twilight, warm terrace and room lighting, refined stone-and-wood architecture, and a lush garden foreground.
+Style/medium: Realistic architectural travel photography, high-quality editorial hotel imagery, cinematic but believable, no illustration look.
+Composition/framing: Wide landscape 16:9 hero composition, three-quarter exterior view, rooftop pool and terraces clearly visible, lake and mountains readable in the background, enough depth and atmosphere for a premium hotel page.
+Lighting/mood: Blue-hour dusk sky, warm interior and terrace lights, soft reflections from the pool, calm luxury mood.
+Color palette: Twilight blues, warm amber lighting, natural greens, subtle mountain silhouettes.
+Materials/textures: Realistic stone, timber, glass railings, pool water, planted terraces, wet stone highlights.
+Text (verbatim): none.
+Constraints: No text, no logos, no watermark, no signage, no brand marks, no people in the foreground, no impossible fantasy architecture. The result should feel like plausible high-end travel photography for a boutique resort in Pokhara.
 ```
 
-and add this `generatedGallery` block (mirrors `angkor-aurora-siem-reap.md`, which makes the hero render as a two-image carousel):
+## Image 2 - Realistic daylight
 
-```yaml
-generatedGallery:
-  - src: "/images/hotels/bar-peepal-resort-pokhara-editorial-dusk.webp"
-    alt: "AI-generated editorial dusk view of Bar Peepal Resort in Pokhara, Nepal"
-    type: "editorial-dusk"
-    srcSet:
-      large: "/images/hotels/responsive/bar-peepal-resort-pokhara-editorial-dusk-1200.webp"
-      small: "/images/hotels/responsive/bar-peepal-resort-pokhara-editorial-dusk-800.webp"
-  - src: "/images/hotels/bar-peepal-resort-pokhara-realistic-daylight.webp"
-    alt: "AI-generated realistic daylight view of Bar Peepal Resort in Pokhara, Nepal"
-    type: "realistic-daylight"
-    srcSet:
-      large: "/images/hotels/responsive/bar-peepal-resort-pokhara-realistic-daylight-1200.webp"
-      small: "/images/hotels/responsive/bar-peepal-resort-pokhara-realistic-daylight-800.webp"
+Final filename:
+
+`bar-peepal-resort-pokhara-realistic-daylight.webp`
+
+Prompt:
+
+```text
+Use case: photorealistic-natural
+Asset type: hotel hero image for a luxury travel editorial website
+Primary request: Create a realistic AI-generated daytime exterior view of Bar Peepal Resort in Pokhara, Nepal.
+Scene/backdrop: A boutique resort exterior in Pokhara with Phewa Lake and the Annapurna range visible in the background, including a distant Machhapuchhre / Fishtail Mountain silhouette.
+Subject: The resort facade with pool terrace, landscaped garden, balconies, warm natural stone and timber details, clear sense of a small upscale Nepalese resort.
+Style/medium: Realistic architectural travel photography, crisp high-quality daylight hotel exterior image, believable proportions and materials, not painterly or illustrated.
+Composition/framing: Wide landscape 16:9 hero composition, three-quarter front exterior view, facade and pool terrace prominent, garden foreground, lake and mountains behind, natural travel magazine framing.
+Lighting/mood: Bright clear daylight, blue sky, clean mountain air, natural shadows, inviting but realistic.
+Color palette: Clear sky blue, white clouds, natural greenery, warm stone, pool-water blue, subtle mountain tones.
+Materials/textures: Realistic facade plaster, timber, stone paving, glass railings, pool water, garden plants.
+Text (verbatim): none.
+Constraints: No text, no logos, no watermark, no signage, no brand marks, no large crowds, no fantasy resort scale. The image should feel like plausible realistic travel photography for Bar Peepal Resort in Pokhara.
 ```
 
-You can keep the existing Wikimedia `gallery:` block as-is — it powers the "Images from the stay and destination" section lower on the page and is independent of the hero.
+## Generation status
+
+- `bar-peepal-resort-pokhara-editorial-dusk.webp` was generated and placed in `public/images/hotels/`.
+- `bar-peepal-resort-pokhara-realistic-daylight.webp` was generated and placed in `public/images/hotels/`.

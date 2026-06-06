@@ -11,7 +11,14 @@ allHotels.sort((a, b) => a.data.rank - b.data.rank);
 
 const bySlug = Object.fromEntries(allHotels.map(h => [h.data.slug, h.data]));
 
-const featuredSlugs = ['hotel-majapahit-surabaya','phoenix-hotel-yogyakarta','majestic-hotel-kuala-lumpur','stamba-hotel-tbilisi','raweekanlaya-bangkok'];
+const featuredSlugs = [
+  'hotel-majapahit-surabaya',
+  'auberge-saint-antoine-quebec-city',
+  'phoenix-hotel-yogyakarta',
+  'majestic-hotel-kuala-lumpur',
+  'brown-hotel-louisville',
+  'pfister-hotel-milwaukee',
+];
 const featured = allHotels.filter(h => featuredSlugs.includes(h.data.slug));
 
 // Full-bleed hero — the first image from the Steigenberger Resort Achti Luxor
@@ -141,7 +148,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
           The trick is knowing which hotels are genuinely worth considering — and which are simply cheap because the standard, location or maintenance is weaker than the star rating suggests.
         </p>
         <p class="text-[#6F685F] text-base md:text-lg leading-relaxed">
-          50 Five-Star Hotels focuses on the places where price, setting and experience come together: heritage hotels in Java, spa hotels in underrated European cities, Nile-side resorts in Luxor, design hotels in the Caucasus and city hotels that make an affordable trip feel far more special.
+          50 Five-Star Hotels focuses on the places where price, setting and experience come together: heritage hotels in Java and North America, spa hotels in underrated European cities, Nile-side resorts in Luxor, design hotels in the Caucasus and city hotels that make an affordable trip feel far more special.
         </p>
       </div>
     </section>
@@ -210,7 +217,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
       <div class="max-w-6xl mx-auto px-5">
         <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Start here</p>
         <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">Hotels that prove the idea</h2>
-        <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">Five hotels from the launch collection — chosen because each one makes the case for affordable luxury in a different way.</p>
+        <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">Six hotels from the collection — chosen because each one makes the case for affordable luxury in a different way.</p>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
           {featured.map(h => (
             <HotelCard hotel={h.data} featured={true} />
@@ -246,7 +253,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
     <!-- Comparison table -->
     <section class="max-w-6xl mx-auto px-5 py-20">
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">The full list</p>
-      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">All 21 launch hotels at a glance</h2>
+      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">All 31 hotels at a glance</h2>
       <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">Ranked by value score. Click any hotel for the full editorial profile.</p>
       <HotelComparisonTable hotels={tableHotels} title="" />
       <div class="mt-8 text-center">
@@ -287,10 +294,10 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
         Find the hotel where the price feels mispriced.
       </h2>
       <p class="text-[#6F685F] text-lg mb-8 max-w-xl mx-auto">
-        Twenty-one hotels across South Asia, Southeast Asia, Europe, the Middle East and the Caucasus — each one chosen because the value case is genuinely interesting.
+        Thirty-one hotels across North America, South Asia, Southeast Asia, Europe, the Middle East and the Caucasus — each one chosen because the value case is genuinely interesting.
       </p>
       <a href="/destinations" class="inline-flex items-center bg-[#1F2428] text-white font-semibold py-4 px-8 rounded-full hover:bg-[#B88A44] transition-colors no-underline">
-        Browse all 21 launch hotels
+        Browse all 31 hotels
       </a>
     </section>
   </main>

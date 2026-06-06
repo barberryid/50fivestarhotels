@@ -16,6 +16,8 @@ export const countryRegions: Record<string, string> = {
   Egypt: 'Middle East and North Africa',
   Morocco: 'Middle East and North Africa',
   'United Arab Emirates': 'Middle East',
+  Canada: 'Americas',
+  'United States': 'Americas',
 };
 
 export function countryRegion(country: string) {
@@ -31,5 +33,6 @@ export function regionSlug(region: string) {
   if (region === 'Caucasus' || region === 'Central Asia') {
     return '/regions/caucasus-central-asia/';
   }
+  if (region === 'Americas') return '/regions/americas/';
   return '/destinations/';
 }
