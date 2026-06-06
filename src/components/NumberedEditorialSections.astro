@@ -1,0 +1,59 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'section'> {
+  ariaLabel?: string;
+}
+
+const { ariaLabel = 'Hotel guide sections', class: className, ...attrs } = Astro.props;
+---
+
+<section {...attrs} class:list={['numbered-editorial-sections', className]} aria-label={ariaLabel}>
+  <slot />
+</section>
+
+<style>
+  .numbered-editorial-sections {
+    counter-reset: editorial-section;
+  }
+
+  .numbered-editorial-sections :global(h2:nth-of-type(-n + 8)) {
+    align-items: end;
+    border-top: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
+    column-gap: 1rem;
+    counter-increment: editorial-section;
+    display: grid;
+    grid-template-columns: 4.25rem minmax(0, 1fr);
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.6rem;
+  }
+
+  .numbered-editorial-sections :global(h2:nth-of-type(-n + 8)::before) {
+    color: color-mix(in srgb, var(--color-gold) 72%, var(--color-bg));
+    content: counter(editorial-section, decimal-leading-zero);
+    font-family: var(--font-serif);
+    font-size: 3.4rem;
+    font-variation-settings: "SOFT" 0, "WONK" 0;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 0.82;
+  }
+
+  .numbered-editorial-sections :global(h2:nth-of-type(-n + 8) + p) {
+    margin-top: 0;
+  }
+
+  @media (min-width: 768px) {
+    .numbered-editorial-sections :global(h2:nth-of-type(-n + 8)) {
+      column-gap: 1.5rem;
+      grid-template-columns: 6.5rem minmax(0, 1fr);
+      margin-top: 3.75rem;
+      padding-top: 2rem;
+    }
+
+    .numbered-editorial-sections :global(h2:nth-of-type(-n + 8)::before) {
+      font-size: 5.25rem;
+    }
+  }
+</style>

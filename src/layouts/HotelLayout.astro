@@ -10,6 +10,7 @@ import PhotoCarousel from '../components/PhotoCarousel.astro';
 import RelatedGuides from '../components/RelatedGuides.astro';
 import LastUpdated from '../components/LastUpdated.astro';
 import PriceAccuracyNote from '../components/PriceAccuracyNote.astro';
+import NumberedEditorialSections from '../components/NumberedEditorialSections.astro';
 import FiveStarReality from '../components/trust/FiveStarReality.astro';
 import WatchOutFor from '../components/trust/WatchOutFor.astro';
 import WhyItsCheap from '../components/trust/WhyItsCheap.astro';
@@ -323,14 +324,14 @@ const relatedGuides = [
         )}
 
         <!-- Editorial content -->
-        <div class="prose prose-lg max-w-none
+        <NumberedEditorialSections class="prose prose-lg max-w-none
           prose-headings:font-serif prose-headings:text-[#1F2428]
-          prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+          prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:leading-tight
           prose-p:text-[#1F2428]/80 prose-p:leading-relaxed
           prose-strong:text-[#1F2428]
           prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
           <slot />
-        </div>
+        </NumberedEditorialSections>
         <!-- Booking CTA -->
         <div class="mt-12 bg-[#1F2428] rounded-2xl p-8 text-white">
           <h2 class="font-serif text-2xl font-bold mb-2">Ready to check rates?</h2>
