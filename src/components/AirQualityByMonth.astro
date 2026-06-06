@@ -1,0 +1,389 @@
+---
+import type { AirQualityLabel, AirQualityMonthKey, HotelAirQuality } from '../data/hotelAirQuality';
+
+interface Props {
+  airQuality?: HotelAirQuality;
+}
+
+const { airQuality } = Astro.props;
+
+const monthEntries: { key: AirQualityMonthKey; abbr: string; full: string }[] = [
+  { key: 'jan', abbr: 'Jan', full: 'January' },
+  { key: 'feb', abbr: 'Feb', full: 'February' },
+  { key: 'mar', abbr: 'Mar', full: 'March' },
+  { key: 'apr', abbr: 'Apr', full: 'April' },
+  { key: 'may', abbr: 'May', full: 'May' },
+  { key: 'jun', abbr: 'Jun', full: 'June' },
+  { key: 'jul', abbr: 'Jul', full: 'July' },
+  { key: 'aug', abbr: 'Aug', full: 'August' },
+  { key: 'sep', abbr: 'Sep', full: 'September' },
+  { key: 'oct', abbr: 'Oct', full: 'October' },
+  { key: 'nov', abbr: 'Nov', full: 'November' },
+  { key: 'dec', abbr: 'Dec', full: 'December' },
+];
+
+const labelCopy: Record<AirQualityLabel, string> = {
+  Excellent: 'Excellent',
+  Good: 'Good',
+  Moderate: 'Moderate',
+  Poor: 'Poor',
+  Avoid: 'Avoid',
+};
+
+const ariaLabelCopy: Record<AirQualityLabel, string> = {
+  ...labelCopy,
+  Avoid: 'Avoid if sensitive',
+};
+
+const shortLabelCopy: Record<AirQualityLabel, string> = {
+  Excellent: 'Excel.',
+  Good: 'Good',
+  Moderate: 'Mod.',
+  Poor: 'Poor',
+  Avoid: 'Avoid',
+};
+
+const formatPm25 = (value: number | string) => {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? numeric.toFixed(numeric % 1 === 0 ? 0 : 1) : String(value);
+};
+
+const monthRecords = airQuality
+  ? monthEntries
+      .map((entry, index) => {
+        const month = airQuality.months[entry.key];
+        if (!month) return undefined;
+
+        const pm25Text = month.pm25 === undefined ? undefined : `estimated PM2.5 ${formatPm25(month.pm25)} ug/m3`;
+        const aqiText = month.aqi === undefined ? undefined : `AQI ${month.aqi}`;
+        const detailText = [pm25Text, aqiText].filter(Boolean).join(', ');
+        const displayLabel = labelCopy[month.label];
+        const ariaDisplayLabel = ariaLabelCopy[month.label];
+        const ariaLabel = detailText
+          ? `${entry.full}: ${ariaDisplayLabel}, ${detailText}.`
+          : `${entry.full}: ${ariaDisplayLabel}.`;
+
+        return {
+          ...entry,
+          index,
+          label: month.label,
+          displayLabel,
+          shortLabel: shortLabelCopy[month.label],
+          category: month.label.toLowerCase(),
+          pm25: month.pm25,
+          aqi: month.aqi,
+          ariaLabel,
+        };
+      })
+      .filter(Boolean)
+  : [];
+
+const hasAirQuality = monthRecords.length >= 6;
+const categoryBestMonths = monthRecords.filter(month => month.label === 'Excellent' || month.label === 'Good');
+const sourceBestMonths = monthRecords.filter(month => airQuality?.bestMonths.includes(month.abbr));
+const bestMonths = categoryBestMonths.length > 0 ? categoryBestMonths : sourceBestMonths;
+const bestMonthSet = new Set(bestMonths.map(month => month.abbr));
+const cautionMonths = monthRecords.filter(
+  month => (month.label === 'Moderate' || month.label === 'Poor') && !bestMonthSet.has(month.abbr)
+);
+const avoidMonths = monthRecords.filter(month => month.label === 'Avoid');
+
+const groupMonthText = (months: typeof monthRecords) => {
+  if (months.length === 0) return 'None obvious';
+  if (months.length === 12) return 'Year-round';
+  return months.map(month => month.abbr).join(' \u00b7 ');
+};
+
+const formatMonthRanges = (months: typeof monthRecords) => {
+  if (months.length === 0) return '';
+  if (months.length === 12) return 'year-round';
+
+  const ranges: string[] = [];
+  let start = months[0];
+  let previous = months[0];
+
+  for (const month of months.slice(1)) {
+    if (month.index === previous.index + 1) {
+      previous = month;
+      continue;
+    }
+
+    ranges.push(start.abbr === previous.abbr ? start.abbr : `${start.abbr}\u2013${previous.abbr}`);
+    start = month;
+    previous = month;
+  }
+
+  ranges.push(start.abbr === previous.abbr ? start.abbr : `${start.abbr}\u2013${previous.abbr}`);
+  return ranges.join(' \u00b7 ');
+};
+
+const summary = (() => {
+  if (!hasAirQuality) return '';
+
+  const bestText = formatMonthRanges(bestMonths);
+  const avoidText = formatMonthRanges(avoidMonths);
+
+  if (bestText && avoidText) {
+    return `Best air is usually ${bestText}. Pollution is often highest ${avoidText}.`;
+  }
+
+  if (bestText) {
+    return `Best air is usually ${bestText}. Air quality appears broadly manageable across the year.`;
+  }
+
+  if (avoidText) {
+    return `Air quality needs more caution year-round. Pollution is often highest ${avoidText}.`;
+  }
+
+  return 'Air quality varies through the year. Sensitive travellers should check live AQI before booking.';
+})();
+
+const groups = [
+  { label: 'Best air', months: bestMonths, tone: 'best' },
+  { label: 'Use caution', months: cautionMonths, tone: 'caution' },
+  { label: 'Avoid if sensitive', months: avoidMonths, tone: 'avoid' },
+];
+---
+
+{hasAirQuality && (
+  <section class="air-quality-card" aria-labelledby="air-quality-by-month-title">
+    <div class="air-quality-header">
+      <p class="air-quality-eyebrow">Air quality</p>
+      <h3 id="air-quality-by-month-title">Air quality by month</h3>
+      <p class="air-quality-summary">{summary}</p>
+    </div>
+
+    <div class="air-quality-groups" aria-label="Air quality planning summary">
+      {groups.map(group => (
+        <div class="air-quality-group" data-tone={group.tone}>
+          <span class="air-quality-group-label">{group.label}</span>
+          <span class="air-quality-group-months">{groupMonthText(group.months)}</span>
+        </div>
+      ))}
+    </div>
+
+    <ol class="air-quality-ribbon" aria-label="Monthly air quality">
+      {monthRecords.map(month => (
+        <li
+          class="air-quality-month"
+          data-category={month.category}
+          aria-label={month.ariaLabel}
+          title={month.ariaLabel}
+        >
+          <span class="air-quality-month-name">{month.abbr}</span>
+          <span class="air-quality-month-label" data-short-label={month.shortLabel}>{month.displayLabel}</span>
+          {month.pm25 !== undefined && (
+            <span class="air-quality-month-value">
+              {formatPm25(month.pm25)} <span aria-hidden="true">&micro;g/m&sup3;</span>
+            </span>
+          )}
+        </li>
+      ))}
+    </ol>
+
+    <p class="air-quality-note">
+      PM2.5-based monthly estimate. Local air can vary due to traffic, dust, fires, weather and live conditions.
+      Check live AQI before booking if you are sensitive to pollution.
+    </p>
+  </section>
+)}
+
+<style>
+  .air-quality-card {
+    background: #ffffff;
+    border: 1px solid #e2d4bf;
+    border-radius: 0.65rem;
+    box-shadow: 0 10px 30px rgba(31, 36, 40, 0.04);
+    color: #1d2433;
+    display: grid;
+    gap: 0.9rem;
+    min-width: 0;
+    padding: 1rem;
+  }
+
+  .air-quality-header {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .air-quality-eyebrow {
+    color: #b88a44;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .air-quality-header h3 {
+    color: #1d2433;
+    font-family: var(--font-serif);
+    font-size: 1.06rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .air-quality-summary {
+    color: #4b5563;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 58rem;
+  }
+
+  .air-quality-groups {
+    display: grid;
+    gap: 0.55rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .air-quality-group {
+    background: #faf8f3;
+    border: 1px solid #e5dbc9;
+    border-left-width: 0.28rem;
+    border-radius: 0.55rem;
+    display: grid;
+    gap: 0.22rem;
+    min-width: 0;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .air-quality-group[data-tone="best"] {
+    border-left-color: #58745a;
+  }
+
+  .air-quality-group[data-tone="caution"] {
+    border-left-color: #b88a44;
+  }
+
+  .air-quality-group[data-tone="avoid"] {
+    border-left-color: #842c2c;
+  }
+
+  .air-quality-group-label {
+    color: #1d2433;
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .air-quality-group-months {
+    color: #4b5563;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .air-quality-ribbon {
+    display: grid;
+    gap: 0.22rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .air-quality-month {
+    align-content: center;
+    border: 1px solid currentColor;
+    border-radius: 0.45rem;
+    display: grid;
+    gap: 0.16rem;
+    min-height: 4rem;
+    min-width: 0;
+    padding: 0.42rem 0.22rem;
+    text-align: center;
+  }
+
+  .air-quality-month-name,
+  .air-quality-month-label,
+  .air-quality-month-value {
+    display: block;
+    line-height: 1.1;
+    min-width: 0;
+  }
+
+  .air-quality-month-name {
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+
+  .air-quality-month-label {
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .air-quality-month-value {
+    color: rgba(29, 36, 51, 0.72);
+    font-size: 0.58rem;
+    font-weight: 750;
+  }
+
+  .air-quality-month[data-category="excellent"] {
+    background: #dcead8;
+    color: #365c3a;
+  }
+
+  .air-quality-month[data-category="good"] {
+    background: #e8e6c9;
+    color: #4d5529;
+  }
+
+  .air-quality-month[data-category="moderate"] {
+    background: #f3e2b8;
+    color: #6f4d19;
+  }
+
+  .air-quality-month[data-category="poor"] {
+    background: #f1c6a8;
+    color: #7c3712;
+  }
+
+  .air-quality-month[data-category="avoid"] {
+    background: #e9b7b0;
+    color: #842c2c;
+  }
+
+  .air-quality-note {
+    color: #6b7280;
+    font-size: 0.74rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    .air-quality-groups {
+      grid-template-columns: 1fr;
+    }
+
+    .air-quality-ribbon {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .air-quality-month-label {
+      font-size: 0;
+    }
+
+    .air-quality-month-label::after {
+      content: attr(data-short-label);
+      font-size: 0.56rem;
+      line-height: 1.1;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .air-quality-card {
+      padding: 0.9rem;
+    }
+
+    .air-quality-month {
+      min-height: 3.8rem;
+    }
+
+    .air-quality-month-value {
+      display: none;
+    }
+  }
+</style>
