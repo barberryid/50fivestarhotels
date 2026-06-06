@@ -75,7 +75,7 @@ const monthRecords = airQuality
           ariaLabel,
         };
       })
-      .filter(Boolean)
+      .filter((record): record is NonNullable<typeof record> => record !== undefined)
   : [];
 
 const hasAirQuality = monthRecords.length >= 6;

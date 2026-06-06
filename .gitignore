@@ -8,3 +8,6 @@ __pycache__/
 
 # LibreOffice/Office lock files
 .~lock.*#
+
+# Microsoft Office temporary owner files
+~$*

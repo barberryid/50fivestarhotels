@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HotelCard from '../components/HotelCard.astro';
 import PriceTierCard from '../components/PriceTierCard.astro';
@@ -60,14 +60,16 @@ const moods = [
   { slug: 'hermitage-jakarta', mood: 'Art-deco calm and serious food' },
 ].map(m => ({ ...m, hotel: bySlug[m.slug] })).filter(m => m.hotel);
 
+type HotelData = CollectionEntry<'hotels'>['data'];
+
 // Slug for per-city destination pages (matches src/pages/destinations/[slug].astro)
-const citySlug = (city) =>
+const citySlug = (city: string) =>
   city.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-const heroImg = (h) => h?.image?.srcSet?.large ?? h?.image?.src;
+const heroImg = (h?: HotelData) => h?.image?.srcSet?.large ?? h?.image?.src;
 // Brighter "realistic daylight" variant for the feeling/mood tiles
 // (the default image is the darker editorial-dusk render).
-const dayImg = (h) => {
+const dayImg = (h?: HotelData) => {
   const day = h?.generatedGallery?.find((g) => g.type === 'realistic-daylight');
   return day?.srcSet?.large ?? day?.src ?? heroImg(h);
 };

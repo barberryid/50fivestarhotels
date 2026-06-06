@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HotelCard from '../../components/HotelCard.astro';
 import RelatedGuides from '../../components/RelatedGuides.astro';
@@ -11,10 +11,6 @@ import { countryRegion, regionSlug } from '../../lib/regions';
 const slugify = (value: string) =>
   value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-const destinationSlugs = [
-  'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo','pokhara',
-];
-
 export async function getStaticPaths() {
   const all = await getCollection('hotels', ({ data }) => !data.draft);
   const slugifyPath = (value: string) =>
@@ -22,13 +18,13 @@ export async function getStaticPaths() {
   const allowedSlugs = [
     'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo','pokhara',
   ];
-  const cities = new Map();
+  const cities = new Map<string, CollectionEntry<'hotels'>[]>();
   for (const h of all) {
     const slug = slugifyPath(h.data.city);
-    if (allowedSlugs.includes(slug)) {
-      if (!cities.has(slug)) cities.set(slug, []);
-      cities.get(slug).push(h);
-    }
+    if (!allowedSlugs.includes(slug)) continue;
+    const existing = cities.get(slug);
+    if (existing) existing.push(h);
+    else cities.set(slug, [h]);
   }
   return Array.from(cities.entries()).map(([slug, hotels]) => ({
     params: { slug },

@@ -31,7 +31,9 @@ const cityRows = Object.entries(cityNotes).map(([city, values]) => {
   const hotel = all.find((h) => h.data.city === city);
   return { city, country: values[0], why: values[1], tier: values[2], when: values[3], caution: values[4], hotel };
 });
-const hotels = cityRows.map((row) => row.hotel).filter(Boolean);
+const hotels = cityRows
+  .map((row) => row.hotel)
+  .filter((hotel): hotel is NonNullable<typeof hotel> => hotel !== undefined);
 const tableHotels = hotels.map((h) => ({
   slug: h.data.slug,
   rank: h.data.rank,

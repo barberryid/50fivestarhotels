@@ -63,7 +63,7 @@ const cards = [
                 <li class="seasonality-month" data-label={month.label}>
                   <span class="seasonality-month-name">{month.month}</span>
                   <span class="seasonality-month-label">{month.label}</span>
-                  {card.kind === 'weather' && (
+                  {'tempC' in month && (
                     <>
                       <span class="seasonality-temp">{month.tempC}&deg;C / {month.tempF}&deg;F</span>
                       <span class="seasonality-humidity" data-short={`${month.humidity}% hum.`}>{month.humidity}% humidity</span>

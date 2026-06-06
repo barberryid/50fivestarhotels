@@ -67,7 +67,7 @@ const { images, label } = Astro.props;
 
     let current = 0;
 
-    const update = (index) => {
+    const update = (index: number) => {
       current = (index + slides.length) % slides.length;
       slides[current].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
       dots.forEach((dot, dotIndex) => {
