@@ -12,12 +12,12 @@ allHotels.sort((a, b) => a.data.rank - b.data.rank);
 const bySlug = Object.fromEntries(allHotels.map(h => [h.data.slug, h.data]));
 
 const featuredSlugs = [
+  'the-grand-york',
+  'municipal-hotel-liverpool',
   'hotel-majapahit-surabaya',
   'auberge-saint-antoine-quebec-city',
   'phoenix-hotel-yogyakarta',
   'majestic-hotel-kuala-lumpur',
-  'brown-hotel-louisville',
-  'pfister-hotel-milwaukee',
 ];
 const featured = allHotels.filter(h => featuredSlugs.includes(h.data.slug));
 
@@ -49,22 +49,22 @@ const tableHotels = allHotels.map(h => ({
 
 // "Browse by feeling" — editorial moods, each with a representative image
 const feelings = [
-  { label: 'Heritage & history', note: 'Old walls, grand staircases and a sense of the past.', slug: 'hotel-majapahit-surabaya' },
+  { label: 'Heritage & history', note: 'Old walls, grand staircases and a sense of the past.', slug: 'the-grand-york' },
   { label: 'Spa & slow mornings', note: 'Wellness stays where the days unwind gently.', slug: 'raweekanlaya-bangkok' },
   { label: 'Design & atmosphere', note: 'Hotels with a strong, distinctive sense of place.', slug: 'stamba-hotel-tbilisi' },
-  { label: 'City & food', note: 'A great base for markets, restaurants and street food.', slug: 'majestic-hotel-kuala-lumpur' },
+  { label: 'City & food', note: 'A great base for culture, restaurants and night energy.', slug: 'municipal-hotel-liverpool' },
   { label: 'Beach & resort', note: 'Sea air, pools and easy holiday comfort.', slug: 'boton-blue-nha-trang' },
   { label: 'Romantic escape', note: 'Special-occasion stays that feel quietly indulgent.', slug: 'sofitel-marrakech' },
 ].map(f => ({ ...f, hotel: bySlug[f.slug] })).filter(f => f.hotel);
 
 // "Destination mood" — cities with a one-line atmosphere
 const moods = [
+  { slug: 'the-grand-york', mood: 'Medieval walls, railway-palace comfort' },
+  { slug: 'municipal-hotel-liverpool', mood: 'Civic grandeur and waterfront culture' },
+  { slug: 'kimpton-blythswood-square', mood: 'Georgian-square Glasgow luxury' },
   { slug: 'hotel-majapahit-surabaya', mood: 'Colonial Java, quietly grand' },
   { slug: 'stamba-hotel-tbilisi', mood: 'Design-led Caucasus cool' },
   { slug: 'sofitel-marrakech', mood: 'Warm light and palace gardens' },
-  { slug: 'raweekanlaya-bangkok', mood: 'Riverside wellness in the city' },
-  { slug: 'majestic-hotel-kuala-lumpur', mood: 'Heritage glamour, modern value' },
-  { slug: 'hermitage-jakarta', mood: 'Art-deco calm and serious food' },
 ].map(m => ({ ...m, hotel: bySlug[m.slug] })).filter(m => m.hotel);
 
 type HotelData = CollectionEntry<'hotels'>['data'];
@@ -253,7 +253,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
     <!-- Comparison table -->
     <section class="max-w-6xl mx-auto px-5 py-20">
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">The full list</p>
-      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">All 31 hotels at a glance</h2>
+      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">All {allHotels.length} hotels at a glance</h2>
       <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">Ranked by value score. Click any hotel for the full editorial profile.</p>
       <HotelComparisonTable hotels={tableHotels} title="" />
       <div class="mt-8 text-center">
@@ -294,10 +294,10 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
         Find the hotel where the price feels mispriced.
       </h2>
       <p class="text-[#6F685F] text-lg mb-8 max-w-xl mx-auto">
-        Thirty-one hotels across North America, South Asia, Southeast Asia, Europe, the Middle East and the Caucasus — each one chosen because the value case is genuinely interesting.
+        {allHotels.length} hotels across North America, South Asia, Southeast Asia, Europe, the Middle East and the Caucasus — each one chosen because the value case is genuinely interesting.
       </p>
       <a href="/destinations" class="inline-flex items-center bg-[#1F2428] text-white font-semibold py-4 px-8 rounded-full hover:bg-[#B88A44] transition-colors no-underline">
-        Browse all 31 hotels
+        Browse all {allHotels.length} hotels
       </a>
     </section>
   </main>

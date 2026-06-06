@@ -1,7 +1,7 @@
 ---
 title: "The Central Station Memphis, Curio Collection by Hilton"
 slug: "central-station-memphis"
-rank: 15
+rank: 18
 city: "Memphis"
 country: "United States"
 region: "North America"

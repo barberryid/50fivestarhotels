@@ -1,7 +1,7 @@
 ---
 title: "Hyatt Regency Tashkent"
 slug: "hyatt-regency-tashkent"
-rank: 20
+rank: 23
 city: "Tashkent"
 country: "Uzbekistan"
 region: "Caucasus and Central Asia"

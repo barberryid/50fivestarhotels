@@ -125,6 +125,24 @@ export const destinationImages = {
     credit: 'AI-generated editorial image',
     subject: 'Phewa Lake and Annapurna views',
   },
+  york: {
+    src: '/images/hotels/the-grand-york-realistic-daylight.webp',
+    alt: 'AI-generated heritage hotel and historic street atmosphere in York, England',
+    credit: 'AI-generated editorial image',
+    subject: 'Historic York heritage hotel',
+  },
+  liverpool: {
+    src: '/images/hotels/municipal-hotel-liverpool-realistic-daylight.webp',
+    alt: 'AI-generated Victorian civic hotel architecture in Liverpool, England',
+    credit: 'AI-generated editorial image',
+    subject: 'Liverpool civic architecture',
+  },
+  glasgow: {
+    src: '/images/hotels/kimpton-blythswood-square-realistic-daylight.webp',
+    alt: 'AI-generated Georgian garden square hotel scene in Glasgow, Scotland',
+    credit: 'AI-generated editorial image',
+    subject: 'Glasgow Georgian square',
+  },
 } as const;
 
 export type DestinationImage = (typeof destinationImages)[keyof typeof destinationImages];

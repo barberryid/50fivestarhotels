@@ -1,7 +1,7 @@
 ---
 title: "Stamba Hotel"
 slug: "stamba-hotel-tbilisi"
-rank: 8
+rank: 11
 city: "Tbilisi"
 country: "Georgia"
 region: "Caucasus and Central Asia"

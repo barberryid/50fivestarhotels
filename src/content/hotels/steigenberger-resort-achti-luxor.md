@@ -1,7 +1,7 @@
 ---
 title: "Steigenberger Resort Achti Luxor"
 slug: "steigenberger-resort-achti-luxor"
-rank: 14
+rank: 17
 city: "Luxor"
 country: "Egypt"
 region: "Middle East and North Africa"

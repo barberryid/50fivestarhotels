@@ -22,6 +22,51 @@ export type LocationSnapshot = {
 };
 
 export const locationSnapshots: Record<string, LocationSnapshot> = {
+  "the-grand-york": {
+    area: "York city centre / station edge",
+    locationVerdict: "A strong York base near the station and close enough for the Minster, the Shambles and the city walls on foot.",
+    bestFor: ["Medieval York", "Rail arrival", "Heritage stay", "Spa city break"],
+    nearbyAnchors: [
+      { name: "York Minster", type: "cathedral", distance: "about 10 min on foot" },
+      { name: "The Shambles", type: "historic street", distance: "about 12 min on foot" },
+      { name: "York city walls", type: "heritage walk", distance: "nearby" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=The%20Grand%20York%20England",
+    fallbackMap: {
+      label: "York heritage base",
+      nearby: ["York Minster", "The Shambles", "City walls"],
+    },
+  },
+  "municipal-hotel-liverpool": {
+    area: "Liverpool city centre",
+    locationVerdict: "A central Liverpool base for St George's Hall, the waterfront, Albert Dock, galleries and Beatles-linked city exploring.",
+    bestFor: ["Liverpool city break", "Civic architecture", "Waterfront", "Music history"],
+    nearbyAnchors: [
+      { name: "St George's Hall", type: "civic landmark", distance: "about 5 min on foot" },
+      { name: "Albert Dock", type: "waterfront / museums", distance: "walk or short taxi" },
+      { name: "Pier Head / Three Graces", type: "architecture", distance: "walk or short taxi" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Municipal%20Hotel%20Liverpool%20MGallery",
+    fallbackMap: {
+      label: "Liverpool civic base",
+      nearby: ["St George's Hall", "Albert Dock", "Three Graces"],
+    },
+  },
+  "kimpton-blythswood-square": {
+    area: "Blythswood Square / central Glasgow",
+    locationVerdict: "A central Glasgow base on a Georgian square, useful for museums, restaurants, Mackintosh architecture and city nightlife.",
+    bestFor: ["Glasgow city break", "Spa hotel", "Restaurants", "Architecture"],
+    nearbyAnchors: [
+      { name: "Kelvingrove Art Gallery and Museum", type: "museum", distance: "short taxi ride" },
+      { name: "Mackintosh architecture trail", type: "architecture", distance: "walk or short taxi" },
+      { name: "Merchant City", type: "restaurants / galleries", distance: "walk or short taxi" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Kimpton%20Blythswood%20Square%20Glasgow",
+    fallbackMap: {
+      label: "Glasgow square base",
+      nearby: ["Kelvingrove", "Mackintosh trail", "Merchant City"],
+    },
+  },
   "hotel-majapahit-surabaya": {
     area: "Central Surabaya",
     locationVerdict: "In central Surabaya, useful for colonial-history sights, old-city exploring and a short-stay Java food stop.",
