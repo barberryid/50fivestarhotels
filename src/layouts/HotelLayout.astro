@@ -5,6 +5,7 @@ import Badge from '../components/Badge.astro';
 import ValueScore from '../components/ValueScore.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import SeasonalityCards from '../components/SeasonalityCards.astro';
+import LocationSnapshotCard from '../components/LocationSnapshotCard.astro';
 import PhotoCarousel from '../components/PhotoCarousel.astro';
 import RelatedGuides from '../components/RelatedGuides.astro';
 import LastUpdated from '../components/LastUpdated.astro';
@@ -15,6 +16,7 @@ import WhyItsCheap from '../components/trust/WhyItsCheap.astro';
 import BestMonths from '../components/trust/BestMonths.astro';
 import { hotelAirQuality } from '../data/hotelAirQuality';
 import { hotelSeasonality } from '../data/hotelSeasonality';
+import { locationSnapshots } from '../data/locationSnapshots';
 import { absoluteUrl, breadcrumbJsonLd, canonicalUrl, imageUrl, publisherJsonLd } from '../lib/seo';
 import { countryRegion, regionSlug } from '../lib/regions';
 
@@ -81,6 +83,7 @@ const gallery = hotel.gallery?.filter(image => image.src) ?? [];
 const generatedGallery = hotel.generatedGallery?.filter(image => image.src) ?? [];
 const seasonality = hotelSeasonality[hotel.slug];
 const airQuality = hotelAirQuality[hotel.slug];
+const locationSnapshot = locationSnapshots[hotel.slug];
 const creditLabel = (sourceSite?: string) => sourceSite ? `Image credit: ${sourceSite}` : 'Image credit';
 
 // Derive best-month signals from seasonality data for the trust panel
@@ -235,6 +238,7 @@ const relatedGuides = [
               ['Why it is interesting', '#why-it-is-interesting'],
               ['Why it is good value', '#why-it-is-good-value'],
               ['Five-star reality', '#five-star-reality'],
+              ['Where this hotel is', '#where-this-hotel-is'],
               ['Best months', '#best-months'],
               ['Location and nearby sights', '#location-and-nearby-sights'],
               ['Food and things to do nearby', '#food-and-things-to-do-nearby'],
@@ -243,8 +247,6 @@ const relatedGuides = [
             ].map(([label, href]) => <a href={href} class="text-[#6F685F] no-underline hover:text-[#B88A44]">{label}</a>)}
           </div>
         </nav>
-
-        {seasonality && <SeasonalityCards seasonality={seasonality} airQuality={airQuality} />}
 
         <!-- Highlights -->
         <div class="bg-[#4F6547]/6 rounded-2xl p-6 mb-8">
@@ -275,6 +277,10 @@ const relatedGuides = [
             <WatchOutFor cautions={hotel.cautions} />
           </div>
         </section>
+
+        <LocationSnapshotCard snapshot={locationSnapshot} hotel={hotel} />
+
+        {seasonality && <SeasonalityCards seasonality={seasonality} airQuality={airQuality} />}
 
         {gallery.length > 0 && (
           <section class="mt-8 mb-10" aria-labelledby="image-gallery-heading">
