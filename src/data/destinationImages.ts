@@ -119,6 +119,12 @@ export const destinationImages = {
     credit: 'AI-generated editorial image',
     subject: 'Palace of Culture',
   },
+  pokhara: {
+    src: '/images/destinations/phewa-lake-pokhara-ai.webp',
+    alt: 'Phewa Lake with boats and the Annapurna range in Pokhara, Nepal',
+    credit: 'AI-generated editorial image',
+    subject: 'Phewa Lake and Annapurna views',
+  },
 } as const;
 
 export type DestinationImage = (typeof destinationImages)[keyof typeof destinationImages];
