@@ -293,6 +293,156 @@ export const locationSnapshots: Record<string, LocationSnapshot> = {
       nearby: ["Fewa Lake", "Pokhara Lakeside", "Annapurna views"],
     },
   },
+  "auberge-saint-antoine-quebec-city": {
+    area: "Old Port / Old Quebec",
+    locationVerdict: "In Quebec City's Old Port, useful for Le Petit-Champlain, the Chateau Frontenac and atmospheric old-city walking.",
+    bestFor: ["Old Quebec", "Heritage stay", "Winter city break", "Quebecois food"],
+    nearbyAnchors: [
+      { name: "Le Petit-Champlain", type: "old town / boutiques", distance: "immediately nearby" },
+      { name: "Chateau Frontenac", type: "landmark hotel", distance: "about 5 min on foot" },
+      { name: "Montmorency Falls", type: "waterfall / viewpoint", distance: "short drive" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Auberge%20Saint-Antoine%20Quebec%20City",
+    fallbackMap: {
+      label: "Old Quebec base",
+      nearby: ["Le Petit-Champlain", "Chateau Frontenac", "Montmorency Falls"],
+    },
+  },
+  "brown-hotel-louisville": {
+    area: "Downtown Louisville / Theater District",
+    locationVerdict: "In downtown Louisville's Theater District, useful for Whiskey Row, bourbon bars, the Muhammad Ali Center and Derby heritage by taxi.",
+    bestFor: ["Bourbon trail", "Grand hotel", "Derby heritage", "Downtown base"],
+    nearbyAnchors: [
+      { name: "Whiskey Row", type: "bourbon bars / distilleries", distance: "walk or short ride" },
+      { name: "Muhammad Ali Center", type: "sports / culture museum", distance: "about 10 min on foot" },
+      { name: "Churchill Downs", type: "racecourse / museum", distance: "short drive" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=The%20Brown%20Hotel%20Louisville%20Kentucky",
+    fallbackMap: {
+      label: "Downtown bourbon base",
+      nearby: ["Whiskey Row", "Muhammad Ali Center", "Churchill Downs"],
+    },
+  },
+  "pfister-hotel-milwaukee": {
+    area: "Downtown Milwaukee / Lake Michigan access",
+    locationVerdict: "In downtown Milwaukee, useful for Lake Michigan, the Milwaukee Art Museum, the Third Ward and city-centre food stops.",
+    bestFor: ["Lake Michigan", "Art hotel", "Third Ward", "Victorian heritage"],
+    nearbyAnchors: [
+      { name: "Milwaukee Art Museum", type: "architecture / museum", distance: "about 10 min on foot" },
+      { name: "Milwaukee Public Market", type: "food hall", distance: "nearby" },
+      { name: "Harley-Davidson Museum", type: "design / transport museum", distance: "short cab ride" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=The%20Pfister%20Hotel%20Milwaukee",
+    fallbackMap: {
+      label: "Downtown lake base",
+      nearby: ["Art Museum", "Public Market", "Harley-Davidson Museum"],
+    },
+  },
+  "venetian-resort-las-vegas": {
+    area: "Las Vegas Strip",
+    locationVerdict: "On the central Las Vegas Strip, useful for restaurants, shows, casino-hopping and spa time without needing a car.",
+    bestFor: ["The Strip", "Suite stay", "Shows", "Spa trip"],
+    nearbyAnchors: [
+      { name: "Las Vegas Strip", type: "entertainment corridor", distance: "at the door" },
+      { name: "Canyon Ranch Spa Club", type: "hotel spa", distance: "on property" },
+      { name: "Neon Museum", type: "design / photo stop", distance: "rideshare trip" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=The%20Venetian%20Resort%20Las%20Vegas",
+    fallbackMap: {
+      label: "Strip resort base",
+      nearby: ["The Strip", "Canyon Ranch Spa", "Neon Museum"],
+    },
+  },
+  "mayo-hotel-tulsa": {
+    area: "Downtown Tulsa / Art Deco district",
+    locationVerdict: "In downtown Tulsa's Art Deco core, useful for architecture walks, rooftop drinks, Philbrook and the Gathering Place by car.",
+    bestFor: ["Art Deco", "Downtown Tulsa", "Rooftop bar", "Architecture walk"],
+    nearbyAnchors: [
+      { name: "Art Deco walking circuit", type: "architecture", distance: "surrounding blocks" },
+      { name: "Philbrook Museum of Art", type: "museum / gardens", distance: "short drive" },
+      { name: "The Gathering Place", type: "riverfront park", distance: "short drive" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=The%20Mayo%20Hotel%20Tulsa",
+    fallbackMap: {
+      label: "Downtown Deco base",
+      nearby: ["Art Deco district", "Philbrook", "Gathering Place"],
+    },
+  },
+  "central-station-memphis": {
+    area: "South Main Arts District",
+    locationVerdict: "In Memphis's South Main Arts District, useful for music, restaurants, galleries and rideshare access to the city's major soul and civil-rights sights.",
+    bestFor: ["Music trip", "South Main", "Train station hotel", "Memphis history"],
+    nearbyAnchors: [
+      { name: "National Civil Rights Museum", type: "history museum", distance: "nearby" },
+      { name: "Stax Museum of American Soul Music", type: "music museum", distance: "short rideshare" },
+      { name: "Sun Studio", type: "recording studio / tour", distance: "rideshare trip" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=The%20Central%20Station%20Memphis%20Curio%20Collection%20by%20Hilton",
+    fallbackMap: {
+      label: "South Main music base",
+      nearby: ["Civil Rights Museum", "Stax Museum", "Sun Studio"],
+    },
+  },
+  "the-nines-portland": {
+    area: "Downtown Portland / Pioneer Square",
+    locationVerdict: "Above Pioneer Place in downtown Portland, useful for Powell's, the Portland Art Museum, restaurants and easy city walking.",
+    bestFor: ["Downtown Portland", "Design hotel", "Bookshops", "Pacific Northwest food"],
+    nearbyAnchors: [
+      { name: "Powell's City of Books", type: "bookshop / landmark", distance: "about 10 min on foot" },
+      { name: "Portland Art Museum", type: "museum", distance: "about 15 min on foot" },
+      { name: "Portland Japanese Garden", type: "garden / viewpoint", distance: "rideshare trip" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=The%20Nines%20a%20Luxury%20Collection%20Hotel%20Portland",
+    fallbackMap: {
+      label: "Pioneer Square base",
+      nearby: ["Powell's", "Art Museum", "Japanese Garden"],
+    },
+  },
+  "21c-museum-hotel-louisville": {
+    area: "Downtown Louisville / Museum Row",
+    locationVerdict: "On Louisville's Museum Row, useful for the Slugger Museum, Whiskey Row, NuLu and bourbon-country city exploring.",
+    bestFor: ["Art hotel", "Museum Row", "Bourbon bars", "NuLu dining"],
+    nearbyAnchors: [
+      { name: "Louisville Slugger Museum", type: "museum / factory", distance: "about 5 min on foot" },
+      { name: "Whiskey Row", type: "bourbon bars", distance: "walkable" },
+      { name: "NuLu", type: "food / boutiques", distance: "about 10 min on foot" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=21c%20Museum%20Hotel%20Louisville",
+    fallbackMap: {
+      label: "Museum Row base",
+      nearby: ["Slugger Museum", "Whiskey Row", "NuLu"],
+    },
+  },
+  "kimpton-cottonwood-omaha": {
+    area: "Blackstone District",
+    locationVerdict: "In Omaha's Blackstone District, useful for independent restaurants and bars, with the Old Market, Joslyn and zoo reached by taxi or rideshare.",
+    bestFor: ["Blackstone District", "Heritage stay", "Omaha food", "Midwest city break"],
+    nearbyAnchors: [
+      { name: "Blackstone District", type: "restaurants / bars", distance: "at the door" },
+      { name: "Joslyn Art Museum", type: "art museum", distance: "short drive" },
+      { name: "Henry Doorly Zoo and Aquarium", type: "zoo / aquarium", distance: "rideshare trip" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Kimpton%20Cottonwood%20Hotel%20Omaha",
+    fallbackMap: {
+      label: "Blackstone base",
+      nearby: ["Blackstone District", "Joslyn", "Henry Doorly Zoo"],
+    },
+  },
+  "perry-lane-hotel-savannah": {
+    area: "Savannah Historic District",
+    locationVerdict: "Inside Savannah's Historic District, useful for Forsyth Park, SCAD, house museums, rooftop drinks and walkable Southern city scenery.",
+    bestFor: ["Historic District", "Rooftop pool", "Photogenic streets", "Savannah food"],
+    nearbyAnchors: [
+      { name: "Forsyth Park", type: "park / photography", distance: "about 5 min on foot" },
+      { name: "SCAD Museum of Art", type: "art museum", distance: "about 10 min on foot" },
+      { name: "Mercer Williams House", type: "house museum", distance: "about 10 min on foot" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Perry%20Lane%20Hotel%20a%20Luxury%20Collection%20Hotel%20Savannah",
+    fallbackMap: {
+      label: "Historic District base",
+      nearby: ["Forsyth Park", "SCAD Museum", "Mercer Williams House"],
+    },
+  },
   "real-marina-olhao": {
     area: "Olhao marina / Ria Formosa",
     locationVerdict: "On Olhao's marina, useful for Ria Formosa boat trips, seafood markets and barrier-island beach days.",
