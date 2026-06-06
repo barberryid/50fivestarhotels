@@ -1,56 +1,141 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+
+const facts = [
+  { label: 'Countries visited', value: '154 / 193 UN member states' },
+  { label: 'Travel style', value: 'Independent traveller' },
+  { label: 'Favourite travel mix', value: 'Beautiful places and difficult places' },
+  { label: 'Site focus', value: 'Affordable luxury hotels' },
+  { label: 'Mission', value: 'Finding unusually good hotel value worldwide' },
+];
 ---
 
 <PageLayout
-  title="About 50 Five-Star Hotels | Luxury Travel Without Luxury Prices"
-  description="About 50 Five-Star Hotels — a luxury editorial travel project built around the idea that five-star comfort can cost far less than most travellers expect."
+  title="About 50 Five-Star Hotels"
+  description="About Gary Wilson and the story behind 50 Five-Star Hotels, a personal guide to affordable luxury hotels and five-star hotels without five-star prices."
+  image="/images/about/about-gary-wilson-50-five-star-hotels.png"
+  maxWidth="max-w-6xl"
 >
-  <div class="prose prose-lg max-w-none
-    prose-headings:font-serif prose-headings:text-[#1F2428]
-    prose-h1:text-4xl prose-h1:mb-8
-    prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-    prose-p:text-[#1F2428]/75 prose-p:leading-relaxed
-    prose-strong:text-[#1F2428]
-    prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
+  <!-- Hero image: full, uncropped, centred -->
+  <figure class="mb-12">
+    <img
+      src="/images/about/about-gary-wilson-50-five-star-hotels.png"
+      alt="Illustrated travel infographic about Gary Wilson, his 154-country travel background, and the story behind 50 Five-Star Hotels."
+      class="w-full h-auto object-contain mx-auto rounded-2xl border border-[#E2D4BF] shadow-sm bg-[#FFFDF8]"
+      style="max-width: 1200px;"
+      width="800"
+      height="1200"
+    />
+  </figure>
 
-    <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest not-prose mb-4">The project</p>
-    <h1>About 50 Five-Star Hotels</h1>
+  <div class="max-w-3xl mx-auto">
+    <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">The story</p>
+    <h1 class="font-serif text-4xl text-[#1F2428] mb-8">About 50 Five-Star Hotels</h1>
 
-    <p>
-      50 Five-Star Hotels is a luxury-value travel project built around a simple idea: in the right cities, five-star comfort can cost far less than most travellers expect.
-    </p>
-    <p>
-      It is built for travellers who like comfort, atmosphere and value, but do not want generic luxury-hotel marketing. The site is interested in where luxury is mispriced, where a destination makes the hotel more compelling, and where the drawbacks are clear enough to book intelligently.
-    </p>
-    <p>
-      The site looks for hotels where price, place and experience come together — heritage hotels, design hotels, spa hotels, city hotels and resort-style stays that can make a trip feel more special without normal luxury pricing.
-    </p>
-    <p>
-      The goal is not to list the cheapest rooms. The goal is to find hotels that make a traveller think: I did not realise I could have this kind of stay at that price.
-    </p>
+    <!-- Credibility fact box -->
+    <div class="not-prose bg-[#FFFDF8] border border-[#E2D4BF] rounded-2xl p-6 sm:p-8 mb-12 shadow-sm">
+      <div class="w-10 h-px bg-[#B88A44] mb-5"></div>
+      <dl class="space-y-4">
+        {facts.map(fact => (
+          <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+            <dt class="text-[#B88A44] text-xs font-bold uppercase tracking-widest sm:w-44 sm:flex-shrink-0">
+              {fact.label}
+            </dt>
+            <dd class="text-[#1F2428] font-medium">{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
 
-    <h2>The collection</h2>
-    <p>
-      The collection covers 31 hotels across North America, South Asia, Southeast Asia, Europe, the Middle East and the Caucasus. All are selected through a structured evaluation process that weights price-to-value, hotel character, review consistency, location quality and nearby destination appeal. Future updates will expand the collection towards 50 hotels.
-    </p>
+    <div class="prose prose-lg max-w-none
+      prose-headings:font-serif prose-headings:text-[#1F2428]
+      prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+      prose-p:text-[#1F2428]/75 prose-p:leading-relaxed
+      prose-strong:text-[#1F2428]
+      prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
 
-    <h2>What this site is not</h2>
-    <p>
-      This site is not a hotel booking engine, a comparison tool or an affiliate directory built to maximise link clicks. It is an editorial travel guide. Hotels are included because the editorial case for them is strong, not because they generate commission.
-    </p>
-    <p>
-      It is also not a guarantee of prices. Rates change constantly and every price reference on the site is approximate. Always check current availability for your specific dates before making any travel decision.
-    </p>
+      <p>I have visited 154 of the world's 193 United Nations member states.</p>
+      <p>
+        Over the years I have travelled across every continent, from some of the world's
+        most famous destinations to places that rarely appear on tourism lists. I enjoy both
+        beautiful places and difficult places: remote mountain regions, little-visited
+        countries, historic cities, deserts, tropical islands, and destinations that many
+        travellers overlook.
+      </p>
+      <p>Most of my trips are not luxury trips.</p>
+      <p>
+        Like many travellers, I usually have a budget. But whenever it has been possible, I
+        have enjoyed staying in hotels that offer an unusually high level of comfort,
+        character, service, or atmosphere for the price.
+      </p>
+      <p>What fascinated me was how dramatically hotel value varies around the world.</p>
+      <p>
+        In some destinations, a standard hotel room can cost more than a luxury suite
+        elsewhere. In other places, it is possible to stay in beautiful heritage hotels,
+        stylish boutique properties, elegant city hotels, or even genuine five-star resorts
+        for far less than many people expect.
+      </p>
+      <p>Over time I began keeping notes.</p>
+      <p>
+        Whenever I found a hotel that made me think, &ldquo;I didn't realise I could stay
+        somewhere like this for that price,&rdquo; I added it to the list.
+      </p>
+      <p>
+        Eventually the list became large enough that I decided to turn it into this website.
+      </p>
 
-    <h2>The five-star question</h2>
-    <p>
-      Not every hotel here is a conventionally luxurious five-star property. Some are heritage hotels rated five-star by local or booking-platform standards, where the value case is interesting even if the polish is not flawless. The site is honest about these distinctions — every profile explains what kind of five-star the hotel is and what that means in practice.
-    </p>
+      <h2>Why this site exists</h2>
+      <p>
+        50 Five-Star Hotels is a personal research project dedicated to finding hotels that
+        offer an exceptional luxury-to-price ratio.
+      </p>
+      <p>The goal is not to find the cheapest hotels.</p>
+      <p>
+        The goal is to find hotels where the experience feels significantly better than the
+        price suggests.
+      </p>
+      <p>
+        Some are genuine international five-star hotels. Others are heritage properties,
+        boutique hotels, resorts, or locally classified five-star hotels that deliver an
+        experience far above what many travellers expect for the cost.
+      </p>
+      <p>For every hotel, I ask a simple question:</p>
+      <p>
+        <strong>Would a reasonably experienced traveller be pleasantly surprised by what
+        they get for the money?</strong>
+      </p>
+      <p>If the answer is yes, it deserves consideration. You can read more about how this works on the <a href="/methodology">methodology page</a>.</p>
+
+      <h2>How I travel</h2>
+      <p>
+        I am particularly interested in unusual destinations, emerging travel destinations,
+        historic cities, archaeology and culture, mountains and natural landscapes, food and
+        local restaurants, affordable luxury travel, and finding exceptional value.
+      </p>
+      <p>
+        Many of the hotels featured on this site are places I have stayed in, researched
+        extensively, or would happily book myself on a future trip. You can browse them all
+        by <a href="/destinations">destination</a> or by budget tier, from
+        <a href="/under-100">hotels under €100</a> upwards.
+      </p>
+
+      <h2>The promise</h2>
+      <p>This site is built around a simple idea:</p>
+      <p><strong>Five-star hotels without five-star prices.</strong></p>
+      <p>
+        I believe luxury travel does not have to be reserved for people with unlimited
+        budgets. With the right destination, the right timing, and the right hotel,
+        remarkable stays can be surprisingly affordable.
+      </p>
+      <p>
+        This website is my attempt to find those opportunities and share them with other
+        travellers.
+      </p>
+    </div>
 
     <div class="not-prose mt-12 bg-[#1F2428] rounded-2xl p-8 text-white">
       <h2 class="font-serif text-2xl font-bold mb-3">Start exploring</h2>
-      <p class="text-white/60 text-sm mb-6">Browse the collection by destination, budget tier or our top-ranked hotels.</p>
+      <p class="text-white/60 text-sm mb-6">Browse the collection by destination, budget tier or how we choose hotels.</p>
       <div class="flex flex-wrap gap-3">
         <a href="/destinations" class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-2.5 px-5 rounded-xl hover:bg-[#A8763A] transition-colors no-underline text-sm">
           Browse by destination
