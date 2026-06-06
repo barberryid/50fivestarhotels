@@ -1,1 +1,0 @@
-Awaiting ChatGPT hero image from Gary. Generate per research/bar-peepal-resort-pokhara-image-prompts.md, save the .webp here (delete this .txt), then apply the frontmatter swap noted at the bottom of src/content/hotels/bar-peepal-resort-pokhara.md.

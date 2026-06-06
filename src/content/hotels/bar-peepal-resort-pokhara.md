@@ -18,13 +18,11 @@ valueScore: 73
 verdict: "Good value"
 bookingUrl: "https://www.booking.com/searchresults.html?ss=Bar%20Peepal%20Resort%20Pokhara%20Nepal"
 image:
-  src: "/images/hotels/bar-peepal-resort-pokhara/web/bar-peepal-resort-pokhara-01-hero-pokhara-annapurna.webp"
-  alt: "The Annapurna range and Phewa Lake seen from above Pokhara, Nepal"
-  attribution: "Photo by Jmhullot via Wikimedia Commons, CC BY 3.0"
-  sourcePageUrl: "https://commons.wikimedia.org/wiki/File:The_Annapurna_range_from_Pokhara.jpg"
-  photographer: "Jmhullot"
-  license: "CC BY 3.0"
-  licenseUrl: "https://creativecommons.org/licenses/by/3.0"
+  src: "/images/hotels/bar-peepal-resort-pokhara-editorial-dusk.webp"
+  alt: "AI-generated editorial dusk view of Bar Peepal Resort in Pokhara, Nepal"
+  srcSet:
+    large: "/images/hotels/responsive/bar-peepal-resort-pokhara-editorial-dusk-1200.webp"
+    small: "/images/hotels/responsive/bar-peepal-resort-pokhara-editorial-dusk-800.webp"
 gallery:
   - src: "/images/hotels/bar-peepal-resort-pokhara/web/bar-peepal-resort-pokhara-01-hero-pokhara-annapurna.webp"
     alt: "The Annapurna range and Phewa Lake seen from above Pokhara, Nepal"
@@ -104,8 +102,21 @@ bestNearbyAttraction: "Fewa Lake, the Annapurna range and Machhapuchhre (Fishtai
 foodAngle: "Dal bhat, momo, thukpa and the Pokhara Lakeside restaurants"
 seoTitle: "Bar Peepal Resort Pokhara Review: Affordable Five-Star Hotel with Himalayan Views"
 seoDescription: "A luxury editorial guide to Bar Peepal Resort in Pokhara, Nepal — a well-reviewed boutique resort at a price that makes Nepal's most beautiful city even more accessible."
-lastUpdated: "2026-06-05"
+lastUpdated: "2026-06-06"
 draft: false
+generatedGallery:
+  - src: "/images/hotels/bar-peepal-resort-pokhara-editorial-dusk.webp"
+    alt: "AI-generated editorial dusk view of Bar Peepal Resort in Pokhara, Nepal"
+    type: "editorial-dusk"
+    srcSet:
+      large: "/images/hotels/responsive/bar-peepal-resort-pokhara-editorial-dusk-1200.webp"
+      small: "/images/hotels/responsive/bar-peepal-resort-pokhara-editorial-dusk-800.webp"
+  - src: "/images/hotels/bar-peepal-resort-pokhara-realistic-daylight.webp"
+    alt: "AI-generated realistic daylight view of Bar Peepal Resort in Pokhara, Nepal"
+    type: "realistic-daylight"
+    srcSet:
+      large: "/images/hotels/responsive/bar-peepal-resort-pokhara-realistic-daylight-1200.webp"
+      small: "/images/hotels/responsive/bar-peepal-resort-pokhara-realistic-daylight-800.webp"
 ---
 
 ## Why it is interesting
