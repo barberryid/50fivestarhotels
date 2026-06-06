@@ -22,6 +22,18 @@ import PageLayout from '../layouts/PageLayout.astro';
       The best hotels for this site are not simply the cheapest. They are the hotels where price, place and experience combine into a compelling travel idea. A hotel that is cheap because it is mediocre, poorly located or poorly maintained does not belong here. A hotel that is cheap because it sits in a city where the cost base is lower — but where the quality, character and setting are genuinely interesting — does.
     </p>
 
+    <h2>The idea behind the site</h2>
+
+    <p>This site is about <strong>affordable luxury travel ideas</strong>, not cheap hotels.</p>
+
+    <p>
+      The distinction matters. A beautiful hotel in a city with nothing worth visiting produces a weak entry. A slightly imperfect hotel beside Angkor Wat, the Nile, Borobudur or the medina of Marrakech can produce an extraordinary trip. We weight destination quality and hotel quality roughly equally, because the hotel is only half the story.
+    </p>
+
+    <p>
+      The test for every hotel we consider is simple: does it make a reasonably seasoned traveller think — <em>I didn't know I could have that kind of stay at that price</em>?
+    </p>
+
     <h2>The scoring system</h2>
 
     <p>Each hotel is assessed against six factors. The final value score is out of 100.</p>
@@ -52,6 +64,40 @@ import PageLayout from '../layouts/PageLayout.astro';
       </table>
     </div>
 
+    <h3>Scoring adjustments</h3>
+
+    <p>
+      We apply a deliberate preference for hotels with genuine character. Generic chain towers — however well-priced — rarely produce the kind of stay this site exists to recommend.
+    </p>
+
+    <div class="not-prose overflow-x-auto rounded-2xl border border-[#1F2428]/8 my-8">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-[#1F2428] text-white text-left">
+            <th class="py-3 px-5 font-semibold">Hotel type</th>
+            <th class="py-3 px-5 font-semibold text-right">Adjustment</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['Exceptional heritage hotel', '+5 points'],
+            ['Exceptional boutique or design hotel', '+5 points'],
+            ['Interesting independent hotel', '+3 points'],
+            ['Generic chain hotel', 'no adjustment'],
+          ].map(([type, adj], i) => (
+            <tr class={`border-t border-[#1F2428]/6 ${i % 2 === 0 ? 'bg-[#FFFDF8]' : 'bg-[#F8F2E8]/60'}`}>
+              <td class="py-3 px-5 text-[#1F2428]/80">{type}</td>
+              <td class="py-3 px-5 text-right font-bold text-[#4F6547]">{adj}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Visual and photographic appeal is also scored separately (0–10) and weighted at 10% of the total score. A hotel that cannot produce a compelling image rarely produces a compelling stay.
+    </p>
+
     <h2>Verdict labels</h2>
 
     <div class="not-prose space-y-4 my-8">
@@ -60,7 +106,7 @@ import PageLayout from '../layouts/PageLayout.astro';
         { label: 'Strong value', score: '75–84', desc: 'A hotel with a clearly compelling value proposition. Worth serious consideration for the right traveller.' },
         { label: 'Good value', score: '65–74', desc: 'A decent value case, though with more caveats or a less exciting destination angle.' },
         { label: 'Conditional value', score: '55–64', desc: 'Worth considering only if specific conditions apply — the price is right on a specific date, or the destination is a priority regardless.' },
-        { label: 'Reject for now', score: 'Below 55', desc: 'Excluded from the current list.' },
+        { label: 'Rejected', score: 'Below 55', desc: 'Excluded from the current list.' },
       ].map(v => (
         <div class="bg-[#FFFDF8] rounded-xl border border-[#1F2428]/6 p-5">
           <div class="flex items-center gap-3 mb-2">
@@ -82,8 +128,8 @@ import PageLayout from '../layouts/PageLayout.astro';
         { cat: 'Local / booking-site five-star', desc: 'Rated five-star by local or booking-platform standards. Quality can vary; always read recent reviews.' },
         { cat: 'Heritage-value five-star', desc: 'The five-star claim is secondary to the heritage identity. Character and atmosphere are the main draw.' },
         { cat: 'Business five-star bargain', desc: 'A well-branded international hotel in a business-travel market where leisure pricing is often lower.' },
-        { cat: 'Near-luxury exception', desc: 'Technically not a five-star, but included because the value case is exceptional and the quality is close.' },
-        { cat: 'Questionable five-star', desc: 'The five-star label requires heavy qualification. Only included if the value case is otherwise strong.' },
+        { cat: 'Near-luxury exception', desc: 'Technically not a five-star, but included because the value case is exceptional and the quality is genuinely close.' },
+        { cat: 'Questionable five-star', desc: 'The five-star label requires heavy qualification. Only included if the value case is otherwise very strong.' },
       ].map(item => (
         <div class="bg-[#F8F2E8] rounded-xl p-5">
           <h3 class="font-serif font-bold text-[#1F2428] mb-2 text-base">{item.cat}</h3>
@@ -92,14 +138,42 @@ import PageLayout from '../layouts/PageLayout.astro';
       ))}
     </div>
 
+    <h3>The cap on non-five-star inclusions</h3>
+
+    <p>
+      No more than 20% of the eventual 50 hotels — a maximum of 10 — will be near-luxury exceptions. This prevents category dilution while preserving the ability to include genuinely exceptional discoveries that happen to carry a four-star label.
+    </p>
+
+    <h2>How we research</h2>
+
+    <p>
+      Research follows a destination-first methodology. We identify cities and regions where luxury is structurally underpriced before searching for individual hotels. This approach finds the hotels that deserve to be found — not simply the hotels that dominate search results.
+    </p>
+
+    <p>
+      Within each research cycle we reject aggressively. For every hotel published, several are considered and declined. A hotel that is cheap because quality or maintenance has declined, or because the destination offers little independent reason to visit, does not pass the editorial test regardless of its star rating.
+    </p>
+
+    <h3>The hard price ceiling</h3>
+
+    <p>
+      Any hotel that regularly prices above €250 per night in shoulder season is excluded. Value at that level needs to be exceptional and consistent, not occasional.
+    </p>
+
+    <h3>The replacement test</h3>
+
+    <p>
+      As the collection grows, every new candidate must answer one question before being considered for publication: <em>is this hotel more compelling than the weakest hotel currently on the list?</em>
+    </p>
+
+    <p>
+      If the answer is yes, it earns consideration. If not, it is held for a future review or rejected. This is how the collection improves over time rather than simply expanding.
+    </p>
+
     <h2>What we are not looking for</h2>
 
     <p>
       We are not looking for the cheapest hotels with a five-star label. We are not looking for hotels that were once excellent but have declined. We are not looking for hotels in destinations with no compelling reason to visit. And we are not looking for hotels where the value advantage is so marginal that it does not justify the effort of researching them.
-    </p>
-
-    <p>
-      The test is simple: does this hotel make a reasonably seasoned traveller think — "I did not realise I could have that kind of stay at that price"?
     </p>
 
     <h2>On prices</h2>
@@ -110,22 +184,22 @@ import PageLayout from '../layouts/PageLayout.astro';
 
     <h2>Why cheap does not always mean good value</h2>
     <p>
-      A low rate is only useful when the hotel, location and trip idea still make sense. Some hotels are inexpensive because the destination is underrated or the season is quiet. Others are inexpensive because maintenance, location or service consistency is weaker than the five-star label suggests. We include cautions so readers can tell the difference.
+      A low rate is only useful when the hotel, location and trip idea still make sense. Some hotels are inexpensive because the destination is underrated or the season is quiet. Others are inexpensive because maintenance, location or service consistency is weaker than the five-star label suggests. We include honest drawbacks in every profile so readers can tell the difference.
     </p>
 
-    <h2>How we handle affiliate links</h2>
+    <h2>On affiliate links</h2>
     <p>
-      Editorial inclusion is based on value, destination interest, hotel quality and honest drawbacks. Booking links may earn a commission in the future at no extra cost to the reader, but commission potential does not determine whether a hotel is included or how it is described.
+      Editorial inclusion is based on value, destination interest, hotel quality and honest drawbacks. Booking links may earn a commission at no extra cost to the reader, but commission potential does not determine whether a hotel is included or how it is described.
     </p>
 
     <h2>How often pages are reviewed</h2>
     <p>
-      Pages are reviewed when hotel details, pricing patterns, destination conditions or editorial judgments materially change. We do not fake frequent updates. Last-updated dates should reflect actual review work.
+      Pages are reviewed when hotel details, pricing patterns, destination conditions or editorial judgements materially change. We do not fake frequent updates. Last-updated dates reflect actual review work.
     </p>
 
-    <h2>What readers should check before booking</h2>
+    <h2>What to check before booking</h2>
     <p>
-      Before booking, check the final rate, taxes, breakfast inclusion, room type, cancellation policy, recent reviews and exact location. Star ratings vary by country and platform, so the best protection is comparing the hotel’s current evidence against your own expectations.
+      Before booking, check the final rate, taxes, breakfast inclusion, room type, cancellation policy, recent reviews and exact location. Star ratings vary by country and platform, so the best protection is comparing the hotel's current evidence against your own expectations.
     </p>
   </div>
 </PageLayout>
