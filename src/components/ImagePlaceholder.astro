@@ -3,11 +3,10 @@ interface Props {
   hotelName: string;
   city: string;
   country: string;
-  imageType?: string;
   aspectRatio?: string;
 }
 
-const { hotelName, city, country, imageType = 'hotel', aspectRatio = 'aspect-[16/9]' } = Astro.props;
+const { hotelName, city, country, aspectRatio = 'aspect-[16/9]' } = Astro.props;
 ---
 
 <div class={`${aspectRatio} bg-gradient-to-br from-[#1F2428] to-[#2D3748] rounded-2xl overflow-hidden flex flex-col items-center justify-center gap-3 p-6 text-center relative`}>

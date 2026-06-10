@@ -114,7 +114,7 @@ const articleJsonLd = {
 const hotelKeywords = [
   hotel.focusKeyword,
   ...(hotel.secondaryKeywords ?? []),
-].filter(Boolean);
+].filter((keyword): keyword is string => Boolean(keyword));
 const hotelJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Hotel',

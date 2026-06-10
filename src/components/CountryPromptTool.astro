@@ -142,7 +142,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry }
   </div>
 </div>
 
-<script type="application/json" id="country-prompt-data" set:html={JSON.stringify(toolData)} />
+<script is:inline type="application/json" id="country-prompt-data" set:html={JSON.stringify(toolData)} />
 
 <script>
   const data = JSON.parse(document.getElementById('country-prompt-data')!.textContent!) as {
