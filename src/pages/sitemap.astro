@@ -9,7 +9,7 @@ const slugify = (value: string) =>
 const destinations = Array.from(new Map(hotels.map((h) => [slugify(h.data.city), h.data.city])).entries()).sort((a, b) => a[1].localeCompare(b[1]));
 const sections = [
   { title: 'Main pages', links: [
-    ['Home', '/'], ['Destinations', '/destinations/'], ['About', '/about/'],
+    ['Home', '/'], ['Destinations', '/destinations/'], ['Research a country', '/research-hotels/'], ['About', '/about/'],
   ] },
   { title: 'Price guides', links: [
     ['Best Five-Star Hotels Under €100 Worldwide', '/under-100/'],

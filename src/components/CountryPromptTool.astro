@@ -1,0 +1,319 @@
+---
+// Interactive country → research-prompt tool for /research-hotels/.
+//
+// Hotel data source: the same `hotels` content collection that
+// src/pages/index.astro builds its table from (preferred path in the brief —
+// a structured build-time source exists, so no HTML parsing fallback is
+// needed). The published list, the per-country [EXISTING HOTELS] blocks and
+// the [COVERAGE] line all refresh automatically on every deploy.
+import { getCollection } from 'astro:content';
+import { countries } from '../data/unCountries';
+import { researchPromptTemplate } from '../data/researchPromptTemplate';
+
+const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
+
+// Frontmatter country names that don't match unCountries display names.
+// Extend this map if a new hotel's `country:` value doesn't appear in the
+// dropdown list (build output warns below when that happens).
+const countryAliases: Record<string, string> = {
+  England: 'United Kingdom',
+  Scotland: 'United Kingdom',
+  Wales: 'United Kingdom',
+  'Northern Ireland': 'United Kingdom',
+  UAE: 'United Arab Emirates',
+  USA: 'United States',
+};
+
+const knownNames = new Set(countries.map((c) => c.name));
+const toCountryName = (raw: string): string => {
+  const name = countryAliases[raw] ?? raw;
+  if (!knownNames.has(name)) {
+    console.warn(
+      `[CountryPromptTool] Hotel country "${raw}" has no match in unCountries — add it to countryAliases.`
+    );
+  }
+  return name;
+};
+
+// Per-country published hotels, weakest (lowest value score) first.
+const hotelsByCountry: Record<string, { name: string; score: number }[]> = {};
+for (const h of allHotels) {
+  const country = toCountryName(h.data.country);
+  (hotelsByCountry[country] ??= []).push({ name: h.data.title, score: h.data.valueScore });
+}
+for (const list of Object.values(hotelsByCountry)) {
+  list.sort((a, b) => a.score - b.score);
+}
+
+// Site-wide coverage line: distinct countries, alphabetical, comma-separated.
+const coverage = Object.keys(hotelsByCountry)
+  .sort((a, b) => a.localeCompare(b, 'en'))
+  .join(', ');
+
+// Default textarea text: coverage is always populated; [REGION] and
+// [EXISTING HOTELS] stay literal until a country is selected.
+const defaultPrompt = researchPromptTemplate.split('[COVERAGE]').join(coverage);
+
+const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry };
+---
+
+<div class="rounded-2xl border border-[#E2D4BF] bg-[#FFFDF8] shadow-sm p-6 md:p-8" data-country-prompt-tool>
+  <!-- Country combobox -->
+  <label id="country-label" for="country-input" class="block text-sm font-semibold text-[#1F2428] mb-2">
+    Country or territory
+  </label>
+  <div class="relative max-w-md">
+    <input
+      type="text"
+      id="country-input"
+      role="combobox"
+      aria-expanded="false"
+      aria-controls="country-listbox"
+      aria-autocomplete="list"
+      aria-activedescendant=""
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="Start typing — e.g. Vietnam, Côte d’Ivoire…"
+      class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+    />
+    <ul
+      id="country-listbox"
+      role="listbox"
+      aria-labelledby="country-label"
+      hidden
+      class="absolute z-20 mt-1 w-full max-h-72 overflow-y-auto rounded-xl border border-[#E2D4BF] bg-white shadow-lg py-1"
+    >
+      {countries.map((c) => (
+        <li
+          id={`country-option-${c.code}`}
+          role="option"
+          aria-selected="false"
+          data-name={c.name}
+          class="cursor-pointer px-4 py-2 text-sm text-[#1F2428] aria-selected:bg-[#F4EADC] data-[active]:bg-[#F4EADC]"
+        >
+          {c.name}
+        </li>
+      ))}
+      <li id="country-no-results" hidden class="px-4 py-2 text-sm text-[#6F685F] italic" role="presentation">
+        No matching country or territory
+      </li>
+    </ul>
+  </div>
+
+  <!-- Copy control -->
+  <div class="mt-6 flex flex-wrap items-center gap-3">
+    <button
+      type="button"
+      id="copy-prompt-button"
+      disabled
+      class="inline-flex items-center gap-2 rounded-full bg-[#B88A44] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1F2428] disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:hover:bg-[#C4B9A6]"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span id="copy-prompt-label">Select a country before copying</span>
+    </button>
+    <span id="copy-prompt-status" class="sr-only" role="status" aria-live="polite"></span>
+  </div>
+
+  <!-- Generated prompt -->
+  <label for="prompt-textarea" class="mt-6 mb-2 block text-sm font-semibold text-[#1F2428]">
+    Research prompt <span class="font-normal text-[#6F685F]">(editable — tweak it before copying if you like)</span>
+  </label>
+  <textarea
+    id="prompt-textarea"
+    rows="18"
+    spellcheck="false"
+    class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 font-mono text-[13px] leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+  >{defaultPrompt}</textarea>
+
+  <!-- Reset -->
+  <div class="mt-4">
+    <button
+      type="button"
+      id="reset-country-button"
+      class="inline-flex items-center rounded-full border border-[#E2D4BF] bg-white px-4 py-2 text-xs font-semibold text-[#6F685F] transition-colors hover:border-[#B88A44] hover:text-[#B88A44]"
+    >
+      Reset country
+    </button>
+  </div>
+</div>
+
+<script type="application/json" id="country-prompt-data" set:html={JSON.stringify(toolData)} />
+
+<script>
+  const data = JSON.parse(document.getElementById('country-prompt-data')!.textContent!) as {
+    template: string;
+    coverage: string;
+    hotelsByCountry: Record<string, { name: string; score: number }[]>;
+  };
+
+  const input = document.getElementById('country-input') as HTMLInputElement;
+  const listbox = document.getElementById('country-listbox') as HTMLUListElement;
+  const noResults = document.getElementById('country-no-results') as HTMLLIElement;
+  const textarea = document.getElementById('prompt-textarea') as HTMLTextAreaElement;
+  const copyButton = document.getElementById('copy-prompt-button') as HTMLButtonElement;
+  const copyLabel = document.getElementById('copy-prompt-label') as HTMLSpanElement;
+  const copyStatus = document.getElementById('copy-prompt-status') as HTMLSpanElement;
+  const resetButton = document.getElementById('reset-country-button') as HTMLButtonElement;
+  const options = Array.from(listbox.querySelectorAll<HTMLLIElement>('[role="option"]'));
+
+  // Case- and accent-insensitive fold ("cote" matches "Côte d’Ivoire").
+  const fold = (s: string) =>
+    s
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/[’ʼ]/g, "'")
+      .toLowerCase();
+
+  let activeIndex = -1;
+  let visible: HTMLLIElement[] = options;
+  let copiedTimer: ReturnType<typeof setTimeout> | undefined;
+
+  const substituteAll = (text: string, token: string, value: string) => text.split(token).join(value);
+
+  const buildPrompt = (country: string | null): string => {
+    let text = substituteAll(data.template, '[COVERAGE]', data.coverage);
+    if (!country) return text;
+    const hotels = data.hotelsByCountry[country];
+    const existing = hotels
+      ? hotels.map((h) => `- ${h.name} — value score ${h.score}`).join('\n')
+      : `No hotels are yet published for ${country}, so there is no in-country incumbent to beat.`;
+    text = substituteAll(text, '[REGION]', country);
+    text = substituteAll(text, '[EXISTING HOTELS]', existing);
+    return text;
+  };
+
+  const setCopyEnabled = (enabled: boolean) => {
+    clearTimeout(copiedTimer);
+    copyButton.disabled = !enabled;
+    copyLabel.textContent = enabled ? 'Copy research prompt' : 'Select a country before copying';
+  };
+
+  const setActive = (index: number) => {
+    if (activeIndex >= 0 && visible[activeIndex]) {
+      visible[activeIndex].removeAttribute('data-active');
+    }
+    activeIndex = index;
+    if (index >= 0 && visible[index]) {
+      const option = visible[index];
+      option.setAttribute('data-active', '');
+      input.setAttribute('aria-activedescendant', option.id);
+      option.scrollIntoView({ block: 'nearest' });
+    } else {
+      input.setAttribute('aria-activedescendant', '');
+    }
+  };
+
+  const openList = () => {
+    listbox.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeList = () => {
+    listbox.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+    setActive(-1);
+  };
+
+  const filterList = (query: string) => {
+    const q = fold(query.trim());
+    visible = [];
+    for (const option of options) {
+      const match = q === '' || fold(option.dataset.name!).includes(q);
+      option.hidden = !match;
+      if (match) visible.push(option);
+    }
+    noResults.hidden = visible.length > 0;
+    setActive(-1);
+  };
+
+  const selectCountry = (name: string) => {
+    input.value = name;
+    for (const option of options) {
+      option.setAttribute('aria-selected', option.dataset.name === name ? 'true' : 'false');
+    }
+    textarea.value = buildPrompt(name);
+    setCopyEnabled(true);
+    closeList();
+  };
+
+  input.addEventListener('input', () => {
+    filterList(input.value);
+    openList();
+  });
+
+  input.addEventListener('click', () => {
+    if (listbox.hidden) {
+      filterList(input.value);
+      openList();
+    }
+  });
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (listbox.hidden) {
+        filterList(input.value);
+        openList();
+      }
+      if (visible.length === 0) return;
+      const delta = event.key === 'ArrowDown' ? 1 : -1;
+      const next = activeIndex < 0
+        ? (delta === 1 ? 0 : visible.length - 1)
+        : (activeIndex + delta + visible.length) % visible.length;
+      setActive(next);
+    } else if (event.key === 'Enter') {
+      if (!listbox.hidden && activeIndex >= 0 && visible[activeIndex]) {
+        event.preventDefault();
+        selectCountry(visible[activeIndex].dataset.name!);
+      }
+    } else if (event.key === 'Escape') {
+      closeList();
+    }
+  });
+
+  input.addEventListener('blur', () => {
+    // Delay so a click on an option can land first.
+    setTimeout(() => {
+      if (!listbox.contains(document.activeElement)) closeList();
+    }, 150);
+  });
+
+  for (const option of options) {
+    // mousedown fires before the input's blur, so selection wins.
+    option.addEventListener('mousedown', (event) => {
+      event.preventDefault();
+      selectCountry(option.dataset.name!);
+    });
+  }
+
+  copyButton.addEventListener('click', async () => {
+    const text = textarea.value;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      textarea.select();
+      document.execCommand('copy');
+      textarea.setSelectionRange(0, 0);
+      textarea.blur();
+    }
+    copyLabel.textContent = 'Copied';
+    copyStatus.textContent = 'Research prompt copied to clipboard';
+    clearTimeout(copiedTimer);
+    copiedTimer = setTimeout(() => {
+      copyLabel.textContent = 'Copy research prompt';
+      copyStatus.textContent = '';
+    }, 2000);
+  });
+
+  resetButton.addEventListener('click', () => {
+    input.value = '';
+    for (const option of options) option.setAttribute('aria-selected', 'false');
+    filterList('');
+    closeList();
+    textarea.value = buildPrompt(null);
+    setCopyEnabled(false);
+  });
+</script>

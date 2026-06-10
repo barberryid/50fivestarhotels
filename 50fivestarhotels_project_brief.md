@@ -1087,3 +1087,7 @@ Recommended follow-ups (identified, not yet actioned):
 - Re-ranked the tail of the list: Real Marina 18→19, Graffit Gallery 19→20, Millennium Downtown 20→21. Updated hardcoded "20 hotels" counts on `index.astro` and `about.astro` to 21.
 - Seasonality added to `src/data/hotelSeasonality.ts` (Pokhara: clear Oct–Nov & Jan–Feb, Jun–Sep monsoon).
 - Images: 6 Wikimedia Commons images sourced + converted to WebP under `public/images/hotels/bar-peepal-resort-pokhara/web/` (hero = Annapurna/Phewa view, CC BY 3.0). The page hero/og currently uses the sourced Wikimedia hero. The two ChatGPT AI heroes (editorial-dusk / realistic-daylight) are **pending from Gary** — prompts in `research/bar-peepal-resort-pokhara-image-prompts.md`; placeholder `.txt` markers and the exact frontmatter swap YAML are in place. Research note: `research/bar-peepal-resort-pokhara.md`.
+
+---
+
+The site includes a "Research a country" tool page (`/research-hotels/`) that lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list.
