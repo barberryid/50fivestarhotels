@@ -14,7 +14,7 @@ const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
 
 // Frontmatter country names that don't match unCountries display names.
 // Extend this map if a new hotel's `country:` value doesn't appear in the
-// dropdown list (build output warns below when that happens).
+// dropdown list (the build fails with a clear error when that happens).
 const countryAliases: Record<string, string> = {
   England: 'United Kingdom',
   Scotland: 'United Kingdom',
@@ -28,8 +28,10 @@ const knownNames = new Set(countries.map((c) => c.name));
 const toCountryName = (raw: string): string => {
   const name = countryAliases[raw] ?? raw;
   if (!knownNames.has(name)) {
-    console.warn(
-      `[CountryPromptTool] Hotel country "${raw}" has no match in unCountries — add it to countryAliases.`
+    throw new Error(
+      `[CountryPromptTool] Hotel country "${raw}" has no match in src/data/unCountries.ts. ` +
+        `Add an entry to countryAliases in src/components/CountryPromptTool.astro ` +
+        `mapping "${raw}" to the matching unCountries display name.`
     );
   }
   return name;
