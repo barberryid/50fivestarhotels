@@ -1,7 +1,7 @@
 ---
 title: "The Brown Hotel"
 slug: "brown-hotel-louisville"
-rank: 8
+rank: 11
 city: "Louisville"
 country: "United States"
 region: "North America"

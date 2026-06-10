@@ -14,6 +14,7 @@ export const countryRegions: Record<string, string> = {
   Portugal: 'Europe',
   England: 'Europe',
   Scotland: 'Europe',
+  France: 'Europe',
   'Bosnia and Herzegovina': 'Europe',
   Egypt: 'Middle East and North Africa',
   Morocco: 'Middle East and North Africa',

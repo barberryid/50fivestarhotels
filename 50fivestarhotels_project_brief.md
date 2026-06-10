@@ -1,5 +1,39 @@
 # 50 Five-Star Hotels — Project Brief
 
+## Current implementation status
+
+Last updated: 10 June 2026
+
+The live Astro project is in `C:\Users\Gary\code\50fivestarhotels` and deploys from the `main` branch to Cloudflare Pages.
+
+Current published collection after the France update:
+
+| Metric | Count |
+|---|---:|
+| Total hotel profiles | 37 |
+| New France profiles | 3 |
+| New France destinations | Carcassonne, Strasbourg, Rouen |
+| New France image assets | 6 AI-generated WebP hotel images plus responsive derivatives |
+
+France update added:
+
+| Rank | Hotel | Destination | Score | Tier | Editorial role |
+|---:|---|---|---:|---|---|
+| 2 | Hotel de la Cite Carcassonne MGallery | Carcassonne, France | 94 | Under â‚¬250 | Heritage-value five-star inside the medieval cite |
+| 6 | Hotel & Spa Regent Petite France | Strasbourg, France | 90 | Under â‚¬250 | True five-star canal hotel in Petite France |
+| 8 | Hotel de Bourgtheroulde, Autograph Collection | Rouen, France | 89 | Under â‚¬250 | Heritage-value five-star Gothic-Renaissance mansion |
+
+France research source:
+
+- `research/50fivestarhotels-france-session.md`
+
+France image assets:
+
+- Originals copied to `images generated/`
+- WebP masters in `public/images/hotels/`
+- Responsive derivatives in `public/images/hotels/responsive/`
+- Image credits recorded in `src/data/imageAttributions.json`
+
 ## Working project name
 
 **50 Five-Star Hotels**

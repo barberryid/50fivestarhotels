@@ -1,7 +1,7 @@
 ---
 title: "The Mayo Hotel"
 slug: "mayo-hotel-tulsa"
-rank: 15
+rank: 18
 city: "Tulsa"
 country: "United States"
 region: "North America"

@@ -1,7 +1,7 @@
 ---
 title: "The Majestic Hotel Kuala Lumpur, Autograph Collection"
 slug: "majestic-hotel-kuala-lumpur"
-rank: 7
+rank: 10
 city: "Kuala Lumpur"
 country: "Malaysia"
 region: "Southeast Asia"

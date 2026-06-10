@@ -67,6 +67,51 @@ export const locationSnapshots: Record<string, LocationSnapshot> = {
       nearby: ["Kelvingrove", "Mackintosh trail", "Merchant City"],
     },
   },
+  "hotel-de-la-cite-carcassonne": {
+    area: "Inside the medieval cite",
+    locationVerdict: "The rare Carcassonne base inside the medieval walls, ideal for seeing the cite early and late when day-trip crowds thin out.",
+    bestFor: ["Inside the citadel", "Rampart walks", "Michelin dinner", "Medieval heritage"],
+    nearbyAnchors: [
+      { name: "Carcassonne ramparts", type: "heritage walk", distance: "immediately nearby" },
+      { name: "Chateau Comtal", type: "medieval castle", distance: "a short walk" },
+      { name: "Pont Vieux", type: "classic city view", distance: "about 10 min on foot" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Hotel%20de%20la%20Cite%20Carcassonne%20MGallery%20France",
+    fallbackMap: {
+      label: "Carcassonne citadel base",
+      nearby: ["Ramparts", "Chateau Comtal", "Pont Vieux"],
+    },
+  },
+  "regent-petite-france-strasbourg": {
+    area: "Petite France / Strasbourg old town",
+    locationVerdict: "A high-impact Strasbourg base in Petite France, close enough for the cathedral, old town and canal walks without needing a car.",
+    bestFor: ["Petite France", "Canal views", "Alsatian food", "Old town walking"],
+    nearbyAnchors: [
+      { name: "Petite France", type: "historic canal quarter", distance: "immediately nearby" },
+      { name: "Strasbourg Cathedral", type: "Gothic cathedral", distance: "about 15 min on foot" },
+      { name: "Ill canal walks", type: "classic Strasbourg views", distance: "nearby" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Hotel%20Spa%20Regent%20Petite%20France%20Strasbourg%20France",
+    fallbackMap: {
+      label: "Petite France canal base",
+      nearby: ["Petite France", "Cathedral", "Ill canals"],
+    },
+  },
+  "hotel-de-bourgtheroulde-rouen": {
+    area: "Old Rouen / Place de la Pucelle",
+    locationVerdict: "A central Rouen base for the cathedral, Joan of Arc history, the Gros Horloge and old-town walking.",
+    bestFor: ["Old Rouen", "Cathedral walks", "Normandy food", "Spa base"],
+    nearbyAnchors: [
+      { name: "Rouen Cathedral", type: "Gothic cathedral", distance: "about 5 min on foot" },
+      { name: "Place du Vieux Marche", type: "Joan of Arc history", distance: "about 2 min on foot" },
+      { name: "Gros Horloge", type: "Renaissance clock", distance: "about 3 min on foot" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Hotel%20de%20Bourgtheroulde%20Rouen%20France",
+    fallbackMap: {
+      label: "Old Rouen heritage base",
+      nearby: ["Cathedral", "Vieux Marche", "Gros Horloge"],
+    },
+  },
   "hotel-majapahit-surabaya": {
     area: "Central Surabaya",
     locationVerdict: "In central Surabaya, useful for colonial-history sights, old-city exploring and a short-stay Java food stop.",
