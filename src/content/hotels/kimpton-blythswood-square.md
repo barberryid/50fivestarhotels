@@ -1,7 +1,7 @@
 ---
 title: "Kimpton Blythswood Square Hotel & Spa"
 slug: "kimpton-blythswood-square"
-rank: 9
+rank: 12
 city: "Glasgow"
 country: "Scotland"
 region: "Europe"

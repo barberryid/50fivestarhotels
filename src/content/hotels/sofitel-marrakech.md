@@ -1,7 +1,7 @@
 ---
 title: "Sofitel Marrakech Palais Imperial & Spa"
 slug: "sofitel-marrakech"
-rank: 29
+rank: 32
 city: "Marrakech"
 country: "Morocco"
 region: "Middle East and North Africa"

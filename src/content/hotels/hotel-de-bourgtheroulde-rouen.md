@@ -1,7 +1,7 @@
 ---
 title: "Hotel de Bourgtheroulde, Autograph Collection"
 slug: "hotel-de-bourgtheroulde-rouen"
-rank: 8
+rank: 11
 city: "Rouen"
 country: "France"
 region: "Europe"

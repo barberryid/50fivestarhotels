@@ -563,6 +563,51 @@ export const locationSnapshots: Record<string, LocationSnapshot> = {
       nearby: ["Sea Garden", "Roman Baths", "Beach"],
     },
   },
+  "grand-hotel-wagner-palermo": {
+    area: "Politeama / Ruggero Settimo",
+    locationVerdict: "A central Palermo base near the theatre district, useful for Teatro Massimo, Via Roma, Quattro Canti and the old town's food-market walks.",
+    bestFor: ["Palermo first-timers", "Street food", "Theatre district", "Historic centre"],
+    nearbyAnchors: [
+      { name: "Teatro Massimo", type: "opera house", distance: "about 10 min on foot" },
+      { name: "Quattro Canti", type: "historic crossroads", distance: "about 15 min on foot" },
+      { name: "Capo / Ballaro markets", type: "street food", distance: "walk or short taxi" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Grand%20Hotel%20Wagner%20Palermo%20Italy",
+    fallbackMap: {
+      label: "Palermo theatre base",
+      nearby: ["Teatro Massimo", "Quattro Canti", "Food markets"],
+    },
+  },
+  "hotel-bristol-palace-genoa": {
+    area: "Central Genoa / Via XX Settembre",
+    locationVerdict: "A central Genoa palace-hotel base for Piazza De Ferrari, Palazzo Ducale, the Rolli palaces and the walk down to Porto Antico.",
+    bestFor: ["Genoa city break", "Palace streets", "Old Port", "Ligurian food"],
+    nearbyAnchors: [
+      { name: "Piazza De Ferrari", type: "central square", distance: "a short walk" },
+      { name: "Palazzo Ducale", type: "historic palace", distance: "a short walk" },
+      { name: "Porto Antico", type: "old port / aquarium", distance: "about 15 min on foot" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Hotel%20Bristol%20Palace%20Genoa%20Italy",
+    fallbackMap: {
+      label: "Central Genoa base",
+      nearby: ["Piazza De Ferrari", "Palazzo Ducale", "Porto Antico"],
+    },
+  },
+  "relais-antica-badia-ragusa": {
+    area: "Ragusa Superiore / cathedral area",
+    locationVerdict: "A small historic Ragusa base for the San Giovanni Battista area, Ragusa Ibla and the wider Val di Noto baroque circuit.",
+    bestFor: ["Val di Noto", "Sicily road trip", "Baroque towns", "Boutique heritage"],
+    nearbyAnchors: [
+      { name: "Cathedral of San Giovanni Battista", type: "baroque cathedral", distance: "nearby" },
+      { name: "Ragusa Ibla", type: "historic old town", distance: "walk or short taxi" },
+      { name: "Modica", type: "baroque town / chocolate", distance: "short drive" },
+    ],
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Relais%20Antica%20Badia%20San%20Maurizio%201619%20Ragusa%20Italy",
+    fallbackMap: {
+      label: "Ragusa baroque base",
+      nearby: ["San Giovanni Battista", "Ragusa Ibla", "Modica"],
+    },
+  },
   "millennium-downtown-abu-dhabi": {
     area: "Downtown Abu Dhabi",
     locationVerdict: "In downtown Abu Dhabi, useful for the Corniche, city-centre dining and taxi access to the Grand Mosque and Louvre Abu Dhabi.",

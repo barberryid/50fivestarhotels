@@ -14,10 +14,10 @@ const bySlug = Object.fromEntries(allHotels.map(h => [h.data.slug, h.data]));
 const featuredSlugs = [
   'the-grand-york',
   'hotel-de-la-cite-carcassonne',
+  'grand-hotel-wagner-palermo',
+  'hotel-bristol-palace-genoa',
+  'relais-antica-badia-ragusa',
   'municipal-hotel-liverpool',
-  'hotel-majapahit-surabaya',
-  'auberge-saint-antoine-quebec-city',
-  'regent-petite-france-strasbourg',
 ];
 const featured = allHotels.filter(h => featuredSlugs.includes(h.data.slug));
 

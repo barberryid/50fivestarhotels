@@ -2,11 +2,39 @@
 
 ## Current implementation status
 
-Last updated: 10 June 2026
+Last updated: 11 June 2026
 
 The live Astro project is in `C:\Users\Gary\code\50fivestarhotels` and deploys from the `main` branch to Cloudflare Pages.
 
-Current published collection after the France update:
+Current published collection after the Italy update:
+
+| Metric | Count |
+|---|---:|
+| Total hotel profiles | 40 |
+| New Italy profiles | 3 |
+| New Italy destinations | Palermo, Genoa, Ragusa |
+| New Italy image assets | 6 AI-generated WebP hotel images plus responsive derivatives |
+
+Italy update added:
+
+| Rank | Hotel | Destination | Score | Tier | Editorial role |
+|---:|---|---|---:|---|---|
+| 3 | Grand Hotel Wagner | Palermo, Italy | 94 | Under €250 | Classic Palermo grand hotel near the theatre district |
+| 4 | Hotel Bristol Palace | Genoa, Italy | 93 | Under €250 | Central Genoa palace hotel and heritage-value five-star |
+| 5 | Relais Antica Badia - San Maurizio 1619 | Ragusa, Italy | 92 | Under €200 | Small Sicilian baroque five-star for the Val di Noto circuit |
+
+Italy research source:
+
+- `research/50fivestarhotels-italy-session.md`
+
+Italy image assets:
+
+- Originals copied to `images generated/`
+- WebP masters in `public/images/hotels/`
+- Responsive derivatives in `public/images/hotels/responsive/`
+- Image credits recorded in `src/data/imageAttributions.json`
+
+Previous France update summary:
 
 | Metric | Count |
 |---|---:|
