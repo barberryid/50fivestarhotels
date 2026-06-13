@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CountryPromptTool from '../components/CountryPromptTool.astro';
+import PersonalisePreferences from '../components/PersonalisePreferences.astro';
 import MethodologyContent from '../components/MethodologyContent.astro';
 import { researchPriceLevels } from '../data/researchPriceLevels';
 import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
@@ -98,6 +99,9 @@ const jsonLd = breadcrumbJsonLd([
         Select at least one price level. The research prompt below updates automatically.
       </p>
     </section>
+
+    <!-- Personalise the research (optional traveller-fit weighting) -->
+    <PersonalisePreferences />
 
     <!-- The tool -->
     <section class="max-w-4xl mx-auto px-5 py-10">

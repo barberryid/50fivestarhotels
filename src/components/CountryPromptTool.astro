@@ -83,9 +83,13 @@ const applyPriceLevelTokens = (text: string, amounts: readonly number[]) => {
 };
 
 // Default textarea text: coverage is always populated; [REGION] and
-// [EXISTING HOTELS] stay literal until a country is selected.
+// [EXISTING HOTELS] stay literal until a country is selected. The personal
+// traveller-fit tokens default to empty (no preferences active yet); the
+// client refills them when PersonalisePreferences emits a change.
 const defaultPrompt = applyPriceLevelTokens(researchPromptTemplate, defaultPriceLevels)
-  .split('[COVERAGE]').join(coverage);
+  .split('[COVERAGE]').join(coverage)
+  .split('[PERSONAL_WEIGHTING_SECTION]').join('')
+  .split('[PERSONAL_OUTPUT_NOTES]').join('');
 
 const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, priceLevels: defaultPriceLevels };
 ---
@@ -209,6 +213,13 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
   let copiedTimer: ReturnType<typeof setTimeout> | undefined;
   let selectedCountry: string | null = null;
 
+  // Traveller-fit fragments supplied by PersonalisePreferences. Read any value
+  // it published before this script ran (load-order safety), then keep it in
+  // sync via the `personalise:change` event below.
+  let personalParts: { weightingSection: string; outputNotes: string } =
+    (window as unknown as { __personalisePromptParts?: { weightingSection: string; outputNotes: string } })
+      .__personalisePromptParts ?? { weightingSection: '', outputNotes: '' };
+
   const substituteAll = (text: string, token: string, value: string) => text.split(token).join(value);
 
   const formatEuroSeries = (amounts: number[]) => {
@@ -268,18 +279,31 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     );
   };
 
+  const applyPersonalTokens = (text: string) =>
+    substituteAll(
+      substituteAll(text, '[PERSONAL_WEIGHTING_SECTION]', personalParts.weightingSection),
+      '[PERSONAL_OUTPUT_NOTES]',
+      personalParts.outputNotes
+    ).replace(/\n{3,}/g, '\n\n');
+
   const buildPrompt = (country: string | null): string => {
     let text = applyPriceLevelTokens(data.template, getSelectedPriceLevels());
     text = substituteAll(text, '[COVERAGE]', data.coverage);
-    if (!country) return text;
-    const hotels = data.hotelsByCountry[country];
-    const existing = hotels
-      ? hotels.map((h) => `- ${h.name} — value score ${h.score}`).join('\n')
-      : `No hotels are yet published for ${country}, so there is no in-country incumbent to beat.`;
-    text = substituteAll(text, '[REGION]', country);
-    text = substituteAll(text, '[EXISTING HOTELS]', existing);
-    return text;
+    const hotels = country ? data.hotelsByCountry[country] : undefined;
+    if (country) {
+      const existing = hotels
+        ? hotels.map((h) => `- ${h.name} — value score ${h.score}`).join('\n')
+        : `No hotels are yet published for ${country}, so there is no in-country incumbent to beat.`;
+      text = substituteAll(text, '[REGION]', country);
+      text = substituteAll(text, '[EXISTING HOTELS]', existing);
+    }
+    return applyPersonalTokens(text);
   };
+
+  document.addEventListener('personalise:change', (event) => {
+    personalParts = (event as CustomEvent<{ weightingSection: string; outputNotes: string }>).detail;
+    textarea.value = buildPrompt(selectedCountry);
+  });
 
   const updatePriceLevelUi = (changedInput?: HTMLInputElement) => {
     if (priceLevelInputs.length === 0) return;

@@ -1,0 +1,406 @@
+---
+// Optional "Personalise the research" section for /research-hotels/.
+//
+// Lets a traveller tell the generated research prompt what matters most to
+// them. This does NOT replace the fixed 100-point editorial score — it adds a
+// second "Personal fit score /100" driven by a normalised traveller-fit
+// weighting.
+//
+// The controls live here; the prompt itself is assembled in CountryPromptTool.
+// This component computes the two prompt fragments and hands them over via a
+// `personalise:change` CustomEvent (and a `window.__personalisePromptParts`
+// fallback for load-order races), mirroring how the price-level cards feed the
+// same tool through shared DOM queries.
+import {
+  importanceScale,
+  preferenceFactors,
+  travellerPresets,
+  defaultPreferences,
+  preferencesStorageKey,
+} from '../data/researchPreferences';
+
+const configData = {
+  importanceScale,
+  presets: travellerPresets,
+  defaults: defaultPreferences,
+  storageKey: preferencesStorageKey,
+};
+---
+
+<section class="max-w-4xl mx-auto px-5 py-10" data-personalise-section>
+  <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Optional refinement</p>
+  <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-3">Personalise the research</h2>
+  <p class="text-[#1F2428]/80 leading-relaxed mb-7">
+    Tell the research prompt what matters most to you. This does not replace the editorial score; it adds a second traveller-fit score.
+  </p>
+
+  <!-- Traveller profile presets -->
+  <fieldset class="mb-7 border-0 p-0 m-0">
+    <legend class="text-sm font-semibold text-[#1F2428] mb-3">Quick-start traveller profiles</legend>
+    <div class="flex flex-wrap gap-2" data-preset-row>
+      {travellerPresets.map((preset) => (
+        <button
+          type="button"
+          data-preset-button={preset.key}
+          aria-pressed="false"
+          class="inline-flex items-center rounded-full border border-[#E2D4BF] bg-white px-4 py-2 text-sm font-semibold text-[#6F685F] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 aria-[pressed=true]:border-[#B88A44] aria-[pressed=true]:bg-[#F4EADC] aria-[pressed=true]:text-[#1F2428]"
+        >
+          {preset.label}
+        </button>
+      ))}
+    </div>
+  </fieldset>
+
+  <!-- Preference cards -->
+  <div class="grid sm:grid-cols-2 gap-4">
+    {preferenceFactors.map((factor) => (
+      <div class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] p-5" data-pref-card>
+        <label for={`pref-${factor.key}`} class="block text-base font-semibold text-[#1F2428] mb-1">
+          {factor.label}
+        </label>
+        <p class="text-sm text-[#6F685F] mb-3">{factor.help}</p>
+        <select
+          id={`pref-${factor.key}`}
+          data-pref-select={factor.key}
+          class="w-full rounded-xl border border-[#E2D4BF] bg-white px-3 py-2 text-sm text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+        >
+          {importanceScale.map((option) => (
+            <option value={option.value}>{option.label}</option>
+          ))}
+        </select>
+      </div>
+    ))}
+
+    <!-- Custom priority card -->
+    <div class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] p-5" data-pref-card>
+      <label for="pref-custom-text" class="block text-base font-semibold text-[#1F2428] mb-1">
+        Something else
+      </label>
+      <p class="text-sm text-[#6F685F] mb-3">Add one priority of your own, then set how important it is.</p>
+      <input
+        type="text"
+        id="pref-custom-text"
+        data-pref-custom-text
+        placeholder="e.g. Spa quality, walkability, sea view…"
+        maxlength="80"
+        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-3 py-2 text-sm text-[#1F2428] placeholder-[#6F685F]/60 mb-3 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      />
+      <label for="pref-custom-importance" class="block text-sm font-semibold text-[#1F2428] mb-1">
+        Importance of your custom priority
+      </label>
+      <select
+        id="pref-custom-importance"
+        data-pref-custom-importance
+        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-3 py-2 text-sm text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      >
+        {importanceScale.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+
+  <!-- Conflict warning -->
+  <p
+    data-pref-warning
+    hidden
+    role="status"
+    aria-live="polite"
+    class="mt-5 rounded-lg border border-[#D9A441] bg-[#FBF3E2] px-4 py-3 text-sm leading-relaxed text-[#7A5A1C]"
+  >
+    Very low prices plus strict safety requirements may produce fewer credible hotel candidates. The prompt will ask the AI to prioritise quality and caution over filling the list.
+  </p>
+
+  <!-- Weighting summary -->
+  <div class="mt-7" data-pref-weighting aria-live="polite">
+    <!-- populated by script -->
+  </div>
+
+  <!-- Reset -->
+  <div class="mt-5">
+    <button
+      type="button"
+      data-pref-reset
+      class="inline-flex items-center rounded-full border border-[#E2D4BF] bg-white px-4 py-2 text-xs font-semibold text-[#6F685F] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60"
+    >
+      Reset preferences
+    </button>
+  </div>
+
+  <script is:inline type="application/json" id="personalise-config" set:html={JSON.stringify(configData)} />
+</section>
+
+<script>
+  interface ImportanceOption { value: number; label: string }
+  interface Preset { key: string; label: string; values: { safety: number; sights: number; quietness: number; customText: string; customImportance: number } }
+  interface PrefState { preset: string | null; safety: number; sights: number; quietness: number; customText: string; customImportance: number }
+  interface Config { importanceScale: ImportanceOption[]; presets: Preset[]; defaults: PrefState; storageKey: string }
+
+  const config = JSON.parse(document.getElementById('personalise-config')!.textContent!) as Config;
+
+  const section = document.querySelector<HTMLElement>('[data-personalise-section]');
+  if (section) {
+    const presetButtons = Array.from(section.querySelectorAll<HTMLButtonElement>('[data-preset-button]'));
+    const selects: Record<'safety' | 'sights' | 'quietness', HTMLSelectElement> = {
+      safety: section.querySelector<HTMLSelectElement>('[data-pref-select="safety"]')!,
+      sights: section.querySelector<HTMLSelectElement>('[data-pref-select="sights"]')!,
+      quietness: section.querySelector<HTMLSelectElement>('[data-pref-select="quietness"]')!,
+    };
+    const customText = section.querySelector<HTMLInputElement>('[data-pref-custom-text]')!;
+    const customImportance = section.querySelector<HTMLSelectElement>('[data-pref-custom-importance]')!;
+    const warning = section.querySelector<HTMLElement>('[data-pref-warning]')!;
+    const weightingBox = section.querySelector<HTMLElement>('[data-pref-weighting]')!;
+    const resetButton = section.querySelector<HTMLButtonElement>('[data-pref-reset]')!;
+    const priceLevelInputs = Array.from(document.querySelectorAll<HTMLInputElement>('[data-price-level-input]'));
+
+    const escapeHtml = (s: string) =>
+      s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    // ----- State -----
+    const readState = (): PrefState => ({
+      preset: null,
+      safety: Number(selects.safety.value || 0),
+      sights: Number(selects.sights.value || 0),
+      quietness: Number(selects.quietness.value || 0),
+      customText: customText.value.trim(),
+      customImportance: Number(customImportance.value || 0),
+    });
+
+    let currentPreset: string | null = config.defaults.preset;
+
+    // ----- Weighting maths (per the implementation brief) -----
+    interface ActivePref { label: string; importance: number; type: string }
+    const getActivePreferences = (state: PrefState): ActivePref[] => {
+      const prefs: ActivePref[] = [
+        { label: 'Safety of the area', importance: state.safety, type: 'safety' },
+        { label: 'Close to main tourist sights', importance: state.sights, type: 'sights' },
+        { label: 'Quietness', importance: state.quietness, type: 'quietness' },
+      ];
+      if (state.customText && state.customImportance > 0) {
+        prefs.push({ label: state.customText, importance: state.customImportance, type: 'custom' });
+      }
+      return prefs.filter((p) => p.importance > 0);
+    };
+
+    interface WeightedPref extends ActivePref { weight: number }
+    const normalisePreferencesTo100 = (preferences: ActivePref[]): WeightedPref[] => {
+      const total = preferences.reduce((sum, p) => sum + p.importance, 0);
+      if (!total) return [];
+      const rounded = preferences.map((p) => ({ ...p, weight: Math.round((p.importance / total) * 100) }));
+      const diff = 100 - rounded.reduce((sum, p) => sum + p.weight, 0);
+      if (rounded.length > 0 && diff !== 0) {
+        const largest = rounded.reduce((best, p, i, arr) => (p.weight > arr[best].weight ? i : best), 0);
+        rounded[largest].weight += diff;
+      }
+      return rounded;
+    };
+
+    // ----- Prompt fragment builders -----
+    const buildInterpretation = (state: PrefState): string => {
+      const lines: string[] = [];
+      if (state.safety >= 3) {
+        lines.push('For safety, check the immediate neighbourhood as well as the wider city. Consider recent traveller comments, official travel advice where relevant, night-time arrival issues, transport safety, and whether the hotel is in an area suitable for ordinary visitors.');
+      }
+      if (state.safety === 5) {
+        lines.push('Do not recommend a hotel simply because it is cheap if the surrounding area creates a material safety concern for typical travellers.');
+      }
+      if (state.sights >= 3) {
+        lines.push('For location near tourist sights, favour hotels that make the destination easier to enjoy: walkable access to major sights, short taxi or metro rides, useful neighbourhoods, and good access to food, culture and transport.');
+      }
+      if (state.sights === 5) {
+        lines.push('Penalise hotels that are technically good value but isolated, airport-oriented, convention-centre focused, or inconvenient for sightseeing.');
+      }
+      if (state.quietness >= 3) {
+        lines.push('For quietness, check whether recent reviews mention traffic noise, nightlife, events, weddings, airport noise, thin walls, loud air conditioning, construction, or noisy corridors.');
+      }
+      if (state.quietness === 5) {
+        lines.push('Favour calmer neighbourhoods, garden settings, courtyard-facing rooms, resort-style layouts, or hotels with repeated evidence of quiet rooms. Penalise party districts, major road locations, and hotels with repeated noise complaints.');
+      }
+      if (state.customText && state.customImportance > 0) {
+        lines.push(`For the custom priority “${state.customText}”, evaluate whether each hotel clearly supports that preference. Do not assume it does; look for evidence in location, facilities, reviews, hotel descriptions and nearby experiences.`);
+      }
+      return lines.length ? `**Interpretation guidance**\n\n${lines.join('\n\n')}` : '';
+    };
+
+    const buildPromptParts = (state: PrefState, weights: WeightedPref[]) => {
+      if (weights.length === 0) return { weightingSection: '', outputNotes: '' };
+
+      const tableRows = weights.map((p) => `| ${p.label} | ${p.weight} |`).join('\n');
+      const weightTable = `| Traveller preference | Weight |\n|---|---:|\n${tableRows}\n| **Total** | **100** |`;
+
+      const intro = [
+        'In addition to the standard editorial scoring, apply the following traveller preference weighting. Prioritise hotels that match these preferences, and explain when a hotel scores well editorially but poorly for this traveller profile.',
+        'Produce two separate scores for each hotel:',
+        '1. Editorial value score /100 — based on the standard 50 Five-Star Hotels scoring system.\n2. Personal fit score /100 — based on the traveller preference weighting below.',
+        'Do not hide trade-offs inside a single combined score. If a hotel is excellent value but weak for this traveller’s priorities, say so clearly.',
+      ].join('\n\n');
+
+      const interpretation = buildInterpretation(state);
+      const body = ['### Additional traveller preference weighting', intro, weightTable, interpretation]
+        .filter(Boolean)
+        .join('\n\n');
+
+      const outputBlock = [
+        '### Additional output for the traveller-fit scoring',
+        'When presenting the final shortlist table and any other hotel tables, add these columns:',
+        '- Editorial value score\n- Personal fit score\n- Best matched traveller preference\n- Main personal-fit drawback',
+        'For each hotel in the top 5 summaries, add a short subsection:',
+        '### Personal fit notes\n\nExplain how well this hotel matches the selected traveller preferences. Mention both strengths and weaknesses.',
+      ].join('\n\n');
+
+      return {
+        weightingSection: `${body}\n\n---\n\n`,
+        outputNotes: `\n${outputBlock}\n`,
+      };
+    };
+
+    // ----- Warnings -----
+    const customHasLuxuryWords = (text: string) =>
+      /\b(luxury|resort|beachfront|suite|spa|romantic)\b/i.test(text);
+
+    const updateWarning = (state: PrefState) => {
+      const fiftySelected = priceLevelInputs.some((i) => i.checked && Number(i.value) === 50);
+      const conflict =
+        (fiftySelected && (state.safety === 5 || state.quietness === 5)) ||
+        (state.safety === 5 && customHasLuxuryWords(state.customText));
+      warning.hidden = !conflict;
+    };
+
+    // ----- Weighting summary table (UI) -----
+    const renderWeighting = (weights: WeightedPref[]) => {
+      if (weights.length === 0) {
+        weightingBox.innerHTML =
+          '<p class="text-sm text-[#6F685F]">No personalised weighting selected. The generated prompt will use the standard editorial scoring only.</p>';
+        return;
+      }
+      const rows = weights
+        .map(
+          (p) =>
+            `<tr class="border-t border-[#E2D4BF]"><td class="py-2 pr-4 text-[#1F2428]">${escapeHtml(p.label)}</td><td class="py-2 text-right font-semibold text-[#1F2428]">${p.weight}</td></tr>`
+        )
+        .join('');
+      weightingBox.innerHTML = `
+        <div class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] p-5">
+          <h3 class="font-serif text-lg font-semibold text-[#1F2428] mb-3">Your traveller-fit weighting</h3>
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-left text-[#6F685F]">
+                <th class="pb-1 font-semibold">Factor</th>
+                <th class="pb-1 text-right font-semibold">Personal weighting</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows}
+              <tr class="border-t border-[#B88A44]/40"><td class="py-2 pr-4 font-semibold text-[#1F2428]">Total</td><td class="py-2 text-right font-semibold text-[#1F2428]">100</td></tr>
+            </tbody>
+          </table>
+        </div>`;
+    };
+
+    // ----- Persistence -----
+    const save = (state: PrefState) => {
+      try {
+        localStorage.setItem(
+          config.storageKey,
+          JSON.stringify({ ...state, preset: currentPreset })
+        );
+      } catch {
+        /* ignore quota / privacy-mode errors */
+      }
+    };
+
+    const setPresetActive = (key: string | null) => {
+      currentPreset = key;
+      for (const button of presetButtons) {
+        button.setAttribute('aria-pressed', button.dataset.presetButton === key ? 'true' : 'false');
+      }
+    };
+
+    // ----- Central recompute -----
+    const publish = (parts: { weightingSection: string; outputNotes: string }) => {
+      (window as unknown as { __personalisePromptParts?: typeof parts }).__personalisePromptParts = parts;
+      document.dispatchEvent(new CustomEvent('personalise:change', { detail: parts }));
+    };
+
+    const refresh = (persist = true) => {
+      const state = readState();
+      const weights = normalisePreferencesTo100(getActivePreferences(state));
+      renderWeighting(weights);
+      updateWarning(state);
+      publish(buildPromptParts(state, weights));
+      if (persist) save(state);
+    };
+
+    // ----- Apply values to the controls -----
+    const applyValues = (values: PrefState) => {
+      selects.safety.value = String(values.safety);
+      selects.sights.value = String(values.sights);
+      selects.quietness.value = String(values.quietness);
+      customText.value = values.customText;
+      customImportance.value = String(values.customImportance);
+    };
+
+    const applyPreset = (key: string) => {
+      const preset = config.presets.find((p) => p.key === key);
+      if (!preset) return;
+      applyValues({ preset: key, ...preset.values });
+      setPresetActive(key);
+      refresh();
+    };
+
+    // ----- Wiring -----
+    for (const button of presetButtons) {
+      button.addEventListener('click', () => applyPreset(button.dataset.presetButton!));
+    }
+
+    const onManualEdit = () => {
+      setPresetActive(null);
+      refresh();
+    };
+    selects.safety.addEventListener('change', onManualEdit);
+    selects.sights.addEventListener('change', onManualEdit);
+    selects.quietness.addEventListener('change', onManualEdit);
+    customImportance.addEventListener('change', onManualEdit);
+    customText.addEventListener('input', onManualEdit);
+
+    for (const input of priceLevelInputs) {
+      input.addEventListener('change', () => updateWarning(readState()));
+    }
+
+    resetButton.addEventListener('click', () => {
+      const balanced = config.presets.find((p) => p.key === 'balanced');
+      if (balanced) {
+        applyValues({ preset: 'balanced', ...balanced.values });
+        setPresetActive('balanced');
+      }
+      refresh();
+    });
+
+    // ----- Initial load: restore from localStorage or fall back to defaults -----
+    const restore = () => {
+      let restored: PrefState | null = null;
+      try {
+        const raw = localStorage.getItem(config.storageKey);
+        if (raw) {
+          const parsed = JSON.parse(raw) as Partial<PrefState>;
+          restored = {
+            preset: typeof parsed.preset === 'string' ? parsed.preset : null,
+            safety: Number(parsed.safety ?? config.defaults.safety),
+            sights: Number(parsed.sights ?? config.defaults.sights),
+            quietness: Number(parsed.quietness ?? config.defaults.quietness),
+            customText: typeof parsed.customText === 'string' ? parsed.customText : '',
+            customImportance: Number(parsed.customImportance ?? 0),
+          };
+        }
+      } catch {
+        restored = null;
+      }
+      const values = restored ?? config.defaults;
+      applyValues(values);
+      setPresetActive(values.preset ?? null);
+    };
+
+    restore();
+    refresh(false);
+  }
+</script>

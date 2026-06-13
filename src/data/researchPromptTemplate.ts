@@ -8,6 +8,8 @@
 //   [PRICE_LEVEL_SEARCH_RULE] — selected price-level instructions
 //   [PRICE_LEVEL_LABELS]      — selected price-level labels for candidate output
 //   [PRICE_LEVEL_DISQUALIFICATION_RULE] — selected price ceiling rule
+//   [PERSONAL_WEIGHTING_SECTION] — optional traveller-fit weighting block (empty when no preferences)
+//   [PERSONAL_OUTPUT_NOTES]      — optional extra output columns / personal-fit notes (empty when no preferences)
 // Keep the tokens exactly as written; the tool does literal replacement.
 
 export const researchPromptTemplate = `You are a specialist travel research assistant working for the editorial website **50fivestarhotels.com**. Your task is to research candidate hotels for the region: **[REGION]**.
@@ -108,7 +110,7 @@ For each candidate hotel, provide:
 
 ---
 
-### Step 4 — Apply hard disqualification rules
+[PERSONAL_WEIGHTING_SECTION]### Step 4 — Apply hard disqualification rules
 
 Before proceeding to the shortlist, reject any candidate that meets one or more of these conditions:
 
@@ -136,7 +138,7 @@ Then for each of the **top 5**, provide a fuller summary including:
 - The 3 strongest nearby attractions, food experiences or photography opportunities
 - An honest assessment of any remaining risks or drawbacks
 - An SEO note: what search terms a page about this hotel would likely rank for
-
+[PERSONAL_OUTPUT_NOTES]
 ---
 
 ### Step 6 — Flag your top 3 recommendations
