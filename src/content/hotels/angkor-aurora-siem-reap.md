@@ -16,7 +16,7 @@ bestFor:
   - "Southeast Asia first-timers"
 valueScore: 83
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Angkor%20Aurora%20Siem%20Reap%20Cambodia"
+bookingUrl: "https://www.booking.com/hotel/kh/angkor-aurora.en-gb.html"
 image:
   src: "/images/hotels/angkor-aurora-siem-reap-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Angkor Aurora in Siem Reap, Cambodia"

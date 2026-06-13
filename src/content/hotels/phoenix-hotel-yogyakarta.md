@@ -17,7 +17,7 @@ bestFor:
   - "heritage enthusiasts"
 valueScore: 89
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Phoenix%20Hotel%20Yogyakarta%20Handwritten%20Collection%20Indonesia"
+bookingUrl: "https://www.booking.com/hotel/id/the-phoenix-yogyakarta-a-member-of-the-mgallery-collection.en-gb.html"
 image:
   src: "/images/hotels/phoenix-hotel-yogyakarta-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of The Phoenix Hotel Yogyakarta - Handwritten Collection in Yogyakarta, Indonesia"

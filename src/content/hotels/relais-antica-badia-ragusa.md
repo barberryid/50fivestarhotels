@@ -16,7 +16,7 @@ bestFor:
   - "food and architecture"
 valueScore: 92
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Relais%20Antica%20Badia%20San%20Maurizio%201619%20Ragusa"
+bookingUrl: "https://www.booking.com/hotel/it/antica-badia-relais.en-gb.html"
 image:
   src: "/images/hotels/relais-antica-badia-ragusa-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view inspired by Relais Antica Badia in Ragusa"

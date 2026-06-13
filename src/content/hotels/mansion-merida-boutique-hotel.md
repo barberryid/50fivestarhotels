@@ -16,7 +16,7 @@ bestFor:
   - "romantic city break"
 valueScore: 97
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Mansion%20Merida%20Boutique%20Hotel%20Mexico"
+bookingUrl: "https://www.booking.com/hotel/mx/mansion-merida-on-the-park.en-gb.html"
 image:
   src: "/images/hotels/mansion-merida-boutique-hotel-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Mansion Merida Boutique Hotel in Merida, Mexico"

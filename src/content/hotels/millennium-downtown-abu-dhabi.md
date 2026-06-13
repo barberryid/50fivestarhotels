@@ -16,7 +16,7 @@ bestFor:
   - "families"
 valueScore: 68
 verdict: "Good value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Millennium%20Downtown%20Abu%20Dhabi%20UAE"
+bookingUrl: "https://www.booking.com/hotel/ae/millennium-plaza-downtown-abu-dhabi.en-gb.html"
 image:
   src: "/images/hotels/millennium-downtown-abu-dhabi-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Millennium Downtown in Abu Dhabi, UAE"

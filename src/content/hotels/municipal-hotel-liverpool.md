@@ -17,7 +17,7 @@ bestFor:
   - "spa hotel value"
 valueScore: 91
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Municipal%20Hotel%20Liverpool%20MGallery"
+bookingUrl: "https://www.booking.com/hotel/gb/the-municipal-liverpool-mgallery.en-gb.html"
 image:
   src: "/images/hotels/municipal-hotel-liverpool-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Municipal Hotel Liverpool, MGallery in England"

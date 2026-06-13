@@ -17,7 +17,7 @@ bestFor:
   - "Mexican food trip"
 valueScore: 96
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Cartesiano%20Boutique%20Wellness%20Hotel%20Puebla%20Mexico"
+bookingUrl: "https://www.booking.com/hotel/mx/cartesiano-puebla.en-gb.html"
 image:
   src: "/images/hotels/cartesiano-puebla-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Cartesiano Boutique & Wellness Hotel in Puebla, Mexico"

@@ -16,7 +16,7 @@ bestFor:
   - "whale and waterfall trips"
 valueScore: 89
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Sublime%20Samana%20Las%20Terrenas"
+bookingUrl: "https://www.booking.com/hotel/do/sublime-samana.en-gb.html"
 image:
   src: "/images/hotels/sublime-samana-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Sublime Samana in Las Terrenas, Dominican Republic"

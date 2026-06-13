@@ -16,7 +16,7 @@ bestFor:
   - "spa weekend"
 valueScore: 90
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hotel%20%26%20Spa%20Regent%20Petite%20France%20Strasbourg"
+bookingUrl: "https://www.booking.com/hotel/fr/regentpetitefrance.en-gb.html"
 image:
   src: "/images/hotels/regent-petite-france-strasbourg-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view inspired by Hotel & Spa Regent Petite France in Strasbourg"

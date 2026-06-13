@@ -16,7 +16,7 @@ bestFor:
   - "Rouen first-timers"
 valueScore: 89
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hotel%20de%20Bourgtheroulde%20Rouen"
+bookingUrl: "https://www.booking.com/hotel/fr/de-bourgtheroulde.en-gb.html"
 image:
   src: "/images/hotels/hotel-de-bourgtheroulde-rouen-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view inspired by Hotel de Bourgtheroulde in Rouen"

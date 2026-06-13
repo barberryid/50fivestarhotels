@@ -16,7 +16,7 @@ bestFor:
   - "heritage garden stays"
 valueScore: 85
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Raweekanlaya%20Bangkok%20Wellness%20Cuisine%20Resort%20Thailand"
+bookingUrl: "https://www.booking.com/hotel/th/raweekanlaya.en-gb.html"
 image:
   src: "/images/hotels/raweekanlaya-bangkok-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of The Raweekanlaya Bangkok Wellness Cuisine Resort in Bangkok, Thailand"

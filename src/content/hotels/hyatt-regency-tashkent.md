@@ -16,7 +16,7 @@ bestFor:
   - "business travellers"
 valueScore: 79
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hyatt%20Regency%20Tashkent%20Uzbekistan"
+bookingUrl: "https://www.booking.com/hotel/uz/hyatt-regency-tashkent.en-gb.html"
 image:
   src: "/images/hotels/hyatt-regency-tashkent-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Hyatt Regency Tashkent in Tashkent, Uzbekistan"

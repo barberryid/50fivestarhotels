@@ -16,7 +16,7 @@ bestFor:
   - "old port exploring"
 valueScore: 93
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hotel%20Bristol%20Palace%20Genoa"
+bookingUrl: "https://www.booking.com/hotel/it/bristol-palace.en-gb.html"
 image:
   src: "/images/hotels/hotel-bristol-palace-genoa-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view inspired by Hotel Bristol Palace in Genoa"

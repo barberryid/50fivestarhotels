@@ -16,7 +16,7 @@ bestFor:
   - "summer beach base"
 valueScore: 71
 verdict: "Good value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Graffit%20Gallery%20Design%20Hotel%20Varna%20Bulgaria"
+bookingUrl: "https://www.booking.com/hotel/bg/graffit-gallery.en-gb.html"
 image:
   src: "/images/hotels/graffit-gallery-design-hotel-varna-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Graffit Gallery Design Hotel in Varna, Bulgaria"

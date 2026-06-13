@@ -16,7 +16,7 @@ bestFor:
   - "pool and resort stays"
 valueScore: 81
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Steigenberger%20Resort%20Achti%20Luxor%20Egypt"
+bookingUrl: "https://www.booking.com/hotel/eg/sheraton-luxor-resort.en-gb.html"
 image:
   src: "/images/hotels/steigenberger-resort-achti-luxor-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Steigenberger Resort Achti in Luxor, Egypt"

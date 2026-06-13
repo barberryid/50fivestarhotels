@@ -16,7 +16,7 @@ bestFor:
   - "Carcassonne first-timers"
 valueScore: 94
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hotel%20de%20la%20Cite%20Carcassonne%20MGallery"
+bookingUrl: "https://www.booking.com/hotel/fr/hotel-de-la-cite.en-gb.html"
 image:
   src: "/images/hotels/hotel-de-la-cite-carcassonne-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view inspired by Hotel de la Cite Carcassonne in France"

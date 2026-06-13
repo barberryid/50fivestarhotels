@@ -16,7 +16,7 @@ bestFor:
   - "Armenia history"
 valueScore: 78
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Grand%20Hotel%20Yerevan%20Armenia"
+bookingUrl: "https://www.booking.com/hotel/am/golden-tulip-yerevan.en-gb.html"
 image:
   src: "/images/hotels/grand-hotel-yerevan-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Grand Hotel Yerevan in Yerevan, Armenia"

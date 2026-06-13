@@ -16,7 +16,7 @@ bestFor:
   - "spa and pool stays"
 valueScore: 78
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Sofitel%20Marrakech%20Palais%20Imperial%20Spa%20Morocco"
+bookingUrl: "https://www.booking.com/hotel/ma/sofitel-marrakech.en-gb.html"
 image:
   src: "/images/hotels/sofitel-marrakech-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Sofitel Marrakech Palais Imperial & Spa in Marrakech, Morocco"

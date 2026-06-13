@@ -17,7 +17,7 @@ bestFor:
   - "Caribbean heritage stay"
 valueScore: 96
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hodelpa%20Nicolas%20de%20Ovando%20Santo%20Domingo"
+bookingUrl: "https://www.booking.com/hotel/do/nicolas-de-ovando-santo-domingo.en-gb.html"
 image:
   src: "/images/hotels/hodelpa-nicolas-de-ovando-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Hodelpa Nicolas de Ovando in Santo Domingo, Dominican Republic"

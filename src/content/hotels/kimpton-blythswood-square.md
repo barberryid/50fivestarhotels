@@ -16,7 +16,7 @@ bestFor:
   - "heritage townhouse stay"
 valueScore: 88
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Kimpton%20Blythswood%20Square%20Glasgow"
+bookingUrl: "https://www.booking.com/hotel/gb/blythswood-square.en-gb.html"
 image:
   src: "/images/hotels/kimpton-blythswood-square-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Kimpton Blythswood Square Hotel and Spa in Glasgow"

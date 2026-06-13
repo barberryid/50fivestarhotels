@@ -16,7 +16,7 @@ bestFor:
   - "seafood lovers"
 valueScore: 72
 verdict: "Good value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Real%20Marina%20Hotel%20Spa%20Olhao%20Portugal"
+bookingUrl: "https://www.booking.com/hotel/pt/real-marina-spa.en-gb.html"
 image:
   src: "/images/hotels/real-marina-hotel-spa-olhao-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Real Marina Hotel & Spa in Olhao, Portugal"

@@ -17,7 +17,7 @@ bestFor:
   - "museum weekend"
 valueScore: 100
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hotel%20Suitess%20Dresden%20Germany"
+bookingUrl: "https://www.booking.com/hotel/de/suitess.en-gb.html"
 image:
   src: "/images/hotels/hotel-suitess-dresden-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Hotel Suitess in Dresden, Germany"

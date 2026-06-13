@@ -16,7 +16,7 @@ bestFor:
   - "architecture lovers"
 valueScore: 84
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Stamba%20Hotel%20Tbilisi%20Georgia"
+bookingUrl: "https://www.booking.com/hotel/ge/stamba-tbilisi.en-gb.html"
 image:
   src: "/images/hotels/stamba-hotel-tbilisi-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Stamba Hotel in Tbilisi, Georgia"

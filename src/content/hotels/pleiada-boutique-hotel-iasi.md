@@ -16,7 +16,7 @@ bestFor:
   - "Romanian cultural city"
 valueScore: 81
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Pleiada%20Boutique%20Hotel%20Spa%20Iasi%20Romania"
+bookingUrl: "https://www.booking.com/hotel/ro/pleiada-boutique-hotel-and-spa.en-gb.html"
 image:
   src: "/images/hotels/pleiada-boutique-hotel-iasi-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Pleiada Boutique Hotel & Spa in Iasi, Romania"

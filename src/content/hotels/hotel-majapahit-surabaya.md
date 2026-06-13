@@ -17,7 +17,7 @@ bestFor:
   - "history trip"
 valueScore: 91
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hotel%20Majapahit%20Surabaya%20MGallery%20Indonesia"
+bookingUrl: "https://www.booking.com/hotel/id/majapahit-surabaya.en-gb.html"
 image:
   src: "/images/hotels/hotel-majapahit-surabaya-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Hotel Majapahit Surabaya - MGallery in Surabaya, Indonesia"

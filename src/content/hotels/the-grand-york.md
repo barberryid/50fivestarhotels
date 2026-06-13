@@ -16,7 +16,7 @@ bestFor:
   - "York first-timers"
 valueScore: 94
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=The%20Grand%20York%20England"
+bookingUrl: "https://www.booking.com/hotel/gb/cedar-court-grand.en-gb.html"
 image:
   src: "/images/hotels/the-grand-york-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of The Grand, York in England"

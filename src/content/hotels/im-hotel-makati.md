@@ -16,7 +16,7 @@ bestFor:
   - "design hotel enthusiasts"
 valueScore: 75
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=IM%20Hotel%20Makati%20Philippines"
+bookingUrl: "https://www.booking.com/hotel/ph/i-39-m-and-residences.en-gb.html"
 image:
   src: "/images/hotels/im-hotel-makati-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of I'M Hotel in Makati, Philippines"

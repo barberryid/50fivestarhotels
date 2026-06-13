@@ -16,7 +16,7 @@ bestFor:
   - "couples"
 valueScore: 87
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Majestic%20Hotel%20Kuala%20Lumpur%20Autograph%20Collection%20Malaysia"
+bookingUrl: "https://www.booking.com/hotel/my/the-majestic-kuala-lumpur.en-gb.html"
 image:
   src: "/images/hotels/majestic-hotel-kuala-lumpur-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of The Majestic Hotel Kuala Lumpur, Autograph Collection in Kuala Lumpur, Malaysia"

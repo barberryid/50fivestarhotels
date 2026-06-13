@@ -16,7 +16,7 @@ bestFor:
   - "theatre district base"
 valueScore: 94
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Grand%20Hotel%20Wagner%20Palermo"
+bookingUrl: "https://www.booking.com/hotel/it/grand-wagner.en-gb.html"
 image:
   src: "/images/hotels/grand-hotel-wagner-palermo-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view inspired by Grand Hotel Wagner in Palermo"

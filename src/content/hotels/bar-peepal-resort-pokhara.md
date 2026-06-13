@@ -16,7 +16,7 @@ bestFor:
   - "Nepal first-timers"
 valueScore: 73
 verdict: "Good value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Bar%20Peepal%20Resort%20Pokhara%20Nepal"
+bookingUrl: "https://www.booking.com/hotel/np/bar-peepal-resort.en-gb.html"
 image:
   src: "/images/hotels/bar-peepal-resort-pokhara-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Bar Peepal Resort in Pokhara, Nepal"

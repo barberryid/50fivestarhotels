@@ -17,7 +17,7 @@ bestFor:
   - "weekend city break"
 valueScore: 99
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Steigenberger%20Icon%20Grandhotel%20Handelshof%20Leipzig%20Germany"
+bookingUrl: "https://www.booking.com/hotel/de/steigenberger-grandhotel-handelshof-leipzig.en-gb.html"
 image:
   src: "/images/hotels/steigenberger-handelshof-leipzig-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Steigenberger Icon Grandhotel Handelshof Leipzig in Germany"

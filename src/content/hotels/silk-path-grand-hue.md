@@ -16,7 +16,7 @@ bestFor:
   - "Vietnam overland route"
 valueScore: 80
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Silk%20Path%20Grand%20Hue%20Hotel%20Spa%20Vietnam"
+bookingUrl: "https://www.booking.com/hotel/vn/green-hue-hue.en-gb.html"
 image:
   src: "/images/hotels/silk-path-hotel-hue-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Silk Path Hotel in Hue, Vietnam"

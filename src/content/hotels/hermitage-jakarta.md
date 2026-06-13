@@ -16,7 +16,7 @@ bestFor:
   - "business travellers"
 valueScore: 80
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hermitage%20Tribute%20Portfolio%20Hotel%20Jakarta%20Indonesia"
+bookingUrl: "https://www.booking.com/hotel/id/the-hermitage-menteng-jakarta-jakarta.en-gb.html"
 image:
   src: "/images/hotels/hermitage-jakarta-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of The Hermitage, a Tribute Portfolio Hotel, Jakarta in Jakarta, Indonesia"

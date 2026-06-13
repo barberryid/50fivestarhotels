@@ -16,7 +16,7 @@ bestFor:
   - "small-city heritage stay"
 valueScore: 99
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Hotel%20Elephant%20Weimar%20Autograph%20Collection%20Germany"
+bookingUrl: "https://www.booking.com/hotel/de/elephantweimarhotel.en-gb.html"
 image:
   src: "/images/hotels/hotel-elephant-weimar-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Hotel Elephant Weimar, Autograph Collection in Germany"

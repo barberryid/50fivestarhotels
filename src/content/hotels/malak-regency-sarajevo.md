@@ -16,7 +16,7 @@ bestFor:
   - "off-the-beaten-path Europe"
 valueScore: 73
 verdict: "Good value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Malak%20Regency%20Hotel%20Sarajevo%20Bosnia"
+bookingUrl: "https://www.booking.com/hotel/ba/malak-regency.en-gb.html"
 image:
   src: "/images/hotels/malak-regency-sarajevo-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Malak Regency Hotel in Sarajevo, Bosnia and Herzegovina"

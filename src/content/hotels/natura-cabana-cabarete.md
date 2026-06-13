@@ -17,7 +17,7 @@ bestFor:
   - "surf and yoga"
 valueScore: 88
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Natura%20Cabana%20Cabarete"
+bookingUrl: "https://www.booking.com/hotel/do/natura-cabana.en-gb.html"
 image:
   src: "/images/hotels/natura-cabana-cabarete-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Natura Cabana Boutique Hotel & Spa in Cabarete, Dominican Republic"

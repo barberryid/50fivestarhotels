@@ -16,7 +16,7 @@ bestFor:
   - "Mexico discovery trips"
 valueScore: 94
 verdict: "Exceptional value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Casa%20Don%20Gustavo%20Boutique%20Hotel%20Campeche%20Mexico"
+bookingUrl: "https://www.booking.com/hotel/mx/casa-don-gustavo-boutique.en-gb.html"
 image:
   src: "/images/hotels/casa-don-gustavo-campeche-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Casa Don Gustavo Boutique Hotel in Campeche, Mexico"

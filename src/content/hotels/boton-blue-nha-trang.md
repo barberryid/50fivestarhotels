@@ -16,7 +16,7 @@ bestFor:
   - "couples"
 valueScore: 76
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Boton%20Blue%20Hotel%20Spa%20Nha%20Trang%20Vietnam"
+bookingUrl: "https://www.booking.com/hotel/vn/boton-blue-nha-trang.en-gb.html"
 image:
   src: "/images/hotels/boton-blue-hotel-spa-nha-trang-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of Boton Blue Hotel & Spa in Nha Trang, Vietnam"

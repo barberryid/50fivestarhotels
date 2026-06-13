@@ -16,7 +16,7 @@ bestFor:
   - "batik and craft"
 valueScore: 82
 verdict: "Strong value"
-bookingUrl: "https://www.booking.com/searchresults.html?ss=Royal%20Surakarta%20Heritage%20Solo%20Indonesia%20Handwritten"
+bookingUrl: "https://www.booking.com/hotel/id/the-royal-surakarta-heritage.en-gb.html"
 image:
   src: "/images/hotels/royal-surakarta-heritage-solo-editorial-dusk.webp"
   alt: "AI-generated editorial dusk view of The Royal Surakarta Heritage - Handwritten Collection in Solo, Indonesia"
