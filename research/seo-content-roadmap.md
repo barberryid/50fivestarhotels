@@ -4,7 +4,7 @@
 
 - cheap-five-star-hotels
 - affordable-luxury-hotels
-- cheapest-cities-five-star-hotels
+- research-hotels
 - under-100
 - under-200
 - under-250

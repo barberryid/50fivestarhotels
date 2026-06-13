@@ -240,6 +240,20 @@ Each page containing affiliate links should include a clear disclosure, for exam
 
 > This page contains affiliate links. If you book through them, I may earn a commission at no extra cost to you. Prices change constantly, so always check the final rate, taxes, cancellation policy, and room type before booking.
 
+### Booking.com affiliate implementation rule
+
+Future hotel profiles must store only a clean canonical Booking.com hotel URL in the hotel Markdown frontmatter `bookingUrl` field. Do not store CJ affiliate URLs in content files.
+
+Use URLs like:
+
+```yaml
+bookingUrl: "https://www.booking.com/hotel/do/sublime-samana.en-gb.html"
+```
+
+Do not use search-result URLs, temporary challenge/referrer URLs, or URLs with parameters such as `chal_t`, `force_referer`, `aid`, `label`, or other tracking query strings. For Booking.com hotel pages, the stored URL should normally end at `.html` or `.en-gb.html`.
+
+The site generates Booking.com CJ affiliate links dynamically from `bookingUrl` using `src/utils/affiliateLinks.ts` and `getBookingAffiliateUrl()`. Hotel pages and hotel cards render the affiliate CTA automatically when `bookingUrl` exists, with `rel="sponsored nofollow noopener"` and `target="_blank"`. When adding future hotels, make sure the clean `bookingUrl` field is present so the affiliate CTA appears automatically.
+
 The project may later expand into secondary affiliate opportunities such as:
 
 - airport transfers
@@ -491,7 +505,7 @@ The site should eventually include the following sections:
 - Under €200
 - Under €250
 - By Destination
-- Best Value Cities
+- How to Find Stays
 - Luxury Travel Tips
 - About
 - Affiliate Disclosure
@@ -507,7 +521,7 @@ The first major content phase should produce:
 2. “Best Five-Star Hotels Under €100 Worldwide”
 3. “Best Five-Star Hotels Under €200 Worldwide”
 4. “Best Five-Star Hotels Under €250 Worldwide”
-5. “Cheapest Cities for Five-Star Hotels”
+5. "How to Find Stays" / research-yourself tool
 6. First 20 hotel profiles
 7. City pages for the strongest destinations
 8. Editorial methodology page: “How We Choose Hotels”
@@ -568,7 +582,7 @@ The site should target practical, high-intent search queries such as:
 - cheap five-star hotels
 - affordable luxury hotels
 - best-value five-star hotels
-- cheapest cities for five-star hotels
+- how to find elite stays by country
 - best five-star hotels under €100 in [city]
 - best five-star hotels under €200 in [country]
 - luxury hotels on a budget
@@ -715,7 +729,8 @@ The site has now had a major SEO architecture expansion committed and pushed to 
 
 - `/cheap-five-star-hotels/`
 - `/affordable-luxury-hotels/`
-- `/cheapest-cities-five-star-hotels/`
+- `/research-hotels/`
+- `/cheapest-cities-five-star-hotels/` redirects to `/research-hotels/`
 - `/affordable-five-star-hotels-europe/`
 - `/affordable-five-star-hotels-asia/`
 - `/luxury-hotels-on-a-budget/`
@@ -912,6 +927,8 @@ All 21 hotels are live as individual pages at `/hotels/[slug]`. Nepal (Pokhara) 
 
 **Maintenance instruction:** when a new hotel Markdown file is added under `src/content/hotels/`, update this launch hotel list in the same change. This brief should always list every live hotel currently present in `src/content/hotels/`, using the hotel frontmatter as the source of truth for exact title, city, country, tier, score, and verdict.
 
+**Affiliate instruction for new hotels:** every new hotel Markdown file should include a clean canonical Booking.com hotel URL in `bookingUrl` when one is available. Keep the stored URL free of affiliate wrappers and tracking/query parameters. The site will generate the CJ affiliate link automatically from that clean value.
+
 | Rank | Hotel | City | Country | Tier | Score | Verdict |
 |---|---|---|---|---|---|---|
 | 1 | Hotel Majapahit Surabaya – MGallery Collection | Surabaya | Indonesia | Under €100 | 91 | Exceptional value |
@@ -974,7 +991,7 @@ src/
     destinations/[slug].astro
     cheap-five-star-hotels.astro
     affordable-luxury-hotels.astro
-    cheapest-cities-five-star-hotels.astro
+    research-hotels.astro
     affordable-five-star-hotels-europe.astro
     affordable-five-star-hotels-asia.astro
     luxury-hotels-on-a-budget.astro
@@ -1083,7 +1100,9 @@ The destination-card images are also fully generated originals. Online pages wer
 
 ### Booking.com links
 
-All booking links use standard Booking.com search URLs (`?ss=Hotel%20Name%20City%20Country`). These are **not affiliate links** at launch. Affiliate links need to be set up separately through the Booking.com Partner Programme and swapped in once approved.
+Booking.com affiliate links are active. Hotel content files must store only clean canonical Booking.com hotel URLs in `bookingUrl`; do not store full CJ affiliate URLs in Markdown. The runtime helper `src/utils/affiliateLinks.ts` wraps each clean URL with the CJ base URL and `encodeURIComponent()` when rendering hotel-page and hotel-card CTAs.
+
+When adding or updating hotels, remove temporary Booking.com parameters such as `chal_t` and `force_referer`, avoid search-result URLs such as `/searchresults.html?...`, and keep the hotel page path intact.
 
 ### Seasonality data
 
@@ -1127,7 +1146,7 @@ Hotel editorial body text uses Tailwind `prose` classes. `@tailwindcss/typograph
 Immediate next priority: add live profile pages for the AI-image candidates not yet present in `src/content/hotels/` - Meliá Yangon, Grand Mercure Medan Angkasa, NH Collection Bogotá WTC Royal, Novotel Ahmedabad, and Mandarin Colombo. Their AI image assets already exist. The main SEO scaffolding for landing pages, destination pages, regional pages, guide pages, sitemap, robots, llms and structured data is already in place.
 
 1. **Replace contextual images with hotel-specific images where possible** — use `research/image-audit.md`, `image-attributions.md`, and the gallery frontmatter as the working source.
-2. **Set up Booking.com affiliate programme** — replace standard search links with affiliate links once approved.
+2. **Maintain Booking.com affiliate links** - every future hotel profile should include a clean canonical `bookingUrl` so the existing CJ helper can generate affiliate CTAs automatically.
 3. **Expand to 50 hotels** — future candidates listed above plus the destination strategy in this brief; use `research/seo-content-roadmap.md` as the working SEO roadmap.
 4. **Deepen existing city/destination pages** — the initial destination route is live for the 20 strongest cities, but individual pages should be enriched over time with more specific local sights, food, timing and hotel comparison detail.
 5. **Keep this brief current** — whenever hotels, routes, image systems, data files, affiliate status, or build/deploy details change, update this Build status section in the same change.
@@ -1150,7 +1169,7 @@ Recommended follow-ups (identified, not yet actioned):
 - Add live profile pages for the 5 candidates that already have AI images but no content file: Meliá Yangon, Grand Mercure Medan Angkasa, NH Collection Bogotá WTC Royal, Novotel Ahmedabad, Mandarin Colombo. Their `public/images/hotels/*` assets are currently orphaned.
 - `destinations.astro` cards link to hotel pages but not to the richer per-city destination pages (`/destinations/<city>/`) — worth surfacing those routes from the destinations index.
 - Remove the unused `destinationSlugs` const in `src/pages/destinations/[slug].astro` (the route already defines its own `allowedSlugs`).
-- Replace Booking.com search links with affiliate links once the programme is approved.
+- Keep future hotel `bookingUrl` values clean canonical Booking.com hotel URLs so affiliate CTAs render automatically through the existing helper.
 
 ### Bar Peepal Resort, Pokhara added — 2026-06-05
 
@@ -1245,4 +1264,4 @@ Recommended follow-ups (identified, not yet actioned):
 
 ---
 
-The site includes a "Research a country" tool page (`/research-hotels/`) that lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list.
+The site includes a "How to Find Stays" research-yourself tool page (`/research-hotels/`) with the public promise "How to Uncover Elite Stays in Every Corner of the World." It lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/` via the Cloudflare Pages `_redirects` file.

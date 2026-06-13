@@ -7,18 +7,18 @@ import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
 const steps = [
   { step: '1', text: 'Choose the price levels and country you want to research.' },
   { step: '2', text: 'Copy the generated research prompt with your selected price ladder.' },
-  { step: '3', text: 'Paste it into a fresh Claude or ChatGPT session.' },
+  { step: '3', text: 'Paste it into a fresh Claude or ChatGPT session and check the results manually.' },
 ];
 
 const jsonLd = breadcrumbJsonLd([
   { name: 'Home', url: canonicalUrl('/') },
-  { name: 'Research a country', url: canonicalUrl('/research-hotels/') },
+  { name: 'How to Find Stays', url: canonicalUrl('/research-hotels/') },
 ]);
 ---
 
 <BaseLayout
-  title="Research Affordable Five-Star Hotels by Country | 50 Five-Star Hotels"
-  description="Use this copy-paste research prompt to find affordable five-star and near-five-star hotels by country, with €50, €100, €150 and €250 price levels."
+  title="How to Find Stays | 50 Five-Star Hotels"
+  description="Research yourself with a copy-paste prompt for uncovering elite stays in every corner of the world, from affordable five-star hotels to near-five-star value candidates."
   canonical="/research-hotels/"
   jsonLd={jsonLd}
 >
@@ -26,10 +26,13 @@ const jsonLd = breadcrumbJsonLd([
     <!-- Hero -->
     <section class="bg-[#FFFDF8] border-b border-[#E2D4BF]">
       <div class="max-w-4xl mx-auto px-5 py-16 md:py-20">
-        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Plan your own trip</p>
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Research yourself</p>
         <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
-          Research affordable five-star hotels in any country
+          How to Find Stays
         </h1>
+        <p class="text-[#1F2428]/80 text-xl md:text-2xl font-serif leading-relaxed mb-5">
+          How to Uncover Elite Stays in Every Corner of the World
+        </p>
         <p class="text-[#1F2428]/80 text-lg md:text-xl leading-relaxed mb-5">
           Use this prompt to find five-star and near-five-star hotels that may be unusually good value in the country you are visiting, from €50 long shots to €250 smart splurges.
         </p>
