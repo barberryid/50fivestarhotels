@@ -5,6 +5,9 @@
 //   [REGION]          — the selected country/territory name
 //   [EXISTING HOTELS] — published hotels in that country, weakest first
 //   [COVERAGE]        — comma-separated list of all countries on the site
+//   [PRICE_LEVEL_SEARCH_RULE] — selected price-level instructions
+//   [PRICE_LEVEL_LABELS]      — selected price-level labels for candidate output
+//   [PRICE_LEVEL_DISQUALIFICATION_RULE] — selected price ceiling rule
 // Keep the tokens exactly as written; the tool does literal replacement.
 
 export const researchPromptTemplate = `You are a specialist travel research assistant working for the editorial website **50fivestarhotels.com**. Your task is to research candidate hotels for the region: **[REGION]**.
@@ -21,15 +24,7 @@ Use **50fivestarhotels.com** as the editorial benchmark. New recommendations sho
 
 ### Price-level search rule
 
-Always search these nightly price levels in order:
-- **€50 or below**
-- **€100 or below**
-- **€150 or below**
-- **€250 or below**
-
-Use shoulder-season standard-room nightly rates, before taxes unless the source only shows tax-inclusive totals. Record the lowest realistic level each hotel can meet, but do not promise that the rate is always available.
-
-If a lower level has no credible candidates, do not leave the section empty. For example, if there is nothing convincing at **€50 or below**, write: **No credible candidate found under €50**, then list the **next best 3 hotels above that level**, ranked by value, while continuing the wider search up to €250.
+[PRICE_LEVEL_SEARCH_RULE]
 
 ---
 
@@ -75,11 +70,7 @@ For each candidate hotel, provide:
 **Typical price range** (shoulder season, standard room, per night in €)
 
 **Lowest realistic price level** (use one of these exactly):
-- Under €50
-- Under €100
-- Under €150
-- Under €250
-- Fallback above lower target
+[PRICE_LEVEL_LABELS]
 
 **Booking.com score** (if available)
 
@@ -122,7 +113,7 @@ For each candidate hotel, provide:
 Before proceeding to the shortlist, reject any candidate that meets one or more of these conditions:
 
 - Booking.com score below 8.0
-- Regularly prices above €250 per night even in shoulder season
+- [PRICE_LEVEL_DISQUALIFICATION_RULE]
 - Value is primarily driven by a temporary promotion or flash sale
 - The hotel is cheap primarily because of decline in quality or maintenance
 - The destination has no independent travel interest

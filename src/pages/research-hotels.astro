@@ -1,35 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CountryPromptTool from '../components/CountryPromptTool.astro';
+import { researchPriceLevels } from '../data/researchPriceLevels';
 import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
 
 const steps = [
-  { step: '1', text: 'Select the country you are travelling to.' },
-  { step: '2', text: 'Copy the generated research prompt with the expanded price ladder.' },
+  { step: '1', text: 'Choose the price levels and country you want to research.' },
+  { step: '2', text: 'Copy the generated research prompt with your selected price ladder.' },
   { step: '3', text: 'Paste it into a fresh Claude or ChatGPT session.' },
-];
-
-const priceLevels = [
-  {
-    label: '€50',
-    title: 'Impossible finds',
-    text: 'Search first for credible five-star or near-five-star rooms at €50 or below.',
-  },
-  {
-    label: '€100',
-    title: 'Budget luxury',
-    text: 'Capture the strongest affordable luxury candidates that still feel genuinely special.',
-  },
-  {
-    label: '€150',
-    title: 'Reliable value',
-    text: 'Open the search to better locations, stronger reviews and more dependable quality.',
-  },
-  {
-    label: '€250',
-    title: 'Smart splurge',
-    text: 'Keep higher-quality hotels in expensive markets if the value still feels unusual.',
-  },
 ];
 
 const jsonLd = breadcrumbJsonLd([
@@ -78,21 +56,43 @@ const jsonLd = breadcrumbJsonLd([
     </section>
 
     <!-- Price levels -->
-    <section class="max-w-4xl mx-auto px-5 py-10">
+    <section class="max-w-4xl mx-auto px-5 py-10" data-price-level-selector>
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Expanded search criteria</p>
       <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-5">Price levels included</h2>
-      <p class="text-[#1F2428]/80 leading-relaxed mb-7">
-        The generated prompt now searches four nightly levels in order: €50, €100, €150 and €250. If a lower level has no credible hotel, it asks for the next best three hotels above that level instead of returning an empty result.
+      <p class="text-[#1F2428]/80 leading-relaxed mb-7" data-price-level-summary>
+        The generated prompt searches the selected nightly levels in order. All four are included by default, and if a selected lower level has no credible hotel, the prompt asks for the next best three hotels above that level instead of returning an empty result.
       </p>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {priceLevels.map(({ label, title, text }) => (
-          <article class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] p-5">
-            <p class="text-3xl font-serif font-semibold text-[#1F2428] mb-2">{label}</p>
-            <h3 class="text-sm font-bold uppercase tracking-widest text-[#B88A44] mb-3">{title}</h3>
-            <p class="text-sm leading-relaxed text-[#6F685F]">{text}</p>
-          </article>
+        {researchPriceLevels.map(({ amount, title, text }) => (
+          <label
+            class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] p-5 cursor-pointer transition-colors data-[selected=true]:border-[#B88A44] data-[selected=true]:bg-[#F4EADC] hover:border-[#B88A44]"
+            data-price-level-card
+            data-selected="true"
+          >
+            <span class="flex h-full gap-4">
+              <input
+                type="checkbox"
+                value={amount}
+                checked
+                data-price-level-input
+                class="mt-1 h-5 w-5 shrink-0 rounded border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
+                aria-describedby={`price-level-${amount}-description`}
+              />
+              <span class="min-w-0">
+                <span class="block text-3xl font-serif font-semibold text-[#1F2428] mb-2">€{amount}</span>
+                <span class="block text-sm font-bold uppercase tracking-widest text-[#B88A44] mb-3">{title}</span>
+                <span id={`price-level-${amount}-description`} class="block text-sm leading-relaxed text-[#6F685F]">{text}</span>
+                <span class="mt-4 inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#4F6547]" data-price-level-state>
+                  Included
+                </span>
+              </span>
+            </span>
+          </label>
         ))}
       </div>
+      <p class="mt-4 text-sm text-[#6F685F]" role="status" aria-live="polite" data-price-level-status>
+        Select at least one price level. The research prompt below updates automatically.
+      </p>
     </section>
 
     <!-- The tool -->

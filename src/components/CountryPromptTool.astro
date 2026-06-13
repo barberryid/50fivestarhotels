@@ -8,6 +8,7 @@
 // the [COVERAGE] line all refresh automatically on every deploy.
 import { getCollection } from 'astro:content';
 import { countries } from '../data/unCountries';
+import { researchPriceLevels } from '../data/researchPriceLevels';
 import { researchPromptTemplate } from '../data/researchPromptTemplate';
 
 const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
@@ -52,11 +53,41 @@ const coverage = Object.keys(hotelsByCountry)
   .sort((a, b) => a.localeCompare(b, 'en'))
   .join(', ');
 
+const defaultPriceLevels = researchPriceLevels.map(({ amount }) => amount);
+
+const buildPriceLevelPromptParts = (amounts: readonly number[]) => {
+  const sorted = [...amounts].sort((a, b) => a - b);
+  const highest = sorted[sorted.length - 1] ?? defaultPriceLevels[defaultPriceLevels.length - 1];
+  const levelLines = sorted.map((amount) => `- **€${amount} or below**`).join('\n');
+  const labelLines = sorted.map((amount) => `- Under €${amount}`).join('\n');
+  const selectedPhrase = sorted.length === 1
+    ? 'this selected nightly price level'
+    : 'these selected nightly price levels in order';
+  const fallbackRule = sorted.length === 1
+    ? `If no credible hotel appears at **€${highest} or below**, do not leave the section empty. Write: **No credible candidate found under €${highest}**, then list the **next best 3 hotels above that level**, ranked by value and clearly marked as fallback results.`
+    : `If a selected level has no credible candidates, do not leave the section empty. For example, if there is nothing convincing at **€${sorted[0]} or below**, write: **No credible candidate found under €${sorted[0]}**, then list the **next best 3 hotels above that level**, ranked by value, while continuing the wider search up to the highest selected level (€${highest}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as fallback results.`;
+
+  return {
+    searchRule: `Always search ${selectedPhrase}:\n${levelLines}\n\nUse shoulder-season standard-room nightly rates, before taxes unless the source only shows tax-inclusive totals. Record the lowest selected level each hotel can meet, but do not promise that the rate is always available.\n\n${fallbackRule}`,
+    labels: `${labelLines}\n- Fallback above selected target`,
+    disqualificationRule: `Regularly prices above €${highest} per night even in shoulder season, unless included only as one of the clearly marked fallback hotels requested because no selected price level produced credible candidates`,
+  };
+};
+
+const applyPriceLevelTokens = (text: string, amounts: readonly number[]) => {
+  const parts = buildPriceLevelPromptParts(amounts);
+  return text
+    .split('[PRICE_LEVEL_SEARCH_RULE]').join(parts.searchRule)
+    .split('[PRICE_LEVEL_LABELS]').join(parts.labels)
+    .split('[PRICE_LEVEL_DISQUALIFICATION_RULE]').join(parts.disqualificationRule);
+};
+
 // Default textarea text: coverage is always populated; [REGION] and
 // [EXISTING HOTELS] stay literal until a country is selected.
-const defaultPrompt = researchPromptTemplate.split('[COVERAGE]').join(coverage);
+const defaultPrompt = applyPriceLevelTokens(researchPromptTemplate, defaultPriceLevels)
+  .split('[COVERAGE]').join(coverage);
 
-const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry };
+const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, priceLevels: defaultPriceLevels };
 ---
 
 <div class="rounded-2xl border border-[#E2D4BF] bg-[#FFFDF8] shadow-sm p-6 md:p-8" data-country-prompt-tool>
@@ -149,6 +180,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry }
     template: string;
     coverage: string;
     hotelsByCountry: Record<string, { name: string; score: number }[]>;
+    priceLevels: number[];
   };
 
   const input = document.getElementById('country-input') as HTMLInputElement;
@@ -160,6 +192,9 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry }
   const copyStatus = document.getElementById('copy-prompt-status') as HTMLSpanElement;
   const resetButton = document.getElementById('reset-country-button') as HTMLButtonElement;
   const options = Array.from(listbox.querySelectorAll<HTMLLIElement>('[role="option"]'));
+  const priceLevelInputs = Array.from(document.querySelectorAll<HTMLInputElement>('[data-price-level-input]'));
+  const priceLevelSummary = document.querySelector<HTMLElement>('[data-price-level-summary]');
+  const priceLevelStatus = document.querySelector<HTMLElement>('[data-price-level-status]');
 
   // Case- and accent-insensitive fold ("cote" matches "Côte d’Ivoire").
   const fold = (s: string) =>
@@ -172,11 +207,70 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry }
   let activeIndex = -1;
   let visible: HTMLLIElement[] = options;
   let copiedTimer: ReturnType<typeof setTimeout> | undefined;
+  let selectedCountry: string | null = null;
 
   const substituteAll = (text: string, token: string, value: string) => text.split(token).join(value);
 
+  const formatEuroSeries = (amounts: number[]) => {
+    const labels = amounts.map((amount) => `€${amount}`);
+    if (labels.length <= 1) return labels[0] ?? '';
+    if (labels.length === 2) return `${labels[0]} and ${labels[1]}`;
+    return `${labels.slice(0, -1).join(', ')} and ${labels[labels.length - 1]}`;
+  };
+
+  const normalisePriceLevels = (amounts: number[]) => {
+    const allowed = new Set(data.priceLevels);
+    return Array.from(new Set(amounts))
+      .filter((amount) => allowed.has(amount))
+      .sort((a, b) => a - b);
+  };
+
+  const getSelectedPriceLevels = () => {
+    if (priceLevelInputs.length === 0) return data.priceLevels;
+    const selected = normalisePriceLevels(
+      priceLevelInputs
+        .filter((priceInput) => priceInput.checked)
+        .map((priceInput) => Number(priceInput.value))
+    );
+    return selected.length > 0 ? selected : data.priceLevels;
+  };
+
+  const buildPriceLevelPromptParts = (amounts: number[]) => {
+    const sorted = normalisePriceLevels(amounts);
+    const safeLevels = sorted.length > 0 ? sorted : data.priceLevels;
+    const highest = safeLevels[safeLevels.length - 1];
+    const levelLines = safeLevels.map((amount) => `- **€${amount} or below**`).join('\n');
+    const labelLines = safeLevels.map((amount) => `- Under €${amount}`).join('\n');
+    const selectedPhrase = safeLevels.length === 1
+      ? 'this selected nightly price level'
+      : 'these selected nightly price levels in order';
+    const fallbackRule = safeLevels.length === 1
+      ? `If no credible hotel appears at **€${highest} or below**, do not leave the section empty. Write: **No credible candidate found under €${highest}**, then list the **next best 3 hotels above that level**, ranked by value and clearly marked as fallback results.`
+      : `If a selected level has no credible candidates, do not leave the section empty. For example, if there is nothing convincing at **€${safeLevels[0]} or below**, write: **No credible candidate found under €${safeLevels[0]}**, then list the **next best 3 hotels above that level**, ranked by value, while continuing the wider search up to the highest selected level (€${highest}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as fallback results.`;
+
+    return {
+      searchRule: `Always search ${selectedPhrase}:\n${levelLines}\n\nUse shoulder-season standard-room nightly rates, before taxes unless the source only shows tax-inclusive totals. Record the lowest selected level each hotel can meet, but do not promise that the rate is always available.\n\n${fallbackRule}`,
+      labels: `${labelLines}\n- Fallback above selected target`,
+      disqualificationRule: `Regularly prices above €${highest} per night even in shoulder season, unless included only as one of the clearly marked fallback hotels requested because no selected price level produced credible candidates`,
+    };
+  };
+
+  const applyPriceLevelTokens = (text: string, amounts: number[]) => {
+    const parts = buildPriceLevelPromptParts(amounts);
+    return substituteAll(
+      substituteAll(
+        substituteAll(text, '[PRICE_LEVEL_SEARCH_RULE]', parts.searchRule),
+        '[PRICE_LEVEL_LABELS]',
+        parts.labels
+      ),
+      '[PRICE_LEVEL_DISQUALIFICATION_RULE]',
+      parts.disqualificationRule
+    );
+  };
+
   const buildPrompt = (country: string | null): string => {
-    let text = substituteAll(data.template, '[COVERAGE]', data.coverage);
+    let text = applyPriceLevelTokens(data.template, getSelectedPriceLevels());
+    text = substituteAll(text, '[COVERAGE]', data.coverage);
     if (!country) return text;
     const hotels = data.hotelsByCountry[country];
     const existing = hotels
@@ -185,6 +279,40 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry }
     text = substituteAll(text, '[REGION]', country);
     text = substituteAll(text, '[EXISTING HOTELS]', existing);
     return text;
+  };
+
+  const updatePriceLevelUi = (changedInput?: HTMLInputElement) => {
+    if (priceLevelInputs.length === 0) return;
+    let checkedInputs = priceLevelInputs.filter((priceInput) => priceInput.checked);
+    if (checkedInputs.length === 0 && changedInput) {
+      changedInput.checked = true;
+      checkedInputs = [changedInput];
+    }
+
+    for (const priceInput of priceLevelInputs) {
+      const card = priceInput.closest<HTMLElement>('[data-price-level-card]');
+      const state = card?.querySelector<HTMLElement>('[data-price-level-state]');
+      const selected = priceInput.checked;
+      if (card) card.dataset.selected = selected ? 'true' : 'false';
+      if (state) {
+        state.textContent = selected ? 'Included' : 'Skipped';
+        state.className = selected
+          ? 'mt-4 inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#4F6547]'
+          : 'mt-4 inline-flex rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-[#6F685F]';
+      }
+    }
+
+    const selectedAmounts = getSelectedPriceLevels();
+    const selectedText = formatEuroSeries(selectedAmounts);
+    if (priceLevelSummary) {
+      priceLevelSummary.textContent = selectedAmounts.length === data.priceLevels.length
+        ? 'The generated prompt searches all four nightly levels in order: €50, €100, €150 and €250. If a selected lower level has no credible hotel, it asks for the next best three hotels above that level instead of returning an empty result.'
+        : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no credible hotel, it asks for the next best three hotels above that level instead of returning an empty result.`;
+    }
+    if (priceLevelStatus) {
+      priceLevelStatus.textContent = `Using ${selectedText} in the research prompt. Select at least one price level.`;
+    }
+    textarea.value = buildPrompt(selectedCountry);
   };
 
   const setCopyEnabled = (enabled: boolean) => {
@@ -232,6 +360,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry }
   };
 
   const selectCountry = (name: string) => {
+    selectedCountry = name;
     input.value = name;
     for (const option of options) {
       option.setAttribute('aria-selected', option.dataset.name === name ? 'true' : 'false');
@@ -291,6 +420,10 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry }
     });
   }
 
+  for (const priceInput of priceLevelInputs) {
+    priceInput.addEventListener('change', () => updatePriceLevelUi(priceInput));
+  }
+
   copyButton.addEventListener('click', async () => {
     const text = textarea.value;
     try {
@@ -311,6 +444,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry }
   });
 
   resetButton.addEventListener('click', () => {
+    selectedCountry = null;
     input.value = '';
     for (const option of options) option.setAttribute('aria-selected', 'false');
     filterList('');
@@ -318,4 +452,6 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry }
     textarea.value = buildPrompt(null);
     setCopyEnabled(false);
   });
+
+  updatePriceLevelUi();
 </script>
