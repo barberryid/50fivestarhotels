@@ -1,7 +1,7 @@
 ---
 title: "21c Museum Hotel Louisville"
 slug: "21c-museum-hotel-louisville"
-rank: 28
+rank: 31
 city: "Louisville"
 country: "United States"
 region: "North America"

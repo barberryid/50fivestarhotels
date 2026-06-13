@@ -1,7 +1,7 @@
 ---
 title: "The Venetian Resort"
 slug: "venetian-resort-las-vegas"
-rank: 19
+rank: 22
 city: "Las Vegas"
 country: "United States"
 region: "North America"

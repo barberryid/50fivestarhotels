@@ -125,6 +125,24 @@ export const destinationImages = {
     credit: 'AI-generated editorial image',
     subject: 'Phewa Lake and Annapurna views',
   },
+  merida: {
+    src: '/images/hotels/mansion-merida-boutique-hotel-realistic-daylight.webp',
+    alt: 'AI-generated mansion hotel courtyard atmosphere in Merida, Mexico',
+    credit: 'AI-generated editorial image',
+    subject: 'Merida mansion courtyard',
+  },
+  puebla: {
+    src: '/images/hotels/cartesiano-puebla-realistic-daylight.webp',
+    alt: 'AI-generated heritage hotel courtyard atmosphere in Puebla, Mexico',
+    credit: 'AI-generated editorial image',
+    subject: 'Puebla heritage hotel courtyard',
+  },
+  campeche: {
+    src: '/images/hotels/casa-don-gustavo-campeche-realistic-daylight.webp',
+    alt: 'AI-generated pastel colonial street and mansion hotel atmosphere in Campeche, Mexico',
+    credit: 'AI-generated editorial image',
+    subject: 'Campeche walled-city mansion hotel',
+  },
   york: {
     src: '/images/hotels/the-grand-york-realistic-daylight.webp',
     alt: 'AI-generated heritage hotel and historic street atmosphere in York, England',

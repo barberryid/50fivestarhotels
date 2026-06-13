@@ -1,7 +1,7 @@
 ---
 title: "Perry Lane Hotel, a Luxury Collection Hotel"
 slug: "perry-lane-hotel-savannah"
-rank: 33
+rank: 36
 city: "Savannah"
 country: "United States"
 region: "North America"

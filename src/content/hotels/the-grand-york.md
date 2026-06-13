@@ -1,7 +1,7 @@
 ---
 title: "The Grand, York"
 slug: "the-grand-york"
-rank: 1
+rank: 3
 city: "York"
 country: "England"
 region: "Europe"

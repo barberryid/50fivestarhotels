@@ -1,7 +1,7 @@
 ---
 title: "Pleiada Boutique Hotel & Spa"
 slug: "pleiada-boutique-hotel-iasi"
-rank: 22
+rank: 25
 city: "Iași"
 country: "Romania"
 region: "Europe"

@@ -1152,4 +1152,33 @@ Recommended follow-ups (identified, not yet actioned):
 
 ---
 
+### Mexico editorial profiles added — 2026-06-13
+
+- Added three live Mexico profiles from the Mexico recommendations brief:
+  - **Mansion Merida Boutique Hotel**, Merida — `src/content/hotels/mansion-merida-boutique-hotel.md` (rank 1, score 97, Exceptional value, Under €250, heritage-value five-star).
+  - **Cartesiano Boutique & Wellness Hotel**, Puebla — `src/content/hotels/cartesiano-puebla.md` (rank 2, score 96, Exceptional value, Under €200 with Under €100 secondary tier, heritage-value five-star).
+  - **Casa Don Gustavo Boutique Hotel**, Campeche — `src/content/hotels/casa-don-gustavo-campeche.md` (rank 6, score 94, Exceptional value, Under €200, heritage-value five-star).
+- Re-ranked existing hotel Markdown files to fit the new global order: previous ranks 1-3 moved down by 2; previous ranks 4+ moved down by 3.
+- Added **Mexico** to `src/lib/regions.ts` so Mexico profiles appear under the **Americas** regional guide.
+- Added `merida`, `puebla` and `campeche` to the destination route allow-list in `src/pages/destinations/[slug].astro`.
+- Added Mexico destination-card imagery to `src/data/destinationImages.ts`, using the new AI-generated daylight hotel images.
+- Refreshed homepage featured picks to include the three Mexico profiles and updated homepage/Americas wording from a North America-only framing to an Americas framing.
+- Added seasonality cards for Merida, Puebla and Campeche in `src/data/hotelSeasonality.ts`.
+- Generated six new fully AI-generated hotel images with `gpt-image-2`, saved as masters in `public/images/hotels/` and responsive derivatives in `public/images/hotels/responsive/`:
+  - `mansion-merida-boutique-hotel-editorial-dusk.webp`
+  - `mansion-merida-boutique-hotel-realistic-daylight.webp`
+  - `cartesiano-puebla-editorial-dusk.webp`
+  - `cartesiano-puebla-realistic-daylight.webp`
+  - `casa-don-gustavo-campeche-editorial-dusk.webp`
+  - `casa-don-gustavo-campeche-realistic-daylight.webp`
+- Updated AI image workflow files:
+  - `scripts/hotel-ai-image-data.js`
+  - `research/images/hotel-ai-image-reference-research.md`
+  - `research/images/hotel-ai-image-prompts.json`
+  - `research/images/hotel-ai-image-audit.md`
+  - QA contact sheet: `research/images/mexico-ai-contact-sheet.jpg`
+- Image audit now reports **28 hotels**, **56 required images**, **56 generated**, **0 needing manual review**, **0 pending**.
+
+---
+
 The site includes a "Research a country" tool page (`/research-hotels/`) that lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list.

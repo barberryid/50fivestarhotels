@@ -5172,5 +5172,197 @@ export const hotelSeasonality: Record<string, HotelSeasonality> = {
       { "month": "Nov", "weather": "Best", "price": "Most expensive", "tempC": 15, "tempF": 59, "humidity": 70 },
       { "month": "Dec", "weather": "Good", "price": "Expensive", "tempC": 11, "tempF": 52, "humidity": 74 }
     ]
+  },
+  "mansion-merida-boutique-hotel": {
+    "hotel": "Mansion Merida Boutique Hotel",
+    "city": "Merida",
+    "country": "Mexico",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Best" },
+        { "month": "Feb", "label": "Best" },
+        { "month": "Mar", "label": "Good" },
+        { "month": "Apr", "label": "Possible" },
+        { "month": "May", "label": "Avoid" },
+        { "month": "Jun", "label": "Avoid" },
+        { "month": "Jul", "label": "Avoid" },
+        { "month": "Aug", "label": "Avoid" },
+        { "month": "Sep", "label": "Avoid" },
+        { "month": "Oct", "label": "Possible" },
+        { "month": "Nov", "label": "Good" },
+        { "month": "Dec", "label": "Best" }
+      ],
+      "summary": "Best: Dec-Feb. Cooler, drier walking weather for Merida and Yucatan day trips; May-Sep is hot and wetter.",
+      "notes": "Avoid means simply not ideal, not impossible. Heat, humidity and storm timing vary year by year.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.climatestotravel.com/climate/mexico/merida\nhttps://www.booking.com/hotel/mx/mansion-merida-on-the-park.html"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Expensive" },
+        { "month": "Feb", "label": "Expensive" },
+        { "month": "Mar", "label": "Average" },
+        { "month": "Apr", "label": "Good value" },
+        { "month": "May", "label": "Cheapest" },
+        { "month": "Jun", "label": "Cheapest" },
+        { "month": "Jul", "label": "Good value" },
+        { "month": "Aug", "label": "Good value" },
+        { "month": "Sep", "label": "Cheapest" },
+        { "month": "Oct", "label": "Good value" },
+        { "month": "Nov", "label": "Average" },
+        { "month": "Dec", "label": "Most expensive" }
+      ],
+      "summary": "Cheapest: May-Jun and Sep. Most expensive: Dec; Jan-Feb can rise with the best weather window.",
+      "notes": "Christmas, New Year, Easter and local events can override seasonal patterns.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.booking.com/hotel/mx/mansion-merida-on-the-park.html"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Best", "price": "Expensive", "tempC": 23, "tempF": 73, "humidity": 72 },
+      { "month": "Feb", "weather": "Best", "price": "Expensive", "tempC": 24, "tempF": 75, "humidity": 70 },
+      { "month": "Mar", "weather": "Good", "price": "Average", "tempC": 26, "tempF": 79, "humidity": 68 },
+      { "month": "Apr", "weather": "Possible", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 68 },
+      { "month": "May", "weather": "Avoid", "price": "Cheapest", "tempC": 29, "tempF": 84, "humidity": 70 },
+      { "month": "Jun", "weather": "Avoid", "price": "Cheapest", "tempC": 29, "tempF": 84, "humidity": 76 },
+      { "month": "Jul", "weather": "Avoid", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 78 },
+      { "month": "Aug", "weather": "Avoid", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 80 },
+      { "month": "Sep", "weather": "Avoid", "price": "Cheapest", "tempC": 28, "tempF": 82, "humidity": 82 },
+      { "month": "Oct", "weather": "Possible", "price": "Good value", "tempC": 27, "tempF": 81, "humidity": 80 },
+      { "month": "Nov", "weather": "Good", "price": "Average", "tempC": 25, "tempF": 77, "humidity": 76 },
+      { "month": "Dec", "weather": "Best", "price": "Most expensive", "tempC": 23, "tempF": 73, "humidity": 74 }
+    ]
+  },
+  "cartesiano-puebla": {
+    "hotel": "Cartesiano Boutique & Wellness Hotel",
+    "city": "Puebla",
+    "country": "Mexico",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Good" },
+        { "month": "Feb", "label": "Best" },
+        { "month": "Mar", "label": "Best" },
+        { "month": "Apr", "label": "Best" },
+        { "month": "May", "label": "Good" },
+        { "month": "Jun", "label": "Possible" },
+        { "month": "Jul", "label": "Possible" },
+        { "month": "Aug", "label": "Possible" },
+        { "month": "Sep", "label": "Avoid" },
+        { "month": "Oct", "label": "Good" },
+        { "month": "Nov", "label": "Best" },
+        { "month": "Dec", "label": "Good" }
+      ],
+      "summary": "Best: Feb-Apr and Nov. Comfortable highland weather for walking; Sep is usually the least reliable month.",
+      "notes": "Avoid means simply not ideal, not impossible. Afternoon rain is more common in the wet season.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.climatestotravel.com/climate/mexico/puebla\nhttps://www.booking.com/hotel/mx/cartesiano-puebla.html"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Good value" },
+        { "month": "Feb", "label": "Average" },
+        { "month": "Mar", "label": "Average" },
+        { "month": "Apr", "label": "Expensive" },
+        { "month": "May", "label": "Good value" },
+        { "month": "Jun", "label": "Cheapest" },
+        { "month": "Jul", "label": "Good value" },
+        { "month": "Aug", "label": "Good value" },
+        { "month": "Sep", "label": "Cheapest" },
+        { "month": "Oct", "label": "Average" },
+        { "month": "Nov", "label": "Average" },
+        { "month": "Dec", "label": "Most expensive" }
+      ],
+      "summary": "Cheapest: Jun and Sep. Most expensive: Dec; Easter and Mexican holiday weekends can lift rates.",
+      "notes": "Puebla can show good midweek value because business and leisure demand patterns vary.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.booking.com/hotel/mx/cartesiano-puebla.html"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Good", "price": "Good value", "tempC": 14, "tempF": 57, "humidity": 58 },
+      { "month": "Feb", "weather": "Best", "price": "Average", "tempC": 15, "tempF": 59, "humidity": 54 },
+      { "month": "Mar", "weather": "Best", "price": "Average", "tempC": 17, "tempF": 63, "humidity": 52 },
+      { "month": "Apr", "weather": "Best", "price": "Expensive", "tempC": 18, "tempF": 64, "humidity": 54 },
+      { "month": "May", "weather": "Good", "price": "Good value", "tempC": 19, "tempF": 66, "humidity": 58 },
+      { "month": "Jun", "weather": "Possible", "price": "Cheapest", "tempC": 18, "tempF": 64, "humidity": 68 },
+      { "month": "Jul", "weather": "Possible", "price": "Good value", "tempC": 17, "tempF": 63, "humidity": 70 },
+      { "month": "Aug", "weather": "Possible", "price": "Good value", "tempC": 17, "tempF": 63, "humidity": 72 },
+      { "month": "Sep", "weather": "Avoid", "price": "Cheapest", "tempC": 17, "tempF": 63, "humidity": 75 },
+      { "month": "Oct", "weather": "Good", "price": "Average", "tempC": 16, "tempF": 61, "humidity": 70 },
+      { "month": "Nov", "weather": "Best", "price": "Average", "tempC": 15, "tempF": 59, "humidity": 62 },
+      { "month": "Dec", "weather": "Good", "price": "Most expensive", "tempC": 14, "tempF": 57, "humidity": 60 }
+    ]
+  },
+  "casa-don-gustavo-campeche": {
+    "hotel": "Casa Don Gustavo Boutique Hotel",
+    "city": "Campeche",
+    "country": "Mexico",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Best" },
+        { "month": "Feb", "label": "Best" },
+        { "month": "Mar", "label": "Good" },
+        { "month": "Apr", "label": "Possible" },
+        { "month": "May", "label": "Avoid" },
+        { "month": "Jun", "label": "Avoid" },
+        { "month": "Jul", "label": "Avoid" },
+        { "month": "Aug", "label": "Avoid" },
+        { "month": "Sep", "label": "Avoid" },
+        { "month": "Oct", "label": "Possible" },
+        { "month": "Nov", "label": "Good" },
+        { "month": "Dec", "label": "Best" }
+      ],
+      "summary": "Best: Dec-Feb. Cooler Gulf weather is strongest for old-town walks; May-Sep is hot and wetter.",
+      "notes": "Avoid means simply not ideal, not impossible. Campeche is rewarding year-round if heat is acceptable.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.climatestotravel.com/climate/mexico/campeche\nhttps://www.booking.com/hotel/mx/casa-don-gustavo.html"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Average" },
+        { "month": "Feb", "label": "Average" },
+        { "month": "Mar", "label": "Good value" },
+        { "month": "Apr", "label": "Good value" },
+        { "month": "May", "label": "Cheapest" },
+        { "month": "Jun", "label": "Cheapest" },
+        { "month": "Jul", "label": "Good value" },
+        { "month": "Aug", "label": "Good value" },
+        { "month": "Sep", "label": "Cheapest" },
+        { "month": "Oct", "label": "Good value" },
+        { "month": "Nov", "label": "Average" },
+        { "month": "Dec", "label": "Expensive" }
+      ],
+      "summary": "Cheapest: May-Jun and Sep. December can rise, but Campeche usually stays calmer than better-known Mexico destinations.",
+      "notes": "Small room count can matter more than broad seasonality; check several dates.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.booking.com/hotel/mx/casa-don-gustavo.html"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Best", "price": "Average", "tempC": 24, "tempF": 75, "humidity": 74 },
+      { "month": "Feb", "weather": "Best", "price": "Average", "tempC": 25, "tempF": 77, "humidity": 72 },
+      { "month": "Mar", "weather": "Good", "price": "Good value", "tempC": 26, "tempF": 79, "humidity": 70 },
+      { "month": "Apr", "weather": "Possible", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 70 },
+      { "month": "May", "weather": "Avoid", "price": "Cheapest", "tempC": 29, "tempF": 84, "humidity": 72 },
+      { "month": "Jun", "weather": "Avoid", "price": "Cheapest", "tempC": 29, "tempF": 84, "humidity": 78 },
+      { "month": "Jul", "weather": "Avoid", "price": "Good value", "tempC": 29, "tempF": 84, "humidity": 78 },
+      { "month": "Aug", "weather": "Avoid", "price": "Good value", "tempC": 29, "tempF": 84, "humidity": 80 },
+      { "month": "Sep", "weather": "Avoid", "price": "Cheapest", "tempC": 28, "tempF": 82, "humidity": 82 },
+      { "month": "Oct", "weather": "Possible", "price": "Good value", "tempC": 27, "tempF": 81, "humidity": 80 },
+      { "month": "Nov", "weather": "Good", "price": "Average", "tempC": 26, "tempF": 79, "humidity": 77 },
+      { "month": "Dec", "weather": "Best", "price": "Expensive", "tempC": 24, "tempF": 75, "humidity": 75 }
+    ]
   }
 };

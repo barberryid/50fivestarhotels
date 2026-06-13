@@ -1,7 +1,7 @@
 ---
 title: "The Pfister Hotel"
 slug: "pfister-hotel-milwaukee"
-rank: 15
+rank: 18
 city: "Milwaukee"
 country: "United States"
 region: "North America"

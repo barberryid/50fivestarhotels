@@ -1,7 +1,7 @@
 ---
 title: "Millennium Downtown Abu Dhabi"
 slug: "millennium-downtown-abu-dhabi"
-rank: 40
+rank: 43
 city: "Abu Dhabi"
 country: "United Arab Emirates"
 region: "Middle East and North Africa"

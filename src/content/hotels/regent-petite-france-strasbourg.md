@@ -1,7 +1,7 @@
 ---
 title: "Hotel & Spa Regent Petite France"
 slug: "regent-petite-france-strasbourg"
-rank: 9
+rank: 12
 city: "Strasbourg"
 country: "France"
 region: "Europe"

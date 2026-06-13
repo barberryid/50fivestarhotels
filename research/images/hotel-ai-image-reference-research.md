@@ -521,3 +521,68 @@ Online source pages were reviewed only as visual research references. No online 
 
 ### Uncertainty / manual-review notes
 - No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Mansion Merida Boutique Hotel - Merida, Mexico
+
+### Reference URLs reviewed
+- https://www.mansionmerida.com/en/
+- https://www.historichotels.org/hotels-resorts/mansion-merida-on-the-park/?from=experiences
+
+### Observed visual features
+- Architecture: small restored French-influenced nineteenth-century mansion hotel with Belle Epoque detail and only 14 suites
+- Entrance/facade: central Merida mansion frontage near the main square, formal colonial city-house arrival rather than resort scale
+- Pool/garden/courtyard: outdoor pool and intimate mansion courtyard, with ornate interiors, chandeliers and European furniture as secondary cues
+- Colours/materials: cream and pale stone facade, patterned tile, dark timber, wrought iron, tropical greenery, blue pool water
+- Setting: historic centre of Merida, Yucatan, close to plazas, cathedral streets and Paseo de Montejo excursions
+- Useful details to preserve: preserve the tiny mansion-hotel scale and French colonial influence; avoid turning it into a hacienda resort
+
+### Recommended image direction
+- Dusk image: mansion courtyard and pool with warm windows, chandeliers glimpsed inside and elegant Yucatan evening atmosphere
+- Daylight image: restored French-style mansion facade or courtyard pool in natural Merida daylight
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Cartesiano Boutique & Wellness Hotel - Puebla, Mexico
+
+### Reference URLs reviewed
+- https://www.cartesiano360.com/en/home
+- https://www.cartesiano360.com/
+- https://www.cntraveler.com/hotels/puebla/hotel-cartesiano
+
+### Observed visual features
+- Architecture: heritage-and-contemporary hotel in Puebla historic centre, combining eighteenth- and nineteenth-century casonas with a former ceramics or tile-factory character
+- Entrance/facade: old-town Puebla frontage with colonial walls, exposed stone, timber, tile and refined contemporary details
+- Pool/garden/courtyard: rooftop or courtyard pool and serious spa/wellness atmosphere, with views toward Puebla church towers where plausible
+- Colours/materials: warm stone, clay and talavera tile tones, pale plaster, raw wood, dark metal, greenery and blue pool water
+- Setting: UNESCO historic centre of Puebla near Los Sapos, talavera shops, baroque churches and food streets
+- Useful details to preserve: make it heritage-boutique and wellness-led, not a beach resort or generic modern business hotel
+
+### Recommended image direction
+- Dusk image: warmly lit heritage courtyard or rooftop pool with Puebla colonial architecture and subtle church-tower atmosphere
+- Daylight image: restored casona and tile-factory-inspired courtyard in crisp Puebla daylight, premium but believable
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Casa Don Gustavo Boutique Hotel - Campeche, Mexico
+
+### Reference URLs reviewed
+- https://www.casadongustavo.com/
+- https://www.tripadvisor.com/Hotel_Review-g1632078-d2062714-Reviews-Casa_Don_Gustavo_Hotel_Boutique-Campeche_Yucatan_Peninsula.html
+- https://www.enchantingtravels.com/hotels/campeche/hotel-boutique-casa-don-gustavo/
+
+### Observed visual features
+- Architecture: small eighteenth-century merchant mansion boutique hotel with 10 suites, period furniture, art objects and colonial Campeche character
+- Entrance/facade: historic house on pedestrian Calle 59 inside Campeche walled old town, pastel colonial street frontage
+- Pool/garden/courtyard: central patio, terrace and small outdoor pool with intimate old-house atmosphere
+- Colours/materials: pastel Campeche walls, cream stone, antique wood, wrought iron, warm lantern light, lush patio greenery
+- Setting: fortified UNESCO-listed old town of Campeche near city walls, gates, pastel streets and the Gulf waterfront
+- Useful details to preserve: preserve the quiet 10-suite mansion scale; avoid making it a large resort or generic hacienda
+
+### Recommended image direction
+- Dusk image: pastel colonial mansion patio and small pool glowing at dusk inside Campeche old town
+- Daylight image: pedestrian colonial street or central patio with period mansion details in bright Gulf daylight
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.

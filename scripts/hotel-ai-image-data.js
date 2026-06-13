@@ -524,6 +524,77 @@ export const hotels = [
       daylight: 'converted publishing-house facade or courtyard garden with industrial details and natural Tbilisi daylight',
     },
   },
+  {
+    hotel: 'Mansion Merida Boutique Hotel',
+    city: 'Merida',
+    country: 'Mexico',
+    slug: 'mansion-merida-boutique-hotel',
+    contentFile: 'mansion-merida-boutique-hotel.md',
+    sources: [
+      'https://www.mansionmerida.com/en/',
+      'https://www.historichotels.org/hotels-resorts/mansion-merida-on-the-park/?from=experiences',
+    ],
+    features: {
+      architecture: 'small restored French-influenced nineteenth-century mansion hotel with Belle Epoque detail and only 14 suites',
+      entrance: 'central Merida mansion frontage near the main square, formal colonial city-house arrival rather than resort scale',
+      pool: 'outdoor pool and intimate mansion courtyard, with ornate interiors, chandeliers and European furniture as secondary cues',
+      colours: 'cream and pale stone facade, patterned tile, dark timber, wrought iron, tropical greenery, blue pool water',
+      setting: 'historic centre of Merida, Yucatan, close to plazas, cathedral streets and Paseo de Montejo excursions',
+      details: 'preserve the tiny mansion-hotel scale and French colonial influence; avoid turning it into a hacienda resort',
+    },
+    directions: {
+      dusk: 'mansion courtyard and pool with warm windows, chandeliers glimpsed inside and elegant Yucatan evening atmosphere',
+      daylight: 'restored French-style mansion facade or courtyard pool in natural Merida daylight',
+    },
+  },
+  {
+    hotel: 'Cartesiano Boutique & Wellness Hotel',
+    city: 'Puebla',
+    country: 'Mexico',
+    slug: 'cartesiano-puebla',
+    contentFile: 'cartesiano-puebla.md',
+    sources: [
+      'https://www.cartesiano360.com/en/home',
+      'https://www.cartesiano360.com/',
+      'https://www.cntraveler.com/hotels/puebla/hotel-cartesiano',
+    ],
+    features: {
+      architecture: 'heritage-and-contemporary hotel in Puebla historic centre, combining eighteenth- and nineteenth-century casonas with a former ceramics or tile-factory character',
+      entrance: 'old-town Puebla frontage with colonial walls, exposed stone, timber, tile and refined contemporary details',
+      pool: 'rooftop or courtyard pool and serious spa/wellness atmosphere, with views toward Puebla church towers where plausible',
+      colours: 'warm stone, clay and talavera tile tones, pale plaster, raw wood, dark metal, greenery and blue pool water',
+      setting: 'UNESCO historic centre of Puebla near Los Sapos, talavera shops, baroque churches and food streets',
+      details: 'make it heritage-boutique and wellness-led, not a beach resort or generic modern business hotel',
+    },
+    directions: {
+      dusk: 'warmly lit heritage courtyard or rooftop pool with Puebla colonial architecture and subtle church-tower atmosphere',
+      daylight: 'restored casona and tile-factory-inspired courtyard in crisp Puebla daylight, premium but believable',
+    },
+  },
+  {
+    hotel: 'Casa Don Gustavo Boutique Hotel',
+    city: 'Campeche',
+    country: 'Mexico',
+    slug: 'casa-don-gustavo-campeche',
+    contentFile: 'casa-don-gustavo-campeche.md',
+    sources: [
+      'https://www.casadongustavo.com/',
+      'https://www.tripadvisor.com/Hotel_Review-g1632078-d2062714-Reviews-Casa_Don_Gustavo_Hotel_Boutique-Campeche_Yucatan_Peninsula.html',
+      'https://www.enchantingtravels.com/hotels/campeche/hotel-boutique-casa-don-gustavo/',
+    ],
+    features: {
+      architecture: 'small eighteenth-century merchant mansion boutique hotel with 10 suites, period furniture, art objects and colonial Campeche character',
+      entrance: 'historic house on pedestrian Calle 59 inside Campeche walled old town, pastel colonial street frontage',
+      pool: 'central patio, terrace and small outdoor pool with intimate old-house atmosphere',
+      colours: 'pastel Campeche walls, cream stone, antique wood, wrought iron, warm lantern light, lush patio greenery',
+      setting: 'fortified UNESCO-listed old town of Campeche near city walls, gates, pastel streets and the Gulf waterfront',
+      details: 'preserve the quiet 10-suite mansion scale; avoid making it a large resort or generic hacienda',
+    },
+    directions: {
+      dusk: 'pastel colonial mansion patio and small pool glowing at dusk inside Campeche old town',
+      daylight: 'pedestrian colonial street or central patio with period mansion details in bright Gulf daylight',
+    },
+  },
 ];
 
 export function buildPrompts(hotel) {
