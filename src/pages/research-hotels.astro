@@ -108,6 +108,24 @@ const jsonLd = breadcrumbJsonLd([
       <CountryPromptTool />
     </section>
 
+    <!-- No empty results -->
+    <section class="max-w-4xl mx-auto px-5 py-10">
+      <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Fallback logic</p>
+      <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-6">No empty results</h2>
+      <p class="text-[#1F2428]/80 leading-relaxed mb-5">
+        If no credible hotel is found at your selected price level, the research prompt will not leave that section blank.
+      </p>
+      <p class="text-[#1F2428]/80 leading-relaxed mb-5">
+        For example, if no reliable candidate appears at <strong class="text-[#1F2428]">€50 or below</strong>, the results should state:
+      </p>
+      <p class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] px-4 py-3 font-semibold text-[#1F2428] mb-5">
+        No credible candidate found under €50
+      </p>
+      <p class="text-[#1F2428]/80 leading-relaxed">
+        The research should then list the <strong class="text-[#1F2428]">next best 3 hotels above that level</strong>, ranked by value and clearly marked as <strong class="text-[#1F2428]">fallback results</strong>. This keeps the research useful while avoiding weak, misleading, or unsafe recommendations just to fill a price category.
+      </p>
+    </section>
+
     <!-- How to judge the results -->
     <section class="bg-[#FFFDF8] border-y border-[#E2D4BF]">
       <div class="max-w-4xl mx-auto px-5 py-16">
