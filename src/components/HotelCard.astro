@@ -1,5 +1,6 @@
 ---
 import Badge from './Badge.astro';
+import { getBookingAffiliateUrl } from '../utils/affiliateLinks';
 
 interface Props {
   hotel: {
@@ -14,7 +15,7 @@ interface Props {
     cautions: string[];
     fiveStarStatus: string;
     typicalPriceRange: string;
-    bookingUrl: string;
+    bookingUrl?: string;
     image?: {
       src: string;
       alt: string;
@@ -38,6 +39,7 @@ interface Props {
 
 const { hotel, featured = false } = Astro.props;
 const scoreColor = hotel.valueScore >= 85 ? '#4F6547' : hotel.valueScore >= 75 ? '#B88A44' : '#6F685F';
+const bookingAffiliateUrl = getBookingAffiliateUrl(hotel.bookingUrl);
 // Prefer the brighter realistic-daylight render for cards; fall back to the
 // default (editorial-dusk) image, then the placeholder.
 const cardImage = hotel.generatedGallery?.find((g) => g.type === 'realistic-daylight') ?? hotel.image;
@@ -97,14 +99,16 @@ const cardImage = hotel.generatedGallery?.find((g) => g.type === 'realistic-dayl
     <p class="text-[#6F685F] text-sm mt-auto pt-1">{hotel.typicalPriceRange}</p>
 
     <div class="flex flex-col gap-2 pt-1">
-      <a
-        href={hotel.bookingUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="block text-center bg-[#1F2428] text-white text-sm font-semibold py-3 px-4 rounded-full hover:bg-[#B88A44] transition-colors no-underline"
-      >
-        Check current rates
-      </a>
+      {bookingAffiliateUrl && (
+        <a
+          href={bookingAffiliateUrl}
+          target="_blank"
+          rel="sponsored nofollow noopener"
+          class="block text-center bg-[#1F2428] text-white text-sm font-semibold py-3 px-4 rounded-full hover:bg-[#B88A44] transition-colors no-underline"
+        >
+          Check current prices on Booking.com
+        </a>
+      )}
       <a
         href={`/hotels/${hotel.slug}`}
         class="block text-center text-[#6F685F] text-sm font-medium hover:text-[#B88A44] transition-colors no-underline"

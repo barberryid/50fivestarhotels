@@ -7,10 +7,9 @@ const { compact = false } = Astro.props;
 
 <div class={`bg-[#1F2428]/5 border border-[#1F2428]/10 rounded-xl ${compact ? 'p-4' : 'p-6'}`}>
   <p class={`text-[#6F685F] ${compact ? 'text-xs' : 'text-sm'} leading-relaxed`}>
-    <strong class="text-[#1F2428] font-semibold">Booking links:</strong> This page contains links to hotel booking platforms.
-    If affiliate links are added in future and you book through them, the site may earn a small commission at no extra cost to you.
-    Current links are standard search links, not affiliate links.
-    Prices change constantly — always verify the final rate, taxes, room type and cancellation policy before booking.
-    {!compact && <a href="/affiliate-disclosure" class="text-[#B88A44] hover:underline ml-1">Full disclosure →</a>}
+    <strong class="text-[#1F2428] font-semibold">Affiliate disclosure:</strong> Some hotel links are affiliate links.
+    If you book after clicking, I may earn a commission at no extra cost to you.
+    Prices change constantly; always verify the final rate, taxes, room type and cancellation policy before booking.
+    {!compact && <a href="/affiliate-disclosure/" class="text-[#B88A44] hover:underline ml-1">Full disclosure -></a>}
   </p>
 </div>

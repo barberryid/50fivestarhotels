@@ -20,6 +20,7 @@ import { hotelSeasonality } from '../data/hotelSeasonality';
 import { locationSnapshots } from '../data/locationSnapshots';
 import { absoluteUrl, breadcrumbJsonLd, canonicalUrl, imageUrl, publisherJsonLd } from '../lib/seo';
 import { countryRegion, regionSlug } from '../lib/regions';
+import { getBookingAffiliateUrl } from '../utils/affiliateLinks';
 
 interface Props {
   hotel: {
@@ -35,7 +36,7 @@ interface Props {
     bestFor: string[];
     valueScore: number;
     verdict: string;
-    bookingUrl: string;
+    bookingUrl?: string;
     highlights: string[];
     cautions: string[];
     whyCheap?: string[];
@@ -85,6 +86,7 @@ const generatedGallery = hotel.generatedGallery?.filter(image => image.src) ?? [
 const seasonality = hotelSeasonality[hotel.slug];
 const airQuality = hotelAirQuality[hotel.slug];
 const locationSnapshot = locationSnapshots[hotel.slug];
+const bookingAffiliateUrl = getBookingAffiliateUrl(hotel.bookingUrl);
 const creditLabel = (sourceSite?: string) => sourceSite ? `Image credit: ${sourceSite}` : 'Image credit';
 
 // Derive best-month signals from seasonality data for the trust panel
@@ -222,17 +224,20 @@ const relatedGuides = [
 
           <div class="mt-6 flex flex-wrap items-center gap-6">
             <ValueScore score={hotel.valueScore} verdict={hotel.verdict} size="lg" />
-            <div class="flex flex-col gap-2">
-              <a
-                href={hotel.bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center bg-[#1F2428] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#B88A44] transition-colors no-underline text-sm"
-              >
-                Check current rates on Booking.com
-              </a>
-              <PriceAccuracyNote />
-            </div>
+            {bookingAffiliateUrl && (
+              <div class="flex flex-col gap-3 max-w-sm">
+                <AffiliateDisclosure compact={true} />
+                <a
+                  href={bookingAffiliateUrl}
+                  target="_blank"
+                  rel="sponsored nofollow noopener"
+                  class="inline-flex items-center justify-center bg-[#1F2428] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#B88A44] transition-colors no-underline text-sm"
+                >
+                  Check current prices on Booking.com
+                </a>
+                <PriceAccuracyNote />
+              </div>
+            )}
           </div>
         </header>
 
@@ -319,24 +324,21 @@ const relatedGuides = [
           prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
           <slot />
         </NumberedEditorialSections>
-        <!-- Booking CTA -->
-        <div class="mt-12 bg-[#1F2428] rounded-2xl p-8 text-white">
-          <h2 class="font-serif text-2xl font-bold mb-2">Ready to check rates?</h2>
-          <p class="text-white/60 text-sm mb-6">Prices vary significantly by date, room type and season. Check current availability before making any plans.</p>
-          <a
-            href={hotel.bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#A8763A] transition-colors no-underline text-sm"
-          >
-            Check current rates on Booking.com →
-          </a>
-          <p class="text-white/60 text-[11px] mt-3">Prices vary by date, taxes, room type, and cancellation policy. Always check the final rate before booking.</p>
-        </div>
-
-        <div class="mt-8">
-          <AffiliateDisclosure compact={true} />
-        </div>
+        {bookingAffiliateUrl && (
+          <div class="mt-12 bg-[#1F2428] rounded-2xl p-8 text-white">
+            <h2 class="font-serif text-2xl font-bold mb-2">Ready to check prices?</h2>
+            <p class="text-white/60 text-sm mb-6">Prices vary significantly by date, room type and season. Check current availability before making any plans.</p>
+            <a
+              href={bookingAffiliateUrl}
+              target="_blank"
+              rel="sponsored nofollow noopener"
+              class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#A8763A] transition-colors no-underline text-sm"
+            >
+              Check current prices on Booking.com
+            </a>
+            <p class="text-white/60 text-[11px] mt-3">Prices vary by date, taxes, room type, and cancellation policy. Always check the final rate before booking.</p>
+          </div>
+        )}
         <RelatedGuides items={relatedGuides} />
       </article>
 

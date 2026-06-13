@@ -25,7 +25,7 @@ const hotels = defineCollection({
       'Conditional value',
       'Reject for now',
     ]),
-    bookingUrl: z.string(),
+    bookingUrl: z.string().optional(),
     image: z.object({
       src: z.string(),
       alt: z.string(),
