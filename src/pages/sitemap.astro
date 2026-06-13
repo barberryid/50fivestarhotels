@@ -12,6 +12,7 @@ const sections = [
     ['Home', '/'], ['Destinations', '/destinations/'], ['How to Find Stays', '/research-hotels/'], ['About', '/about/'],
   ] },
   { title: 'Price guides', links: [
+    ['Five-Star Hotels Under €50', '/under-50/'],
     ['Best Five-Star Hotels Under €100 Worldwide', '/under-100/'],
     ['Best Five-Star Hotels Under €200 Worldwide', '/under-200/'],
     ['Best Five-Star Hotels Under €250 Worldwide', '/under-250/'],
@@ -30,8 +31,8 @@ const sections = [
   ] },
   { title: 'Destination guides', links: destinations.map(([slug, city]) => [`Affordable luxury in ${city}`, `/destinations/${slug}/`]) },
   { title: 'Hotel profiles', links: hotels.map((h) => [h.data.title, `/hotels/${h.data.slug}/`]) },
-  { title: 'Methodology and disclosure', links: [
-    ['How We Choose Hotels', '/methodology/'],
+  { title: 'Research, disclosure and credits', links: [
+    ['How We Choose Hotels', '/research-hotels/#methodology'],
     ['Affiliate Disclosure', '/affiliate-disclosure/'],
     ['Image Credits', '/image-credits/'],
   ] },
@@ -47,7 +48,7 @@ const sections = [
 
 <PageLayout
   title="Sitemap | 50 Five-Star Hotels"
-  description="A user-facing sitemap for 50 Five-Star Hotels, including price guides, destination guides, hotel profiles, methodology, disclosure, and supporting guides."
+  description="A user-facing sitemap for 50 Five-Star Hotels, including price guides, destination guides, hotel profiles, research tools, disclosure, and supporting guides."
   canonical="/sitemap/"
   jsonLd={breadcrumbJsonLd([{ name: 'Home', url: canonicalUrl('/') }, { name: 'Sitemap', url: canonicalUrl('/sitemap/') }])}
   maxWidth="max-w-6xl"

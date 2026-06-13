@@ -501,6 +501,7 @@ Example wording:
 The site should eventually include the following sections:
 
 - Homepage
+- Under €50
 - Under €100
 - Under €200
 - Under €250
@@ -509,7 +510,7 @@ The site should eventually include the following sections:
 - Luxury Travel Tips
 - About
 - Affiliate Disclosure
-- How We Choose Hotels
+- How We Choose Hotels section on `/research-hotels/`
 
 ---
 
@@ -524,7 +525,7 @@ The first major content phase should produce:
 5. "How to Find Stays" / research-yourself tool
 6. First 20 hotel profiles
 7. City pages for the strongest destinations
-8. Editorial methodology page: “How We Choose Hotels”
+8. Editorial methodology section: “How We Choose Hotels” at the bottom of `/research-hotels/`
 9. Affiliate disclosure page
 
 ---
@@ -729,8 +730,10 @@ The site has now had a major SEO architecture expansion committed and pushed to 
 
 - `/cheap-five-star-hotels/`
 - `/affordable-luxury-hotels/`
+- `/under-50/` placeholder page
 - `/research-hotels/`
 - `/cheapest-cities-five-star-hotels/` redirects to `/research-hotels/`
+- `/methodology/` redirects to `/research-hotels/#methodology`
 - `/affordable-five-star-hotels-europe/`
 - `/affordable-five-star-hotels-asia/`
 - `/luxury-hotels-on-a-budget/`
@@ -991,12 +994,12 @@ src/
     destinations/[slug].astro
     cheap-five-star-hotels.astro
     affordable-luxury-hotels.astro
+    under-50.astro
     research-hotels.astro
     affordable-five-star-hotels-europe.astro
     affordable-five-star-hotels-asia.astro
     luxury-hotels-on-a-budget.astro
     sitemap.astro
-    methodology.astro
     affiliate-disclosure.astro
     image-credits.astro
     about.astro
@@ -1264,4 +1267,4 @@ Recommended follow-ups (identified, not yet actioned):
 
 ---
 
-The site includes a "How to Find Stays" research-yourself tool page (`/research-hotels/`) with the public promise "How to Uncover Elite Stays in Every Corner of the World." It lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/` via the Cloudflare Pages `_redirects` file.
+The site includes a "How to Find Stays" research-yourself tool page (`/research-hotels/`) with the public promise "How to Uncover Elite Stays in Every Corner of the World." It lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The "How We Choose Hotels" methodology text now lives at the bottom of this page as `/research-hotels/#methodology`. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/`, and `/methodology/` redirects to `/research-hotels/#methodology`, via the Cloudflare Pages `_redirects` file. A new `/under-50/` placeholder page exists for future under-€50 research.

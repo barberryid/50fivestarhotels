@@ -11,10 +11,11 @@ The site focuses on:
 - best-value five-star hotels
 - how to find elite stays by country
 - honest five-star classification
-- price tiers under €100, under €200, and under €250
+- price tiers under €50, under €100, under €200, and under €250
 
 Important pages:
 - https://50fivestarhotels.com/
+- https://50fivestarhotels.com/under-50/
 - https://50fivestarhotels.com/under-100/
 - https://50fivestarhotels.com/under-200/
 - https://50fivestarhotels.com/under-250/
@@ -25,5 +26,4 @@ Important pages:
 - https://50fivestarhotels.com/affordable-five-star-hotels-europe/
 - https://50fivestarhotels.com/luxury-hotels-on-a-budget/
 - https://50fivestarhotels.com/destinations/
-- https://50fivestarhotels.com/methodology/
 - https://50fivestarhotels.com/affiliate-disclosure/

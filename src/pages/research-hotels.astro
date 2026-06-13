@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CountryPromptTool from '../components/CountryPromptTool.astro';
+import MethodologyContent from '../components/MethodologyContent.astro';
 import { researchPriceLevels } from '../data/researchPriceLevels';
 import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
 
@@ -134,5 +135,7 @@ const jsonLd = breadcrumbJsonLd([
         The same applies if you are researching for your own trip. Check the hotel on at least two booking platforms, read the most recent reviews rather than the average score, and confirm the price for your actual dates — shoulder-season bargains can vanish in peak weeks.
       </p>
     </section>
+
+    <MethodologyContent />
   </main>
 </BaseLayout>

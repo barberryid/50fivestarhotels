@@ -1,0 +1,32 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
+
+const jsonLd = breadcrumbJsonLd([
+  { name: 'Home', url: canonicalUrl('/') },
+  { name: 'Five-Star Hotels Under €50', url: canonicalUrl('/under-50/') },
+]);
+---
+
+<PageLayout
+  title="Five-Star Hotels Under €50 | 50 Five-Star Hotels"
+  description="A placeholder for future five-star and near-five-star hotel research under €50, with honest cautions about rates, seasonality and five-star reality."
+  canonical="/under-50/"
+  jsonLd={jsonLd}
+>
+  <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Coming soon</p>
+  <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
+    Five-Star Hotels Under €50
+  </h1>
+  <div class="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-[#1F2428] prose-p:text-[#1F2428]/75 prose-p:leading-relaxed">
+    <p>
+      This page is a placeholder for future research into rare under-€50 five-star and near-five-star stays. At this level, a low headline rate needs especially careful checking: dates, taxes, room category, recent reviews, location and whether the five-star label reflects the current guest experience.
+    </p>
+    <p>
+      For now, use the research tool to investigate specific countries and treat under-€50 results as leads to verify rather than promises to book.
+    </p>
+    <p>
+      <a href="/research-hotels/" class="text-[#B88A44] font-semibold no-underline hover:underline">Research a country with the hotel prompt →</a>
+    </p>
+  </div>
+</PageLayout>
