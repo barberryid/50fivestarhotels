@@ -1,7 +1,7 @@
 ---
 title: "Hotel de la Cite Carcassonne MGallery"
 slug: "hotel-de-la-cite-carcassonne"
-rank: 7
+rank: 8
 city: "Carcassonne"
 country: "France"
 region: "Europe"

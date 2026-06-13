@@ -1,7 +1,7 @@
 ---
 title: "The Royal Surakarta Heritage – Handwritten Collection"
 slug: "royal-surakarta-heritage"
-rank: 26
+rank: 29
 city: "Solo"
 country: "Indonesia"
 region: "Southeast Asia"

@@ -1,7 +1,7 @@
 ---
 title: "Angkor Aurora"
 slug: "angkor-aurora-siem-reap"
-rank: 24
+rank: 27
 city: "Siem Reap"
 country: "Cambodia"
 region: "Southeast Asia"

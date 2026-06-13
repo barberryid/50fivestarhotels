@@ -1,7 +1,7 @@
 ---
 title: "Real Marina Hotel & Spa"
 slug: "real-marina-olhao"
-rank: 44
+rank: 47
 city: "Olhão"
 country: "Portugal"
 region: "Europe"

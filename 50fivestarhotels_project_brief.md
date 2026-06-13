@@ -1211,4 +1211,27 @@ Recommended follow-ups (identified, not yet actioned):
 
 ---
 
+### Dominican Republic editorial profiles added â€” 2026-06-13
+
+- Added three live Dominican Republic profiles from the Dominican Republic recommendations brief:
+  - **Hodelpa Nicolas de Ovando**, Santo Domingo â€” `src/content/hotels/hodelpa-nicolas-de-ovando.md` (rank 6, score 96, Exceptional value, Under â‚¬250 with Under â‚¬200 secondary tier, heritage-value five-star).
+  - **Sublime Samana Hotel & Residences**, Las Terrenas â€” `src/content/hotels/sublime-samana.md` (rank 19, score 89, Exceptional value, Under â‚¬250, local / booking-site five-star).
+  - **Natura Cabana Boutique Hotel & Spa**, Cabarete â€” `src/content/hotels/natura-cabana-cabarete.md` (rank 21, score 88, Exceptional value, Under â‚¬250 with Under â‚¬200 secondary tier, near-luxury exception).
+- Re-ranked existing hotel Markdown files around the Dominican Republic insertions while preserving score order.
+- Added **Dominican Republic** to `src/lib/regions.ts` so the new profiles appear under the **Americas** regional guide.
+- Added `santo-domingo`, `las-terrenas` and `cabarete` to the destination route allow-list in `src/pages/destinations/[slug].astro`.
+- Added Dominican Republic destination-card imagery to `src/data/destinationImages.ts`, using the new AI-generated daylight hotel images.
+- Refreshed homepage featured picks to include Hodelpa Nicolas de Ovando and updated homepage/Americas wording to mention Dominican Republic heritage and Caribbean value.
+- Added seasonality cards for Santo Domingo, Las Terrenas and Cabarete in `src/data/hotelSeasonality.ts`.
+- Added six new fully AI-generated hotel images, saved as masters in `public/images/hotels/` and responsive derivatives in `public/images/hotels/responsive/`.
+- Updated AI image workflow files:
+  - `scripts/hotel-ai-image-data.js`
+  - `research/images/hotel-ai-image-reference-research.md`
+  - `research/images/hotel-ai-image-prompts.json`
+  - `research/images/hotel-ai-image-audit.md`
+  - QA contact sheet: `research/images/dominican-republic-ai-contact-sheet.jpg`
+- Image audit now reports **34 hotels**, **68 required images**, **68 generated**, **0 needing manual review**, **0 pending**.
+
+---
+
 The site includes a "Research a country" tool page (`/research-hotels/`) that lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list.

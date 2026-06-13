@@ -587,6 +587,72 @@ Online source pages were reviewed only as visual research references. No online 
 ### Uncertainty / manual-review notes
 - No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
 
+## Hodelpa Nicolas de Ovando - Santo Domingo, Dominican Republic
+
+### Reference URLs reviewed
+- https://www.hodelpa.com/en/hotels/dominican-republic/santo-domingo/hodelpa-nicolas-de-ovando
+- https://whc.unesco.org/en/list/526/
+- https://www.godominicanrepublic.com/santo-domingo/
+
+### Observed visual features
+- Architecture: restored colonial-era heritage hotel in Santo Domingo Colonial Zone, stone arcades, old plaster walls and refined historic courtyard scale
+- Entrance/facade: historic Calle Las Damas frontage in the old city, dignified but compact arrival rather than beach-resort spectacle
+- Pool/garden/courtyard: quiet courtyard pool and shaded colonial patios are central visual cues
+- Colours/materials: warm coral and cream plaster, old stone, dark timber, terracotta roof tones, tropical greenery, blue pool water
+- Setting: UNESCO Colonial City of Santo Domingo near Plaza Espana, Alcazar de Colon, Ozama Fortress and the first cathedral
+- Useful details to preserve: preserve the walkable old-city heritage mood and avoid making it a coastal resort or oversized palace
+
+### Recommended image direction
+- Dusk image: colonial courtyard and arcades glowing at dusk, with warm lantern light and old Santo Domingo texture
+- Daylight image: historic street facade or courtyard pool in natural Caribbean daylight, elegant and realistic
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Sublime Samana Hotel & Residences - Las Terrenas, Dominican Republic
+
+### Reference URLs reviewed
+- https://www.sublimesamana.com/
+- https://www.godominicanrepublic.com/destinations/samana/
+- https://www.booking.com/fivestars/city/do/las-terrenas.html
+
+### Observed visual features
+- Architecture: low-rise luxury beach resort and residences on the Samana Peninsula, tropical contemporary design with palms and pale resort buildings
+- Entrance/facade: relaxed resort arrival should be secondary to the beach, pools and landscaped grounds
+- Pool/garden/courtyard: long swimming pools, beachside loungers and palm-framed outdoor living are key visual cues
+- Colours/materials: white and pale stone buildings, turquoise pool water, green palms, soft sand, Caribbean sky and sea blues
+- Setting: Playa Coson near Las Terrenas, with Samana nature trips to El Limon waterfall, whale watching and Los Haitises
+- Useful details to preserve: make it refined and quiet rather than a huge all-inclusive resort; preserve boutique-residence scale
+
+### Recommended image direction
+- Dusk image: pool and palm-framed resort terraces near the beach with soft violet Caribbean dusk light
+- Daylight image: low-rise resort, pools and palms in natural daylight with Samana beach atmosphere
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Natura Cabana Boutique Hotel & Spa - Cabarete, Dominican Republic
+
+### Reference URLs reviewed
+- https://naturacabana.com/
+- https://www.godominicanrepublic.com/destinations/puerto-plata/
+- https://www.godominicanrepublic.com/poi/beaches/puerto-plata/cabarete/
+
+### Observed visual features
+- Architecture: beachfront eco-cabana boutique hotel with thatched roofs, natural timber, stone paths and wellness-resort character
+- Entrance/facade: informal tropical garden arrival through palms and cabana paths, not a formal city-hotel porte cochere
+- Pool/garden/courtyard: spa, yoga, garden paths and beachfront cabanas matter more than a large resort pool
+- Colours/materials: thatched palm roofs, honey timber, sandy paths, tropical greens, Caribbean blue sky and sea, natural stone
+- Setting: north coast near Cabarete and Encuentro Beach, with surf, kitesurf, Puerto Plata and Damajagua waterfall day trips
+- Useful details to preserve: emphasize nature, wellness and handmade textures; avoid polished mega-resort or formal five-star cues
+
+### Recommended image direction
+- Dusk image: thatched eco-cabanas and tropical garden paths glowing at dusk near the beach
+- Daylight image: natural cabana architecture, palms and beachside wellness atmosphere in realistic daylight
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
 ## Hotel Suitess - Dresden, Germany
 
 ### Reference URLs reviewed

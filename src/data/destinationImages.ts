@@ -143,6 +143,24 @@ export const destinationImages = {
     credit: 'AI-generated editorial image',
     subject: 'Campeche walled-city mansion hotel',
   },
+  'santo-domingo': {
+    src: '/images/hotels/hodelpa-nicolas-de-ovando-realistic-daylight.webp',
+    alt: 'AI-generated colonial heritage hotel atmosphere in Santo Domingo, Dominican Republic',
+    credit: 'AI-generated editorial image',
+    subject: 'Santo Domingo Colonial Zone heritage hotel',
+  },
+  'las-terrenas': {
+    src: '/images/hotels/sublime-samana-realistic-daylight.webp',
+    alt: 'AI-generated beach resort atmosphere in Las Terrenas, Dominican Republic',
+    credit: 'AI-generated editorial image',
+    subject: 'Las Terrenas Samana beach resort',
+  },
+  cabarete: {
+    src: '/images/hotels/natura-cabana-cabarete-realistic-daylight.webp',
+    alt: 'AI-generated eco-cabana beach hotel atmosphere in Cabarete, Dominican Republic',
+    credit: 'AI-generated editorial image',
+    subject: 'Cabarete eco-cabana beach hotel',
+  },
   dresden: {
     src: '/images/hotels/hotel-suitess-dresden-realistic-daylight.webp',
     alt: 'AI-generated old-town luxury hotel atmosphere in Dresden, Germany',

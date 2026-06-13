@@ -5556,5 +5556,197 @@ export const hotelSeasonality: Record<string, HotelSeasonality> = {
       { "month": "Nov", "weather": "Possible", "price": "Good value", "tempC": 5, "tempF": 41, "humidity": 82 },
       { "month": "Dec", "weather": "Possible", "price": "Expensive", "tempC": 2, "tempF": 36, "humidity": 84 }
     ]
+  },
+  "hodelpa-nicolas-de-ovando": {
+    "hotel": "Hodelpa Nicolas de Ovando",
+    "city": "Santo Domingo",
+    "country": "Dominican Republic",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Best" },
+        { "month": "Feb", "label": "Best" },
+        { "month": "Mar", "label": "Best" },
+        { "month": "Apr", "label": "Good" },
+        { "month": "May", "label": "Possible" },
+        { "month": "Jun", "label": "Possible" },
+        { "month": "Jul", "label": "Possible" },
+        { "month": "Aug", "label": "Avoid" },
+        { "month": "Sep", "label": "Avoid" },
+        { "month": "Oct", "label": "Possible" },
+        { "month": "Nov", "label": "Good" },
+        { "month": "Dec", "label": "Best" }
+      ],
+      "summary": "Best: Dec-Mar. Drier, more comfortable weather for Colonial Zone walks; Aug-Sep is the weakest hurricane-season window.",
+      "notes": "Avoid means not ideal, not impossible. Tropical showers and storm risk can override normal patterns.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.climatestotravel.com/climate/dominican-republic/santo-domingo\nhttps://www.booking.com/searchresults.html?ss=Hodelpa%20Nicolas%20de%20Ovando%20Santo%20Domingo"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Expensive" },
+        { "month": "Feb", "label": "Expensive" },
+        { "month": "Mar", "label": "Average" },
+        { "month": "Apr", "label": "Average" },
+        { "month": "May", "label": "Cheapest" },
+        { "month": "Jun", "label": "Cheapest" },
+        { "month": "Jul", "label": "Good value" },
+        { "month": "Aug", "label": "Good value" },
+        { "month": "Sep", "label": "Cheapest" },
+        { "month": "Oct", "label": "Good value" },
+        { "month": "Nov", "label": "Good value" },
+        { "month": "Dec", "label": "Most expensive" }
+      ],
+      "summary": "Cheapest: May-Jun and Sep. Most expensive: Dec; winter demand can lift Caribbean city hotels too.",
+      "notes": "Holiday weeks and business dates can override broad seasonality.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.booking.com/searchresults.html?ss=Hodelpa%20Nicolas%20de%20Ovando%20Santo%20Domingo"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Best", "price": "Expensive", "tempC": 25, "tempF": 77, "humidity": 78 },
+      { "month": "Feb", "weather": "Best", "price": "Expensive", "tempC": 25, "tempF": 77, "humidity": 76 },
+      { "month": "Mar", "weather": "Best", "price": "Average", "tempC": 26, "tempF": 79, "humidity": 75 },
+      { "month": "Apr", "weather": "Good", "price": "Average", "tempC": 26, "tempF": 79, "humidity": 76 },
+      { "month": "May", "weather": "Possible", "price": "Cheapest", "tempC": 27, "tempF": 81, "humidity": 80 },
+      { "month": "Jun", "weather": "Possible", "price": "Cheapest", "tempC": 28, "tempF": 82, "humidity": 81 },
+      { "month": "Jul", "weather": "Possible", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 80 },
+      { "month": "Aug", "weather": "Avoid", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 82 },
+      { "month": "Sep", "weather": "Avoid", "price": "Cheapest", "tempC": 28, "tempF": 82, "humidity": 83 },
+      { "month": "Oct", "weather": "Possible", "price": "Good value", "tempC": 27, "tempF": 81, "humidity": 83 },
+      { "month": "Nov", "weather": "Good", "price": "Good value", "tempC": 26, "tempF": 79, "humidity": 81 },
+      { "month": "Dec", "weather": "Best", "price": "Most expensive", "tempC": 25, "tempF": 77, "humidity": 79 }
+    ]
+  },
+  "sublime-samana": {
+    "hotel": "Sublime Samana Hotel & Residences",
+    "city": "Las Terrenas",
+    "country": "Dominican Republic",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Best" },
+        { "month": "Feb", "label": "Best" },
+        { "month": "Mar", "label": "Best" },
+        { "month": "Apr", "label": "Good" },
+        { "month": "May", "label": "Possible" },
+        { "month": "Jun", "label": "Possible" },
+        { "month": "Jul", "label": "Possible" },
+        { "month": "Aug", "label": "Avoid" },
+        { "month": "Sep", "label": "Avoid" },
+        { "month": "Oct", "label": "Possible" },
+        { "month": "Nov", "label": "Good" },
+        { "month": "Dec", "label": "Best" }
+      ],
+      "summary": "Best: Dec-Mar. Drier beach weather and whale-season appeal; late summer and early autumn carry more storm risk.",
+      "notes": "Avoid means not ideal, not impossible. Boat trips and beach conditions can change quickly in tropical weather.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.climatestotravel.com/climate/dominican-republic/samana\nhttps://www.booking.com/searchresults.html?ss=Sublime%20Samana%20Las%20Terrenas"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Expensive" },
+        { "month": "Feb", "label": "Expensive" },
+        { "month": "Mar", "label": "Average" },
+        { "month": "Apr", "label": "Average" },
+        { "month": "May", "label": "Good value" },
+        { "month": "Jun", "label": "Cheapest" },
+        { "month": "Jul", "label": "Good value" },
+        { "month": "Aug", "label": "Good value" },
+        { "month": "Sep", "label": "Cheapest" },
+        { "month": "Oct", "label": "Cheapest" },
+        { "month": "Nov", "label": "Good value" },
+        { "month": "Dec", "label": "Most expensive" }
+      ],
+      "summary": "Cheapest: Jun and Sep-Oct. Most expensive: Dec; Jan-Feb weather and whale-season demand can also lift rates.",
+      "notes": "For this hotel, price is the main inclusion risk: always confirm the final rate stays under the site's ceiling.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.booking.com/searchresults.html?ss=Sublime%20Samana%20Las%20Terrenas"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Best", "price": "Expensive", "tempC": 25, "tempF": 77, "humidity": 79 },
+      { "month": "Feb", "weather": "Best", "price": "Expensive", "tempC": 25, "tempF": 77, "humidity": 78 },
+      { "month": "Mar", "weather": "Best", "price": "Average", "tempC": 26, "tempF": 79, "humidity": 77 },
+      { "month": "Apr", "weather": "Good", "price": "Average", "tempC": 26, "tempF": 79, "humidity": 78 },
+      { "month": "May", "weather": "Possible", "price": "Good value", "tempC": 27, "tempF": 81, "humidity": 81 },
+      { "month": "Jun", "weather": "Possible", "price": "Cheapest", "tempC": 28, "tempF": 82, "humidity": 82 },
+      { "month": "Jul", "weather": "Possible", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 81 },
+      { "month": "Aug", "weather": "Avoid", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 83 },
+      { "month": "Sep", "weather": "Avoid", "price": "Cheapest", "tempC": 28, "tempF": 82, "humidity": 84 },
+      { "month": "Oct", "weather": "Possible", "price": "Cheapest", "tempC": 27, "tempF": 81, "humidity": 84 },
+      { "month": "Nov", "weather": "Good", "price": "Good value", "tempC": 26, "tempF": 79, "humidity": 82 },
+      { "month": "Dec", "weather": "Best", "price": "Most expensive", "tempC": 25, "tempF": 77, "humidity": 80 }
+    ]
+  },
+  "natura-cabana-cabarete": {
+    "hotel": "Natura Cabana Boutique Hotel & Spa",
+    "city": "Cabarete",
+    "country": "Dominican Republic",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Best" },
+        { "month": "Feb", "label": "Best" },
+        { "month": "Mar", "label": "Best" },
+        { "month": "Apr", "label": "Good" },
+        { "month": "May", "label": "Possible" },
+        { "month": "Jun", "label": "Good" },
+        { "month": "Jul", "label": "Good" },
+        { "month": "Aug", "label": "Possible" },
+        { "month": "Sep", "label": "Avoid" },
+        { "month": "Oct", "label": "Possible" },
+        { "month": "Nov", "label": "Good" },
+        { "month": "Dec", "label": "Best" }
+      ],
+      "summary": "Best: Dec-Mar; Jun-Jul can also work for Cabarete wind and beach activity. Sep is the weakest storm-season month.",
+      "notes": "Avoid means not ideal, not impossible. Cabarete conditions depend on surf, wind and tropical weather as much as rainfall averages.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.climatestotravel.com/climate/dominican-republic/puerto-plata\nhttps://www.booking.com/searchresults.html?ss=Natura%20Cabana%20Cabarete"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Expensive" },
+        { "month": "Feb", "label": "Expensive" },
+        { "month": "Mar", "label": "Average" },
+        { "month": "Apr", "label": "Average" },
+        { "month": "May", "label": "Good value" },
+        { "month": "Jun", "label": "Cheapest" },
+        { "month": "Jul", "label": "Good value" },
+        { "month": "Aug", "label": "Good value" },
+        { "month": "Sep", "label": "Cheapest" },
+        { "month": "Oct", "label": "Cheapest" },
+        { "month": "Nov", "label": "Good value" },
+        { "month": "Dec", "label": "Most expensive" }
+      ],
+      "summary": "Cheapest: Jun and Sep-Oct. Most expensive: Dec; winter dry-season dates can be pricier.",
+      "notes": "Small, distinctive properties can sell unevenly by room type, so compare several dates.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.booking.com/searchresults.html?ss=Natura%20Cabana%20Cabarete"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Best", "price": "Expensive", "tempC": 24, "tempF": 75, "humidity": 80 },
+      { "month": "Feb", "weather": "Best", "price": "Expensive", "tempC": 24, "tempF": 75, "humidity": 78 },
+      { "month": "Mar", "weather": "Best", "price": "Average", "tempC": 25, "tempF": 77, "humidity": 77 },
+      { "month": "Apr", "weather": "Good", "price": "Average", "tempC": 26, "tempF": 79, "humidity": 78 },
+      { "month": "May", "weather": "Possible", "price": "Good value", "tempC": 27, "tempF": 81, "humidity": 81 },
+      { "month": "Jun", "weather": "Good", "price": "Cheapest", "tempC": 28, "tempF": 82, "humidity": 81 },
+      { "month": "Jul", "weather": "Good", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 80 },
+      { "month": "Aug", "weather": "Possible", "price": "Good value", "tempC": 28, "tempF": 82, "humidity": 82 },
+      { "month": "Sep", "weather": "Avoid", "price": "Cheapest", "tempC": 28, "tempF": 82, "humidity": 84 },
+      { "month": "Oct", "weather": "Possible", "price": "Cheapest", "tempC": 27, "tempF": 81, "humidity": 84 },
+      { "month": "Nov", "weather": "Good", "price": "Good value", "tempC": 26, "tempF": 79, "humidity": 82 },
+      { "month": "Dec", "weather": "Best", "price": "Most expensive", "tempC": 25, "tempF": 77, "humidity": 80 }
+    ]
   }
 };
