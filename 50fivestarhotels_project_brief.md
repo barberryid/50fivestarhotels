@@ -2,7 +2,14 @@
 
 ## Current implementation status
 
-Last updated: 11 June 2026
+Last updated: 13 June 2026
+
+Latest homepage design update:
+
+- The homepage hero keeps the full-width palm-free Steigenberger Luxor image background, but the hero text is now contained in one restrained dark frosted-glass panel.
+- The panel uses a translucent dark surface, backdrop blur where supported, a subtle soft-gold border, and a graceful solid-background fallback where `backdrop-filter` is unavailable.
+- The lower homepage sections (`Browse by price`, `Browse by feeling`, featured hotel cards, destination mood, comparison table, and supporting sections) were intentionally left unchanged.
+- Local build check: `npm.cmd run build` completed successfully on 13 June 2026.
 
 The live Astro project is in `C:\Users\Gary\code\50fivestarhotels` and deploys from the `main` branch to Cloudflare Pages.
 
@@ -648,6 +655,8 @@ Current colour direction (warm affordable-luxury editorial palette, live as of 2
 
 Typography: headings use **Fraunces** (warm editorial serif, loaded via `SeoHead.astro`); body/UI uses **Inter**. The earlier functional palette (`#F8F5EF`, `#1D2433`, `#58745A`, `#6B7280`, pure white) was swept onto these warm values in commit `cfb0e79`; new components should use the warm hex values above or the `--color-*` tokens in `src/styles/global.css`.
 
+Homepage hero note, 2026-06-13: the current hero uses the same full-bleed palm-free Steigenberger Luxor image, but places the editorial copy, CTAs, and price caution inside a single controlled-width dark glass panel. This treatment is scoped to the homepage hero only and should not be applied to the lower budget, feeling, destination, or hotel-card sections.
+
 ---
 
 ## Success criteria
@@ -818,6 +827,8 @@ The `/destinations/` page now has AI-generated editorial destination-card images
 ### Current local review status
 
 The project has been reviewed against the current Git working tree on 2026-05-31. The latest committed site state is on `main` / `origin/main`. After this brief update, this file itself is the only expected local edit unless additional work has been requested.
+
+Homepage hero update reviewed on 2026-06-13: `src/pages/index.astro` now uses the scoped frosted-glass hero copy panel described above, and `npm.cmd run build` completed successfully.
 
 **Latest committed/pushed state:**
 

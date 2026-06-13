@@ -92,7 +92,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
 >
   <main>
     <!-- Hero -->
-    <section class="relative isolate flex items-center justify-center min-h-[78vh] md:min-h-[86vh] overflow-hidden">
+    <section class="relative isolate flex items-center justify-center min-h-[70svh] sm:min-h-[76vh] md:min-h-[82vh] overflow-hidden">
       <!-- Full-bleed background image -->
       <picture class="absolute inset-0 -z-10">
         <source media="(min-width: 768px)" srcset={heroImage.large} type="image/webp" />
@@ -110,30 +110,31 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
       <div class="absolute inset-0 -z-10 bg-[#1F2428]/28"></div>
       <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[#1F2428]/20 via-transparent to-[#1F2428]/60"></div>
 
-      <!-- Centered hero copy -->
-      <div class="max-w-3xl mx-auto px-5 py-24 text-center text-white">
-        <p class="text-[#E8D7B4] text-xs sm:text-sm font-bold uppercase tracking-[0.22em] mb-6 flex items-center justify-center gap-3">
-          <span class="inline-block w-8 h-px bg-[#D8BD8A]"></span>
-          Affordable luxury travel
-          <span class="inline-block w-8 h-px bg-[#D8BD8A]"></span>
-        </p>
-        <h1 class="font-serif text-[2.9rem] sm:text-6xl md:text-7xl font-semibold leading-[0.98] tracking-tight [text-shadow:0_2px_24px_rgba(31,36,40,0.45)]">
-          Five-star hotels without five-star <span class="text-[#E8C988] italic">prices.</span>
-        </h1>
-        <p class="text-white/85 text-lg md:text-xl mt-7 leading-relaxed max-w-2xl mx-auto">
-          A warm, honest guide to hotels where the price feels surprisingly modest for the setting, service, history or sense of occasion.
-        </p>
-        <div class="flex flex-wrap gap-3 justify-center mt-10">
-          <a href="#featured" class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-3.5 px-8 rounded-full hover:bg-white hover:text-[#1F2428] transition-colors no-underline text-sm">
-            Explore the best-value hotels
-          </a>
-          <a href="/under-100" class="inline-flex items-center bg-white/10 backdrop-blur text-white font-semibold py-3.5 px-8 rounded-full border border-white/40 hover:bg-white hover:text-[#1F2428] transition-colors no-underline text-sm">
-            See hotels under €100
-          </a>
+      <!-- Frosted hero copy panel -->
+      <div class="w-full max-w-6xl mx-auto px-5 py-10 sm:py-10 md:py-8">
+        <div class="hero-glass max-w-[740px] mx-auto lg:mx-0 lg:ml-10 rounded-[1.25rem] px-6 py-7 sm:px-9 sm:py-9 md:px-10 md:py-10 text-center sm:text-left text-white shadow-[0_28px_90px_rgba(0,0,0,0.38)] ring-1 ring-[#D8BD8A]/45">
+          <p class="text-[#E8D7B4] text-[0.68rem] sm:text-xs font-bold uppercase tracking-[0.22em] mb-5 flex items-center justify-center sm:justify-start gap-3">
+            <span class="inline-block w-7 sm:w-9 h-px bg-[#D8BD8A]"></span>
+            Affordable luxury travel
+          </p>
+          <h1 class="font-serif text-[3rem] sm:text-[4.2rem] md:text-[5rem] font-semibold leading-[0.94] [text-shadow:0_2px_28px_rgba(0,0,0,0.55)]">
+            Five-star hotels without five-star <span class="text-[#E8C988] italic">prices.</span>
+          </h1>
+          <p class="text-white/88 text-base sm:text-lg md:text-xl mt-5 leading-relaxed max-w-[39rem] mx-auto sm:mx-0">
+            A warm, honest guide to hotels where the price feels surprisingly modest for the setting, service, history or sense of occasion.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start mt-7">
+            <a href="#featured" class="inline-flex items-center justify-center bg-[#B88A44] text-white font-semibold py-3.5 px-7 rounded-full hover:bg-white hover:text-[#1F2428] transition-colors no-underline text-sm">
+              Explore the best-value hotels
+            </a>
+            <a href="/under-100" class="inline-flex items-center justify-center bg-white/10 text-white font-semibold py-3.5 px-7 rounded-full border border-white/45 hover:bg-white hover:text-[#1F2428] transition-colors no-underline text-sm">
+              See hotels under €100
+            </a>
+          </div>
+          <p class="text-white/72 text-xs mt-5 leading-relaxed max-w-md mx-auto sm:mx-0">
+            Prices change constantly. Every hotel here should be checked by date, room type, taxes and cancellation policy before booking.
+          </p>
         </div>
-        <p class="text-white/65 text-xs mt-7 leading-relaxed max-w-md mx-auto">
-          Prices change constantly. Every hotel here should be checked by date, room type, taxes and cancellation policy before booking.
-        </p>
       </div>
     </section>
 
@@ -316,3 +317,36 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
     </section>
   </main>
 </BaseLayout>
+
+<style>
+  .hero-glass {
+    background: rgba(20, 23, 26, 0.78);
+  }
+
+  @supports ((backdrop-filter: blur(18px)) or (-webkit-backdrop-filter: blur(18px))) {
+    .hero-glass {
+      background: linear-gradient(135deg, rgba(31, 36, 40, 0.7), rgba(13, 16, 18, 0.54));
+      -webkit-backdrop-filter: blur(18px) saturate(1.18);
+      backdrop-filter: blur(18px) saturate(1.18);
+    }
+  }
+
+  .hero-glass h1 {
+    letter-spacing: 0;
+  }
+
+  @media (max-width: 767px) {
+    @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+      .hero-glass {
+        -webkit-backdrop-filter: blur(12px) saturate(1.1);
+        backdrop-filter: blur(12px) saturate(1.1);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-glass a {
+      transition-duration: 0.01ms;
+    }
+  }
+</style>
