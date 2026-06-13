@@ -5,8 +5,31 @@ import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
 
 const steps = [
   { step: '1', text: 'Select the country you are travelling to.' },
-  { step: '2', text: 'Copy the generated research prompt.' },
+  { step: '2', text: 'Copy the generated research prompt with the expanded price ladder.' },
   { step: '3', text: 'Paste it into a fresh Claude or ChatGPT session.' },
+];
+
+const priceLevels = [
+  {
+    label: '€50',
+    title: 'Impossible finds',
+    text: 'Search first for credible five-star or near-five-star rooms at €50 or below.',
+  },
+  {
+    label: '€100',
+    title: 'Budget luxury',
+    text: 'Capture the strongest affordable luxury candidates that still feel genuinely special.',
+  },
+  {
+    label: '€150',
+    title: 'Reliable value',
+    text: 'Open the search to better locations, stronger reviews and more dependable quality.',
+  },
+  {
+    label: '€250',
+    title: 'Smart splurge',
+    text: 'Keep higher-quality hotels in expensive markets if the value still feels unusual.',
+  },
 ];
 
 const jsonLd = breadcrumbJsonLd([
@@ -17,7 +40,7 @@ const jsonLd = breadcrumbJsonLd([
 
 <BaseLayout
   title="Research Affordable Five-Star Hotels by Country | 50 Five-Star Hotels"
-  description="Use this copy-paste research prompt to find affordable five-star and near-five-star hotels in any country."
+  description="Use this copy-paste research prompt to find affordable five-star and near-five-star hotels by country, with €50, €100, €150 and €250 price levels."
   canonical="/research-hotels/"
   jsonLd={jsonLd}
 >
@@ -30,7 +53,7 @@ const jsonLd = breadcrumbJsonLd([
           Research affordable five-star hotels in any country
         </h1>
         <p class="text-[#1F2428]/80 text-lg md:text-xl leading-relaxed mb-5">
-          Use this prompt to find five-star and near-five-star hotels that may be unusually good value in the country you are visiting.
+          Use this prompt to find five-star and near-five-star hotels that may be unusually good value in the country you are visiting, from €50 long shots to €250 smart splurges.
         </p>
         <p class="text-[#6F685F] text-base md:text-lg leading-relaxed font-serif italic">
           I have visited many of the countries in this guide. But I did a lot of research before travelling — this is how I research nowadays.
@@ -54,6 +77,24 @@ const jsonLd = breadcrumbJsonLd([
       </p>
     </section>
 
+    <!-- Price levels -->
+    <section class="max-w-4xl mx-auto px-5 py-10">
+      <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Expanded search criteria</p>
+      <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-5">Price levels included</h2>
+      <p class="text-[#1F2428]/80 leading-relaxed mb-7">
+        The generated prompt now searches four nightly levels in order: €50, €100, €150 and €250. If a lower level has no credible hotel, it asks for the next best three hotels above that level instead of returning an empty result.
+      </p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {priceLevels.map(({ label, title, text }) => (
+          <article class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] p-5">
+            <p class="text-3xl font-serif font-semibold text-[#1F2428] mb-2">{label}</p>
+            <h3 class="text-sm font-bold uppercase tracking-widest text-[#B88A44] mb-3">{title}</h3>
+            <p class="text-sm leading-relaxed text-[#6F685F]">{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
     <!-- The tool -->
     <section class="max-w-4xl mx-auto px-5 py-10">
       <CountryPromptTool />
@@ -69,6 +110,9 @@ const jsonLd = breadcrumbJsonLd([
         </p>
         <p class="text-[#1F2428]/80 leading-relaxed mb-5">
           Pay as much attention to the destinations as to the hotels. The prompt is destination-first by design: destination quality and hotel quality carry equal weight, because a beautiful hotel in a dull city makes a weak trip, while a slightly imperfect hotel beside something extraordinary can make a great one. If the assistant recommends a hotel but struggles to name three genuinely interesting things nearby, treat that as a warning.
+        </p>
+        <p class="text-[#1F2428]/80 leading-relaxed mb-5">
+          Treat the €50 level as a discovery exercise, not a promise. In some countries there may be no credible five-star hotel at that price, so the useful result is the fallback list: the next best three hotels above the missed level, with the same review, location and editorial checks applied.
         </p>
         <p class="text-[#1F2428]/80 leading-relaxed">
           A good session should also reject aggressively. Expect a healthy rejected list at the end — hotels priced above €250 a night, review scores below 8.0, or value that depends on a flash sale. If everything scores highly, the research is probably too generous, and it is worth running the prompt again in a fresh session.

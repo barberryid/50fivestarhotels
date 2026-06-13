@@ -15,6 +15,22 @@ The site is a curated guide to **affordable luxury travel ideas** — not a dire
 
 For context, here are the countries and territories already represented on the site: [COVERAGE]
 
+Use **50fivestarhotels.com** as the editorial benchmark. New recommendations should add something useful to that site rather than merely repeating obvious luxury hotels.
+
+---
+
+### Price-level search rule
+
+Always search these nightly price levels in order:
+- **€50 or below**
+- **€100 or below**
+- **€150 or below**
+- **€250 or below**
+
+Use shoulder-season standard-room nightly rates, before taxes unless the source only shows tax-inclusive totals. Record the lowest realistic level each hotel can meet, but do not promise that the rate is always available.
+
+If a lower level has no credible candidates, do not leave the section empty. For example, if there is nothing convincing at **€50 or below**, write: **No credible candidate found under €50**, then list the **next best 3 hotels above that level**, ranked by value, while continuing the wider search up to €250.
+
 ---
 
 ### Step 1 — Identify the strongest destinations in the region
@@ -32,7 +48,7 @@ Reject any destination with a **High** risk rating from further consideration in
 
 ### Step 2 — Find the best qualifying hotel in each destination
 
-For each destination that passes Step 1, identify the **1–3 most compelling hotel candidates**. Focus on hotels that combine:
+For each destination that passes Step 1, apply the price-level search rule and identify the **1–3 most compelling hotel candidates**. Focus on hotels that combine:
 
 - Strong value versus the local five-star market
 - Genuine character (heritage, design, boutique, wellness — not generic chain towers)
@@ -57,6 +73,13 @@ For each candidate hotel, provide:
 - Questionable five-star
 
 **Typical price range** (shoulder season, standard room, per night in €)
+
+**Lowest realistic price level** (use one of these exactly):
+- Under €50
+- Under €100
+- Under €150
+- Under €250
+- Fallback above lower target
 
 **Booking.com score** (if available)
 
@@ -113,8 +136,8 @@ List any hotels you are rejecting at this stage and state which rule applies.
 
 Rank surviving candidates by adjusted score. Present the shortlist as a clean table:
 
-| Rank | Hotel | City | Category | Price range (€) | Score | Verdict |
-|---|---|---|---|---|---|---|
+| Rank | Hotel | City | Category | Lowest price level | Price range (€) | Score | Verdict |
+|---|---|---|---|---|---|---|---|
 
 Then for each of the **top 5**, provide a fuller summary including:
 
