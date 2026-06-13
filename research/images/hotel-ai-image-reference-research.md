@@ -586,3 +586,69 @@ Online source pages were reviewed only as visual research references. No online 
 
 ### Uncertainty / manual-review notes
 - No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Hotel Suitess - Dresden, Germany
+
+### Reference URLs reviewed
+- https://www.suitess-hotel.com/home.html
+- https://www.booking.com/hotel/de/suitess.html
+- https://www.expedia.com/Dresden-Hotels-Suitess-An-Der-Frauenkirche.h1744928.Hotel-Information
+
+### Observed visual features
+- Architecture: small five-star-superior private hotel in Dresden old town with baroque-influenced classic styling beside the Frauenkirche
+- Entrance/facade: intimate historic-centre frontage on Neumarkt, pale stone and plaster, refined windows and restrained boutique arrival
+- Pool/garden/courtyard: rooftop spa and terrace with sauna, hot tub and city-view wellness atmosphere rather than a resort pool
+- Colours/materials: warm pale stone, cream plaster, dark slate rooflines, brass interior glow, Dresden sandstone, evening city lights
+- Setting: Dresden Altstadt beside the Frauenkirche, close to Neumarkt, Zwinger, Semperoper, Royal Palace and Elbe views
+- Useful details to preserve: preserve compact boutique scale and Frauenkirche/old-town context; avoid making it a huge palace hotel
+
+### Recommended image direction
+- Dusk image: boutique hotel frontage or rooftop terrace glowing at dusk with Frauenkirche and Dresden old-town atmosphere nearby
+- Daylight image: classic Dresden old-town hotel facade in natural daylight, elegant and intimate with historic sandstone context
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Steigenberger Icon Grandhotel Handelshof Leipzig - Leipzig, Germany
+
+### Reference URLs reviewed
+- https://hrewards.com/en/steigenberger-icon-grandhotel-handelshof-leipzig
+- https://www.booking.com/hotel/de/steigenberger-grandhotel-handelshof-leipzig.html
+- https://www.cntraveler.com/hotels/germany/leipzig/steigenberger-grandhotel-handelshof
+
+### Observed visual features
+- Architecture: historic former fair and trade building in central Leipzig, grand stone facade and polished contemporary grand-hotel interiors
+- Entrance/facade: formal city-centre entrance near Nikolaikirche, Naschmarkt, market square and old trading arcades
+- Pool/garden/courtyard: two-floor Spa World with sauna, steam bath, gym and treatments; no resort pool emphasis
+- Colours/materials: light German stone, dark metal, glass skylights, warm lobby light, polished wood, soft gold interior accents
+- Setting: compact Leipzig centre near St Thomas Church, Madler Passage, Nikolaikirche, Bach heritage and cafe culture
+- Useful details to preserve: make it a credible central European grand hotel in a former trade building, not a fantasy palace or generic tower
+
+### Recommended image direction
+- Dusk image: historic Handelshof facade and entrance warmly lit in Leipzig city-centre evening, elegant grand-hotel arrival
+- Daylight image: grand stone facade or skylit lobby-courtyard atmosphere in realistic Leipzig daylight
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.
+
+## Hotel Elephant Weimar, Autograph Collection - Weimar, Germany
+
+### Reference URLs reviewed
+- https://www.marriott.com/en-us/hotels/erfak-hotel-elephant-weimar-autograph-collection/overview/
+- https://www.marriott.com/en-us/hotels/erfak-hotel-elephant-weimar-autograph-collection/experiences/
+- https://guide.michelin.com/us/en/hotels-stays/weimar/elephant-120950-10222
+
+### Observed visual features
+- Architecture: historic cultural hotel on Weimar market square, refined classic facade with Art Deco and Bauhaus-influenced interior sensibility
+- Entrance/facade: formal market-square frontage in the heart of Weimar, elegant but smaller-scale than a capital-city palace
+- Pool/garden/courtyard: no pool focus; emphasize cultural lobby, restaurant, market-square setting and renovated heritage interiors
+- Colours/materials: cream stone, warm plaster, dark timber, Bauhaus-era restraint, soft amber lighting, town-square paving
+- Setting: Weimar historic centre near Goethe House, Schiller House, Duchess Anna Amalia Library and Bauhaus Museum
+- Useful details to preserve: preserve the literary-cultural address and quiet German small-city atmosphere; avoid nightlife or resort cues
+
+### Recommended image direction
+- Dusk image: historic market-square hotel facade glowing at dusk with refined cultural-city atmosphere
+- Daylight image: elegant Weimar market-square frontage or interior-lobby glimpse in natural daylight, calm and literary
+
+### Uncertainty / manual-review notes
+- No major source conflict noted from the reviewed URLs; final AI output should still be checked for architectural believability and property-specific character.

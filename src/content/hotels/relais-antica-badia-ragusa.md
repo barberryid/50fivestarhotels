@@ -1,7 +1,7 @@
 ---
 title: "Relais Antica Badia - San Maurizio 1619"
 slug: "relais-antica-badia-ragusa"
-rank: 8
+rank: 11
 city: "Ragusa"
 country: "Italy"
 region: "Europe"

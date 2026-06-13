@@ -1,7 +1,7 @@
 ---
 title: "Hotel Bristol Palace"
 slug: "hotel-bristol-palace-genoa"
-rank: 7
+rank: 10
 city: "Genoa"
 country: "Italy"
 region: "Europe"

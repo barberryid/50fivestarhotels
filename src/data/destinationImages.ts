@@ -143,6 +143,24 @@ export const destinationImages = {
     credit: 'AI-generated editorial image',
     subject: 'Campeche walled-city mansion hotel',
   },
+  dresden: {
+    src: '/images/hotels/hotel-suitess-dresden-realistic-daylight.webp',
+    alt: 'AI-generated old-town luxury hotel atmosphere in Dresden, Germany',
+    credit: 'AI-generated editorial image',
+    subject: 'Dresden old-town hotel by the Frauenkirche',
+  },
+  leipzig: {
+    src: '/images/hotels/steigenberger-handelshof-leipzig-realistic-daylight.webp',
+    alt: 'AI-generated central grand hotel atmosphere in Leipzig, Germany',
+    credit: 'AI-generated editorial image',
+    subject: 'Leipzig historic grand hotel',
+  },
+  weimar: {
+    src: '/images/hotels/hotel-elephant-weimar-realistic-daylight.webp',
+    alt: 'AI-generated market-square hotel atmosphere in Weimar, Germany',
+    credit: 'AI-generated editorial image',
+    subject: 'Weimar market-square cultural hotel',
+  },
   york: {
     src: '/images/hotels/the-grand-york-realistic-daylight.webp',
     alt: 'AI-generated heritage hotel and historic street atmosphere in York, England',

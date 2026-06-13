@@ -5364,5 +5364,197 @@ export const hotelSeasonality: Record<string, HotelSeasonality> = {
       { "month": "Nov", "weather": "Good", "price": "Average", "tempC": 26, "tempF": 79, "humidity": 77 },
       { "month": "Dec", "weather": "Best", "price": "Expensive", "tempC": 24, "tempF": 75, "humidity": 75 }
     ]
+  },
+  "hotel-suitess-dresden": {
+    "hotel": "Hotel Suitess",
+    "city": "Dresden",
+    "country": "Germany",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Avoid" },
+        { "month": "Feb", "label": "Avoid" },
+        { "month": "Mar", "label": "Possible" },
+        { "month": "Apr", "label": "Good" },
+        { "month": "May", "label": "Best" },
+        { "month": "Jun", "label": "Best" },
+        { "month": "Jul", "label": "Good" },
+        { "month": "Aug", "label": "Good" },
+        { "month": "Sep", "label": "Best" },
+        { "month": "Oct", "label": "Good" },
+        { "month": "Nov", "label": "Possible" },
+        { "month": "Dec", "label": "Possible" }
+      ],
+      "summary": "Best: May-Jun and Sep. Spring and early autumn are strongest for old-town walking; winter can be atmospheric but colder.",
+      "notes": "Avoid means simply not ideal, not impossible. December is atmospheric but Christmas-market demand can be high.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.climatestotravel.com/climate/germany/dresden\nhttps://www.booking.com/hotel/de/suitess.html"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Cheapest" },
+        { "month": "Feb", "label": "Cheapest" },
+        { "month": "Mar", "label": "Good value" },
+        { "month": "Apr", "label": "Good value" },
+        { "month": "May", "label": "Average" },
+        { "month": "Jun", "label": "Average" },
+        { "month": "Jul", "label": "Expensive" },
+        { "month": "Aug", "label": "Expensive" },
+        { "month": "Sep", "label": "Average" },
+        { "month": "Oct", "label": "Good value" },
+        { "month": "Nov", "label": "Good value" },
+        { "month": "Dec", "label": "Most expensive" }
+      ],
+      "summary": "Cheapest: Jan-Feb. Most expensive: Dec; summer weekends and cultural dates can also lift rates.",
+      "notes": "Dresden events, holidays and Christmas markets can override normal seasonality.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.booking.com/hotel/de/suitess.html"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Avoid", "price": "Cheapest", "tempC": 1, "tempF": 34, "humidity": 82 },
+      { "month": "Feb", "weather": "Avoid", "price": "Cheapest", "tempC": 2, "tempF": 36, "humidity": 78 },
+      { "month": "Mar", "weather": "Possible", "price": "Good value", "tempC": 6, "tempF": 43, "humidity": 72 },
+      { "month": "Apr", "weather": "Good", "price": "Good value", "tempC": 10, "tempF": 50, "humidity": 68 },
+      { "month": "May", "weather": "Best", "price": "Average", "tempC": 15, "tempF": 59, "humidity": 68 },
+      { "month": "Jun", "weather": "Best", "price": "Average", "tempC": 18, "tempF": 64, "humidity": 70 },
+      { "month": "Jul", "weather": "Good", "price": "Expensive", "tempC": 20, "tempF": 68, "humidity": 70 },
+      { "month": "Aug", "weather": "Good", "price": "Expensive", "tempC": 19, "tempF": 66, "humidity": 72 },
+      { "month": "Sep", "weather": "Best", "price": "Average", "tempC": 15, "tempF": 59, "humidity": 74 },
+      { "month": "Oct", "weather": "Good", "price": "Good value", "tempC": 10, "tempF": 50, "humidity": 78 },
+      { "month": "Nov", "weather": "Possible", "price": "Good value", "tempC": 5, "tempF": 41, "humidity": 82 },
+      { "month": "Dec", "weather": "Possible", "price": "Most expensive", "tempC": 2, "tempF": 36, "humidity": 84 }
+    ]
+  },
+  "steigenberger-handelshof-leipzig": {
+    "hotel": "Steigenberger Icon Grandhotel Handelshof Leipzig",
+    "city": "Leipzig",
+    "country": "Germany",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Avoid" },
+        { "month": "Feb", "label": "Avoid" },
+        { "month": "Mar", "label": "Possible" },
+        { "month": "Apr", "label": "Good" },
+        { "month": "May", "label": "Best" },
+        { "month": "Jun", "label": "Best" },
+        { "month": "Jul", "label": "Good" },
+        { "month": "Aug", "label": "Good" },
+        { "month": "Sep", "label": "Best" },
+        { "month": "Oct", "label": "Good" },
+        { "month": "Nov", "label": "Possible" },
+        { "month": "Dec", "label": "Possible" }
+      ],
+      "summary": "Best: May-Jun and Sep. Good walking weather for Leipzig's passages, churches and cafe streets.",
+      "notes": "Avoid means simply not ideal, not impossible. Winter can still suit museums, music and cafe trips.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.climatestotravel.com/climate/germany/leipzig\nhttps://www.booking.com/hotel/de/steigenberger-grandhotel-handelshof-leipzig.html"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Cheapest" },
+        { "month": "Feb", "label": "Cheapest" },
+        { "month": "Mar", "label": "Good value" },
+        { "month": "Apr", "label": "Average" },
+        { "month": "May", "label": "Average" },
+        { "month": "Jun", "label": "Average" },
+        { "month": "Jul", "label": "Good value" },
+        { "month": "Aug", "label": "Good value" },
+        { "month": "Sep", "label": "Expensive" },
+        { "month": "Oct", "label": "Expensive" },
+        { "month": "Nov", "label": "Good value" },
+        { "month": "Dec", "label": "Most expensive" }
+      ],
+      "summary": "Cheapest: Jan-Feb. Most expensive: Dec; Leipzig fair and event dates can matter more than month.",
+      "notes": "Trade fairs and conventions are the main price risk. Always compare event calendars with hotel rates.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.booking.com/hotel/de/steigenberger-grandhotel-handelshof-leipzig.html"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Avoid", "price": "Cheapest", "tempC": 1, "tempF": 34, "humidity": 82 },
+      { "month": "Feb", "weather": "Avoid", "price": "Cheapest", "tempC": 2, "tempF": 36, "humidity": 78 },
+      { "month": "Mar", "weather": "Possible", "price": "Good value", "tempC": 6, "tempF": 43, "humidity": 72 },
+      { "month": "Apr", "weather": "Good", "price": "Average", "tempC": 10, "tempF": 50, "humidity": 68 },
+      { "month": "May", "weather": "Best", "price": "Average", "tempC": 15, "tempF": 59, "humidity": 68 },
+      { "month": "Jun", "weather": "Best", "price": "Average", "tempC": 18, "tempF": 64, "humidity": 70 },
+      { "month": "Jul", "weather": "Good", "price": "Good value", "tempC": 20, "tempF": 68, "humidity": 70 },
+      { "month": "Aug", "weather": "Good", "price": "Good value", "tempC": 19, "tempF": 66, "humidity": 72 },
+      { "month": "Sep", "weather": "Best", "price": "Expensive", "tempC": 15, "tempF": 59, "humidity": 74 },
+      { "month": "Oct", "weather": "Good", "price": "Expensive", "tempC": 10, "tempF": 50, "humidity": 78 },
+      { "month": "Nov", "weather": "Possible", "price": "Good value", "tempC": 5, "tempF": 41, "humidity": 82 },
+      { "month": "Dec", "weather": "Possible", "price": "Most expensive", "tempC": 2, "tempF": 36, "humidity": 84 }
+    ]
+  },
+  "hotel-elephant-weimar": {
+    "hotel": "Hotel Elephant Weimar, Autograph Collection",
+    "city": "Weimar",
+    "country": "Germany",
+    "matchedSite": true,
+    "weather": {
+      "title": "Best time for weather",
+      "months": [
+        { "month": "Jan", "label": "Avoid" },
+        { "month": "Feb", "label": "Avoid" },
+        { "month": "Mar", "label": "Possible" },
+        { "month": "Apr", "label": "Good" },
+        { "month": "May", "label": "Best" },
+        { "month": "Jun", "label": "Best" },
+        { "month": "Jul", "label": "Good" },
+        { "month": "Aug", "label": "Good" },
+        { "month": "Sep", "label": "Best" },
+        { "month": "Oct", "label": "Good" },
+        { "month": "Nov", "label": "Possible" },
+        { "month": "Dec", "label": "Possible" }
+      ],
+      "summary": "Best: May-Jun and Sep. Comfortable small-city weather for Weimar's museums, houses and park walks.",
+      "notes": "Avoid means simply not ideal, not impossible. Winter can still work well for culture-focused trips.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.climatestotravel.com/climate/germany/weimar\nhttps://www.booking.com/hotel/de/elephant-weimar.html"
+    },
+    "price": {
+      "title": "Best time for price",
+      "months": [
+        { "month": "Jan", "label": "Cheapest" },
+        { "month": "Feb", "label": "Cheapest" },
+        { "month": "Mar", "label": "Good value" },
+        { "month": "Apr", "label": "Average" },
+        { "month": "May", "label": "Average" },
+        { "month": "Jun", "label": "Average" },
+        { "month": "Jul", "label": "Expensive" },
+        { "month": "Aug", "label": "Expensive" },
+        { "month": "Sep", "label": "Average" },
+        { "month": "Oct", "label": "Good value" },
+        { "month": "Nov", "label": "Good value" },
+        { "month": "Dec", "label": "Expensive" }
+      ],
+      "summary": "Cheapest: Jan-Feb. Summer and festival periods can be higher; Weimar usually stays calmer than Germany's biggest cities.",
+      "notes": "Small-city seasonality can be disrupted by festivals and cultural events.",
+      "confidenceLevel": "Medium",
+      "lastChecked": "2026-06-13",
+      "sources": "https://www.booking.com/hotel/de/elephant-weimar.html"
+    },
+    "months": [
+      { "month": "Jan", "weather": "Avoid", "price": "Cheapest", "tempC": 1, "tempF": 34, "humidity": 82 },
+      { "month": "Feb", "weather": "Avoid", "price": "Cheapest", "tempC": 2, "tempF": 36, "humidity": 78 },
+      { "month": "Mar", "weather": "Possible", "price": "Good value", "tempC": 6, "tempF": 43, "humidity": 72 },
+      { "month": "Apr", "weather": "Good", "price": "Average", "tempC": 10, "tempF": 50, "humidity": 68 },
+      { "month": "May", "weather": "Best", "price": "Average", "tempC": 15, "tempF": 59, "humidity": 68 },
+      { "month": "Jun", "weather": "Best", "price": "Average", "tempC": 18, "tempF": 64, "humidity": 70 },
+      { "month": "Jul", "weather": "Good", "price": "Expensive", "tempC": 20, "tempF": 68, "humidity": 70 },
+      { "month": "Aug", "weather": "Good", "price": "Expensive", "tempC": 19, "tempF": 66, "humidity": 72 },
+      { "month": "Sep", "weather": "Best", "price": "Average", "tempC": 15, "tempF": 59, "humidity": 74 },
+      { "month": "Oct", "weather": "Good", "price": "Good value", "tempC": 10, "tempF": 50, "humidity": 78 },
+      { "month": "Nov", "weather": "Possible", "price": "Good value", "tempC": 5, "tempF": 41, "humidity": 82 },
+      { "month": "Dec", "weather": "Possible", "price": "Expensive", "tempC": 2, "tempF": 36, "humidity": 84 }
+    ]
   }
 };

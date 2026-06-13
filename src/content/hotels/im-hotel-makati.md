@@ -1,7 +1,7 @@
 ---
 title: "I'M Hotel Makati"
 slug: "im-hotel-makati"
-rank: 38
+rank: 41
 city: "Makati"
 country: "Philippines"
 region: "Southeast Asia"

@@ -1,7 +1,7 @@
 ---
 title: "Bar Peepal Resort"
 slug: "bar-peepal-resort-pokhara"
-rank: 40
+rank: 43
 city: "Pokhara"
 country: "Nepal"
 region: "South Asia"

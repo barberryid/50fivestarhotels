@@ -1,7 +1,7 @@
 ---
 title: "Municipal Hotel Liverpool, MGallery"
 slug: "municipal-hotel-liverpool"
-rank: 9
+rank: 12
 city: "Liverpool"
 country: "England"
 region: "Europe"

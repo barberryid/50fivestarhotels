@@ -1,7 +1,7 @@
 ---
 title: "Auberge Saint-Antoine"
 slug: "auberge-saint-antoine-quebec-city"
-rank: 11
+rank: 14
 city: "Quebec City"
 country: "Canada"
 region: "North America"

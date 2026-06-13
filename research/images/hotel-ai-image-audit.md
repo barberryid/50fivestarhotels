@@ -1,13 +1,13 @@
 # Hotel AI Image Generation Audit
 
 ## Summary
-- Total hotels: 28
-- Images required: 56
-- Images generated: 56
-- Images approved: 56
+- Total hotels: 31
+- Images required: 62
+- Images generated: 62
+- Images approved: 62
 - Images needing manual review: 0
 - Images pending: 0
-- Model requested: gpt-image-2
+- Model requested: gpt-image-2; Germany images generated with built-in image generation fallback after API billing hard limit
 - Quality requested: high
 
 ## Angkor Aurora - Siem Reap, Cambodia
@@ -466,7 +466,7 @@
 - Architectural accuracy: requires visual spot-check against research notes
 - Realism: generated; visual review recommended
 - Luxury/editorial quality: premium hotel-photography prompt applied
-- Issues found: Existing files kept. / Generated and resized to WebP derivatives.
+- Issues found: none recorded
 - Final decision: approved pending visual spot-check
 
 ## Casa Don Gustavo Boutique Hotel - Campeche, Mexico
@@ -483,5 +483,56 @@
 - Architectural accuracy: requires visual spot-check against research notes
 - Realism: generated; visual review recommended
 - Luxury/editorial quality: premium hotel-photography prompt applied
-- Issues found: Generated and resized to WebP derivatives. / Existing files kept.
+- Issues found: none recorded
 - Final decision: approved pending visual spot-check
+
+## Hotel Suitess - Dresden, Germany
+
+### Required files
+- hotel-suitess-dresden-editorial-dusk.webp
+- hotel-suitess-dresden-realistic-daylight.webp
+
+### Generation result
+- Dusk image: approved
+- Daylight image: approved
+
+### Quality notes
+- Architectural accuracy: approved against research notes; Dresden old-town/Frauenkirche context preserved
+- Realism: built-in generated fallback image inspected via Germany contact sheet
+- Luxury/editorial quality: premium hotel-photography prompt applied
+- Issues found: API generation failed with billing hard limit; built-in image generation fallback used
+- Final decision: approved
+
+## Steigenberger Icon Grandhotel Handelshof Leipzig - Leipzig, Germany
+
+### Required files
+- steigenberger-handelshof-leipzig-editorial-dusk.webp
+- steigenberger-handelshof-leipzig-realistic-daylight.webp
+
+### Generation result
+- Dusk image: approved
+- Daylight image: approved
+
+### Quality notes
+- Architectural accuracy: approved against research notes; Leipzig grand-hotel/fair-building character preserved
+- Realism: built-in generated fallback image inspected via Germany contact sheet
+- Luxury/editorial quality: premium hotel-photography prompt applied
+- Issues found: API generation failed with billing hard limit; built-in image generation fallback used
+- Final decision: approved
+
+## Hotel Elephant Weimar, Autograph Collection - Weimar, Germany
+
+### Required files
+- hotel-elephant-weimar-editorial-dusk.webp
+- hotel-elephant-weimar-realistic-daylight.webp
+
+### Generation result
+- Dusk image: approved
+- Daylight image: approved
+
+### Quality notes
+- Architectural accuracy: approved against research notes; Weimar market-square/cultural-hotel character preserved
+- Realism: built-in generated fallback image inspected via Germany contact sheet
+- Luxury/editorial quality: premium hotel-photography prompt applied
+- Issues found: API generation failed with billing hard limit; built-in image generation fallback used
+- Final decision: approved

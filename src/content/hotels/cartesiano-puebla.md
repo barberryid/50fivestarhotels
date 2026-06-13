@@ -1,7 +1,7 @@
 ---
 title: "Cartesiano Boutique & Wellness Hotel"
 slug: "cartesiano-puebla"
-rank: 2
+rank: 5
 city: "Puebla"
 country: "Mexico"
 region: "North America"

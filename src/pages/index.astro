@@ -12,12 +12,12 @@ allHotels.sort((a, b) => a.data.rank - b.data.rank);
 const bySlug = Object.fromEntries(allHotels.map(h => [h.data.slug, h.data]));
 
 const featuredSlugs = [
+  'hotel-suitess-dresden',
+  'steigenberger-handelshof-leipzig',
+  'hotel-elephant-weimar',
   'mansion-merida-boutique-hotel',
   'cartesiano-puebla',
   'the-grand-york',
-  'hotel-de-la-cite-carcassonne',
-  'grand-hotel-wagner-palermo',
-  'casa-don-gustavo-campeche',
 ];
 const featured = allHotels.filter(h => featuredSlugs.includes(h.data.slug));
 
@@ -148,7 +148,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
           The trick is knowing which hotels are genuinely worth considering — and which are simply cheap because the standard, location or maintenance is weaker than the star rating suggests.
         </p>
         <p class="text-[#6F685F] text-base md:text-lg leading-relaxed">
-          50 Five-Star Hotels focuses on the places where price, setting and experience come together: heritage hotels in Mexico and Java, spa hotels in underrated European cities, Nile-side resorts in Luxor, design hotels in the Caucasus and city hotels that make an affordable trip feel far more special.
+          50 Five-Star Hotels focuses on the places where price, setting and experience come together: heritage hotels in Germany, Mexico and Java, spa hotels in underrated European cities, Nile-side resorts in Luxor, design hotels in the Caucasus and city hotels that make an affordable trip feel far more special.
         </p>
       </div>
     </section>

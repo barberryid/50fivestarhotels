@@ -1,7 +1,7 @@
 ---
 title: "The Phoenix Hotel Yogyakarta – Handwritten Collection"
 slug: "phoenix-hotel-yogyakarta"
-rank: 13
+rank: 16
 city: "Yogyakarta"
 country: "Indonesia"
 region: "Southeast Asia"

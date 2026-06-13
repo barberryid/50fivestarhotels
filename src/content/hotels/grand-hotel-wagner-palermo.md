@@ -1,7 +1,7 @@
 ---
 title: "Grand Hotel Wagner"
 slug: "grand-hotel-wagner-palermo"
-rank: 5
+rank: 8
 city: "Palermo"
 country: "Italy"
 region: "Europe"

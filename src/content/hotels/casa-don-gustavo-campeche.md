@@ -1,7 +1,7 @@
 ---
 title: "Casa Don Gustavo Boutique Hotel"
 slug: "casa-don-gustavo-campeche"
-rank: 6
+rank: 9
 city: "Campeche"
 country: "Mexico"
 region: "North America"

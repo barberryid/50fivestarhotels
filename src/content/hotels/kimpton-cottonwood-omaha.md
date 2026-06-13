@@ -1,7 +1,7 @@
 ---
 title: "Kimpton Cottonwood Hotel"
 slug: "kimpton-cottonwood-omaha"
-rank: 34
+rank: 37
 city: "Omaha"
 country: "United States"
 region: "North America"

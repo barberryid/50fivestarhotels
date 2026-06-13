@@ -1,7 +1,7 @@
 ---
 title: "Hotel Majapahit Surabaya – MGallery Collection"
 slug: "hotel-majapahit-surabaya"
-rank: 10
+rank: 13
 city: "Surabaya"
 country: "Indonesia"
 region: "Southeast Asia"

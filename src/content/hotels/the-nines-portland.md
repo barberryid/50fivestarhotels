@@ -1,7 +1,7 @@
 ---
 title: "The Nines, a Luxury Collection Hotel"
 slug: "the-nines-portland"
-rank: 30
+rank: 33
 city: "Portland"
 country: "United States"
 region: "North America"

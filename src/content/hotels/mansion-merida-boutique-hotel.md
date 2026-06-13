@@ -1,7 +1,7 @@
 ---
 title: "Mansion Merida Boutique Hotel"
 slug: "mansion-merida-boutique-hotel"
-rank: 1
+rank: 4
 city: "Merida"
 country: "Mexico"
 region: "North America"

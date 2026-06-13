@@ -1181,4 +1181,34 @@ Recommended follow-ups (identified, not yet actioned):
 
 ---
 
+### Germany editorial profiles added — 2026-06-13
+
+- Added three live Germany profiles from the Germany recommendations brief:
+  - **Hotel Suitess**, Dresden — `src/content/hotels/hotel-suitess-dresden.md` (rank 1, score 100, Exceptional value, Under €250 with Under €200 secondary tier, heritage-value five-star).
+  - **Steigenberger Icon Grandhotel Handelshof Leipzig**, Leipzig — `src/content/hotels/steigenberger-handelshof-leipzig.md` (rank 2, score 99, Exceptional value, Under €250 with Under €200 secondary tier, heritage-value five-star).
+  - **Hotel Elephant Weimar, Autograph Collection**, Weimar — `src/content/hotels/hotel-elephant-weimar.md` (rank 3, score 99, Exceptional value, Under €250, heritage-value five-star).
+- Re-ranked existing hotel Markdown files down by 3 to fit the new Germany leaders into the global order.
+- Added **Germany** to `src/lib/regions.ts` so the new profiles appear under the **Europe** regional guide.
+- Added `dresden`, `leipzig` and `weimar` to the destination route allow-list in `src/pages/destinations/[slug].astro`.
+- Added Germany destination-card imagery to `src/data/destinationImages.ts`, using the new AI-generated daylight hotel images.
+- Refreshed homepage featured picks to include the three Germany profiles and updated homepage/Europe wording to mention German cultural-city value.
+- Added seasonality cards for Dresden, Leipzig and Weimar in `src/data/hotelSeasonality.ts`.
+- Added six new fully AI-generated hotel images, saved as masters in `public/images/hotels/` and responsive derivatives in `public/images/hotels/responsive/`:
+  - `hotel-suitess-dresden-editorial-dusk.webp`
+  - `hotel-suitess-dresden-realistic-daylight.webp`
+  - `steigenberger-handelshof-leipzig-editorial-dusk.webp`
+  - `steigenberger-handelshof-leipzig-realistic-daylight.webp`
+  - `hotel-elephant-weimar-editorial-dusk.webp`
+  - `hotel-elephant-weimar-realistic-daylight.webp`
+- The project API image generator hit an OpenAI billing hard limit, so Germany images were generated with the built-in image generation fallback and then converted to the site's standard WebP master/responsive sizes.
+- Updated AI image workflow files:
+  - `scripts/hotel-ai-image-data.js`
+  - `research/images/hotel-ai-image-reference-research.md`
+  - `research/images/hotel-ai-image-prompts.json`
+  - `research/images/hotel-ai-image-audit.md`
+  - QA contact sheet: `research/images/germany-ai-contact-sheet.jpg`
+- Image audit now reports **31 hotels**, **62 required images**, **62 generated**, **0 needing manual review**, **0 pending**.
+
+---
+
 The site includes a "Research a country" tool page (`/research-hotels/`) that lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list.
