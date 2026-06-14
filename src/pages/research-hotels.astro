@@ -54,40 +54,29 @@ const jsonLd = breadcrumbJsonLd([
     <section class="bg-[#FFFDF8] border-b border-[#E2D4BF]">
       <div class="max-w-4xl mx-auto px-5 py-16 md:py-20">
         <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Hotel finder</p>
-        <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-8">
           Find the Right Hotel for Your Trip
         </h1>
-        <p class="text-[#1F2428]/80 text-xl md:text-2xl font-serif leading-relaxed mb-5">
-          Build a practical shortlist by destination, budget and travel style.
-        </p>
-        <p class="text-[#1F2428]/80 text-lg md:text-xl leading-relaxed mb-5">
-          Use this tool to create a hotel-finding brief for an upcoming trip. Choose your destination, price level and priorities, then copy the prompt into ChatGPT, Claude or another research-capable assistant. The output should help you compare hotels by value, location, recent reviews, nearby things to do and likely compromises.
+        <ol class="grid gap-5 md:grid-cols-3 list-none p-0 m-0 mb-6">
+          {steps.map(({ step, title, text }) => (
+            <li class="flex h-full min-h-48 items-start gap-4 rounded-[18px] border border-[#B88A44]/25 bg-[#FFFEFA] p-5 shadow-sm">
+              <span class="inline-flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-2xl bg-[#E8F1E6] text-xl font-extrabold text-[#4F6547] shadow-[0_10px_24px_rgba(88,116,90,0.18)]" aria-hidden="true">
+                {step}
+              </span>
+              <div class="min-w-0">
+                <h2 class="font-sans text-base font-extrabold text-[#1F2428] mb-2">{title}</h2>
+                <p class="text-[#374151] text-sm leading-relaxed">{text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p class="text-[#6F685F] text-sm leading-relaxed mb-6">
+          This prompt is designed for Claude, ChatGPT, or another research-capable AI assistant. Start a fresh session rather than continuing an old one.
         </p>
         <p class="text-[#6F685F] text-base md:text-lg leading-relaxed font-serif italic">
           The goal is not to find the cheapest hotel. It is to find hotels where the comfort, character, location and experience feel unusually strong for the price.
         </p>
       </div>
-    </section>
-
-    <!-- How it works -->
-    <section class="max-w-4xl mx-auto px-5 pt-14 pb-4">
-      <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-8">How it works</h2>
-      <ol class="grid gap-5 md:grid-cols-3 list-none p-0 m-0">
-        {steps.map(({ step, title, text }) => (
-          <li class="flex h-full min-h-48 items-start gap-4 rounded-[18px] border border-[#B88A44]/25 bg-[#FFFEFA] p-5 shadow-sm">
-            <span class="inline-flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-2xl bg-[#E8F1E6] text-xl font-extrabold text-[#4F6547] shadow-[0_10px_24px_rgba(88,116,90,0.18)]" aria-hidden="true">
-              {step}
-            </span>
-            <div class="min-w-0">
-              <h3 class="font-sans text-base font-extrabold text-[#1F2428] mb-2">{title}</h3>
-              <p class="text-[#374151] text-sm leading-relaxed">{text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-      <p class="text-[#6F685F] text-sm leading-relaxed mt-6">
-        This prompt is designed for Claude, ChatGPT, or another research-capable AI assistant. Start a fresh session rather than continuing an old one.
-      </p>
     </section>
 
     <!-- Price levels -->
