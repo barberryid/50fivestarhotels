@@ -17,6 +17,7 @@ const hotels = defineCollection({
     hotelType: z.string(),
     fiveStarStatus: z.string(),
     bestFor: z.array(z.string()),
+    notIdealFor: z.array(z.string()).optional(),
     valueScore: z.number(),
     verdict: z.enum([
       'Exceptional value',

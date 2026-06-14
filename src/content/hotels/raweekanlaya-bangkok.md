@@ -14,6 +14,10 @@ bestFor:
   - "Bangkok alternatives"
   - "couples"
   - "heritage garden stays"
+notIdealFor:
+  - "Travellers wanting central nightlife"
+  - "Walkable city-centre base"
+  - "Sleek modern high-rise rooms"
 valueScore: 85
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/hotel/th/raweekanlaya.en-gb.html"

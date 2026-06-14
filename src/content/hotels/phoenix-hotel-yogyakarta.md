@@ -15,6 +15,10 @@ bestFor:
   - "Borobudur day trips"
   - "couples"
   - "heritage enthusiasts"
+notIdealFor:
+  - "Travellers wanting contemporary design"
+  - "Big-resort amenities"
+  - "Nightlife on the doorstep"
 valueScore: 89
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/hotel/id/the-phoenix-yogyakarta-a-member-of-the-mgallery-collection.en-gb.html"

@@ -54,6 +54,18 @@ const coverage = Object.keys(hotelsByCountry)
   .join(', ');
 
 const defaultPriceLevels = researchPriceLevels.map(({ amount }) => amount);
+
+const dealBreakerOptions = [
+  'Avoid poor recent reviews',
+  'Avoid isolated locations',
+  'Avoid noisy nightlife areas',
+  'Avoid weak air conditioning',
+  'Avoid hotels with dated rooms',
+  'Avoid destinations with high safety or political risk',
+  'Breakfast must be included or affordable',
+  'Free cancellation preferred',
+  'Walkable location preferred',
+];
 const outputModeStorageKey = '50fivestarhotels:hotelFinderOutputMode';
 const defaultOutputMode = 'simple';
 const outputModes = {
@@ -65,6 +77,7 @@ Give me the 5–8 strongest hotel options only. Do not produce a long market sca
 
 For each hotel, include:
 - Why it fits my trip
+- Value score and trip-fit score
 - Typical price range
 - What kind of five-star or near-luxury hotel it really is
 - Best for
@@ -77,7 +90,7 @@ After the shortlist, give me one clear recommendation: the hotel you would check
 
 Use this output mode as the main shape of the answer.
 
-Give me the full destination scan, longlist, value scores, personal-fit scores where relevant, rejected hotels, fallback results and final shortlist.
+Give me the full destination scan, longlist, value scores and trip-fit scores, rejected hotels, fallback results and final shortlist.
 
 Also include:
 - Hotels rejected and why
@@ -99,8 +112,8 @@ const buildPriceLevelPromptParts = (amounts: readonly number[]) => {
     ? 'this selected nightly price level'
     : 'these selected nightly price levels in order';
   const fallbackRule = sorted.length === 1
-    ? `If a selected country or region has no credible hotel at **€${highest} or below**, do not leave the result blank. Display: **No credible candidate found under €${highest}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${highest}** results.`
-    : `If a selected country or region has no credible hotel at **€${sorted[0]} or below**, do not leave the result blank. Display: **No credible candidate found under €${sorted[0]}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${sorted[0]}** results. Continue the wider search up to the highest selected level (€${highest}). Apply the same fallback pattern to any selected level with no credible hotel options, using the matching fallback label for that level (${fallbackLabels}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as **Fallback above €${highest}** results.`;
+    ? `If a selected country or region has no credible hotel at **€${highest} or below**, do not leave the result blank. Display: **No credible hotel option found under €${highest}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${highest}** results.`
+    : `If a selected country or region has no credible hotel at **€${sorted[0]} or below**, do not leave the result blank. Display: **No credible hotel option found under €${sorted[0]}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${sorted[0]}** results. Continue the wider search up to the highest selected level (€${highest}). Apply the same fallback pattern to any selected level with no credible hotel options, using the matching fallback label for that level (${fallbackLabels}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as **Fallback above €${highest}** results.`;
 
   return {
     searchRule: `Always search ${selectedPhrase}:\n${levelLines}\n\nUse shoulder-season standard-room nightly rates, before taxes unless the source only shows tax-inclusive totals. Record the lowest selected level each hotel can meet, but do not promise that the rate is always available.\n\n${fallbackRule}`,
@@ -206,6 +219,44 @@ const toolData = {
     </p>
   </div>
 
+  <!-- Travel timing -->
+  <div class="mt-6 grid gap-4 md:grid-cols-[minmax(0,1.5fr)_minmax(0,0.8fr)] max-w-2xl">
+    <div>
+      <label for="travel-dates-input" class="block text-sm font-semibold text-[#1F2428] mb-2">
+        Travel dates or month <span class="font-normal text-[#6F685F]">(optional)</span>
+      </label>
+      <input
+        type="text"
+        id="travel-dates-input"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="e.g. March 2026, 12–15 May, shoulder season, flexible..."
+        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      />
+      <p class="mt-2 text-sm text-[#6F685F]">
+        Add exact dates, a month, or a flexible season so the prompt can judge price and weather realistically.
+      </p>
+    </div>
+
+    <div>
+      <label for="nights-input" class="block text-sm font-semibold text-[#1F2428] mb-2">
+        Number of nights <span class="font-normal text-[#6F685F]">(optional)</span>
+      </label>
+      <input
+        type="number"
+        id="nights-input"
+        min="1"
+        max="60"
+        inputmode="numeric"
+        placeholder="e.g. 2"
+        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      />
+      <p class="mt-2 text-sm text-[#6F685F]">
+        Short stopovers and longer stays often need different hotel choices.
+      </p>
+    </div>
+  </div>
+
   <!-- Trip scenario (optional, freeform) -->
   <label for="trip-scenario-input" class="mt-6 block text-sm font-semibold text-[#1F2428] mb-2">
     Trip scenario <span class="font-normal text-[#6F685F]">(optional)</span>
@@ -223,9 +274,39 @@ const toolData = {
     </p>
   </div>
 
+  <!-- Deal-breakers -->
+  <fieldset class="mt-6 border-0 p-0 m-0 max-w-2xl">
+    <legend class="block text-sm font-semibold text-[#1F2428] mb-2">
+      Deal-breakers <span class="font-normal text-[#6F685F]">(optional)</span>
+    </legend>
+    <p class="mb-3 text-sm text-[#6F685F]">
+      Tick anything that should strongly affect the shortlist.
+    </p>
+    <div class="grid gap-2 sm:grid-cols-2">
+      {dealBreakerOptions.map((option) => (
+        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#4F6547] has-[:checked]:bg-[#E8F1E6]">
+          <input
+            type="checkbox"
+            value={option}
+            data-deal-breaker-input
+            class="mt-1 h-4 w-4 shrink-0 rounded border-[#E2D4BF] text-[#4F6547] accent-[#4F6547]"
+          />
+          <span class="text-[#1F2428]">{option}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
   <!-- Hotel-finding prompts -->
   <div class="mt-8 border-t border-[#E2D4BF] pt-7">
     <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-3">Hotel-finding prompts</p>
+
+    <div class="mb-5 rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-4">
+      <p class="text-sm font-semibold text-[#1F2428]" data-brief-ready-status>Choose a destination to make the brief copy-ready.</p>
+      <p class="mt-1 text-sm leading-relaxed text-[#6F685F]">
+        Start with the main hotel prompt. It creates a practical shortlist of hotel options for your destination, budget and travel style. Use the second prompt only if you also want to compare months by weather, air quality and likely hotel-price seasonality.
+      </p>
+    </div>
 
     <fieldset class="mb-4 border-0 p-0 m-0">
       <legend class="text-sm font-semibold text-[#1F2428] mb-2">How detailed should the output be?</legend>
@@ -310,6 +391,15 @@ const toolData = {
             spellcheck="false"
             class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 font-mono text-[13px] leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
           >{defaultPrompt}</textarea>
+          <div class="mt-4 rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-4">
+            <h3 class="text-sm font-semibold text-[#1F2428] mb-2">Suggested manual searches</h3>
+            <p class="text-sm leading-relaxed text-[#6F685F] mb-3">
+              Use these searches on Booking.com, Google Hotels or your preferred booking site to verify what the prompt finds.
+            </p>
+            <ul class="space-y-2 text-sm text-[#1F2428]" data-search-suggestions>
+              <li>Select a destination to generate suggested searches.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -396,7 +486,12 @@ const toolData = {
 
   const input = document.getElementById('country-input') as HTMLInputElement;
   const cityInput = document.getElementById('city-input') as HTMLInputElement;
+  const travelDatesInput = document.getElementById('travel-dates-input') as HTMLInputElement;
+  const nightsInput = document.getElementById('nights-input') as HTMLInputElement;
   const tripScenarioInput = document.getElementById('trip-scenario-input') as HTMLTextAreaElement;
+  const dealBreakerInputs = Array.from(document.querySelectorAll<HTMLInputElement>('[data-deal-breaker-input]'));
+  const searchSuggestions = document.querySelector<HTMLElement>('[data-search-suggestions]');
+  const briefReadyStatus = document.querySelector<HTMLElement>('[data-brief-ready-status]');
   const listbox = document.getElementById('country-listbox') as HTMLUListElement;
   const noResults = document.getElementById('country-no-results') as HTMLLIElement;
   const textarea = document.getElementById('prompt-textarea') as HTMLTextAreaElement;
@@ -539,8 +634,8 @@ const toolData = {
       ? 'this selected nightly price level'
       : 'these selected nightly price levels in order';
     const fallbackRule = safeLevels.length === 1
-      ? `If a selected country or region has no credible hotel at **€${highest} or below**, do not leave the result blank. Display: **No credible candidate found under €${highest}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${highest}** results.`
-      : `If a selected country or region has no credible hotel at **€${safeLevels[0]} or below**, do not leave the result blank. Display: **No credible candidate found under €${safeLevels[0]}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${safeLevels[0]}** results. Continue the wider search up to the highest selected level (€${highest}). Apply the same fallback pattern to any selected level with no credible hotel options, using the matching fallback label for that level (${fallbackLabels}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as **Fallback above €${highest}** results.`;
+      ? `If a selected country or region has no credible hotel at **€${highest} or below**, do not leave the result blank. Display: **No credible hotel option found under €${highest}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${highest}** results.`
+      : `If a selected country or region has no credible hotel at **€${safeLevels[0]} or below**, do not leave the result blank. Display: **No credible hotel option found under €${safeLevels[0]}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${safeLevels[0]}** results. Continue the wider search up to the highest selected level (€${highest}). Apply the same fallback pattern to any selected level with no credible hotel options, using the matching fallback label for that level (${fallbackLabels}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as **Fallback above €${highest}** results.`;
 
     return {
       searchRule: `Always search ${selectedPhrase}:\n${levelLines}\n\nUse shoulder-season standard-room nightly rates, before taxes unless the source only shows tax-inclusive totals. Record the lowest selected level each hotel can meet, but do not promise that the rate is always available.\n\n${fallbackRule}`,
@@ -571,6 +666,10 @@ const toolData = {
 
   const getCity = () => cityInput.value.trim();
   const getTripScenario = () => tripScenarioInput.value.trim();
+  const getTravelDates = () => travelDatesInput.value.trim();
+  const getNights = () => nightsInput.value.trim();
+  const getSelectedDealBreakers = () =>
+    dealBreakerInputs.filter((dealBreakerInput) => dealBreakerInput.checked).map((dealBreakerInput) => dealBreakerInput.value);
 
   const buildCityFocusSection = (country: string | null, city: string): string => {
     if (!city) return '';
@@ -583,16 +682,74 @@ const toolData = {
     );
   };
 
-  const buildTripScenarioSection = (scenario: string): string => {
-    if (!scenario) return '';
-    return `### My trip scenario\n\n${scenario}\n\n`;
+  const buildTripDetailsSection = ({
+    scenario,
+    travelDates,
+    nights,
+    dealBreakers,
+  }: {
+    scenario: string;
+    travelDates: string;
+    nights: string;
+    dealBreakers: string[];
+  }): string => {
+    const lines: string[] = [];
+
+    if (travelDates) lines.push(`- Travel dates or season: ${travelDates}`);
+    if (nights) lines.push(`- Number of nights: ${nights}`);
+    if (scenario) lines.push(`- Trip scenario: ${scenario}`);
+    if (dealBreakers.length) lines.push(`- Deal-breakers: ${dealBreakers.join('; ')}`);
+
+    if (!lines.length) return '';
+
+    return `### My trip details\n\n${lines.join('\n')}\n\n`;
+  };
+
+  const escapeForHtml = (value: string) =>
+    value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  const updateSearchSuggestions = () => {
+    if (!searchSuggestions) return;
+
+    const city = getCity();
+    const country = selectedCountry;
+    const destination = city && country ? `${city}, ${country}` : city || country;
+    const prices = getSelectedPriceLevels();
+    const maxPrice = Math.max(...prices);
+    const travelDates = getTravelDates();
+    const dateSuffix = travelDates ? ` ${travelDates}` : '';
+
+    if (!destination) {
+      searchSuggestions.innerHTML = '<li>Select a destination to generate suggested searches.</li>';
+      return;
+    }
+
+    const queries = [
+      `Booking.com five-star hotels ${destination}${dateSuffix}`,
+      `Google Hotels ${destination} 5 star under €${maxPrice}${dateSuffix}`,
+      `best hotels ${destination} recent reviews`,
+      `luxury hotel ${destination} good value`,
+    ];
+
+    searchSuggestions.innerHTML = queries
+      .map((query) => `<li><code class="rounded bg-white px-2 py-1 text-xs">${escapeForHtml(query)}</code></li>`)
+      .join('');
   };
 
   const buildPrompt = (country: string | null, city: string): string => {
     let text = applyPriceLevelTokens(data.template, getSelectedPriceLevels());
     text = substituteAll(text, '[COVERAGE]', data.coverage);
     text = substituteAll(text, '[CITY_FOCUS_SECTION]', buildCityFocusSection(country, city));
-    text = substituteAll(text, '[TRIP_SCENARIO_SECTION]', buildTripScenarioSection(getTripScenario()));
+    text = substituteAll(
+      text,
+      '[TRIP_SCENARIO_SECTION]',
+      buildTripDetailsSection({
+        scenario: getTripScenario(),
+        travelDates: getTravelDates(),
+        nights: getNights(),
+        dealBreakers: getSelectedDealBreakers(),
+      })
+    );
     text = substituteAll(text, '[OUTPUT_MODE_SECTION]', getOutputModeSection());
     const hotels = country ? data.hotelsByCountry[country] : undefined;
     if (country) {
@@ -612,7 +769,13 @@ const toolData = {
       selectedPriceLevels: getSelectedPriceLevels(),
       travellerProfile: personalParts.travellerProfile,
       travellerPriorities: personalParts.travellerPriorities,
-      additionalNotes: [personalParts.additionalNotes, getTripScenario() ? `Trip scenario: ${getTripScenario()}` : '']
+      additionalNotes: [
+        personalParts.additionalNotes,
+        getTravelDates() ? `Travel dates or season: ${getTravelDates()}` : '',
+        getNights() ? `Number of nights: ${getNights()}` : '',
+        getTripScenario() ? `Trip scenario: ${getTripScenario()}` : '',
+        getSelectedDealBreakers().length ? `Deal-breakers: ${getSelectedDealBreakers().join('; ')}` : '',
+      ]
         .filter(Boolean)
         .join('\n'),
     });
@@ -636,11 +799,29 @@ const toolData = {
 
   cityInput.addEventListener('input', () => {
     refreshPrompts();
+    updateSearchSuggestions();
   });
 
   tripScenarioInput.addEventListener('input', () => {
     refreshPrompts();
   });
+
+  travelDatesInput.addEventListener('input', () => {
+    refreshPrompts();
+    updateSearchSuggestions();
+  });
+
+  nightsInput.addEventListener('input', () => {
+    refreshPrompts();
+    updateSearchSuggestions();
+  });
+
+  for (const dealBreakerInput of dealBreakerInputs) {
+    dealBreakerInput.addEventListener('change', () => {
+      refreshPrompts();
+      updateSearchSuggestions();
+    });
+  }
 
   for (const modeInput of outputModeInputs) {
     modeInput.addEventListener('change', () => {
@@ -675,13 +856,14 @@ const toolData = {
     const fallbackLabels = selectedAmounts.map((amount) => `“Fallback above €${amount}”`).join(', ');
     if (priceLevelSummary) {
       priceLevelSummary.textContent = selectedAmounts.length === data.priceLevels.length
-        ? 'The generated prompt searches all four nightly levels in order: €50, €100, €150 and €250. If no credible option appears at €50 or below, it displays “No credible candidate found under €50” and marks the next best three hotels above that level as “Fallback above €50”.'
-        : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no credible hotel, it displays “No credible candidate found under that level” and uses ${fallbackLabels} for the next best three hotels above it.`;
+        ? 'The generated prompt searches all four nightly levels in order: €50, €100, €150 and €250. If no credible option appears at €50 or below, it displays “No credible hotel option found under €50” and marks the next best three hotels above that level as “Fallback above €50”.'
+        : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no credible hotel, it displays “No credible hotel option found under that level” and uses ${fallbackLabels} for the next best three hotels above it.`;
     }
     if (priceLevelStatus) {
       priceLevelStatus.textContent = `Using ${selectedText} in the prompt. Select at least one price level.`;
     }
     refreshPrompts();
+    updateSearchSuggestions();
   };
 
   const setCopyEnabled = (enabled: boolean) => {
@@ -693,6 +875,11 @@ const toolData = {
     copyWhenToGoLabel.textContent = enabled ? 'Copy when-to-go prompt' : 'Select a destination before copying';
     copyStatus.textContent = '';
     copyWhenToGoStatus.textContent = '';
+    if (briefReadyStatus) {
+      briefReadyStatus.textContent = enabled
+        ? 'Your hotel-finding brief is ready to copy.'
+        : 'Choose a destination to make the brief copy-ready.';
+    }
   };
 
   const setActive = (index: number) => {
@@ -740,6 +927,7 @@ const toolData = {
       option.setAttribute('aria-selected', option.dataset.name === name ? 'true' : 'false');
     }
     refreshPrompts();
+    updateSearchSuggestions();
     setCopyEnabled(true);
     closeList();
     if (hotelPromptCard && !hasAutoOpenedHotelPrompt) {
@@ -839,15 +1027,44 @@ const toolData = {
     selectedCountry = null;
     input.value = '';
     cityInput.value = '';
+    travelDatesInput.value = '';
+    nightsInput.value = '';
     tripScenarioInput.value = '';
+    for (const dealBreakerInput of dealBreakerInputs) dealBreakerInput.checked = false;
     hasAutoOpenedHotelPrompt = false;
     for (const option of options) option.setAttribute('aria-selected', 'false');
     filterList('');
     closeList();
     refreshPrompts();
+    updateSearchSuggestions();
     setCopyEnabled(false);
   });
 
+  const prefillFromUrl = () => {
+    let params: URLSearchParams;
+    try {
+      params = new URLSearchParams(window.location.search);
+    } catch {
+      return;
+    }
+    const cityParam = params.get('city');
+    const scenarioParam = params.get('scenario');
+    if (cityParam) cityInput.value = cityParam;
+    if (scenarioParam) tripScenarioInput.value = scenarioParam;
+
+    const countryParam = params.get('country');
+    const match = countryParam
+      ? options.find((option) => fold(option.dataset.name!) === fold(countryParam))
+      : undefined;
+    if (match) {
+      selectCountry(match.dataset.name!);
+    } else if (cityParam || scenarioParam) {
+      refreshPrompts();
+      updateSearchSuggestions();
+    }
+  };
+
   restoreOutputMode();
   updatePriceLevelUi();
+  prefillFromUrl();
 </script>

@@ -13,6 +13,8 @@ interface Props {
     verdict: string;
     highlights: string[];
     cautions: string[];
+    bestFor?: string[];
+    notIdealFor?: string[];
     fiveStarStatus: string;
     typicalPriceRange: string;
     bookingUrl?: string;
@@ -43,6 +45,8 @@ const bookingAffiliateUrl = getBookingAffiliateUrl(hotel.bookingUrl);
 // Prefer the brighter realistic-daylight render for cards; fall back to the
 // default (editorial-dusk) image, then the placeholder.
 const cardImage = hotel.generatedGallery?.find((g) => g.type === 'realistic-daylight') ?? hotel.image;
+const bestFor = hotel.bestFor?.slice(0, 2) ?? [];
+const notIdealFor = hotel.notIdealFor?.slice(0, 2) ?? hotel.cautions?.slice(0, 1) ?? [];
 ---
 
 <article class={`group bg-[#FFFDF8] rounded-[1.25rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#E2D4BF] flex flex-col ${featured ? 'ring-1 ring-[#B88A44]/25' : ''}`}>
@@ -94,6 +98,23 @@ const cardImage = hotel.generatedGallery?.find((g) => g.type === 'realistic-dayl
 
     {hotel.highlights[0] && (
       <p class="text-[#1F2428]/75 text-sm leading-relaxed">{hotel.highlights[0]}</p>
+    )}
+
+    {(bestFor.length > 0 || notIdealFor.length > 0) && (
+      <div class="space-y-2 text-xs">
+        {bestFor.length > 0 && (
+          <div>
+            <span class="font-semibold text-[#4F6547]">Best for: </span>
+            <span class="text-[#6F685F]">{bestFor.join(', ')}</span>
+          </div>
+        )}
+        {notIdealFor.length > 0 && (
+          <div>
+            <span class="font-semibold text-[#8A5A2B]">Not ideal for: </span>
+            <span class="text-[#6F685F]">{notIdealFor.join(', ')}</span>
+          </div>
+        )}
+      </div>
     )}
 
     <p class="text-[#6F685F] text-sm mt-auto pt-1">{hotel.typicalPriceRange}</p>

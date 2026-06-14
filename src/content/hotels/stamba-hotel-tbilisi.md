@@ -14,6 +14,10 @@ bestFor:
   - "Tbilisi city break"
   - "couples"
   - "architecture lovers"
+notIdealFor:
+  - "Travellers wanting classic heritage decor"
+  - "Quiet rural escapes"
+  - "Family-resort facilities"
 valueScore: 84
 verdict: "Strong value"
 bookingUrl: "https://www.booking.com/hotel/ge/stamba-tbilisi.en-gb.html"

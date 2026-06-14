@@ -14,6 +14,10 @@ bestFor:
   - "KL city break"
   - "colonial history"
   - "couples"
+notIdealFor:
+  - "Travellers wanting sleek modern towers"
+  - "Nightlife-focused stays"
+  - "Bare-bones budget rates"
 valueScore: 87
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/hotel/my/the-majestic-kuala-lumpur.en-gb.html"

@@ -3,7 +3,7 @@
 //
 // Lets a traveller tell the generated research prompt what matters most to
 // them. This does NOT replace the 100-point value score — it adds a
-// second "Personal fit score /100" driven by a normalised traveller-fit
+// second "Trip-fit score /100" driven by a normalised traveller-fit
 // weighting.
 //
 // The controls live here; the prompt itself is assembled in CountryPromptTool.
@@ -248,7 +248,7 @@ const configData = {
         lines.push('For character, heritage or design, look for evidence that the hotel feels distinctive rather than generic: architecture, renovation quality, interiors, setting, local identity or independent/boutique personality.');
       }
       if (state.character === 5) {
-        lines.push('A generic chain hotel should lose personal-fit points unless it is clearly stronger on location, comfort or price than the more characterful alternatives.');
+        lines.push('A generic chain hotel should lose trip-fit points unless it is clearly stronger on location, comfort or price than the more characterful alternatives.');
       }
       if (state.customText && state.customImportance > 0) {
         lines.push(`For the custom priority “${state.customText}”, evaluate whether each hotel clearly supports that preference. Do not assume it does; look for evidence in location, facilities, reviews, hotel descriptions and nearby experiences.`);
@@ -314,8 +314,8 @@ const configData = {
       const intro = [
         'In addition to the value score above, apply the following preference weighting. Prioritise hotels that match what I care about, and tell me when a hotel scores well on value but poorly for my priorities.',
         'Produce two separate scores for each hotel:',
-        '1. Value score /100 — from the six-factor value scoring above.\n2. Personal fit score /100 — based on the preference weighting below.',
-        'To work out the personal fit score, rate the hotel 0–5 on each preference (0 = poor fit, 1 = weak, 2 = acceptable but compromised, 3 = good, 4 = very good, 5 = excellent), multiply each rating by its weight, then scale the result to a score out of 100.',
+        '1. Value score /100 — from the six-factor value scoring above.\n2. Trip-fit score /100 — based on my trip details, traveller profile, priorities and deal-breakers.',
+        'To work out the trip-fit score, rate the hotel 0–5 on each preference (0 = poor fit, 1 = weak, 2 = acceptable but compromised, 3 = good, 4 = very good, 5 = excellent), multiply each rating by its weight, then scale the result to a score out of 100.',
         'For each preference, note the evidence you found, anything you could not confirm, and your confidence: High / Medium / Low. For quietness especially, check recent reviews for weddings, traffic, thin walls, air-conditioning hum or construction rather than assuming a resort or garden hotel is quiet.',
         'Do not hide trade-offs inside a single combined score. If a hotel is excellent value but weak for my priorities, say so clearly.',
       ].join('\n\n');
@@ -326,11 +326,11 @@ const configData = {
         .join('\n\n');
 
       const outputBlock = [
-        '### Additional output for my personal-fit scoring',
+        '### Additional output for my trip-fit scoring',
         'When presenting the final shortlist table and any other hotel tables, add these columns alongside the existing value Score column:',
-        '- Personal fit score\n- Best matched preference\n- Main personal-fit drawback',
+        '- Trip-fit score\n- Best matched preference\n- Main trip-fit drawback',
         'For each hotel in the top 5 summaries, add a short subsection:',
-        '### Personal fit notes\n\nExplain how well this hotel matches my selected preferences. Mention both strengths and weaknesses.',
+        '### Trip-fit notes\n\nExplain how well this hotel matches my selected preferences. Mention both strengths and weaknesses.',
       ].join('\n\n');
 
       return {
@@ -369,12 +369,12 @@ const configData = {
         .join('');
       weightingBox.innerHTML = `
         <div class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] p-5">
-          <h3 class="font-serif text-lg font-semibold text-[#1F2428] mb-3">Your traveller-fit weighting</h3>
+          <h3 class="font-serif text-lg font-semibold text-[#1F2428] mb-3">Your trip-fit weighting</h3>
           <table class="w-full text-sm">
             <thead>
               <tr class="text-left text-[#6F685F]">
                 <th class="pb-1 font-semibold">Factor</th>
-                <th class="pb-1 text-right font-semibold">Personal weighting</th>
+                <th class="pb-1 text-right font-semibold">Trip weighting</th>
               </tr>
             </thead>
             <tbody>

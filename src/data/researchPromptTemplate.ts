@@ -9,7 +9,7 @@
 //   [CITY_FOCUS_SECTION] — optional city/town focus block (empty when no city entered)
 //   [TRIP_SCENARIO_SECTION] — optional real-trip context block (empty when no scenario entered)
 //   [PERSONAL_WEIGHTING_SECTION] — optional traveller-fit weighting block (empty when no preferences)
-//   [PERSONAL_OUTPUT_NOTES]      — optional extra output columns / personal-fit notes (empty when no preferences)
+//   [PERSONAL_OUTPUT_NOTES]      — optional extra output columns / trip-fit notes (empty when no preferences)
 //   [OUTPUT_MODE_SECTION]        — simple-shortlist or deep-research output instruction
 // Keep the tokens exactly as written; the tool does literal replacement.
 
@@ -48,7 +48,7 @@ For each, tell me briefly:
 
 Skip anywhere you'd rate **High** risk unless there's a strong reason to mention it. If you considered a place and ruled it out, note it in one line with the reason (too remote, weak hotels, nothing to do, safety) so I know it was checked.
 
-Treat serious safety or political risk as a hard filter unless I explicitly ask you to consider higher-risk destinations. For normal neighbourhood-level safety, reflect my traveller-fit priorities: a hotel in a less convenient or less comfortable area can still be mentioned, but it should lose personal-fit points and carry a clear warning.
+Treat serious safety or political risk as a hard filter unless I explicitly ask you to consider higher-risk destinations. For normal neighbourhood-level safety, reflect my traveller-fit priorities: a hotel in a less convenient or less comfortable area can still be mentioned, but it should lose trip-fit points and carry a clear warning.
 
 ---
 
@@ -117,6 +117,19 @@ Score each line and total to 100. You may add up to +5 (staying within the 100 c
 - 55–64: Conditional value
 - Below 55: Reject for now
 
+**Trip-fit score out of 100**
+
+Also give each hotel a separate **Trip-fit score /100**. This should reflect how well the hotel fits my specific trip details, traveller profile, priorities and deal-breakers. Do not merge this into the value score.
+
+Use this scale:
+- 85–100: Excellent fit for this trip
+- 75–84: Strong fit
+- 65–74: Good fit with some compromises
+- 55–64: Conditional fit
+- Below 55: Poor fit for this trip
+
+If I have not provided many trip details, base the trip-fit score on general traveller practicality: location usefulness, safety, recent review consistency, comfort, ease of arrival, and whether the hotel makes sense for a normal short leisure stay.
+
 **One line on why I'd book it**
 **One honest line on what might disappoint me**
 
@@ -141,8 +154,8 @@ Tell me which hotels you dropped and why.
 
 Rank the survivors by value score in a clean table:
 
-| Rank | Hotel | Place | Type | Lowest budget level | Price range (€) | Score | Rating |
-|---|---|---|---|---|---|---|---|
+| Rank | Hotel | Place | Type | Lowest budget level | Price range (€) | Value score | Trip-fit score | Rating |
+|---|---|---|---|---|---|---|---|---|
 
 Then for my **top 3–5**, add a fuller picture:
 
@@ -257,16 +270,18 @@ export function buildWhenToGoPrompt(inputs: ResearchPromptInputs): string {
     ? ''
     : '\nNo city or town has been provided. Research the strongest relevant destination(s) inside the country or territory, but do not turn this into a broad country guide. Choose the most useful city, resort area or travel base for affordable-luxury value and explain the focus briefly.\n';
 
-  return `You are a specialist travel research assistant working for the editorial website 50fivestarhotels.com.
+  return `You are a practical travel-timing assistant helping a traveller decide when to visit a destination for good-value luxury or near-luxury hotels.
 
-Your task is to research when to visit the following destination for affordable luxury hotel travellers:
+Use the same value checks used by 50 Five-Star Hotels, but answer for this traveller's trip rather than for an editorial hotel list.
+
+Your task is to research when to visit the following destination:
 
 Destination: ${destinationLabel}
 Country or territory: ${countryOrTerritory}
 City / town / region: ${cityOrRegion}
 Selected hotel price level: ${selectedPriceTier}${travellerContext.length ? `\n${travellerContext.join('\n')}` : ''}
 ${countryOnlyInstruction}
-The site is a curated guide to affordable five-star and near-five-star hotels. This task is not to find hotels again. Instead, research the best months to visit this destination for the best mix of:
+This task is not to find hotels again. Instead, research the best months to visit this destination for the best mix of:
 
 1. Weather comfort
 2. Air quality

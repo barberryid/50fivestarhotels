@@ -89,6 +89,32 @@ The site should not feel like a generic hotel affiliate list. It should feel lik
 
 ---
 
+## Hotel Finder assistant pivot
+
+The site now includes a practical Hotel Finder assistant. The assistant is for ordinary travellers planning real trips, not only for editorial site research.
+
+It should help users create a hotel-finding brief based on:
+
+- destination
+- city or region focus
+- travel dates or month
+- number of nights
+- price level
+- trip scenario
+- traveller priorities
+- deal-breakers
+
+The assistant should return both:
+
+1. **Value score** — how good the hotel is according to the site’s general value method.
+2. **Trip-fit score** — how well the hotel fits this traveller’s specific trip.
+
+The assistant should keep the same honesty standards as the editorial site: clear star-rating reality, recent-review checks, location cautions, price uncertainty, fallback results when no credible low-budget option exists, and visible warnings before booking.
+
+The site should avoid language that makes the tool feel like internal editorial research. Use traveller-facing wording such as “hotel options,” “hotel-finding brief,” “trip-fit score,” “compare realistic hotel options,” and “find hotels for my trip.”
+
+---
+
 ## Product pivot: practical hotel-finding assistant
 
 The site is evolving from a purely editorial guide into a practical hotel-finding assistant for travellers.

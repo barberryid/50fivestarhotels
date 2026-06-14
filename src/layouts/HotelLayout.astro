@@ -34,6 +34,7 @@ interface Props {
     hotelType: string;
     fiveStarStatus: string;
     bestFor: string[];
+    notIdealFor?: string[];
     valueScore: number;
     verdict: string;
     bookingUrl?: string;
@@ -81,6 +82,9 @@ interface Props {
 }
 
 const { hotel, allHotels = [] } = Astro.props;
+const notIdealFor = hotel.notIdealFor?.length
+  ? hotel.notIdealFor
+  : hotel.cautions?.slice(0, 3) ?? [];
 const gallery = hotel.gallery?.filter(image => image.src) ?? [];
 const generatedGallery = hotel.generatedGallery?.filter(image => image.src) ?? [];
 const seasonality = hotelSeasonality[hotel.slug];
@@ -147,7 +151,7 @@ const relatedHotels = allHotels
 const relatedGuides = [
   { title: `${hotel.budgetTier} hotels`, description: 'Compare hotels in the same price tier.', href: tierPath },
   { title: `Affordable luxury in ${hotel.city}`, description: `Read the destination guide for ${hotel.city}.`, href: `/destinations/${citySlug}/` },
-  { title: 'Not sure this is the right hotel?', description: 'Use the Hotel Finder to compare this hotel with other options for your destination, budget and travel style.', href: '/research-hotels/' },
+  { title: 'Compare hotels for this trip', description: `Use the Hotel Finder to compare ${hotel.title} with other options in ${hotel.city}, ${hotel.country}, by budget, travel style and likely compromises.`, href: `/research-hotels/?country=${encodeURIComponent(hotel.country)}&city=${encodeURIComponent(hotel.city)}` },
   { title: 'How we choose hotels', description: 'The scoring method, five-star reality checks, and booking cautions.', href: '/research-hotels/#methodology' },
   { title: `Affordable five-star hotels in ${region}`, description: 'Browse hotels in the same broad region.', href: regionSlug(region) },
   ...relatedHotels.map((entry) => ({
@@ -368,6 +372,16 @@ const relatedGuides = [
                 ))}
               </dd>
             </div>
+            {notIdealFor.length > 0 && (
+              <div>
+                <dt class="text-[#6F685F] text-xs uppercase tracking-wider font-semibold mb-1">Not ideal for</dt>
+                <dd class="flex flex-wrap gap-1.5">
+                  {notIdealFor.map(tag => (
+                    <span class="bg-white border border-[#E2D4BF] text-[#6F685F] px-2 py-0.5 rounded-full text-xs">{tag}</span>
+                  ))}
+                </dd>
+              </div>
+            )}
             <div>
               <dt class="text-[#6F685F] text-xs uppercase tracking-wider font-semibold mb-1">Best nearby</dt>
               <dd class="text-[#1F2428]">{hotel.bestNearbyAttraction}</dd>

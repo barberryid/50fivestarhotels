@@ -15,6 +15,10 @@ bestFor:
   - "couples"
   - "Java city break"
   - "history trip"
+notIdealFor:
+  - "Travellers wanting modern minimalism"
+  - "Light sleepers in older buildings"
+  - "Resort-style pool facilities"
 valueScore: 91
 verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/hotel/id/majapahit-surabaya.en-gb.html"
