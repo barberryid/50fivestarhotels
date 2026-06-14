@@ -789,7 +789,7 @@ The site has now had a major SEO architecture expansion committed and pushed to 
 
 ### Destination-card AI image completion - 2026-05-31
 
-The `/destinations/` page now has AI-generated editorial destination-card images for all 20 launch destination cards. The images are destination/trip-idea assets rather than hotel photos: landmarks, old towns, gardens, cultural districts, coastlines, bazaars, and city atmospheres.
+Historical note: the `/destinations/` page previously used AI-generated editorial destination-card images for all 20 launch destination cards. The images are destination/trip-idea assets rather than hotel photos: landmarks, old towns, gardens, cultural districts, coastlines, bazaars, and city atmospheres.
 
 **Committed and pushed destination-image updates:**
 
@@ -801,7 +801,7 @@ The `/destinations/` page now has AI-generated editorial destination-card images
 - Final WebP assets live in `public/images/destinations/`.
 - Source PNGs are retained in `public/images/destinations/source/`, matching the convention established by the first destination-image batch.
 - `src/data/destinationImages.ts` maps each destination slug to `src`, `alt`, `credit`, and `subject` metadata.
-- `src/pages/destinations.astro` uses the manifest to render the image at the top of each destination card with `aspect-ratio: 16 / 10`, `object-fit: cover`, lazy loading, and text below the image.
+- `src/pages/destinations.astro` formerly used the manifest to render image destination cards. As of 2026-06-14 it instead renders the homepage-style "The full list" hotel comparison table.
 - `scripts/generate_destination_ai_images.js` contains the repeatable OpenAI Images API workflow for the full destination-image set, with skip-existing behaviour unless `--force` is passed.
 - Research, prompts, and audit records are kept in:
   - `research/destination-ai-image-reference-research.md`
@@ -1268,3 +1268,5 @@ Recommended follow-ups (identified, not yet actioned):
 ---
 
 The site includes a "How to Find Stays" research-yourself tool page (`/research-hotels/`) with the public promise "How to Uncover Elite Stays in Every Corner of the World." It lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The "How We Choose Hotels" methodology text now lives at the bottom of this page as `/research-hotels/#methodology`. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/`, and `/methodology/` redirects to `/research-hotels/#methodology`, via the Cloudflare Pages `_redirects` file. A new `/under-50/` placeholder page exists for future under-€50 research.
+
+As of 2026-06-14, `/destinations/` has been replaced with the homepage-style "The full list" section: "All {hotel count} hotels at a glance", ranked by value score, with every row linking to the full hotel editorial profile.

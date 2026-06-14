@@ -1,135 +1,51 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Badge from '../components/Badge.astro';
-import { destinationImages, type DestinationImage } from '../data/destinationImages';
+import HotelComparisonTable from '../components/HotelComparisonTable.astro';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../lib/seo';
 
-const all = await getCollection('hotels', ({ data }) => !data.draft);
-all.sort((a, b) => a.data.rank - b.data.rank);
+const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
+allHotels.sort((a, b) => a.data.rank - b.data.rank);
 
-const regions: Record<string, typeof all> = {};
-for (const h of all) {
-  if (!regions[h.data.region]) regions[h.data.region] = [];
-  regions[h.data.region].push(h);
-}
+const tableHotels = allHotels.map((h) => ({
+  slug: h.data.slug,
+  rank: h.data.rank,
+  title: h.data.title,
+  city: h.data.city,
+  country: h.data.country,
+  budgetTier: h.data.budgetTier,
+  valueScore: h.data.valueScore,
+  verdict: h.data.verdict,
+  fiveStarStatus: h.data.fiveStarStatus,
+  bestFor: h.data.bestFor,
+  cautions: h.data.cautions,
+}));
 
-const regionOrder = [
-  'Southeast Asia',
-  'South Asia',
-  'North America',
-  'Europe',
-  'Middle East and North Africa',
-  'Caucasus and Central Asia',
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: canonicalUrl('/') },
+    { name: 'Destinations', url: canonicalUrl('/destinations/') },
+  ]),
+  itemListJsonLd('All hotels at a glance', allHotels),
 ];
-
-const destinationImageByKey: Record<string, DestinationImage> = destinationImages;
-const destinationKey = (city: string) =>
-  city
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-const getDestinationImage = (city: string) => destinationImageByKey[destinationKey(city)];
 ---
 
 <BaseLayout
-  title="Hotel Destinations | 50 Five-Star Hotels"
-  description="Browse affordable five-star hotels by destination region — Southeast Asia, North America, Europe, Middle East, Caucasus and more."
+  title={`All ${allHotels.length} Hotels at a Glance | 50 Five-Star Hotels`}
+  description="The full 50 Five-Star Hotels list ranked by value score, with links to every hotel editorial profile."
+  canonical="/destinations/"
+  jsonLd={jsonLd}
 >
-  <main class="max-w-6xl mx-auto px-5 py-16">
-    <!-- Header -->
-    <div class="max-w-3xl mb-16">
-      <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Browse by destination</p>
-      <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
-        Hotels by destination
+  <main>
+    <section class="max-w-6xl mx-auto px-5 py-20">
+      <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">The full list</p>
+      <h1 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">
+        All {allHotels.length} hotels at a glance
       </h1>
-      <p class="text-[#6F685F] text-lg leading-relaxed">
-        Hotel value is uneven by destination. Some of the world's most extraordinary properties sit in cities where the local cost base makes international-standard luxury surprisingly affordable. These are the destinations where that gap is most interesting.
+      <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">
+        Ranked by value score. Click any hotel for the full editorial profile.
       </p>
-    </div>
-
-    <!-- Regions -->
-    {regionOrder.filter(r => regions[r]).map(region => (
-      <section id={region.toLowerCase().replace(/\s+/g, '-')} class="mb-16">
-        <h2 class="font-serif text-2xl font-bold text-[#1F2428] mb-2">{region}</h2>
-        <div class="h-px bg-[#1F2428]/10 mb-8"></div>
-
-        <div class="space-y-5 lg:columns-2 lg:space-y-0 lg:gap-5">
-          {regions[region].map(h => {
-            const destinationImage = getDestinationImage(h.data.city);
-
-            return (
-              <a href={`/hotels/${h.data.slug}`} class="block no-underline group lg:mb-5 lg:break-inside-avoid">
-                <article class="bg-[#FFFDF8] rounded-xl border border-[#1F2428]/6 overflow-hidden hover:border-[#B88A44]/40 hover:shadow-md transition-all">
-                  {destinationImage && (
-                    <div class="aspect-[16/10] overflow-hidden bg-[#EEE6D8]">
-                      <img
-                        src={destinationImage.src}
-                        alt={destinationImage.alt}
-                        loading="lazy"
-                        decoding="async"
-                        width="1200"
-                        height="750"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                    </div>
-                  )}
-
-                  <div class="p-5">
-                    <div class="flex flex-wrap items-start justify-between gap-4">
-                      <div class="flex-1 min-w-0">
-                        <div class="flex flex-wrap gap-2 mb-2">
-                          <Badge label={h.data.budgetTier} variant="tier" />
-                          <Badge label={h.data.fiveStarStatus} variant="type" />
-                        </div>
-                        <h3 class="font-serif text-lg font-bold text-[#1F2428] group-hover:text-[#B88A44] transition-colors leading-snug">
-                          {h.data.title}
-                        </h3>
-                        <p class="text-[#B88A44] text-sm font-medium mt-1">{h.data.city}, {h.data.country}</p>
-                        <p class="text-[#6F685F] text-sm mt-2">{h.data.typicalPriceRange}</p>
-                      </div>
-
-                      <div class="basis-full shrink-0 text-left sm:basis-auto sm:text-right">
-                        <div class="font-serif text-2xl font-bold text-[#4F6547]">{h.data.valueScore}</div>
-                        <div class="text-[10px] text-[#4F6547] font-semibold uppercase tracking-wider">value score</div>
-                        <div class="text-xs text-[#6F685F] mt-1">{h.data.verdict}</div>
-                      </div>
-                    </div>
-
-                    <div class="mt-3 text-sm text-[#6F685F]">
-                      <strong class="text-[#1F2428]/70">Why visit:</strong> {h.data.bestNearbyAttraction}
-                    </div>
-                  </div>
-                </article>
-              </a>
-            );
-          })}
-        </div>
-      </section>
-    ))}
-
-    <!-- Any remaining regions not in ordered list -->
-    {Object.keys(regions).filter(r => !regionOrder.includes(r)).map(region => (
-      <section id={region.toLowerCase().replace(/\s+/g, '-')} class="mb-16">
-        <h2 class="font-serif text-2xl font-bold text-[#1F2428] mb-2">{region}</h2>
-        <div class="h-px bg-[#1F2428]/10 mb-8"></div>
-        <div class="space-y-5 lg:columns-2 lg:space-y-0 lg:gap-5">
-          {regions[region].map(h => (
-            <a href={`/hotels/${h.data.slug}`} class="block no-underline group lg:mb-5 lg:break-inside-avoid">
-              <article class="bg-[#FFFDF8] rounded-xl border border-[#1F2428]/6 p-5 hover:border-[#B88A44]/40 hover:shadow-md transition-all">
-                <div class="flex flex-wrap items-start justify-between gap-4">
-                  <div class="flex-1">
-                    <h3 class="font-serif text-lg font-bold text-[#1F2428] group-hover:text-[#B88A44] transition-colors">{h.data.title}</h3>
-                    <p class="text-[#B88A44] text-sm font-medium mt-1">{h.data.city}, {h.data.country}</p>
-                  </div>
-                  <Badge label={h.data.budgetTier} variant="tier" />
-                </div>
-              </article>
-            </a>
-          ))}
-        </div>
-      </section>
-    ))}
+      <HotelComparisonTable hotels={tableHotels} title="" />
+    </section>
   </main>
 </BaseLayout>
