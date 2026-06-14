@@ -7,9 +7,21 @@ import { researchPriceLevels } from '../data/researchPriceLevels';
 import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
 
 const steps = [
-  { step: '1', text: 'Enter the destination, budget level and travel priorities for your trip.' },
-  { step: '2', text: 'Generate a hotel-finding brief that tells the assistant what to check and how to score the options.' },
-  { step: '3', text: 'Paste the brief into ChatGPT or Claude, then verify prices, room type, taxes, cancellation policy and recent reviews before booking.' },
+  {
+    step: '1',
+    title: 'Choose your destination',
+    text: 'Enter a country, territory, city or town. Leave the city blank if you want a wider country search.',
+  },
+  {
+    step: '2',
+    title: 'Open the main hotel prompt',
+    text: 'Start with “Find the right hotel”. It creates a practical shortlist based on value, location, reviews and travel fit.',
+  },
+  {
+    step: '3',
+    title: 'Copy, paste and verify',
+    text: 'Paste the brief into ChatGPT or Claude, then check live prices, taxes, room type, cancellation policy and recent reviews before booking.',
+  },
 ];
 
 const bookingChecks = [
@@ -60,11 +72,16 @@ const jsonLd = breadcrumbJsonLd([
     <!-- How it works -->
     <section class="max-w-4xl mx-auto px-5 pt-14 pb-4">
       <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-8">How it works</h2>
-      <ol class="grid sm:grid-cols-3 gap-5 list-none p-0 m-0">
-        {steps.map(({ step, text }) => (
-          <li class="rounded-2xl border border-[#E2D4BF] bg-[#FFFDF8] p-5">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#B88A44] text-white text-sm font-bold mb-3" aria-hidden="true">{step}</span>
-            <p class="text-[#1F2428]/80 text-sm leading-relaxed">{text}</p>
+      <ol class="grid gap-5 md:grid-cols-3 list-none p-0 m-0">
+        {steps.map(({ step, title, text }) => (
+          <li class="flex h-full min-h-48 items-start gap-4 rounded-[18px] border border-[#B88A44]/25 bg-[#FFFEFA] p-5 shadow-sm">
+            <span class="inline-flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-2xl bg-[#E8F1E6] text-xl font-extrabold text-[#4F6547] shadow-[0_10px_24px_rgba(88,116,90,0.18)]" aria-hidden="true">
+              {step}
+            </span>
+            <div class="min-w-0">
+              <h3 class="font-sans text-base font-extrabold text-[#1F2428] mb-2">{title}</h3>
+              <p class="text-[#374151] text-sm leading-relaxed">{text}</p>
+            </div>
           </li>
         ))}
       </ol>
