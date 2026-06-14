@@ -17,7 +17,9 @@ The hotel I'm hoping to find should make me think:
 
 > "I didn't realise I could get this kind of stay at that price."
 
-I'm not chasing the cheapest room — I want the best comfort, character and location for the money. Suggest places I might not find on my own, not just the obvious famous five-stars.
+I'm not chasing the cheapest room — I want the best comfort, character and location for the money. Suggest places I might not find on my own, not just the obvious famous five-stars. Don't recommend a hotel just because it's cheap, highly rated or labelled five-star: it has to add up to a stay I'd be genuinely glad I booked. If a hotel is good value but the place, setting or experience around it is dull, say so or mark it borderline rather than overselling it.
+
+**A smaller, honest list is better than a padded one.** Don't invent weak options to hit a target number. For a large country, aim for the fuller ranges below; for a small country, an island, a single-city search, or a strict low budget, give me only the genuinely credible candidates that exist. If the market can't really support a good-value luxury stay at my budget, tell me plainly and say whether I'd do better to raise the budget a little, shift my dates, or look at a nearby alternative.
 
 [CITY_FOCUS_SECTION]---
 
@@ -25,37 +27,39 @@ I'm not chasing the cheapest room — I want the best comfort, character and loc
 
 [PRICE_LEVEL_SEARCH_RULE]
 
+When you check prices, assume a normal booking: 2 adults, a standard entry-level room, midweek nights in shoulder-season months (not public holidays or peak events), and look at 1- and 2-night stays where you can. Note refundable and non-refundable rates separately if they differ a lot. If the only cheap rate is non-refundable, mobile-only, member-only, opaque, or a short-lived promotion, flag it and don't treat it as the normal price. If the same hotel would qualify as a fallback for more than one missed budget level, list it once under the lowest relevant fallback label rather than repeating it.
+
 ---
 
 ### Step 1 — Where should I base myself in [REGION]?
 
-If I haven't named a specific city, first suggest the **3–6 places** in **[REGION]** worth considering, prioritising spots where genuinely good hotels are unusually affordable and the destination itself is worth visiting.
+If I haven't named a specific city, first suggest the places worth considering — up to about 5–8 for a large country, but far fewer (even one or two) for a small or island destination. Prioritise spots where genuinely good hotels are unusually affordable and the destination itself is worth visiting. Don't pad the list.
 
 For each, tell me briefly:
 - Why hotel prices are lower here than I'd expect
 - What makes it worth a trip
 - A rough safety level for ordinary travellers: Low / Moderate / High
 
-Skip anywhere you'd rate **High** risk unless there's a strong reason to mention it.
+Skip anywhere you'd rate **High** risk unless there's a strong reason to mention it. If you considered a place and ruled it out, note it in one line with the reason (too remote, weak hotels, nothing to do, safety) so I know it was checked.
 
 ---
 
 ### Step 2 — Find the best-value hotels
 
-For each place worth staying, apply my budget above and find the **1–3 strongest hotels**. Favour places with:
+For each place worth staying, apply my budget above and find the strongest hotels (1–3 each). Favour places with:
 
 - Strong value compared with similar hotels nearby
 - Real character (heritage, design, boutique, spa or resort — not bland chain towers)
 - A genuinely useful, pleasant location
 - Consistently good recent reviews
 
-Check Booking.com, Google Hotels, Tripadvisor and recent travel write-ups, and tell me where you found each one.
+Check Booking.com, Google Hotels, Tripadvisor and recent travel write-ups. Before you trust a hotel's review strength, scan its negative and mixed reviews from the last 12–18 months for recurring complaints: maintenance decline, noise, cleanliness, air-conditioning problems, weak breakfast, poor service, nearby construction, misleading photos, location issues, or surprise fees. If recent reviews contradict older glowing ones, trust the recent reviews.
 
 ---
 
 ### Step 3 — Score and compare the options
 
-List the strongest candidates you find (aim for roughly 8–15, or fewer if the area is small). For each:
+List the strongest candidates you find — up to roughly 8–15, or as few as genuinely exist in a small market. For each:
 
 **Hotel name and location**
 **What kind of "five-star" it is** (pick one):
@@ -72,6 +76,15 @@ List the strongest candidates you find (aim for roughly 8–15, or fewer if the 
 [PRICE_LEVEL_LABELS]
 
 **Review score** (Booking.com or Google, with the rough number of reviews so I know it's reliable)
+
+**Evidence line** — so I can trust the numbers:
+- Star-rating source (Booking.com / Google / hotel site / official classification / other)
+- Review-score source and the date you checked
+- Price source and the rough date you checked
+- Recent reviews scanned? yes / no
+- Your confidence: High / Medium / Low
+
+Don't rely on a hotel's own website alone for its star rating, price or reviews — use at least two independent sources where you can.
 
 **Value score out of 100**, built from these six factors:
 
@@ -103,7 +116,7 @@ Score each line and total to 100. You may add up to +5 (staying within the 100 c
 
 Drop any hotel that:
 
-- Has a review score below 8.0 / 10, or too few reviews to trust
+- Has a reliable review score below 8.0 / 10, or too few reviews to trust. If Booking.com coverage is thin, use a recent Google, Tripadvisor or Agoda equivalent instead and say which — and don't drop a strong hotel on a weak Booking.com score alone if other reputable sources clearly contradict it.
 - [PRICE_LEVEL_DISQUALIFICATION_RULE]
 - Looks cheap only because of a short-term promotion or flash sale
 - Is cheap mainly because it's run-down or poorly maintained
@@ -133,6 +146,12 @@ Then for my **top 3–5**, add a fuller picture:
 ### Step 6 — Honourable mentions and traps
 
 Briefly list any hotels I might be tempted by but should probably skip — name, location, and the one reason to pass. This saves me from booking something that looks good but isn't.
+
+---
+
+### Bottom line
+
+In 2–3 sentences, tell me straight: does **[REGION]** at my budget genuinely deliver an affordable-luxury stay worth taking, or would I do better to raise my budget a little, change my dates, or base myself somewhere nearby? If it's a clear yes, say which hotel you'd book first.
 
 ---
 

@@ -317,9 +317,9 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     const place = country ? `${city}, ${country}` : city;
     const regionName = country ?? 'the wider region';
     return (
-      `**Geographic focus:** Concentrate this research on **${place}** and the destinations within easy reach of it — roughly a day trip from ${city}. ` +
-      `Treat ${city} as the primary base rather than ranging across the whole of ${regionName}. ` +
-      `In Step 1, prioritise ${city} itself and nearby destinations.\n\n`
+      `**Where I want to stay:** Focus on **${place}** and the places within easy reach of it — roughly a day trip from ${city}. ` +
+      `Treat ${city} as my base rather than ranging across the whole of ${regionName}; this city focus overrides the wider country search. ` +
+      `Only consider ${city} itself and the neighbourhoods, beaches, islands or day trips I could realistically use from there.\n\n`
     );
   };
 

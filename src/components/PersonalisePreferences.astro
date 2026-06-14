@@ -226,26 +226,28 @@ const configData = {
       if (weights.length === 0) return { weightingSection: '', outputNotes: '' };
 
       const tableRows = weights.map((p) => `| ${p.label} | ${p.weight} |`).join('\n');
-      const weightTable = `| Traveller preference | Weight |\n|---|---:|\n${tableRows}\n| **Total** | **100** |`;
+      const weightTable = `| My preference | Weight |\n|---|---:|\n${tableRows}\n| **Total** | **100** |`;
 
       const intro = [
         'In addition to the value score above, apply the following preference weighting. Prioritise hotels that match what I care about, and tell me when a hotel scores well on value but poorly for my priorities.',
         'Produce two separate scores for each hotel:',
         '1. Value score /100 — from the six-factor value scoring above.\n2. Personal fit score /100 — based on the preference weighting below.',
+        'To work out the personal fit score, rate the hotel 0–5 on each preference (0 = poor fit, 1 = weak, 2 = acceptable but compromised, 3 = good, 4 = very good, 5 = excellent), multiply each rating by its weight, then scale the result to a score out of 100.',
+        'For each preference, note the evidence you found, anything you could not confirm, and your confidence: High / Medium / Low. For quietness especially, check recent reviews for weddings, traffic, thin walls, air-conditioning hum or construction rather than assuming a resort or garden hotel is quiet.',
         'Do not hide trade-offs inside a single combined score. If a hotel is excellent value but weak for my priorities, say so clearly.',
       ].join('\n\n');
 
       const interpretation = buildInterpretation(state);
-      const body = ['### Additional traveller preference weighting', intro, weightTable, interpretation]
+      const body = ['### My preference weighting', intro, weightTable, interpretation]
         .filter(Boolean)
         .join('\n\n');
 
       const outputBlock = [
-        '### Additional output for the traveller-fit scoring',
-        'When presenting the final shortlist table and any other hotel tables, add these columns:',
-        '- Value score\n- Personal fit score\n- Best matched preference\n- Main personal-fit drawback',
+        '### Additional output for my personal-fit scoring',
+        'When presenting the final shortlist table and any other hotel tables, add these columns alongside the existing value Score column:',
+        '- Personal fit score\n- Best matched preference\n- Main personal-fit drawback',
         'For each hotel in the top 5 summaries, add a short subsection:',
-        '### Personal fit notes\n\nExplain how well this hotel matches the selected traveller preferences. Mention both strengths and weaknesses.',
+        '### Personal fit notes\n\nExplain how well this hotel matches my selected preferences. Mention both strengths and weaknesses.',
       ].join('\n\n');
 
       return {
