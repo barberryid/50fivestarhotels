@@ -3,27 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import AccordionCard from '../components/AccordionCard.astro';
 import CountryPromptTool from '../components/CountryPromptTool.astro';
 import PersonalisePreferences from '../components/PersonalisePreferences.astro';
-import MethodologyContent from '../components/MethodologyContent.astro';
 import { researchPriceLevels } from '../data/researchPriceLevels';
 import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
-
-const steps = [
-  {
-    step: '1',
-    title: 'Choose your destination',
-    text: 'Enter a country, territory, city or town. Leave the city blank if you want a wider country search.',
-  },
-  {
-    step: '2',
-    title: 'Open the main hotel prompt',
-    text: 'Start with “Find the right hotel”. It creates a practical shortlist based on value, location, reviews and travel fit.',
-  },
-  {
-    step: '3',
-    title: 'Copy, paste and verify',
-    text: 'Paste the brief into ChatGPT or Claude, then check live prices, taxes, room type, cancellation policy and recent reviews before booking.',
-  },
-];
 
 const bookingChecks = [
   'Final price after taxes and fees',
@@ -58,19 +39,13 @@ const jsonLd = breadcrumbJsonLd([
         <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-8">
           Find the Right Hotel for Your Trip
         </h1>
-        <ol class="grid gap-5 md:grid-cols-3 list-none p-0 m-0 mb-6">
-          {steps.map(({ step, title, text }) => (
-            <li class="flex h-full min-h-48 items-start gap-4 rounded-[18px] border border-[#B88A44]/25 bg-[#FFFEFA] p-5 shadow-sm">
-              <span class="inline-flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-2xl bg-[#E8F1E6] text-xl font-extrabold text-[#4F6547] shadow-[0_10px_24px_rgba(88,116,90,0.18)]" aria-hidden="true">
-                {step}
-              </span>
-              <div class="min-w-0">
-                <h2 class="font-sans text-base font-extrabold text-[#1F2428] mb-2">{title}</h2>
-                <p class="text-[#374151] text-sm leading-relaxed">{text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <p class="mb-6 flex flex-wrap items-center gap-2 text-xl md:text-2xl font-semibold text-[#1F2428]">
+          <span>Follow steps</span>
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#4F6547] text-base font-bold text-white shadow-[0_8px_20px_rgba(79,101,71,0.28)]">1</span>
+          <span aria-hidden="true">–</span>
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#4F6547] text-base font-bold text-white shadow-[0_8px_20px_rgba(79,101,71,0.28)]">5</span>
+          <span>below</span>
+        </p>
         <p class="text-[#6F685F] text-sm leading-relaxed mb-6">
           This prompt is designed for Claude, ChatGPT, or another research-capable AI assistant. Start a fresh session rather than continuing an old one.
         </p>
@@ -82,7 +57,7 @@ const jsonLd = breadcrumbJsonLd([
 
     <!-- Price levels -->
     <section class="max-w-4xl mx-auto px-5 py-6" data-price-level-selector>
-      <AccordionCard title="Price levels included">
+      <AccordionCard title="Price levels included" number={1}>
       <p class="text-[#1F2428]/80 leading-relaxed mb-7" data-price-level-summary>
         The generated prompt searches the selected nightly levels in order. All four are included by default. If no credible option appears at €50 or below, it displays “No credible hotel option found under €50” and marks the next best three hotels above that level as “Fallback above €50”.
       </p>
@@ -202,7 +177,5 @@ const jsonLd = breadcrumbJsonLd([
         The same applies if you are researching for your own trip. Check the hotel on at least two booking platforms, read the most recent reviews rather than the average score, and confirm the price for your actual dates — shoulder-season bargains can vanish in peak weeks.
       </p>
     </section>
-
-    <MethodologyContent />
   </main>
 </BaseLayout>

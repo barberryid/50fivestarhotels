@@ -6,15 +6,21 @@
 // so the page's shared client scripts can still read the controls inside.
 interface Props {
   title: string;
+  number?: number;
   open?: boolean;
   class?: string;
 }
-const { title, open = false, class: className = '' } = Astro.props;
+const { title, number, open = false, class: className = '' } = Astro.props;
 ---
 
 <details class:list={['ff-accordion group rounded-2xl border border-[#E2D4BF] bg-[#FFFDF8] shadow-sm', className]} open={open}>
   <summary class="ff-summary flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 md:px-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F6547]/50">
-    <span class="font-serif text-xl md:text-2xl font-semibold text-[#1F2428]">{title}</span>
+    <span class="flex min-w-0 items-center gap-3">
+      {number != null && (
+        <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#4F6547] text-sm font-bold text-white shadow-[0_8px_20px_rgba(79,101,71,0.28)]" aria-hidden="true">{number}</span>
+      )}
+      <span class="font-serif text-xl md:text-2xl font-semibold text-[#1F2428]">{title}</span>
+    </span>
     <span class="ff-chevron inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#4F6547] text-white shadow-[0_8px_20px_rgba(79,101,71,0.28)] transition-transform duration-200" aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
         <path d="m6 9 6 6 6-6"></path>
