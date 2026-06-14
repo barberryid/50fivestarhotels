@@ -1270,3 +1270,10 @@ Recommended follow-ups (identified, not yet actioned):
 The site includes a "How to Find Stays" research-yourself tool page (`/research-hotels/`) with the public promise "How to Uncover Elite Stays in Every Corner of the World." It lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The "How We Choose Hotels" methodology text now lives at the bottom of this page as `/research-hotels/#methodology`. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/`, and `/methodology/` redirects to `/research-hotels/#methodology`, via the Cloudflare Pages `_redirects` file. A new `/under-50/` placeholder page exists for future under-€50 research.
 
 As of 2026-06-14, `/destinations/` has been replaced with the homepage-style "The full list" section: "All {hotel count} hotels at a glance", ranked by value score, with every row linking to the full hotel editorial profile.
+
+### Under €50 research block added — 2026-06-14
+
+- Added a new `/research-hotels/` editorial section, **Best hotels found at €50 or below**, near the top of the page.
+- Added the **Best 3 to develop first** row for The Royal Surakarta Heritage – Handwritten Collection, Pandora Suite D’Angkor, and Havana Nha Trang Hotel.
+- Added the full 10-hotel under-€50 candidate table, with visible snapshot-rate caution language and Conrad Bangkok marked as a rate anomaly requiring recheck.
+- Updated the visible fallback rule and generated country research prompt so empty under-€50 results display **No credible candidate found under €50** and use the label **Fallback above €50** for fallback results.

@@ -12,6 +12,129 @@ const steps = [
   { step: '3', text: 'Paste it into a fresh Claude or ChatGPT session and check the results manually.' },
 ];
 
+const under50TopHotels = [
+  {
+    rank: '1',
+    name: 'The Royal Surakarta Heritage – Handwritten Collection',
+    cityCountry: 'Solo / Surakarta, Indonesia',
+    category: 'Heritage-value five-star',
+    rate: 'from €25–€35',
+    why: 'Javanese interiors, Accor/Handwritten branding, historic Solo setting and a real “how is this possible?” price.',
+    watch: 'Older-property risk; not a slick international luxury product.',
+  },
+  {
+    rank: '2',
+    name: 'Pandora Suite D’Angkor',
+    cityCountry: 'Siem Reap, Cambodia',
+    category: 'Local / booking-site five-star',
+    rate: 'from €20',
+    why: 'Excellent Angkor base with pool, boutique feel, very high review signal and genuinely shocking pricing.',
+    watch: 'Local five-star classification; needs photo/style audit before full profile.',
+  },
+  {
+    rank: '3',
+    name: 'Havana Nha Trang Hotel',
+    cityCountry: 'Nha Trang, Vietnam',
+    category: 'Business / beach five-star bargain',
+    rate: 'from €29',
+    why: 'Best Nha Trang representative because it has a large review base, beachfront/high-rise luxury angle and repeated sub-€50 evidence.',
+    watch: 'Nha Trang has many cheap high-rise “five-star” hotels, so selectivity matters.',
+  },
+];
+
+const under50Candidates = [
+  {
+    rank: 1,
+    hotel: 'The Royal Surakarta Heritage – Handwritten Collection',
+    cityCountry: 'Solo / Surakarta, Indonesia',
+    category: 'Heritage-value five-star',
+    rate: 'from €25–€35',
+    strength: 'Javanese interiors, Accor/Handwritten branding, historic Solo setting and one of the strongest “how is this possible?” price stories.',
+    drawback: 'Older-property risk; not a slick international luxury product.',
+  },
+  {
+    rank: 2,
+    hotel: 'Pandora Suite D’Angkor',
+    cityCountry: 'Siem Reap, Cambodia',
+    category: 'Local / booking-site five-star',
+    rate: 'from €20',
+    strength: 'Excellent Angkor base with pool, boutique feel, very high review signal and genuinely shocking pricing.',
+    drawback: 'Local five-star classification; needs photo/style audit before full profile.',
+  },
+  {
+    rank: 3,
+    hotel: 'The Phoenix Hotel Yogyakarta – Handwritten Collection',
+    cityCountry: 'Yogyakarta, Indonesia',
+    category: 'Heritage-value five-star',
+    rate: 'from €48',
+    strength: 'Strong colonial-landmark story, central Yogyakarta setting and Borobudur/Prambanan editorial hooks.',
+    drawback: 'Borderline under the target; other dates may show around €50 or slightly above.',
+  },
+  {
+    rank: 4,
+    hotel: 'Havana Nha Trang Hotel',
+    cityCountry: 'Nha Trang, Vietnam',
+    category: 'Business / beach five-star bargain',
+    rate: 'from €29',
+    strength: 'Best Nha Trang headline bargain: beachfront access, pool, gym, large review base and proper resort-city visuals.',
+    drawback: 'Nha Trang has many cheap high-rise “five-star” hotels, so selectivity matters.',
+  },
+  {
+    rank: 5,
+    hotel: 'Conrad Bangkok',
+    cityCountry: 'Bangkok, Thailand',
+    category: 'True international five-star',
+    rate: 'from €41',
+    strength: 'Potentially the most surprising brand-name find: a genuine Conrad appearing below €50.',
+    drawback: 'Treat as a rate anomaly until rechecked across several dates; most visible rates jump above €90.',
+  },
+  {
+    rank: 6,
+    hotel: 'Megapolis Hotel Panama',
+    cityCountry: 'Panama City, Panama',
+    category: 'Business five-star bargain',
+    rate: 'from €48',
+    strength: 'Huge skyline tower, spa/pool/city views and a real under-€50 Panama City angle.',
+    drawback: 'Generic mega-hotel feel; some renovation or dated-room risk.',
+  },
+  {
+    rank: 7,
+    hotel: 'Virgo Hotel',
+    cityCountry: 'Nha Trang, Vietnam',
+    category: 'Local / booking-site five-star',
+    rate: 'from €18',
+    strength: 'One of the cheapest credible five-star-labelled hotels found worldwide.',
+    drawback: 'More “cheap urban hotel with pool” than emotional luxury.',
+  },
+  {
+    rank: 8,
+    hotel: 'TTC Hotel Michelia',
+    cityCountry: 'Nha Trang, Vietnam',
+    category: 'Local / booking-site five-star',
+    rate: 'from €25',
+    strength: 'Strong backup Nha Trang candidate with private-beach / pool-style value at a very low price.',
+    drawback: 'Needs manual image/review audit; likely less distinctive than Havana.',
+  },
+  {
+    rank: 9,
+    hotel: 'Diamond Bay Hotel',
+    cityCountry: 'Nha Trang, Vietnam',
+    category: 'Local / booking-site five-star',
+    rate: 'from €40',
+    strength: 'Good mass-market resort-city candidate with facilities to feel five-star-adjacent.',
+    drawback: 'Less character than the Indonesian heritage hotels.',
+  },
+  {
+    rank: 10,
+    hotel: 'Grand Mercure Solo Baru',
+    cityCountry: 'Solo Baru / Surakarta, Indonesia',
+    category: 'Business five-star bargain',
+    rate: 'from €34',
+    strength: 'Solid Accor-brand five-star bargain near Solo, useful as a second Central Java candidate.',
+    drawback: 'More business-hotel than destination hotel; Royal Surakarta is the stronger editorial choice.',
+  },
+];
+
 const jsonLd = breadcrumbJsonLd([
   { name: 'Home', url: canonicalUrl('/') },
   { name: 'How to Find Stays', url: canonicalUrl('/research-hotels/') },
@@ -65,7 +188,7 @@ const jsonLd = breadcrumbJsonLd([
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Expanded search criteria</p>
       <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-5">Price levels included</h2>
       <p class="text-[#1F2428]/80 leading-relaxed mb-7" data-price-level-summary>
-        The generated prompt searches the selected nightly levels in order. All four are included by default, and if a selected lower level has no credible hotel, the prompt asks for the next best three hotels above that level instead of returning an empty result.
+        The generated prompt searches the selected nightly levels in order. All four are included by default. If no credible candidate appears at €50 or below, it displays “No credible candidate found under €50” and marks the next best three hotels above that level as “Fallback above €50”.
       </p>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {researchPriceLevels.map(({ amount, title, text }) => (
@@ -100,6 +223,98 @@ const jsonLd = breadcrumbJsonLd([
       </p>
     </section>
 
+    <!-- Under €50 research candidates -->
+    <section id="under-50-research" class="bg-[#FFFDF8] border-y border-[#E2D4BF]">
+      <div class="max-w-5xl mx-auto px-5 py-14 md:py-16">
+        <div class="max-w-4xl">
+          <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Under €50 research</p>
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428]">Best hotels found at €50 or below</h2>
+            <span class="inline-flex rounded-full bg-[#4F6547] px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+              Visible snapshot rates
+            </span>
+          </div>
+          <p class="text-[#1F2428]/80 text-lg font-serif leading-relaxed mb-6">
+            The strongest current examples of unusually affordable five-star or near-five-star hotel value.
+          </p>
+          <div class="space-y-4 text-[#1F2428]/80 leading-relaxed">
+            <p>
+              Use this section for the strongest hotels found at the €50-or-below research level. The goal is not to list the cheapest hotels; it is to show credible five-star or near-five-star hotels where the price, place and experience create a genuine affordable-luxury story.
+            </p>
+            <p>
+              If no credible hotel appears in the research at €50 or below, do not leave the section empty. Write: <strong class="text-[#1F2428]">No credible candidate found under €50</strong>, then list the next best 3 hotels above that level, ranked by value and clearly marked as fallback results.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-10">
+          <h3 class="font-serif text-xl md:text-2xl font-semibold text-[#1F2428] mb-5">Best 3 to develop first</h3>
+          <div class="grid md:grid-cols-3 gap-4">
+            {under50TopHotels.map((hotel) => (
+              <article class="rounded-lg border border-[#E2D4BF] bg-white p-5 shadow-sm">
+                <div class="mb-4 flex items-start justify-between gap-3">
+                  <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#B88A44] text-sm font-bold text-white">{hotel.rank}</span>
+                  <span class="rounded-full bg-[#F8F2E8] px-3 py-1 text-xs font-semibold text-[#4F6547]">{hotel.rate}</span>
+                </div>
+                <h4 class="font-serif text-lg font-semibold leading-snug text-[#1F2428] mb-3">{hotel.name}</h4>
+                <dl class="space-y-3 text-sm">
+                  <div>
+                    <dt class="font-semibold text-[#1F2428]">City / country</dt>
+                    <dd class="text-[#6F685F]">{hotel.cityCountry}</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-[#1F2428]">Category</dt>
+                    <dd class="text-[#6F685F]">{hotel.category}</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-[#1F2428]">Why it leads</dt>
+                    <dd class="text-[#6F685F] leading-relaxed">{hotel.why}</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-[#1F2428]">Watch out for</dt>
+                    <dd class="text-[#6F685F] leading-relaxed">{hotel.watch}</dd>
+                  </div>
+                </dl>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-10 overflow-x-auto rounded-lg border border-[#E2D4BF] bg-white">
+          <table class="min-w-[1040px] w-full text-sm">
+            <thead>
+              <tr class="bg-[#1F2428] text-left text-white">
+                <th class="px-4 py-3 font-semibold text-right">Rank</th>
+                <th class="px-4 py-3 font-semibold">Hotel</th>
+                <th class="px-4 py-3 font-semibold">City / Country</th>
+                <th class="px-4 py-3 font-semibold">Category</th>
+                <th class="px-4 py-3 font-semibold">Lowest rate found</th>
+                <th class="px-4 py-3 font-semibold">Editorial strength</th>
+                <th class="px-4 py-3 font-semibold">Drawback flag</th>
+              </tr>
+            </thead>
+            <tbody>
+              {under50Candidates.map((hotel, i) => (
+                <tr class={`border-t border-[#E2D4BF]/70 ${i % 2 === 0 ? 'bg-[#FFFDF8]' : 'bg-[#F8F2E8]/50'}`}>
+                  <td class="px-4 py-4 align-top text-right font-bold text-[#4F6547]">{hotel.rank}</td>
+                  <td class="px-4 py-4 align-top font-serif font-semibold leading-snug text-[#1F2428]">{hotel.hotel}</td>
+                  <td class="px-4 py-4 align-top text-[#1F2428]/80">{hotel.cityCountry}</td>
+                  <td class="px-4 py-4 align-top text-[#1F2428]/80">{hotel.category}</td>
+                  <td class="px-4 py-4 align-top font-semibold text-[#1F2428]">{hotel.rate}</td>
+                  <td class="px-4 py-4 align-top leading-relaxed text-[#6F685F]">{hotel.strength}</td>
+                  <td class="px-4 py-4 align-top leading-relaxed text-[#6F685F]">{hotel.drawback}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-5 text-sm leading-relaxed text-[#6F685F]">
+          Price evidence is based on visible OTA snapshot rates, usually for one night / two adults. These rates are useful for value ranking, not a promise of constant availability. Always recheck live prices by date, room type, taxes and cancellation policy before publishing or booking.
+        </p>
+      </div>
+    </section>
+
     <!-- Personalise the research (optional traveller-fit weighting) -->
     <PersonalisePreferences />
 
@@ -113,16 +328,16 @@ const jsonLd = breadcrumbJsonLd([
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Fallback logic</p>
       <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-6">No empty results</h2>
       <p class="text-[#1F2428]/80 leading-relaxed mb-5">
-        If no credible hotel is found at your selected price level, the research prompt will not leave that section blank.
-      </p>
-      <p class="text-[#1F2428]/80 leading-relaxed mb-5">
-        For example, if no reliable candidate appears at <strong class="text-[#1F2428]">€50 or below</strong>, the results should state:
+        If a selected country or region has no credible hotel at <strong class="text-[#1F2428]">€50 or below</strong>, do not leave the result blank. Display:
       </p>
       <p class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] px-4 py-3 font-semibold text-[#1F2428] mb-5">
         No credible candidate found under €50
       </p>
+      <p class="text-[#1F2428]/80 leading-relaxed mb-5">
+        Then show the <strong class="text-[#1F2428]">next best 3 hotels above that level</strong>, ranked by value and clearly marked as fallback results.
+      </p>
       <p class="text-[#1F2428]/80 leading-relaxed">
-        The research should then list the <strong class="text-[#1F2428]">next best 3 hotels above that level</strong>, ranked by value and clearly marked as <strong class="text-[#1F2428]">fallback results</strong>. This keeps the research useful while avoiding weak, misleading, or unsafe recommendations just to fill a price category.
+        Use the fallback label <strong class="text-[#1F2428]">Fallback above €50</strong>. Do not use vague labels such as “maybe”, “other options”, or “not found”.
       </p>
     </section>
 

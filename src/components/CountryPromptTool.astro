@@ -60,16 +60,18 @@ const buildPriceLevelPromptParts = (amounts: readonly number[]) => {
   const highest = sorted[sorted.length - 1] ?? defaultPriceLevels[defaultPriceLevels.length - 1];
   const levelLines = sorted.map((amount) => `- **€${amount} or below**`).join('\n');
   const labelLines = sorted.map((amount) => `- Under €${amount}`).join('\n');
+  const fallbackLabelLines = sorted.map((amount) => `- Fallback above €${amount}`).join('\n');
+  const fallbackLabels = sorted.map((amount) => `**Fallback above €${amount}**`).join(', ');
   const selectedPhrase = sorted.length === 1
     ? 'this selected nightly price level'
     : 'these selected nightly price levels in order';
   const fallbackRule = sorted.length === 1
-    ? `If no credible hotel appears at **€${highest} or below**, do not leave the section empty. Write: **No credible candidate found under €${highest}**, then list the **next best 3 hotels above that level**, ranked by value and clearly marked as fallback results.`
-    : `If a selected level has no credible candidates, do not leave the section empty. For example, if there is nothing convincing at **€${sorted[0]} or below**, write: **No credible candidate found under €${sorted[0]}**, then list the **next best 3 hotels above that level**, ranked by value, while continuing the wider search up to the highest selected level (€${highest}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as fallback results.`;
+    ? `If a selected country or region has no credible hotel at **€${highest} or below**, do not leave the result blank. Display: **No credible candidate found under €${highest}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${highest}** results.`
+    : `If a selected country or region has no credible hotel at **€${sorted[0]} or below**, do not leave the result blank. Display: **No credible candidate found under €${sorted[0]}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${sorted[0]}** results. Continue the wider search up to the highest selected level (€${highest}). Apply the same fallback pattern to any selected level with no credible candidates, using the matching fallback label for that level (${fallbackLabels}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as **Fallback above €${highest}** results.`;
 
   return {
     searchRule: `Always search ${selectedPhrase}:\n${levelLines}\n\nUse shoulder-season standard-room nightly rates, before taxes unless the source only shows tax-inclusive totals. Record the lowest selected level each hotel can meet, but do not promise that the rate is always available.\n\n${fallbackRule}`,
-    labels: `${labelLines}\n- Fallback above selected target`,
+    labels: `${labelLines}\n${fallbackLabelLines}`,
     disqualificationRule: `Regularly prices above €${highest} per night even in shoulder season, unless included only as one of the clearly marked fallback hotels requested because no selected price level produced credible candidates`,
   };
 };
@@ -252,16 +254,18 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     const highest = safeLevels[safeLevels.length - 1];
     const levelLines = safeLevels.map((amount) => `- **€${amount} or below**`).join('\n');
     const labelLines = safeLevels.map((amount) => `- Under €${amount}`).join('\n');
+    const fallbackLabelLines = safeLevels.map((amount) => `- Fallback above €${amount}`).join('\n');
+    const fallbackLabels = safeLevels.map((amount) => `**Fallback above €${amount}**`).join(', ');
     const selectedPhrase = safeLevels.length === 1
       ? 'this selected nightly price level'
       : 'these selected nightly price levels in order';
     const fallbackRule = safeLevels.length === 1
-      ? `If no credible hotel appears at **€${highest} or below**, do not leave the section empty. Write: **No credible candidate found under €${highest}**, then list the **next best 3 hotels above that level**, ranked by value and clearly marked as fallback results.`
-      : `If a selected level has no credible candidates, do not leave the section empty. For example, if there is nothing convincing at **€${safeLevels[0]} or below**, write: **No credible candidate found under €${safeLevels[0]}**, then list the **next best 3 hotels above that level**, ranked by value, while continuing the wider search up to the highest selected level (€${highest}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as fallback results.`;
+      ? `If a selected country or region has no credible hotel at **€${highest} or below**, do not leave the result blank. Display: **No credible candidate found under €${highest}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${highest}** results.`
+      : `If a selected country or region has no credible hotel at **€${safeLevels[0]} or below**, do not leave the result blank. Display: **No credible candidate found under €${safeLevels[0]}**, then show the **next best 3 hotels above that level**, ranked by value and clearly marked as **Fallback above €${safeLevels[0]}** results. Continue the wider search up to the highest selected level (€${highest}). Apply the same fallback pattern to any selected level with no credible candidates, using the matching fallback label for that level (${fallbackLabels}). If no credible hotel appears within the selected levels, list the next best 3 hotels above €${highest} and clearly mark them as **Fallback above €${highest}** results.`;
 
     return {
       searchRule: `Always search ${selectedPhrase}:\n${levelLines}\n\nUse shoulder-season standard-room nightly rates, before taxes unless the source only shows tax-inclusive totals. Record the lowest selected level each hotel can meet, but do not promise that the rate is always available.\n\n${fallbackRule}`,
-      labels: `${labelLines}\n- Fallback above selected target`,
+      labels: `${labelLines}\n${fallbackLabelLines}`,
       disqualificationRule: `Regularly prices above €${highest} per night even in shoulder season, unless included only as one of the clearly marked fallback hotels requested because no selected price level produced credible candidates`,
     };
   };
@@ -328,10 +332,11 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
 
     const selectedAmounts = getSelectedPriceLevels();
     const selectedText = formatEuroSeries(selectedAmounts);
+    const fallbackLabels = selectedAmounts.map((amount) => `“Fallback above €${amount}”`).join(', ');
     if (priceLevelSummary) {
       priceLevelSummary.textContent = selectedAmounts.length === data.priceLevels.length
-        ? 'The generated prompt searches all four nightly levels in order: €50, €100, €150 and €250. If a selected lower level has no credible hotel, it asks for the next best three hotels above that level instead of returning an empty result.'
-        : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no credible hotel, it asks for the next best three hotels above that level instead of returning an empty result.`;
+        ? 'The generated prompt searches all four nightly levels in order: €50, €100, €150 and €250. If no credible candidate appears at €50 or below, it displays “No credible candidate found under €50” and marks the next best three hotels above that level as “Fallback above €50”.'
+        : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no credible hotel, it displays “No credible candidate found under that level” and uses ${fallbackLabels} for the next best three hotels above it.`;
     }
     if (priceLevelStatus) {
       priceLevelStatus.textContent = `Using ${selectedText} in the research prompt. Select at least one price level.`;
