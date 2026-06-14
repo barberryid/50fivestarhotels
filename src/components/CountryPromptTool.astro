@@ -9,7 +9,7 @@
 import { getCollection } from 'astro:content';
 import { countries } from '../data/unCountries';
 import { researchPriceLevels } from '../data/researchPriceLevels';
-import { researchPromptTemplate } from '../data/researchPromptTemplate';
+import { buildWhenToGoPrompt, researchPromptTemplate } from '../data/researchPromptTemplate';
 
 const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
 
@@ -94,6 +94,11 @@ const defaultPrompt = applyPriceLevelTokens(researchPromptTemplate, defaultPrice
   .split('[PERSONAL_WEIGHTING_SECTION]').join('')
   .split('[PERSONAL_OUTPUT_NOTES]').join('');
 
+const defaultWhenToGoPrompt = buildWhenToGoPrompt({
+  countryOrTerritory: '[REGION]',
+  selectedPriceLevels: defaultPriceLevels,
+});
+
 const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, priceLevels: defaultPriceLevels };
 ---
 
@@ -158,33 +163,74 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     </p>
   </div>
 
-  <!-- Copy control -->
-  <div class="mt-6 flex flex-wrap items-center gap-3">
-    <button
-      type="button"
-      id="copy-prompt-button"
-      disabled
-      class="inline-flex items-center gap-2 rounded-full bg-[#B88A44] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1F2428] disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:hover:bg-[#C4B9A6]"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
-        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-      </svg>
-      <span id="copy-prompt-label">Select a country before copying</span>
-    </button>
-    <span id="copy-prompt-status" class="sr-only" role="status" aria-live="polite"></span>
-  </div>
+  <!-- Generated prompts -->
+  <div class="mt-8 border-t border-[#E2D4BF] pt-7">
+    <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-3">Generated prompts</p>
 
-  <!-- Generated prompt -->
-  <label for="prompt-textarea" class="mt-6 mb-2 block text-sm font-semibold text-[#1F2428]">
-    Your hotel-finding prompt <span class="font-normal text-[#6F685F]">(editable — tweak it before copying if you like)</span>
-  </label>
-  <textarea
-    id="prompt-textarea"
-    rows="18"
-    spellcheck="false"
-    class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 font-mono text-[13px] leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
-  >{defaultPrompt}</textarea>
+    <section aria-labelledby="hotel-prompt-heading">
+      <div class="mb-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <label id="hotel-prompt-heading" for="prompt-textarea" class="block text-sm font-semibold text-[#1F2428]">
+            Find best-value hotels <span class="font-normal text-[#6F685F]">(editable)</span>
+          </label>
+          <p class="mt-1 text-sm text-[#6F685F]">
+            Use this to research credible affordable five-star and near-five-star hotel candidates.
+          </p>
+        </div>
+        <button
+          type="button"
+          id="copy-prompt-button"
+          disabled
+          class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#B88A44] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1F2428] disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:hover:bg-[#C4B9A6]"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span id="copy-prompt-label">Select a country before copying</span>
+        </button>
+        <span id="copy-prompt-status" class="sr-only" role="status" aria-live="polite"></span>
+      </div>
+      <textarea
+        id="prompt-textarea"
+        rows="18"
+        spellcheck="false"
+        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 font-mono text-[13px] leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      >{defaultPrompt}</textarea>
+    </section>
+
+    <section aria-labelledby="when-to-go-prompt-heading" class="mt-7 border-t border-[#E2D4BF] pt-7">
+      <div class="mb-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <label id="when-to-go-prompt-heading" for="when-to-go-textarea" class="block text-sm font-semibold text-[#1F2428]">
+            When to go: weather, air quality and price seasonality <span class="font-normal text-[#6F685F]">(editable)</span>
+          </label>
+          <p class="mt-1 text-sm text-[#6F685F]">
+            Use the same destination and price level to research monthly weather, air quality and hotel-price seasonality.
+          </p>
+        </div>
+        <button
+          type="button"
+          id="copy-when-to-go-prompt-button"
+          disabled
+          class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#B88A44] bg-white px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#F4EADC] disabled:cursor-not-allowed disabled:border-[#C4B9A6] disabled:text-[#6F685F] disabled:hover:bg-white"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span id="copy-when-to-go-prompt-label">Select a country before copying</span>
+        </button>
+        <span id="copy-when-to-go-prompt-status" class="sr-only" role="status" aria-live="polite"></span>
+      </div>
+      <textarea
+        id="when-to-go-textarea"
+        rows="18"
+        spellcheck="false"
+        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 font-mono text-[13px] leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      >{defaultWhenToGoPrompt}</textarea>
+    </section>
+  </div>
 
   <!-- Reset -->
   <div class="mt-4">
@@ -201,6 +247,8 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
 <script is:inline type="application/json" id="country-prompt-data" set:html={JSON.stringify(toolData)} />
 
 <script>
+  import { buildWhenToGoPrompt } from '../data/researchPromptTemplate';
+
   const data = JSON.parse(document.getElementById('country-prompt-data')!.textContent!) as {
     template: string;
     coverage: string;
@@ -213,9 +261,13 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
   const listbox = document.getElementById('country-listbox') as HTMLUListElement;
   const noResults = document.getElementById('country-no-results') as HTMLLIElement;
   const textarea = document.getElementById('prompt-textarea') as HTMLTextAreaElement;
+  const whenToGoTextarea = document.getElementById('when-to-go-textarea') as HTMLTextAreaElement;
   const copyButton = document.getElementById('copy-prompt-button') as HTMLButtonElement;
   const copyLabel = document.getElementById('copy-prompt-label') as HTMLSpanElement;
   const copyStatus = document.getElementById('copy-prompt-status') as HTMLSpanElement;
+  const copyWhenToGoButton = document.getElementById('copy-when-to-go-prompt-button') as HTMLButtonElement;
+  const copyWhenToGoLabel = document.getElementById('copy-when-to-go-prompt-label') as HTMLSpanElement;
+  const copyWhenToGoStatus = document.getElementById('copy-when-to-go-prompt-status') as HTMLSpanElement;
   const resetButton = document.getElementById('reset-country-button') as HTMLButtonElement;
   const options = Array.from(listbox.querySelectorAll<HTMLLIElement>('[role="option"]'));
   const priceLevelInputs = Array.from(document.querySelectorAll<HTMLInputElement>('[data-price-level-input]'));
@@ -233,14 +285,28 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
   let activeIndex = -1;
   let visible: HTMLLIElement[] = options;
   let copiedTimer: ReturnType<typeof setTimeout> | undefined;
+  let copiedWhenToGoTimer: ReturnType<typeof setTimeout> | undefined;
   let selectedCountry: string | null = null;
 
   // Traveller-fit fragments supplied by PersonalisePreferences. Read any value
   // it published before this script ran (load-order safety), then keep it in
   // sync via the `personalise:change` event below.
-  let personalParts: { weightingSection: string; outputNotes: string } =
-    (window as unknown as { __personalisePromptParts?: { weightingSection: string; outputNotes: string } })
-      .__personalisePromptParts ?? { weightingSection: '', outputNotes: '' };
+  let personalParts: {
+    weightingSection: string;
+    outputNotes: string;
+    travellerProfile?: string;
+    travellerPriorities?: string;
+    additionalNotes?: string;
+  } =
+    (window as unknown as {
+      __personalisePromptParts?: {
+        weightingSection: string;
+        outputNotes: string;
+        travellerProfile?: string;
+        travellerPriorities?: string;
+        additionalNotes?: string;
+      };
+    }).__personalisePromptParts ?? { weightingSection: '', outputNotes: '' };
 
   const substituteAll = (text: string, token: string, value: string) => text.split(token).join(value);
 
@@ -338,13 +404,35 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     return applyPersonalTokens(text);
   };
 
+  const buildWhenToGoPromptFromState = (country: string | null, city: string): string =>
+    buildWhenToGoPrompt({
+      countryOrTerritory: country ?? '[REGION]',
+      cityOrTown: city,
+      selectedPriceLevels: getSelectedPriceLevels(),
+      travellerProfile: personalParts.travellerProfile,
+      travellerPriorities: personalParts.travellerPriorities,
+      additionalNotes: personalParts.additionalNotes,
+    });
+
+  const refreshPrompts = () => {
+    const city = getCity();
+    textarea.value = buildPrompt(selectedCountry, city);
+    whenToGoTextarea.value = buildWhenToGoPromptFromState(selectedCountry, city);
+  };
+
   document.addEventListener('personalise:change', (event) => {
-    personalParts = (event as CustomEvent<{ weightingSection: string; outputNotes: string }>).detail;
-    textarea.value = buildPrompt(selectedCountry, getCity());
+    personalParts = (event as CustomEvent<{
+      weightingSection: string;
+      outputNotes: string;
+      travellerProfile?: string;
+      travellerPriorities?: string;
+      additionalNotes?: string;
+    }>).detail;
+    refreshPrompts();
   });
 
   cityInput.addEventListener('input', () => {
-    textarea.value = buildPrompt(selectedCountry, getCity());
+    refreshPrompts();
   });
 
   const updatePriceLevelUi = (changedInput?: HTMLInputElement) => {
@@ -379,13 +467,18 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     if (priceLevelStatus) {
       priceLevelStatus.textContent = `Using ${selectedText} in the prompt. Select at least one price level.`;
     }
-    textarea.value = buildPrompt(selectedCountry, getCity());
+    refreshPrompts();
   };
 
   const setCopyEnabled = (enabled: boolean) => {
     clearTimeout(copiedTimer);
+    clearTimeout(copiedWhenToGoTimer);
     copyButton.disabled = !enabled;
+    copyWhenToGoButton.disabled = !enabled;
     copyLabel.textContent = enabled ? 'Copy hotel prompt' : 'Select a country before copying';
+    copyWhenToGoLabel.textContent = enabled ? 'Copy when-to-go prompt' : 'Select a country before copying';
+    copyStatus.textContent = '';
+    copyWhenToGoStatus.textContent = '';
   };
 
   const setActive = (index: number) => {
@@ -432,7 +525,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     for (const option of options) {
       option.setAttribute('aria-selected', option.dataset.name === name ? 'true' : 'false');
     }
-    textarea.value = buildPrompt(name, getCity());
+    refreshPrompts();
     setCopyEnabled(true);
     closeList();
   };
@@ -491,22 +584,36 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     priceInput.addEventListener('change', () => updatePriceLevelUi(priceInput));
   }
 
-  copyButton.addEventListener('click', async () => {
-    const text = textarea.value;
+  const copyTextareaText = async (source: HTMLTextAreaElement) => {
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(source.value);
     } catch {
-      textarea.select();
+      source.select();
       document.execCommand('copy');
-      textarea.setSelectionRange(0, 0);
-      textarea.blur();
+      source.setSelectionRange(0, 0);
+      source.blur();
     }
+  };
+
+  copyButton.addEventListener('click', async () => {
+    await copyTextareaText(textarea);
     copyLabel.textContent = 'Copied';
-    copyStatus.textContent = 'Prompt copied to clipboard';
+    copyStatus.textContent = 'Hotel prompt copied to clipboard';
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
       copyLabel.textContent = 'Copy hotel prompt';
       copyStatus.textContent = '';
+    }, 2000);
+  });
+
+  copyWhenToGoButton.addEventListener('click', async () => {
+    await copyTextareaText(whenToGoTextarea);
+    copyWhenToGoLabel.textContent = 'Copied';
+    copyWhenToGoStatus.textContent = 'When-to-go prompt copied to clipboard';
+    clearTimeout(copiedWhenToGoTimer);
+    copiedWhenToGoTimer = setTimeout(() => {
+      copyWhenToGoLabel.textContent = 'Copy when-to-go prompt';
+      copyWhenToGoStatus.textContent = '';
     }, 2000);
   });
 
@@ -517,7 +624,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     for (const option of options) option.setAttribute('aria-selected', 'false');
     filterList('');
     closeList();
-    textarea.value = buildPrompt(null, '');
+    refreshPrompts();
     setCopyEnabled(false);
   });
 

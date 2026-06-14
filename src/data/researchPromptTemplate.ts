@@ -163,4 +163,291 @@ In 2–3 sentences, tell me straight: does **[REGION]** at my budget genuinely d
 - Use the exact category and rating labels above.
 - Keep the shortlist table clean and easy to copy.`;
 
+export type ResearchPromptInputs = {
+  countryOrTerritory: string;
+  cityOrTown?: string;
+  selectedPriceLevel?: string;
+  selectedPriceLevels?: readonly number[];
+  travellerProfile?: string;
+  travellerPriorities?: string;
+  additionalNotes?: string;
+};
+
+const cleanPromptValue = (value: string | undefined): string => (value ?? '').trim();
+
+export const formatWhenToGoPriceTierLabel = (amounts: readonly number[] | undefined): string => {
+  const sorted = Array.from(new Set(amounts ?? []))
+    .filter((amount) => Number.isFinite(amount))
+    .sort((a, b) => a - b);
+
+  if (sorted.length === 0) return 'Selected price level not specified';
+  return sorted.map((amount) => `€${amount} or below`).join(', ');
+};
+
+const singleWhenToGoPriceTierInstruction = (amount: number): string => {
+  if (amount <= 50) {
+    return '- If the price level is €50 or below, identify the months with the best chance of credible hotel value near or below €50. If that level is unrealistic, say so clearly, then identify the months most likely to produce the best fallback value above €50.';
+  }
+
+  if (amount <= 100) {
+    return '- If the price level is €100 or below, identify the months with the best chance of five-star or near-five-star value near or below €100.';
+  }
+
+  if (amount <= 150) {
+    return '- If the price level is €150 or below, identify the months with the best chance of strong affordable-luxury value near or below €150.';
+  }
+
+  if (amount <= 250) {
+    return '- If the price level is €250 or below, identify the months with the best chance of higher-quality five-star or near-five-star value while avoiding peak luxury pricing.';
+  }
+
+  return `- For the selected price level near or below €${amount}, identify the months with the best chance of strong affordable-luxury hotel value while avoiding peak pricing.`;
+};
+
+export const getWhenToGoPriceTierInstruction = (
+  selectedPriceLevel = '',
+  selectedPriceLevels?: readonly number[]
+): string => {
+  const sorted = Array.from(new Set(selectedPriceLevels ?? []))
+    .filter((amount) => Number.isFinite(amount))
+    .sort((a, b) => a - b);
+
+  if (sorted.length > 0) {
+    return sorted.map(singleWhenToGoPriceTierInstruction).join('\n');
+  }
+
+  const level = selectedPriceLevel.toLowerCase();
+  if (/(^|[^0-9])50([^0-9]|$)/.test(level)) return singleWhenToGoPriceTierInstruction(50);
+  if (/(^|[^0-9])100([^0-9]|$)/.test(level)) return singleWhenToGoPriceTierInstruction(100);
+  if (/(^|[^0-9])150([^0-9]|$)/.test(level)) return singleWhenToGoPriceTierInstruction(150);
+  if (/(^|[^0-9])250([^0-9]|$)/.test(level)) return singleWhenToGoPriceTierInstruction(250);
+
+  return '- Identify the months with the best chance of strong affordable-luxury hotel value at the selected price level.';
+};
+
+export function buildWhenToGoPrompt(inputs: ResearchPromptInputs): string {
+  const countryOrTerritory = cleanPromptValue(inputs.countryOrTerritory) || '[COUNTRY OR TERRITORY]';
+  const cityOrTown = cleanPromptValue(inputs.cityOrTown);
+  const destinationLabel = cityOrTown ? `${cityOrTown}, ${countryOrTerritory}` : countryOrTerritory;
+  const selectedPriceTier =
+    cleanPromptValue(inputs.selectedPriceLevel) || formatWhenToGoPriceTierLabel(inputs.selectedPriceLevels);
+  const cityOrRegion = cityOrTown || 'Not specified - research the strongest relevant destination(s) inside the country or territory, then keep the answer focused and practical.';
+
+  const travellerContext = [
+    cleanPromptValue(inputs.travellerProfile) ? `Traveller profile: ${cleanPromptValue(inputs.travellerProfile)}` : '',
+    cleanPromptValue(inputs.travellerPriorities)
+      ? `Traveller priorities: ${cleanPromptValue(inputs.travellerPriorities)}`
+      : '',
+    cleanPromptValue(inputs.additionalNotes)
+      ? `Additional traveller notes: ${cleanPromptValue(inputs.additionalNotes)}`
+      : '',
+  ].filter(Boolean);
+
+  const countryOnlyInstruction = cityOrTown
+    ? ''
+    : '\nNo city or town has been provided. Research the strongest relevant destination(s) inside the country or territory, but do not turn this into a broad country guide. Choose the most useful city, resort area or travel base for affordable-luxury value and explain the focus briefly.\n';
+
+  return `You are a specialist travel research assistant working for the editorial website 50fivestarhotels.com.
+
+Your task is to research when to visit the following destination for affordable luxury hotel travellers:
+
+Destination: ${destinationLabel}
+Country or territory: ${countryOrTerritory}
+City / town / region: ${cityOrRegion}
+Selected hotel price level: ${selectedPriceTier}${travellerContext.length ? `\n${travellerContext.join('\n')}` : ''}
+${countryOnlyInstruction}
+The site is a curated guide to affordable five-star and near-five-star hotels. This task is not to find hotels again. Instead, research the best months to visit this destination for the best mix of:
+
+1. Weather comfort
+2. Air quality
+3. Hotel-price value at the selected price level
+
+For the selected price level, adapt your judgement as follows:
+${getWhenToGoPriceTierInstruction(selectedPriceTier, inputs.selectedPriceLevels)}
+
+If traveller priorities are provided, use them to frame the monthly trade-offs without making the answer bloated. For example:
+- If safety matters, flag months with extreme heat, storms, smoke, flooding, transport disruption, local instability or other practical risks where relevant.
+- If sightseeing matters, identify months that make walking, tours, museums, beaches, mountain trips or day trips more comfortable.
+- If quietness matters, mention peak crowding, school holidays, major events, nightlife seasons or resort shutdowns where relevant.
+- If food, culture, romance or another custom priority is mentioned, include major festivals, closures, seasonal atmosphere and crowding trade-offs where they materially affect the trip.
+
+Use credible, current sources where possible. For weather, use sources such as Weather Spark, Time and Date, Meteostat, NOAA, national meteorological agencies or climate normals. For air quality, use IQAir, AQICN, OpenAQ, national environmental agencies or other credible PM2.5 / AQI sources. For hotel-price seasonality, use Booking.com, Google Hotels, Agoda, Kayak, Expedia, official tourism calendars, major event calendars and visible month-by-month availability patterns where useful.
+
+Do not invent precise monthly figures. If reliable local PM2.5, AQI or hotel-price data is unavailable, say so clearly, use cautious ranges or relative categories, and explain the uncertainty. If using a nearby city or regional proxy, identify it as a proxy.
+
+Hotel prices change constantly by date, room type, taxes, cancellation policy, events and occupancy. Do not promise exact rates. Use relative monthly categories and cautious wording.
+
+Return the answer in this structure:
+
+# When to go: [Destination]
+
+## Best time for weather
+
+Short summary:
+- Best months:
+- Good months:
+- Possible months:
+- Difficult months:
+
+Explain the main weather pattern in plain English:
+- temperature
+- humidity
+- rainfall / rainy season
+- heat risk
+- cold risk, if relevant
+- beach / mountain / city comfort, if relevant
+
+## Air quality by month
+
+Short summary:
+- Best air:
+- Use caution:
+- Avoid if sensitive:
+
+Explain the likely air-quality pattern:
+- PM2.5 / AQI trend if credible data exists
+- smoke / burning season risk if relevant
+- dust / desert wind risk if relevant
+- traffic pollution if relevant
+- monsoon / rain-cleaning effect if relevant
+- uncertainty if local data is limited
+
+## Best time for price
+
+Short summary:
+- Cheapest months:
+- Good-value months:
+- Average months:
+- Expensive months:
+- Most expensive months:
+
+Explain why prices change:
+- peak tourist season
+- weather
+- holidays
+- local events
+- school holidays
+- business travel patterns
+- heat / rain / low-season discounts
+- whether the selected price tier is realistic
+
+## Best overall months for value travellers
+
+Best overall:
+Best for weather:
+Best for price:
+Best for air quality:
+Avoid or think twice:
+
+Give a short verdict for a traveller looking for affordable luxury.
+
+## Month-by-month table
+
+Use exactly these category labels where possible:
+
+Weather:
+- Best
+- Good
+- Possible
+- Difficult
+
+Air quality:
+- Best
+- Moderate
+- Use caution
+- Avoid if sensitive
+
+Price:
+- Cheapest
+- Good value
+- Average
+- Expensive
+- Most expensive
+
+| Month | Weather | Air quality | Price value | Traveller note |
+|---|---|---|---|---|
+| Jan |  |  |  |  |
+| Feb |  |  |  |  |
+| Mar |  |  |  |  |
+| Apr |  |  |  |  |
+| May |  |  |  |  |
+| Jun |  |  |  |  |
+| Jul |  |  |  |  |
+| Aug |  |  |  |  |
+| Sep |  |  |  |  |
+| Oct |  |  |  |  |
+| Nov |  |  |  |  |
+| Dec |  |  |  |  |
+
+## Structured monthly data
+
+Return a valid JSON object using this exact shape:
+
+{
+  "destination": "",
+  "countryOrTerritory": "",
+  "cityOrRegion": "",
+  "selectedPriceTier": "",
+  "weatherSummary": "",
+  "airQualitySummary": "",
+  "priceSummary": "",
+  "bestOverallMonths": "",
+  "bestWeatherMonths": "",
+  "bestPriceMonths": "",
+  "bestAirQualityMonths": "",
+  "months": [
+    {
+      "month": "Jan",
+      "weatherCategory": "",
+      "weatherReason": "",
+      "avgHighC": null,
+      "avgLowC": null,
+      "avgTempC": null,
+      "avgTempF": null,
+      "humidityPercent": null,
+      "rainfallMm": null,
+      "rainyDays": null,
+      "airQualityCategory": "",
+      "pm25": null,
+      "aqi": null,
+      "airQualityReason": "",
+      "priceCategory": "",
+      "priceReason": "",
+      "travellerNote": ""
+    }
+  ],
+  "sourceNotes": [
+    {
+      "topic": "Weather",
+      "sourcesUsed": [],
+      "confidence": "High / Medium / Low",
+      "notes": ""
+    },
+    {
+      "topic": "Air quality",
+      "sourcesUsed": [],
+      "confidence": "High / Medium / Low",
+      "notes": ""
+    },
+    {
+      "topic": "Hotel price seasonality",
+      "sourcesUsed": [],
+      "confidence": "High / Medium / Low",
+      "notes": ""
+    }
+  ]
+}
+
+Important:
+- The JSON must include all 12 months.
+- Use null where precise numeric data is not credible.
+- Do not use fake precision.
+- Add a brief explanation of uncertainty where data is weak.
+- Weather averages are not guarantees.
+- Air quality can vary daily because of traffic, fires, dust, weather, construction and local conditions.
+- Hotel prices change constantly.
+- Live AQI and current hotel rates should be checked before booking.
+- If the destination has limited data, say so clearly.`;
+}
+
 export default researchPromptTemplate;

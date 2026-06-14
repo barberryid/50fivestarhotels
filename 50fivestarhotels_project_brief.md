@@ -1304,6 +1304,24 @@ Recommended follow-ups (identified, not yet actioned):
 
 The site includes a "How to Find Stays" research-yourself tool page (`/research-hotels/`) with the public promise "How to Uncover Elite Stays in Every Corner of the World." It lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The "How We Choose Hotels" methodology text now lives at the bottom of this page as `/research-hotels/#methodology`. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/`, and `/methodology/` redirects to `/research-hotels/#methodology`, via the Cloudflare Pages `_redirects` file. The `/under-50/` page is now a live tier page for carefully qualified under-€50 snapshot-rate candidates.
 
+### Research prompt tool - "When to go" companion prompt
+
+The `/research-hotels/` page should offer two separate generated prompts:
+
+1. A hotel-finding prompt that researches credible affordable five-star and near-five-star hotel candidates in the selected destination and price tier.
+2. A "When to go" prompt that uses the same destination and price tier to research monthly seasonality.
+
+The "When to go" prompt should not find hotels again. It should research:
+- best months for weather
+- air quality by month
+- monthly hotel-price value
+- best overall months for value travellers
+- caveats around data quality, daily AQI variation and changing hotel prices
+
+The output should be traveller-facing first, with a structured monthly JSON block underneath so the data can later be reused in visual seasonality cards.
+
+The prompt should use cautious, evidence-based language and avoid promising exact prices or perfect weather.
+
 As of 2026-06-14, `/destinations/` has been replaced with the homepage-style "The full list" section: "All {hotel count} hotels at a glance", ranked by value score, with every row linking to the full hotel editorial profile.
 
 ### Under €50 research block added — 2026-06-14

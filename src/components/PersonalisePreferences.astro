@@ -135,6 +135,13 @@ const configData = {
   interface Preset { key: string; label: string; values: { safety: number; sights: number; quietness: number; customText: string; customImportance: number } }
   interface PrefState { preset: string | null; safety: number; sights: number; quietness: number; customText: string; customImportance: number }
   interface Config { importanceScale: ImportanceOption[]; presets: Preset[]; defaults: PrefState; storageKey: string }
+  interface PromptParts {
+    weightingSection: string;
+    outputNotes: string;
+    travellerProfile: string;
+    travellerPriorities: string;
+    additionalNotes: string;
+  }
 
   const config = JSON.parse(document.getElementById('personalise-config')!.textContent!) as Config;
 
@@ -222,8 +229,48 @@ const configData = {
       return lines.length ? `**Interpretation guidance**\n\n${lines.join('\n\n')}` : '';
     };
 
+    const buildSeasonalityInterpretation = (state: PrefState): string => {
+      const lines: string[] = [];
+      if (state.safety >= 3) {
+        lines.push('For safety, flag months with extreme heat, storms, flooding, smoke, poor air quality, difficult transport or other practical travel risks where relevant.');
+      }
+      if (state.safety === 5) {
+        lines.push('Be especially cautious about recommending months with major weather, air-quality or local-disruption risks, even if hotel prices are attractive.');
+      }
+      if (state.sights >= 3) {
+        lines.push('For sightseeing, favour months that make walking, day trips, outdoor sights and cultural visits more comfortable.');
+      }
+      if (state.sights === 5) {
+        lines.push('Call out months when heat, heavy rain, closures, crowds or major holidays could materially reduce sightseeing value.');
+      }
+      if (state.quietness >= 3) {
+        lines.push('For quietness, consider peak tourist months, school holidays, major events, festival periods, nightlife seasons and low-season shutdowns.');
+      }
+      if (state.quietness === 5) {
+        lines.push('Prefer months with a calmer atmosphere when possible, not just the cheapest or busiest peak-weather months.');
+      }
+      if (state.customText && state.customImportance > 0) {
+        lines.push(`For the custom priority "${state.customText}", explain any month-by-month seasonality or event pattern that materially affects it.`);
+      }
+      return lines.join('\n');
+    };
+
     const buildPromptParts = (state: PrefState, weights: WeightedPref[]) => {
-      if (weights.length === 0) return { weightingSection: '', outputNotes: '' };
+      const profileLabel = currentPreset
+        ? config.presets.find((preset) => preset.key === currentPreset)?.label ?? ''
+        : '';
+      const travellerPriorities = weights.map((p) => `${p.label} (${p.weight}%)`).join('; ');
+      const additionalNotes = buildSeasonalityInterpretation(state);
+
+      if (weights.length === 0) {
+        return {
+          weightingSection: '',
+          outputNotes: '',
+          travellerProfile: profileLabel,
+          travellerPriorities: '',
+          additionalNotes,
+        };
+      }
 
       const tableRows = weights.map((p) => `| ${p.label} | ${p.weight} |`).join('\n');
       const weightTable = `| My preference | Weight |\n|---|---:|\n${tableRows}\n| **Total** | **100** |`;
@@ -253,6 +300,9 @@ const configData = {
       return {
         weightingSection: `${body}\n\n---\n\n`,
         outputNotes: `\n${outputBlock}\n`,
+        travellerProfile: profileLabel,
+        travellerPriorities,
+        additionalNotes,
       };
     };
 
@@ -319,7 +369,7 @@ const configData = {
     };
 
     // ----- Central recompute -----
-    const publish = (parts: { weightingSection: string; outputNotes: string }) => {
+    const publish = (parts: PromptParts) => {
       (window as unknown as { __personalisePromptParts?: typeof parts }).__personalisePromptParts = parts;
       document.dispatchEvent(new CustomEvent('personalise:change', { detail: parts }));
     };
