@@ -1,10 +1,8 @@
 // src/data/researchPromptTemplate.ts
 // The public research prompt shown on /research-hotels/, ported from
 // research-prompt-public.md (the SESSION PROMPT block only — no editor notes).
-// Three tokens are substituted on the client:
+// Tokens substituted on the client:
 //   [REGION]          — the selected country/territory name
-//   [EXISTING HOTELS] — published hotels in that country, weakest first
-//   [COVERAGE]        — comma-separated list of all countries on the site
 //   [PRICE_LEVEL_SEARCH_RULE] — selected price-level instructions
 //   [PRICE_LEVEL_LABELS]      — selected price-level labels for candidate output
 //   [PRICE_LEVEL_DISQUALIFICATION_RULE] — selected price ceiling rule
@@ -15,11 +13,9 @@
 
 export const researchPromptTemplate = `You are a specialist travel research assistant for a curated editorial guide to affordable luxury travel. Your task is to research candidate hotels for the region: **[REGION]**.
 
-The site is a curated guide to **affordable luxury travel ideas** — not a directory of cheap hotels. The editorial test for every candidate is:
+The editorial test for every candidate is:
 
 > "Does this hotel make a reasonably seasoned traveller think: I didn't know I could have that kind of stay at that price?"
-
-For context, here are the countries and territories already represented on the site: [COVERAGE]
 
 Use this curated guide as the editorial benchmark. New recommendations should add something useful rather than merely repeating obvious luxury hotels.
 
@@ -142,19 +138,7 @@ Then for each of the **top 5**, provide a fuller summary including:
 [PERSONAL_OUTPUT_NOTES]
 ---
 
-### Step 6 — Flag your top 3 recommendations
-
-Identify the 3 hotels you most strongly recommend for full editorial profile development. For each one, explain in 2–3 sentences why it earns a place.
-
-Then apply the **in-country replacement test**. The hotels already published for **[REGION]** are:
-
-[EXISTING HOTELS]
-
-For each of your top 3, state clearly whether it is more compelling than the weakest currently published hotel in **[REGION]**, and why. If no hotel is yet published for **[REGION]**, say so and judge each recommendation on its own merits instead.
-
----
-
-### Step 7 — List all rejected candidates
+### Step 6 — List all rejected candidates
 
 Provide a brief rejected list: hotel name, city, and the single primary reason for rejection. This record prevents the same hotels from being re-researched in future sessions.
 
