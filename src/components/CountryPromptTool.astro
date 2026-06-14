@@ -7,6 +7,7 @@
 // needed). The published list, the per-country [EXISTING HOTELS] blocks and
 // the [COVERAGE] line all refresh automatically on every deploy.
 import { getCollection } from 'astro:content';
+import AccordionCard from './AccordionCard.astro';
 import { countries } from '../data/unCountries';
 import { researchPriceLevels } from '../data/researchPriceLevels';
 import { buildWhenToGoPrompt, researchPromptTemplate } from '../data/researchPromptTemplate';
@@ -158,9 +159,10 @@ const toolData = {
 };
 ---
 
-<div class="rounded-2xl border border-[#E2D4BF] bg-[#FFFDF8] shadow-sm p-6 md:p-8" data-country-prompt-tool>
+<div class="space-y-4" data-country-prompt-tool>
+  <AccordionCard title="Country or territory">
   <!-- Country combobox -->
-  <label id="country-label" for="country-input" class="block text-sm font-semibold text-[#1F2428] mb-2">
+  <label id="country-label" for="country-input" class="sr-only">
     Country or territory
   </label>
   <div class="relative max-w-md">
@@ -296,50 +298,15 @@ const toolData = {
       ))}
     </div>
   </fieldset>
+  </AccordionCard>
 
-  <!-- Hotel-finding prompts -->
-  <div class="mt-8 border-t border-[#E2D4BF] pt-7">
-    <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-3">Hotel-finding prompts</p>
-
+  <AccordionCard title="Hotel-finding prompts">
     <div class="mb-5 rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-4">
       <p class="text-sm font-semibold text-[#1F2428]" data-brief-ready-status>Choose a destination to make the brief copy-ready.</p>
       <p class="mt-1 text-sm leading-relaxed text-[#6F685F]">
         Start with the main hotel prompt. It creates a practical shortlist of hotel options for your destination, budget and travel style. Use the second prompt only if you also want to compare months by weather, air quality and likely hotel-price seasonality.
       </p>
     </div>
-
-    <fieldset class="mb-4 border-0 p-0 m-0">
-      <legend class="text-sm font-semibold text-[#1F2428] mb-2">How detailed should the output be?</legend>
-      <div class="grid gap-2 sm:grid-cols-2" data-output-mode-group>
-        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
-          <input
-            type="radio"
-            name="hotel-output-mode"
-            value="simple"
-            checked
-            data-output-mode-input
-            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
-          />
-          <span>
-            <span class="block font-semibold text-[#1F2428]">Simple shortlist</span>
-            <span class="block text-[#6F685F]">Best for travellers planning a trip</span>
-          </span>
-        </label>
-        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
-          <input
-            type="radio"
-            name="hotel-output-mode"
-            value="deep"
-            data-output-mode-input
-            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
-          />
-          <span>
-            <span class="block font-semibold text-[#1F2428]">Deep research</span>
-            <span class="block text-[#6F685F]">Best for comparing a full market</span>
-          </span>
-        </label>
-      </div>
-    </fieldset>
 
     <div class="space-y-3">
       <section aria-labelledby="hotel-prompt-heading" class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card data-hotel-prompt-card>
@@ -455,10 +422,48 @@ const toolData = {
         </div>
       </section>
     </div>
-  </div>
+  </AccordionCard>
+
+  <AccordionCard title="Copy your prompt">
+    <fieldset class="border-0 p-0 m-0">
+      <legend class="sr-only">Copy your prompt</legend>
+      <p class="mb-3 text-sm leading-relaxed text-[#6F685F]">
+        Choose how detailed the output should be, then copy your prompt from the hotel-finding prompts above and paste it into ChatGPT or Claude.
+      </p>
+      <div class="grid gap-2 sm:grid-cols-2" data-output-mode-group>
+        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
+          <input
+            type="radio"
+            name="hotel-output-mode"
+            value="simple"
+            checked
+            data-output-mode-input
+            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
+          />
+          <span>
+            <span class="block font-semibold text-[#1F2428]">Simple shortlist</span>
+            <span class="block text-[#6F685F]">Best for travellers planning a trip</span>
+          </span>
+        </label>
+        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
+          <input
+            type="radio"
+            name="hotel-output-mode"
+            value="deep"
+            data-output-mode-input
+            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
+          />
+          <span>
+            <span class="block font-semibold text-[#1F2428]">Deep research</span>
+            <span class="block text-[#6F685F]">Best for comparing a full market</span>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+  </AccordionCard>
 
   <!-- Reset -->
-  <div class="mt-4">
+  <div class="pt-1">
     <button
       type="button"
       id="reset-country-button"

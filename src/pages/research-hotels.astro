@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AccordionCard from '../components/AccordionCard.astro';
 import CountryPromptTool from '../components/CountryPromptTool.astro';
 import PersonalisePreferences from '../components/PersonalisePreferences.astro';
 import MethodologyContent from '../components/MethodologyContent.astro';
@@ -80,9 +81,8 @@ const jsonLd = breadcrumbJsonLd([
     </section>
 
     <!-- Price levels -->
-    <section class="max-w-4xl mx-auto px-5 py-10" data-price-level-selector>
-      <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Expanded search criteria</p>
-      <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-5">Price levels included</h2>
+    <section class="max-w-4xl mx-auto px-5 py-6" data-price-level-selector>
+      <AccordionCard title="Price levels included">
       <p class="text-[#1F2428]/80 leading-relaxed mb-7" data-price-level-summary>
         The generated prompt searches the selected nightly levels in order. All four are included by default. If no credible option appears at €50 or below, it displays “No credible hotel option found under €50” and marks the next best three hotels above that level as “Fallback above €50”.
       </p>
@@ -117,6 +117,7 @@ const jsonLd = breadcrumbJsonLd([
       <p class="mt-4 text-sm text-[#6F685F]" role="status" aria-live="polite" data-price-level-status>
         Select at least one price level. The prompt below updates automatically.
       </p>
+      </AccordionCard>
     </section>
 
     <!-- Traveller-fit weighting -->
