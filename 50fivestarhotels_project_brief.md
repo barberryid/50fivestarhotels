@@ -1328,3 +1328,7 @@ As of 2026-06-14, `/destinations/` has been replaced with the homepage-style "Th
   - **Grand Mercure Solo Baru**, Solo Baru, Indonesia.
 - Generated and integrated one AI editorial hero plus 1200px and 800px WebP derivatives for each of the eight new profiles.
 - Added Panama to the Americas region map, added `panama-city` and `solo-baru` destination routes, refreshed global ranks, and updated the project brief live hotel table to **57 hotels**.
+
+### Homepage hero background lightened — 2026-06-14
+
+- Brightened the homepage hero background image and reduced the dark overlay strength while leaving the floating hero copy panel unchanged.
