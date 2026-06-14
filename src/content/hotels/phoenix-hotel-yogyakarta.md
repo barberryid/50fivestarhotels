@@ -1,13 +1,13 @@
 ---
 title: "The Phoenix Hotel Yogyakarta – Handwritten Collection"
 slug: "phoenix-hotel-yogyakarta"
-rank: 17
+rank: 18
 city: "Yogyakarta"
 country: "Indonesia"
 region: "Southeast Asia"
-budgetTier: "Under €100"
-secondaryTier: "Under €200"
-typicalPriceRange: "Often seen around €65–€110 outside peak dates"
+budgetTier: "Under €50"
+secondaryTier: "Under €100"
+typicalPriceRange: "Visible snapshot rates have been seen from €48; often closer to €65-€110 outside peak dates"
 hotelType: "Heritage hotel"
 fiveStarStatus: "Heritage-value five-star"
 bestFor:

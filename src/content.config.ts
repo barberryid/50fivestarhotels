@@ -11,7 +11,7 @@ const hotels = defineCollection({
     city: z.string(),
     country: z.string(),
     region: z.string(),
-    budgetTier: z.enum(['Under €100', 'Under €200', 'Under €250']),
+    budgetTier: z.enum(['Under €50', 'Under €100', 'Under €200', 'Under €250']),
     secondaryTier: z.string().optional(),
     typicalPriceRange: z.string(),
     hotelType: z.string(),

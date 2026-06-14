@@ -16,12 +16,12 @@ export async function getStaticPaths() {
   const slugifyPath = (value: string) =>
     value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const allowedSlugs = [
-    'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo','pokhara',
+    'kuala-lumpur','bangkok','jakarta','marrakech','tashkent','yogyakarta','surabaya','luxor','siem-reap','tbilisi','hue','nha-trang','abu-dhabi','sarajevo','yerevan','iasi','varna','olhao','makati','solo','solo-baru','pokhara',
     'quebec-city','louisville','milwaukee','las-vegas','tulsa','memphis','portland','omaha','savannah',
     'york','liverpool','glasgow','carcassonne','strasbourg','rouen','palermo','genoa','ragusa',
     'merida','puebla','campeche',
     'dresden','leipzig','weimar',
-    'santo-domingo','las-terrenas','cabarete',
+    'santo-domingo','las-terrenas','cabarete','panama-city',
   ];
   const cities = new Map<string, CollectionEntry<'hotels'>[]>();
   for (const h of all) {
@@ -42,7 +42,7 @@ const primary = hotels[0].data;
 const city = primary.city;
 const country = primary.country;
 const region = countryRegion(country);
-const tierPath = primary.budgetTier.includes('100') ? '/under-100/' : primary.budgetTier.includes('200') ? '/under-200/' : '/under-250/';
+const tierPath = primary.budgetTier.includes('€50') ? '/under-50/' : primary.budgetTier.includes('100') ? '/under-100/' : primary.budgetTier.includes('200') ? '/under-200/' : '/under-250/';
 const path = `/destinations/${slugify(city)}/`;
 const nearby = all
   .map((h) => h.data)

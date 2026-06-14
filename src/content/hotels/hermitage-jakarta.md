@@ -1,7 +1,7 @@
 ---
 title: "The Hermitage, a Tribute Portfolio Hotel, Jakarta"
 slug: "hermitage-jakarta"
-rank: 35
+rank: 37
 city: "Jakarta"
 country: "Indonesia"
 region: "Southeast Asia"

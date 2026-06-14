@@ -25,6 +25,7 @@ export const countryRegions: Record<string, string> = {
   'United States': 'Americas',
   Mexico: 'Americas',
   'Dominican Republic': 'Americas',
+  Panama: 'Americas',
 };
 
 export function countryRegion(country: string) {

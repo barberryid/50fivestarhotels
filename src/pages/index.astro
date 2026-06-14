@@ -32,6 +32,7 @@ const heroImage = {
   alt: heroHotel?.image?.alt ?? heroHotel?.title ?? 'Steigenberger Resort Achti, Luxor at dusk',
 };
 
+const under50Count = allHotels.filter(h => h.data.budgetTier === 'Under €50').length;
 const under100Count = allHotels.filter(h => h.data.budgetTier === 'Under €100').length;
 const under200Count = allHotels.filter(h => h.data.budgetTier === 'Under €200').length;
 const under250Count = allHotels.filter(h => h.data.budgetTier === 'Under €250').length;
@@ -85,7 +86,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
 
 <BaseLayout
   title="50 Five-Star Hotels Without Five-Star Prices"
-  description="Discover affordable five-star and near-five-star hotels around the world, from under-€100 heritage stays to smart luxury splurges under €250."
+  description="Discover affordable five-star and near-five-star hotels around the world, from rare under-€50 snapshot finds to smart luxury splurges under €250."
   canonical="/"
   image={heroImage.src}
   jsonLd={jsonLd}
@@ -167,7 +168,14 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), itemListJsonLd('Best afforda
     <section class="max-w-6xl mx-auto px-5 py-20">
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Browse by price</p>
       <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-10">Find hotels by budget</h2>
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <PriceTierCard
+          tier="Under €50"
+          href="/under-50"
+          tagline="Rare snapshot finds"
+          description="The most aggressive value leads: five-star or near-five-star hotels that can appear at €50 or below, with extra caution required."
+          count={under50Count}
+        />
         <PriceTierCard
           tier="Under €100"
           href="/under-100"

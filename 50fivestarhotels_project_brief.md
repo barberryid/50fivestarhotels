@@ -730,7 +730,7 @@ The site has now had a major SEO architecture expansion committed and pushed to 
 
 - `/cheap-five-star-hotels/`
 - `/affordable-luxury-hotels/`
-- `/under-50/` placeholder page
+- `/under-50/` live under-?50 tier page
 - `/research-hotels/`
 - `/cheapest-cities-five-star-hotels/` redirects to `/research-hotels/`
 - `/methodology/` redirects to `/research-hotels/#methodology`
@@ -924,38 +924,73 @@ The site was redesigned toward a warm, image-rich affordable-luxury editorial lo
 - Rendering Markdown entries uses `import { render } from 'astro:content'` then `await render(entry)` — not `entry.render()`
 - Content files live in `src/content/hotels/`
 
-### Launch hotel list (21 hotels)
+### Live hotel list (57 hotels)
 
-All 21 hotels are live as individual pages at `/hotels/[slug]`. Nepal (Pokhara) joined the collection on 2026-06-05 as the first **South Asia** destination.
+All 57 hotels are live as individual pages at `/hotels/[slug]`. The under-?50 tier joined the collection on 2026-06-14 with the strongest candidates from the under-?50 research block.
 
-**Maintenance instruction:** when a new hotel Markdown file is added under `src/content/hotels/`, update this launch hotel list in the same change. This brief should always list every live hotel currently present in `src/content/hotels/`, using the hotel frontmatter as the source of truth for exact title, city, country, tier, score, and verdict.
+**Maintenance instruction:** when a new hotel Markdown file is added under `src/content/hotels/`, update this live hotel list in the same change. This brief should always list every live hotel currently present in `src/content/hotels/`, using the hotel frontmatter as the source of truth for exact title, city, country, tier, score, and verdict.
 
 **Affiliate instruction for new hotels:** every new hotel Markdown file should include a clean canonical Booking.com hotel URL in `bookingUrl` when one is available. Keep the stored URL free of affiliate wrappers and tracking/query parameters. The site will generate the CJ affiliate link automatically from that clean value.
 
 | Rank | Hotel | City | Country | Tier | Score | Verdict |
 |---|---|---|---|---|---|---|
-| 1 | Hotel Majapahit Surabaya – MGallery Collection | Surabaya | Indonesia | Under €100 | 91 | Exceptional value |
-| 2 | The Phoenix Hotel Yogyakarta – Handwritten Collection | Yogyakarta | Indonesia | Under €100 | 89 | Exceptional value |
-| 3 | The Majestic Hotel Kuala Lumpur, Autograph Collection | Kuala Lumpur | Malaysia | Under €200 | 87 | Exceptional value |
-| 4 | The Raweekanlaya Bangkok Wellness Cuisine Resort | Bangkok | Thailand | Under €200 | 85 | Exceptional value |
-| 5 | Stamba Hotel | Tbilisi | Georgia | Under €250 | 84 | Strong value |
-| 6 | Angkor Aurora | Siem Reap | Cambodia | Under €100 | 83 | Strong value |
-| 7 | The Royal Surakarta Heritage – Handwritten | Solo | Indonesia | Under €100 | 82 | Strong value |
-| 8 | Pleiada Boutique Hotel & Spa | Iași | Romania | Under €200 | 81 | Strong value |
-| 9 | Steigenberger Resort Achti Luxor | Luxor | Egypt | Under €200 | 81 | Strong value |
-| 10 | Silk Path Grand Hue Hotel & Spa | Hue | Vietnam | Under €100 | 80 | Strong value |
-| 11 | The Hermitage, a Tribute Portfolio Hotel, Jakarta | Jakarta | Indonesia | Under €200 | 80 | Strong value |
-| 12 | Hyatt Regency Tashkent | Tashkent | Uzbekistan | Under €200 | 79 | Strong value |
-| 13 | Grand Hotel Yerevan | Yerevan | Armenia | Under €200 | 78 | Strong value |
-| 14 | Sofitel Marrakech Palais Imperial & Spa | Marrakech | Morocco | Under €250 | 78 | Strong value |
-| 15 | Boton Blue Hotel & Spa | Nha Trang | Vietnam | Under €100 | 76 | Strong value |
-| 16 | I'M Hotel Makati | Makati | Philippines | Under €200 | 75 | Strong value |
-| 17 | Malak Regency Hotel | Sarajevo | Bosnia and Herzegovina | Under €200 | 73 | Good value |
-| 18 | Bar Peepal Resort | Pokhara | Nepal | Under €100 | 73 | Good value |
-| 19 | Real Marina Hotel & Spa | Olhão | Portugal | Under €200 | 72 | Good value |
-| 20 | Graffit Gallery Design Hotel | Varna | Bulgaria | Under €200 | 71 | Good value |
-| 21 | Millennium Downtown Abu Dhabi | Abu Dhabi | United Arab Emirates | Under €200 | 68 | Good value |
-
+| 1 | Hotel Suitess | Dresden | Germany | Under €250 | 100 | Exceptional value |
+| 2 | Steigenberger Icon Grandhotel Handelshof Leipzig | Leipzig | Germany | Under €250 | 99 | Exceptional value |
+| 3 | Hotel Elephant Weimar, Autograph Collection | Weimar | Germany | Under €250 | 99 | Exceptional value |
+| 4 | Mansion Merida Boutique Hotel | Merida | Mexico | Under €250 | 97 | Exceptional value |
+| 5 | Cartesiano Boutique & Wellness Hotel | Puebla | Mexico | Under €200 | 96 | Exceptional value |
+| 6 | Hodelpa Nicolas de Ovando | Santo Domingo | Dominican Republic | Under €250 | 96 | Exceptional value |
+| 7 | The Grand, York | York | England | Under €250 | 94 | Exceptional value |
+| 8 | Hotel de la Cite Carcassonne MGallery | Carcassonne | France | Under €250 | 94 | Exceptional value |
+| 9 | Grand Hotel Wagner | Palermo | Italy | Under €250 | 94 | Exceptional value |
+| 10 | Casa Don Gustavo Boutique Hotel | Campeche | Mexico | Under €200 | 94 | Exceptional value |
+| 11 | Hotel Bristol Palace | Genoa | Italy | Under €250 | 93 | Exceptional value |
+| 12 | Relais Antica Badia - San Maurizio 1619 | Ragusa | Italy | Under €200 | 92 | Exceptional value |
+| 13 | Municipal Hotel Liverpool, MGallery | Liverpool | England | Under €200 | 91 | Exceptional value |
+| 14 | Hotel Majapahit Surabaya – MGallery Collection | Surabaya | Indonesia | Under €100 | 91 | Exceptional value |
+| 15 | The Royal Surakarta Heritage – Handwritten Collection | Solo | Indonesia | Under €50 | 91 | Exceptional value |
+| 16 | Auberge Saint-Antoine | Quebec City | Canada | Under €200 | 90 | Exceptional value |
+| 17 | Hotel & Spa Regent Petite France | Strasbourg | France | Under €250 | 90 | Exceptional value |
+| 18 | The Phoenix Hotel Yogyakarta – Handwritten Collection | Yogyakarta | Indonesia | Under €50 | 89 | Exceptional value |
+| 19 | Hotel de Bourgtheroulde, Autograph Collection | Rouen | France | Under €250 | 89 | Exceptional value |
+| 20 | Sublime Samana Hotel & Residences | Las Terrenas | Dominican Republic | Under €250 | 89 | Exceptional value |
+| 21 | Kimpton Blythswood Square Hotel & Spa | Glasgow | Scotland | Under €250 | 88 | Exceptional value |
+| 22 | Natura Cabana Boutique Hotel & Spa | Cabarete | Dominican Republic | Under €250 | 88 | Exceptional value |
+| 23 | Pandora Suite D’Angkor | Siem Reap | Cambodia | Under €50 | 88 | Exceptional value |
+| 24 | The Majestic Hotel Kuala Lumpur, Autograph Collection | Kuala Lumpur | Malaysia | Under €200 | 87 | Exceptional value |
+| 25 | The Brown Hotel | Louisville | United States | Under €100 | 86 | Exceptional value |
+| 26 | The Pfister Hotel | Milwaukee | United States | Under €200 | 85 | Exceptional value |
+| 27 | The Raweekanlaya Bangkok Wellness Cuisine Resort | Bangkok | Thailand | Under €200 | 85 | Exceptional value |
+| 28 | Stamba Hotel | Tbilisi | Georgia | Under €250 | 84 | Strong value |
+| 29 | Havana Nha Trang Hotel | Nha Trang | Vietnam | Under €50 | 84 | Strong value |
+| 30 | Angkor Aurora | Siem Reap | Cambodia | Under €100 | 83 | Strong value |
+| 31 | The Venetian Resort | Las Vegas | United States | Under €200 | 83 | Strong value |
+| 32 | The Mayo Hotel | Tulsa | United States | Under €200 | 82 | Strong value |
+| 33 | Pleiada Boutique Hotel & Spa | Iași | Romania | Under €200 | 81 | Strong value |
+| 34 | Steigenberger Resort Achti Luxor | Luxor | Egypt | Under €200 | 81 | Strong value |
+| 35 | The Central Station Memphis, Curio Collection by Hilton | Memphis | United States | Under €200 | 81 | Strong value |
+| 36 | Silk Path Grand Hue Hotel & Spa | Hue | Vietnam | Under €100 | 80 | Strong value |
+| 37 | The Hermitage, a Tribute Portfolio Hotel, Jakarta | Jakarta | Indonesia | Under €200 | 80 | Strong value |
+| 38 | The Nines, a Luxury Collection Hotel | Portland | United States | Under €200 | 80 | Strong value |
+| 39 | 21c Museum Hotel Louisville | Louisville | United States | Under €200 | 80 | Strong value |
+| 40 | Grand Mercure Solo Baru | Solo Baru | Indonesia | Under €50 | 80 | Strong value |
+| 41 | Hyatt Regency Tashkent | Tashkent | Uzbekistan | Under €200 | 79 | Strong value |
+| 42 | Grand Hotel Yerevan | Yerevan | Armenia | Under €200 | 78 | Strong value |
+| 43 | Kimpton Cottonwood Hotel | Omaha | United States | Under €200 | 78 | Strong value |
+| 44 | Sofitel Marrakech Palais Imperial & Spa | Marrakech | Morocco | Under €250 | 78 | Strong value |
+| 45 | Conrad Bangkok | Bangkok | Thailand | Under €50 | 78 | Strong value |
+| 46 | Perry Lane Hotel, a Luxury Collection Hotel | Savannah | United States | Under €250 | 77 | Strong value |
+| 47 | Boton Blue Hotel & Spa | Nha Trang | Vietnam | Under €100 | 76 | Strong value |
+| 48 | Megapolis Hotel Panama | Panama City | Panama | Under €50 | 76 | Strong value |
+| 49 | I'M Hotel Makati | Makati | Philippines | Under €200 | 75 | Strong value |
+| 50 | Malak Regency Hotel | Sarajevo | Bosnia and Herzegovina | Under €200 | 73 | Good value |
+| 51 | Bar Peepal Resort | Pokhara | Nepal | Under €100 | 73 | Good value |
+| 52 | Real Marina Hotel & Spa | Olhão | Portugal | Under €200 | 72 | Good value |
+| 53 | Graffit Gallery Design Hotel | Varna | Bulgaria | Under €200 | 71 | Good value |
+| 54 | TTC Hotel Michelia | Nha Trang | Vietnam | Under €50 | 70 | Good value |
+| 55 | Diamond Bay Hotel | Nha Trang | Vietnam | Under €50 | 69 | Good value |
+| 56 | Millennium Downtown Abu Dhabi | Abu Dhabi | United Arab Emirates | Under €200 | 68 | Good value |
+| 57 | Virgo Hotel | Nha Trang | Vietnam | Under €50 | 68 | Good value |
 **Not in launch batch (future candidates):**
 - Meliá Yangon
 - NH Collection Bogotá WTC Royal
@@ -975,7 +1010,7 @@ src/
                         RegionPage, GuideArticle
   components/trust/   - FiveStarReality, WatchOutFor, WhyItsCheap, BestMonths
                         (reusable "before you book" trust panel on hotel pages)
-  content/hotels/     - 21 Markdown hotel files
+  content/hotels/     - 57 Markdown hotel files
   content.config.ts   - Astro 6 Content Layer schema (glob loader);
                         includes optional whyCheap, seoTitle, seoDescription,
                         focusKeyword, secondaryKeywords and lastUpdated fields
@@ -1150,7 +1185,7 @@ Immediate next priority: add live profile pages for the AI-image candidates not 
 
 1. **Replace contextual images with hotel-specific images where possible** — use `research/image-audit.md`, `image-attributions.md`, and the gallery frontmatter as the working source.
 2. **Maintain Booking.com affiliate links** - every future hotel profile should include a clean canonical `bookingUrl` so the existing CJ helper can generate affiliate CTAs automatically.
-3. **Expand to 50 hotels** — future candidates listed above plus the destination strategy in this brief; use `research/seo-content-roadmap.md` as the working SEO roadmap.
+3. **Maintain the post-50 collection** — future candidates listed above plus the destination strategy in this brief; use `research/seo-content-roadmap.md` as the working SEO roadmap and keep the live hotel table synced to frontmatter.
 4. **Deepen existing city/destination pages** — the initial destination route is live for the 20 strongest cities, but individual pages should be enriched over time with more specific local sights, food, timing and hotel comparison detail.
 5. **Keep this brief current** — whenever hotels, routes, image systems, data files, affiliate status, or build/deploy details change, update this Build status section in the same change.
 
@@ -1267,7 +1302,7 @@ Recommended follow-ups (identified, not yet actioned):
 
 ---
 
-The site includes a "How to Find Stays" research-yourself tool page (`/research-hotels/`) with the public promise "How to Uncover Elite Stays in Every Corner of the World." It lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The "How We Choose Hotels" methodology text now lives at the bottom of this page as `/research-hotels/#methodology`. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/`, and `/methodology/` redirects to `/research-hotels/#methodology`, via the Cloudflare Pages `_redirects` file. A new `/under-50/` placeholder page exists for future under-€50 research.
+The site includes a "How to Find Stays" research-yourself tool page (`/research-hotels/`) with the public promise "How to Uncover Elite Stays in Every Corner of the World." It lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The "How We Choose Hotels" methodology text now lives at the bottom of this page as `/research-hotels/#methodology`. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/`, and `/methodology/` redirects to `/research-hotels/#methodology`, via the Cloudflare Pages `_redirects` file. The `/under-50/` page is now a live tier page for carefully qualified under-€50 snapshot-rate candidates.
 
 As of 2026-06-14, `/destinations/` has been replaced with the homepage-style "The full list" section: "All {hotel count} hotels at a glance", ranked by value score, with every row linking to the full hotel editorial profile.
 
@@ -1277,3 +1312,19 @@ As of 2026-06-14, `/destinations/` has been replaced with the homepage-style "Th
 - Added the **Best 3 to develop first** row for The Royal Surakarta Heritage – Handwritten Collection, Pandora Suite D’Angkor, and Havana Nha Trang Hotel.
 - Added the full 10-hotel under-€50 candidate table, with visible snapshot-rate caution language and Conrad Bangkok marked as a rate anomaly requiring recheck.
 - Updated the visible fallback rule and generated country research prompt so empty under-€50 results display **No credible candidate found under €50** and use the label **Fallback above €50** for fallback results.
+
+### Under €50 live profiles added — 2026-06-14
+
+- Promoted the under-€50 research candidates into a live **Under €50** tier and replaced `/under-50/` with a real collection page.
+- Updated **The Royal Surakarta Heritage – Handwritten Collection** and **The Phoenix Hotel Yogyakarta – Handwritten Collection** from `Under €100` to `Under €50`, with `Under €100` retained as the secondary tier.
+- Added eight new hotel profiles:
+  - **Pandora Suite D’Angkor**, Siem Reap, Cambodia.
+  - **Havana Nha Trang Hotel**, Nha Trang, Vietnam.
+  - **Conrad Bangkok**, Bangkok, Thailand.
+  - **Megapolis Hotel Panama**, Panama City, Panama.
+  - **Virgo Hotel**, Nha Trang, Vietnam.
+  - **TTC Hotel Michelia**, Nha Trang, Vietnam.
+  - **Diamond Bay Hotel**, Nha Trang, Vietnam.
+  - **Grand Mercure Solo Baru**, Solo Baru, Indonesia.
+- Generated and integrated one AI editorial hero plus 1200px and 800px WebP derivatives for each of the eight new profiles.
+- Added Panama to the Americas region map, added `panama-city` and `solo-baru` destination routes, refreshed global ranks, and updated the project brief live hotel table to **57 hotels**.

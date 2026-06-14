@@ -1,7 +1,7 @@
 ---
 title: "Sublime Samana Hotel & Residences"
 slug: "sublime-samana"
-rank: 19
+rank: 20
 city: "Las Terrenas"
 country: "Dominican Republic"
 region: "Americas"

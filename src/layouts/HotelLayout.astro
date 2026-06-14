@@ -138,7 +138,7 @@ const hotelJsonLd = {
   description: hotelDescription,
 };
 const citySlug = hotel.city.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const tierPath = hotel.budgetTier.includes('100') ? '/under-100/' : hotel.budgetTier.includes('200') ? '/under-200/' : '/under-250/';
+const tierPath = hotel.budgetTier.includes('€50') ? '/under-50/' : hotel.budgetTier.includes('100') ? '/under-100/' : hotel.budgetTier.includes('200') ? '/under-200/' : '/under-250/';
 const region = countryRegion(hotel.country);
 const relatedHotels = allHotels
   .map((entry) => entry.data ?? entry)

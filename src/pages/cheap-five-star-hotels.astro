@@ -4,12 +4,12 @@ import SeoLandingPage from '../components/SeoLandingPage.astro';
 
 const all = await getCollection('hotels', ({ data }) => !data.draft);
 const priority = [
-  'hotel-majapahit-surabaya',
-  'phoenix-hotel-yogyakarta',
   'royal-surakarta-heritage',
-  'angkor-aurora-siem-reap',
-  'silk-path-grand-hue',
-  'boton-blue-nha-trang',
+  'phoenix-hotel-yogyakarta',
+  'pandora-suite-dangkor',
+  'havana-nha-trang-hotel',
+  'hotel-majapahit-surabaya',
+  'grand-mercure-solo-baru',
 ];
 const hotels = priority.map((slug) => all.find((h) => h.data.slug === slug)).filter(Boolean);
 ---
@@ -28,21 +28,21 @@ const hotels = priority.map((slug) => all.find((h) => h.data.slug === slug)).fil
     {
       heading: 'What cheap five-star really means',
       body: [
-        'On this site, cheap five-star usually means a hotel that can often appear under €100, or close to it, outside peak dates. Some are local or booking-site five-star properties rather than universally polished international luxury hotels. That distinction matters, because the star label is only one part of the value story.',
+        'On this site, cheap five-star usually means a hotel that can often appear under €100, with a smaller under-€50 tier for the most aggressive visible snapshot-rate finds. Some are local or booking-site five-star properties rather than universally polished international luxury hotels. That distinction matters, because the star label is only one part of the value story.',
         'A good cheap five-star hotel should still feel like an upgrade from ordinary accommodation. It might offer heritage architecture, a proper pool, a better breakfast, larger rooms, an interesting neighbourhood, or a city that makes the whole trip richer.',
       ],
     },
     {
       heading: 'Best cheap five-star hotels in the current list',
       body: [
-        'The strongest examples right now are in Indonesia, Cambodia, and Vietnam. Hotel Majapahit Surabaya and The Phoenix Hotel Yogyakarta are especially compelling because they combine heritage character with rates that can look almost implausible from a European or North American perspective.',
-        'The Royal Surakarta Heritage, Angkor Aurora, Silk Path Grand Hue, and Boton Blue Hotel & Spa are also worth checking when dates are flexible. Their value depends heavily on season, room type, and whether the local five-star label matches your expectations.',
+        'The strongest ultra-cheap examples right now are in Indonesia, Cambodia, and Vietnam. The Royal Surakarta Heritage, The Phoenix Hotel Yogyakarta, Pandora Suite D’Angkor, and Havana Nha Trang Hotel are especially compelling because they combine a real trip idea with rates that can look almost implausible from a European or North American perspective.',
+        'Hotel Majapahit Surabaya, Grand Mercure Solo Baru, Angkor Aurora, Silk Path Grand Hue, and Boton Blue Hotel & Spa are also worth checking when dates are flexible. Their value depends heavily on season, room type, and whether the local five-star label matches your expectations.',
       ],
     },
     {
       heading: 'Best destinations for cheap five-star hotels',
       body: [
-        'Surabaya, Yogyakarta, Solo, Siem Reap, Hue, and Nha Trang are strong because the destination itself is affordable. Lower operating costs, competitive hotel supply, and a local market that does not price luxury like London, Paris, or Singapore can make the same comfort level feel dramatically cheaper.',
+        'Surabaya, Yogyakarta, Solo, Siem Reap, Hue, and Nha Trang are strong because the destination itself is affordable. Bangkok and Panama City can also produce occasional business-hotel anomalies. Lower operating costs, competitive hotel supply, and a local market that does not price luxury like London, Paris, or Singapore can make the same comfort level feel dramatically cheaper.',
         'The best cheap five-star destinations are rarely the obvious trophy cities. They are often second cities, heritage cities, temple gateways, or coastal cities with enough hotel supply to keep rates honest.',
       ],
     },
@@ -70,7 +70,7 @@ const hotels = priority.map((slug) => all.find((h) => h.data.slug === slug)).fil
     {
       heading: 'Related price guides',
       body: [
-        'Use the under-€100 page for the most aggressive value cases, under-€200 for more reliable affordable luxury, and under-€250 for smart splurges where design, location, or brand strength justify paying a little more.',
+        'Use the under-€50 page for the most fragile snapshot-rate finds, under-€100 for broader budget luxury, under-€200 for more reliable affordable luxury, and under-€250 for smart splurges where design, location, or brand strength justify paying a little more.',
       ],
     },
   ]}
@@ -78,7 +78,8 @@ const hotels = priority.map((slug) => all.find((h) => h.data.slug === slug)).fil
   tableTitle="Cheap five-star hotels at a glance"
   itemListName="Cheap five-star hotels worth considering"
   related={[
-    { title: 'Best Five-Star Hotels Under €100 Worldwide', href: '/under-100/', description: 'The strongest budget luxury hook on the site.' },
+    { title: 'Best Five-Star Hotels Under €50 Worldwide', href: '/under-50/', description: 'Rare snapshot-rate finds that need careful rechecking.' },
+    { title: 'Best Five-Star Hotels Under €100 Worldwide', href: '/under-100/', description: 'The broader budget luxury hook on the site.' },
     { title: 'Best Five-Star Hotels Under €200 Worldwide', href: '/under-200/', description: 'More reliable comfort while staying value-focused.' },
     { title: 'Affordable Luxury Hotels', href: '/affordable-luxury-hotels/', description: 'A broader guide for travellers who want value without bargain-bin framing.' },
     { title: 'How to Find Stays', href: '/research-hotels/', description: 'Research affordable five-star candidates for your own trip.' },

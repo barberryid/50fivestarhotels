@@ -1,7 +1,7 @@
 ---
 title: "Grand Hotel Yerevan"
 slug: "grand-hotel-yerevan"
-rank: 39
+rank: 42
 city: "Yerevan"
 country: "Armenia"
 region: "Caucasus and Central Asia"

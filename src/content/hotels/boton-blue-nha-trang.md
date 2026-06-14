@@ -1,7 +1,7 @@
 ---
 title: "Boton Blue Hotel & Spa"
 slug: "boton-blue-nha-trang"
-rank: 43
+rank: 47
 city: "Nha Trang"
 country: "Vietnam"
 region: "Southeast Asia"

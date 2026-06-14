@@ -1,32 +1,88 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
-import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HotelCard from '../components/HotelCard.astro';
+import HotelComparisonTable from '../components/HotelComparisonTable.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../lib/seo';
 
-const jsonLd = breadcrumbJsonLd([
-  { name: 'Home', url: canonicalUrl('/') },
-  { name: 'Five-Star Hotels Under €50', url: canonicalUrl('/under-50/') },
-]);
+const all = await getCollection('hotels', ({ data }) => !data.draft);
+const hotels = all.filter(h => h.data.budgetTier === 'Under €50').sort((a, b) => a.data.rank - b.data.rank);
+
+const tableHotels = hotels.map(h => ({
+  slug: h.data.slug,
+  rank: h.data.rank,
+  title: h.data.title,
+  city: h.data.city,
+  country: h.data.country,
+  budgetTier: h.data.budgetTier,
+  valueScore: h.data.valueScore,
+  verdict: h.data.verdict,
+  fiveStarStatus: h.data.fiveStarStatus,
+  bestFor: h.data.bestFor,
+  cautions: h.data.cautions,
+}));
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: canonicalUrl('/') },
+    { name: 'Five-Star Hotels Under €50', url: canonicalUrl('/under-50/') },
+  ]),
+  itemListJsonLd('Five-star and near-five-star hotels under €50', hotels),
+];
 ---
 
-<PageLayout
-  title="Five-Star Hotels Under €50 | 50 Five-Star Hotels"
-  description="A placeholder for future five-star and near-five-star hotel research under €50, with honest cautions about rates, seasonality and five-star reality."
+<BaseLayout
+  title="Best Five-Star Hotels Under €50 | 50 Five-Star Hotels"
+  description="Rare five-star and near-five-star hotel candidates that can appear at €50 or below, with careful cautions about snapshot rates, seasonality and local star ratings."
   canonical="/under-50/"
   jsonLd={jsonLd}
 >
-  <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Coming soon</p>
-  <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
-    Five-Star Hotels Under €50
-  </h1>
-  <div class="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-[#1F2428] prose-p:text-[#1F2428]/75 prose-p:leading-relaxed">
-    <p>
-      This page is a placeholder for future research into rare under-€50 five-star and near-five-star stays. At this level, a low headline rate needs especially careful checking: dates, taxes, room category, recent reviews, location and whether the five-star label reflects the current guest experience.
-    </p>
-    <p>
-      For now, use the research tool to investigate specific countries and treat under-€50 results as leads to verify rather than promises to book.
-    </p>
-    <p>
-      <a href="/research-hotels/" class="text-[#B88A44] font-semibold no-underline hover:underline">Research a country with the hotel prompt →</a>
-    </p>
-  </div>
-</PageLayout>
+  <main>
+    <section class="bg-[#F8F2E8] border-b border-[#1F2428]/6">
+      <div class="max-w-4xl mx-auto px-5 py-16">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Budget tier</p>
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
+          Best five-star hotels under €50
+        </h1>
+        <p class="text-[#6F685F] text-lg leading-relaxed max-w-2xl">
+          These are the most fragile bargains on the site: credible five-star or near-five-star hotels that have appeared at €50 or below in visible snapshot rates. Treat them as leads to recheck, not fixed prices.
+        </p>
+        <p class="text-[#6F685F] text-xs mt-5">
+          {hotels.length} hotels in this tier. Prices vary by date, room type, taxes and cancellation policy.
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-[#1F2428]/4 border-b border-[#1F2428]/6">
+      <div class="max-w-4xl mx-auto px-5 py-6">
+        <p class="text-[#1F2428]/70 text-sm leading-relaxed">
+          <strong class="text-[#1F2428]">Price note:</strong> Under-€50 evidence is based on visible OTA snapshot rates, usually for one night / two adults. These hotels are not guaranteed to stay below €50. Always recheck live prices by date, room type, taxes and cancellation policy before publishing or booking.
+        </p>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-5 py-16">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {hotels.map(h => <HotelCard hotel={h.data} />)}
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-5 pb-16">
+      <HotelComparisonTable hotels={tableHotels} title="Under €50 hotels at a glance" />
+    </section>
+
+    <section class="max-w-4xl mx-auto px-5 pb-16">
+      <AffiliateDisclosure />
+    </section>
+
+    <section class="bg-[#FFFDF8] border-t border-[#1F2428]/6 py-12">
+      <div class="max-w-4xl mx-auto px-5 flex flex-wrap gap-6 items-center justify-between">
+        <p class="text-[#6F685F] text-sm">How are these hotels evaluated?</p>
+        <a href="/research-hotels/#methodology" class="text-[#B88A44] font-semibold text-sm hover:underline no-underline">
+          Read the full methodology →
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

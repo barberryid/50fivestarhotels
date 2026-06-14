@@ -1,7 +1,7 @@
 ---
 title: "Natura Cabana Boutique Hotel & Spa"
 slug: "natura-cabana-cabarete"
-rank: 21
+rank: 22
 city: "Cabarete"
 country: "Dominican Republic"
 region: "Americas"

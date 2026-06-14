@@ -1,12 +1,13 @@
 ---
 title: "The Royal Surakarta Heritage – Handwritten Collection"
 slug: "royal-surakarta-heritage"
-rank: 29
+rank: 15
 city: "Solo"
 country: "Indonesia"
 region: "Southeast Asia"
-budgetTier: "Under €100"
-typicalPriceRange: "Often seen around €60–€100 outside peak dates"
+budgetTier: "Under €50"
+secondaryTier: "Under €100"
+typicalPriceRange: "Visible snapshot rates have been seen from €25-€35; recheck live dates carefully"
 hotelType: "Heritage hotel"
 fiveStarStatus: "Heritage-value five-star"
 bestFor:
@@ -14,8 +15,8 @@ bestFor:
   - "Javanese culture"
   - "off-the-beaten-path Java"
   - "batik and craft"
-valueScore: 82
-verdict: "Strong value"
+valueScore: 91
+verdict: "Exceptional value"
 bookingUrl: "https://www.booking.com/hotel/id/the-royal-surakarta-heritage.en-gb.html"
 image:
   src: "/images/hotels/royal-surakarta-heritage-solo-editorial-dusk.webp"

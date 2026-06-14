@@ -1,7 +1,7 @@
 ---
 title: "Silk Path Grand Hue Hotel & Spa"
 slug: "silk-path-grand-hue"
-rank: 34
+rank: 36
 city: "Hue"
 country: "Vietnam"
 region: "Southeast Asia"

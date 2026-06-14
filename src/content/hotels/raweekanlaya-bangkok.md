@@ -1,7 +1,7 @@
 ---
 title: "The Raweekanlaya Bangkok Wellness Cuisine Resort"
 slug: "raweekanlaya-bangkok"
-rank: 25
+rank: 27
 city: "Bangkok"
 country: "Thailand"
 region: "Southeast Asia"
