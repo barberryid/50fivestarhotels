@@ -11,54 +11,54 @@
 //   [PERSONAL_OUTPUT_NOTES]      — optional extra output columns / personal-fit notes (empty when no preferences)
 // Keep the tokens exactly as written; the tool does literal replacement.
 
-export const researchPromptTemplate = `You are a specialist travel research assistant for a curated editorial guide to affordable luxury travel. Your task is to research candidate hotels for the region: **[REGION]**.
+export const researchPromptTemplate = `You are an expert travel assistant. Help me find an outstanding-value hotel for an upcoming trip to **[REGION]**.
 
-The editorial test for every candidate is:
+The hotel I'm hoping to find should make me think:
 
-> "Does this hotel make a reasonably seasoned traveller think: I didn't know I could have that kind of stay at that price?"
+> "I didn't realise I could get this kind of stay at that price."
 
-Use this curated guide as the editorial benchmark. New recommendations should add something useful rather than merely repeating obvious luxury hotels.
+I'm not chasing the cheapest room — I want the best comfort, character and location for the money. Suggest places I might not find on my own, not just the obvious famous five-stars.
 
 [CITY_FOCUS_SECTION]---
 
-### Price-level search rule
+### My budget
 
 [PRICE_LEVEL_SEARCH_RULE]
 
 ---
 
-### Step 1 — Identify the strongest destinations in the region
+### Step 1 — Where should I base myself in [REGION]?
 
-Before researching any hotels, first identify the **5–8 cities or destinations** within **[REGION]** where five-star or near-five-star hotel quality is structurally underpriced relative to Western European or North American equivalents.
+If I haven't named a specific city, first suggest the **3–6 places** in **[REGION]** worth considering, prioritising spots where genuinely good hotels are unusually affordable and the destination itself is worth visiting.
 
-For each destination, briefly explain:
-- Why luxury pricing is lower here
-- Whether the destination itself is interesting enough to justify a trip
-- A rough safety/political risk level: Low / Moderate / High
+For each, tell me briefly:
+- Why hotel prices are lower here than I'd expect
+- What makes it worth a trip
+- A rough safety level for ordinary travellers: Low / Moderate / High
 
-Reject any destination with a **High** risk rating from further consideration in this session unless you have a specific editorial reason to flag it as a future watch.
-
----
-
-### Step 2 — Find the best qualifying hotel in each destination
-
-For each destination that passes Step 1, apply the price-level search rule and identify the **1–3 most compelling hotel candidates**. Focus on hotels that combine:
-
-- Strong value versus the local five-star market
-- Genuine character (heritage, design, boutique, wellness — not generic chain towers)
-- A location and surrounding destination worth writing about
-- Visually interesting enough to anchor editorial photography
-
-Search Booking.com, Google Hotels, TripAdvisor and recent travel publications for evidence.
+Skip anywhere you'd rate **High** risk unless there's a strong reason to mention it.
 
 ---
 
-### Step 3 — Produce a scored longlist of 15–20 candidates
+### Step 2 — Find the best-value hotels
 
-For each candidate hotel, provide:
+For each place worth staying, apply my budget above and find the **1–3 strongest hotels**. Favour places with:
 
-**Hotel name and city**
-**Five-star category** (use one of these exactly):
+- Strong value compared with similar hotels nearby
+- Real character (heritage, design, boutique, spa or resort — not bland chain towers)
+- A genuinely useful, pleasant location
+- Consistently good recent reviews
+
+Check Booking.com, Google Hotels, Tripadvisor and recent travel write-ups, and tell me where you found each one.
+
+---
+
+### Step 3 — Score and compare the options
+
+List the strongest candidates you find (aim for roughly 8–15, or fewer if the area is small). For each:
+
+**Hotel name and location**
+**What kind of "five-star" it is** (pick one):
 - True international five-star
 - Local / booking-site five-star
 - Heritage-value five-star
@@ -66,90 +66,82 @@ For each candidate hotel, provide:
 - Near-luxury exception
 - Questionable five-star
 
-**Typical price range** (shoulder season, standard room, per night in €)
+**Typical nightly price** (standard room, shoulder season, in €; note the rate you saw and roughly when)
 
-**Lowest realistic price level** (use one of these exactly):
+**Lowest budget level it fits** (pick one):
 [PRICE_LEVEL_LABELS]
 
-**Booking.com score** (if available)
+**Review score** (Booking.com or Google, with the rough number of reviews so I know it's reliable)
 
-**Preliminary score** across these six factors (score each out of the maximum, then total):
+**Value score out of 100**, built from these six factors:
 
-| Factor | Max | Your score |
+| What I'm judging | Max | Score |
 |---|---|---|
-| Price/value vs local five-star market | 25 | |
-| Hotel character or luxury feel | 20 | |
+| Price vs. what comparable hotels cost nearby | 25 | |
+| Character and how luxurious it actually feels | 20 | |
 | Review strength and consistency | 15 | |
-| Location usefulness | 15 | |
-| Nearby sights, food and experiences | 15 | |
-| Risk level and hidden drawbacks | 10 | |
+| How useful the location is | 15 | |
+| Things to see, eat and do nearby | 15 | |
+| Risk and hidden drawbacks | 10 | |
 | **Total** | **100** | |
 
-**Scoring adjustments** (apply before finalising total):
-- Exceptional heritage hotel: +5
-- Exceptional boutique or design hotel: +5
-- Interesting independent hotel: +3
-- Generic chain hotel: 0
-- Visual/photography potential (score 0–10, weight at 10% of total): add this figure ×0.1
+Score each line and total to 100. You may add up to +5 (staying within the 100 ceiling) for an exceptional heritage, design or independent hotel. Show the final number.
 
-**Adjusted total score:**
-
-**Verdict label** (apply the correct one):
+**Rating** (from the score):
 - 85–100: Exceptional value
 - 75–84: Strong value
 - 65–74: Good value
-- 55–64: Conditional value
-- Below 55: Reject
+- 55–64: Worth a look
+- Below 55: Skip
 
-**One-sentence editorial case** for the hotel (why would a reader book this?)
-
-**One-sentence risk or drawback flag** (what could disappoint a reader?)
+**One line on why I'd book it**
+**One honest line on what might disappoint me**
 
 ---
 
-[PERSONAL_WEIGHTING_SECTION]### Step 4 — Apply hard disqualification rules
+[PERSONAL_WEIGHTING_SECTION]### Step 4 — Rule out the weak options
 
-Before proceeding to the shortlist, reject any candidate that meets one or more of these conditions:
+Drop any hotel that:
 
-- Booking.com score below 8.0
+- Has a review score below 8.0 / 10, or too few reviews to trust
 - [PRICE_LEVEL_DISQUALIFICATION_RULE]
-- Value is primarily driven by a temporary promotion or flash sale
-- The hotel is cheap primarily because of decline in quality or maintenance
-- The destination has no independent travel interest
-- High safety/political risk (already excluded in Step 1)
+- Looks cheap only because of a short-term promotion or flash sale
+- Is cheap mainly because it's run-down or poorly maintained
+- Sits somewhere with nothing worth doing nearby
+- Is in an area you'd flag as unsafe
 
-List any hotels you are rejecting at this stage and state which rule applies.
+Tell me which hotels you dropped and why.
 
 ---
 
-### Step 5 — Produce a final shortlist of 8–12 candidates
+### Step 5 — Give me a shortlist
 
-Rank surviving candidates by adjusted score. Present the shortlist as a clean table:
+Rank the survivors by value score in a clean table:
 
-| Rank | Hotel | City | Category | Lowest price level | Price range (€) | Score | Verdict |
+| Rank | Hotel | Place | Type | Lowest budget level | Price range (€) | Score | Rating |
 |---|---|---|---|---|---|---|---|
 
-Then for each of the **top 5**, provide a fuller summary including:
+Then for my **top 3–5**, add a fuller picture:
 
-- What makes this hotel editorially interesting beyond the price
-- The 3 strongest nearby attractions, food experiences or photography opportunities
-- An honest assessment of any remaining risks or drawbacks
-- An SEO note: what search terms a page about this hotel would likely rank for
+- What makes it special beyond the price
+- The 3 best things to see, eat or do nearby
+- An honest take on any remaining drawbacks
+- A direct booking link (clean Booking.com or hotel URL) so I can check the live rate
 [PERSONAL_OUTPUT_NOTES]
 ---
 
-### Step 6 — List all rejected candidates
+### Step 6 — Honourable mentions and traps
 
-Provide a brief rejected list: hotel name, city, and the single primary reason for rejection. This record prevents the same hotels from being re-researched in future sessions.
+Briefly list any hotels I might be tempted by but should probably skip — name, location, and the one reason to pass. This saves me from booking something that looks good but isn't.
 
 ---
 
-### Output format rules
+### How to answer
 
-- Do not pad responses with caveats, disclaimers or meta-commentary
-- Be direct: score confidently, recommend clearly
-- If data is unavailable for a hotel, say so once and move on
-- Use the exact verdict labels and five-star category names defined above
-- The final shortlist table must be clean and copy-pasteable`;
+- Be direct and confident — recommend clearly, don't hedge everything.
+- Only suggest hotels you can actually verify. If you're unsure of a price or score, say so rather than inventing it.
+- Prices change constantly with season, demand and dates, so treat every figure as indicative and remind me to check the live rate before booking.
+- Use the exact category and rating labels above.
+- Keep the shortlist table clean and easy to copy.`;
 
 export default researchPromptTemplate;

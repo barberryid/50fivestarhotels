@@ -177,7 +177,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
 
   <!-- Generated prompt -->
   <label for="prompt-textarea" class="mt-6 mb-2 block text-sm font-semibold text-[#1F2428]">
-    Research prompt <span class="font-normal text-[#6F685F]">(editable — tweak it before copying if you like)</span>
+    Your hotel-finding prompt <span class="font-normal text-[#6F685F]">(editable — tweak it before copying if you like)</span>
   </label>
   <textarea
     id="prompt-textarea"
@@ -377,7 +377,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
         : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no credible hotel, it displays “No credible candidate found under that level” and uses ${fallbackLabels} for the next best three hotels above it.`;
     }
     if (priceLevelStatus) {
-      priceLevelStatus.textContent = `Using ${selectedText} in the research prompt. Select at least one price level.`;
+      priceLevelStatus.textContent = `Using ${selectedText} in the prompt. Select at least one price level.`;
     }
     textarea.value = buildPrompt(selectedCountry, getCity());
   };
@@ -385,7 +385,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
   const setCopyEnabled = (enabled: boolean) => {
     clearTimeout(copiedTimer);
     copyButton.disabled = !enabled;
-    copyLabel.textContent = enabled ? 'Copy research prompt' : 'Select a country before copying';
+    copyLabel.textContent = enabled ? 'Copy hotel prompt' : 'Select a country before copying';
   };
 
   const setActive = (index: number) => {
@@ -502,10 +502,10 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
       textarea.blur();
     }
     copyLabel.textContent = 'Copied';
-    copyStatus.textContent = 'Research prompt copied to clipboard';
+    copyStatus.textContent = 'Prompt copied to clipboard';
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
-      copyLabel.textContent = 'Copy research prompt';
+      copyLabel.textContent = 'Copy hotel prompt';
       copyStatus.textContent = '';
     }, 2000);
   });

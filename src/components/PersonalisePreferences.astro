@@ -2,7 +2,7 @@
 // Optional "Personalise the research" section for /research-hotels/.
 //
 // Lets a traveller tell the generated research prompt what matters most to
-// them. This does NOT replace the fixed 100-point editorial score — it adds a
+// them. This does NOT replace the 100-point value score — it adds a
 // second "Personal fit score /100" driven by a normalised traveller-fit
 // weighting.
 //
@@ -31,7 +31,7 @@ const configData = {
   <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Optional refinement</p>
   <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-3">Personalise the research</h2>
   <p class="text-[#1F2428]/80 leading-relaxed mb-7">
-    Tell the research prompt what matters most to you. This does not replace the editorial score; it adds a second traveller-fit score.
+    Tell the prompt what matters most to you. This does not replace the value score; it adds a second traveller-fit score.
   </p>
 
   <!-- Traveller profile presets -->
@@ -229,10 +229,10 @@ const configData = {
       const weightTable = `| Traveller preference | Weight |\n|---|---:|\n${tableRows}\n| **Total** | **100** |`;
 
       const intro = [
-        'In addition to the standard editorial scoring, apply the following traveller preference weighting. Prioritise hotels that match these preferences, and explain when a hotel scores well editorially but poorly for this traveller profile.',
+        'In addition to the value score above, apply the following preference weighting. Prioritise hotels that match what I care about, and tell me when a hotel scores well on value but poorly for my priorities.',
         'Produce two separate scores for each hotel:',
-        '1. Editorial value score /100 — based on the standard 50 Five-Star Hotels scoring system.\n2. Personal fit score /100 — based on the traveller preference weighting below.',
-        'Do not hide trade-offs inside a single combined score. If a hotel is excellent value but weak for this traveller’s priorities, say so clearly.',
+        '1. Value score /100 — from the six-factor value scoring above.\n2. Personal fit score /100 — based on the preference weighting below.',
+        'Do not hide trade-offs inside a single combined score. If a hotel is excellent value but weak for my priorities, say so clearly.',
       ].join('\n\n');
 
       const interpretation = buildInterpretation(state);
@@ -243,7 +243,7 @@ const configData = {
       const outputBlock = [
         '### Additional output for the traveller-fit scoring',
         'When presenting the final shortlist table and any other hotel tables, add these columns:',
-        '- Editorial value score\n- Personal fit score\n- Best matched traveller preference\n- Main personal-fit drawback',
+        '- Value score\n- Personal fit score\n- Best matched preference\n- Main personal-fit drawback',
         'For each hotel in the top 5 summaries, add a short subsection:',
         '### Personal fit notes\n\nExplain how well this hotel matches the selected traveller preferences. Mention both strengths and weaknesses.',
       ].join('\n\n');
@@ -270,7 +270,7 @@ const configData = {
     const renderWeighting = (weights: WeightedPref[]) => {
       if (weights.length === 0) {
         weightingBox.innerHTML =
-          '<p class="text-sm text-[#6F685F]">No personalised weighting selected. The generated prompt will use the standard editorial scoring only.</p>';
+          '<p class="text-sm text-[#6F685F]">No personalised weighting selected. The generated prompt will use the standard value scoring only.</p>';
         return;
       }
       const rows = weights
