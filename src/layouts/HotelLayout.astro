@@ -147,7 +147,7 @@ const relatedHotels = allHotels
 const relatedGuides = [
   { title: `${hotel.budgetTier} hotels`, description: 'Compare hotels in the same price tier.', href: tierPath },
   { title: `Affordable luxury in ${hotel.city}`, description: `Read the destination guide for ${hotel.city}.`, href: `/destinations/${citySlug}/` },
-  { title: 'How to Find Stays', description: 'Use the research prompt to uncover affordable five-star candidates by country.', href: '/research-hotels/' },
+  { title: 'Not sure this is the right hotel?', description: 'Use the Hotel Finder to compare this hotel with other options for your destination, budget and travel style.', href: '/research-hotels/' },
   { title: 'How we choose hotels', description: 'The scoring method, five-star reality checks, and booking cautions.', href: '/research-hotels/#methodology' },
   { title: `Affordable five-star hotels in ${region}`, description: 'Browse hotels in the same broad region.', href: regionSlug(region) },
   ...relatedHotels.map((entry) => ({

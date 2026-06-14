@@ -1,23 +1,23 @@
 export const researchPriceLevels = [
   {
     amount: 50,
-    title: 'Impossible finds',
-    text: 'Search first for credible five-star or near-five-star rooms at €50 or below.',
+    title: 'Long-shot bargain',
+    text: 'Rare, but worth checking in low-cost markets. If no credible option appears, show the next best fallback hotels clearly marked.',
   },
   {
     amount: 100,
     title: 'Budget luxury',
-    text: 'Capture the strongest affordable luxury candidates that still feel genuinely special.',
+    text: 'The most distinctive category: hotels that can feel surprisingly good for the price outside peak dates.',
   },
   {
     amount: 150,
-    title: 'Reliable value',
-    text: 'Open the search to better locations, stronger reviews and more dependable quality.',
+    title: 'Better reliability',
+    text: 'Allows stronger hotels, better locations and fewer compromises in many markets.',
   },
   {
     amount: 250,
     title: 'Smart splurge',
-    text: 'Keep higher-quality hotels in expensive markets if the value still feels unusual.',
+    text: 'Useful for expensive cities, special occasions or genuinely stronger properties that still undercut normal luxury pricing.',
   },
 ] as const;
 

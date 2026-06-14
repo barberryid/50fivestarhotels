@@ -9,7 +9,7 @@ const slugify = (value: string) =>
 const destinations = Array.from(new Map(hotels.map((h) => [slugify(h.data.city), h.data.city])).entries()).sort((a, b) => a[1].localeCompare(b[1]));
 const sections = [
   { title: 'Main pages', links: [
-    ['Home', '/'], ['Destinations', '/destinations/'], ['How to Find Stays', '/research-hotels/'], ['About', '/about/'],
+    ['Home', '/'], ['Destinations', '/destinations/'], ['Hotel Finder', '/research-hotels/'], ['About', '/about/'],
   ] },
   { title: 'Price guides', links: [
     ['Five-Star Hotels Under €50', '/under-50/'],
@@ -31,7 +31,7 @@ const sections = [
   ] },
   { title: 'Destination guides', links: destinations.map(([slug, city]) => [`Affordable luxury in ${city}`, `/destinations/${slug}/`]) },
   { title: 'Hotel profiles', links: hotels.map((h) => [h.data.title, `/hotels/${h.data.slug}/`]) },
-  { title: 'Research, disclosure and credits', links: [
+  { title: 'Hotel finder, disclosure and credits', links: [
     ['How We Choose Hotels', '/research-hotels/#methodology'],
     ['Affiliate Disclosure', '/affiliate-disclosure/'],
     ['Image Credits', '/image-credits/'],

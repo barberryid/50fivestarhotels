@@ -99,7 +99,7 @@ whyCheap:
 bestNearbyAttraction: "Surabaya old town, House of Sampoerna and Heroes Monument"
 foodAngle: "East Java food, local markets, rawon, sate and Surabaya street food"
 seoTitle: "Hotel Majapahit Surabaya Review: Affordable Five-Star Heritage in Java"
-seoDescription: "A luxury editorial guide to Hotel Majapahit Surabaya, one of the strongest affordable five-star hotel candidates in Indonesia."
+seoDescription: "A luxury editorial guide to Hotel Majapahit Surabaya, one of the strongest affordable five-star hotel options in Indonesia."
 draft: false
 generatedGallery:
   - src: "/images/hotels/hotel-majapahit-surabaya-editorial-dusk.webp"

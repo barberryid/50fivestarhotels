@@ -89,6 +89,26 @@ The site should not feel like a generic hotel affiliate list. It should feel lik
 
 ---
 
+## Product pivot: practical hotel-finding assistant
+
+The site is evolving from a purely editorial guide into a practical hotel-finding assistant for travellers.
+
+The core promise remains "five-star hotels without five-star prices", but the site should increasingly help users build a realistic shortlist for a specific trip: destination, budget, travel style, priorities and tolerance for trade-offs.
+
+The Hotel Finder should help travellers compare hotel options by:
+
+- price/value
+- five-star reality
+- location usefulness
+- recent review strength
+- nearby things to see, eat and do
+- hidden drawbacks
+- traveller-specific fit
+
+The default user is an ordinary traveller planning a real stay, not an editor compiling a hotel database. Deep research functionality may remain available for content creation and power users, but the visible framing should be practical and traveller-first.
+
+---
+
 ## Core idea
 
 Many travellers assume five-star hotels are always expensive. In reality, genuine or locally classified five-star hotels can often be found at surprisingly low prices in parts of Southeast Asia, the Middle East, North Africa, the Balkans, the Caucasus, Eastern Europe, Central Asia, and selected business cities.
@@ -302,7 +322,7 @@ Destinations removed from the initial list:
 
 ---
 
-## Required hotel candidates from existing notes
+## Required hotel options from existing notes
 
 The first research phase should include or evaluate the following hotels from the existing project notes:
 
@@ -506,7 +526,7 @@ The site should eventually include the following sections:
 - Under €200
 - Under €250
 - By Destination
-- How to Find Stays
+- Hotel Finder
 - Luxury Travel Tips
 - About
 - Affiliate Disclosure
@@ -522,7 +542,7 @@ The first major content phase should produce:
 2. “Best Five-Star Hotels Under €100 Worldwide”
 3. “Best Five-Star Hotels Under €200 Worldwide”
 4. “Best Five-Star Hotels Under €250 Worldwide”
-5. "How to Find Stays" / research-yourself tool
+5. Hotel Finder / practical trip-planning tool
 6. First 20 hotel profiles
 7. City pages for the strongest destinations
 8. Editorial methodology section: “How We Choose Hotels” at the bottom of `/research-hotels/`
@@ -691,7 +711,7 @@ The website should become a trusted guide to affordable luxury hotels, not a col
 
 ## Core editorial standard
 
-The best hotel candidates are not simply the cheapest. They are the hotels where price, place, and experience combine into a compelling travel idea.
+The best hotels are not simply the cheapest. They are the hotels where price, place, and experience combine into a compelling travel idea.
 
 The guiding question for every inclusion should be:
 
@@ -1063,7 +1083,7 @@ Hotel pages now use local image assets from `public/images/hotels/` rather than 
 - central image attribution data in `src/data/imageAttributions.json` and `src/data/imageAttributions.csv`
 - a public image credits route at `/image-credits/`
 
-AI-generated hotel image assets were added on 2026-05-31 for 25 hotel candidates in the AI image brief:
+AI-generated hotel image assets were added on 2026-05-31 for 25 hotel options in the AI image brief:
 
 - **Master AI images:** 50 WebP files in `public/images/hotels/`
 - **Master size:** 1600 x 1000 px, 16:10 landscape
@@ -1302,13 +1322,13 @@ Recommended follow-ups (identified, not yet actioned):
 
 ---
 
-The site includes a "How to Find Stays" research-yourself tool page (`/research-hotels/`) with the public promise "How to Uncover Elite Stays in Every Corner of the World." It lets readers select a country or territory and copy a structured AI research prompt for finding affordable five-star and near-five-star hotel candidates. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The "How We Choose Hotels" methodology text now lives at the bottom of this page as `/research-hotels/#methodology`. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/`, and `/methodology/` redirects to `/research-hotels/#methodology`, via the Cloudflare Pages `_redirects` file. The `/under-50/` page is now a live tier page for carefully qualified under-€50 snapshot-rate candidates.
+The site includes a Hotel Finder page (`/research-hotels/`) with the public promise "Find the Right Hotel for Your Trip." It lets readers enter a destination, budget level, traveller priorities and optional trip scenario, then copy a practical hotel-finding brief for comparing good-value hotel options by value, five-star reality, location, recent reviews, nearby things to do and honest drawbacks. The prompt auto-injects the published hotels for the selected country and a site-wide coverage line, both derived at build time from the same source as the homepage hotel list. The "How We Choose Hotels" methodology text now lives at the bottom of this page as `/research-hotels/#methodology`. The retired `/cheapest-cities-five-star-hotels/` page redirects to `/research-hotels/`, and `/methodology/` redirects to `/research-hotels/#methodology`, via the Cloudflare Pages `_redirects` file. The `/under-50/` page is now a live tier page for carefully qualified under-€50 snapshot-rate candidates.
 
 ### Research prompt tool - "When to go" companion prompt
 
 The `/research-hotels/` page should offer two separate generated prompts:
 
-1. A hotel-finding prompt that researches credible affordable five-star and near-five-star hotel candidates in the selected destination and price tier.
+1. A hotel-finding prompt that compares credible affordable five-star, near-five-star and clearly marked near-luxury exception hotel options in the selected destination and price tier.
 2. A "When to go" prompt that uses the same destination and price tier to research monthly seasonality.
 
 The "When to go" prompt should not find hotels again. It should research:

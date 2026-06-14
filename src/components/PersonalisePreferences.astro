@@ -1,5 +1,5 @@
 ---
-// Optional "Personalise the research" section for /research-hotels/.
+// Optional "Tell the finder what matters most" section for /research-hotels/.
 //
 // Lets a traveller tell the generated research prompt what matters most to
 // them. This does NOT replace the 100-point value score — it adds a
@@ -29,9 +29,9 @@ const configData = {
 
 <section class="max-w-4xl mx-auto px-5 pt-10 pb-4" data-personalise-section>
   <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Optional refinement</p>
-  <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-3">Personalise the research</h2>
+  <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-3">Tell the finder what matters most</h2>
   <p class="text-[#1F2428]/80 leading-relaxed mb-7">
-    Tell the prompt what matters most to you. This does not replace the value score; it adds a second traveller-fit score.
+    Set your priorities so the output ranks hotels by both general value and fit for your trip. A hotel can be good value but still wrong for you.
   </p>
 
   <!-- Traveller profile presets -->
@@ -81,7 +81,7 @@ const configData = {
         type="text"
         id="pref-custom-text"
         data-pref-custom-text
-        placeholder="e.g. Spa quality, walkability, sea view…"
+        placeholder="e.g. Spa quality, sea view, family rooms…"
         maxlength="80"
         class="w-full rounded-xl border border-[#E2D4BF] bg-white px-3 py-2 text-sm text-[#1F2428] placeholder-[#6F685F]/60 mb-3 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
       />
@@ -108,7 +108,7 @@ const configData = {
     aria-live="polite"
     class="mt-5 rounded-lg border border-[#D9A441] bg-[#FBF3E2] px-4 py-3 text-sm leading-relaxed text-[#7A5A1C]"
   >
-    Very low prices plus strict safety requirements may produce fewer credible hotel candidates. The prompt will ask the AI to prioritise quality and caution over filling the list.
+    Very low prices plus strict safety requirements may produce fewer credible hotel options. The prompt will ask the assistant to prioritise quality and caution over filling the list.
   </p>
 
   <!-- Weighting summary -->
@@ -132,8 +132,10 @@ const configData = {
 
 <script>
   interface ImportanceOption { value: number; label: string }
-  interface Preset { key: string; label: string; values: { safety: number; sights: number; quietness: number; customText: string; customImportance: number } }
-  interface PrefState { preset: string | null; safety: number; sights: number; quietness: number; customText: string; customImportance: number }
+  type PreferenceKey = 'safety' | 'sights' | 'quietness' | 'walkability' | 'foodNeighbourhood' | 'character';
+  type PreferenceValues = Record<PreferenceKey, number>;
+  interface Preset { key: string; label: string; values: PreferenceValues & { customText: string; customImportance: number } }
+  type PrefState = PreferenceValues & { preset: string | null; customText: string; customImportance: number };
   interface Config { importanceScale: ImportanceOption[]; presets: Preset[]; defaults: PrefState; storageKey: string }
   interface PromptParts {
     weightingSection: string;
@@ -147,12 +149,19 @@ const configData = {
 
   const section = document.querySelector<HTMLElement>('[data-personalise-section]');
   if (section) {
-    const presetButtons = Array.from(section.querySelectorAll<HTMLButtonElement>('[data-preset-button]'));
-    const selects: Record<'safety' | 'sights' | 'quietness', HTMLSelectElement> = {
-      safety: section.querySelector<HTMLSelectElement>('[data-pref-select="safety"]')!,
-      sights: section.querySelector<HTMLSelectElement>('[data-pref-select="sights"]')!,
-      quietness: section.querySelector<HTMLSelectElement>('[data-pref-select="quietness"]')!,
+    const preferenceKeys = ['safety', 'sights', 'quietness', 'walkability', 'foodNeighbourhood', 'character'] as const;
+    const preferenceLabels: Record<PreferenceKey, string> = {
+      safety: 'Safety of the area',
+      sights: 'Close to main tourist sights',
+      quietness: 'Quietness',
+      walkability: 'Walkability',
+      foodNeighbourhood: 'Food and neighbourhood interest',
+      character: 'Character, heritage or design',
     };
+    const presetButtons = Array.from(section.querySelectorAll<HTMLButtonElement>('[data-preset-button]'));
+    const selects = Object.fromEntries(
+      preferenceKeys.map((key) => [key, section.querySelector<HTMLSelectElement>(`[data-pref-select="${key}"]`)!])
+    ) as Record<PreferenceKey, HTMLSelectElement>;
     const customText = section.querySelector<HTMLInputElement>('[data-pref-custom-text]')!;
     const customImportance = section.querySelector<HTMLSelectElement>('[data-pref-custom-importance]')!;
     const warning = section.querySelector<HTMLElement>('[data-pref-warning]')!;
@@ -166,9 +175,9 @@ const configData = {
     // ----- State -----
     const readState = (): PrefState => ({
       preset: null,
-      safety: Number(selects.safety.value || 0),
-      sights: Number(selects.sights.value || 0),
-      quietness: Number(selects.quietness.value || 0),
+      ...(Object.fromEntries(
+        preferenceKeys.map((key) => [key, Number(selects[key].value || 0)])
+      ) as PreferenceValues),
       customText: customText.value.trim(),
       customImportance: Number(customImportance.value || 0),
     });
@@ -178,11 +187,11 @@ const configData = {
     // ----- Weighting maths (per the implementation brief) -----
     interface ActivePref { label: string; importance: number; type: string }
     const getActivePreferences = (state: PrefState): ActivePref[] => {
-      const prefs: ActivePref[] = [
-        { label: 'Safety of the area', importance: state.safety, type: 'safety' },
-        { label: 'Close to main tourist sights', importance: state.sights, type: 'sights' },
-        { label: 'Quietness', importance: state.quietness, type: 'quietness' },
-      ];
+      const prefs: ActivePref[] = preferenceKeys.map((key) => ({
+        label: preferenceLabels[key],
+        importance: state[key],
+        type: key,
+      }));
       if (state.customText && state.customImportance > 0) {
         prefs.push({ label: state.customText, importance: state.customImportance, type: 'custom' });
       }
@@ -223,6 +232,24 @@ const configData = {
       if (state.quietness === 5) {
         lines.push('Favour calmer neighbourhoods, garden settings, courtyard-facing rooms, resort-style layouts, or hotels with repeated evidence of quiet rooms. Penalise party districts, major road locations, and hotels with repeated noise complaints.');
       }
+      if (state.walkability >= 3) {
+        lines.push('For walkability, check whether restaurants, sights, public transport, waterfronts or useful neighbourhood streets are realistically reachable on foot. Do not treat a cheap but isolated hotel as equally useful.');
+      }
+      if (state.walkability === 5) {
+        lines.push('Strongly favour hotels that reduce taxi dependence for normal daily plans, especially at night or after dinner.');
+      }
+      if (state.foodNeighbourhood >= 3) {
+        lines.push('For food and neighbourhood interest, look for nearby restaurants, cafes, markets, historic streets, waterfronts or local areas that make evenings and short walks more rewarding.');
+      }
+      if (state.foodNeighbourhood === 5) {
+        lines.push('Penalise hotels in sterile business parks, isolated resort strips or traffic-heavy locations unless the hotel itself clearly compensates for the weak neighbourhood.');
+      }
+      if (state.character >= 3) {
+        lines.push('For character, heritage or design, look for evidence that the hotel feels distinctive rather than generic: architecture, renovation quality, interiors, setting, local identity or independent/boutique personality.');
+      }
+      if (state.character === 5) {
+        lines.push('A generic chain hotel should lose personal-fit points unless it is clearly stronger on location, comfort or price than the more characterful alternatives.');
+      }
       if (state.customText && state.customImportance > 0) {
         lines.push(`For the custom priority “${state.customText}”, evaluate whether each hotel clearly supports that preference. Do not assume it does; look for evidence in location, facilities, reviews, hotel descriptions and nearby experiences.`);
       }
@@ -248,6 +275,15 @@ const configData = {
       }
       if (state.quietness === 5) {
         lines.push('Prefer months with a calmer atmosphere when possible, not just the cheapest or busiest peak-weather months.');
+      }
+      if (state.walkability >= 3) {
+        lines.push('For walkability, mention months when heat, rain, smoke, snow, floods or extreme humidity make walking and public transport less pleasant.');
+      }
+      if (state.foodNeighbourhood >= 3) {
+        lines.push('For food and neighbourhood interest, mention seasonal markets, festivals, closures, restaurant holiday periods or local crowding where it materially affects the trip.');
+      }
+      if (state.character >= 3) {
+        lines.push('For character, heritage or design, mention seasons when the destination atmosphere, historic areas, gardens, courtyards or outdoor spaces are especially strong or weak.');
       }
       if (state.customText && state.customImportance > 0) {
         lines.push(`For the custom priority "${state.customText}", explain any month-by-month seasonality or event pattern that materially affects it.`);
@@ -385,9 +421,9 @@ const configData = {
 
     // ----- Apply values to the controls -----
     const applyValues = (values: PrefState) => {
-      selects.safety.value = String(values.safety);
-      selects.sights.value = String(values.sights);
-      selects.quietness.value = String(values.quietness);
+      for (const key of preferenceKeys) {
+        selects[key].value = String(values[key]);
+      }
       customText.value = values.customText;
       customImportance.value = String(values.customImportance);
     };
@@ -409,9 +445,9 @@ const configData = {
       setPresetActive(null);
       refresh();
     };
-    selects.safety.addEventListener('change', onManualEdit);
-    selects.sights.addEventListener('change', onManualEdit);
-    selects.quietness.addEventListener('change', onManualEdit);
+    for (const select of Object.values(selects)) {
+      select.addEventListener('change', onManualEdit);
+    }
     customImportance.addEventListener('change', onManualEdit);
     customText.addEventListener('input', onManualEdit);
 
@@ -420,10 +456,10 @@ const configData = {
     }
 
     resetButton.addEventListener('click', () => {
-      const balanced = config.presets.find((p) => p.key === 'balanced');
-      if (balanced) {
-        applyValues({ preset: 'balanced', ...balanced.values });
-        setPresetActive('balanced');
+      const bestValue = config.presets.find((p) => p.key === 'best-value');
+      if (bestValue) {
+        applyValues({ preset: 'best-value', ...bestValue.values });
+        setPresetActive('best-value');
       }
       refresh();
     });
@@ -437,9 +473,9 @@ const configData = {
           const parsed = JSON.parse(raw) as Partial<PrefState>;
           restored = {
             preset: typeof parsed.preset === 'string' ? parsed.preset : null,
-            safety: Number(parsed.safety ?? config.defaults.safety),
-            sights: Number(parsed.sights ?? config.defaults.sights),
-            quietness: Number(parsed.quietness ?? config.defaults.quietness),
+            ...(Object.fromEntries(
+              preferenceKeys.map((key) => [key, Number(parsed[key] ?? config.defaults[key])])
+            ) as PreferenceValues),
             customText: typeof parsed.customText === 'string' ? parsed.customText : '',
             customImportance: Number(parsed.customImportance ?? 0),
           };

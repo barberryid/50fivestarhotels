@@ -7,20 +7,33 @@ import { researchPriceLevels } from '../data/researchPriceLevels';
 import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
 
 const steps = [
-  { step: '1', text: 'Choose the price levels, traveller priorities and destination you want to research.' },
-  { step: '2', text: 'Copy the hotel prompt, or the separate when-to-go prompt for weather, air quality and price seasonality.' },
-  { step: '3', text: 'Paste it into a fresh Claude or ChatGPT session and check the results manually.' },
+  { step: '1', text: 'Enter the destination, budget level and travel priorities for your trip.' },
+  { step: '2', text: 'Generate a hotel-finding brief that tells the assistant what to check and how to score the options.' },
+  { step: '3', text: 'Paste the brief into ChatGPT or Claude, then verify prices, room type, taxes, cancellation policy and recent reviews before booking.' },
+];
+
+const bookingChecks = [
+  'Final price after taxes and fees',
+  'Exact room type',
+  'Whether breakfast is included or expensive',
+  'Cancellation policy',
+  'Recent reviews from the last 3–6 months',
+  'Lowest-rated recent reviews',
+  'Location on the map',
+  'Airport or station transfer time',
+  'Whether the five-star label is official, local or platform-based',
+  'Whether the low price is seasonal, mobile-only, member-only or non-refundable',
 ];
 
 const jsonLd = breadcrumbJsonLd([
   { name: 'Home', url: canonicalUrl('/') },
-  { name: 'How to Find Stays', url: canonicalUrl('/research-hotels/') },
+  { name: 'Hotel Finder', url: canonicalUrl('/research-hotels/') },
 ]);
 ---
 
 <BaseLayout
-  title="How to Find Stays | 50 Five-Star Hotels"
-  description="Research yourself with a copy-paste prompt for uncovering elite stays in every corner of the world, from affordable five-star hotels to near-five-star value candidates."
+  title="Hotel Finder | 50 Five-Star Hotels"
+  description="Build a practical hotel-finding brief for your destination, budget and travel style, with value checks, recent-review cautions and honest trade-offs before you book."
   canonical="/research-hotels/"
   jsonLd={jsonLd}
 >
@@ -28,18 +41,18 @@ const jsonLd = breadcrumbJsonLd([
     <!-- Hero -->
     <section class="bg-[#FFFDF8] border-b border-[#E2D4BF]">
       <div class="max-w-4xl mx-auto px-5 py-16 md:py-20">
-        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Research yourself</p>
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Hotel finder</p>
         <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
-          How to Find Stays
+          Find the Right Hotel for Your Trip
         </h1>
         <p class="text-[#1F2428]/80 text-xl md:text-2xl font-serif leading-relaxed mb-5">
-          How to Uncover Elite Stays in Every Corner of the World
+          Build a practical shortlist by destination, budget and travel style.
         </p>
         <p class="text-[#1F2428]/80 text-lg md:text-xl leading-relaxed mb-5">
-          Use these prompts to find five-star and near-five-star hotels that may be unusually good value in the country you are visiting, then research when weather, air quality and hotel prices are most likely to line up.
+          Use this tool to create a hotel-finding brief for an upcoming trip. Choose your destination, price level and priorities, then copy the prompt into ChatGPT, Claude or another research-capable assistant. The output should help you compare hotels by value, location, recent reviews, nearby things to do and likely compromises.
         </p>
         <p class="text-[#6F685F] text-base md:text-lg leading-relaxed font-serif italic">
-          I have visited many of the countries in this guide. But I did a lot of research before travelling — this is how I research nowadays.
+          The goal is not to find the cheapest hotel. It is to find hotels where the comfort, character, location and experience feel unusually strong for the price.
         </p>
       </div>
     </section>
@@ -65,7 +78,7 @@ const jsonLd = breadcrumbJsonLd([
       <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Expanded search criteria</p>
       <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-5">Price levels included</h2>
       <p class="text-[#1F2428]/80 leading-relaxed mb-7" data-price-level-summary>
-        The generated prompt searches the selected nightly levels in order. All four are included by default. If no credible candidate appears at €50 or below, it displays “No credible candidate found under €50” and marks the next best three hotels above that level as “Fallback above €50”.
+        The generated prompt searches the selected nightly levels in order. All four are included by default. If no credible option appears at €50 or below, it displays “No credible candidate found under €50” and marks the next best three hotels above that level as “Fallback above €50”.
       </p>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {researchPriceLevels.map(({ amount, title, text }) => (
@@ -100,12 +113,31 @@ const jsonLd = breadcrumbJsonLd([
       </p>
     </section>
 
-    <!-- Personalise the research (optional traveller-fit weighting) -->
+    <!-- Traveller-fit weighting -->
     <PersonalisePreferences />
 
     <!-- The tool -->
     <section class="max-w-4xl mx-auto px-5 pt-0 pb-10">
       <CountryPromptTool />
+    </section>
+
+    <!-- Before booking checklist -->
+    <section class="max-w-4xl mx-auto px-5 py-10">
+      <div class="rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-6 md:p-7">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Verification</p>
+        <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-4">Before booking, check</h2>
+        <p class="text-[#1F2428]/80 leading-relaxed mb-6">
+          Hotel prices and conditions change constantly. Before booking any hotel from the generated shortlist, verify the live details yourself.
+        </p>
+        <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+          {bookingChecks.map((item) => (
+            <li class="flex items-start gap-3 text-sm leading-relaxed text-[#1F2428]/80">
+              <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#B88A44]" aria-hidden="true"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
 
     <!-- No empty results -->
@@ -132,7 +164,7 @@ const jsonLd = breadcrumbJsonLd([
         <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Reading the output</p>
         <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-6">How to judge the results</h2>
         <p class="text-[#1F2428]/80 leading-relaxed mb-5">
-          The prompt asks the assistant to score every candidate out of 100 across six factors — price and value against the local five-star market, hotel character, review strength, location usefulness, nearby sights and food, and risk. Bonuses reward heritage, boutique and independent hotels; generic chain towers get nothing extra. The totals map to exact verdict labels: <strong class="text-[#1F2428]">Exceptional value</strong> (85–100), <strong class="text-[#1F2428]">Strong value</strong> (75–84), <strong class="text-[#1F2428]">Good value</strong> (65–74), <strong class="text-[#1F2428]">Conditional value</strong> (55–64) and <strong class="text-[#1F2428]">Reject</strong> below that.
+          The prompt asks the assistant to score every hotel option out of 100 across six factors — price and value against the local five-star market, hotel character, review strength, location usefulness, nearby sights and food, and risk. Bonuses reward heritage, boutique and independent hotels; generic chain towers get nothing extra. The totals map to exact verdict labels: <strong class="text-[#1F2428]">Exceptional value</strong> (85–100), <strong class="text-[#1F2428]">Strong value</strong> (75–84), <strong class="text-[#1F2428]">Good value</strong> (65–74), <strong class="text-[#1F2428]">Conditional value</strong> (55–64) and <strong class="text-[#1F2428]">Reject for now</strong> below that.
         </p>
         <p class="text-[#1F2428]/80 leading-relaxed mb-5">
           Pay as much attention to the destinations as to the hotels. The prompt is destination-first by design: destination quality and hotel quality carry equal weight, because a beautiful hotel in a dull city makes a weak trip, while a slightly imperfect hotel beside something extraordinary can make a great one. If the assistant recommends a hotel but struggles to name three genuinely interesting things nearby, treat that as a warning.

@@ -4,14 +4,16 @@
 // Tokens substituted on the client:
 //   [REGION]          — the selected country/territory name
 //   [PRICE_LEVEL_SEARCH_RULE] — selected price-level instructions
-//   [PRICE_LEVEL_LABELS]      — selected price-level labels for candidate output
+//   [PRICE_LEVEL_LABELS]      — selected price-level labels for option output
 //   [PRICE_LEVEL_DISQUALIFICATION_RULE] — selected price ceiling rule
 //   [CITY_FOCUS_SECTION] — optional city/town focus block (empty when no city entered)
+//   [TRIP_SCENARIO_SECTION] — optional real-trip context block (empty when no scenario entered)
 //   [PERSONAL_WEIGHTING_SECTION] — optional traveller-fit weighting block (empty when no preferences)
 //   [PERSONAL_OUTPUT_NOTES]      — optional extra output columns / personal-fit notes (empty when no preferences)
+//   [OUTPUT_MODE_SECTION]        — simple-shortlist or deep-research output instruction
 // Keep the tokens exactly as written; the tool does literal replacement.
 
-export const researchPromptTemplate = `You are an expert travel assistant. Help me find an outstanding-value hotel for an upcoming trip to **[REGION]**.
+export const researchPromptTemplate = `You are a practical hotel-finding assistant. Help me choose unusually good-value hotels for an upcoming trip to **[REGION]**.
 
 The hotel I'm hoping to find should make me think:
 
@@ -19,15 +21,19 @@ The hotel I'm hoping to find should make me think:
 
 I'm not chasing the cheapest room — I want the best comfort, character and location for the money. Suggest places I might not find on my own, not just the obvious famous five-stars. Don't recommend a hotel just because it's cheap, highly rated or labelled five-star: it has to add up to a stay I'd be genuinely glad I booked. If a hotel is good value but the place, setting or experience around it is dull, say so or mark it borderline rather than overselling it.
 
-**A smaller, honest list is better than a padded one.** Don't invent weak options to hit a target number. For a large country, aim for the fuller ranges below; for a small country, an island, a single-city search, or a strict low budget, give me only the genuinely credible candidates that exist. If the market can't really support a good-value luxury stay at my budget, tell me plainly and say whether I'd do better to raise the budget a little, shift my dates, or look at a nearby alternative.
+**A smaller, honest list is better than a padded one.** Don't invent weak options to hit a target number. For a large country, aim for the fuller ranges below; for a small country, an island, a single-city search, or a strict low budget, give me only the genuinely credible hotel options that exist. If the market can't really support a good-value luxury stay at my budget, tell me plainly and say whether I'd do better to raise the budget a little, shift my dates, or look at a nearby alternative.
 
-[CITY_FOCUS_SECTION]---
+[CITY_FOCUS_SECTION][TRIP_SCENARIO_SECTION]---
 
 ### My budget
 
 [PRICE_LEVEL_SEARCH_RULE]
 
 When you check prices, assume a normal booking: 2 adults, a standard entry-level room, midweek nights in shoulder-season months (not public holidays or peak events), and look at 1- and 2-night stays where you can. Note refundable and non-refundable rates separately if they differ a lot. If the only cheap rate is non-refundable, mobile-only, member-only, opaque, or a short-lived promotion, flag it and don't treat it as the normal price. If the same hotel would qualify as a fallback for more than one missed budget level, list it once under the lowest relevant fallback label rather than repeating it.
+
+---
+
+[OUTPUT_MODE_SECTION]
 
 ---
 
@@ -42,6 +48,8 @@ For each, tell me briefly:
 
 Skip anywhere you'd rate **High** risk unless there's a strong reason to mention it. If you considered a place and ruled it out, note it in one line with the reason (too remote, weak hotels, nothing to do, safety) so I know it was checked.
 
+Treat serious safety or political risk as a hard filter unless I explicitly ask you to consider higher-risk destinations. For normal neighbourhood-level safety, reflect my traveller-fit priorities: a hotel in a less convenient or less comfortable area can still be mentioned, but it should lose personal-fit points and carry a clear warning.
+
 ---
 
 ### Step 2 — Find the best-value hotels
@@ -55,11 +63,13 @@ For each place worth staying, apply my budget above and find the strongest hotel
 
 Check Booking.com, Google Hotels, Tripadvisor and recent travel write-ups. Before you trust a hotel's review strength, scan its negative and mixed reviews from the last 12–18 months for recurring complaints: maintenance decline, noise, cleanliness, air-conditioning problems, weak breakfast, poor service, nearby construction, misleading photos, location issues, or surprise fees. If recent reviews contradict older glowing ones, trust the recent reviews.
 
+You may include a strong four-star or near-luxury exception if it appears to fit the trip better than weak five-star options, but mark it clearly as **Near-luxury exception** and explain why it deserves consideration. Do not include ordinary four-star hotels just to fill the list.
+
 ---
 
 ### Step 3 — Score and compare the options
 
-List the strongest candidates you find — up to roughly 8–15, or as few as genuinely exist in a small market. For each:
+List the strongest hotel options you find — up to roughly 8–15, or as few as genuinely exist in a small market. For each:
 
 **Hotel name and location**
 **What kind of "five-star" it is** (pick one):
@@ -104,8 +114,8 @@ Score each line and total to 100. You may add up to +5 (staying within the 100 c
 - 85–100: Exceptional value
 - 75–84: Strong value
 - 65–74: Good value
-- 55–64: Worth a look
-- Below 55: Skip
+- 55–64: Conditional value
+- Below 55: Reject for now
 
 **One line on why I'd book it**
 **One honest line on what might disappoint me**
