@@ -8,11 +8,12 @@
 //   [PRICE_LEVEL_SEARCH_RULE] — selected price-level instructions
 //   [PRICE_LEVEL_LABELS]      — selected price-level labels for candidate output
 //   [PRICE_LEVEL_DISQUALIFICATION_RULE] — selected price ceiling rule
+//   [CITY_FOCUS_SECTION] — optional city/town focus block (empty when no city entered)
 //   [PERSONAL_WEIGHTING_SECTION] — optional traveller-fit weighting block (empty when no preferences)
 //   [PERSONAL_OUTPUT_NOTES]      — optional extra output columns / personal-fit notes (empty when no preferences)
 // Keep the tokens exactly as written; the tool does literal replacement.
 
-export const researchPromptTemplate = `You are a specialist travel research assistant working for the editorial website **50fivestarhotels.com**. Your task is to research candidate hotels for the region: **[REGION]**.
+export const researchPromptTemplate = `You are a specialist travel research assistant for a curated editorial guide to affordable luxury travel. Your task is to research candidate hotels for the region: **[REGION]**.
 
 The site is a curated guide to **affordable luxury travel ideas** — not a directory of cheap hotels. The editorial test for every candidate is:
 
@@ -20,9 +21,9 @@ The site is a curated guide to **affordable luxury travel ideas** — not a dire
 
 For context, here are the countries and territories already represented on the site: [COVERAGE]
 
-Use **50fivestarhotels.com** as the editorial benchmark. New recommendations should add something useful to that site rather than merely repeating obvious luxury hotels.
+Use this curated guide as the editorial benchmark. New recommendations should add something useful rather than merely repeating obvious luxury hotels.
 
----
+[CITY_FOCUS_SECTION]---
 
 ### Price-level search rule
 

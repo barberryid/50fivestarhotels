@@ -90,6 +90,7 @@ const applyPriceLevelTokens = (text: string, amounts: readonly number[]) => {
 // client refills them when PersonalisePreferences emits a change.
 const defaultPrompt = applyPriceLevelTokens(researchPromptTemplate, defaultPriceLevels)
   .split('[COVERAGE]').join(coverage)
+  .split('[CITY_FOCUS_SECTION]').join('')
   .split('[PERSONAL_WEIGHTING_SECTION]').join('')
   .split('[PERSONAL_OUTPUT_NOTES]').join('');
 
@@ -137,6 +138,24 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
         No matching country or territory
       </li>
     </ul>
+  </div>
+
+  <!-- City or town (optional, freeform) -->
+  <label for="city-input" class="mt-6 block text-sm font-semibold text-[#1F2428] mb-2">
+    City or town <span class="font-normal text-[#6F685F]">(optional)</span>
+  </label>
+  <div class="max-w-md">
+    <input
+      type="text"
+      id="city-input"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="e.g. Hoi An, Oaxaca, Luang Prabang…"
+      class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+    />
+    <p class="mt-2 text-sm text-[#6F685F]">
+      Leave blank to research the whole country. Enter a city or town to focus the search on it and the destinations within easy reach.
+    </p>
   </div>
 
   <!-- Copy control -->
@@ -190,6 +209,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
   };
 
   const input = document.getElementById('country-input') as HTMLInputElement;
+  const cityInput = document.getElementById('city-input') as HTMLInputElement;
   const listbox = document.getElementById('country-listbox') as HTMLUListElement;
   const noResults = document.getElementById('country-no-results') as HTMLLIElement;
   const textarea = document.getElementById('prompt-textarea') as HTMLTextAreaElement;
@@ -290,9 +310,23 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
       personalParts.outputNotes
     ).replace(/\n{3,}/g, '\n\n');
 
-  const buildPrompt = (country: string | null): string => {
+  const getCity = () => cityInput.value.trim();
+
+  const buildCityFocusSection = (country: string | null, city: string): string => {
+    if (!city) return '';
+    const place = country ? `${city}, ${country}` : city;
+    const regionName = country ?? 'the wider region';
+    return (
+      `**Geographic focus:** Concentrate this research on **${place}** and the destinations within easy reach of it — roughly a day trip from ${city}. ` +
+      `Treat ${city} as the primary base rather than ranging across the whole of ${regionName}. ` +
+      `In Step 1, prioritise ${city} itself and nearby destinations.\n\n`
+    );
+  };
+
+  const buildPrompt = (country: string | null, city: string): string => {
     let text = applyPriceLevelTokens(data.template, getSelectedPriceLevels());
     text = substituteAll(text, '[COVERAGE]', data.coverage);
+    text = substituteAll(text, '[CITY_FOCUS_SECTION]', buildCityFocusSection(country, city));
     const hotels = country ? data.hotelsByCountry[country] : undefined;
     if (country) {
       const existing = hotels
@@ -306,7 +340,11 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
 
   document.addEventListener('personalise:change', (event) => {
     personalParts = (event as CustomEvent<{ weightingSection: string; outputNotes: string }>).detail;
-    textarea.value = buildPrompt(selectedCountry);
+    textarea.value = buildPrompt(selectedCountry, getCity());
+  });
+
+  cityInput.addEventListener('input', () => {
+    textarea.value = buildPrompt(selectedCountry, getCity());
   });
 
   const updatePriceLevelUi = (changedInput?: HTMLInputElement) => {
@@ -341,7 +379,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     if (priceLevelStatus) {
       priceLevelStatus.textContent = `Using ${selectedText} in the research prompt. Select at least one price level.`;
     }
-    textarea.value = buildPrompt(selectedCountry);
+    textarea.value = buildPrompt(selectedCountry, getCity());
   };
 
   const setCopyEnabled = (enabled: boolean) => {
@@ -394,7 +432,7 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
     for (const option of options) {
       option.setAttribute('aria-selected', option.dataset.name === name ? 'true' : 'false');
     }
-    textarea.value = buildPrompt(name);
+    textarea.value = buildPrompt(name, getCity());
     setCopyEnabled(true);
     closeList();
   };
@@ -475,10 +513,11 @@ const toolData = { template: researchPromptTemplate, coverage, hotelsByCountry, 
   resetButton.addEventListener('click', () => {
     selectedCountry = null;
     input.value = '';
+    cityInput.value = '';
     for (const option of options) option.setAttribute('aria-selected', 'false');
     filterList('');
     closeList();
-    textarea.value = buildPrompt(null);
+    textarea.value = buildPrompt(null, '');
     setCopyEnabled(false);
   });
 
