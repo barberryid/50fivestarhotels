@@ -7,6 +7,8 @@ The `/about/` page has been simplified. The previous long Hotel Finder/story/met
 - `https://50beautifulplaces.com/`
 - `https://50difficultplaces.com/`
 
+The original Gary Wilson/about-story graphic (`/images/about/about-gary-wilson-50-five-star-hotels.png`) is retained below the website windows.
+
 The methodology content now lives at `/hotel-finder/#methodology`, and internal "How We Choose Hotels" links plus `/methodology/` redirects point there instead of `/about/#methodology`.
 
 ## Finder-first pivot (15 June 2026)
