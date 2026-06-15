@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import HotelComparisonTable from '../components/HotelComparisonTable.astro';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../lib/seo';
+
+const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
+allHotels.sort((a, b) => a.data.rank - b.data.rank);
+
+const tableHotels = allHotels.map(h => ({
+  slug: h.data.slug,
+  rank: h.data.rank,
+  title: h.data.title,
+  city: h.data.city,
+  country: h.data.country,
+  budgetTier: h.data.budgetTier,
+  valueScore: h.data.valueScore,
+  verdict: h.data.verdict,
+  fiveStarStatus: h.data.fiveStarStatus,
+  bestFor: h.data.bestFor,
+  cautions: h.data.cautions,
+}));
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: canonicalUrl('/') },
+    { name: 'All Hotels', url: canonicalUrl('/all-hotels/') },
+  ]),
+  itemListJsonLd('All affordable five-star hotels', allHotels),
+];
+---
+
+<PageLayout
+  title="All Hotels | 50 Five-Star Hotels"
+  description="Every affordable five-star and near-five-star hotel in the collection, ranked by value score. Compare price tier, verdict, five-star reality and best-for at a glance."
+  canonical="/all-hotels/"
+  jsonLd={jsonLd}
+  maxWidth="max-w-6xl"
+>
+  <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">The full list</p>
+  <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-4">All {allHotels.length} hotels at a glance</h1>
+  <p class="text-[#6F685F] text-lg mb-10 max-w-2xl">Ranked by value score. Click any hotel for the full editorial profile.</p>
+  <HotelComparisonTable hotels={tableHotels} title="" />
+  <div class="mt-8">
+    <a href="/destinations" class="inline-flex items-center text-[#B88A44] font-semibold hover:underline no-underline">
+      Browse all hotels by destination →
+    </a>
+  </div>
+</PageLayout>
