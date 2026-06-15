@@ -1,167 +1,54 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import MethodologyContent from '../components/MethodologyContent.astro';
 
-const facts = [
-  { label: 'Countries visited', value: '154 / 193 UN member states' },
-  { label: 'Travel style', value: 'Independent traveller' },
-  { label: 'Favourite travel mix', value: 'Beautiful places and difficult places' },
-  { label: 'Site focus', value: 'Affordable luxury hotels' },
-  { label: 'Mission', value: 'Finding unusually good hotel value worldwide' },
+const sisterSites = [
+  {
+    title: '50 Beautiful Places',
+    href: 'https://50beautifulplaces.com/',
+    frameTitle: '50 Beautiful Places',
+  },
+  {
+    title: '50 Difficult Places',
+    href: 'https://50difficultplaces.com/',
+    frameTitle: '50 Difficult Places',
+  },
 ];
 ---
 
 <PageLayout
   title="About 50 Five-Star Hotels"
-  description="About Gary Wilson and the story behind 50 Five-Star Hotels, a personal guide to affordable luxury hotels and five-star hotels without five-star prices."
-  image="/images/about/about-gary-wilson-50-five-star-hotels.png"
-  maxWidth="max-w-6xl"
+  description="Explore the sister travel websites from 50 Five-Star Hotels: 50 Beautiful Places and 50 Difficult Places."
+  maxWidth="max-w-none"
 >
-  <!-- Hero image: full, uncropped, centred -->
-  <figure class="mb-12">
-    <img
-      src="/images/about/about-gary-wilson-50-five-star-hotels.png"
-      alt="Illustrated travel infographic about Gary Wilson, his 154-country travel background, and the story behind 50 Five-Star Hotels."
-      class="w-full h-auto object-contain mx-auto rounded-2xl border border-[#E2D4BF] shadow-sm bg-[#FFFDF8]"
-      style="max-width: 1200px;"
-      width="800"
-      height="1200"
-    />
-  </figure>
-
-  <!-- Research prompt promo -->
-  <section class="mb-12 rounded-2xl bg-[#F4EADC] border border-[#E2D4BF] px-5 py-12 text-center">
-    <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Hotel Finder</p>
-    <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[#1F2428] mb-4">Planning your own trip?</h2>
-    <p class="text-[#6F685F] text-lg mb-8 max-w-xl mx-auto">
-      Use the Hotel Finder to build a practical shortlist for your own trip. It helps compare hotels by value, five-star reality, location, recent reviews, nearby things to do and honest drawbacks.
-    </p>
-    <a href="/hotel-finder/" class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-3.5 px-8 rounded-full hover:bg-[#1F2428] transition-colors no-underline text-sm">
-      Use the Hotel Finder →
-    </a>
+  <section class="mx-auto w-[min(860px,calc(100%_-_40px))] pb-8 pt-[clamp(48px,8vw,96px)]">
+    <p class="mb-3 text-[0.67rem] font-black uppercase tracking-[0.18em] text-[#B88A44]">Other travel websites</p>
+    <h1 class="m-0 font-serif text-[clamp(2.4rem,5vw,4.6rem)] font-semibold leading-[0.98] text-[#1F2428]">More travel projects.</h1>
   </section>
 
-  <div class="max-w-3xl mx-auto">
-    <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">The story</p>
-    <h1 class="font-serif text-4xl text-[#1F2428] mb-8">About 50 Five-Star Hotels</h1>
+  <div class="mx-auto w-[min(860px,calc(100%_-_40px))] border-t border-[#E2D4BF]"></div>
 
-    <!-- Credibility fact box -->
-    <div class="not-prose bg-[#FFFDF8] border border-[#E2D4BF] rounded-2xl p-6 sm:p-8 mb-12 shadow-sm">
-      <div class="w-10 h-px bg-[#B88A44] mb-5"></div>
-      <dl class="space-y-4">
-        {facts.map(fact => (
-          <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-            <dt class="text-[#B88A44] text-xs font-bold uppercase tracking-widest sm:w-44 sm:flex-shrink-0">
-              {fact.label}
-            </dt>
-            <dd class="text-[#1F2428] font-medium">{fact.value}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-
-    <div class="prose prose-lg max-w-none
-      prose-headings:font-serif prose-headings:text-[#1F2428]
-      prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-      prose-p:text-[#1F2428]/75 prose-p:leading-relaxed
-      prose-strong:text-[#1F2428]
-      prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
-
-      <p>I have visited 154 of the world's 193 United Nations member states.</p>
-      <p>
-        Over the years I have travelled across every continent, from some of the world's
-        most famous destinations to places that rarely appear on tourism lists. I enjoy both
-        beautiful places and difficult places: remote mountain regions, little-visited
-        countries, historic cities, deserts, tropical islands, and destinations that many
-        travellers overlook.
-      </p>
-      <p>Most of my trips are not luxury trips.</p>
-      <p>
-        Like many travellers, I usually have a budget. But whenever it has been possible, I
-        have enjoyed staying in hotels that offer an unusually high level of comfort,
-        character, service, or atmosphere for the price.
-      </p>
-      <p>What fascinated me was how dramatically hotel value varies around the world.</p>
-      <p>
-        In some destinations, a standard hotel room can cost more than a luxury suite
-        elsewhere. In other places, it is possible to stay in beautiful heritage hotels,
-        stylish boutique properties, elegant city hotels, or even genuine five-star resorts
-        for far less than many people expect.
-      </p>
-      <p>Over time I began keeping notes.</p>
-      <p>
-        Whenever I found a hotel that made me think, &ldquo;I didn't realise I could stay
-        somewhere like this for that price,&rdquo; I added it to the list.
-      </p>
-      <p>
-        Eventually the list became large enough that I decided to turn it into this website.
-      </p>
-
-      <h2>Why this site exists</h2>
-      <p>
-        50 Five-Star Hotels is a personal research project dedicated to finding hotels that
-        offer an exceptional luxury-to-price ratio.
-      </p>
-      <p>The goal is not to find the cheapest hotels.</p>
-      <p>
-        The goal is to find hotels where the experience feels significantly better than the
-        price suggests.
-      </p>
-      <p>
-        Some are genuine international five-star hotels. Others are heritage properties,
-        boutique hotels, resorts, or locally classified five-star hotels that deliver an
-        experience far above what many travellers expect for the cost.
-      </p>
-      <p>For every hotel, I ask a simple question:</p>
-      <p>
-        <strong>Would a reasonably experienced traveller be pleasantly surprised by what
-        they get for the money?</strong>
-      </p>
-      <p>If the answer is yes, it deserves consideration. You can read more about how this works in the <a href="/about/#methodology">methodology section</a>.</p>
-
-      <h2>How I travel</h2>
-      <p>
-        I am particularly interested in unusual destinations, emerging travel destinations,
-        historic cities, archaeology and culture, mountains and natural landscapes, food and
-        local restaurants, affordable luxury travel, and finding exceptional value.
-      </p>
-      <p>
-        Many of the hotels featured on this site are places I have stayed in, researched
-        extensively, or would happily book myself on a future trip. You can browse them all
-        by <a href="/destinations">destination</a> or by budget tier, from
-        <a href="/under-100">hotels under €100</a> upwards.
-      </p>
-
-      <h2>The promise</h2>
-      <p>This site is built around a simple idea:</p>
-      <p><strong>Five-star hotels without five-star prices.</strong></p>
-      <p>
-        I believe luxury travel does not have to be reserved for people with unlimited
-        budgets. With the right destination, the right timing, and the right hotel,
-        remarkable stays can be surprisingly affordable.
-      </p>
-      <p>
-        This website is my attempt to find those opportunities and share them with other
-        travellers.
-      </p>
-    </div>
-
-    <div class="not-prose mt-12 bg-[#1F2428] rounded-2xl p-8 text-white">
-      <h2 class="font-serif text-2xl font-bold mb-3">Start exploring</h2>
-      <p class="text-white/60 text-sm mb-6">Browse the collection by destination, budget tier or how we choose hotels.</p>
-      <div class="flex flex-wrap gap-3">
-        <a href="/destinations" class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-2.5 px-5 rounded-xl hover:bg-[#A8763A] transition-colors no-underline text-sm">
-          Browse by destination
+  <div class="mx-auto w-[min(1180px,calc(100%_-_40px))] pb-[clamp(2rem,5vw,4rem)]">
+    {sisterSites.map((site) => (
+      <section class="border-b border-[#E2D4BF] py-[clamp(2rem,5vw,3rem)] last:border-b-0" aria-labelledby={`${site.title.toLowerCase().replaceAll(' ', '-')}-heading`}>
+        <a
+          id={`${site.title.toLowerCase().replaceAll(' ', '-')}-heading`}
+          class="inline-flex font-serif text-[clamp(1.5rem,3vw,2.35rem)] leading-tight text-[#1F2428] underline decoration-[#B88A44]/40 underline-offset-8 transition-colors hover:text-[#B88A44]"
+          href={site.href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {site.title}
         </a>
-        <a href="/under-100" class="inline-flex items-center bg-[#FFFDF8]/10 text-white font-semibold py-2.5 px-5 rounded-xl hover:bg-[#FFFDF8]/20 transition-colors no-underline text-sm">
-          Hotels under €100
-        </a>
-        <a href="#methodology" class="inline-flex items-center bg-[#FFFDF8]/10 text-white font-semibold py-2.5 px-5 rounded-xl hover:bg-[#FFFDF8]/20 transition-colors no-underline text-sm">
-          How we choose hotels
-        </a>
-      </div>
-    </div>
+        <div class="mt-6 overflow-hidden rounded-xl border border-[#E2D4BF] bg-white shadow-[0_3px_18px_rgba(31,36,40,0.07)]">
+          <iframe
+            src={site.href}
+            title={site.frameTitle}
+            class="h-[min(72svh,760px)] w-full"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </div>
+      </section>
+    ))}
   </div>
-
-  <MethodologyContent />
 </PageLayout>

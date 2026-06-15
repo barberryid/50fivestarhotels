@@ -1,5 +1,14 @@
 # 50 Five-Star Hotels — Project Brief
 
+## About page sister-site windows (15 June 2026)
+
+The `/about/` page has been simplified. The previous long Hotel Finder/story/methodology copy was removed from `src/pages/about.astro` and replaced with two framed live website windows, matching the sister-site preview pattern used on `50difficultplaces.com/about/`:
+
+- `https://50beautifulplaces.com/`
+- `https://50difficultplaces.com/`
+
+The methodology content now lives at `/hotel-finder/#methodology`, and internal "How We Choose Hotels" links plus `/methodology/` redirects point there instead of `/about/#methodology`.
+
 ## Finder-first pivot (15 June 2026)
 
 The site pivoted from a list-first editorial catalogue to a **finder-first hotel research assistant** (Model A: prompt-first; no in-page LLM). The Hotel Finder is now the product; the curated hotel collection is recast as **examples / proof** that the method works.

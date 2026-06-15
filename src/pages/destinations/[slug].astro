@@ -53,7 +53,7 @@ const relatedItems = [
   { title: `${primary.budgetTier} hotels`, description: 'Compare the right price tier for this destination.', href: tierPath },
   { title: 'Hotel Finder', description: `Build a practical hotel shortlist for ${city}, ${country}, or compare nearby alternatives.`, href: '/hotel-finder/' },
   { title: `Affordable five-star hotels in ${region}`, description: 'Browse the wider regional guide.', href: regionSlug(region) },
-  { title: 'How We Choose Hotels', description: 'Understand the value score and five-star reality checks.', href: '/about/#methodology' },
+  { title: 'How We Choose Hotels', description: 'Understand the value score and five-star reality checks.', href: '/hotel-finder/#methodology' },
   ...nearby.slice(0, 3).map((h) => ({ title: `Affordable luxury in ${h.city}`, description: `${h.country} - ${h.budgetTier}`, href: `/destinations/${slugify(h.city)}/` })),
 ];
 const title = `Best Affordable Five-Star Hotels in ${city}`;
