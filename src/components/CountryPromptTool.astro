@@ -301,13 +301,44 @@ const toolData = {
   </AccordionCard>
 
   <AccordionCard title="Hotel-finding prompts" number={4}>
-    <div class="mb-5 rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-4">
-      <p class="text-sm font-semibold text-[#1F2428]" data-brief-ready-status>Choose a destination to make the brief copy-ready.</p>
-      <p class="mt-1 text-sm leading-relaxed text-[#6F685F]">
-        Start with the main hotel prompt. It creates a practical shortlist of hotel options for your destination, budget and travel style. Use the second prompt only if you also want to compare months by weather, air quality and likely hotel-price seasonality.
+    <fieldset class="border-0 p-0 m-0">
+      <legend class="sr-only">Output detail level</legend>
+      <p class="mb-3 text-sm leading-relaxed text-[#6F685F]">
+        Choose how detailed the output should be, then open and copy your prompt from the box below and paste it into ChatGPT or Claude.
       </p>
-    </div>
+      <div class="grid gap-2 sm:grid-cols-2" data-output-mode-group>
+        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
+          <input
+            type="radio"
+            name="hotel-output-mode"
+            value="simple"
+            checked
+            data-output-mode-input
+            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
+          />
+          <span>
+            <span class="block font-semibold text-[#1F2428]">Simple shortlist</span>
+            <span class="block text-[#6F685F]">Best for travellers planning a trip</span>
+          </span>
+        </label>
+        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
+          <input
+            type="radio"
+            name="hotel-output-mode"
+            value="deep"
+            data-output-mode-input
+            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
+          />
+          <span>
+            <span class="block font-semibold text-[#1F2428]">Deep research</span>
+            <span class="block text-[#6F685F]">Best for comparing a full market</span>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+  </AccordionCard>
 
+  <AccordionCard title="Copy your prompt" number={5}>
     <div class="space-y-3">
       <section aria-labelledby="hotel-prompt-heading" class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card data-hotel-prompt-card>
         <button
@@ -424,44 +455,6 @@ const toolData = {
     </div>
   </AccordionCard>
 
-  <AccordionCard title="Copy your prompt" number={5}>
-    <fieldset class="border-0 p-0 m-0">
-      <legend class="sr-only">Copy your prompt</legend>
-      <p class="mb-3 text-sm leading-relaxed text-[#6F685F]">
-        Choose how detailed the output should be, then copy your prompt from the hotel-finding prompts above and paste it into ChatGPT or Claude.
-      </p>
-      <div class="grid gap-2 sm:grid-cols-2" data-output-mode-group>
-        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
-          <input
-            type="radio"
-            name="hotel-output-mode"
-            value="simple"
-            checked
-            data-output-mode-input
-            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
-          />
-          <span>
-            <span class="block font-semibold text-[#1F2428]">Simple shortlist</span>
-            <span class="block text-[#6F685F]">Best for travellers planning a trip</span>
-          </span>
-        </label>
-        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
-          <input
-            type="radio"
-            name="hotel-output-mode"
-            value="deep"
-            data-output-mode-input
-            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
-          />
-          <span>
-            <span class="block font-semibold text-[#1F2428]">Deep research</span>
-            <span class="block text-[#6F685F]">Best for comparing a full market</span>
-          </span>
-        </label>
-      </div>
-    </fieldset>
-  </AccordionCard>
-
   <!-- Reset -->
   <div class="pt-1">
     <button
@@ -562,7 +555,7 @@ const toolData = {
 
     toggle.setAttribute('aria-expanded', String(open));
     panel.hidden = !open;
-    if (label) label.textContent = open ? 'Hide prompt' : 'Show prompt';
+    if (label) label.textContent = open ? 'Open to show and copy prompt' : 'Show prompt';
     chevron?.classList.toggle('rotate-180', open);
   };
 
