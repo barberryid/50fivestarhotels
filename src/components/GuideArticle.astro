@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RelatedGuides from './RelatedGuides.astro';
+import FinderCta from './FinderCta.astro';
 import LastUpdated from './LastUpdated.astro';
 import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
 
@@ -31,6 +32,12 @@ const jsonLd = breadcrumbJsonLd([{ name: 'Home', url: canonicalUrl('/') }, { nam
           {section.body.map((paragraph) => <p>{paragraph}</p>)}
         </>
       ))}
+    </div>
+    <div class="mt-12">
+      <FinderCta
+        title="Put this into practice"
+        text="Use the Hotel Finder to turn these checks into a research brief for your own trip."
+      />
     </div>
     <RelatedGuides items={related} />
   </main>

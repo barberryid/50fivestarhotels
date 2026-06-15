@@ -216,8 +216,8 @@ const singleWhenToGoPriceTierInstruction = (amount: number): string => {
     return '- If the price level is €100 or below, identify the months with the best chance of five-star or near-five-star value near or below €100.';
   }
 
-  if (amount <= 150) {
-    return '- If the price level is €150 or below, identify the months with the best chance of strong affordable-luxury value near or below €150.';
+  if (amount <= 200) {
+    return '- If the price level is €200 or below, identify the months with the best chance of strong affordable-luxury value near or below €200.';
   }
 
   if (amount <= 250) {
@@ -242,7 +242,7 @@ export const getWhenToGoPriceTierInstruction = (
   const level = selectedPriceLevel.toLowerCase();
   if (/(^|[^0-9])50([^0-9]|$)/.test(level)) return singleWhenToGoPriceTierInstruction(50);
   if (/(^|[^0-9])100([^0-9]|$)/.test(level)) return singleWhenToGoPriceTierInstruction(100);
-  if (/(^|[^0-9])150([^0-9]|$)/.test(level)) return singleWhenToGoPriceTierInstruction(150);
+  if (/(^|[^0-9])200([^0-9]|$)/.test(level)) return singleWhenToGoPriceTierInstruction(200);
   if (/(^|[^0-9])250([^0-9]|$)/.test(level)) return singleWhenToGoPriceTierInstruction(250);
 
   return '- Identify the months with the best chance of strong affordable-luxury hotel value at the selected price level.';

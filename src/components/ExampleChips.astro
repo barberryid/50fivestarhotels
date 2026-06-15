@@ -1,0 +1,49 @@
+---
+// Quick-start example destination chips. Each links to the Hotel Finder with
+// the country/city prefilled via query params (handled by CountryPromptTool's
+// prefillFromUrl). Hard-coded for the first pass per the implementation brief.
+interface Props {
+  heading?: string;
+}
+const { heading = 'Try an example destination' } = Astro.props;
+
+const examples = [
+  { city: 'Bangkok', country: 'Thailand' },
+  { city: 'Siem Reap', country: 'Cambodia' },
+  { city: 'Luxor', country: 'Egypt' },
+  { city: 'Tbilisi', country: 'Georgia' },
+  { city: 'Kuala Lumpur', country: 'Malaysia' },
+  { city: 'Olhão', country: 'Portugal' },
+];
+
+const chipHref = ({ city, country }: { city: string; country: string }) =>
+  `/hotel-finder/?country=${encodeURIComponent(country)}&city=${encodeURIComponent(city)}#hotel-finder`;
+---
+
+<div data-example-chips>
+  <p class="text-[#6F685F] text-sm font-semibold mb-3">{heading}</p>
+  <div class="flex flex-wrap gap-2">
+    {examples.map((example) => (
+      <a
+        href={chipHref(example)}
+        data-example-chip
+        data-city={example.city}
+        data-country={example.country}
+        class="inline-flex items-center rounded-full border border-[#E2D4BF] bg-white px-4 py-2 text-sm font-semibold text-[#6F685F] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] no-underline"
+      >
+        {example.city}, {example.country}
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  for (const chip of Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-example-chip]'))) {
+    chip.addEventListener('click', () => {
+      const track = (window as unknown as { ffshTrack?: (name: string, props?: Record<string, unknown>) => void }).ffshTrack;
+      if (typeof track === 'function') {
+        track('finder_example_clicked', { city: chip.dataset.city ?? '', country: chip.dataset.country ?? '' });
+      }
+    });
+  }
+</script>

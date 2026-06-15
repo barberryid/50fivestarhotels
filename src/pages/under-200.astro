@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HotelCard from '../components/HotelCard.astro';
 import HotelComparisonTable from '../components/HotelComparisonTable.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import FinderCta from '../components/FinderCta.astro';
 
 const all = await getCollection('hotels', ({ data }) => !data.draft);
 const hotels = all.filter(h => h.data.budgetTier === 'Under €200').sort((a, b) => a.data.rank - b.data.rank);
@@ -29,14 +30,20 @@ const tableHotels = hotels.map(h => ({
       <div class="max-w-4xl mx-auto px-5 py-16">
         <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Budget tier</p>
         <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
-          Best five-star hotels under €200
+          Under €200: More reliable luxury-value examples under €200
         </h1>
         <p class="text-[#6F685F] text-lg leading-relaxed max-w-2xl">
-          The under-€200 tier is where affordable luxury becomes more reliable. These hotels often offer stronger locations, better facilities or more recognisable brands while still costing far less than comparable stays in expensive markets.
+          The under-€200 tier is where affordable luxury becomes more reliable. These examples often offer stronger locations, better facilities or more recognisable brands while still costing far less than comparable stays in expensive markets.
+        </p>
+        <p class="text-[#6F685F] text-sm leading-relaxed max-w-2xl mt-4">
+          These are examples, not live guarantees. Hotel prices change constantly by date, room type, taxes, cancellation policy and local demand. Use the Hotel Finder to research your own destination and verify live rates before booking.
         </p>
         <p class="text-[#6F685F] text-xs mt-5">
-          {hotels.length} hotels in this tier. Prices vary by date, room type, taxes and cancellation policy.
+          {hotels.length} hotel examples in this tier. Prices vary by date, room type, taxes and cancellation policy.
         </p>
+        <div class="mt-8 max-w-3xl">
+          <FinderCta compact={true} />
+        </div>
       </div>
     </section>
 
@@ -59,6 +66,13 @@ const tableHotels = hotels.map(h => ({
     <!-- Comparison table -->
     <section class="max-w-6xl mx-auto px-5 pb-16">
       <HotelComparisonTable hotels={tableHotels} title="Under €200 hotels at a glance" />
+    </section>
+
+    <section class="max-w-4xl mx-auto px-5 pb-10">
+      <FinderCta
+        title="Apply this to your own destination"
+        text="Use the Hotel Finder to build a research brief for reliable luxury value wherever you are heading."
+      />
     </section>
 
     <section class="max-w-4xl mx-auto px-5 pb-16">

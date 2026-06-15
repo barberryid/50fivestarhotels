@@ -1,5 +1,22 @@
 # 50 Five-Star Hotels — Project Brief
 
+## Finder-first pivot (15 June 2026)
+
+The site pivoted from a list-first editorial catalogue to a **finder-first hotel research assistant** (Model A: prompt-first; no in-page LLM). The Hotel Finder is now the product; the curated hotel collection is recast as **examples / proof** that the method works.
+
+Key changes:
+
+- **Canonical tool page:** new `/hotel-finder/` (`src/pages/hotel-finder.astro`) is the primary navigation target. The full finder lives in one reusable component, `src/components/HotelFinder.astro` (price-level selector + `PersonalisePreferences` + `CountryPromptTool` + before-booking checklist), used by both `/hotel-finder/` and the homepage. Its root carries `id="hotel-finder"`.
+- **Homepage is tool-led:** outcome-driven hero ("Find five-star hotels without five-star prices — anywhere you're going") with a primary CTA to `/hotel-finder/`, a three-step "How it works" strip (`id="how-it-works"`), a "Built on 50+ hand-scored hotel examples" proof band, and example destination chips. The same `HotelFinder` is embedded below.
+- **Finder-first navigation:** Header = Find Hotels / How It Works / Examples / Destinations / Guides / About. Budget-tier links removed from primary nav and kept in a regrouped footer (Find Hotels, Examples, Budget examples, Destination examples, Guides, About) with updated brand copy.
+- **Budget ladder unified to €50 / €100 / €200 / €250** everywhere (the finder previously used €150). See `src/data/researchPriceLevels.ts`.
+- **"50" vs "57" reconciled:** user-facing headings use **50+ hotel examples** wording (brand, not a literal count). `/all-hotels/` reframed as the "Example Hotel Library"; `/destinations/` rebuilt as a grouped regional index; the four `under-*` pages reframed as examples with disclaimers. Finder CTAs (`src/components/FinderCta.astro`) added to every hotel profile and guide.
+- **Copy hand-off + analytics:** after copying, a success panel shows Open ChatGPT / Open Claude buttons. `window.ffshTrack(name, props)` (provider-agnostic, safe no-op) added in `BaseLayout.astro`; events: finder_viewed, finder_country_selected, finder_price_level_changed, hotel_prompt_copied, when_to_go_prompt_copied, open_chatgpt_clicked, open_claude_clicked, finder_example_clicked, affiliate_booking_clicked. No analytics provider token is wired yet. Raw prompt sections marked `data-nosnippet`.
+- **SEO/redirects:** `webApplicationJsonLd()` added (`src/lib/seo.ts`), used on the homepage and `/hotel-finder/`; `public/_redirects` now sends `/research-hotels` and `/find-hotels` → `/hotel-finder/`; sitemap surfaces the finder; all internal `/#hotel-finder` links repointed to `/hotel-finder/`.
+- **Not done (deferred):** in-page LLM (Model B) and the P3 tool-intent SEO pages.
+
+Local build check: `npm run build` completed successfully on 15 June 2026 (139 pages).
+
 ## Current implementation status
 
 Last updated: 13 June 2026

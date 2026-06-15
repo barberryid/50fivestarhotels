@@ -11,6 +11,7 @@ import RelatedGuides from '../components/RelatedGuides.astro';
 import LastUpdated from '../components/LastUpdated.astro';
 import PriceAccuracyNote from '../components/PriceAccuracyNote.astro';
 import NumberedEditorialSections from '../components/NumberedEditorialSections.astro';
+import FinderCta from '../components/FinderCta.astro';
 import FiveStarReality from '../components/trust/FiveStarReality.astro';
 import WatchOutFor from '../components/trust/WatchOutFor.astro';
 import WhyItsCheap from '../components/trust/WhyItsCheap.astro';
@@ -141,6 +142,7 @@ const hotelJsonLd = {
     : undefined,
   description: hotelDescription,
 };
+const finderHref = `/hotel-finder/?country=${encodeURIComponent(hotel.country)}&city=${encodeURIComponent(hotel.city)}#hotel-finder`;
 const citySlug = hotel.city.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const tierPath = hotel.budgetTier.includes('€50') ? '/under-50/' : hotel.budgetTier.includes('100') ? '/under-100/' : hotel.budgetTier.includes('200') ? '/under-200/' : '/under-250/';
 const region = countryRegion(hotel.country);
@@ -151,7 +153,7 @@ const relatedHotels = allHotels
 const relatedGuides = [
   { title: `${hotel.budgetTier} hotels`, description: 'Compare hotels in the same price tier.', href: tierPath },
   { title: `Affordable luxury in ${hotel.city}`, description: `Read the destination guide for ${hotel.city}.`, href: `/destinations/${citySlug}/` },
-  { title: 'Compare hotels for this trip', description: `Use the Hotel Finder to compare ${hotel.title} with other options in ${hotel.city}, ${hotel.country}, by budget, travel style and likely compromises.`, href: `/?country=${encodeURIComponent(hotel.country)}&city=${encodeURIComponent(hotel.city)}#hotel-finder` },
+  { title: 'Compare hotels for this trip', description: `Use the Hotel Finder to compare ${hotel.title} with other options in ${hotel.city}, ${hotel.country}, by budget, travel style and likely compromises.`, href: finderHref },
   { title: 'How we choose hotels', description: 'The scoring method, five-star reality checks, and booking cautions.', href: '/about/#methodology' },
   { title: `Affordable five-star hotels in ${region}`, description: 'Browse hotels in the same broad region.', href: regionSlug(region) },
   ...relatedHotels.map((entry) => ({
@@ -235,6 +237,7 @@ const relatedGuides = [
                   href={bookingAffiliateUrl}
                   target="_blank"
                   rel="sponsored nofollow noopener"
+                  data-affiliate-booking
                   class="inline-flex items-center justify-center bg-[#1F2428] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#B88A44] transition-colors no-underline text-sm"
                 >
                   Check current prices on Booking.com
@@ -258,6 +261,16 @@ const relatedGuides = [
               </li>
             ))}
           </ul>
+        </div>
+
+        <!-- Tool CTA: find similar hotels -->
+        <div class="mb-8">
+          <FinderCta
+            title="Like this kind of hotel?"
+            text="Find similar good-value hotels for your own trip using the Hotel Finder. It searches by destination, budget and travel priorities."
+            href={finderHref}
+            compact={true}
+          />
         </div>
 
         <!-- Trust panel: before you book -->
@@ -336,6 +349,7 @@ const relatedGuides = [
               href={bookingAffiliateUrl}
               target="_blank"
               rel="sponsored nofollow noopener"
+              data-affiliate-booking
               class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#A8763A] transition-colors no-underline text-sm"
             >
               Check current prices on Booking.com
@@ -343,6 +357,14 @@ const relatedGuides = [
             <p class="text-white/60 text-[11px] mt-3">Prices vary by date, taxes, room type, and cancellation policy. Always check the final rate before booking.</p>
           </div>
         )}
+        <div class="mt-12">
+          <FinderCta
+            title={`Find hotels like this in ${hotel.city}`}
+            text="Use the Hotel Finder to compare this kind of stay with other good-value options for your dates and budget."
+            href={finderHref}
+            compact={true}
+          />
+        </div>
         <RelatedGuides items={relatedGuides} />
       </article>
 
@@ -396,4 +418,12 @@ const relatedGuides = [
       </aside>
     </div>
   </main>
+  <script>
+    for (const link of Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-affiliate-booking]'))) {
+      link.addEventListener('click', () => {
+        const track = (window as unknown as { ffshTrack?: (name: string, props?: Record<string, unknown>) => void }).ffshTrack;
+        if (typeof track === 'function') track('affiliate_booking_clicked');
+      });
+    }
+  </script>
 </BaseLayout>

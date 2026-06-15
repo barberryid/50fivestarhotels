@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HotelFinder from '../components/HotelFinder.astro';
+import ThreeStepStrip from '../components/ThreeStepStrip.astro';
+import ExampleChips from '../components/ExampleChips.astro';
+import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
+
+const jsonLd = [
+  websiteJsonLd(),
+  publisherJsonLd(),
+  webApplicationJsonLd(),
+  breadcrumbJsonLd([
+    { name: 'Home', url: canonicalUrl('/') },
+    { name: 'Hotel Finder', url: canonicalUrl('/hotel-finder/') },
+  ]),
+];
+
+const doesList = [
+  'Helps you define the right hotel search brief.',
+  'Forces the research to check value, location, recent reviews and hidden drawbacks.',
+  'Creates fallback options when a budget is unrealistic.',
+];
+const doesNotList = [
+  'It does not check live prices itself.',
+  'It does not guarantee availability.',
+  'It does not replace checking taxes, room type, cancellation terms and recent reviews before booking.',
+];
+---
+
+<BaseLayout
+  title="Free Hotel Finder for Affordable Luxury Hotels | 50 Five-Star Hotels"
+  description="Build a hotel research brief for ChatGPT or Claude and find affordable five-star, near-luxury and unusually good-value hotels for your own trip."
+  canonical="/hotel-finder/"
+  jsonLd={jsonLd}
+>
+  <main>
+    <!-- Hero -->
+    <section class="bg-[#F8F2E8] border-b border-[#1F2428]/6">
+      <div class="max-w-4xl mx-auto px-5 py-16 md:py-20">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Hotel Finder</p>
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
+          Find the right hotel for your trip — not just your budget.
+        </h1>
+        <p class="text-[#6F685F] text-lg leading-relaxed max-w-2xl mb-8">
+          Choose a destination, budget and travel priorities. The Hotel Finder creates a practical research brief you can paste into ChatGPT, Claude or another research-capable assistant.
+        </p>
+        <div class="flex flex-wrap gap-4 mb-10">
+          <a
+            href="#hotel-finder"
+            class="inline-flex items-center justify-center rounded-full bg-[#4F6547] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(79,101,71,0.22)] transition-colors hover:bg-[#344532] no-underline"
+          >
+            Build my hotel shortlist →
+          </a>
+          <a
+            href="/all-hotels/"
+            class="inline-flex items-center justify-center rounded-full border border-[#1F2428]/15 bg-white px-6 py-3 text-sm font-semibold text-[#1F2428] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] no-underline"
+          >
+            See example hotels
+          </a>
+        </div>
+        <ExampleChips />
+      </div>
+    </section>
+
+    <!-- Three-step strip -->
+    <ThreeStepStrip />
+
+    <!-- What this tool does / does not do -->
+    <section class="max-w-4xl mx-auto px-5 py-12">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-[#4F6547]/25 bg-[#E8F1E6] p-6">
+          <h2 class="font-serif text-xl font-semibold text-[#1F2428] mb-3">What this tool does</h2>
+          <ul class="space-y-2">
+            {doesList.map((item) => (
+              <li class="flex items-start gap-3 text-sm leading-relaxed text-[#1F2428]/80">
+                <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#4F6547]" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-[#E2D4BF] bg-[#FFFDF8] p-6">
+          <h2 class="font-serif text-xl font-semibold text-[#1F2428] mb-3">What it does not do</h2>
+          <ul class="space-y-2">
+            {doesNotList.map((item) => (
+              <li class="flex items-start gap-3 text-sm leading-relaxed text-[#1F2428]/80">
+                <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#B88A44]" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- The finder -->
+    <HotelFinder />
+
+    <!-- When-to-go promotion -->
+    <section class="max-w-4xl mx-auto px-5 pb-16">
+      <div class="rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-6 md:p-7">
+        <h2 class="font-serif text-2xl font-semibold text-[#1F2428] mb-3">
+          Already know the destination? Find the best months.
+        </h2>
+        <p class="text-[#1F2428]/80 leading-relaxed">
+          Use the second “When to go” prompt inside <a href="#hotel-finder" class="text-[#B88A44] hover:underline">step 5 above</a> to compare weather, crowds, price seasonality and hotel-value windows before choosing your dates. It stays connected to the same destination, budget and preferences.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,40 +1,83 @@
 ---
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/under-50', label: 'Under €50' },
-  { href: '/under-100', label: 'Under €100' },
-  { href: '/under-200', label: 'Under €200' },
-  { href: '/under-250', label: 'Under €250' },
-  { href: '/destinations', label: 'Destinations' },
-  { href: '/all-hotels', label: 'All Hotels' },
-  { href: '/cheap-five-star-hotels', label: 'Cheap five-star hotels' },
-  { href: '/affordable-luxury-hotels', label: 'Affordable luxury hotels' },
-  { href: '/#hotel-finder', label: 'Hotel Finder' },
-  { href: '/affordable-five-star-hotels-asia', label: 'Affordable five-star hotels in Asia' },
-  { href: '/affordable-five-star-hotels-europe', label: 'Affordable five-star hotels in Europe' },
-  { href: '/regions/americas', label: 'Affordable five-star hotels in the Americas' },
-  { href: '/affiliate-disclosure/', label: 'Affiliate Disclosure' },
-  { href: '/image-credits', label: 'Image Credits' },
-  { href: '/sitemap', label: 'Sitemap' },
-  { href: '/about', label: 'About' },
+const groups = [
+  {
+    title: 'Find Hotels',
+    links: [
+      { href: '/hotel-finder/', label: 'Hotel Finder' },
+      { href: '/#how-it-works', label: 'How It Works' },
+    ],
+  },
+  {
+    title: 'Examples',
+    links: [
+      { href: '/all-hotels/', label: 'Example hotel library' },
+      { href: '/cheap-five-star-hotels/', label: 'Cheap five-star hotels' },
+      { href: '/affordable-luxury-hotels/', label: 'Affordable luxury hotels' },
+      { href: '/luxury-hotels-on-a-budget/', label: 'Luxury hotels on a budget' },
+    ],
+  },
+  {
+    title: 'Budget examples',
+    links: [
+      { href: '/under-50/', label: 'Under €50' },
+      { href: '/under-100/', label: 'Under €100' },
+      { href: '/under-200/', label: 'Under €200' },
+      { href: '/under-250/', label: 'Under €250' },
+    ],
+  },
+  {
+    title: 'Destination examples',
+    links: [
+      { href: '/destinations/', label: 'All destinations' },
+      { href: '/affordable-five-star-hotels-asia/', label: 'Asia' },
+      { href: '/affordable-five-star-hotels-europe/', label: 'Europe' },
+      { href: '/regions/americas/', label: 'Americas' },
+    ],
+  },
+  {
+    title: 'Guides',
+    links: [
+      { href: '/guides/how-to-find-cheap-five-star-hotels/', label: 'How to find cheap five-star hotels' },
+      { href: '/guides/when-are-five-star-hotels-cheapest/', label: 'When are they cheapest?' },
+      { href: '/guides/five-star-hotel-ratings-explained/', label: 'Five-star ratings explained' },
+    ],
+  },
+  {
+    title: 'About',
+    links: [
+      { href: '/about/', label: 'About' },
+      { href: '/affiliate-disclosure/', label: 'Affiliate disclosure' },
+      { href: '/image-credits/', label: 'Image credits' },
+      { href: '/sitemap/', label: 'Sitemap' },
+    ],
+  },
 ];
 ---
 
 <footer class="bg-[#1F2428] text-white mt-24">
   <div class="max-w-6xl mx-auto px-5 py-16">
-    <div class="flex flex-col md:flex-row justify-between gap-10">
+    <div class="flex flex-col lg:flex-row justify-between gap-12">
       <div class="max-w-sm">
         <p class="font-serif text-xl font-bold mb-2">50 Five-Star Hotels</p>
         <p class="text-[#C4B9A6] text-sm leading-relaxed">
-          Five-star hotels without five-star prices. A practical guide and hotel-finding assistant for travellers looking for unusually good-value luxury and near-luxury stays.
+          50 Five-Star Hotels is a practical hotel-finding assistant for travellers looking for unusually good-value luxury and near-luxury stays — with honest warnings before you book.
         </p>
       </div>
 
-      <nav aria-label="Footer navigation" class="flex flex-wrap gap-x-8 gap-y-2">
-        {links.map(link => (
-          <a href={link.href} class="text-sm text-[#C4B9A6] hover:text-white transition-colors no-underline">
-            {link.label}
-          </a>
+      <nav aria-label="Footer navigation" class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-8">
+        {groups.map((group) => (
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-[#8A8073] mb-3">{group.title}</p>
+            <ul class="space-y-2">
+              {group.links.map((link) => (
+                <li>
+                  <a href={link.href} class="text-sm text-[#C4B9A6] hover:text-white transition-colors no-underline">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
       </nav>
     </div>

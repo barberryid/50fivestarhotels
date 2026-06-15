@@ -340,7 +340,7 @@ const toolData = {
 
   <AccordionCard title="Copy your prompt" number={5}>
     <div class="space-y-3">
-      <section aria-labelledby="hotel-prompt-heading" class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card data-hotel-prompt-card>
+      <section aria-labelledby="hotel-prompt-heading" data-nosnippet class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card data-hotel-prompt-card>
         <button
           type="button"
           class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-[#F8F1E8] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
@@ -398,10 +398,36 @@ const toolData = {
               <li>Select a destination to generate suggested searches.</li>
             </ul>
           </div>
+          <div id="hotel-copy-success" hidden class="mt-4 rounded-xl border border-[#4F6547]/30 bg-[#E8F1E6] p-4">
+            <p class="text-sm font-semibold text-[#1F2428] mb-1">Prompt copied.</p>
+            <p class="text-sm leading-relaxed text-[#1F2428]/80 mb-3">
+              Open ChatGPT or Claude, start a fresh session, and paste the brief there. Verify live prices before booking.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a
+                href="https://chatgpt.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-open-chatgpt
+                class="inline-flex items-center gap-2 rounded-full bg-[#1F2428] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#4F6547] no-underline"
+              >
+                Open ChatGPT →
+              </a>
+              <a
+                href="https://claude.ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-open-claude
+                class="inline-flex items-center gap-2 rounded-full border border-[#1F2428] px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#1F2428] hover:text-white no-underline"
+              >
+                Open Claude →
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section aria-labelledby="when-to-go-prompt-heading" class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card>
+      <section aria-labelledby="when-to-go-prompt-heading" data-nosnippet class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card>
         <button
           type="button"
           class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-[#F8F1E8] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
@@ -450,6 +476,32 @@ const toolData = {
             spellcheck="false"
             class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 font-mono text-[13px] leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
           >{defaultWhenToGoPrompt}</textarea>
+          <div id="when-to-go-copy-success" hidden class="mt-4 rounded-xl border border-[#4F6547]/30 bg-[#E8F1E6] p-4">
+            <p class="text-sm font-semibold text-[#1F2428] mb-1">Prompt copied.</p>
+            <p class="text-sm leading-relaxed text-[#1F2428]/80 mb-3">
+              Open ChatGPT or Claude, start a fresh session, and paste the brief there.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a
+                href="https://chatgpt.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-open-chatgpt
+                class="inline-flex items-center gap-2 rounded-full bg-[#1F2428] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#4F6547] no-underline"
+              >
+                Open ChatGPT →
+              </a>
+              <a
+                href="https://claude.ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-open-claude
+                class="inline-flex items-center gap-2 rounded-full border border-[#1F2428] px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#1F2428] hover:text-white no-underline"
+              >
+                Open Claude →
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -501,7 +553,21 @@ const toolData = {
   const copyWhenToGoLabel = document.getElementById('copy-when-to-go-prompt-label') as HTMLSpanElement;
   const copyWhenToGoStatus = document.getElementById('copy-when-to-go-prompt-status') as HTMLSpanElement;
   const resetButton = document.getElementById('reset-country-button') as HTMLButtonElement;
+  const hotelCopySuccess = document.getElementById('hotel-copy-success') as HTMLElement | null;
+  const whenToGoCopySuccess = document.getElementById('when-to-go-copy-success') as HTMLElement | null;
   const options = Array.from(listbox.querySelectorAll<HTMLLIElement>('[role="option"]'));
+
+  const track = (eventName: string, props: Record<string, unknown> = {}) => {
+    const fn = (window as unknown as { ffshTrack?: (name: string, props?: Record<string, unknown>) => void }).ffshTrack;
+    if (typeof fn === 'function') fn(eventName, props);
+  };
+
+  for (const link of Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-open-chatgpt]'))) {
+    link.addEventListener('click', () => track('open_chatgpt_clicked'));
+  }
+  for (const link of Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-open-claude]'))) {
+    link.addEventListener('click', () => track('open_claude_clicked'));
+  }
   const promptCards = Array.from(document.querySelectorAll<HTMLElement>('[data-prompt-card]'));
   const hotelPromptCard = document.querySelector<HTMLElement>('[data-hotel-prompt-card]');
   const priceLevelInputs = Array.from(document.querySelectorAll<HTMLInputElement>('[data-price-level-input]'));
@@ -854,7 +920,7 @@ const toolData = {
     const fallbackLabels = selectedAmounts.map((amount) => `“Fallback above €${amount}”`).join(', ');
     if (priceLevelSummary) {
       priceLevelSummary.textContent = selectedAmounts.length === data.priceLevels.length
-        ? 'The generated prompt searches all four nightly levels in order: €50, €100, €150 and €250. If no credible option appears at €50 or below, it displays “No credible hotel option found under €50” and marks the next best three hotels above that level as “Fallback above €50”.'
+        ? 'The generated prompt searches all four nightly levels in order: €50, €100, €200 and €250. If no credible option appears at €50 or below, it displays “No credible hotel option found under €50” and marks the next best three hotels above that level as “Fallback above €50”.'
         : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no credible hotel, it displays “No credible hotel option found under that level” and uses ${fallbackLabels} for the next best three hotels above it.`;
     }
     if (priceLevelStatus) {
@@ -928,6 +994,7 @@ const toolData = {
     updateSearchSuggestions();
     setCopyEnabled(true);
     closeList();
+    track('finder_country_selected', { country: name });
     if (hotelPromptCard && !hasAutoOpenedHotelPrompt) {
       setPromptCardOpen(hotelPromptCard, true);
       hasAutoOpenedHotelPrompt = true;
@@ -985,7 +1052,10 @@ const toolData = {
   }
 
   for (const priceInput of priceLevelInputs) {
-    priceInput.addEventListener('change', () => updatePriceLevelUi(priceInput));
+    priceInput.addEventListener('change', () => {
+      updatePriceLevelUi(priceInput);
+      track('finder_price_level_changed', { levels: getSelectedPriceLevels().join(',') });
+    });
   }
 
   const copyTextareaText = async (source: HTMLTextAreaElement) => {
@@ -1003,6 +1073,8 @@ const toolData = {
     await copyTextareaText(textarea);
     copyLabel.textContent = 'Copied';
     copyStatus.textContent = 'Hotel prompt copied to clipboard';
+    if (hotelCopySuccess) hotelCopySuccess.hidden = false;
+    track('hotel_prompt_copied', { country: selectedCountry ?? '' });
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
       copyLabel.textContent = 'Copy hotel prompt';
@@ -1014,6 +1086,8 @@ const toolData = {
     await copyTextareaText(whenToGoTextarea);
     copyWhenToGoLabel.textContent = 'Copied';
     copyWhenToGoStatus.textContent = 'When-to-go prompt copied to clipboard';
+    if (whenToGoCopySuccess) whenToGoCopySuccess.hidden = false;
+    track('when_to_go_prompt_copied', { country: selectedCountry ?? '' });
     clearTimeout(copiedWhenToGoTimer);
     copiedWhenToGoTimer = setTimeout(() => {
       copyWhenToGoLabel.textContent = 'Copy when-to-go prompt';
@@ -1030,6 +1104,8 @@ const toolData = {
     tripScenarioInput.value = '';
     for (const dealBreakerInput of dealBreakerInputs) dealBreakerInput.checked = false;
     hasAutoOpenedHotelPrompt = false;
+    if (hotelCopySuccess) hotelCopySuccess.hidden = true;
+    if (whenToGoCopySuccess) whenToGoCopySuccess.hidden = true;
     for (const option of options) option.setAttribute('aria-selected', 'false');
     filterList('');
     closeList();

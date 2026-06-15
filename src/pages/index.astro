@@ -1,11 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AccordionCard from '../components/AccordionCard.astro';
-import CountryPromptTool from '../components/CountryPromptTool.astro';
-import PersonalisePreferences from '../components/PersonalisePreferences.astro';
-import { researchPriceLevels } from '../data/researchPriceLevels';
-import { publisherJsonLd, websiteJsonLd } from '../lib/seo';
+import HotelFinder from '../components/HotelFinder.astro';
+import ThreeStepStrip from '../components/ThreeStepStrip.astro';
+import ExampleChips from '../components/ExampleChips.astro';
+import { publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
 
 const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
 const bySlug = Object.fromEntries(allHotels.map(h => [h.data.slug, h.data]));
@@ -21,25 +20,12 @@ const heroImage = {
   alt: heroHotel?.image?.alt ?? heroHotel?.title ?? 'Steigenberger Resort Achti, Luxor at dusk',
 };
 
-const bookingChecks = [
-  'Final price after taxes and fees',
-  'Exact room type',
-  'Whether breakfast is included or expensive',
-  'Cancellation policy',
-  'Recent reviews from the last 3–6 months',
-  'Lowest-rated recent reviews',
-  'Location on the map',
-  'Airport or station transfer time',
-  'Whether the five-star label is official, local or platform-based',
-  'Whether the low price is seasonal, mobile-only, member-only or non-refundable',
-];
-
-const jsonLd = [websiteJsonLd(), publisherJsonLd()];
+const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
 ---
 
 <BaseLayout
-  title="50 Five-Star Hotels Without Five-Star Prices"
-  description="Discover affordable five-star and near-five-star hotels around the world, from rare under-€50 snapshot finds to smart luxury splurges under €250."
+  title="50 Five-Star Hotels — Free Affordable-Luxury Hotel Finder"
+  description="Use the Hotel Finder to build a research brief for ChatGPT or Claude and find affordable five-star, near-luxury and unusually good-value hotels for your own trip."
   canonical="/"
   image={heroImage.src}
   jsonLd={jsonLd}
@@ -66,118 +52,70 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd()];
 
       <!-- Frosted hero copy panel -->
       <div class="w-full max-w-6xl mx-auto px-5 py-10 sm:py-10 md:py-8">
-        <div class="hero-glass max-w-[740px] mx-auto lg:mx-0 lg:ml-10 rounded-[1.25rem] px-6 py-7 sm:px-9 sm:py-9 md:px-10 md:py-10 text-center sm:text-left text-white shadow-[0_28px_90px_rgba(0,0,0,0.38)] ring-1 ring-[#D8BD8A]/45">
+        <div class="hero-glass max-w-[760px] mx-auto lg:mx-0 lg:ml-10 rounded-[1.25rem] px-6 py-7 sm:px-9 sm:py-9 md:px-10 md:py-10 text-center sm:text-left text-white shadow-[0_28px_90px_rgba(0,0,0,0.38)] ring-1 ring-[#D8BD8A]/45">
           <p class="text-[#E8D7B4] text-[0.68rem] sm:text-xs font-bold uppercase tracking-[0.22em] mb-5 flex items-center justify-center sm:justify-start gap-3">
             <span class="inline-block w-7 sm:w-9 h-px bg-[#D8BD8A]"></span>
-            Affordable luxury travel
+            Affordable luxury hotel finder
           </p>
-          <h1 class="font-serif text-[3rem] sm:text-[4.2rem] md:text-[5rem] font-semibold leading-[0.94] [text-shadow:0_2px_28px_rgba(0,0,0,0.55)]">
-            Five-star hotels without five-star <span class="text-[#E8C988] italic">prices.</span>
+          <h1 class="font-serif text-[2.5rem] sm:text-[3.4rem] md:text-[4rem] font-semibold leading-[0.98] [text-shadow:0_2px_28px_rgba(0,0,0,0.55)]">
+            Find five-star hotels without five-star <span class="text-[#E8C988] italic">prices</span> — anywhere you're going.
           </h1>
-          <p class="text-white/88 text-base sm:text-lg md:text-xl mt-5 leading-relaxed max-w-[39rem] mx-auto sm:mx-0">
-            A warm, practical guide to finding hotels where the price feels surprisingly modest for the setting, service, history or sense of occasion.
+          <p class="text-white/88 text-base sm:text-lg mt-5 leading-relaxed max-w-[42rem] mx-auto sm:mx-0">
+            Use the Hotel Finder to build a practical research brief for ChatGPT or Claude. Choose a destination, budget and travel priorities, then get a shortlist method that helps you spot unusually good-value hotels — and the compromises to check before booking.
           </p>
-          <p class="text-white/72 text-xs mt-7 leading-relaxed max-w-md mx-auto sm:mx-0">
-            Prices change constantly. Every hotel here should be checked by date, room type, taxes and cancellation policy before booking.
-          </p>
+          <div class="mt-7 flex flex-wrap gap-3 justify-center sm:justify-start">
+            <a
+              href="/hotel-finder/"
+              class="inline-flex items-center justify-center rounded-full bg-[#4F6547] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.3)] transition-colors hover:bg-[#344532] no-underline"
+            >
+              Build my hotel shortlist →
+            </a>
+            <a
+              href="/all-hotels/"
+              class="inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/20 no-underline"
+            >
+              See example hotels
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- How it works -->
+    <ThreeStepStrip id="how-it-works" />
+
+    <!-- Proof band -->
+    <section class="bg-[#FFFDF8] border-b border-[#E2D4BF]">
+      <div class="max-w-4xl mx-auto px-5 py-12 md:py-14 text-center sm:text-left">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-3">Built on 50+ hand-scored hotel examples</p>
+        <p class="text-[#1F2428]/80 text-lg leading-relaxed max-w-2xl mx-auto sm:mx-0 mb-5">
+          The finder is based on the same value logic used across the hotel profiles: price, character, reviews, location, nearby experiences and hidden drawbacks.
+        </p>
+        <a href="/all-hotels/" class="inline-flex items-center text-[#B88A44] font-semibold hover:underline no-underline">
+          Browse example hotels →
+        </a>
+      </div>
+    </section>
+
     <!-- Hotel finder intro -->
-    <section id="hotel-finder" class="bg-[#FFFDF8] border-b border-[#E2D4BF] scroll-mt-20">
-      <div class="max-w-4xl mx-auto px-5 py-16 md:py-20">
+    <section class="bg-[#FFFDF8] border-b border-[#E2D4BF]">
+      <div class="max-w-4xl mx-auto px-5 py-14 md:py-16">
         <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Hotel finder</p>
-        <h2 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-8">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1F2428] leading-tight mb-6">
           Find the Right Hotel for Your Trip
         </h2>
-        <p class="mb-6 flex flex-wrap items-center gap-2 text-xl md:text-2xl font-semibold text-[#1F2428]">
-          <span>Follow steps</span>
-          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#4F6547] text-base font-bold text-white shadow-[0_8px_20px_rgba(79,101,71,0.28)]">1</span>
-          <span aria-hidden="true">–</span>
-          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#4F6547] text-base font-bold text-white shadow-[0_8px_20px_rgba(79,101,71,0.28)]">5</span>
-          <span>below then</span>
-          <span aria-hidden="true">–</span>
-          <span>copy and paste your results into an AI</span>
-        </p>
         <p class="text-[#6F685F] text-sm leading-relaxed mb-6">
-          This prompt is designed for Claude, ChatGPT, or another research-capable AI assistant. Start a fresh session rather than continuing an old one.
+          Follow steps 1–5 below, then copy and paste your results into ChatGPT, Claude or another research-capable AI. Start a fresh session rather than continuing an old one.
         </p>
-        <p class="text-[#6F685F] text-base md:text-lg leading-relaxed font-serif italic">
+        <p class="text-[#1F2428] text-base md:text-lg leading-relaxed font-serif italic mb-8">
           The goal is not to find the cheapest hotel. It is to find hotels where the comfort, character, location and experience feel unusually strong for the price.
         </p>
+        <ExampleChips />
       </div>
     </section>
 
-    <!-- Price levels -->
-    <section class="max-w-4xl mx-auto px-5 py-6" data-price-level-selector>
-      <AccordionCard title="Price levels included" number={1}>
-      <p class="text-[#1F2428]/80 leading-relaxed mb-7" data-price-level-summary>
-        The generated prompt searches the selected nightly levels in order. All four are included by default. If no credible option appears at €50 or below, it displays “No credible hotel option found under €50” and marks the next best three hotels above that level as “Fallback above €50”.
-      </p>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {researchPriceLevels.map(({ amount, title, text }) => (
-          <label
-            class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] p-5 cursor-pointer transition-colors data-[selected=true]:border-[#B88A44] data-[selected=true]:bg-[#F4EADC] hover:border-[#B88A44]"
-            data-price-level-card
-            data-selected="true"
-          >
-            <span class="flex h-full gap-4">
-              <input
-                type="checkbox"
-                value={amount}
-                checked
-                data-price-level-input
-                class="mt-1 h-5 w-5 shrink-0 rounded border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
-                aria-describedby={`price-level-${amount}-description`}
-              />
-              <span class="min-w-0">
-                <span class="block text-3xl font-serif font-semibold text-[#1F2428] mb-2">€{amount}</span>
-                <span class="block text-sm font-bold uppercase tracking-widest text-[#B88A44] mb-3">{title}</span>
-                <span id={`price-level-${amount}-description`} class="block text-sm leading-relaxed text-[#6F685F]">{text}</span>
-                <span class="mt-4 inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#4F6547]" data-price-level-state>
-                  Included
-                </span>
-              </span>
-            </span>
-          </label>
-        ))}
-      </div>
-      <p class="mt-4 text-sm text-[#6F685F]" role="status" aria-live="polite" data-price-level-status>
-        Select at least one price level. The prompt below updates automatically.
-      </p>
-      </AccordionCard>
-    </section>
-
-    <!-- Traveller-fit weighting -->
-    <PersonalisePreferences />
-
-    <!-- The tool -->
-    <section class="max-w-4xl mx-auto px-5 pt-0 pb-10">
-      <CountryPromptTool />
-    </section>
-
-    <!-- Before booking checklist -->
-    <section class="max-w-4xl mx-auto px-5 py-10">
-      <div class="rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-6 md:p-7">
-        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Final booking check</p>
-        <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#1F2428] mb-4">Before booking, check</h2>
-        <p class="text-[#1F2428]/80 leading-relaxed mb-6">
-          The finder is designed to produce a strong shortlist, not a final booking decision. Before booking any hotel, verify the live details yourself.
-        </p>
-        <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-3">
-          {bookingChecks.map((item) => (
-            <li class="flex items-start gap-3 text-sm leading-relaxed text-[#1F2428]/80">
-              <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#4F6547]" aria-hidden="true"></span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-        <p class="mt-6 rounded-lg bg-[#E8F1E6] px-4 py-3 text-sm leading-relaxed text-[#1F2428]">
-          A hotel can be a strong value option and still be wrong for your trip. Treat the shortlist as a decision aid, then check the live booking page carefully.
-        </p>
-      </div>
-    </section>
+    <!-- The finder -->
+    <HotelFinder />
   </main>
 </BaseLayout>
 
