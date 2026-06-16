@@ -334,22 +334,21 @@ const toolData = {
   </AccordionCard>
 
   <AccordionCard title="Copy your prompt" number={5}>
+    <button
+      slot="actions"
+      type="button"
+      disabled
+      data-copy-prompt-button
+      class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#B88A44] px-4 py-2 text-xs md:px-5 md:py-2.5 md:text-sm font-semibold text-white transition-colors hover:bg-[#1F2428] disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:hover:bg-[#C4B9A6]"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span data-copy-prompt-label>Select a destination before copying</span>
+    </button>
+    <span slot="actions" class="sr-only" role="status" aria-live="polite" data-copy-prompt-status></span>
     <div class="space-y-3">
-      <div class="flex flex-wrap items-center justify-end gap-3">
-        <button
-          type="button"
-          disabled
-          data-copy-prompt-button
-          class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#B88A44] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1F2428] disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:hover:bg-[#C4B9A6]"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <span data-copy-prompt-label>Select a destination before copying</span>
-        </button>
-        <span class="sr-only" role="status" aria-live="polite" data-copy-prompt-status></span>
-      </div>
       <section aria-labelledby="hotel-prompt-heading" data-nosnippet class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card data-hotel-prompt-card>
         <button
           type="button"
@@ -973,7 +972,11 @@ const toolData = {
     }
   };
 
-  const handleCopyPrompt = async () => {
+  const handleCopyPrompt = async (event: Event) => {
+    // The top button lives inside the accordion <summary>; stop the click from
+    // toggling the section open/closed.
+    event.preventDefault();
+    event.stopPropagation();
     await copyTextareaText(textarea);
     for (const label of copyLabels) label.textContent = 'Copied';
     for (const status of copyStatuses) status.textContent = 'Hotel prompt copied to clipboard';

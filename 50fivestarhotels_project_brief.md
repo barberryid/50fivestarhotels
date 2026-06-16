@@ -1,5 +1,14 @@
 # 50 Five-Star Hotels — Project Brief
 
+## Copy button moved into the accordion header (16 June 2026)
+
+Follow-up to the duplicate-copy-button change: the top copy button on both tools was moved up out of the accordion body into the **accordion header row** so it is visible immediately, even while the section is collapsed.
+
+- `src/components/AccordionCard.astro` gained a named **`actions` slot** rendered inside the `<summary>`, just left of the collapse chevron.
+- On the Hotel Finder (`CountryPromptTool.astro`, step 5) and Best Time to Go (`WhenToGoTool.astro`, step 2), the header copy button is passed via `slot="actions"` (button + sr-only status span). The button still lives inside the native `<details><summary>`, so its copy handler now calls `event.preventDefault()` + `event.stopPropagation()` to stop the click from toggling the section open/closed. The in-panel button remains and stays in sync (same `data-copy-*` attributes / shared handler).
+- The header button uses slightly smaller padding/text on mobile (`px-4 py-2 text-xs md:px-5 md:py-2.5 md:text-sm`) so it fits the header row.
+- Local build check: `npm run build` succeeded on 16 June 2026 (88 pages). Browser verification confirmed the button is visible while collapsed, copies on click, and does not toggle the accordion; no console errors.
+
 ## Duplicate copy button at top of prompt step (16 June 2026)
 
 A second copy button was added at the **top** of the prompt section on both the Hotel Finder (`src/components/CountryPromptTool.astro`, step 5 "Copy your prompt") and the Best Time to Go page (`src/components/WhenToGoTool.astro`, step 2 "When to go"), so the prompt can be copied without scrolling past the textarea.
