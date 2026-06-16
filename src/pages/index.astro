@@ -9,15 +9,14 @@ import { publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo
 const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
 const bySlug = Object.fromEntries(allHotels.map(h => [h.data.slug, h.data]));
 
-// Full-bleed hero — the first image from the Steigenberger Resort Achti Luxor
-// hotel page (its AI editorial dusk view), retouched to remove the central
-// foreground palm tree. The hotel page itself keeps the original image.
-const heroHotel = bySlug['steigenberger-resort-achti-luxor'];
+// Full-bleed hero — an illustrated Tuscan villa terrace overlooking the
+// vineyards and hills at golden hour, evoking the affordable-luxury idea
+// at the heart of the site rather than any single hotel listing.
 const heroImage = {
-  large: '/images/hotels/responsive/steigenberger-resort-achti-luxor-editorial-dusk-no-center-palm-1200.webp',
-  small: '/images/hotels/responsive/steigenberger-resort-achti-luxor-editorial-dusk-no-center-palm-800.webp',
-  src: '/images/hotels/steigenberger-resort-achti-luxor-editorial-dusk-no-center-palm.webp',
-  alt: heroHotel?.image?.alt ?? heroHotel?.title ?? 'Steigenberger Resort Achti, Luxor at dusk',
+  large: '/images/hotels/responsive/tuscan-villa-terrace-hero-1200.webp',
+  small: '/images/hotels/responsive/tuscan-villa-terrace-hero-800.webp',
+  src: '/images/hotels/tuscan-villa-terrace-hero.webp',
+  alt: 'Illustrated terrace of a Tuscan villa overlooking vineyards and rolling hills at golden hour',
 };
 
 const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
@@ -43,7 +42,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
           loading="eager"
           decoding="async"
           fetchpriority="high"
-          class="h-full w-full object-cover brightness-[1.22] saturate-[1.08] contrast-[1.03]"
+          class="h-full w-full object-cover brightness-[1.02] saturate-[1.04] contrast-[1.02]"
         />
       </picture>
       <!-- Warm legibility overlay -->
