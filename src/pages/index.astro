@@ -1,13 +1,6 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HotelFinder from '../components/HotelFinder.astro';
-import ThreeStepStrip from '../components/ThreeStepStrip.astro';
-import ExampleChips from '../components/ExampleChips.astro';
 import { publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
-
-const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
-const bySlug = Object.fromEntries(allHotels.map(h => [h.data.slug, h.data]));
 
 // Full-bleed hero — an illustrated Tuscan villa with an infinity pool and
 // flowering terrace overlooking the vineyards and hills at golden hour,
@@ -79,42 +72,6 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
         </div>
       </div>
     </section>
-
-    <!-- How it works -->
-    <ThreeStepStrip id="how-it-works" />
-
-    <!-- Proof band -->
-    <section class="bg-[#FFFDF8] border-b border-[#E2D4BF]">
-      <div class="max-w-4xl mx-auto px-5 py-12 md:py-14 text-center sm:text-left">
-        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-3">Built on 50+ hand-scored hotel examples</p>
-        <p class="text-[#1F2428]/80 text-lg leading-relaxed max-w-2xl mx-auto sm:mx-0 mb-5">
-          The finder is based on the same value logic used across the hotel profiles: price, character, reviews, location, nearby experiences and hidden drawbacks.
-        </p>
-        <a href="/all-hotels/" class="inline-flex items-center text-[#B88A44] font-semibold hover:underline no-underline">
-          Browse example hotels →
-        </a>
-      </div>
-    </section>
-
-    <!-- Hotel finder intro -->
-    <section class="bg-[#FFFDF8] border-b border-[#E2D4BF]">
-      <div class="max-w-4xl mx-auto px-5 py-14 md:py-16">
-        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Hotel finder</p>
-        <h2 class="font-serif text-3xl md:text-4xl font-bold text-[#1F2428] leading-tight mb-6">
-          Find the Right Hotel for Your Trip
-        </h2>
-        <p class="text-[#6F685F] text-sm leading-relaxed mb-6">
-          Follow steps 1–5 below, then copy and paste your results into ChatGPT, Claude or another research-capable AI. Start a fresh session rather than continuing an old one.
-        </p>
-        <p class="text-[#1F2428] text-base md:text-lg leading-relaxed font-serif italic mb-8">
-          The goal is not to find the cheapest hotel. It is to find hotels where the comfort, character, location and experience feel unusually strong for the price.
-        </p>
-        <ExampleChips />
-      </div>
-    </section>
-
-    <!-- The finder -->
-    <HotelFinder />
   </main>
 </BaseLayout>
 
