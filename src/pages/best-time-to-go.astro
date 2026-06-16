@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhenToGoTool from '../components/WhenToGoTool.astro';
+import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, websiteJsonLd } from '../lib/seo';
+
+const jsonLd = [
+  websiteJsonLd(),
+  publisherJsonLd(),
+  breadcrumbJsonLd([
+    { name: 'Home', url: canonicalUrl('/') },
+    { name: 'Best Time to Go', url: canonicalUrl('/best-time-to-go/') },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Best Time to Go: Weather, Air Quality and Hotel Value by Month | 50 Five-Star Hotels"
+  description="Pick a destination and build a free prompt for ChatGPT or Claude that compares the best months to visit by weather, air quality and affordable-luxury hotel value."
+  canonical="/best-time-to-go/"
+  jsonLd={jsonLd}
+>
+  <main>
+    <!-- Hero -->
+    <section class="bg-[#F8F2E8] border-b border-[#1F2428]/6">
+      <div class="max-w-4xl mx-auto px-5 py-16 md:py-20">
+        <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Best Time to Go</p>
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight">
+          Find the best months to visit — for weather, air quality and hotel value.
+        </h1>
+        <p class="mt-5 text-lg text-[#1F2428]/80 leading-relaxed max-w-2xl">
+          Choose a destination, then copy a ready-made prompt into ChatGPT or Claude. It compares monthly
+          weather comfort, air quality and affordable-luxury hotel-price seasonality, so you can choose your
+          dates before you book.
+        </p>
+      </div>
+    </section>
+
+    <!-- The tool -->
+    <section class="max-w-4xl mx-auto px-5 py-10">
+      <WhenToGoTool />
+    </section>
+
+    <!-- Cross-link back to the finder -->
+    <section class="max-w-4xl mx-auto px-5 pb-16">
+      <div class="rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-6 md:p-7">
+        <h2 class="font-serif text-2xl font-semibold text-[#1F2428] mb-3">
+          Know when, but not where to stay?
+        </h2>
+        <p class="text-[#1F2428]/80 leading-relaxed">
+          Use the <a href="/hotel-finder/" class="text-[#B88A44] hover:underline">Hotel Finder</a> to build a
+          full research brief and compare affordable five-star and near-luxury hotels by value, location,
+          recent reviews and likely compromises.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

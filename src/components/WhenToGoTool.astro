@@ -1,0 +1,434 @@
+---
+// Standalone "Best time to go" tool used on /best-time-to-go/.
+// A focused, self-contained version of the destination → prompt flow:
+//   1. Country or territory (combobox) + optional city/town
+//   2. When-to-go prompt (built by buildWhenToGoPrompt, copy to clipboard)
+// Unlike the full Hotel Finder, this page has no price-level selector or
+// traveller-fit weighting; the prompt uses all four default price levels.
+import AccordionCard from './AccordionCard.astro';
+import { countries } from '../data/unCountries';
+import { researchPriceLevels } from '../data/researchPriceLevels';
+import { buildWhenToGoPrompt } from '../data/researchPromptTemplate';
+
+const defaultPriceLevels = researchPriceLevels.map(({ amount }) => amount);
+
+const defaultWhenToGoPrompt = buildWhenToGoPrompt({
+  countryOrTerritory: '[REGION]',
+  selectedPriceLevels: defaultPriceLevels,
+});
+
+const toolData = {
+  priceLevels: defaultPriceLevels,
+};
+---
+
+<div class="space-y-4" data-when-to-go-tool>
+  <AccordionCard title="Country or territory" number={1} open={true}>
+    <!-- Country combobox -->
+    <label id="country-label" for="country-input" class="sr-only">
+      Country or territory
+    </label>
+    <div class="relative max-w-md">
+      <input
+        type="text"
+        id="country-input"
+        role="combobox"
+        aria-expanded="false"
+        aria-controls="country-listbox"
+        aria-autocomplete="list"
+        aria-activedescendant=""
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Start typing — e.g. Vietnam, Côte d’Ivoire…"
+        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      />
+      <ul
+        id="country-listbox"
+        role="listbox"
+        aria-labelledby="country-label"
+        hidden
+        class="absolute z-20 mt-1 w-full max-h-72 overflow-y-auto rounded-xl border border-[#E2D4BF] bg-white shadow-lg py-1"
+      >
+        {countries.map((c) => (
+          <li
+            id={`country-option-${c.code}`}
+            role="option"
+            aria-selected="false"
+            data-name={c.name}
+            class="cursor-pointer px-4 py-2 text-sm text-[#1F2428] aria-selected:bg-[#F4EADC] data-[active]:bg-[#F4EADC]"
+          >
+            {c.name}
+          </li>
+        ))}
+        <li id="country-no-results" hidden class="px-4 py-2 text-sm text-[#6F685F] italic" role="presentation">
+          No matching country or territory
+        </li>
+      </ul>
+    </div>
+
+    <!-- City or town (optional, freeform) -->
+    <label for="city-input" class="mt-6 block text-sm font-semibold text-[#1F2428] mb-2">
+      City or town <span class="font-normal text-[#6F685F]">(optional)</span>
+    </label>
+    <div class="max-w-md">
+      <input
+        type="text"
+        id="city-input"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="e.g. Hoi An, Oaxaca, Luang Prabang…"
+        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      />
+      <p class="mt-2 text-sm text-[#6F685F]">
+        Leave blank to research the whole country. Enter a city or town to focus the search on it and the destinations within easy reach.
+      </p>
+    </div>
+  </AccordionCard>
+
+  <AccordionCard title="When to go" number={2}>
+    <section aria-labelledby="when-to-go-prompt-heading" data-nosnippet class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card>
+      <button
+        type="button"
+        class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-[#F8F1E8] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
+        aria-expanded="false"
+        aria-controls="when-to-go-prompt-panel"
+        data-prompt-toggle
+      >
+        <span class="min-w-0">
+          <span class="flex flex-wrap items-center gap-2">
+            <span id="when-to-go-prompt-heading" class="block text-sm font-semibold text-[#1F2428]">
+              When to go
+            </span>
+          </span>
+          <span class="mt-1 block text-sm leading-relaxed text-[#6F685F]">
+            Use the destination above to check monthly weather, air quality and hotel-price seasonality, then copy the prompt into ChatGPT or Claude.
+          </span>
+        </span>
+        <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-full border border-[#4F6547]/35 bg-white px-3.5 py-1.5 text-xs font-semibold text-[#4F6547] transition-colors group-hover:bg-[#E8F1E6]">
+          <span data-prompt-toggle-label>Show prompt</span>
+          <svg data-prompt-chevron xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </span>
+      </button>
+      <div id="when-to-go-prompt-panel" class="border-t border-[#E2D4BF] p-4 md:p-5" data-prompt-panel hidden>
+        <div class="mb-3 flex flex-wrap items-center justify-end gap-3">
+          <button
+            type="button"
+            id="copy-when-to-go-prompt-button"
+            disabled
+            class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#B88A44] bg-white px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#F4EADC] disabled:cursor-not-allowed disabled:border-[#C4B9A6] disabled:text-[#6F685F] disabled:hover:bg-white"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="copy-when-to-go-prompt-label">Select a destination before copying</span>
+          </button>
+          <span id="copy-when-to-go-prompt-status" class="sr-only" role="status" aria-live="polite"></span>
+        </div>
+        <label for="when-to-go-textarea" class="sr-only">When to go prompt text</label>
+        <textarea
+          id="when-to-go-textarea"
+          rows="18"
+          spellcheck="false"
+          class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 font-mono text-[13px] leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+        >{defaultWhenToGoPrompt}</textarea>
+        <div id="when-to-go-copy-success" hidden class="mt-4 rounded-xl border border-[#4F6547]/30 bg-[#E8F1E6] p-4">
+          <p class="text-sm font-semibold text-[#1F2428] mb-1">Prompt copied.</p>
+          <p class="text-sm leading-relaxed text-[#1F2428]/80 mb-3">
+            Open ChatGPT or Claude, start a fresh session, and paste the brief there.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="https://chatgpt.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-open-chatgpt
+              class="inline-flex items-center gap-2 rounded-full bg-[#1F2428] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#4F6547] no-underline"
+            >
+              Open ChatGPT →
+            </a>
+            <a
+              href="https://claude.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-open-claude
+              class="inline-flex items-center gap-2 rounded-full border border-[#1F2428] px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#1F2428] hover:text-white no-underline"
+            >
+              Open Claude →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </AccordionCard>
+
+  <!-- Reset -->
+  <div class="pt-1">
+    <button
+      type="button"
+      id="reset-country-button"
+      class="inline-flex items-center rounded-full border border-[#E2D4BF] bg-white px-4 py-2 text-xs font-semibold text-[#6F685F] transition-colors hover:border-[#B88A44] hover:text-[#B88A44]"
+    >
+      Reset country
+    </button>
+  </div>
+</div>
+
+<script is:inline type="application/json" id="when-to-go-data" set:html={JSON.stringify(toolData)} />
+
+<script>
+  import { buildWhenToGoPrompt } from '../data/researchPromptTemplate';
+
+  const data = JSON.parse(document.getElementById('when-to-go-data')!.textContent!) as {
+    priceLevels: number[];
+  };
+
+  const input = document.getElementById('country-input') as HTMLInputElement;
+  const cityInput = document.getElementById('city-input') as HTMLInputElement;
+  const listbox = document.getElementById('country-listbox') as HTMLUListElement;
+  const noResults = document.getElementById('country-no-results') as HTMLLIElement;
+  const whenToGoTextarea = document.getElementById('when-to-go-textarea') as HTMLTextAreaElement;
+  const copyButton = document.getElementById('copy-when-to-go-prompt-button') as HTMLButtonElement;
+  const copyLabel = document.getElementById('copy-when-to-go-prompt-label') as HTMLSpanElement;
+  const copyStatus = document.getElementById('copy-when-to-go-prompt-status') as HTMLSpanElement;
+  const resetButton = document.getElementById('reset-country-button') as HTMLButtonElement;
+  const copySuccess = document.getElementById('when-to-go-copy-success') as HTMLElement | null;
+  const options = Array.from(listbox.querySelectorAll<HTMLLIElement>('[role="option"]'));
+
+  const track = (eventName: string, props: Record<string, unknown> = {}) => {
+    const fn = (window as unknown as { ffshTrack?: (name: string, props?: Record<string, unknown>) => void }).ffshTrack;
+    if (typeof fn === 'function') fn(eventName, props);
+  };
+
+  for (const link of Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-open-chatgpt]'))) {
+    link.addEventListener('click', () => track('open_chatgpt_clicked'));
+  }
+  for (const link of Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-open-claude]'))) {
+    link.addEventListener('click', () => track('open_claude_clicked'));
+  }
+
+  // Show/hide the prompt panel.
+  const promptCard = document.querySelector<HTMLElement>('[data-prompt-card]');
+  const setPromptCardOpen = (card: HTMLElement, open: boolean) => {
+    const toggle = card.querySelector<HTMLButtonElement>('[data-prompt-toggle]');
+    const panel = card.querySelector<HTMLElement>('[data-prompt-panel]');
+    const label = card.querySelector<HTMLElement>('[data-prompt-toggle-label]');
+    const chevron = card.querySelector<SVGElement>('[data-prompt-chevron]');
+    if (!toggle || !panel) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    panel.hidden = !open;
+    if (label) label.textContent = open ? 'Open to show and copy prompt' : 'Show prompt';
+    chevron?.classList.toggle('rotate-180', open);
+  };
+  if (promptCard) {
+    const toggle = promptCard.querySelector<HTMLButtonElement>('[data-prompt-toggle]');
+    toggle?.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      setPromptCardOpen(promptCard, open);
+    });
+  }
+
+  // Case- and accent-insensitive fold ("cote" matches "Côte d’Ivoire").
+  const fold = (s: string) =>
+    s
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/[’ʼ]/g, "'")
+      .toLowerCase();
+
+  let activeIndex = -1;
+  let visible: HTMLLIElement[] = options;
+  let copiedTimer: ReturnType<typeof setTimeout> | undefined;
+  let selectedCountry: string | null = null;
+  let hasAutoOpenedPrompt = false;
+
+  const getCity = () => cityInput.value.trim();
+
+  const buildWhenToGoPromptFromState = (country: string | null, city: string): string =>
+    buildWhenToGoPrompt({
+      countryOrTerritory: country ?? '[REGION]',
+      cityOrTown: city,
+      selectedPriceLevels: data.priceLevels,
+    });
+
+  const refreshPrompt = () => {
+    whenToGoTextarea.value = buildWhenToGoPromptFromState(selectedCountry, getCity());
+  };
+
+  const setCopyEnabled = (enabled: boolean) => {
+    clearTimeout(copiedTimer);
+    copyButton.disabled = !enabled;
+    copyLabel.textContent = enabled ? 'Copy when-to-go prompt' : 'Select a destination before copying';
+    copyStatus.textContent = '';
+  };
+
+  const setActive = (index: number) => {
+    if (activeIndex >= 0 && visible[activeIndex]) {
+      visible[activeIndex].removeAttribute('data-active');
+    }
+    activeIndex = index;
+    if (index >= 0 && visible[index]) {
+      const option = visible[index];
+      option.setAttribute('data-active', '');
+      input.setAttribute('aria-activedescendant', option.id);
+      option.scrollIntoView({ block: 'nearest' });
+    } else {
+      input.setAttribute('aria-activedescendant', '');
+    }
+  };
+
+  const openList = () => {
+    listbox.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeList = () => {
+    listbox.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+    setActive(-1);
+  };
+
+  const filterList = (query: string) => {
+    const q = fold(query.trim());
+    visible = [];
+    for (const option of options) {
+      const match = q === '' || fold(option.dataset.name!).includes(q);
+      option.hidden = !match;
+      if (match) visible.push(option);
+    }
+    noResults.hidden = visible.length > 0;
+    setActive(-1);
+  };
+
+  const selectCountry = (name: string) => {
+    selectedCountry = name;
+    input.value = name;
+    for (const option of options) {
+      option.setAttribute('aria-selected', option.dataset.name === name ? 'true' : 'false');
+    }
+    refreshPrompt();
+    setCopyEnabled(true);
+    closeList();
+    track('when_to_go_country_selected', { country: name });
+    if (promptCard && !hasAutoOpenedPrompt) {
+      setPromptCardOpen(promptCard, true);
+      hasAutoOpenedPrompt = true;
+    }
+  };
+
+  input.addEventListener('input', () => {
+    filterList(input.value);
+    openList();
+  });
+
+  input.addEventListener('click', () => {
+    if (listbox.hidden) {
+      filterList(input.value);
+      openList();
+    }
+  });
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (listbox.hidden) {
+        filterList(input.value);
+        openList();
+      }
+      if (visible.length === 0) return;
+      const delta = event.key === 'ArrowDown' ? 1 : -1;
+      const next = activeIndex < 0
+        ? (delta === 1 ? 0 : visible.length - 1)
+        : (activeIndex + delta + visible.length) % visible.length;
+      setActive(next);
+    } else if (event.key === 'Enter') {
+      if (!listbox.hidden && activeIndex >= 0 && visible[activeIndex]) {
+        event.preventDefault();
+        selectCountry(visible[activeIndex].dataset.name!);
+      }
+    } else if (event.key === 'Escape') {
+      closeList();
+    }
+  });
+
+  input.addEventListener('blur', () => {
+    // Delay so a click on an option can land first.
+    setTimeout(() => {
+      if (!listbox.contains(document.activeElement)) closeList();
+    }, 150);
+  });
+
+  for (const option of options) {
+    // mousedown fires before the input's blur, so selection wins.
+    option.addEventListener('mousedown', (event) => {
+      event.preventDefault();
+      selectCountry(option.dataset.name!);
+    });
+  }
+
+  cityInput.addEventListener('input', () => {
+    refreshPrompt();
+  });
+
+  const copyTextareaText = async (source: HTMLTextAreaElement) => {
+    try {
+      await navigator.clipboard.writeText(source.value);
+    } catch {
+      source.select();
+      document.execCommand('copy');
+      source.setSelectionRange(0, 0);
+      source.blur();
+    }
+  };
+
+  copyButton.addEventListener('click', async () => {
+    await copyTextareaText(whenToGoTextarea);
+    copyLabel.textContent = 'Copied';
+    copyStatus.textContent = 'When-to-go prompt copied to clipboard';
+    if (copySuccess) copySuccess.hidden = false;
+    track('when_to_go_prompt_copied', { country: selectedCountry ?? '' });
+    clearTimeout(copiedTimer);
+    copiedTimer = setTimeout(() => {
+      copyLabel.textContent = 'Copy when-to-go prompt';
+      copyStatus.textContent = '';
+    }, 2000);
+  });
+
+  resetButton.addEventListener('click', () => {
+    selectedCountry = null;
+    input.value = '';
+    cityInput.value = '';
+    hasAutoOpenedPrompt = false;
+    if (copySuccess) copySuccess.hidden = true;
+    for (const option of options) option.setAttribute('aria-selected', 'false');
+    filterList('');
+    closeList();
+    refreshPrompt();
+    setCopyEnabled(false);
+  });
+
+  const prefillFromUrl = () => {
+    let params: URLSearchParams;
+    try {
+      params = new URLSearchParams(window.location.search);
+    } catch {
+      return;
+    }
+    const cityParam = params.get('city');
+    if (cityParam) cityInput.value = cityParam;
+
+    const countryParam = params.get('country');
+    const match = countryParam
+      ? options.find((option) => fold(option.dataset.name!) === fold(countryParam))
+      : undefined;
+    if (match) {
+      selectCountry(match.dataset.name!);
+    } else if (cityParam) {
+      refreshPrompt();
+    }
+  };
+
+  prefillFromUrl();
+</script>

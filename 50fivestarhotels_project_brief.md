@@ -1,5 +1,15 @@
 # 50 Five-Star Hotels — Project Brief
 
+## Best Time to Go page (16 June 2026)
+
+The "When to go" travel-timing prompt was **moved off the Hotel Finder onto its own page** at `/best-time-to-go/` (`src/pages/best-time-to-go.astro`).
+
+- **New standalone component:** `src/components/WhenToGoTool.astro` bundles a focused destination → prompt flow with its own trimmed client script (no dependency on the larger `HotelFinder`/`CountryPromptTool` wiring). Card 1 "Country or territory" is the renumbered copy of the finder's step 3 — country combobox (accent-insensitive search, keyboard nav) plus optional city/town only; the other step-3 fields (dates, nights, scenario, deal-breakers) were intentionally left out. Card 2 "When to go" is the moved prompt card, built by the shared `buildWhenToGoPrompt()` with all four default price levels (€50/€100/€200/€250). Supports `?country=…&city=…` prefill.
+- **Hotel Finder change:** the second "When to go" prompt card was removed from `src/components/CountryPromptTool.astro` and its shared script cleanly rewired (all `whenToGo` variables, the copy handler, and the `buildWhenToGoPrompt` import removed). The page's "Already know the destination?" promo box on `/hotel-finder/` now links to `/best-time-to-go/` instead of the old in-page anchor.
+- **Linking:** "Best Time to Go" added to the header nav (`src/components/Header.astro`) and the HTML sitemap (`src/pages/sitemap.astro`); the XML sitemap picks it up automatically.
+- **Analytics:** reuses `when_to_go_prompt_copied`; adds `when_to_go_country_selected`.
+- Local build check: `npm run build` completed successfully on 16 June 2026 (88 pages). Browser verification confirmed both pages work with zero console errors.
+
 ## About page sister-site windows (15 June 2026)
 
 The `/about/` page has been simplified. The previous long Hotel Finder/story/methodology copy was removed from `src/pages/about.astro` and replaced with two framed live website windows, matching the sister-site preview pattern used on `50difficultplaces.com/about/`:
