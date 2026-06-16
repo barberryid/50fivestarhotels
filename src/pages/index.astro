@@ -32,7 +32,7 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
 >
   <main>
     <!-- Hero -->
-    <section class="relative isolate flex items-center justify-center min-h-[70svh] sm:min-h-[76vh] md:min-h-[82vh] overflow-hidden">
+    <section class="relative isolate flex items-center justify-start min-h-[70svh] sm:min-h-[76vh] md:min-h-[82vh] overflow-hidden">
       <!-- Full-bleed background image -->
       <picture class="absolute inset-0 -z-10">
         <source media="(min-width: 768px)" srcset={heroImage.large} type="image/webp" />
@@ -50,8 +50,8 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
       <div class="absolute inset-0 -z-10 bg-gradient-to-r from-white/30 via-transparent to-transparent"></div>
 
       <!-- Frosted hero copy panel -->
-      <div class="w-full max-w-6xl mx-auto px-5 py-10 sm:py-10 md:py-8">
-        <div class="hero-glass max-w-[600px] mr-auto rounded-[1.75rem] px-6 py-8 sm:px-9 sm:py-10 md:px-10 md:py-11 text-center sm:text-left text-[#22281C] shadow-[0_24px_70px_rgba(40,30,12,0.18)] ring-1 ring-white/60">
+      <div class="w-full max-w-[1180px] px-[clamp(1rem,5vw,5rem)] py-10 sm:py-10 md:py-8">
+        <div class="hero-glass max-w-[640px] mr-auto rounded-[1.75rem] px-6 py-8 sm:px-9 sm:py-10 md:px-10 md:py-11 text-center sm:text-left text-[#22281C] shadow-[0_24px_70px_rgba(40,30,12,0.18)] ring-1 ring-white/60">
           <p class="text-[#9A6B2F] text-[0.68rem] sm:text-xs font-bold uppercase tracking-[0.22em] mb-5 flex items-center justify-center sm:justify-start gap-3">
             <span class="inline-block w-7 sm:w-9 h-px bg-[#9A6B2F]/60"></span>
             Dream hotel finder
