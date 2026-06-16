@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HotelFinder from '../components/HotelFinder.astro';
 import MethodologyContent from '../components/MethodologyContent.astro';
 import ThreeStepStrip from '../components/ThreeStepStrip.astro';
-import ExampleChips from '../components/ExampleChips.astro';
 import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
 
 const jsonLd = [
@@ -39,27 +38,9 @@ const doesNotList = [
     <section class="bg-[#F8F2E8] border-b border-[#1F2428]/6">
       <div class="max-w-4xl mx-auto px-5 py-16 md:py-20">
         <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Hotel Finder</p>
-        <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-6">
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight">
           Find the right hotel for your trip — not just your budget.
         </h1>
-        <p class="text-[#6F685F] text-lg leading-relaxed max-w-2xl mb-8">
-          Choose a destination, budget and travel priorities. The Hotel Finder creates a practical research brief you can paste into ChatGPT, Claude or another research-capable assistant.
-        </p>
-        <div class="flex flex-wrap gap-4 mb-10">
-          <a
-            href="#hotel-finder"
-            class="inline-flex items-center justify-center rounded-full bg-[#4F6547] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(79,101,71,0.22)] transition-colors hover:bg-[#344532] no-underline"
-          >
-            Build my hotel shortlist →
-          </a>
-          <a
-            href="/all-hotels/"
-            class="inline-flex items-center justify-center rounded-full border border-[#1F2428]/15 bg-white px-6 py-3 text-sm font-semibold text-[#1F2428] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] no-underline"
-          >
-            See example hotels
-          </a>
-        </div>
-        <ExampleChips />
       </div>
     </section>
 
