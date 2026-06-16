@@ -1,5 +1,10 @@
 # 50 Five-Star Hotels — Project Brief
 
+## Header star logo + /all-hotels/ trim (16 June 2026)
+
+- **Header logo:** a star logo was added to the left of the "50 Five-Star Hotels" brand text in `src/components/Header.astro` (mirroring the logo-left-of-name pattern on the sister site). The asset is `public/images/hotels/yellow-star-on-black-star.svg` — a composite built from the supplied yellow sparkle (`public/images/hotels/yellow-star-sparkle-17540.svg`, fill `rgb(247,191,11)`): a **full-size black 4-point star backing** with the yellow sparkle scaled to 60% and centred on top. Rendered at 40×40 (`h-10 w-10 object-contain`). This logo is **specific to 50fivestarhotels.com** and was intentionally not applied to the sister sites. Note: the "black star on 50beautifulplaces.com" referenced in the request does not exist — that site uses a sun-with-face logo (`/sun-with-face-svgrepo-com.svg`); the black star here is original, made from the same sparkle shape.
+- **/all-hotels/ trim:** removed the two intro paragraphs ("These hotels are examples…" and "Ranked by editorial value score…") and the first `FinderCta` block from `src/pages/all-hotels.astro`. The page now goes straight from the H1 into the comparison table. The second CTA ("Research your own destination") and the `FinderCta` import are retained.
+
 ## Best Time to Go page (16 June 2026)
 
 The "When to go" travel-timing prompt was **moved off the Hotel Finder onto its own page** at `/best-time-to-go/` (`src/pages/best-time-to-go.astro`).

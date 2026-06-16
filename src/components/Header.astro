@@ -12,8 +12,15 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 <header class="sticky top-0 z-50 bg-[#F8F2E8]/95 backdrop-blur border-b border-[#1F2428]/8">
   <div class="px-[clamp(1rem,4vw,3rem)] flex items-center justify-between h-16">
-    <a href="/" class="font-serif text-lg font-bold text-[#1F2428] hover:text-[#B88A44] transition-colors no-underline">
-      50 Five-Star Hotels
+    <a href="/" class="inline-flex items-center gap-3 font-serif text-lg font-bold text-[#1F2428] hover:text-[#B88A44] transition-colors no-underline">
+      <img
+        class="h-10 w-10 shrink-0 object-contain"
+        src="/images/hotels/yellow-star-on-black-star.svg"
+        alt="50 Five-Star Hotels logo"
+        width="40"
+        height="40"
+      />
+      <span>50 Five-Star Hotels</span>
     </a>
 
     <nav class="hidden md:flex items-center gap-6" aria-label="Main navigation">
