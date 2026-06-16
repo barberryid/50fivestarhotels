@@ -42,5 +42,5 @@ export function regionSlug(region: string) {
     return '/regions/caucasus-central-asia/';
   }
   if (region === 'Americas') return '/regions/americas/';
-  return '/destinations/';
+  return '/all-hotels/';
 }

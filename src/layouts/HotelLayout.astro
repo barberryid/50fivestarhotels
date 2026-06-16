@@ -101,7 +101,7 @@ const pageUrl = canonicalUrl(`/hotels/${hotel.slug}/`);
 const hotelDescription = hotel.seoDescription;
 const breadcrumbLd = breadcrumbJsonLd([
   { name: 'Home', url: absoluteUrl('/') },
-  { name: 'Hotels', url: absoluteUrl('/destinations/') },
+  { name: 'Hotels', url: absoluteUrl('/all-hotels/') },
   { name: hotel.title, url: pageUrl },
 ]);
 const articleJsonLd = {
@@ -143,7 +143,6 @@ const hotelJsonLd = {
   description: hotelDescription,
 };
 const finderHref = `/hotel-finder/?country=${encodeURIComponent(hotel.country)}&city=${encodeURIComponent(hotel.city)}#hotel-finder`;
-const citySlug = hotel.city.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const tierPath = hotel.budgetTier.includes('€50') ? '/under-50/' : hotel.budgetTier.includes('100') ? '/under-100/' : hotel.budgetTier.includes('200') ? '/under-200/' : '/under-250/';
 const region = countryRegion(hotel.country);
 const relatedHotels = allHotels
@@ -152,7 +151,6 @@ const relatedHotels = allHotels
   .slice(0, 3);
 const relatedGuides = [
   { title: `${hotel.budgetTier} hotels`, description: 'Compare hotels in the same price tier.', href: tierPath },
-  { title: `Affordable luxury in ${hotel.city}`, description: `Read the destination guide for ${hotel.city}.`, href: `/destinations/${citySlug}/` },
   { title: 'Compare hotels for this trip', description: `Use the Hotel Finder to compare ${hotel.title} with other options in ${hotel.city}, ${hotel.country}, by budget, travel style and likely compromises.`, href: finderHref },
   { title: 'How we choose hotels', description: 'The scoring method, five-star reality checks, and booking cautions.', href: '/hotel-finder/#methodology' },
   { title: `Affordable five-star hotels in ${region}`, description: 'Browse hotels in the same broad region.', href: regionSlug(region) },
@@ -170,8 +168,8 @@ const relatedGuides = [
     <div class="mb-8">
       <Breadcrumbs crumbs={[
         { label: 'Home', href: '/' },
-        { label: 'Hotels', href: '/destinations' },
-        { label: hotel.city, href: `/destinations/${citySlug}/` },
+        { label: 'Hotels', href: '/all-hotels' },
+        { label: hotel.city },
         { label: hotel.title }
       ]} />
     </div>

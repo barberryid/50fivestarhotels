@@ -4,12 +4,9 @@ import PageLayout from '../layouts/PageLayout.astro';
 import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
 
 const hotels = (await getCollection('hotels', ({ data }) => !data.draft)).sort((a, b) => a.data.rank - b.data.rank);
-const slugify = (value: string) =>
-  value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const destinations = Array.from(new Map(hotels.map((h) => [slugify(h.data.city), h.data.city])).entries()).sort((a, b) => a[1].localeCompare(b[1]));
 const sections = [
   { title: 'Main pages', links: [
-    ['Home', '/'], ['Hotel Finder', '/hotel-finder/'], ['Examples', '/all-hotels/'], ['Destinations', '/destinations/'], ['About', '/about/'],
+    ['Home', '/'], ['Hotel Finder', '/hotel-finder/'], ['Examples', '/all-hotels/'], ['About', '/about/'],
   ] },
   { title: 'Price guides', links: [
     ['Five-Star Hotels Under €50', '/under-50/'],
@@ -29,7 +26,6 @@ const sections = [
     ['Middle East and North Africa Region Guide', '/regions/middle-east-north-africa/'],
     ['Caucasus and Central Asia Region Guide', '/regions/caucasus-central-asia/'],
   ] },
-  { title: 'Destination guides', links: destinations.map(([slug, city]) => [`Affordable luxury in ${city}`, `/destinations/${slug}/`]) },
   { title: 'Hotel profiles', links: hotels.map((h) => [h.data.title, `/hotels/${h.data.slug}/`]) },
   { title: 'Hotel finder, disclosure and credits', links: [
     ['How We Choose Hotels', '/hotel-finder/#methodology'],
@@ -37,7 +33,6 @@ const sections = [
     ['Image Credits', '/image-credits/'],
   ] },
   { title: 'Supporting guides', links: [
-    ['How to Find Cheap Five-Star Hotels Without Getting Misled', '/guides/how-to-find-cheap-five-star-hotels/'],
     ['When Are Five-Star Hotels Cheapest?', '/guides/when-are-five-star-hotels-cheapest/'],
     ['Five-Star Hotel Ratings Explained', '/guides/five-star-hotel-ratings-explained/'],
     ['Best Heritage Hotels Under €200', '/guides/heritage-hotels-under-200/'],
