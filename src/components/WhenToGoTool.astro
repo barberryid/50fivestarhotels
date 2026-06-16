@@ -86,7 +86,23 @@ const toolData = {
   </AccordionCard>
 
   <AccordionCard title="When to go" number={2}>
-    <section aria-labelledby="when-to-go-prompt-heading" data-nosnippet class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card>
+    <div class="space-y-3">
+      <div class="flex flex-wrap items-center justify-end gap-3">
+        <button
+          type="button"
+          disabled
+          data-copy-when-to-go-button
+          class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#B88A44] bg-white px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#F4EADC] disabled:cursor-not-allowed disabled:border-[#C4B9A6] disabled:text-[#6F685F] disabled:hover:bg-white"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span data-copy-when-to-go-label>Select a destination before copying</span>
+        </button>
+        <span class="sr-only" role="status" aria-live="polite" data-copy-when-to-go-status></span>
+      </div>
+      <section aria-labelledby="when-to-go-prompt-heading" data-nosnippet class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card>
       <button
         type="button"
         class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-[#F8F1E8] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
@@ -117,15 +133,16 @@ const toolData = {
             type="button"
             id="copy-when-to-go-prompt-button"
             disabled
+            data-copy-when-to-go-button
             class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#B88A44] bg-white px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#F4EADC] disabled:cursor-not-allowed disabled:border-[#C4B9A6] disabled:text-[#6F685F] disabled:hover:bg-white"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
             </svg>
-            <span id="copy-when-to-go-prompt-label">Select a destination before copying</span>
+            <span id="copy-when-to-go-prompt-label" data-copy-when-to-go-label>Select a destination before copying</span>
           </button>
-          <span id="copy-when-to-go-prompt-status" class="sr-only" role="status" aria-live="polite"></span>
+          <span id="copy-when-to-go-prompt-status" data-copy-when-to-go-status class="sr-only" role="status" aria-live="polite"></span>
         </div>
         <label for="when-to-go-textarea" class="sr-only">When to go prompt text</label>
         <textarea
@@ -162,6 +179,7 @@ const toolData = {
         </div>
       </div>
     </section>
+    </div>
   </AccordionCard>
 
   <!-- Reset -->
@@ -190,9 +208,11 @@ const toolData = {
   const listbox = document.getElementById('country-listbox') as HTMLUListElement;
   const noResults = document.getElementById('country-no-results') as HTMLLIElement;
   const whenToGoTextarea = document.getElementById('when-to-go-textarea') as HTMLTextAreaElement;
-  const copyButton = document.getElementById('copy-when-to-go-prompt-button') as HTMLButtonElement;
-  const copyLabel = document.getElementById('copy-when-to-go-prompt-label') as HTMLSpanElement;
-  const copyStatus = document.getElementById('copy-when-to-go-prompt-status') as HTMLSpanElement;
+  // Two copy buttons share the same state and action: one at the top of the
+  // step and one inside the prompt panel.
+  const copyButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-copy-when-to-go-button]'));
+  const copyLabels = Array.from(document.querySelectorAll<HTMLElement>('[data-copy-when-to-go-label]'));
+  const copyStatuses = Array.from(document.querySelectorAll<HTMLElement>('[data-copy-when-to-go-status]'));
   const resetButton = document.getElementById('reset-country-button') as HTMLButtonElement;
   const copySuccess = document.getElementById('when-to-go-copy-success') as HTMLElement | null;
   const options = Array.from(listbox.querySelectorAll<HTMLLIElement>('[role="option"]'));
@@ -259,9 +279,9 @@ const toolData = {
 
   const setCopyEnabled = (enabled: boolean) => {
     clearTimeout(copiedTimer);
-    copyButton.disabled = !enabled;
-    copyLabel.textContent = enabled ? 'Copy when-to-go prompt' : 'Select a destination before copying';
-    copyStatus.textContent = '';
+    for (const btn of copyButtons) btn.disabled = !enabled;
+    for (const label of copyLabels) label.textContent = enabled ? 'Copy when-to-go prompt' : 'Select a destination before copying';
+    for (const status of copyStatuses) status.textContent = '';
   };
 
   const setActive = (index: number) => {
@@ -383,18 +403,19 @@ const toolData = {
     }
   };
 
-  copyButton.addEventListener('click', async () => {
+  const handleCopyWhenToGo = async () => {
     await copyTextareaText(whenToGoTextarea);
-    copyLabel.textContent = 'Copied';
-    copyStatus.textContent = 'When-to-go prompt copied to clipboard';
+    for (const label of copyLabels) label.textContent = 'Copied';
+    for (const status of copyStatuses) status.textContent = 'When-to-go prompt copied to clipboard';
     if (copySuccess) copySuccess.hidden = false;
     track('when_to_go_prompt_copied', { country: selectedCountry ?? '' });
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
-      copyLabel.textContent = 'Copy when-to-go prompt';
-      copyStatus.textContent = '';
+      for (const label of copyLabels) label.textContent = 'Copy when-to-go prompt';
+      for (const status of copyStatuses) status.textContent = '';
     }, 2000);
-  });
+  };
+  for (const btn of copyButtons) btn.addEventListener('click', handleCopyWhenToGo);
 
   resetButton.addEventListener('click', () => {
     selectedCountry = null;

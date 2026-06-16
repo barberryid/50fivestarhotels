@@ -335,6 +335,21 @@ const toolData = {
 
   <AccordionCard title="Copy your prompt" number={5}>
     <div class="space-y-3">
+      <div class="flex flex-wrap items-center justify-end gap-3">
+        <button
+          type="button"
+          disabled
+          data-copy-prompt-button
+          class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#B88A44] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1F2428] disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:hover:bg-[#C4B9A6]"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span data-copy-prompt-label>Select a destination before copying</span>
+        </button>
+        <span class="sr-only" role="status" aria-live="polite" data-copy-prompt-status></span>
+      </div>
       <section aria-labelledby="hotel-prompt-heading" data-nosnippet class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card data-hotel-prompt-card>
         <button
           type="button"
@@ -367,15 +382,16 @@ const toolData = {
               type="button"
               id="copy-prompt-button"
               disabled
+              data-copy-prompt-button
               class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#B88A44] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1F2428] disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:hover:bg-[#C4B9A6]"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
-              <span id="copy-prompt-label">Select a destination before copying</span>
+              <span id="copy-prompt-label" data-copy-prompt-label>Select a destination before copying</span>
             </button>
-            <span id="copy-prompt-status" class="sr-only" role="status" aria-live="polite"></span>
+            <span id="copy-prompt-status" data-copy-prompt-status class="sr-only" role="status" aria-live="polite"></span>
           </div>
           <label for="prompt-textarea" class="sr-only">Hotel-finding brief text</label>
           <textarea
@@ -460,9 +476,11 @@ const toolData = {
   const listbox = document.getElementById('country-listbox') as HTMLUListElement;
   const noResults = document.getElementById('country-no-results') as HTMLLIElement;
   const textarea = document.getElementById('prompt-textarea') as HTMLTextAreaElement;
-  const copyButton = document.getElementById('copy-prompt-button') as HTMLButtonElement;
-  const copyLabel = document.getElementById('copy-prompt-label') as HTMLSpanElement;
-  const copyStatus = document.getElementById('copy-prompt-status') as HTMLSpanElement;
+  // Two copy buttons share the same state and action: one at the top of the
+  // step and one inside the prompt panel.
+  const copyButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-copy-prompt-button]'));
+  const copyLabels = Array.from(document.querySelectorAll<HTMLElement>('[data-copy-prompt-label]'));
+  const copyStatuses = Array.from(document.querySelectorAll<HTMLElement>('[data-copy-prompt-status]'));
   const resetButton = document.getElementById('reset-country-button') as HTMLButtonElement;
   const hotelCopySuccess = document.getElementById('hotel-copy-success') as HTMLElement | null;
   const options = Array.from(listbox.querySelectorAll<HTMLLIElement>('[role="option"]'));
@@ -822,9 +840,9 @@ const toolData = {
 
   const setCopyEnabled = (enabled: boolean) => {
     clearTimeout(copiedTimer);
-    copyButton.disabled = !enabled;
-    copyLabel.textContent = enabled ? 'Copy hotel prompt' : 'Select a destination before copying';
-    copyStatus.textContent = '';
+    for (const btn of copyButtons) btn.disabled = !enabled;
+    for (const label of copyLabels) label.textContent = enabled ? 'Copy hotel prompt' : 'Select a destination before copying';
+    for (const status of copyStatuses) status.textContent = '';
     if (briefReadyStatus) {
       briefReadyStatus.textContent = enabled
         ? 'Your hotel-finding brief is ready to copy.'
@@ -955,18 +973,19 @@ const toolData = {
     }
   };
 
-  copyButton.addEventListener('click', async () => {
+  const handleCopyPrompt = async () => {
     await copyTextareaText(textarea);
-    copyLabel.textContent = 'Copied';
-    copyStatus.textContent = 'Hotel prompt copied to clipboard';
+    for (const label of copyLabels) label.textContent = 'Copied';
+    for (const status of copyStatuses) status.textContent = 'Hotel prompt copied to clipboard';
     if (hotelCopySuccess) hotelCopySuccess.hidden = false;
     track('hotel_prompt_copied', { country: selectedCountry ?? '' });
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
-      copyLabel.textContent = 'Copy hotel prompt';
-      copyStatus.textContent = '';
+      for (const label of copyLabels) label.textContent = 'Copy hotel prompt';
+      for (const status of copyStatuses) status.textContent = '';
     }, 2000);
-  });
+  };
+  for (const btn of copyButtons) btn.addEventListener('click', handleCopyPrompt);
 
   resetButton.addEventListener('click', () => {
     selectedCountry = null;

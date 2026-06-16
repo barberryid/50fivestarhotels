@@ -1,5 +1,13 @@
 # 50 Five-Star Hotels — Project Brief
 
+## Duplicate copy button at top of prompt step (16 June 2026)
+
+A second copy button was added at the **top** of the prompt section on both the Hotel Finder (`src/components/CountryPromptTool.astro`, step 5 "Copy your prompt") and the Best Time to Go page (`src/components/WhenToGoTool.astro`, step 2 "When to go"), so the prompt can be copied without scrolling past the textarea.
+
+- Each section now has two copy buttons: one right-aligned at the top of the accordion body, and the original inside the prompt panel. They are wired together via data-attributes (`data-copy-prompt-button` / `-label` / `-status` on the finder; `data-copy-when-to-go-button` / `-label` / `-status` on best-time-to-go). The client scripts switched from single `getElementById` lookups to `querySelectorAll` arrays, so both buttons share the same enabled/disabled state, label text ("Select a destination before copying" → "Copy … prompt"), copy-to-clipboard action, "Copied" feedback, and success panel.
+- Analytics unchanged (`hotel_prompt_copied` / `when_to_go_prompt_copied` fire once per copy regardless of which button is used).
+- Local build check: `npm run build` succeeded on 16 June 2026 (88 pages); browser verification confirmed both buttons sync and copy, with no console errors.
+
 ## Header star logo + /all-hotels/ trim (16 June 2026)
 
 - **Header logo:** a star logo was added to the left of the "50 Five-Star Hotels" brand text in `src/components/Header.astro` (mirroring the logo-left-of-name pattern on the sister site). The asset is `public/images/hotels/yellow-star-on-black-star.svg` — a composite built from the supplied yellow sparkle (`public/images/hotels/yellow-star-sparkle-17540.svg`, fill `rgb(247,191,11)`): a **full-size black 4-point star backing** with the yellow sparkle scaled to 60% and centred on top. Rendered at 40×40 (`h-10 w-10 object-contain`). This logo is **specific to 50fivestarhotels.com** and was intentionally not applied to the sister sites. Note: the "black star on 50beautifulplaces.com" referenced in the request does not exist — that site uses a sun-with-face logo (`/sun-with-face-svgrepo-com.svg`); the black star here is original, made from the same sparkle shape.
