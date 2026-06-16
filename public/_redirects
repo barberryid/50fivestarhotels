@@ -6,3 +6,8 @@
 /cheapest-cities-five-star-hotels / 301
 /methodology/ /hotel-finder/#methodology 301
 /methodology /hotel-finder/#methodology 301
+/guides/how-to-find-cheap-five-star-hotels/ /guides/why-some-five-star-hotels-are-so-cheap/ 301
+/guides/how-to-find-cheap-five-star-hotels /guides/why-some-five-star-hotels-are-so-cheap/ 301
+/destinations/* /all-hotels/ 301
+/destinations/ /all-hotels/ 301
+/destinations /all-hotels/ 301
