@@ -33,6 +33,20 @@
   /* Fraunces for warm editorial headings, Inter for clean UI/body */
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: Fraunces, Georgia, "Times New Roman", serif;
+
+  /* Pre-travel checklist aliases — map the checklist's token names onto the
+     warm affordable-luxury palette so its utilities and var() refs resolve. */
+  --color-clay: #A86645;        /* terracotta accent → primary CTA / progress */
+  --color-clay-text: #8A4F33;   /* darker terracotta for readable accent text */
+  --color-cream: #F8F2E8;       /* warm ivory subtle surface */
+  --color-surface: #FFFDF8;     /* warm white card */
+  --color-line: #E2D4BF;        /* warm border */
+  --color-ink: #1F2428;         /* warm charcoal */
+  --color-muted: #6F685F;       /* warm muted text */
+  --color-forest: #4F6547;      /* deep green (success / important) */
+  --color-tag-bg: #EFE4D3;      /* sand tag fill */
+
+  --shadow-card: 0 3px 18px rgba(31, 36, 40, 0.07);
 }
 
 body {

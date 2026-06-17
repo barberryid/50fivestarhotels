@@ -1,0 +1,1992 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+type ChecklistItem = {
+  id: string;
+  text: string;
+  critical?: boolean;
+  why?: string;
+  sources?: Array<{ label: string; url: string }>;
+  tags?: string[];
+  recheckOf?: string[];
+};
+
+type ChecklistSection = {
+  num?: number;
+  title: string;
+  helper: string;
+  items: ChecklistItem[];
+};
+
+const sections: ChecklistSection[] = [
+  {
+    num: 1,
+    title: "Before you book",
+    helper: "Check safety, entry rules, seasonality, and cancellation risks before paying.",
+    items: [
+      { id: "s1-passport-validity", text: "Check passport validity rules for every destination and transit country.", critical: true, why: "Most countries require your passport to be valid for 6 months beyond your departure date. Some require a year. Airlines enforce this at check-in." },
+      { id: "s1-blank-pages", text: "Check passport blank-page requirements.", why: "Some countries require 2–4 blank pages and will deny boarding without them." },
+      { id: "s1-visa-rules", text: "Check visa, eVisa, ETA, arrival card, customs declaration, health declaration, and proof-of-onward-travel rules.", critical: true, sources: [{ label: "Timatic", url: "https://www.iatatravelcentre.com/" }] },
+      { id: "s1-transit-visa", text: "Check transit visa requirements." },
+      { id: "s1-vaccinations", text: "Check vaccination and travel-health recommendations.", sources: [{ label: "CDC", url: "https://wwwnc.cdc.gov/travel" }, { label: "NHS Fit for Travel", url: "https://www.fitfortravel.nhs.uk/" }] },
+      { id: "s1-travel-insurance", text: "Check travel insurance options and exclusions.", critical: true },
+      { id: "s1-safety-situation", text: "Check the safety situation for your destination.", sources: [{ label: "US State Dept", url: "https://travel.state.gov/" }, { label: "UK FCDO", url: "https://www.gov.uk/foreign-travel-advice" }] },
+      { id: "s1-best-time", text: "Check the best time to visit and whether your dates are realistic." },
+      { id: "s1-holidays-closures", text: "Check public holidays, election periods, major festivals, or closures that could affect your plans.", sources: [{ label: "Office Holidays", url: "https://www.officeholidays.com/" }] },
+      { id: "s1-attraction-access", text: "Check if the main attraction is accessible during your dates." },
+      { id: "s1-permits-access", text: "Check permit, guide, advance-booking, and special-access requirements.", tags: ["remote"] },
+    ],
+  },
+  {
+    num: 2,
+    title: "Flights, hotels, and transport",
+    helper: "Confirm timings, connections, baggage rules, airport transfers, and local transport.",
+    items: [
+      { id: "s2-compare-flights", text: "Compare and book flights early if prices are likely to rise." },
+      { id: "s2-airline-apps", text: "Download the airline apps and log in before departure." },
+      { id: "s2-baggage-allowance", text: "Check baggage allowance for every airline, especially on separate tickets or low-cost carriers." },
+      { id: "s2-airport-terminal", text: "Check airport terminal and transfer requirements." },
+      { id: "s2-baggage-transfer", text: "Check if checked baggage transfers automatically or must be collected and rechecked." },
+      { id: "s2-connection-type", text: "Check if your connection is protected or self-transfer.", why: "On self-transfer, the airline owes you nothing if the first flight is delayed and you miss the second. Buy together or buy a buffer." },
+      { id: "s2-flight-bookings-offline", text: "Save flight bookings offline." },
+      { id: "s2-compare-hotels", text: "Compare hotel options and book accommodation." },
+      { id: "s2-hotel-bookings-offline", text: "Save hotel bookings offline." },
+      { id: "s2-hotel-contact", text: "Save each hotel's address, phone number, and GPS coordinates.", critical: true },
+      { id: "s2-hotel-local-name", text: "Save the hotel name in the local language if relevant." },
+      { id: "s2-airport-transfer-plan", text: "Plan exactly how you will get from the airport to the hotel.", critical: true },
+      { id: "s2-taxi-scams", text: "Check if airport taxis are regulated and if scams are common.", why: "Unregulated airport taxis are the most common single rip-off for new arrivals — and a real safety risk in some cities." },
+      { id: "s2-ridehailing", text: "Check if Uber works at the destination and what the local alternatives are." },
+      { id: "s2-local-transport", text: "Check local transport options, including metro, bus, train, taxi, ride-hailing, and private transfer." },
+      { id: "s2-ticket-buying", text: "Learn how to buy metro, bus, or train tickets before arrival." },
+      { id: "s2-late-night-transport", text: "Check late-night or early-morning transport options if arriving outside normal hours." },
+      { id: "s2-intl-driving-permit", text: "Obtain an International Driving Permit if your destination requires one.", tags: ["driving"] },
+      { id: "s2-rental-car-insurance", text: "Confirm exactly what your credit card and home insurance cover for rental cars abroad — gaps are common.", tags: ["driving"] },
+      { id: "s2-local-driving-rules", text: "Familiarise yourself with local driving rules: which side, roundabouts, right-of-way, headlight rules.", tags: ["driving"] },
+      { id: "s2-breakdown-numbers", text: "Save emergency breakdown and police numbers for the country.", tags: ["driving"] },
+      { id: "s2-fuel-availability", text: "Check fuel availability outside cities; consider whether a jerry can or extra range matters.", tags: ["driving"] },
+      { id: "s2-border-paperwork", text: "If driving across borders, check what paperwork the rental company requires.", tags: ["driving"] },
+    ],
+  },
+  {
+    num: 3,
+    title: "Documents and backups",
+    helper: "Prepare passports, visas, insurance, booking references, and offline copies.",
+    items: [
+      { id: "s3-digital-copies", text: "Save digital copies of your passport, visa, travel insurance, prescriptions, vaccination certificates, flight bookings, hotel bookings, and important receipts.", critical: true },
+      { id: "s3-offline-copy", text: "Keep one offline copy on your phone." },
+      { id: "s3-cloud-copy", text: "Keep one cloud copy." },
+      { id: "s3-printed-copy", text: "Carry one printed copy of the most important documents." },
+      { id: "s3-leave-copy-with-someone-trusted", text: "Leave a copy of key documents with someone you trust." },
+      { id: "s3-step-enrol", text: "Enrol in STEP (US citizens) or your country's traveler-registration program.", critical: true, sources: [{ label: "STEP", url: "https://step.state.gov/" }], why: "Lets your embassy contact you in emergencies (natural disasters, unrest, family emergencies back home) and gives consular staff a record you're in-country if something goes wrong." },
+      { id: "s3-insurer-emergency-number", text: "Save your travel insurer's emergency assistance number." },
+      { id: "s3-local-emergency-numbers", text: "Save local emergency numbers." },
+      { id: "s3-embassy-contact", text: "Save your embassy or consulate contact details." },
+      { id: "s3-emergency-contacts-paper", text: "Write key emergency contacts on paper, not only in your phone.", critical: true },
+      { id: "s3-separate-valuables", text: "Keep passport, cards, cash, and backup documents separated where practical." },
+      { id: "s3-child-passport-validity", text: "Check child passport validity — rules sometimes require shorter remaining validity than for adults, sometimes longer.", tags: ["kids"] },
+      { id: "s3-consent-letter", text: "If travelling with a child without both legal parents present, carry a notarised consent letter.", tags: ["kids"] },
+    ],
+  },
+  {
+    num: 4,
+    title: "Money and payments",
+    helper: "Check cards, cash needs, ATM access, exchange rates, and backup payment options.",
+    items: [
+      { id: "s4-destination-currency", text: "Check the destination currency." },
+      { id: "s4-currency-app", text: "Download a currency app such as XE or Currency Plus and add the currencies before departure.", sources: [{ label: "XE", url: "https://www.xe.com/" }] },
+      { id: "s4-cash-vs-card", text: "Check if cash or card is more commonly used." },
+      { id: "s4-two-cards", text: "Carry at least two payment cards stored separately.", critical: true },
+      { id: "s4-foreign-fees", text: "Check foreign transaction fees and ATM withdrawal fees." },
+      { id: "s4-atm-reliability", text: "Check if ATMs are reliable outside the capital or main tourist areas.", tags: ["remote"] },
+      { id: "s4-contactless", text: "Check if contactless payment is common." },
+      { id: "s4-emergency-cash", text: "Keep emergency cash in euros, US dollars, or your home currency.", critical: true, why: "ATM and card networks can fail country-wide for hours. €100–200 in hard currency, kept separate from your wallet, is the cheapest insurance you'll buy." },
+      { id: "s4-emergency-cash-separate", text: "Keep emergency cash separate from your wallet." },
+      { id: "s4-card-block-number", text: "Save your bank's card-blocking phone number." },
+      { id: "s4-airport-cash-exchange", text: "Consider exchanging a small amount of money on arrival if airport transport or food may require cash." },
+    ],
+  },
+  {
+    num: 5,
+    title: "Phone, internet, maps, and digital setup",
+    helper: "Prepare eSIMs, offline maps, travel apps, chargers, and key account access.",
+    items: [
+      { id: "s5-phone-unlocked", text: "Check your phone is unlocked before buying an eSIM." },
+      { id: "s5-esim-compatible", text: "Check if eSIM works in your destination." },
+      { id: "s5-esim-install", text: "Install and test your eSIM before departure where possible.", critical: true },
+      { id: "s5-roaming-costs", text: "Check roaming costs and coverage." },
+      { id: "s5-hotel-wifi", text: "Check WiFi availability at your hotel." },
+      { id: "s5-vpn", text: "Check if a VPN is useful or necessary.", why: "Several countries block Gmail, WhatsApp, Maps, or VPN provider sites themselves. Install and test before arrival — you may not be able to from inside the country." },
+      { id: "s5-offline-maps", text: "Download offline Google Maps for the destination.", critical: true },
+      { id: "s5-map-pins", text: "Save hotel, airport, restaurant, supermarket, and attraction pins in Google Maps." },
+      { id: "s5-offline-translation", text: "Download offline translation languages if needed." },
+      { id: "s5-booking-apps", text: "Download booking confirmations into airline, hotel, and travel apps." },
+      { id: "s5-flight-tracker", text: "Install Flightradar24 or a similar flight-tracking app.", sources: [{ label: "Flightradar24", url: "https://www.flightradar24.com/" }] },
+      { id: "s5-2fa-backup", text: "Set up two-factor authentication backup codes before travel.", why: "If your home SIM doesn't roam, SMS-only 2FA can lock you out of bookings, banking, and email mid-trip. Backup codes printed on paper solve it." },
+      { id: "s5-sms-2fa", text: "Avoid relying only on SMS codes if your home SIM may not work abroad." },
+      { id: "s5-charge-devices", text: "Charge devices before departure." },
+      { id: "s5-cables-adapters", text: "Pack charging cables, power bank, plug adapter, and any voltage converter if needed.", critical: true },
+      { id: "s5-satellite-comm", text: "Register a satellite communicator (Garmin inReach, PLB, or equivalent) and test before departure.", tags: ["remote"] },
+      { id: "s5-backcountry-maps", text: "Download offline backcountry maps (Gaia GPS, Maps.me, OsmAnd) in addition to Google Maps.", tags: ["remote"] },
+    ],
+  },
+  {
+    num: 6,
+    title: "Health, medication, and insurance",
+    helper: "Confirm medication, prescriptions, vaccinations, health risks, and insurance coverage.",
+    items: [
+      { id: "s6-recommended-vaccinations", text: "Check recommended vaccinations." },
+      { id: "s6-vaccination-schedule", text: "Schedule vaccination or travel-clinic appointments early." },
+      { id: "s6-malaria-altitude-meds", text: "Check if malaria prevention, altitude medication, motion-sickness medication, or water-purification tablets are relevant.", tags: ["remote", "altitude"], why: "Some prophylactics must be started 1–2 weeks before entering a malarial area. Starting after arrival is too late." },
+      { id: "s6-medicine-legality", text: "Check if your prescription and over-the-counter medicines are legal in destination and transit countries." },
+      { id: "s6-original-packaging", text: "Carry medicines in original packaging.", why: "Customs may need to verify medication is yours and prescribed. Loose pills can look like trafficking." },
+      { id: "s6-prescriptions-letter", text: "Carry prescriptions and, where useful, a doctor's letter listing the medicine name, generic name, dose, and reason for use." },
+      { id: "s6-meds-hand-luggage", text: "Keep essential medication in hand luggage.", critical: true },
+      { id: "s6-controlled-meds", text: "Check rules for controlled medicines, ADHD medication, strong painkillers, sleep medication, injections, and refrigerated medication.", sources: [{ label: "INCB", url: "https://www.incb.org/incb/en/travellers/country-regulations.html" }], why: "ADHD medication, strong painkillers, and some sleep medications are illegal in Japan, the UAE, Singapore, and elsewhere. Travelers have been arrested for routine prescriptions." },
+      { id: "s6-travel-health-kit", text: "Prepare a small travel health kit." },
+      { id: "s6-health-kit-contents", text: "Include basic pain relief, stomach medicine, oral rehydration salts, plasters, blister care, antiseptic wipes, sunscreen, insect repellent, and any destination-specific medication." },
+      { id: "s6-tap-water", text: "Check if tap water is drinkable.", sources: [{ label: "CDC Water", url: "https://wwwnc.cdc.gov/travel/page/water-disinfection" }], why: "Even brushing teeth with tap water can transmit illness in some places. Hotels often provide bottled water specifically for this." },
+      { id: "s6-food-hygiene", text: "Check food hygiene risks and basic precautions." },
+      { id: "s6-extended-first-aid", text: "Pack an extended first-aid kit including blister care, snake-bite consideration where relevant, and AMS awareness.", tags: ["remote"] },
+      { id: "s6-trail-conditions", text: "Get up-to-date trail or route conditions from rangers, guides, or recent trip reports.", tags: ["remote"] },
+      { id: "s6-water-purification-test", text: "Test water filtration / purification at home, not in the field.", tags: ["remote"] },
+      { id: "s6-children-medication", text: "Pack children's prescription medication in original packaging with double the supply you expect to need.", tags: ["kids"] },
+      { id: "s6-child-repellent-sunscreen", text: "Pack child-appropriate insect repellent (DEET % limits) and sunscreen (mineral preferred for under-2s).", tags: ["kids"] },
+      { id: "s6-acclimatisation", text: "Build acclimatisation days into the itinerary: above 3,000 m, sleep no more than 500 m higher than the previous night.", tags: ["altitude"] },
+      { id: "s6-ams-symptoms", text: "Learn to recognise AMS symptoms in yourself and companions: headache, nausea, fatigue, dizziness, loss of appetite.", tags: ["altitude"] },
+      { id: "s6-diamox", text: "Get a Diamox (acetazolamide) prescription if appropriate and understand the dosing schedule before departure.", tags: ["altitude"] },
+      { id: "s6-altitude-hydration", text: "Plan aggressive hydration and avoid alcohol on arrival at altitude.", tags: ["altitude"] },
+    ],
+  },
+  {
+    num: 7,
+    title: "Food, routine, and local practicalities",
+    helper: "Plan around dietary needs, daily routines, shops, water safety, and local basics.",
+    items: [
+      { id: "s7-restaurants-nearby", text: "Research restaurants near your hotel." },
+      { id: "s7-local-food", text: "Research local food specialities." },
+      { id: "s7-bakeries", text: "Research bakeries in the area, especially if you like sourdough or fresh bread." },
+      { id: "s7-coffee-supermarkets", text: "Research coffee shops, supermarkets, and health food stores." },
+      { id: "s7-dietary-options", text: "Check vegan, vegetarian, gluten-free, or other dietary options if relevant." },
+      { id: "s7-arrival-day-restaurants", text: "Save a few reliable restaurants for arrival day." },
+      { id: "s7-tipping-customs", text: "Check tipping and service-charge customs." },
+      { id: "s7-local-customs", text: "Check local customs and respectful behaviour." },
+      { id: "s7-dress-codes", text: "Check dress codes for religious sites or conservative regions." },
+      { id: "s7-head-coverings", text: "Check if head coverings, covered shoulders, or long trousers/skirts are required." },
+      { id: "s7-local-laws", text: "Check local laws that may surprise visitors." },
+      { id: "s7-photography-restrictions", text: "Check photography restrictions at religious, military, border, drone, and government sites.", why: "Photographing government buildings, military installations, border zones, or some religious sites can lead to detention. The rules aren't always posted." },
+    ],
+  },
+  {
+    num: 8,
+    title: "Weather, packing, and local conditions",
+    helper: "Match your packing to climate, terrain, season, and likely daily conditions.",
+    items: [
+      { id: "s8-weather-forecast", text: "Check the weather forecast for your travel dates." },
+      { id: "s8-weather-details", text: "Check temperature ranges, rainfall, wind, humidity, and storm risk." },
+      { id: "s8-general-climate", text: "Understand the general climate, not only the short-term forecast." },
+      { id: "s8-weather-closures", text: "Check if roads, trails, ferries, passes, or viewpoints can close because of weather.", tags: ["remote"] },
+      { id: "s8-sunrise-sunset", text: "Check sunrise and sunset times if photography or hiking matters." },
+      { id: "s8-pack-clothing", text: "Pack clothing for the real conditions, not only the average climate." },
+      { id: "s8-footwear", text: "Pack appropriate footwear for walking, hiking, wet streets, sand, snow, or rough ground." },
+      { id: "s8-power-outlets", text: "Check power outlets and voltage.", sources: [{ label: "IEC World Plugs", url: "https://www.iec.ch/world-plugs" }] },
+      { id: "s8-adapters", text: "Pack the correct adapters and converters if needed." },
+      { id: "s8-laundry", text: "Check if laundry is available if packing light." },
+    ],
+  },
+  {
+    num: 9,
+    title: "Day-by-day plan",
+    helper: "Build a realistic itinerary with buffers, rest time, and transport checks.",
+    items: [
+      { id: "s9-day-by-day-plan", text: "Prepare a realistic day-by-day plan." },
+      { id: "s9-attractions-list", text: "List the attractions you want to visit." },
+      { id: "s9-opening-hours", text: "Check opening hours, closed days, admission fees, and booking requirements." },
+      { id: "s9-travel-times", text: "Check travel times between places, not just distances." },
+      { id: "s9-road-conditions", text: "Check if roads are slow, rough, seasonal, or require a 4x4.", tags: ["remote", "driving"] },
+      { id: "s9-rest-time", text: "Build in rest time and bad-weather alternatives." },
+      { id: "s9-no-activity-after-flight", text: "Avoid planning the most important activity immediately after a long overnight flight.", why: "Jet lag plus a long flight plus an early-morning highlight is how once-in-a-lifetime moments get missed. Sleep on day one." },
+      { id: "s9-guided-tours", text: "Check guided-tour, permit, and local-fixer requirements.", tags: ["remote"] },
+      { id: "s9-backup-activities", text: "Save backup activities for bad weather or transport delays." },
+      { id: "s9-altitude-descent", text: "Know where the nearest descent point is from each high-altitude location on your route.", tags: ["altitude"] },
+    ],
+  },
+  {
+    num: 10,
+    title: "One week before travel",
+    helper: "Finish the main confirmations before problems become urgent.",
+    items: [
+      { id: "s10-recheck-entry", text: "Re-check visa, entry, arrival-card, and health rules.", recheckOf: ["s1-visa-rules", "s1-vaccinations"] },
+      { id: "s10-recheck-weather", text: "Re-check weather and access conditions.", recheckOf: ["s8-weather-forecast"] },
+      { id: "s10-recheck-flights", text: "Re-check flight times and terminal details.", recheckOf: ["s2-compare-flights"] },
+      { id: "s10-recheck-hotels", text: "Re-check hotel bookings.", recheckOf: ["s2-compare-hotels"] },
+      { id: "s10-recheck-transfer", text: "Re-check airport transfer or arrival transport.", recheckOf: ["s2-airport-transfer-plan"] },
+      { id: "s10-download-maps", text: "Download offline maps." },
+      { id: "s10-download-translation", text: "Download offline translation languages." },
+      { id: "s10-confirm-esim", text: "Confirm eSIM, roaming, or WiFi plan." },
+      { id: "s10-prepare-documents", text: "Prepare travel documents and copies." },
+      { id: "s10-prepare-medication", text: "Prepare medication and travel health kit." },
+      { id: "s10-check-holidays", text: "Check public holidays or closures during your stay." },
+      { id: "s10-cash-card-plan", text: "Check cash/card plan." },
+      { id: "s10-luggage-packing", text: "Check luggage allowance and packing list." },
+    ],
+  },
+  {
+    num: 11,
+    title: "Day before departure",
+    helper: "Complete final checks, charging, packing, documents, and home preparation.",
+    items: [
+      { id: "s11-online-checkin", text: "Complete online check-in.", why: "On overbooked flights, late check-in is often who gets bumped or downgraded. Some airlines auto-downgrade no-shows." },
+      { id: "s11-boarding-passes", text: "Download or screenshot boarding passes." },
+      { id: "s11-charge-devices", text: "Charge phone, power bank, headphones, watch, camera, and other devices." },
+      { id: "s11-hotel-screenshot", text: "Screenshot hotel address, hotel phone number, and GPS coordinates." },
+      { id: "s11-confirm-transfer", text: "Confirm airport transfer or route to your first hotel." },
+      { id: "s11-pack-essentials", text: "Pack passport, visa, travel insurance, cards, cash, medication, adapters, chargers, and essential documents." },
+      { id: "s11-offline-downloads", text: "Download maps and bookings for offline use." },
+      { id: "s11-arrival-form", text: "Fill in any required arrival or customs form.", critical: true },
+      { id: "s11-travel-snacks", text: "Prepare snacks or food for the travel day." },
+      { id: "s11-hand-luggage-essentials", text: "Put essential items in hand luggage." },
+      { id: "s11-departure-clothes", text: "Set out clothes for departure day." },
+      { id: "s11-airport-check", text: "Check departure airport, terminal, and journey time to airport." },
+      { id: "s11-offline-entertainment", text: "Download flight-day and transfer entertainment offline: shows, games, audiobooks.", tags: ["kids"] },
+      { id: "s11-child-emergency-card", text: "Make an emergency contact card the child carries: allergies, parent details, hotel address.", tags: ["kids"] },
+    ],
+  },
+  {
+    num: 12,
+    title: "Arrival day",
+    helper: "Make arrival smoother with transport, cash, connectivity, and hotel details ready.",
+    items: [
+      { id: "s12-border-control-answers", text: "Know what to say if border control asks for hotel address, onward ticket, or travel purpose.", why: "Border officers often ask where you're staying, how long, and whether you have an onward ticket. Hesitation triggers secondary screening. Have answers ready." },
+      { id: "s12-hotel-address-ready", text: "Have your hotel address and GPS coordinates ready." },
+      { id: "s12-cash-ready", text: "Have enough cash or working card access for taxi, SIM/eSIM problem, food, and water." },
+      { id: "s12-official-taxi", text: "Use official taxi, regulated transport, or a trusted ride-hailing app." },
+      { id: "s12-taxi-route", text: "Check the route to your hotel before getting into a taxi." },
+      { id: "s12-airport-money-exchange", text: "Avoid changing large amounts of money at poor airport rates unless necessary." },
+      { id: "s12-buy-supplies", text: "Buy water or basic supplies if arriving late." },
+      { id: "s12-safe-arrival-message", text: "Message someone that you have arrived safely if appropriate." },
+    ],
+  },
+  {
+    title: "Optional, but they make the trip better",
+    helper: "Small touches that aren't essential — pick what fits your trip.",
+    items: [
+      { id: "sx-airline-crew-gift", text: "Chocolate or a small gift for airline crew." },
+      { id: "sx-bakeries-nearby", text: "A few good bakeries near your hotel." },
+      { id: "sx-coffee-shops", text: "Good coffee shops near your first morning route." },
+      { id: "sx-health-food-stores", text: "Health food stores or supermarkets." },
+      { id: "sx-local-specialities", text: "Local speciality foods to try." },
+      { id: "sx-sunrise-viewpoints", text: "Sunrise and sunset viewpoints." },
+      { id: "sx-backup-plans", text: "Backup plans for bad weather." },
+      { id: "sx-quiet-spot", text: "A quiet place near the hotel for the first morning." },
+    ],
+  },
+];
+
+const criticalItems = sections
+  .flatMap((s) => s.items)
+  .filter((item) => item.critical)
+  .map((item) => ({ id: item.id, text: item.text }));
+
+// Map each item ID → its section anchor (used for recheckOf cross-links)
+const itemSectionMap: Record<string, { num: number | null; anchor: string }> = {};
+sections.forEach((s) => {
+  const anchor = s.num != null ? `section-${s.num}` : "section-extras";
+  s.items.forEach((item) => {
+    itemSectionMap[item.id] = { num: s.num ?? null, anchor };
+  });
+});
+
+// Return unique section refs for a list of recheckOf item IDs
+function getRecheckSections(ids: string[]): Array<{ label: string; anchor: string }> {
+  const seen = new Set<string>();
+  const result: Array<{ label: string; anchor: string }> = [];
+  for (const id of ids) {
+    const info = itemSectionMap[id];
+    if (info && !seen.has(info.anchor)) {
+      seen.add(info.anchor);
+      result.push({
+        label: info.num != null ? `Section ${info.num}` : "Extras",
+        anchor: info.anchor,
+      });
+    }
+  }
+  return result;
+}
+
+const tagLabels: Record<string, string> = {
+  remote: "Remote",
+  driving: "Driving",
+  kids: "Kids",
+  altitude: "Altitude"
+};
+
+const beforePayingText =
+  "Before paying for flights or non-refundable hotels, check passport validity, visa rules, transit visa rules, vaccination requirements, travel insurance exclusions, local safety advice, public holidays, weather risks, and whether the main attraction is accessible during your dates.";
+
+const siteUrl = "https://50fivestarhotels.com";
+const checklistUrl = `${siteUrl}/pre-travel-checklist/`;
+const pageTitle = "Pre-Travel Checklist: What to Check Before You Travel Abroad";
+const pageDescription =
+  "A practical pre-travel checklist for visas, flights, hotels, offline maps, money, insurance, transport, health, weather, customs, and arrival forms before an international trip.";
+const copyText = [
+  pageTitle,
+  "",
+  "Before paying",
+  beforePayingText,
+  "",
+  ...sections.flatMap((section) => [
+    section.num != null ? `${section.num}. ${section.title}` : section.title,
+    ...section.items.map((item) => `[ ] ${item.text}`),
+    ""
+  ]),
+  "Do not forget",
+  ...criticalItems.map((item) => `[ ] ${item.text}`)
+].join("\n");
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${checklistUrl}#article`,
+    headline: pageTitle,
+    description: pageDescription,
+    url: checklistUrl,
+    image: `${siteUrl}/images/social/default-og.webp`,
+    inLanguage: "en",
+    isPartOf: { "@type": "WebSite", "@id": `${siteUrl}/#website` },
+    author: { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: "50 Five-Star Hotels" },
+    publisher: { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: "50 Five-Star Hotels" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+      { "@type": "ListItem", position: 2, name: "Pre-Travel Checklist", item: checklistUrl }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  type="article"
+  canonical="/pre-travel-checklist/"
+  jsonLd={jsonLd}
+>
+  <section class="mx-auto w-full max-w-[1180px] px-4 pb-8 pt-[clamp(3rem,8vw,7rem)]">
+    <div class="max-w-[820px]">
+      <p class="mb-3 text-[0.76rem] font-black uppercase tracking-[0.1em] text-clay-text">Travel planning</p>
+      <h1 class="max-w-[14ch] font-serif text-[clamp(2.2rem,5vw,3.6rem)] font-semibold leading-[1.03] text-ink">Pre-Travel Checklist</h1>
+      <div class="mt-5 max-w-[52rem]">
+        <p class="rounded-xl border border-line bg-cream p-4 text-[1.05rem] font-bold leading-relaxed text-forest">This checklist is designed for international trips, multi-country itineraries, and destinations where transport, entry rules, internet access, or local logistics may need extra planning.</p>
+      </div>
+      <!-- Trip date awareness -->
+      <div class="mt-6 print:hidden">
+        <label for="trip-date" class="mb-1.5 block text-sm font-bold text-ink">When do you leave?</label>
+        <input
+          id="trip-date"
+          type="date"
+          class="trip-date-input"
+          aria-describedby="trip-date-helper"
+        />
+        <p id="trip-date-helper" class="mt-1 text-xs leading-relaxed text-muted">Optional. Used only in your browser to label time-sensitive items.</p>
+        <button id="ical-btn" type="button" disabled class="ical-btn mt-3">Add reminders to calendar</button>
+        <div id="days-to-go-banner" hidden class="days-to-go-banner mt-3" role="status" aria-live="polite">
+          <span id="days-to-go-text"></span>
+        </div>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-3 print:hidden">
+        <button id="print-checklist" class="inline-flex min-h-[2.7rem] items-center rounded-full bg-clay px-5 text-sm font-extrabold text-cream transition-opacity hover:opacity-90" type="button">
+          Print this checklist
+        </button>
+        <button id="copy-checklist" class="inline-flex min-h-[2.7rem] items-center rounded-full border border-line bg-surface px-5 text-sm font-extrabold text-forest transition-colors hover:bg-tag-bg" type="button">
+          Copy checklist
+        </button>
+        <span id="copy-status" class="self-center text-sm font-bold text-clay-text" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter chips -->
+  <div class="filter-strip print:hidden" role="group" aria-label="Trip type filters">
+    <div class="filter-inner mx-auto w-full max-w-[1180px] px-4">
+      <span class="filter-label">Trip type:</span>
+      <button class="filter-chip" type="button" aria-pressed="false" data-filter="remote">Remote / wilderness</button>
+      <button class="filter-chip" type="button" aria-pressed="false" data-filter="driving">Driving abroad</button>
+      <button class="filter-chip" type="button" aria-pressed="false" data-filter="kids">With kids</button>
+      <button class="filter-chip" type="button" aria-pressed="false" data-filter="altitude">High altitude</button>
+    </div>
+  </div>
+
+  <!-- Progress strip -->
+  <div class="progress-strip print:hidden" role="region" aria-label="Checklist progress">
+    <div class="progress-bar-track">
+      <div id="progress-bar" class="progress-bar-fill"></div>
+    </div>
+    <div class="progress-inner mx-auto w-full max-w-[1180px] px-4">
+      <div class="progress-counts">
+        <div id="progress-live" class="progress-text" aria-live="polite">
+          <strong>0</strong>&thinsp;<span class="progress-of">of</span>&thinsp;<strong>0</strong>&thinsp;complete
+        </div>
+        <div id="progress-optional" class="progress-optional-text" aria-live="polite"></div>
+      </div>
+      <div class="progress-controls">
+        <button id="reset-btn" class="progress-btn" type="button" aria-describedby="reset-msg">Reset</button>
+        <span id="reset-msg" class="sr-only" aria-live="polite"></span>
+        <button id="expand-all-btn" class="progress-btn" type="button">Expand all</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="checklist-grid mx-auto grid w-full max-w-[1180px] gap-6 px-4 pb-[clamp(3rem,7vw,6rem)] lg:grid-cols-[minmax(0,1fr)_minmax(17rem,22rem)] lg:items-start">
+    <article id="checklist-article" class="grid gap-3">
+      {sections.map((section, sectionIndex) => (
+        <Fragment>
+          {section.num == null && (
+            <div class="optional-divider" role="separator" aria-label="Optional items begin">
+              <span>— Optional from here —</span>
+            </div>
+          )}
+          <details
+            id={section.num != null ? `section-${section.num}` : "section-extras"}
+            open={sectionIndex === 0}
+            class="checklist-accordion rounded-xl border border-line bg-surface shadow-card"
+          >
+            <summary class="accordion-summary">
+              <span
+                class={`section-badge${section.num != null && section.num >= 10 ? " section-badge--double" : ""}${section.num == null ? " section-badge--optional" : ""}`}
+                aria-hidden="true"
+              >
+                {section.num != null ? section.num : (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"/>
+                  </svg>
+                )}
+              </span>
+            <div class="min-w-0 flex-1">
+              <h2 class="accordion-title">{section.title}</h2>
+              <p class="accordion-helper">{section.helper}</p>
+              {(section.num === 10 || section.num === 11 || section.num === 12) && (
+                <span class="section-date-chip" id={`section-${section.num}-chip`} hidden></span>
+              )}
+            </div>
+            <span class="accordion-chevron" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="accordion-content">
+            {sectionIndex === 0 && (
+              <div class="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
+                <p class="mb-1 text-[0.7rem] font-black uppercase tracking-[0.1em] text-clay-text">Before booking</p>
+                <p class="text-sm font-bold leading-relaxed text-ink">{beforePayingText}</p>
+              </div>
+            )}
+            <ul class="grid list-none gap-2 p-0">
+              {section.items.map((item) => (
+                <li
+                  data-tags={item.tags ? item.tags.join(",") : ""}
+                  data-optional={section.num == null ? "true" : "false"}
+                >
+                  <div class="why-row">
+                    <label class={"checklist-row flex min-h-[3rem] gap-3 rounded-lg border border-line bg-cream px-3 py-3 text-sm font-bold leading-relaxed text-ink sm:text-[0.96rem]" + (section.num == null ? " checklist-row--optional" : "") + (item.critical ? " checklist-row--critical" : "")} data-checked="false">
+                      <input class="mt-1 h-4 w-4 shrink-0 accent-clay" type="checkbox" data-item-id={item.id} aria-label={`Mark complete: ${item.text}`} />
+                      <span class="min-w-0 flex-1">
+                        <span class="block">
+                          {item.text}
+                          {item.sources && item.sources.map((src) => (
+                            <sup><a class="source-link" href={src.url} target="_blank" rel="noopener">{src.label}&nbsp;↗</a></sup>
+                          ))}
+                        </span>
+                        {item.tags && item.tags.length > 0 && (
+                          <span class="item-tag-row" aria-hidden="true">
+                            {item.tags.map((tag) => (
+                              <span class="item-tag-chip">{tagLabels[tag]}</span>
+                            ))}
+                          </span>
+                        )}
+                        {item.recheckOf && item.recheckOf.length > 0 && (
+                          <span class="recheck-meta" data-recheck-ids={item.recheckOf.join(",")}>
+                            {getRecheckSections(item.recheckOf).map((sec, i) => (
+                              <Fragment>{i > 0 && <span aria-hidden="true">, </span>}<a class="recheck-link" href={`#${sec.anchor}`}>{sec.label}</a></Fragment>
+                            ))}
+                            <span class="originally-checked-note" hidden>✓ originally checked</span>
+                          </span>
+                        )}
+                      </span>
+                    </label>
+                    {item.why && (
+                      <button
+                        class="why-toggle"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls={`why-${item.id}`}
+                      >why?</button>
+                    )}
+                  </div>
+                  {item.why && (
+                    <div class="why-content" id={`why-${item.id}`} hidden>
+                      {item.why}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+          </details>
+        </Fragment>
+      ))}
+    </article>
+
+    <aside class="checklist-aside sticky top-24 grid gap-5 print:static">
+      <details id="sidebar-details">
+        <summary class="sidebar-details-summary">
+          <span>Final sweep — tap to open.</span>
+          <svg class="sidebar-details-chevron" width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <section class="rounded-xl border border-clay/30 bg-cream p-5 shadow-card" aria-labelledby="do-not-forget-heading">
+          <p class="mb-2 text-[0.72rem] font-black uppercase tracking-[0.1em] text-clay-text">Final sweep</p>
+          <h2 id="do-not-forget-heading" class="max-w-none text-[clamp(1.45rem,3vw,2rem)]">Do not forget</h2>
+          <p id="critical-count" class="mt-3 text-sm font-semibold text-ink"></p>
+          <ul id="critical-list" class="mt-2 list-none p-0" aria-label="Unchecked critical items"></ul>
+          <p id="critical-complete" hidden class="mt-3 text-sm font-bold text-forest">All critical items complete ✓</p>
+        </section>
+      </details>
+      <section class="rounded-xl border border-line bg-surface p-5" aria-label="Official source reminder">
+        <p class="text-sm font-bold leading-relaxed text-muted">
+          Rules can change. Use official government, airline, embassy, consulate, insurer, and health sources before booking or departing. Ask a travel clinic or doctor where relevant.
+        </p>
+      </section>
+    </aside>
+  </section>
+
+  <!-- Jump to next unchecked (mobile-only floating button) -->
+  <button
+    id="jump-to-next"
+    class="jump-btn print:hidden"
+    type="button"
+    aria-label="Jump to next unchecked item"
+  >
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script is:inline define:vars={{ copyText, criticalItems }}>
+    (function () {
+      var STORAGE_KEY = "50fsh.checklist.v1";
+      var state;
+      var writeTimer = null;
+      var progressTimer = null;
+      var resetPending = false;
+      var resetTimer = null;
+
+      function freshState() {
+        return {
+          version: 1,
+          checked: [],
+          tripDate: null,
+          filters: { remote: false, driving: false, kids: false, altitude: false },
+          updatedAt: new Date().toISOString()
+        };
+      }
+
+      function loadState() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            if (parsed && parsed.version === 1) {
+              state = parsed;
+              if (!state.filters) state.filters = { remote: false, driving: false, kids: false, altitude: false };
+              return;
+            }
+          }
+        } catch (_) {}
+        state = freshState();
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {}
+      }
+
+      function saveState() {
+        try {
+          state.updatedAt = new Date().toISOString();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (_) {}
+      }
+
+      function debouncedSave() {
+        clearTimeout(writeTimer);
+        writeTimer = setTimeout(saveState, 150);
+      }
+
+      function getProgressCounts() {
+        var all = Array.from(document.querySelectorAll("#checklist-article [data-item-id]"));
+        var visible = all.filter(function (cb) {
+          var li = cb.closest("li");
+          return !li || li.style.display !== "none";
+        });
+        var required = visible.filter(function (cb) {
+          var li = cb.closest("li");
+          return !li || li.getAttribute("data-optional") !== "true";
+        });
+        var optional = visible.filter(function (cb) {
+          var li = cb.closest("li");
+          return li && li.getAttribute("data-optional") === "true";
+        });
+        return {
+          checked: required.filter(function (cb) { return cb.checked; }).length,
+          total: required.length,
+          optChecked: optional.filter(function (cb) { return cb.checked; }).length,
+          optTotal: optional.length
+        };
+      }
+
+      function updateProgressBar() {
+        var counts = getProgressCounts();
+        var bar = document.getElementById("progress-bar");
+        if (bar) bar.style.width = counts.total > 0 ? (counts.checked / counts.total * 100) + "%" : "0%";
+      }
+
+      function updateProgressText() {
+        var counts = getProgressCounts();
+        var liveEl = document.getElementById("progress-live");
+        if (liveEl) {
+          liveEl.innerHTML =
+            "<strong>" + counts.checked + "</strong> <span class=\"progress-of\">of</span> <strong>" + counts.total + "</strong> complete";
+        }
+        var optEl = document.getElementById("progress-optional");
+        if (optEl) {
+          optEl.textContent = counts.optTotal > 0
+            ? "+ " + counts.optChecked + " of " + counts.optTotal + " optional"
+            : "";
+        }
+      }
+
+      function updateProgress() {
+        updateProgressBar();
+        clearTimeout(progressTimer);
+        progressTimer = setTimeout(updateProgressText, 500);
+      }
+
+      function updateProgressImmediate() {
+        updateProgressBar();
+        updateProgressText();
+      }
+
+      function restoreState() {
+        var checkedSet = new Set(state.checked);
+        document.querySelectorAll("#checklist-article [data-item-id]").forEach(function (cb) {
+          var id = cb.dataset.itemId;
+          var isChecked = checkedSet.has(id);
+          cb.checked = isChecked;
+          var label = cb.closest(".checklist-row");
+          if (label) label.dataset.checked = isChecked ? "true" : "false";
+        });
+        updateProgressImmediate();
+        buildSidebar();
+        updateJumpBtn();
+        updateTripDateUI();
+        applyFilters();
+        updateFilterChips();
+        updateRecheckAnnotations();
+      }
+
+      function updateRecheckAnnotations() {
+        var checkedSet = new Set(state.checked);
+        document.querySelectorAll(".recheck-meta[data-recheck-ids]").forEach(function (meta) {
+          var ids = meta.getAttribute("data-recheck-ids").split(",").filter(Boolean);
+          var allChecked = ids.length > 0 && ids.every(function (id) { return checkedSet.has(id); });
+          var note = meta.querySelector(".originally-checked-note");
+          if (note) {
+            if (allChecked) note.removeAttribute("hidden");
+            else note.setAttribute("hidden", "");
+          }
+        });
+      }
+
+      function applyFilters() {
+        var active = Object.keys(state.filters).filter(function (k) { return state.filters[k]; });
+        document.querySelectorAll("#checklist-article li[data-tags]").forEach(function (li) {
+          var tagsAttr = li.getAttribute("data-tags");
+          var itemTags = tagsAttr ? tagsAttr.split(",").filter(Boolean) : [];
+          if (itemTags.length === 0) {
+            li.style.display = "";
+          } else {
+            var show = active.length > 0 && active.some(function (f) { return itemTags.indexOf(f) !== -1; });
+            li.style.display = show ? "" : "none";
+          }
+        });
+      }
+
+      function updateFilterChips() {
+        document.querySelectorAll(".filter-chip").forEach(function (btn) {
+          var f = btn.dataset.filter;
+          var on = state.filters[f] === true;
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+          if (on) btn.classList.add("filter-chip--active");
+          else    btn.classList.remove("filter-chip--active");
+        });
+      }
+
+      function highlightProgressCounter() {
+        var el = document.getElementById("progress-live");
+        if (!el) return;
+        el.classList.remove("progress-flash");
+        void el.offsetWidth; // reflow to restart animation
+        el.classList.add("progress-flash");
+      }
+
+      function readUrlFilters() {
+        var params = new URLSearchParams(window.location.search);
+        var keys = ["remote", "driving", "kids", "altitude"];
+        var hadAny = keys.some(function (k) { return params.has(k); });
+        if (!hadAny) return false;
+        keys.forEach(function (k) { state.filters[k] = params.get(k) === "1"; });
+        return true;
+      }
+
+      function updateUrl() {
+        var params = new URLSearchParams();
+        ["remote", "driving", "kids", "altitude"].forEach(function (k) {
+          if (state.filters[k]) params.set(k, "1");
+        });
+        var qs = params.toString();
+        history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : "") + window.location.hash);
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function buildSidebar() {
+        var checkedSet = new Set(state.checked);
+        var uncheckedCount = criticalItems.filter(function (item) {
+          return !checkedSet.has(item.id);
+        }).length;
+        var countEl = document.getElementById("critical-count");
+        var listEl = document.getElementById("critical-list");
+        var completeEl = document.getElementById("critical-complete");
+        if (!countEl || !listEl || !completeEl) return;
+        if (uncheckedCount === 0) {
+          countEl.textContent = "";
+          completeEl.removeAttribute("hidden");
+        } else {
+          completeEl.setAttribute("hidden", "");
+          countEl.textContent = uncheckedCount + " critical item" + (uncheckedCount === 1 ? "" : "s") + " still to do";
+        }
+        // Always render all critical items with checkboxes
+        listEl.innerHTML = criticalItems.map(function (item) {
+          var isChecked = checkedSet.has(item.id);
+          return '<li class="critical-item' + (isChecked ? " critical-item--done" : "") + '">' +
+            '<div class="critical-item-row">' +
+            '<input type="checkbox" class="critical-sidebar-cb" data-item-id="' + escapeHtml(item.id) + '"' +
+            (isChecked ? " checked" : "") +
+            ' aria-label="' + escapeHtml("Mark complete: " + item.text) + '" />' +
+            '<a href="#" class="critical-link" data-target-id="' + escapeHtml(item.id) + '">' +
+            escapeHtml(item.text) + '</a>' +
+            '</div></li>';
+        }).join("");
+      }
+
+      function updateJumpBtn() {
+        var btn = document.getElementById("jump-to-next");
+        if (!btn) return;
+        var hasUnchecked = Array.from(document.querySelectorAll("#checklist-article [data-item-id]:not(:checked)")).some(function (cb) {
+          var li = cb.closest("li");
+          return !li || li.style.display !== "none";
+        });
+        btn.hidden = !hasUnchecked;
+      }
+
+      function jumpToNext() {
+        var all = Array.from(document.querySelectorAll("#checklist-article [data-item-id]:not(:checked)")).filter(function (cb) {
+          var li = cb.closest("li");
+          return !li || li.style.display !== "none";
+        });
+        if (all.length === 0) {
+          updateJumpBtn();
+          return;
+        }
+        // Find first unchecked item below the current viewport top (with buffer for sticky strip)
+        var next = null;
+        for (var i = 0; i < all.length; i++) {
+          if (all[i].getBoundingClientRect().top > 80) {
+            next = all[i];
+            break;
+          }
+        }
+        // Fallback: if none found below, wrap to first overall
+        if (!next) next = all[0];
+        var details = next.closest("details.checklist-accordion");
+        if (details && !details.open) {
+          details.open = true;
+          requestAnimationFrame(function () {
+            next.scrollIntoView({ behavior: "smooth", block: "center" });
+            next.focus();
+          });
+        } else {
+          next.scrollIntoView({ behavior: "smooth", block: "center" });
+          next.focus();
+        }
+      }
+
+      function updateTripDateUI() {
+        var dateInput = document.getElementById("trip-date");
+        var icalBtnEl = document.getElementById("ical-btn");
+        var banner = document.getElementById("days-to-go-banner");
+        var bannerText = document.getElementById("days-to-go-text");
+
+        if (dateInput) dateInput.value = state.tripDate || "";
+        if (icalBtnEl) icalBtnEl.disabled = !state.tripDate;
+
+        if (!state.tripDate) {
+          if (banner) banner.setAttribute("hidden", "");
+          [10, 11, 12].forEach(function (n) {
+            var chip = document.getElementById("section-" + n + "-chip");
+            if (chip) chip.setAttribute("hidden", "");
+          });
+          return;
+        }
+
+        // Parse as local midnight to avoid timezone shifts
+        var dp = state.tripDate.split("-");
+        var tripDate = new Date(+dp[0], +dp[1] - 1, +dp[2]);
+        var today = new Date(); today.setHours(0, 0, 0, 0);
+        var diffDays = Math.round((tripDate - today) / 86400000);
+
+        if (banner && bannerText) {
+          var msg;
+          if (diffDays > 0)      msg = diffDays + (diffDays === 1 ? " day to go" : " days to go");
+          else if (diffDays === 0) msg = "Today’s the day!";
+          else                     msg = "Have a good trip ✈";
+          bannerText.textContent = msg;
+          banner.removeAttribute("hidden");
+        }
+
+        var sectionCfg = [
+          { num: 10, offset: 7, prefix: "by " },
+          { num: 11, offset: 1, prefix: "" },
+          { num: 12, offset: 0, prefix: "" }
+        ];
+        sectionCfg.forEach(function (cfg) {
+          var chip = document.getElementById("section-" + cfg.num + "-chip");
+          if (!chip) return;
+          var d = new Date(tripDate.getFullYear(), tripDate.getMonth(), tripDate.getDate() - cfg.offset);
+          var label = d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+          chip.textContent = cfg.prefix + label;
+          chip.removeAttribute("hidden");
+        });
+      }
+
+      function generateIcs(tripDateStr) {
+        var dp = tripDateStr.split("-");
+        var trip = new Date(+dp[0], +dp[1] - 1, +dp[2]);
+        var pad = function (n) { return String(n).padStart(2, "0"); };
+        function toD(d) { return d.getFullYear() + "" + pad(d.getMonth() + 1) + "" + pad(d.getDate()); }
+        function icsEsc(s) {
+          return s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+        }
+        var now = new Date();
+        var dtstamp = now.getUTCFullYear() + "" + pad(now.getUTCMonth() + 1) + "" + pad(now.getUTCDate()) +
+          "T" + pad(now.getUTCHours()) + "" + pad(now.getUTCMinutes()) + "" + pad(now.getUTCSeconds()) + "Z";
+        var base = "https://50fivestarhotels.com/pre-travel-checklist/";
+        var evts = [
+          { off: 56, sum: "Book major reservations (flights, key hotels)",        sec: "1" },
+          { off: 28, sum: "Travel clinic appointment if vaccinations needed",      sec: "6" },
+          { off: 14, sum: "Re-check entry rules, weather, and insurance",          sec: "1" },
+          { off:  7, sum: "Final week: re-check bookings, prepare documents",      sec: "10" },
+          { off:  1, sum: "Day-before final sweep",                                sec: "11" },
+          { off:  0, sum: "Departure day",                                         sec: "12" }
+        ];
+        var lines = [
+          "BEGIN:VCALENDAR", "VERSION:2.0",
+          "PRODID:-//50 Five-Star Hotels//Pre-Travel Checklist//EN",
+          "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+          "X-WR-CALNAME:50 Five-Star Hotels - Trip Reminders"
+        ];
+        evts.forEach(function (ev) {
+          var start = new Date(trip.getFullYear(), trip.getMonth(), trip.getDate() - ev.off);
+          var end   = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1);
+          lines.push("BEGIN:VEVENT");
+          lines.push("UID:" + tripDateStr + "-d" + ev.off + "@50fivestarhotels.com");
+          lines.push("DTSTAMP:" + dtstamp);
+          lines.push("DTSTART;VALUE=DATE:" + toD(start));
+          lines.push("DTEND;VALUE=DATE:" + toD(end));
+          lines.push("SUMMARY:" + icsEsc(ev.sum));
+          lines.push("DESCRIPTION:" + icsEsc(base + "#section-" + ev.sec));
+          lines.push("END:VEVENT");
+        });
+        lines.push("END:VCALENDAR");
+        return lines.join("\r\n");
+      }
+
+      // Delegated change listener on the article
+      var article = document.getElementById("checklist-article");
+      if (article) {
+        article.addEventListener("change", function (e) {
+          if (e.target.matches("[data-item-id]")) {
+            var id = e.target.dataset.itemId;
+            var isChecked = e.target.checked;
+            var label = e.target.closest(".checklist-row");
+            if (label) label.dataset.checked = isChecked ? "true" : "false";
+            if (isChecked) {
+              if (state.checked.indexOf(id) === -1) state.checked.push(id);
+            } else {
+              state.checked = state.checked.filter(function (i) { return i !== id; });
+            }
+            debouncedSave();
+            updateProgress();
+            updateJumpBtn();
+            buildSidebar();
+            updateRecheckAnnotations();
+          }
+        });
+
+        // Why-toggle click delegation
+        article.addEventListener("click", function (e) {
+          var btn = e.target.closest(".why-toggle");
+          if (btn) {
+            var controlsId = btn.getAttribute("aria-controls");
+            var content = controlsId ? document.getElementById(controlsId) : null;
+            if (!content) return;
+            var expanded = btn.getAttribute("aria-expanded") === "true";
+            btn.setAttribute("aria-expanded", expanded ? "false" : "true");
+            if (expanded) content.setAttribute("hidden", "");
+            else content.removeAttribute("hidden");
+            return;
+          }
+          // Recheck link click delegation
+          var recheckLink = e.target.closest(".recheck-link");
+          if (recheckLink) {
+            e.preventDefault();
+            var href = recheckLink.getAttribute("href");
+            var targetSection = href ? document.querySelector(href) : null;
+            if (targetSection) {
+              if (targetSection.tagName === "DETAILS" && !targetSection.open) {
+                targetSection.open = true;
+                requestAnimationFrame(function () {
+                  targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                });
+              } else {
+                targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
+            }
+          }
+        });
+      }
+
+      // Reset button
+      var resetBtn = document.getElementById("reset-btn");
+      var resetMsg = document.getElementById("reset-msg");
+      if (resetBtn) {
+        resetBtn.addEventListener("click", function () {
+          if (!resetPending) {
+            resetPending = true;
+            resetBtn.textContent = "Click again to confirm.";
+            if (resetMsg) resetMsg.textContent = "Click reset again to confirm clearing all checked items.";
+            resetTimer = setTimeout(function () {
+              resetPending = false;
+              resetBtn.textContent = "Reset";
+              if (resetMsg) resetMsg.textContent = "";
+            }, 5000);
+          } else {
+            clearTimeout(resetTimer);
+            resetPending = false;
+            resetBtn.textContent = "Reset";
+            if (resetMsg) resetMsg.textContent = "";
+            state.checked = [];
+            saveState();
+            document.querySelectorAll("#checklist-article [data-item-id]").forEach(function (cb) {
+              cb.checked = false;
+              var label = cb.closest(".checklist-row");
+              if (label) label.dataset.checked = "false";
+            });
+            updateProgressImmediate();
+            buildSidebar();
+            updateJumpBtn();
+          }
+        });
+      }
+
+      // Expand / Collapse all
+      var allExpanded = false;
+      var expandAllBtn = document.getElementById("expand-all-btn");
+      if (expandAllBtn) {
+        expandAllBtn.addEventListener("click", function () {
+          allExpanded = !allExpanded;
+          document.querySelectorAll(".checklist-accordion").forEach(function (d) {
+            d.open = allExpanded;
+          });
+          expandAllBtn.textContent = allExpanded ? "Collapse all" : "Expand all";
+        });
+      }
+
+      // Sidebar details: force-open at lg breakpoint
+      function syncSidebarDetails() {
+        var details = document.getElementById("sidebar-details");
+        if (!details) return;
+        if (window.matchMedia("(min-width: 1024px)").matches) {
+          details.open = true;
+        }
+      }
+      syncSidebarDetails();
+      try {
+        window.matchMedia("(min-width: 1024px)").addEventListener("change", function (e) {
+          if (e.matches) {
+            var details = document.getElementById("sidebar-details");
+            if (details) details.open = true;
+          }
+        });
+      } catch (_) {}
+
+      // Sidebar event delegation — checkbox sync + critical link scroll
+      var sidebarAside = document.querySelector(".checklist-aside");
+      if (sidebarAside) {
+        // Sidebar checkbox → sync main checklist
+        sidebarAside.addEventListener("change", function (e) {
+          if (!e.target.matches(".critical-sidebar-cb")) return;
+          var id = e.target.dataset.itemId;
+          var isChecked = e.target.checked;
+          if (isChecked) {
+            if (state.checked.indexOf(id) === -1) state.checked.push(id);
+          } else {
+            state.checked = state.checked.filter(function (i) { return i !== id; });
+          }
+          debouncedSave();
+          // Sync the corresponding checkbox in the main checklist
+          var mainCb = document.querySelector('#checklist-article [data-item-id="' + id + '"]');
+          if (mainCb) {
+            mainCb.checked = isChecked;
+            var mainLabel = mainCb.closest(".checklist-row");
+            if (mainLabel) mainLabel.dataset.checked = isChecked ? "true" : "false";
+          }
+          updateProgressImmediate();
+          updateJumpBtn();
+          buildSidebar();
+          updateRecheckAnnotations();
+        });
+
+        // Critical link → scroll to and focus main checkbox
+        sidebarAside.addEventListener("click", function (e) {
+          var link = e.target.closest(".critical-link");
+          if (!link) return;
+          e.preventDefault();
+          var targetId = link.dataset.targetId;
+          var cb = document.querySelector('#checklist-article [data-item-id="' + targetId + '"]');
+          if (!cb) return;
+          var details = cb.closest("details.checklist-accordion");
+          if (details && !details.open) {
+            details.open = true;
+            requestAnimationFrame(function () {
+              cb.scrollIntoView({ behavior: "smooth", block: "center" });
+              cb.focus();
+            });
+          } else {
+            cb.scrollIntoView({ behavior: "smooth", block: "center" });
+            cb.focus();
+          }
+        });
+      }
+
+      // Jump-to-next button
+      var jumpBtn = document.getElementById("jump-to-next");
+      if (jumpBtn) {
+        jumpBtn.addEventListener("click", jumpToNext);
+      }
+
+      // Hide jump button when virtual keyboard is likely open
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", function () {
+          var btn = document.getElementById("jump-to-next");
+          if (!btn) return;
+          var vvHeight = window.visualViewport.height;
+          var winHeight = window.innerHeight;
+          if (vvHeight < winHeight * 0.7) {
+            btn.hidden = true;
+          } else {
+            updateJumpBtn();
+          }
+        });
+      }
+
+      // Filter chips
+      document.querySelectorAll(".filter-chip").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var f = btn.dataset.filter;
+          state.filters[f] = !state.filters[f];
+          saveState();
+          updateUrl();
+          applyFilters();
+          updateFilterChips();
+          updateProgressImmediate();
+          highlightProgressCounter();
+          updateJumpBtn();
+          buildSidebar();
+        });
+      });
+
+      // Trip date input
+      var tripDateInput = document.getElementById("trip-date");
+      if (tripDateInput) {
+        tripDateInput.addEventListener("change", function () {
+          var val = tripDateInput.value;
+          if (!val) {
+            state.tripDate = null;
+            saveState();
+            updateTripDateUI();
+            return;
+          }
+          // Reject past dates silently
+          var dp = val.split("-");
+          var selected = new Date(+dp[0], +dp[1] - 1, +dp[2]);
+          var today = new Date(); today.setHours(0, 0, 0, 0);
+          if (selected < today) {
+            tripDateInput.value = state.tripDate || "";
+            return;
+          }
+          state.tripDate = val;
+          saveState();
+          updateTripDateUI();
+        });
+      }
+
+      // iCal download
+      var icalBtnEl = document.getElementById("ical-btn");
+      if (icalBtnEl) {
+        icalBtnEl.addEventListener("click", function () {
+          if (!state.tripDate) return;
+          var icsContent = generateIcs(state.tripDate);
+          var blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "50fsh-trip-reminders-" + state.tripDate + ".ics";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        });
+      }
+
+      // Print handlers
+      var printButton = document.getElementById("print-checklist");
+      var copyButton = document.getElementById("copy-checklist");
+      var copyStatus = document.getElementById("copy-status");
+
+      if (printButton) {
+        printButton.addEventListener("click", function () { window.print(); });
+      }
+
+      window.addEventListener("beforeprint", function () {
+        document.querySelectorAll("details.checklist-accordion").forEach(function (d) {
+          d._wasOpen = d.open;
+          d.open = true;
+        });
+      });
+
+      window.addEventListener("afterprint", function () {
+        document.querySelectorAll("details.checklist-accordion").forEach(function (d) {
+          d.open = d._wasOpen !== undefined ? d._wasOpen : false;
+        });
+      });
+
+      if (copyButton) {
+        copyButton.addEventListener("click", function () {
+          navigator.clipboard.writeText(copyText).then(function () {
+            if (copyStatus) copyStatus.textContent = "Copied.";
+          }).catch(function () {
+            if (copyStatus) copyStatus.textContent = "Copy failed. Select and copy the page text instead.";
+          });
+        });
+      }
+
+      // Init
+      loadState();
+      if (readUrlFilters()) { saveState(); }
+      restoreState();
+    })();
+  </script>
+
+  <style>
+    /* ── Number badge ─────────────────────────────────────────────────── */
+    .section-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #F6ECD9 0%, #D8BD8A 50%, #B88A44 100%);
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #5A3D1C;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.7),
+        0 2px 8px rgba(184, 138, 68, 0.25);
+    }
+
+    .section-badge--double {
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Accordion card ───────────────────────────────────────────────── */
+    .accordion-summary {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    .accordion-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion-summary:focus-visible {
+      outline: 3px solid var(--color-clay);
+      outline-offset: -3px;
+      border-radius: 0.75rem;
+    }
+
+    .checklist-accordion > .accordion-summary:hover {
+      background-color: var(--color-tag-bg);
+      border-radius: 0.75rem;
+    }
+
+    details[open] > .accordion-summary {
+      border-bottom: 1px solid var(--color-line);
+      border-radius: 0.75rem 0.75rem 0 0;
+    }
+
+    .accordion-title {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1.25;
+      max-width: none;
+      color: var(--color-ink);
+      letter-spacing: -0.01em;
+    }
+
+    .accordion-helper {
+      margin-top: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--color-muted);
+    }
+
+    .accordion-chevron {
+      flex-shrink: 0;
+      color: var(--color-muted);
+      transition: transform 200ms ease;
+    }
+
+    details[open] .accordion-chevron {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      padding: 1rem 1.25rem 1.25rem;
+    }
+
+    /* ── Critical item highlight ─────────────────────────────────────── */
+    .checklist-row--critical {
+      background-color: #FBF3E4;
+      border-color: #E8D3A8;
+    }
+
+    /* ── Checked item strikethrough ───────────────────────────────────── */
+    .checklist-row[data-checked="true"] {
+      color: var(--color-muted);
+      text-decoration: line-through;
+      text-decoration-thickness: 1px;
+      text-decoration-color: var(--color-muted);
+      opacity: 0.7;
+    }
+
+    /* ── Progress strip ───────────────────────────────────────────────── */
+    .progress-strip {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--color-cream);
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    .progress-bar-track {
+      height: 4px;
+      background: var(--color-line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      position: absolute;
+      inset-block: 0;
+      left: 0;
+      background: var(--color-clay);
+      width: 0%;
+      transition: width 200ms ease;
+    }
+
+    .progress-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .progress-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+
+    .progress-of {
+      color: var(--color-muted);
+      font-weight: 500;
+    }
+
+    .progress-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+
+    .progress-btn {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--color-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem 0;
+      transition: color 150ms ease;
+      white-space: nowrap;
+    }
+
+    .progress-btn:hover {
+      color: var(--color-ink);
+    }
+
+    .progress-btn:focus-visible {
+      outline: 2px solid var(--color-clay);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* ── Mobile sidebar reorder ───────────────────────────────────────── */
+    @media (max-width: 1023px) {
+      .checklist-aside {
+        order: -1;
+      }
+    }
+
+    /* ── Sidebar details wrapper ──────────────────────────────────────── */
+    #sidebar-details {
+      /* No extra chrome — inner section provides its own card style */
+    }
+
+    .sidebar-details-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--color-clay-text);
+      background: var(--color-cream);
+      border: 1px solid var(--color-clay);
+      border-radius: 0.75rem;
+      user-select: none;
+    }
+
+    .sidebar-details-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .sidebar-details-summary:focus-visible {
+      outline: 3px solid var(--color-clay);
+      outline-offset: -3px;
+    }
+
+    .sidebar-details-chevron {
+      color: var(--color-clay-text);
+      flex-shrink: 0;
+      transition: transform 200ms ease;
+    }
+
+    #sidebar-details[open] .sidebar-details-chevron {
+      transform: rotate(180deg);
+    }
+
+    #sidebar-details[open] > section {
+      margin-top: 0.5rem;
+    }
+
+    /* On desktop, hide the summary toggle — details is kept open by JS */
+    @media (min-width: 1024px) {
+      .sidebar-details-summary {
+        display: none;
+      }
+    }
+
+    /* ── Mobile ───────────────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .section-badge {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+        border-radius: 14px;
+      }
+
+      .section-badge--double {
+        font-size: 0.95rem;
+      }
+
+      .accordion-summary {
+        padding: 0.875rem 1rem;
+        gap: 0.75rem;
+      }
+
+      .accordion-content {
+        padding: 0.875rem 1rem 1rem;
+      }
+    }
+
+    /* ── Filter strip ────────────────────────────────────────────────── */
+    .filter-strip {
+      background: var(--color-cream);
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    .filter-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+    }
+
+    .filter-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── Filter chips ─────────────────────────────────────────────────── */
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: 0 0.875rem;
+      border-radius: 9999px;
+      border: 1px solid var(--color-line);
+      background: var(--color-surface);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--color-ink);
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+      transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--color-clay);
+      color: var(--color-clay-text);
+    }
+
+    .filter-chip[aria-pressed="true"],
+    .filter-chip--active {
+      background: var(--color-clay);
+      border-color: var(--color-clay);
+      color: var(--color-cream);
+    }
+
+    .filter-chip:focus-visible {
+      outline: 2px solid var(--color-clay);
+      outline-offset: 2px;
+    }
+
+    /* ── Item tag chips ───────────────────────────────────────────────── */
+    .item-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      margin-top: 0.2rem;
+    }
+
+    .item-tag-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.1rem 0.4rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: 9999px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--color-muted);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    /* ── Progress flash (on filter change) ───────────────────────────── */
+    @keyframes progress-flash {
+      0%   { background-color: transparent; }
+      15%  { background-color: var(--color-tag-bg); }
+      85%  { background-color: var(--color-tag-bg); }
+      100% { background-color: transparent; }
+    }
+
+    .progress-flash {
+      animation: progress-flash 1s ease;
+      border-radius: 4px;
+    }
+
+    /* ── Trip date input ─────────────────────────────────────────────── */
+    .trip-date-input {
+      display: block;
+      height: 2.5rem;
+      padding: 0 0.875rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      cursor: pointer;
+      transition: border-color 150ms ease;
+      font-family: inherit;
+    }
+
+    .trip-date-input:focus {
+      outline: none;
+      border-color: var(--color-clay);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-clay) 20%, transparent);
+    }
+
+    .trip-date-input::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.55;
+    }
+
+    /* ── iCal button ──────────────────────────────────────────────────── */
+    .ical-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      min-height: 2.2rem;
+      padding: 0 0.875rem;
+      border-radius: 9999px;
+      border: 1px solid var(--color-line);
+      background: var(--color-surface);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--color-muted);
+      cursor: default;
+      font-family: inherit;
+      transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+    }
+
+    .ical-btn:not(:disabled) {
+      color: var(--color-forest);
+      border-color: var(--color-clay);
+      cursor: pointer;
+    }
+
+    .ical-btn:not(:disabled):hover {
+      background: var(--color-tag-bg);
+    }
+
+    .ical-btn:disabled {
+      opacity: 0.55;
+    }
+
+    .ical-btn:not(:disabled):focus-visible {
+      outline: 2px solid var(--color-clay);
+      outline-offset: 2px;
+    }
+
+    /* ── Days-to-go banner ────────────────────────────────────────────── */
+    .days-to-go-banner {
+      display: inline-flex;
+      align-items: center;
+      background: var(--color-tag-bg);
+      border: 1px solid var(--color-clay);
+      border-radius: 9999px;
+      padding: 0.3rem 0.875rem;
+      font-size: 0.875rem;
+      font-weight: 800;
+      color: var(--color-clay-text);
+    }
+
+    /* ── Section date chip ────────────────────────────────────────────── */
+    .section-date-chip {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0.375rem;
+      padding: 0.15rem 0.5rem;
+      background: var(--color-tag-bg);
+      border: 1px solid var(--color-clay);
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-clay-text);
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Critical list in sidebar ────────────────────────────────────── */
+    /* #critical-list is static HTML (gets scoping attr) but its children  */
+    /* are injected via innerHTML at runtime, so they need :global().       */
+    #critical-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0;
+    }
+
+    :global(.critical-item) {
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    :global(.critical-item:last-child) {
+      border-bottom: none;
+    }
+
+    :global(.critical-item-row) {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.4rem 0.25rem;
+    }
+
+    :global(.critical-sidebar-cb) {
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      accent-color: var(--color-clay);
+      cursor: pointer;
+    }
+
+    :global(.critical-link) {
+      flex: 1;
+      min-width: 0;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      text-decoration: none;
+      border-radius: 0.25rem;
+      transition: color 150ms ease;
+      line-height: 1.35;
+    }
+
+    :global(.critical-link:hover) {
+      color: var(--color-clay-text);
+      text-decoration: underline;
+    }
+
+    :global(.critical-link:focus-visible) {
+      outline: 2px solid var(--color-clay);
+      outline-offset: 2px;
+    }
+
+    :global(.critical-item--done .critical-link) {
+      color: var(--color-muted);
+      text-decoration: line-through;
+      text-decoration-thickness: 1px;
+      opacity: 0.65;
+    }
+
+    /* ── Jump-to-next button ──────────────────────────────────────────── */
+    .jump-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 30;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--color-clay);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      transition: opacity 150ms ease, transform 150ms ease;
+    }
+
+    .jump-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .jump-btn:focus-visible {
+      outline: 3px solid var(--color-clay);
+      outline-offset: 3px;
+    }
+
+    /* Hide jump button on desktop */
+    @media (min-width: 1024px) {
+      .jump-btn {
+        display: none !important;
+      }
+    }
+
+    /* ── Reduced motion ───────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .progress-bar-fill,
+      .accordion-chevron,
+      .sidebar-details-chevron,
+      .progress-btn,
+      .critical-link,
+      .jump-btn,
+      .trip-date-input,
+      .ical-btn,
+      .filter-chip,
+      .why-toggle,
+      .source-link,
+      .recheck-link {
+        transition: none;
+      }
+
+      .progress-flash {
+        animation: none;
+      }
+    }
+
+    /* ── Why row ─────────────────────────────────────────────────────── */
+    .why-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.375rem;
+    }
+
+    .why-row .checklist-row {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ── Why toggle button ────────────────────────────────────────────── */
+    .why-toggle {
+      flex-shrink: 0;
+      align-self: center;
+      background: none;
+      border: none;
+      padding: 0.2rem 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      cursor: pointer;
+      font-family: inherit;
+      border-radius: 0.25rem;
+      white-space: nowrap;
+      transition: color 150ms ease;
+    }
+
+    .why-toggle:hover {
+      color: var(--color-ink);
+      text-decoration: underline;
+    }
+
+    .why-toggle:focus-visible {
+      outline: 2px solid var(--color-clay);
+      outline-offset: 2px;
+    }
+
+    .why-toggle[aria-expanded="true"] {
+      color: var(--color-clay-text);
+    }
+
+    /* ── Why content ──────────────────────────────────────────────────── */
+    .why-content {
+      margin-top: 0.375rem;
+      padding: 0.625rem 0.75rem;
+      background: var(--color-tag-bg);
+      border-radius: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--color-ink);
+    }
+
+    /* ── Source links ─────────────────────────────────────────────────── */
+    .source-link {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-clay-text);
+      text-decoration: none;
+      margin-left: 0.15rem;
+    }
+
+    .source-link:hover {
+      text-decoration: underline;
+    }
+
+    .source-link:focus-visible {
+      outline: 2px solid var(--color-clay);
+      outline-offset: 1px;
+      border-radius: 2px;
+    }
+
+    /* ── Recheck meta ─────────────────────────────────────────────────── */
+    .recheck-meta {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-muted);
+    }
+
+    .recheck-link {
+      color: var(--color-clay-text);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .recheck-link:hover {
+      text-decoration: underline;
+    }
+
+    .recheck-link:focus-visible {
+      outline: 2px solid var(--color-clay);
+      outline-offset: 1px;
+      border-radius: 2px;
+    }
+
+    .originally-checked-note {
+      color: var(--color-forest);
+      margin-left: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* ── Optional section badge ───────────────────────────────────────── */
+    .section-badge--optional {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%);
+      color: #7c2d12;
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.7),
+        0 2px 8px rgba(245, 158, 11, 0.22);
+    }
+
+    /* ── Optional divider ─────────────────────────────────────────────── */
+    .optional-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0.25rem 0;
+      color: var(--color-muted);
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+
+    .optional-divider::before,
+    .optional-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--color-line);
+    }
+
+    /* ── Optional item rows ───────────────────────────────────────────── */
+    li[data-optional="true"] .checklist-row {
+      opacity: 0.88;
+    }
+
+    li[data-optional="true"] .checklist-row .min-w-0 > span:first-child {
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    /* ── Secondary optional progress count ───────────────────────────── */
+    .progress-counts {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .progress-optional-text {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      margin-top: 0.05rem;
+    }
+
+    /* ── Print ────────────────────────────────────────────────────────── */
+    @media print {
+      header,
+      footer,
+      .skip-link {
+        display: none !important;
+      }
+
+      .filter-strip,
+      .progress-strip,
+      .jump-btn,
+      .why-toggle,
+      .why-content {
+        display: none;
+      }
+
+      body {
+        background: #fff;
+      }
+
+      section,
+      article,
+      aside {
+        box-shadow: none !important;
+      }
+
+      input[type="checkbox"] {
+        print-color-adjust: exact;
+      }
+
+      details {
+        break-inside: avoid;
+      }
+
+      details > summary {
+        list-style: none;
+      }
+
+      details > *:not(summary) {
+        display: block !important;
+      }
+
+      .accordion-chevron {
+        display: none !important;
+      }
+
+      .section-badge {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</BaseLayout>
