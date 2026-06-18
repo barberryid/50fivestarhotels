@@ -1,5 +1,15 @@
 # 50 Five-Star Hotels — Project Brief
 
+## Pre-travel checklist page ported from 50difficultplaces (17 June 2026)
+
+The full interactive pre-travel checklist was moved from `50difficultplaces.com/pre-travel-checklist/` to this site at the same path, `/pre-travel-checklist/` (`src/pages/pre-travel-checklist.astro`). It is a 13-section / 171-item checklist with localStorage persistence, trip-type filters, a trip-date picker that generates an `.ics` calendar of reminders, print/copy actions, a progress strip, and a "Do not forget" critical-items sidebar.
+
+- **Rebranded fully to 50fivestarhotels.com** — no `50difficultplaces` references remain. `siteUrl`/canonical, JSON-LD `author`/`publisher` ("50 Five-Star Hotels"), and OG image (`/images/social/default-og.webp`) all point here. The `.ics` PRODID/UID/`X-WR-CALNAME`/download filename are rebranded; the localStorage key is `50fsh.checklist.v1`.
+- **Palette via alias tokens, not a rewrite.** The page keeps its original token class names (`clay`, `cream`, `surface`, `line`, `ink`, `muted`, `forest`, `tag-bg`, `shadow-card`); rather than rewrite every class, **alias tokens were added to `src/styles/global.css` `@theme`** mapping them onto the warm palette (clay→terracotta `#A86645`, clay-text→`#8A4F33`, cream→bg, surface→card, etc.). **Do not delete those aliases or the checklist styling breaks.** The section-badge gradient was re-coloured lime→warm gold; the critical-row highlight changed mint→warm `#FBF3E4`.
+- **No service worker on this site,** so the source's offline chip + SW-registration script were dropped during the port.
+- **Linked** from `Footer.astro` (Guides group) and `sitemap.astro` (Main pages); the XML sitemap picks it up automatically.
+- Local build check: `npm run build` succeeded on 18 June 2026 (89 pages); the page builds to `dist/pre-travel-checklist/index.html` with no stale references.
+
 ## Copy button moved into the accordion header (16 June 2026)
 
 Follow-up to the duplicate-copy-button change: the top copy button on both tools was moved up out of the accordion body into the **accordion header row** so it is visible immediately, even while the section is collapsed.
