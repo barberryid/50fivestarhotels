@@ -12,6 +12,7 @@ import LastUpdated from '../components/LastUpdated.astro';
 import PriceAccuracyNote from '../components/PriceAccuracyNote.astro';
 import NumberedEditorialSections from '../components/NumberedEditorialSections.astro';
 import FinderCta from '../components/FinderCta.astro';
+import BookingAffiliateLink from '../components/BookingAffiliateLink.astro';
 import FiveStarReality from '../components/trust/FiveStarReality.astro';
 import WatchOutFor from '../components/trust/WatchOutFor.astro';
 import WhyItsCheap from '../components/trust/WhyItsCheap.astro';
@@ -231,15 +232,13 @@ const relatedGuides = [
             {bookingAffiliateUrl && (
               <div class="flex flex-col gap-3 max-w-sm">
                 <AffiliateDisclosure compact={true} />
-                <a
+                <BookingAffiliateLink
                   href={bookingAffiliateUrl}
-                  target="_blank"
-                  rel="sponsored nofollow noopener"
-                  data-affiliate-booking
+                  track={true}
                   class="inline-flex items-center justify-center bg-[#1F2428] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#B88A44] transition-colors no-underline text-sm"
                 >
                   Check current prices on Booking.com
-                </a>
+                </BookingAffiliateLink>
                 <PriceAccuracyNote />
               </div>
             )}
@@ -343,15 +342,13 @@ const relatedGuides = [
           <div class="mt-12 bg-[#1F2428] rounded-2xl p-8 text-white">
             <h2 class="font-serif text-2xl font-bold mb-2">Ready to check prices?</h2>
             <p class="text-white/60 text-sm mb-6">Prices vary significantly by date, room type and season. Check current availability before making any plans.</p>
-            <a
+            <BookingAffiliateLink
               href={bookingAffiliateUrl}
-              target="_blank"
-              rel="sponsored nofollow noopener"
-              data-affiliate-booking
+              track={true}
               class="inline-flex items-center bg-[#B88A44] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#A8763A] transition-colors no-underline text-sm"
             >
               Check current prices on Booking.com
-            </a>
+            </BookingAffiliateLink>
             <p class="text-white/60 text-[11px] mt-3">Prices vary by date, taxes, room type, and cancellation policy. Always check the final rate before booking.</p>
           </div>
         )}

@@ -1,0 +1,31 @@
+---
+// Reusable Booking.com affiliate link.
+// Always renders rel="nofollow sponsored noopener" so every affiliate link on
+// the site stays SEO/compliance-safe by default. Pass the affiliate URL via
+// `href` (e.g. getBookingAffiliateUrl(hotel.bookingUrl)) — never hard-code a URL here.
+interface Props {
+  href: string;
+  class?: string;
+  ariaLabel?: string;
+  /** Adds data-affiliate-booking so the click is picked up by ffshTrack analytics. */
+  track?: boolean;
+}
+
+const {
+  href,
+  class: className = '',
+  ariaLabel = 'Check current prices on Booking.com',
+  track = false,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="nofollow sponsored noopener"
+  class={className}
+  aria-label={ariaLabel}
+  data-affiliate-booking={track ? '' : undefined}
+>
+  <slot>Check current prices on Booking.com</slot>
+</a>

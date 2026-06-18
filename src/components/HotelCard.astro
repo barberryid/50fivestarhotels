@@ -1,5 +1,6 @@
 ---
 import Badge from './Badge.astro';
+import BookingAffiliateLink from './BookingAffiliateLink.astro';
 import { getBookingAffiliateUrl } from '../utils/affiliateLinks';
 
 interface Props {
@@ -121,14 +122,12 @@ const notIdealFor = hotel.notIdealFor?.slice(0, 2) ?? hotel.cautions?.slice(0, 1
 
     <div class="flex flex-col gap-2 pt-1">
       {bookingAffiliateUrl && (
-        <a
+        <BookingAffiliateLink
           href={bookingAffiliateUrl}
-          target="_blank"
-          rel="sponsored nofollow noopener"
           class="block text-center bg-[#1F2428] text-white text-sm font-semibold py-3 px-4 rounded-full hover:bg-[#B88A44] transition-colors no-underline"
         >
           Check current prices on Booking.com
-        </a>
+        </BookingAffiliateLink>
       )}
       <a
         href={`/hotels/${hotel.slug}`}
