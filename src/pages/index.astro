@@ -6,7 +6,17 @@ import { publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo
 
 const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
 allHotels.sort((a, b) => a.data.rank - b.data.rank);
-const inspirationHotels = allHotels.slice(0, 3).map((entry) => {
+
+const inspirationTierAmounts = [50, 100, 250];
+const matchesBudgetTier = (budgetTier: string, amount: number) =>
+  new RegExp(`(^|[^0-9])${amount}$`).test(budgetTier);
+
+const inspirationEntries = inspirationTierAmounts.flatMap((amount) => {
+  const entry = allHotels.find(({ data }) => matchesBudgetTier(data.budgetTier, amount));
+  return entry ? [entry] : [];
+});
+
+const inspirationHotels = inspirationEntries.map((entry) => {
   const cardImage = entry.data.generatedGallery?.find((image) => image.type === 'realistic-daylight') ?? entry.data.image;
   return {
     ...entry.data,
