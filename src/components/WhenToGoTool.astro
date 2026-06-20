@@ -137,7 +137,7 @@ const riskCheckOptions = [
     </p>
     <div class="grid gap-2 sm:grid-cols-2">
       {timingPriorityOptions.map((option) => (
-        <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm shadow-[2px_2px_0_rgba(29,36,51,0.05)] transition-colors has-[:checked]:border-[#58745A] has-[:checked]:bg-[#E6EBDD]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#58745A] has-[:checked]:bg-[#E6EBDD]">
           <input
             type="checkbox"
             value={option}
@@ -156,7 +156,7 @@ const riskCheckOptions = [
     </p>
     <div class="grid gap-2 sm:grid-cols-2">
       {riskCheckOptions.map((option) => (
-        <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm shadow-[2px_2px_0_rgba(29,36,51,0.05)] transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#FBF4E8]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#FBF4E8]">
           <input
             type="checkbox"
             value={option}
@@ -234,7 +234,7 @@ const riskCheckOptions = [
           spellcheck="false"
           class="w-full rounded-lg border border-[#E2D4BF] bg-white/80 px-4 py-3 text-sm leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
         >{defaultWhenToGoPrompt}</textarea>
-        <div id="when-to-go-copy-success" hidden class="mt-4 rounded-xl border border-[#4F6547]/30 bg-[#E8F1E6] p-4">
+        <div id="when-to-go-copy-success" hidden class="spark-brief mt-4 p-4">
           <p class="text-sm font-semibold text-[#1F2428] mb-1">Timing prompt copied.</p>
           <p class="text-sm leading-relaxed text-[#1F2428]/80 mb-3">
             Open ChatGPT or Claude, start a fresh session, and paste the brief there.
@@ -385,7 +385,7 @@ const riskCheckOptions = [
   const setCopyEnabled = (enabled: boolean) => {
     clearTimeout(copiedTimer);
     for (const btn of copyButtons) btn.disabled = !enabled;
-    for (const label of copyLabels) label.textContent = enabled ? 'Copy timing prompt' : 'Select a destination before copying';
+    for (const label of copyLabels) label.textContent = enabled ? 'Copy timing prompt ->' : 'Select a destination before copying';
     for (const status of copyStatuses) status.textContent = '';
   };
 
@@ -536,7 +536,7 @@ const riskCheckOptions = [
     track('when_to_go_prompt_copied', { country: selectedCountry ?? '' });
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
-      for (const label of copyLabels) label.textContent = 'Copy timing prompt';
+      for (const label of copyLabels) label.textContent = 'Copy timing prompt ->';
       for (const status of copyStatuses) status.textContent = '';
     }, 2000);
   };

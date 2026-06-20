@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import DreamRouteRibbon from '../components/DreamRouteRibbon.astro';
 import WhenToGoTool from '../components/WhenToGoTool.astro';
 import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, websiteJsonLd } from '../lib/seo';
 
@@ -28,29 +29,43 @@ const steps = [
   jsonLd={jsonLd}
 >
   <main class="toolkit-shell">
-    <section class="px-5 py-14 md:py-18">
-      <div class="mx-auto max-w-4xl">
-        <span class="toolkit-badge">Best Time to Go</span>
-        <h1 class="mt-5 text-4xl font-semibold leading-tight text-[#1D2433] md:text-5xl">
-          Find the best month for your trip
-        </h1>
-        <p class="mt-5 max-w-3xl text-lg leading-8 text-[#324052]">
-          Build a timing prompt that asks your AI to compare hotel value, weather, crowds, air quality and practical travel risks month by month.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#best-time-tool" class="toolkit-button toolkit-button-green">
-            Build my timing prompt
-            <span aria-hidden="true">-&gt;</span>
-          </a>
-          <a href="/hotel-finder/" class="toolkit-button toolkit-button-secondary">
-            Start hotel hunt
-          </a>
+    <section class="spark-hero px-5 py-14 md:py-18">
+      <DreamRouteRibbon variant="page" />
+      <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-[minmax(0,1fr)_18rem] md:items-center">
+        <div>
+          <span class="toolkit-badge">Best Time to Go</span>
+          <h1 class="mt-5 text-4xl font-semibold leading-tight text-[#1D2433] md:text-5xl">
+            Find the month that makes your trip work
+          </h1>
+          <p class="mt-5 max-w-3xl text-lg leading-8 text-[#324052]">
+            Build a timing prompt that asks your AI to compare hotel value, weather, crowds, air quality and practical travel risks.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#best-time-tool" class="toolkit-button toolkit-button-green">
+              Build my timing prompt
+              <span aria-hidden="true">-&gt;</span>
+            </a>
+            <a href="/hotel-finder/" class="toolkit-button toolkit-button-secondary">
+              Start hotel hunt
+            </a>
+          </div>
+          <ol class="toolkit-progress mt-8" aria-label="Best Time to Go steps">
+            {steps.map((step, index) => (
+              <li><span>{index + 1}</span>{step}</li>
+            ))}
+          </ol>
         </div>
-        <ol class="toolkit-progress mt-8" aria-label="Best Time to Go steps">
-          {steps.map((step, index) => (
-            <li><span>{index + 1}</span>{step}</li>
-          ))}
-        </ol>
+        <aside class="spark-brief hidden p-5 md:block" aria-label="Timing brief preview">
+          <p class="text-xs font-black uppercase tracking-[0.08em] text-[#58745A]">Value + comfort</p>
+          <div class="mt-4 grid grid-cols-3 gap-2" aria-hidden="true">
+            <span class="rounded-lg bg-white px-2 py-3 text-center text-xs font-black text-[#B88A44] shadow-[2px_2px_0_rgba(29,36,51,0.07)]">Mar</span>
+            <span class="rounded-lg bg-[#E6EBDD] px-2 py-3 text-center text-xs font-black text-[#58745A] shadow-[2px_2px_0_rgba(29,36,51,0.07)]">Apr</span>
+            <span class="rounded-lg bg-white px-2 py-3 text-center text-xs font-black text-[#B88A44] shadow-[2px_2px_0_rgba(29,36,51,0.07)]">May</span>
+          </div>
+          <p class="mt-4 text-sm leading-6 text-[#324052]">
+            A timing brief weighs hotel value, crowds, weather and travel risk before dates get locked in.
+          </p>
+        </aside>
       </div>
     </section>
 

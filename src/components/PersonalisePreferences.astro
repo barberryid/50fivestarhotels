@@ -58,7 +58,7 @@ const configData = {
           type="button"
           data-preset-button={preset.key}
           aria-pressed="false"
-        class="inline-flex min-h-11 items-center rounded-lg border border-[#E2D4BF] bg-white px-4 py-2 text-sm font-semibold text-[#6B7280] shadow-[2px_2px_0_rgba(29,36,51,0.06)] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 aria-[pressed=true]:border-[#B88A44] aria-[pressed=true]:bg-[#FBF4E8] aria-[pressed=true]:text-[#1D2433]"
+        class="spark-chip inline-flex min-h-11 items-center rounded-lg border border-[#E2D4BF] bg-white px-4 py-2 text-sm font-semibold text-[#6B7280] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 aria-[pressed=true]:border-[#B88A44] aria-[pressed=true]:bg-[#FBF4E8] aria-[pressed=true]:text-[#1D2433]"
         >
           {preset.label}
         </button>
@@ -69,7 +69,7 @@ const configData = {
   <!-- Preference cards -->
   <div class="grid sm:grid-cols-2 gap-4">
     {preferenceFactors.map((factor) => (
-      <div class="rounded-lg border border-[#E2D4BF] bg-white p-5 shadow-[3px_3px_0_rgba(29,36,51,0.05)]" data-pref-card>
+      <div class="spark-card rounded-lg border border-[#E2D4BF] bg-white p-5 shadow-[3px_3px_0_rgba(29,36,51,0.05)]" data-pref-card>
         <label for={`pref-${factor.key}`} class="block text-base font-semibold text-[#1F2428] mb-1">
           {factor.label}
         </label>
@@ -87,7 +87,7 @@ const configData = {
     ))}
 
     <!-- Custom priority card -->
-    <div class="rounded-lg border border-[#E2D4BF] bg-white p-5 shadow-[3px_3px_0_rgba(29,36,51,0.05)]" data-pref-card>
+    <div class="spark-card rounded-lg border border-[#E2D4BF] bg-white p-5 shadow-[3px_3px_0_rgba(29,36,51,0.05)]" data-pref-card>
       <label for="pref-custom-text" class="block text-base font-semibold text-[#1F2428] mb-1">
         Something else
       </label>

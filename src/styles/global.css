@@ -15,6 +15,8 @@
   --color-luxury-terracotta: #A86645;
   --color-luxury-border: #E3D6C2;
   --color-luxury-warning: #F4DFC5;
+  --color-luxury-coral: #D87A5A;
+  --color-luxury-sky: #8FB7C9;
 
   /* Aliases (raw CSS-var form of the same palette) */
   --color-bg: #F8F5EF;
@@ -33,6 +35,8 @@
   --color-paper-deep: #EFE3D2;
   --color-ink-soft: #324052;
   --color-success-soft: #E6EBDD;
+  --color-coral: #D87A5A;
+  --color-sky: #8FB7C9;
 
   /* Fraunces for warm editorial headings, Inter for clean UI/body */
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -96,14 +100,22 @@ summary:focus-visible {
 
 .toolkit-shell {
   background:
+    radial-gradient(circle at 13% 11%, rgba(216, 122, 90, 0.09), transparent 25rem),
+    radial-gradient(circle at 88% 9%, rgba(143, 183, 201, 0.16), transparent 22rem),
     linear-gradient(180deg, rgba(251, 244, 232, 0.88), rgba(248, 245, 239, 1) 42%),
     var(--color-bg);
+}
+
+.spark-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
 }
 
 .toolkit-card,
 .tool-card {
   position: relative;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-bg-card);
   color: var(--color-text);
@@ -120,11 +132,37 @@ summary:focus-visible {
   min-height: 100%;
   flex-direction: column;
   gap: 1.25rem;
+  overflow: hidden;
   padding: clamp(1.25rem, 2vw, 1.75rem);
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,
     border-color 160ms ease;
+}
+
+.tool-card::before,
+.tool-card::after {
+  position: absolute;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-color: currentColor;
+  content: "";
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.tool-card::before {
+  top: 0.8rem;
+  right: 0.8rem;
+  border-top: 2px solid;
+  border-right: 2px solid;
+}
+
+.tool-card::after {
+  bottom: 0.8rem;
+  left: 0.8rem;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
 }
 
 .tool-card:hover {
@@ -149,6 +187,7 @@ summary:focus-visible {
   justify-content: center;
   border-radius: 8px;
   background: var(--color-paper-warm);
+  box-shadow: 3px 3px 0 rgba(29, 36, 51, 0.08);
 }
 
 .tool-card-icon svg {
@@ -166,7 +205,9 @@ summary:focus-visible {
 
 .tool-card h2 {
   margin: 0;
-  font-size: clamp(1.45rem, 2vw, 1.9rem);
+  font-family: var(--font-sans);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 850;
   line-height: 1.08;
 }
 
@@ -174,6 +215,21 @@ summary:focus-visible {
   margin-top: 0.75rem;
   color: var(--color-text-muted);
   line-height: 1.65;
+}
+
+.tool-card-stamp {
+  align-self: flex-start;
+  border: 1px solid rgba(29, 36, 51, 0.18);
+  border-radius: 999px;
+  background: var(--color-paper-warm);
+  color: var(--color-ink-soft);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 0.45rem 0.65rem;
+  text-transform: uppercase;
+  transform: rotate(-1.5deg);
 }
 
 .tool-card-link,
@@ -288,10 +344,211 @@ summary:focus-visible {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
+.dream-route {
+  pointer-events: none;
+}
+
+.dream-route-hero {
+  position: absolute;
+  inset: 1rem 0 auto 0;
+  z-index: -1;
+  width: min(78rem, 115vw);
+  height: auto;
+  margin-inline: auto;
+  opacity: 0.95;
+}
+
+.dream-route-page {
+  position: absolute;
+  inset: 0 0 auto auto;
+  z-index: -1;
+  width: min(42rem, 92vw);
+  opacity: 0.48;
+  transform: translate(8%, -15%);
+}
+
+.dream-route-main,
+.dream-route-soft,
+.dream-route-sky {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dream-route-main {
+  stroke: var(--color-gold);
+  stroke-width: 12;
+  opacity: 0.62;
+}
+
+.dream-route-soft {
+  stroke: var(--color-coral);
+  stroke-width: 22;
+  opacity: 0.13;
+}
+
+.dream-route-sky {
+  stroke: var(--color-sky);
+  stroke-width: 9;
+  opacity: 0.58;
+}
+
+.dream-route-node {
+  stroke: var(--color-bg-card);
+  stroke-width: 5;
+}
+
+.dream-route-node-gold,
+.dream-route-card {
+  fill: var(--color-gold);
+}
+
+.dream-route-node-green {
+  fill: var(--color-green);
+}
+
+.dream-route-node-sky {
+  fill: var(--color-sky);
+}
+
+.dream-route-star {
+  fill: var(--color-coral);
+  opacity: 0.72;
+}
+
+.dream-route-card {
+  opacity: 0.13;
+}
+
+.dream-route-card-line,
+.dream-route-calendar {
+  stroke: var(--color-green);
+  stroke-width: 7;
+  stroke-linecap: round;
+  opacity: 0.5;
+}
+
+.dream-route-divider {
+  display: grid;
+  grid-template-columns: minmax(2rem, 1fr) auto minmax(2rem, 1fr);
+  gap: 1rem;
+  align-items: center;
+  max-width: 42rem;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.dream-route-divider span {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184, 138, 68, 0.32), transparent);
+}
+
+.dream-route-divider svg {
+  width: 15rem;
+  max-width: 45vw;
+  color: var(--color-gold);
+}
+
+.dream-route-divider path {
+  stroke: currentColor;
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.64;
+}
+
+.dream-route-divider circle {
+  fill: var(--color-green);
+  stroke: var(--color-bg);
+  stroke-width: 2;
+}
+
+.paper-prompt-card {
+  position: relative;
+  border: 1.5px solid rgba(29, 36, 51, 0.14);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fff 0%, var(--color-paper-warm) 100%);
+  box-shadow: 6px 6px 0 rgba(143, 183, 201, 0.22);
+}
+
+.paper-prompt-card::before {
+  position: absolute;
+  top: -0.65rem;
+  right: 1.2rem;
+  width: 3.6rem;
+  height: 1.25rem;
+  border: 1px solid rgba(29, 36, 51, 0.12);
+  border-radius: 999px;
+  background: var(--color-success-soft);
+  content: "";
+  transform: rotate(2deg);
+}
+
+.spark-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spark-card::after {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(216, 122, 90, 0.22), transparent 68%);
+  content: "";
+  pointer-events: none;
+}
+
+.spark-chip {
+  min-height: 44px;
+  box-shadow: 2px 2px 0 rgba(29, 36, 51, 0.06);
+}
+
+.spark-brief {
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(143, 183, 201, 0.18) 0 0.45rem, transparent 0.45rem),
+    var(--color-paper-warm);
+  box-shadow: 5px 5px 0 rgba(88, 116, 90, 0.14);
+}
+
+@keyframes route-node-pulse {
+  0%, 100% {
+    transform: scale(1);
+    transform-origin: center;
+  }
+  50% {
+    transform: scale(1.08);
+    transform-origin: center;
+  }
+}
+
+.dream-route-node {
+  animation: route-node-pulse 4.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tool-card,
   .tool-card-link,
-  .toolkit-button {
+  .toolkit-button,
+  .dream-route-node {
+    animation: none;
     transition-duration: 0.01ms;
+  }
+}
+
+@media (max-width: 767px) {
+  .dream-route-hero {
+    inset: 5rem auto auto -12rem;
+    width: 42rem;
+    opacity: 0.38;
+  }
+
+  .dream-route-page {
+    width: 34rem;
+    opacity: 0.22;
+    transform: translate(28%, -18%);
   }
 }

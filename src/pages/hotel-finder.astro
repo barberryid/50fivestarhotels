@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import DreamRouteRibbon from '../components/DreamRouteRibbon.astro';
 import HotelFinder from '../components/HotelFinder.astro';
 import MethodologyContent from '../components/MethodologyContent.astro';
 import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
@@ -30,29 +31,39 @@ const steps = [
   jsonLd={jsonLd}
 >
   <main class="toolkit-shell">
-    <section class="px-5 py-14 md:py-18">
-      <div class="mx-auto max-w-4xl">
-        <span class="toolkit-badge">Hotel Finder</span>
-        <h1 class="mt-5 text-4xl font-semibold leading-tight text-[#1D2433] md:text-5xl">
-          Build your dream hotel search
-        </h1>
-        <p class="mt-5 max-w-3xl text-lg leading-8 text-[#324052]">
-          Answer a few simple questions and create a hotel-finding prompt for ChatGPT, Claude or your preferred AI. The goal is to find unusually good-value luxury stays - and the trade-offs to check before booking.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#hotel-finder" class="toolkit-button toolkit-button-gold">
-            Build my hotel prompt
-            <span aria-hidden="true">-&gt;</span>
-          </a>
-          <a href="/best-time-to-go/" class="toolkit-button toolkit-button-secondary">
-            Find my best month
-          </a>
+    <section class="spark-hero px-5 py-14 md:py-18">
+      <DreamRouteRibbon variant="page" />
+      <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-[minmax(0,1fr)_18rem] md:items-center">
+        <div>
+          <span class="toolkit-badge">Hotel Finder</span>
+          <h1 class="mt-5 text-4xl font-semibold leading-tight text-[#1D2433] md:text-5xl">
+            Build your dream hotel search
+          </h1>
+          <p class="mt-5 max-w-3xl text-lg leading-8 text-[#324052]">
+            Answer a few simple questions and create a hotel-finding prompt for ChatGPT, Claude or your preferred AI. The goal is to find unusually good-value luxury stays - and the trade-offs to check before booking.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#hotel-finder" class="toolkit-button toolkit-button-gold">
+              Build my hotel prompt
+              <span aria-hidden="true">-&gt;</span>
+            </a>
+            <a href="/best-time-to-go/" class="toolkit-button toolkit-button-secondary">
+              Find my best month
+            </a>
+          </div>
+          <ol class="toolkit-progress mt-8" aria-label="Hotel Finder steps">
+            {steps.map((step, index) => (
+              <li><span>{index + 1}</span>{step}</li>
+            ))}
+          </ol>
         </div>
-        <ol class="toolkit-progress mt-8" aria-label="Hotel Finder steps">
-          {steps.map((step, index) => (
-            <li><span>{index + 1}</span>{step}</li>
-          ))}
-        </ol>
+        <aside class="spark-brief hidden p-5 md:block" aria-label="Hotel prompt preview">
+          <p class="text-xs font-black uppercase tracking-[0.08em] text-[#58745A]">Travel brief preview</p>
+          <h2 class="mt-3 font-sans text-lg font-black leading-snug text-[#1D2433]">Your hotel-hunting prompt is ready.</h2>
+          <p class="mt-3 text-sm leading-6 text-[#324052]">
+            Paste it into ChatGPT or Claude and let it search with your priorities in mind.
+          </p>
+        </aside>
       </div>
     </section>
 

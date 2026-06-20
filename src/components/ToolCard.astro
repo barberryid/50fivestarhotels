@@ -5,13 +5,15 @@ interface Props {
   href: string;
   cta: string;
   variant?: 'gold' | 'green';
+  stamp?: string;
 }
 
-const { title, description, href, cta, variant = 'gold' } = Astro.props;
+const { title, description, href, cta, variant = 'gold', stamp } = Astro.props;
 const isGreen = variant === 'green';
 ---
 
 <article class={`tool-card tool-card-${variant}`}>
+  {stamp && <span class="tool-card-stamp">{stamp}</span>}
   <div class="tool-card-icon" aria-hidden="true">
     {isGreen ? (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">

@@ -285,7 +285,7 @@ const toolData = {
     </p>
     <div class="grid gap-2 sm:grid-cols-2">
       {dealBreakerOptions.map((option) => (
-        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#4F6547] has-[:checked]:bg-[#E8F1E6]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#4F6547] has-[:checked]:bg-[#E8F1E6]">
           <input
             type="checkbox"
             value={option}
@@ -306,7 +306,7 @@ const toolData = {
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {researchPriceLevels.map(({ amount, title, text }) => (
         <label
-          class="rounded-lg border border-[#E2D4BF] bg-white p-5 cursor-pointer shadow-[3px_3px_0_rgba(29,36,51,0.05)] transition-colors data-[selected=true]:border-[#B88A44] data-[selected=true]:bg-[#FBF4E8] hover:border-[#B88A44]"
+          class="spark-chip rounded-lg border border-[#E2D4BF] bg-white p-5 cursor-pointer shadow-[3px_3px_0_rgba(29,36,51,0.05)] transition-colors data-[selected=true]:border-[#B88A44] data-[selected=true]:bg-[#FBF4E8] hover:border-[#B88A44]"
           data-price-level-card
           data-selected="true"
         >
@@ -345,7 +345,7 @@ const toolData = {
         Choose how detailed the output should be, then open and copy your prompt from the box below and paste it into ChatGPT or Claude.
       </p>
       <div class="grid gap-2 sm:grid-cols-2" data-output-mode-group>
-        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
           <input
             type="radio"
             name="hotel-output-mode"
@@ -359,7 +359,7 @@ const toolData = {
             <span class="block text-[#6F685F]">Best for travellers planning a trip</span>
           </span>
         </label>
-        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
           <input
             type="radio"
             name="hotel-output-mode"
@@ -454,7 +454,7 @@ const toolData = {
               <li>Select a destination to generate suggested searches.</li>
             </ul>
           </div>
-          <div id="hotel-copy-success" hidden class="mt-4 rounded-xl border border-[#4F6547]/30 bg-[#E8F1E6] p-4">
+          <div id="hotel-copy-success" hidden class="spark-brief mt-4 p-4">
             <p class="text-sm font-semibold text-[#1F2428] mb-1">Prompt copied.</p>
             <p class="text-sm leading-relaxed text-[#1F2428]/80 mb-3">
               Open ChatGPT or Claude, start a fresh session, and paste the brief there. Verify live prices before booking.
@@ -887,7 +887,7 @@ const toolData = {
   const setCopyEnabled = (enabled: boolean) => {
     clearTimeout(copiedTimer);
     for (const btn of copyButtons) btn.disabled = !enabled;
-    for (const label of copyLabels) label.textContent = enabled ? 'Copy prompt' : 'Select a destination before copying';
+    for (const label of copyLabels) label.textContent = enabled ? 'Copy my prompt ->' : 'Select a destination before copying';
     for (const status of copyStatuses) status.textContent = '';
     if (briefReadyStatus) {
       briefReadyStatus.textContent = enabled
@@ -1031,7 +1031,7 @@ const toolData = {
     track('hotel_prompt_copied', { country: selectedCountry ?? '' });
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
-      for (const label of copyLabels) label.textContent = 'Copy prompt';
+      for (const label of copyLabels) label.textContent = 'Copy my prompt ->';
       for (const status of copyStatuses) status.textContent = '';
     }, 2000);
   };
