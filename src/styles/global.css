@@ -349,13 +349,11 @@ summary:focus-visible {
 }
 
 .dream-route-hero {
-  position: absolute;
-  inset: 1rem 0 auto 0;
-  z-index: -1;
-  width: min(78rem, 115vw);
+  display: block;
+  width: min(31rem, 100%);
   height: auto;
-  margin-inline: auto;
-  opacity: 0.95;
+  margin-top: 1.9rem;
+  opacity: 0.76;
 }
 
 .dream-route-page {
@@ -529,6 +527,10 @@ summary:focus-visible {
   animation: route-node-pulse 4.6s ease-in-out infinite;
 }
 
+.dream-route-hero .dream-route-node {
+  animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tool-card,
   .tool-card-link,
@@ -541,9 +543,9 @@ summary:focus-visible {
 
 @media (max-width: 767px) {
   .dream-route-hero {
-    inset: 5rem auto auto -12rem;
-    width: 42rem;
-    opacity: 0.38;
+    width: min(24rem, 100%);
+    margin-top: 1.5rem;
+    opacity: 0.68;
   }
 
   .dream-route-page {

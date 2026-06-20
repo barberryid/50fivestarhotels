@@ -38,8 +38,8 @@ const isGreen = variant === 'green';
     <h2>{title}</h2>
     <p>{description}</p>
   </div>
-  <a href={href} class={`tool-card-link ${isGreen ? 'tool-card-link-green' : 'tool-card-link-gold'}`}>
+  <a href={href} class={`tool-card-link ${isGreen ? 'tool-card-link-green' : 'tool-card-link-gold'}`} aria-label={`${cta}: ${title}`}>
     {cta}
-    <span aria-hidden="true">-&gt;</span>
+    <span aria-hidden="true">&rarr;</span>
   </a>
 </article>

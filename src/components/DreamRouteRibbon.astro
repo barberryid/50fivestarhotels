@@ -10,21 +10,15 @@ const { variant = 'hero', class: className = '' } = Astro.props;
 {variant === 'hero' ? (
   <svg
     class:list={['dream-route dream-route-hero', className]}
-    viewBox="0 0 900 520"
+    viewBox="0 0 560 140"
     fill="none"
     aria-hidden="true"
     focusable="false"
   >
-    <path class="dream-route-soft" d="M58 390 C 220 230, 270 470, 418 306 S 650 118, 814 228" />
-    <path class="dream-route-main" d="M66 380 C 218 224, 286 448, 426 294 S 650 126, 808 224" />
-    <path class="dream-route-sky" d="M162 318 C 254 248, 318 330, 390 270" />
-    <circle class="dream-route-node dream-route-node-gold" cx="72" cy="380" r="12" />
-    <circle class="dream-route-node dream-route-node-green" cx="426" cy="294" r="13" />
-    <circle class="dream-route-node dream-route-node-sky" cx="808" cy="224" r="12" />
-    <path class="dream-route-star" d="M266 180 l8 19 20 3 -15 13 4 20 -17 -10 -18 10 4 -20 -15 -13 20 -3 9 -19Z" />
-    <path class="dream-route-card" d="M548 74 h118 a18 18 0 0 1 18 18 v82 a18 18 0 0 1 -18 18 h-118 a18 18 0 0 1 -18 -18 v-82 a18 18 0 0 1 18 -18Z" />
-    <path class="dream-route-card-line" d="M558 108 h64 M558 132 h92 M558 156 h72" />
-    <path class="dream-route-calendar" d="M632 88 v18 M660 88 v18 M620 116 h52" />
+    <path class="dream-route-soft" d="M24 92 C 126 32, 218 124, 320 72 S 456 38, 536 76" />
+    <path class="dream-route-main" d="M28 88 C 128 38, 218 116, 320 68 S 456 42, 532 74" />
+    <circle class="dream-route-node dream-route-node-gold" cx="28" cy="88" r="8" />
+    <circle class="dream-route-node dream-route-node-green" cx="532" cy="74" r="8" />
   </svg>
 ) : variant === 'page' ? (
   <svg
