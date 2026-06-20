@@ -3,50 +3,55 @@
 
 @theme {
   /* Warm affordable-luxury editorial palette */
-  --color-luxury-bg: #F8F2E8;        /* warm ivory */
-  --color-luxury-bg-soft: #EFE4D3;   /* sand */
-  --color-luxury-card: #FFFDF8;      /* warm white card */
-  --color-luxury-ink: #1F2428;       /* warm charcoal */
-  --color-luxury-muted: #6F685F;     /* warm muted text */
-  --color-luxury-gold: #B88A44;      /* gold */
-  --color-luxury-gold-soft: #D8BD8A; /* soft gold */
-  --color-luxury-green: #4F6547;     /* deep green */
-  --color-luxury-green-dark: #344532;/* darker green */
-  --color-luxury-terracotta: #A86645;/* warm terracotta accent */
-  --color-luxury-border: #E2D4BF;    /* warm border */
-  --color-luxury-warning: #F4EADC;   /* warm warning surface */
+  --color-luxury-bg: #F8F5EF;
+  --color-luxury-bg-soft: #EFE3D2;
+  --color-luxury-card: #FFFFFF;
+  --color-luxury-ink: #1D2433;
+  --color-luxury-muted: #6B7280;
+  --color-luxury-gold: #B88A44;
+  --color-luxury-gold-soft: #D8BD8A;
+  --color-luxury-green: #58745A;
+  --color-luxury-green-dark: #344532;
+  --color-luxury-terracotta: #A86645;
+  --color-luxury-border: #E3D6C2;
+  --color-luxury-warning: #F4DFC5;
 
   /* Aliases (raw CSS-var form of the same palette) */
-  --color-bg: #F8F2E8;
-  --color-bg-soft: #EFE4D3;
-  --color-bg-card: #FFFDF8;
-  --color-text: #1F2428;
-  --color-text-muted: #6F685F;
+  --color-bg: #F8F5EF;
+  --color-bg-soft: #EFE3D2;
+  --color-bg-card: #FFFFFF;
+  --color-text: #1D2433;
+  --color-text-muted: #6B7280;
   --color-gold: #B88A44;
   --color-gold-soft: #D8BD8A;
-  --color-green: #4F6547;
+  --color-green: #58745A;
   --color-green-dark: #344532;
   --color-terracotta: #A86645;
-  --color-border: #E2D4BF;
-  --color-warning-bg: #F4EADC;
+  --color-border: #E3D6C2;
+  --color-warning-bg: #F4DFC5;
+  --color-paper-warm: #FBF4E8;
+  --color-paper-deep: #EFE3D2;
+  --color-ink-soft: #324052;
+  --color-success-soft: #E6EBDD;
 
   /* Fraunces for warm editorial headings, Inter for clean UI/body */
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: Fraunces, Georgia, "Times New Roman", serif;
 
-  /* Pre-travel checklist aliases — map the checklist's token names onto the
-     warm affordable-luxury palette so its utilities and var() refs resolve. */
-  --color-clay: #A86645;        /* terracotta accent → primary CTA / progress */
-  --color-clay-text: #8A4F33;   /* darker terracotta for readable accent text */
-  --color-cream: #F8F2E8;       /* warm ivory subtle surface */
-  --color-surface: #FFFDF8;     /* warm white card */
-  --color-line: #E2D4BF;        /* warm border */
-  --color-ink: #1F2428;         /* warm charcoal */
-  --color-muted: #6F685F;       /* warm muted text */
-  --color-forest: #4F6547;      /* deep green (success / important) */
-  --color-tag-bg: #EFE4D3;      /* sand tag fill */
+  /* Pre-travel checklist aliases map existing token names onto this palette. */
+  --color-clay: #A86645;
+  --color-clay-text: #8A4F33;
+  --color-cream: #F8F5EF;
+  --color-surface: #FFFFFF;
+  --color-line: #E3D6C2;
+  --color-ink: #1D2433;
+  --color-muted: #6B7280;
+  --color-forest: #58745A;
+  --color-tag-bg: #EFE3D2;
 
-  --shadow-card: 0 3px 18px rgba(31, 36, 40, 0.07);
+  --shadow-card: 0 3px 18px rgba(29, 36, 51, 0.07);
+  --shadow-print: 5px 5px 0 rgba(184, 138, 68, 0.16);
+  --shadow-print-green: 5px 5px 0 rgba(88, 116, 90, 0.16);
 }
 
 body {
@@ -59,7 +64,7 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   font-optical-sizing: auto;
 }
 
@@ -69,7 +74,11 @@ h1, h2 {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 3px;
   border-radius: 2px;
@@ -80,7 +89,210 @@ button:focus-visible {
   background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-soft) 100%);
 }
 
-/* Warm gradient for hero / image overlays — soft, only as deep as text needs */
+/* Warm gradient for hero / image overlays: soft, only as deep as text needs. */
 .editorial-overlay {
-  background: linear-gradient(180deg, rgba(31,36,40,0) 45%, rgba(31,36,40,0.6) 100%);
+  background: linear-gradient(180deg, rgba(29, 36, 51, 0) 45%, rgba(29, 36, 51, 0.6) 100%);
+}
+
+.toolkit-shell {
+  background:
+    linear-gradient(180deg, rgba(251, 244, 232, 0.88), rgba(248, 245, 239, 1) 42%),
+    var(--color-bg);
+}
+
+.toolkit-card,
+.tool-card {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  box-shadow: var(--shadow-print);
+}
+
+.toolkit-card-green,
+.tool-card-green {
+  box-shadow: var(--shadow-print-green);
+}
+
+.tool-card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+.tool-card:hover {
+  transform: translate(-2px, -2px);
+}
+
+.tool-card-gold:hover {
+  border-color: rgba(184, 138, 68, 0.72);
+  box-shadow: 7px 7px 0 rgba(184, 138, 68, 0.2);
+}
+
+.tool-card-green:hover {
+  border-color: rgba(88, 116, 90, 0.72);
+  box-shadow: 7px 7px 0 rgba(88, 116, 90, 0.2);
+}
+
+.tool-card-icon {
+  display: inline-flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--color-paper-warm);
+}
+
+.tool-card-icon svg {
+  width: 1.65rem;
+  height: 1.65rem;
+}
+
+.tool-card-gold .tool-card-icon {
+  color: var(--color-gold);
+}
+
+.tool-card-green .tool-card-icon {
+  color: var(--color-green);
+}
+
+.tool-card h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 2vw, 1.9rem);
+  line-height: 1.08;
+}
+
+.tool-card p {
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.tool-card-link,
+.toolkit-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  padding: 0.78rem 1rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.tool-card-link {
+  margin-top: auto;
+  width: fit-content;
+}
+
+.tool-card-link-gold,
+.toolkit-button-gold {
+  background: var(--color-gold);
+  color: #fff;
+  box-shadow: 0 4px 0 #7f5e2d;
+}
+
+.tool-card-link-green,
+.toolkit-button-green {
+  background: var(--color-green);
+  color: #fff;
+  box-shadow: 0 4px 0 #344532;
+}
+
+.toolkit-button-secondary {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  box-shadow: 0 3px 0 rgba(29, 36, 51, 0.12);
+}
+
+.tool-card-link:hover,
+.toolkit-button:hover {
+  transform: translateY(-1px);
+}
+
+.tool-card-link:active,
+.toolkit-button:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.toolkit-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(184, 138, 68, 0.28);
+  border-radius: 999px;
+  background: var(--color-paper-warm);
+  color: var(--color-ink-soft);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 0.45rem 0.7rem;
+  text-transform: uppercase;
+}
+
+.toolkit-progress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toolkit-progress li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg-card);
+  padding: 0.55rem 0.7rem;
+  color: var(--color-text);
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: 3px 3px 0 rgba(29, 36, 51, 0.06);
+}
+
+.toolkit-progress span {
+  display: inline-flex;
+  width: 1.45rem;
+  height: 1.45rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-green);
+  color: #fff;
+  font-size: 0.74rem;
+}
+
+.prompt-paper {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-paper-warm);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-card,
+  .tool-card-link,
+  .toolkit-button {
+    transition-duration: 0.01ms;
+  }
 }

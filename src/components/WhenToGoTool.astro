@@ -20,10 +20,37 @@ const defaultWhenToGoPrompt = buildWhenToGoPrompt({
 const toolData = {
   priceLevels: defaultPriceLevels,
 };
+
+const timingPriorityOptions = [
+  'Best hotel value',
+  'Comfortable weather',
+  'Fewer crowds',
+  'Lower heat risk',
+  'Lower rain risk',
+  'Cleaner air',
+  'Easier transport',
+  'Festivals/events',
+  'Quiet atmosphere',
+  'Good walking conditions',
+];
+
+const riskCheckOptions = [
+  'Extreme heat',
+  'Heavy rain or storms',
+  'Poor air quality',
+  'School holidays',
+  'Major events',
+  'Transport disruption',
+  'Low-season closures',
+  'Peak hotel pricing',
+];
 ---
 
-<div class="space-y-4" data-when-to-go-tool>
-  <AccordionCard title="Country or territory" number={1} open={true}>
+<div class="space-y-5" data-when-to-go-tool>
+  <AccordionCard title="Where are you thinking of going?" number={1} open={true}>
+    <p class="mb-6 text-[#1F2428]/80 leading-relaxed">
+      Start with the country, region, island or city you are considering. Add a city or town if the timing depends on a specific base.
+    </p>
     <!-- Country combobox -->
     <label id="country-label" for="country-input" class="sr-only">
       Country or territory
@@ -85,13 +112,70 @@ const toolData = {
     </div>
   </AccordionCard>
 
-  <AccordionCard title="When to go" number={2}>
+  <AccordionCard title="What months or seasons are possible?" number={2}>
+    <label for="months-input" class="block text-sm font-semibold text-[#1F2428] mb-2">
+      Possible months or seasons <span class="font-normal text-[#6F685F]">(optional)</span>
+    </label>
+    <div class="max-w-2xl">
+      <input
+        type="text"
+        id="months-input"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="e.g. March to June, autumn, any month except August"
+        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      />
+      <p class="mt-2 text-sm text-[#6F685F]">
+        Leave this blank if the whole year is possible. Add constraints if school holidays, heat or flight dates already narrow the trip.
+      </p>
+    </div>
+  </AccordionCard>
+
+  <AccordionCard title="What matters most: price, weather, quietness or convenience?" number={3}>
+    <p class="mb-4 text-sm leading-relaxed text-[#6F685F]">
+      Pick the timing priorities that should shape the month-by-month comparison.
+    </p>
+    <div class="grid gap-2 sm:grid-cols-2">
+      {timingPriorityOptions.map((option) => (
+        <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm shadow-[2px_2px_0_rgba(29,36,51,0.05)] transition-colors has-[:checked]:border-[#58745A] has-[:checked]:bg-[#E6EBDD]">
+          <input
+            type="checkbox"
+            value={option}
+            data-timing-priority-input
+            class="mt-1 h-4 w-4 shrink-0 rounded border-[#E2D4BF] text-[#58745A] accent-[#58745A]"
+          />
+          <span class="text-[#1F2428]">{option}</span>
+        </label>
+      ))}
+    </div>
+  </AccordionCard>
+
+  <AccordionCard title="What risks should the AI check?" number={4}>
+    <p class="mb-4 text-sm leading-relaxed text-[#6F685F]">
+      Add practical watch-outs so the prompt does not recommend a month just because hotel prices look low.
+    </p>
+    <div class="grid gap-2 sm:grid-cols-2">
+      {riskCheckOptions.map((option) => (
+        <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm shadow-[2px_2px_0_rgba(29,36,51,0.05)] transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#FBF4E8]">
+          <input
+            type="checkbox"
+            value={option}
+            data-risk-check-input
+            class="mt-1 h-4 w-4 shrink-0 rounded border-[#E2D4BF] text-[#B88A44] accent-[#B88A44]"
+          />
+          <span class="text-[#1F2428]">{option}</span>
+        </label>
+      ))}
+    </div>
+  </AccordionCard>
+
+  <AccordionCard title="Generate your best-time-to-go prompt" number={5}>
     <button
       slot="actions"
       type="button"
       disabled
       data-copy-when-to-go-button
-      class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#B88A44] bg-white px-4 py-2 text-xs md:px-5 md:py-2.5 md:text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#F4EADC] disabled:cursor-not-allowed disabled:border-[#C4B9A6] disabled:text-[#6F685F] disabled:hover:bg-white"
+      class="toolkit-button toolkit-button-green shrink-0 px-4 py-2 text-xs md:px-5 md:py-2.5 md:text-sm disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:shadow-none"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -101,10 +185,10 @@ const toolData = {
     </button>
     <span slot="actions" class="sr-only" role="status" aria-live="polite" data-copy-when-to-go-status></span>
     <div class="space-y-3">
-      <section aria-labelledby="when-to-go-prompt-heading" data-nosnippet class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card>
+      <section aria-labelledby="when-to-go-prompt-heading" data-nosnippet class="prompt-paper overflow-hidden" data-prompt-card>
       <button
         type="button"
-        class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-[#F8F1E8] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
+        class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-white/60 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
         aria-expanded="false"
         aria-controls="when-to-go-prompt-panel"
         data-prompt-toggle
@@ -112,14 +196,14 @@ const toolData = {
         <span class="min-w-0">
           <span class="flex flex-wrap items-center gap-2">
             <span id="when-to-go-prompt-heading" class="block text-sm font-semibold text-[#1F2428]">
-              When to go
+              Your month-by-month travel prompt is ready
             </span>
           </span>
           <span class="mt-1 block text-sm leading-relaxed text-[#6F685F]">
-            Use the destination above to check monthly weather, air quality and hotel-price seasonality, then copy the prompt into ChatGPT or Claude.
+            Paste this into your AI tool to compare months before you start checking live hotel prices.
           </span>
         </span>
-        <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-full border border-[#4F6547]/35 bg-white px-3.5 py-1.5 text-xs font-semibold text-[#4F6547] transition-colors group-hover:bg-[#E8F1E6]">
+        <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#58745A] px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_0_#344532] transition-colors group-hover:bg-[#344532]">
           <span data-prompt-toggle-label>Show prompt</span>
           <svg data-prompt-chevron xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform" aria-hidden="true">
             <path d="m6 9 6 6 6-6"></path>
@@ -133,7 +217,7 @@ const toolData = {
             id="copy-when-to-go-prompt-button"
             disabled
             data-copy-when-to-go-button
-            class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#B88A44] bg-white px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#F4EADC] disabled:cursor-not-allowed disabled:border-[#C4B9A6] disabled:text-[#6F685F] disabled:hover:bg-white"
+            class="toolkit-button toolkit-button-green shrink-0 px-5 py-2.5 text-sm disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:shadow-none"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -148,10 +232,10 @@ const toolData = {
           id="when-to-go-textarea"
           rows="18"
           spellcheck="false"
-          class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 font-mono text-[13px] leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+          class="w-full rounded-lg border border-[#E2D4BF] bg-white/80 px-4 py-3 text-sm leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
         >{defaultWhenToGoPrompt}</textarea>
         <div id="when-to-go-copy-success" hidden class="mt-4 rounded-xl border border-[#4F6547]/30 bg-[#E8F1E6] p-4">
-          <p class="text-sm font-semibold text-[#1F2428] mb-1">Prompt copied.</p>
+          <p class="text-sm font-semibold text-[#1F2428] mb-1">Timing prompt copied.</p>
           <p class="text-sm leading-relaxed text-[#1F2428]/80 mb-3">
             Open ChatGPT or Claude, start a fresh session, and paste the brief there.
           </p>
@@ -186,9 +270,9 @@ const toolData = {
     <button
       type="button"
       id="reset-country-button"
-      class="inline-flex items-center rounded-full border border-[#E2D4BF] bg-white px-4 py-2 text-xs font-semibold text-[#6F685F] transition-colors hover:border-[#B88A44] hover:text-[#B88A44]"
+      class="toolkit-button toolkit-button-secondary text-xs"
     >
-      Reset country
+      Try another destination
     </button>
   </div>
 </div>
@@ -204,6 +288,9 @@ const toolData = {
 
   const input = document.getElementById('country-input') as HTMLInputElement;
   const cityInput = document.getElementById('city-input') as HTMLInputElement;
+  const monthsInput = document.getElementById('months-input') as HTMLInputElement;
+  const timingPriorityInputs = Array.from(document.querySelectorAll<HTMLInputElement>('[data-timing-priority-input]'));
+  const riskCheckInputs = Array.from(document.querySelectorAll<HTMLInputElement>('[data-risk-check-input]'));
   const listbox = document.getElementById('country-listbox') as HTMLUListElement;
   const noResults = document.getElementById('country-no-results') as HTMLLIElement;
   const whenToGoTextarea = document.getElementById('when-to-go-textarea') as HTMLTextAreaElement;
@@ -236,9 +323,10 @@ const toolData = {
     const label = card.querySelector<HTMLElement>('[data-prompt-toggle-label]');
     const chevron = card.querySelector<SVGElement>('[data-prompt-chevron]');
     if (!toggle || !panel) return;
+    if (open) card.closest('details')?.setAttribute('open', '');
     toggle.setAttribute('aria-expanded', String(open));
     panel.hidden = !open;
-    if (label) label.textContent = open ? 'Open to show and copy prompt' : 'Show prompt';
+    if (label) label.textContent = open ? 'Hide prompt' : 'Show prompt';
     chevron?.classList.toggle('rotate-180', open);
   };
   if (promptCard) {
@@ -264,12 +352,30 @@ const toolData = {
   let hasAutoOpenedPrompt = false;
 
   const getCity = () => cityInput.value.trim();
+  const getMonths = () => monthsInput.value.trim();
+  const getSelectedTimingPriorities = () =>
+    timingPriorityInputs.filter((priorityInput) => priorityInput.checked).map((priorityInput) => priorityInput.value);
+  const getSelectedRiskChecks = () =>
+    riskCheckInputs.filter((riskInput) => riskInput.checked).map((riskInput) => riskInput.value);
+
+  const buildTravellerPriorities = () => getSelectedTimingPriorities().join('; ');
+
+  const buildAdditionalNotes = () => {
+    const lines: string[] = [];
+    const months = getMonths();
+    const risks = getSelectedRiskChecks();
+    if (months) lines.push(`Possible months or seasons: ${months}`);
+    if (risks.length) lines.push(`Risks to check: ${risks.join('; ')}`);
+    return lines.join('\n');
+  };
 
   const buildWhenToGoPromptFromState = (country: string | null, city: string): string =>
     buildWhenToGoPrompt({
       countryOrTerritory: country ?? '[REGION]',
       cityOrTown: city,
       selectedPriceLevels: data.priceLevels,
+      travellerPriorities: buildTravellerPriorities(),
+      additionalNotes: buildAdditionalNotes(),
     });
 
   const refreshPrompt = () => {
@@ -279,7 +385,7 @@ const toolData = {
   const setCopyEnabled = (enabled: boolean) => {
     clearTimeout(copiedTimer);
     for (const btn of copyButtons) btn.disabled = !enabled;
-    for (const label of copyLabels) label.textContent = enabled ? 'Copy when-to-go prompt' : 'Select a destination before copying';
+    for (const label of copyLabels) label.textContent = enabled ? 'Copy timing prompt' : 'Select a destination before copying';
     for (const status of copyStatuses) status.textContent = '';
   };
 
@@ -391,6 +497,22 @@ const toolData = {
     refreshPrompt();
   });
 
+  monthsInput.addEventListener('input', () => {
+    refreshPrompt();
+  });
+
+  for (const priorityInput of timingPriorityInputs) {
+    priorityInput.addEventListener('change', () => {
+      refreshPrompt();
+    });
+  }
+
+  for (const riskInput of riskCheckInputs) {
+    riskInput.addEventListener('change', () => {
+      refreshPrompt();
+    });
+  }
+
   const copyTextareaText = async (source: HTMLTextAreaElement) => {
     try {
       await navigator.clipboard.writeText(source.value);
@@ -414,7 +536,7 @@ const toolData = {
     track('when_to_go_prompt_copied', { country: selectedCountry ?? '' });
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
-      for (const label of copyLabels) label.textContent = 'Copy when-to-go prompt';
+      for (const label of copyLabels) label.textContent = 'Copy timing prompt';
       for (const status of copyStatuses) status.textContent = '';
     }, 2000);
   };
@@ -424,6 +546,9 @@ const toolData = {
     selectedCountry = null;
     input.value = '';
     cityInput.value = '';
+    monthsInput.value = '';
+    for (const priorityInput of timingPriorityInputs) priorityInput.checked = false;
+    for (const riskInput of riskCheckInputs) riskInput.checked = false;
     hasAutoOpenedPrompt = false;
     if (copySuccess) copySuccess.hidden = true;
     for (const option of options) option.setAttribute('aria-selected', 'false');

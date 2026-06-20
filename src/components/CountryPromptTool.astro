@@ -8,6 +8,7 @@
 // the [COVERAGE] line all refresh automatically on every deploy.
 import { getCollection } from 'astro:content';
 import AccordionCard from './AccordionCard.astro';
+import PersonalisePreferences from './PersonalisePreferences.astro';
 import { countries } from '../data/unCountries';
 import { researchPriceLevels } from '../data/researchPriceLevels';
 import { researchPromptTemplate } from '../data/researchPromptTemplate';
@@ -154,8 +155,11 @@ const toolData = {
 };
 ---
 
-<div class="space-y-4" data-country-prompt-tool>
-  <AccordionCard title="Country or territory" number={3}>
+<div class="space-y-5" data-country-prompt-tool>
+  <AccordionCard title="Where are you going?" number={1} open={true}>
+  <p class="mb-6 text-[#1F2428]/80 leading-relaxed">
+    Start with a country, city, island, region or route. The more real-world context you add, the better the AI can judge value, location and trade-offs.
+  </p>
   <!-- Country combobox -->
   <label id="country-label" for="country-input" class="sr-only">
     Country or territory
@@ -295,7 +299,46 @@ const toolData = {
   </fieldset>
   </AccordionCard>
 
-  <AccordionCard title="Hotel-finding prompts" number={4}>
+  <AccordionCard title="What price level should the AI test?" number={2}>
+    <p class="text-[#1F2428]/80 leading-relaxed mb-7" data-price-level-summary>
+      Choose the price levels you want the AI to test. Lower prices are exciting, but the prompt will also ask the AI to flag weak or misleading five-star claims.
+    </p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {researchPriceLevels.map(({ amount, title, text }) => (
+        <label
+          class="rounded-lg border border-[#E2D4BF] bg-white p-5 cursor-pointer shadow-[3px_3px_0_rgba(29,36,51,0.05)] transition-colors data-[selected=true]:border-[#B88A44] data-[selected=true]:bg-[#FBF4E8] hover:border-[#B88A44]"
+          data-price-level-card
+          data-selected="true"
+        >
+          <span class="flex h-full gap-4">
+            <input
+              type="checkbox"
+              value={amount}
+              checked
+              data-price-level-input
+              class="mt-1 h-5 w-5 shrink-0 rounded border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
+              aria-describedby={`price-level-${amount}-description`}
+            />
+            <span class="min-w-0">
+              <span class="block text-3xl font-serif font-semibold text-[#1F2428] mb-2">EUR {amount}</span>
+              <span class="block text-sm font-bold uppercase tracking-[0.08em] text-[#B88A44] mb-3">{title}</span>
+              <span id={`price-level-${amount}-description`} class="block text-sm leading-relaxed text-[#6F685F]">{text}</span>
+              <span class="mt-4 inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#4F6547]" data-price-level-state>
+                Included
+              </span>
+            </span>
+          </span>
+        </label>
+      ))}
+    </div>
+    <p class="mt-4 text-sm text-[#6F685F]" role="status" aria-live="polite" data-price-level-status>
+      Select at least one price level. The prompt below updates automatically.
+    </p>
+  </AccordionCard>
+
+  <PersonalisePreferences number={3} />
+
+  <AccordionCard title="What kind of answer should the AI give?" number={4}>
     <fieldset class="border-0 p-0 m-0">
       <legend class="sr-only">Output detail level</legend>
       <p class="mb-3 text-sm leading-relaxed text-[#6F685F]">
@@ -333,13 +376,13 @@ const toolData = {
     </fieldset>
   </AccordionCard>
 
-  <AccordionCard title="Copy your prompt" number={5}>
+  <AccordionCard title="Generate your hotel-hunting prompt" number={5}>
     <button
       slot="actions"
       type="button"
       disabled
       data-copy-prompt-button
-      class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#B88A44] px-4 py-2 text-xs md:px-5 md:py-2.5 md:text-sm font-semibold text-white transition-colors hover:bg-[#1F2428] disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:hover:bg-[#C4B9A6]"
+      class="toolkit-button toolkit-button-gold shrink-0 px-4 py-2 text-xs md:px-5 md:py-2.5 md:text-sm disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:shadow-none"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -349,10 +392,10 @@ const toolData = {
     </button>
     <span slot="actions" class="sr-only" role="status" aria-live="polite" data-copy-prompt-status></span>
     <div class="space-y-3">
-      <section aria-labelledby="hotel-prompt-heading" data-nosnippet class="overflow-hidden rounded-xl border border-[#E2D4BF] bg-white" data-prompt-card data-hotel-prompt-card>
+      <section aria-labelledby="hotel-prompt-heading" data-nosnippet class="prompt-paper overflow-hidden" data-prompt-card data-hotel-prompt-card>
         <button
           type="button"
-          class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-[#F8F1E8] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
+          class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-white/60 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
           aria-expanded="false"
           aria-controls="hotel-prompt-panel"
           data-prompt-toggle
@@ -360,15 +403,15 @@ const toolData = {
           <span class="min-w-0">
             <span class="flex flex-wrap items-center gap-2">
               <span id="hotel-prompt-heading" class="block text-sm font-semibold text-[#1F2428]">
-                Find the right hotel
+                Your hotel-hunting prompt is ready
               </span>
-              <span class="rounded-full bg-[#E8F1E6] px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-wide text-[#4F6547]">MAIN</span>
+              <span class="rounded-full bg-[#E6EBDD] px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-[0.08em] text-[#4F6547]">Prompt ready</span>
             </span>
             <span class="mt-1 block text-sm leading-relaxed text-[#6F685F]">
-              Use this to compare realistic hotel options by value, location, recent reviews, nearby things to do and likely compromises.
+              Paste this into ChatGPT, Claude or another AI tool, then ask follow-up questions before booking.
             </span>
           </span>
-          <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-full bg-[#4F6547] px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_10px_24px_rgba(88,116,90,0.18)] transition-colors group-hover:bg-[#344532]">
+          <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#4F6547] px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_0_#344532] transition-colors group-hover:bg-[#344532]">
             <span data-prompt-toggle-label>Show prompt</span>
             <svg data-prompt-chevron xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform" aria-hidden="true">
               <path d="m6 9 6 6 6-6"></path>
@@ -382,7 +425,7 @@ const toolData = {
               id="copy-prompt-button"
               disabled
               data-copy-prompt-button
-              class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#B88A44] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1F2428] disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:hover:bg-[#C4B9A6]"
+              class="toolkit-button toolkit-button-gold shrink-0 px-5 py-2.5 text-sm disabled:cursor-not-allowed disabled:bg-[#C4B9A6] disabled:shadow-none"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -397,8 +440,11 @@ const toolData = {
             id="prompt-textarea"
             rows="18"
             spellcheck="false"
-            class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 font-mono text-[13px] leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+            class="w-full rounded-lg border border-[#E2D4BF] bg-white/80 px-4 py-3 text-sm leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
           >{defaultPrompt}</textarea>
+          <p class="mt-3 text-sm font-semibold text-[#58745A]" role="status" aria-live="polite" data-brief-ready-status>
+            Choose a destination to make the brief copy-ready.
+          </p>
           <div class="mt-4 rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-4">
             <h3 class="text-sm font-semibold text-[#1F2428] mb-2">Suggested manual searches</h3>
             <p class="text-sm leading-relaxed text-[#6F685F] mb-3">
@@ -444,9 +490,9 @@ const toolData = {
     <button
       type="button"
       id="reset-country-button"
-      class="inline-flex items-center rounded-full border border-[#E2D4BF] bg-white px-4 py-2 text-xs font-semibold text-[#6F685F] transition-colors hover:border-[#B88A44] hover:text-[#B88A44]"
+      class="toolkit-button toolkit-button-secondary text-xs"
     >
-      Reset country
+      Try another destination
     </button>
   </div>
 </div>
@@ -544,10 +590,11 @@ const toolData = {
     const label = card.querySelector<HTMLElement>('[data-prompt-toggle-label]');
     const chevron = card.querySelector<SVGElement>('[data-prompt-chevron]');
     if (!toggle || !panel) return;
+    if (open) card.closest('details')?.setAttribute('open', '');
 
     toggle.setAttribute('aria-expanded', String(open));
     panel.hidden = !open;
-    if (label) label.textContent = open ? 'Open to show and copy prompt' : 'Show prompt';
+    if (label) label.textContent = open ? 'Hide prompt' : 'Show prompt';
     chevron?.classList.toggle('rotate-180', open);
   };
 
@@ -840,7 +887,7 @@ const toolData = {
   const setCopyEnabled = (enabled: boolean) => {
     clearTimeout(copiedTimer);
     for (const btn of copyButtons) btn.disabled = !enabled;
-    for (const label of copyLabels) label.textContent = enabled ? 'Copy hotel prompt' : 'Select a destination before copying';
+    for (const label of copyLabels) label.textContent = enabled ? 'Copy prompt' : 'Select a destination before copying';
     for (const status of copyStatuses) status.textContent = '';
     if (briefReadyStatus) {
       briefReadyStatus.textContent = enabled
@@ -984,7 +1031,7 @@ const toolData = {
     track('hotel_prompt_copied', { country: selectedCountry ?? '' });
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
-      for (const label of copyLabels) label.textContent = 'Copy hotel prompt';
+      for (const label of copyLabels) label.textContent = 'Copy prompt';
       for (const status of copyStatuses) status.textContent = '';
     }, 2000);
   };

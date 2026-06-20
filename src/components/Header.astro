@@ -1,9 +1,8 @@
 ---
 const navLinks = [
-  { href: '/hotel-finder', label: 'Find Hotels' },
+  { href: '/hotel-finder', label: 'Hotel Finder' },
   { href: '/best-time-to-go', label: 'Best Time to Go' },
-  { href: '/pre-travel-checklist', label: 'Checklist' },
-  { href: '/all-hotels', label: 'Examples' },
+  { href: '/all-hotels', label: 'Example Hotels' },
   { href: '/guides/why-some-five-star-hotels-are-so-cheap', label: 'Guides' },
   { href: '/about', label: 'About' },
 ];
@@ -11,9 +10,9 @@ const navLinks = [
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
-<header class="sticky top-0 z-50 bg-[#F8F2E8]/95 backdrop-blur border-b border-[#1F2428]/8">
+<header class="sticky top-0 z-50 bg-[#F8F5EF]/95 backdrop-blur border-b border-[#1D2433]/8">
   <div class="px-[clamp(1rem,4vw,3rem)] flex items-center justify-between h-16">
-    <a href="/" class="inline-flex items-center gap-3 font-serif text-lg font-bold text-[#1F2428] hover:text-[#B88A44] transition-colors no-underline">
+    <a href="/" class="inline-flex items-center gap-3 font-serif text-lg font-bold text-[#1D2433] hover:text-[#B88A44] transition-colors no-underline">
       <img
         class="h-10 w-10 shrink-0 object-contain"
         src="/images/hotels/yellow-star-on-black-star.svg"
@@ -24,14 +23,14 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
       <span>50 Five-Star Hotels</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-6" aria-label="Main navigation">
+    <nav class="hidden md:flex items-center gap-5" aria-label="Main navigation">
       {navLinks.filter(l => l.href !== '/').map(link => (
         <a
           href={link.href}
-          class={`text-sm font-medium transition-colors no-underline ${
+          class={`rounded-lg px-2.5 py-2 text-sm font-semibold transition-colors no-underline ${
             currentPath === link.href
-              ? 'text-[#B88A44]'
-              : 'text-[#6F685F] hover:text-[#1F2428]'
+              ? 'bg-[#FBF4E8] text-[#1D2433] shadow-[3px_3px_0_rgba(184,138,68,0.16)]'
+              : 'text-[#6B7280] hover:bg-white hover:text-[#1D2433]'
           }`}
         >
           {link.label}
@@ -44,7 +43,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
       aria-label="Open navigation menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
-      class="md:hidden p-2 rounded-lg text-[#1F2428] hover:bg-[#1F2428]/5 transition-colors"
+      class="md:hidden p-2 rounded-lg text-[#1D2433] hover:bg-[#1D2433]/5 transition-colors"
     >
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="3" y1="6" x2="19" y2="6"/>
@@ -54,15 +53,15 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     </button>
   </div>
 
-  <div id="mobile-menu" class="hidden md:hidden border-t border-[#1F2428]/8 bg-[#F8F2E8]">
+  <div id="mobile-menu" class="hidden md:hidden border-t border-[#1D2433]/8 bg-[#F8F5EF]">
     <nav class="px-[clamp(1rem,4vw,3rem)] py-4 flex flex-col gap-1" aria-label="Mobile navigation">
       {navLinks.map(link => (
         <a
           href={link.href}
-          class={`py-2 px-3 rounded-lg text-sm font-medium transition-colors no-underline ${
+          class={`py-2 px-3 rounded-lg text-sm font-semibold transition-colors no-underline ${
             currentPath === link.href
-              ? 'text-[#B88A44] bg-[#B88A44]/8'
-              : 'text-[#1F2428] hover:bg-[#1F2428]/5'
+              ? 'text-[#1D2433] bg-[#FBF4E8]'
+              : 'text-[#1D2433] hover:bg-[#1D2433]/5'
           }`}
         >
           {link.label}

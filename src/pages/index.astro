@@ -1,113 +1,119 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ToolCard from '../components/ToolCard.astro';
 import { publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
 
-// Full-bleed hero — an illustrated Tuscan villa with an infinity pool and
-// flowering terrace overlooking the vineyards and hills at golden hour,
-// evoking the affordable-luxury idea at the heart of the site rather than
-// any single hotel listing.
-const heroImage = {
-  large: '/images/hotels/responsive/tuscan-villa-pool-hero-1200.webp',
-  small: '/images/hotels/responsive/tuscan-villa-pool-hero-800.webp',
-  src: '/images/hotels/tuscan-villa-pool-hero.webp',
-  alt: 'Illustrated Tuscan villa with an infinity pool and flowering terrace overlooking vineyards and rolling hills at golden hour',
-};
+const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
+allHotels.sort((a, b) => a.data.rank - b.data.rank);
+const inspirationHotels = allHotels.slice(0, 3).map((entry) => {
+  const cardImage = entry.data.generatedGallery?.find((image) => image.type === 'realistic-daylight') ?? entry.data.image;
+  return {
+    ...entry.data,
+    image: cardImage,
+  };
+});
 
 const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
 ---
 
 <BaseLayout
-  title="50 Five-Star Hotels — Free Affordable-Luxury Hotel Finder"
-  description="Use the Hotel Finder to build a research brief for ChatGPT or Claude and find affordable five-star, near-luxury and unusually good-value hotels for your own trip."
+  title="50 Five-Star Hotels - AI Hotel Finder and Best Time to Go Prompts"
+  description="Build simple AI travel prompts for affordable luxury hotels, five-star hotels without five-star prices, and month-by-month hotel value research."
   canonical="/"
-  image={heroImage.src}
+  image="/images/social/default-og.webp"
   jsonLd={jsonLd}
 >
-  <main>
-    <!-- Hero -->
-    <section class="relative isolate flex items-center justify-start min-h-[70svh] sm:min-h-[76vh] md:min-h-[82vh] overflow-hidden">
-      <!-- Full-bleed background image -->
-      <picture class="absolute inset-0 -z-10">
-        <source media="(min-width: 768px)" srcset={heroImage.large} type="image/webp" />
-        <source media="(max-width: 767px)" srcset={heroImage.small} type="image/webp" />
-        <img
-          src={heroImage.large}
-          alt={heroImage.alt}
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-          class="h-full w-full object-cover brightness-[1.02] saturate-[1.04] contrast-[1.02]"
-        />
-      </picture>
-      <!-- Soft light overlay to lift the glass panel off the illustration -->
-      <div class="absolute inset-0 -z-10 bg-gradient-to-r from-white/30 via-transparent to-transparent"></div>
-
-      <!-- Frosted hero copy panel -->
-      <div class="w-full max-w-[1180px] px-[clamp(1rem,5vw,5rem)] py-10 sm:py-10 md:py-8">
-        <div class="hero-glass max-w-[640px] mr-auto rounded-[1.75rem] px-6 py-8 sm:px-9 sm:py-10 md:px-10 md:py-11 text-center sm:text-left text-[#22281C] shadow-[0_24px_70px_rgba(40,30,12,0.18)] ring-1 ring-white/60">
-          <p class="text-[#9A6B2F] text-[0.68rem] sm:text-xs font-bold uppercase tracking-[0.22em] mb-5 flex items-center justify-center sm:justify-start gap-3">
-            <span class="inline-block w-7 sm:w-9 h-px bg-[#9A6B2F]/60"></span>
-            Dream hotel finder
-          </p>
-          <h1 class="font-serif text-[2.5rem] sm:text-[3.4rem] md:text-[4rem] font-semibold leading-[0.98] text-[#22281C]">
-            Find your dream five-star stay without five-star <span class="text-[#9A6B2F] italic">prices</span>.
+  <main class="toolkit-shell">
+    <section class="px-5 py-14 md:py-20">
+      <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.82fr)] lg:items-center">
+        <div>
+          <span class="toolkit-badge">Hotel Finder + Best Time to Go</span>
+          <h1 class="mt-6 max-w-3xl text-5xl font-semibold leading-[1.02] text-[#1D2433] md:text-6xl">
+            Find your dream hotel - and the best time to go
           </h1>
-          <p class="text-[#22281C]/82 text-base sm:text-lg mt-5 leading-relaxed max-w-[42rem] mx-auto sm:mx-0">
-            Use the Hotel Finder to build a practical research prompt for your AI Agent.
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-[#324052]">
+            Build simple AI prompts that help you search for affordable luxury hotels, compare travel months and spot the compromises before you book.
           </p>
-          <div class="mt-7 flex flex-wrap gap-3 justify-center sm:justify-start">
-            <a
-              href="/hotel-finder/"
-              class="inline-flex items-center justify-center rounded-full bg-[#4F6547] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(40,60,40,0.22)] transition-colors hover:bg-[#344532] no-underline"
-            >
-              Build my hotel shortlist →
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/hotel-finder/" class="toolkit-button toolkit-button-gold">
+              Start my hotel hunt
+              <span aria-hidden="true">-&gt;</span>
             </a>
-            <a
-              href="/all-hotels/"
-              class="inline-flex items-center justify-center rounded-full border border-[#22281C]/20 bg-white/50 px-6 py-3 text-sm font-semibold text-[#22281C] transition-colors hover:bg-white/70 no-underline"
-            >
-              See example hotels
+            <a href="/best-time-to-go/" class="toolkit-button toolkit-button-secondary">
+              Find the best month
             </a>
           </div>
+          <p class="mt-5 max-w-xl text-sm font-semibold leading-6 text-[#6B7280]">
+            No account needed. No booking pressure. Just better prompts for smarter travel research.
+          </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+          <ToolCard
+            title="Build your hotel search"
+            description="Choose a destination, budget and travel style. Get a prompt designed to uncover good-value luxury hotels, not just cheap rooms."
+            href="/hotel-finder/"
+            cta="Start hotel hunt"
+            variant="gold"
+          />
+          <ToolCard
+            title="Find your best month"
+            description="Compare weather, hotel value, crowds and practical risks before you decide when to travel."
+            href="/best-time-to-go/"
+            cta="Compare months"
+            variant="green"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="px-5 pb-16 md:pb-24">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-8 max-w-3xl">
+          <span class="toolkit-badge">Example hotel ideas</span>
+          <h2 class="mt-4 text-3xl font-semibold leading-tight text-[#1D2433] md:text-4xl">
+            Need inspiration? Browse example five-star bargains
+          </h2>
+          <p class="mt-4 text-base leading-7 text-[#324052]">
+            These hotels show the kind of value the prompts are designed to help you find: atmospheric, comfortable or five-star-adjacent stays where the price can be surprisingly modest for the experience.
+          </p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-3">
+          {inspirationHotels.map((hotel) => (
+            <article class="toolkit-card overflow-hidden shadow-[4px_4px_0_rgba(29,36,51,0.08)]">
+              <a href={`/hotels/${hotel.slug}`} class="block no-underline">
+                <div class="aspect-[16/10] overflow-hidden bg-[#EFE3D2]">
+                  <picture>
+                    {hotel.image?.srcSet?.large && <source media="(min-width: 900px)" srcset={hotel.image.srcSet.large} type="image/webp" />}
+                    {hotel.image?.srcSet?.small && <source media="(max-width: 899px)" srcset={hotel.image.srcSet.small} type="image/webp" />}
+                    <img
+                      src={hotel.image?.srcSet?.small ?? hotel.image?.src ?? '/images/placeholders/luxury-hotel-placeholder.svg'}
+                      alt={hotel.image?.alt ?? `${hotel.title} in ${hotel.city}, ${hotel.country}`}
+                      loading="lazy"
+                      decoding="async"
+                      class="h-full w-full object-cover"
+                    />
+                  </picture>
+                </div>
+                <div class="p-4">
+                  <p class="text-xs font-bold uppercase tracking-[0.08em] text-[#B88A44]">{hotel.budgetTier}</p>
+                  <h3 class="mt-2 text-xl font-semibold leading-snug text-[#1D2433]">{hotel.title}</h3>
+                  <p class="mt-2 text-sm font-semibold text-[#58745A]">{hotel.city}, {hotel.country}</p>
+                  <p class="mt-3 text-sm leading-6 text-[#6B7280]">{hotel.typicalPriceRange}</p>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-8">
+          <a href="/all-hotels/" class="toolkit-button toolkit-button-secondary">
+            Browse example hotels
+          </a>
         </div>
       </div>
     </section>
   </main>
 </BaseLayout>
-
-<style>
-  .hero-glass {
-    background: rgba(255, 255, 255, 0.78);
-    box-shadow:
-      0 24px 70px rgba(40, 30, 12, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.72);
-  }
-
-  @supports ((backdrop-filter: blur(18px)) or (-webkit-backdrop-filter: blur(18px))) {
-    .hero-glass {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.34));
-      -webkit-backdrop-filter: blur(22px) saturate(1.4);
-      backdrop-filter: blur(22px) saturate(1.4);
-    }
-  }
-
-  .hero-glass h1 {
-    letter-spacing: 0;
-  }
-
-  @media (max-width: 767px) {
-    @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
-      .hero-glass {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.5));
-        -webkit-backdrop-filter: blur(16px) saturate(1.2);
-        backdrop-filter: blur(16px) saturate(1.2);
-      }
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-glass a {
-      transition-duration: 0.01ms;
-    }
-  }
-</style>
