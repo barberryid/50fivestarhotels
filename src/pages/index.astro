@@ -36,36 +36,34 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
   jsonLd={jsonLd}
 >
   <main class="toolkit-shell">
-    <section class="spark-hero px-5 py-14 md:py-20">
-      <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.82fr)] lg:items-start">
-        <div class="max-w-2xl">
-          <h1 class="max-w-3xl text-5xl font-semibold leading-[1.02] text-[#1D2433] md:text-6xl">
-            Find your dream hotel
-          </h1>
-          <DreamRouteRibbon />
-          <p class="mt-6 max-w-xl text-sm font-semibold leading-6 text-[#6B7280] md:text-base">
-            No account needed. No booking pressure. Just better prompts for smarter travel research.
-          </p>
-        </div>
+    <section class="dream-postcard-hero">
+      <div class="dream-postcard-hero-inner">
+        <h1 class="dream-postcard-title">Find your dream hotel</h1>
+        <DreamRouteRibbon />
 
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-1 lg:pt-4">
+        <div class="dream-tool-grid">
           <ToolCard
             title="Build your hotel search"
             description="Choose a destination, budget and travel style. Get a prompt designed to uncover good-value luxury hotels, not just cheap rooms."
             href="/hotel-finder/"
             cta="Start hotel hunt"
             variant="gold"
-            stamp="Tool 1"
+            stamp="TOOL 1"
           />
           <ToolCard
             title="Find your best month"
             description="Compare weather, hotel value, crowds and practical risks before you decide when to travel."
             href="/best-time-to-go/"
-            cta="Compare months"
             variant="green"
-            stamp="Tool 2"
+            stamp="TOOL 2"
+            fullCardLink
+            ariaLabel="Find your best month using the Best Time to Go tool"
           />
         </div>
+
+        <p class="dream-hero-trust">
+          No account needed. No booking pressure. Just better prompts for smarter travel research.
+        </p>
       </div>
     </section>
 

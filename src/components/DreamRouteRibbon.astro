@@ -10,15 +10,16 @@ const { variant = 'hero', class: className = '' } = Astro.props;
 {variant === 'hero' ? (
   <svg
     class:list={['dream-route dream-route-hero', className]}
-    viewBox="0 0 560 140"
+    viewBox="0 0 900 220"
     fill="none"
     aria-hidden="true"
     focusable="false"
   >
-    <path class="dream-route-soft" d="M24 92 C 126 32, 218 124, 320 72 S 456 38, 536 76" />
-    <path class="dream-route-main" d="M28 88 C 128 38, 218 116, 320 68 S 456 42, 532 74" />
-    <circle class="dream-route-node dream-route-node-gold" cx="28" cy="88" r="8" />
-    <circle class="dream-route-node dream-route-node-green" cx="532" cy="74" r="8" />
+    <path class="dream-route-hero-shadow" d="M82 132 C 238 54, 370 174, 520 108 S 706 62, 818 124" />
+    <path class="dream-route-hero-line" d="M82 132 C 238 54, 370 174, 520 108 S 706 62, 818 124" />
+    <circle class="dream-route-hero-start" cx="82" cy="132" r="9" />
+    <circle class="dream-route-hero-end" cx="818" cy="124" r="11" />
+    <path class="dream-route-hero-star" d="M642 42 l7 16 17 2 -13 11 4 17 -15 -9 -15 9 4 -17 -13 -11 17 -2 7 -16Z" />
   </svg>
 ) : variant === 'page' ? (
   <svg

@@ -37,6 +37,8 @@
   --color-success-soft: #E6EBDD;
   --color-coral: #D87A5A;
   --color-sky: #8FB7C9;
+  --color-soft-coral: #D98F73;
+  --color-soft-sky: #C8D7F0;
 
   /* Fraunces for warm editorial headings, Inter for clean UI/body */
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -112,6 +114,49 @@ summary:focus-visible {
   overflow: hidden;
 }
 
+.dream-postcard-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 3rem 1.25rem 4rem;
+  background:
+    radial-gradient(circle at 50% 14%, rgba(200, 215, 240, 0.34), transparent 34rem),
+    radial-gradient(circle at 22% 72%, rgba(217, 143, 115, 0.13), transparent 25rem),
+    linear-gradient(180deg, var(--color-bg) 0%, #f3eee5 100%);
+}
+
+.dream-postcard-hero-inner {
+  max-width: 72.5rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dream-postcard-title {
+  max-width: 56rem;
+  margin: 0 auto;
+  color: var(--color-text);
+  font-size: 3.25rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 0.95;
+}
+
+.dream-tool-grid {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 58rem;
+  margin: 0 auto;
+}
+
+.dream-hero-trust {
+  max-width: 44rem;
+  margin: 1.75rem auto 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
 .toolkit-card,
 .tool-card {
   position: relative;
@@ -131,68 +176,63 @@ summary:focus-visible {
   display: flex;
   min-height: 100%;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.15rem;
   overflow: hidden;
-  padding: clamp(1.25rem, 2vw, 1.75rem);
+  border: 1px solid rgba(29, 36, 51, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 8px 8px 0 rgba(184, 138, 68, 0.12);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  text-align: left;
+  text-decoration: none;
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,
     border-color 160ms ease;
 }
 
-.tool-card::before,
-.tool-card::after {
-  position: absolute;
-  width: 1.65rem;
-  height: 1.65rem;
-  border-color: currentColor;
-  content: "";
-  opacity: 0.28;
-  pointer-events: none;
-}
-
-.tool-card::before {
-  top: 0.8rem;
-  right: 0.8rem;
-  border-top: 2px solid;
-  border-right: 2px solid;
-}
-
-.tool-card::after {
-  bottom: 0.8rem;
-  left: 0.8rem;
-  border-bottom: 2px solid;
-  border-left: 2px solid;
+.tool-card-green {
+  box-shadow: 8px 8px 0 rgba(88, 116, 90, 0.13);
 }
 
 .tool-card:hover {
-  transform: translate(-2px, -2px);
+  transform: translateY(-2px);
 }
 
 .tool-card-gold:hover {
   border-color: rgba(184, 138, 68, 0.72);
-  box-shadow: 7px 7px 0 rgba(184, 138, 68, 0.2);
+  box-shadow: 10px 10px 0 rgba(184, 138, 68, 0.16);
 }
 
 .tool-card-green:hover {
   border-color: rgba(88, 116, 90, 0.72);
-  box-shadow: 7px 7px 0 rgba(88, 116, 90, 0.2);
+  box-shadow: 10px 10px 0 rgba(88, 116, 90, 0.17);
+}
+
+.tool-card-full-link {
+  color: inherit;
+  cursor: pointer;
+}
+
+.tool-card-full-link:focus-visible {
+  outline: 3px solid rgba(88, 116, 90, 0.55);
+  outline-offset: 4px;
 }
 
 .tool-card-icon {
   display: inline-flex;
-  width: 3rem;
-  height: 3rem;
+  width: 2.8rem;
+  height: 2.8rem;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
   background: var(--color-paper-warm);
-  box-shadow: 3px 3px 0 rgba(29, 36, 51, 0.08);
+  box-shadow: 2px 2px 0 rgba(29, 36, 51, 0.08);
 }
 
 .tool-card-icon svg {
-  width: 1.65rem;
-  height: 1.65rem;
+  width: 1.45rem;
+  height: 1.45rem;
 }
 
 .tool-card-gold .tool-card-icon {
@@ -206,7 +246,7 @@ summary:focus-visible {
 .tool-card h2 {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-size: 1.45rem;
   font-weight: 850;
   line-height: 1.08;
 }
@@ -219,7 +259,7 @@ summary:focus-visible {
 
 .tool-card-stamp {
   align-self: flex-start;
-  border: 1px solid rgba(29, 36, 51, 0.18);
+  border: 1px solid rgba(184, 138, 68, 0.24);
   border-radius: 999px;
   background: var(--color-paper-warm);
   color: var(--color-ink-soft);
@@ -229,7 +269,6 @@ summary:focus-visible {
   line-height: 1;
   padding: 0.45rem 0.65rem;
   text-transform: uppercase;
-  transform: rotate(-1.5deg);
 }
 
 .tool-card-link,
@@ -350,10 +389,47 @@ summary:focus-visible {
 
 .dream-route-hero {
   display: block;
-  width: min(31rem, 100%);
+  width: min(47.5rem, 90vw);
   height: auto;
-  margin-top: 1.9rem;
-  opacity: 0.76;
+  margin: 1.35rem auto 2.25rem;
+  opacity: 1;
+}
+
+.dream-route-hero-shadow,
+.dream-route-hero-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dream-route-hero-shadow {
+  stroke: rgba(184, 138, 68, 0.18);
+  stroke-width: 18;
+}
+
+.dream-route-hero-line {
+  stroke: var(--color-gold);
+  stroke-width: 7;
+}
+
+.dream-route-hero-start,
+.dream-route-hero-end {
+  stroke-width: 4;
+}
+
+.dream-route-hero-start {
+  fill: var(--color-bg);
+  stroke: var(--color-gold);
+}
+
+.dream-route-hero-end {
+  fill: var(--color-green);
+  stroke: var(--color-bg);
+}
+
+.dream-route-hero-star {
+  fill: var(--color-soft-coral);
+  opacity: 0.78;
 }
 
 .dream-route-page {
@@ -541,11 +617,44 @@ summary:focus-visible {
   }
 }
 
+@media (min-width: 768px) {
+  .dream-postcard-hero {
+    padding-block: 5rem 6rem;
+  }
+
+  .dream-postcard-title {
+    font-size: 5rem;
+  }
+
+  .dream-tool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .dream-hero-trust {
+    margin-top: 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dream-postcard-hero {
+    padding-block: 6rem 7rem;
+  }
+
+  .dream-postcard-title {
+    font-size: 6.25rem;
+  }
+
+  .dream-tool-grid {
+    gap: 2rem;
+  }
+}
+
 @media (max-width: 767px) {
   .dream-route-hero {
-    width: min(24rem, 100%);
-    margin-top: 1.5rem;
-    opacity: 0.68;
+    width: min(24rem, 92vw);
+    margin-block: 1.25rem 1.75rem;
   }
 
   .dream-route-page {
