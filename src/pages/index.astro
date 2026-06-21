@@ -1,9 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { exampleHotels } from '../data/exampleHotels';
+import { exampleHotels, brownHotelLouisville } from '../data/exampleHotels';
+import type { ExampleHotel } from '../data/exampleHotels';
 import { publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
 
-const featured = exampleHotels.slice(0, 3);
+// One example per budget tier (under €50 / €100 / €250) for a clear spread.
+// €50 and €250 take the best-scoring example from each tier; the €100 slot
+// showcases The Brown Hotel.
+const featured = [
+  exampleHotels.find((h) => h.tierMax === 50),
+  brownHotelLouisville,
+  exampleHotels.find((h) => h.tierMax === 250),
+].filter((h): h is ExampleHotel => Boolean(h));
 
 const budgetTiles = [
   { num: '€50', note: '& under', href: '/under-50/' },

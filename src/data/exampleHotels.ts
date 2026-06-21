@@ -32,3 +32,18 @@ export const exampleHotels: ExampleHotel[] = [
   { slug: 'sofitel-marrakech', img: B + 'sofitel-marrakech.webp', title: 'Sofitel Marrakech', place: 'Marrakech, Morocco', type: 'Palace resort & spa', tier: 'Under €250', tierMax: 250, price: 'Often €130–€220 outside peak dates', score: 78, verdict: 'Strong value' },
   { slug: 'grand-hotel-yerevan', img: B + 'grand-hotel-yerevan.webp', title: 'Grand Hotel Yerevan', place: 'Yerevan, Armenia', type: 'Classic grand hotel', tier: 'Under €200', tierMax: 200, price: 'Often €85–€145 outside peak dates', score: 78, verdict: 'Strong value' },
 ];
+
+// Pulled from the content collection (not the dusk image set) so the homepage
+// featured strip can showcase it in the under-€100 slot.
+export const brownHotelLouisville: ExampleHotel = {
+  slug: 'brown-hotel-louisville',
+  img: '/images/hotels/brown-hotel-louisville-ai-hero.webp',
+  title: 'The Brown Hotel',
+  place: 'Louisville, USA',
+  type: 'Heritage grand hotel',
+  tier: 'Under €100',
+  tierMax: 100,
+  price: 'Often €95–€175 in shoulder season',
+  score: 86,
+  verdict: 'Exceptional value',
+};
