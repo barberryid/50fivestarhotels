@@ -1,81 +1,111 @@
 ---
-const navLinks = [
-  { href: '/hotel-finder', label: 'Hotel Finder' },
-  { href: '/best-time-to-go', label: 'Best Time to Go' },
-  { href: '/all-hotels', label: 'Example Hotels' },
-  { href: '/guides/why-some-five-star-hotels-are-so-cheap', label: 'Guides' },
-  { href: '/about', label: 'About' },
+// Warm editorial header: sticky bar with inline desktop nav pills, a "Browse
+// all 50" CTA and a full-screen overlay menu (dontboardme-style). Real routes
+// throughout — no SPA screen switching.
+const pills = [
+  { href: '/all-hotels/', label: 'The Collection' },
+  { href: '/hotel-finder/', label: 'Hotel Finder' },
+  { href: '/best-time-to-go/', label: 'Best Time' },
+  { href: '/about/', label: 'About' },
 ];
 
-const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const overlayLinks = [
+  { n: '01', label: 'Home', href: '/' },
+  { n: '02', label: 'The Collection', href: '/all-hotels/' },
+  { n: '03', label: 'Hotel Finder', href: '/hotel-finder/' },
+  { n: '04', label: 'Best Time to Go', href: '/best-time-to-go/' },
+  { n: '05', label: 'Guides', href: '/guides/why-some-five-star-hotels-are-so-cheap/' },
+  { n: '06', label: 'About', href: '/about/' },
+];
 ---
 
-<header class="sticky top-0 z-50 bg-[#F8F5EF]/95 backdrop-blur border-b border-[#1D2433]/8">
-  <div class="px-[clamp(1rem,4vw,3rem)] flex items-center justify-between h-16">
-    <a href="/" class="inline-flex items-center gap-3 font-serif text-lg font-bold text-[#1D2433] hover:text-[#B88A44] transition-colors no-underline">
-      <img
-        class="h-10 w-10 shrink-0 object-contain"
-        src="/images/hotels/yellow-star-on-black-star.svg"
-        alt="50 Five-Star Hotels logo"
-        width="40"
-        height="40"
-      />
-      <span>50 Five-Star Hotels</span>
+<header
+  class="fs"
+  style="--accent:#B0492B;position:sticky;top:0;z-index:60;background:rgba(247,239,215,.86);backdrop-filter:blur(10px);border-bottom:1px solid #E6DBBE;font-family:'Source Serif 4',Georgia,serif;"
+>
+  <div style="max-width:1280px;margin:0 auto;height:72px;padding:0 clamp(18px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:20px;">
+    <a href="/" style="display:flex;align-items:center;gap:11px;text-decoration:none;">
+      <img src="/images/star-logo.svg" alt="" width="30" height="30" style="display:block;width:30px;height:30px;" />
+      <span style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;color:#2A2622;white-space:nowrap;">50 Five-Star Hotels</span>
     </a>
-
-    <nav class="hidden md:flex items-center gap-5" aria-label="Main navigation">
-      {navLinks.filter(l => l.href !== '/').map(link => (
-        <a
-          href={link.href}
-          class={`rounded-lg px-2.5 py-2 text-sm font-semibold transition-colors no-underline ${
-            currentPath === link.href
-              ? 'bg-[#FBF4E8] text-[#1D2433] shadow-[3px_3px_0_rgba(184,138,68,0.16)]'
-              : 'text-[#6B7280] hover:bg-white hover:text-[#1D2433]'
-          }`}
-        >
-          {link.label}
-        </a>
+    <nav style="display:flex;align-items:center;gap:4px;" aria-label="Main navigation">
+      {pills.map((link) => (
+        <a class="nav-pill fs-desk-nav" href={link.href} style="padding:9px 13px;border-radius:8px;color:#5C544A;font-family:'Archivo',sans-serif;font-size:13px;font-weight:600;text-decoration:none;">{link.label}</a>
       ))}
-    </nav>
-
-    <button
-      id="mobile-menu-btn"
-      aria-label="Open navigation menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      class="md:hidden p-2 rounded-lg text-[#1D2433] hover:bg-[#1D2433]/5 transition-colors"
-    >
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="3" y1="6" x2="19" y2="6"/>
-        <line x1="3" y1="11" x2="19" y2="11"/>
-        <line x1="3" y1="16" x2="19" y2="16"/>
-      </svg>
-    </button>
-  </div>
-
-  <div id="mobile-menu" class="hidden md:hidden border-t border-[#1D2433]/8 bg-[#F8F5EF]">
-    <nav class="px-[clamp(1rem,4vw,3rem)] py-4 flex flex-col gap-1" aria-label="Mobile navigation">
-      {navLinks.map(link => (
-        <a
-          href={link.href}
-          class={`py-2 px-3 rounded-lg text-sm font-semibold transition-colors no-underline ${
-            currentPath === link.href
-              ? 'text-[#1D2433] bg-[#FBF4E8]'
-              : 'text-[#1D2433] hover:bg-[#1D2433]/5'
-          }`}
-        >
-          {link.label}
-        </a>
-      ))}
+      <a href="/all-hotels/" class="btn-ink fs-cta-browse" style="margin-left:8px;display:inline-flex;align-items:center;gap:7px;background:#2A2622;color:#F7EFD7;padding:11px 16px;border-radius:9px;font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em;white-space:nowrap;text-decoration:none;">Browse all 50 <span style="color:#EAB92B;">→</span></a>
+      <button type="button" data-menu-open aria-label="Open menu" aria-controls="fs-overlay-menu" aria-expanded="false" style="margin-left:4px;display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid #E0D3B0;border-radius:9px;padding:10px 14px;cursor:pointer;font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2A2622;">
+        <span style="display:inline-flex;flex-direction:column;gap:3px;">
+          <span style="width:17px;height:2px;background:#2A2622;border-radius:2px;display:block;"></span>
+          <span style="width:17px;height:2px;background:#2A2622;border-radius:2px;display:block;"></span>
+        </span>
+        Menu
+      </button>
     </nav>
   </div>
 </header>
 
+<!-- ============ OVERLAY MENU ============ -->
+<div
+  id="fs-overlay-menu"
+  class="fs"
+  hidden
+  style="--accent:#B0492B;position:fixed;inset:0;z-index:90;background:#F7EFD7;animation:ov-fade .3s ease both;overflow:auto;font-family:'Source Serif 4',Georgia,serif;color:#2A2622;"
+>
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 84% 16%,rgba(234,185,43,.16),transparent 42%),radial-gradient(circle at 12% 88%,rgba(176,73,43,.08),transparent 40%);pointer-events:none;"></div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;min-height:100%;padding:24px clamp(18px,4vw,40px) 40px;display:flex;flex-direction:column;">
+    <div style="height:48px;display:flex;align-items:center;justify-content:space-between;">
+      <a href="/" style="display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;">
+        <img src="/images/star-logo.svg" alt="" width="28" height="28" style="display:block;" />
+        <span style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:17px;">50 Five-Star Hotels</span>
+      </a>
+      <button type="button" data-menu-close aria-label="Close menu" style="display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid #E0D3B0;border-radius:9px;padding:9px 15px;cursor:pointer;font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2A2622;">Close <span style="font-size:16px;line-height:1;">✕</span></button>
+    </div>
+
+    <div style="flex:1;display:flex;align-items:center;padding:36px 0;">
+      <div style="width:100%;display:grid;grid-template-columns:1fr;gap:2px;">
+        <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;">Where would you like to go</p>
+        {overlayLinks.map((item) => (
+          <a class="ov-link" href={item.href} style="display:flex;align-items:baseline;gap:20px;padding:7px 0;text-decoration:none;border-bottom:1px solid rgba(230,219,190,.7);">
+            <span style="font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;color:#B6A98A;min-width:34px;">{item.n}</span>
+            <span class="lab" style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(34px,6.4vw,72px);line-height:1.04;color:#2A2622;">{item.label}</span>
+            <span class="arr" style="margin-left:auto;color:var(--accent);font-size:clamp(22px,3vw,34px);opacity:0;transform:translateX(-12px);transition:opacity .25s ease,transform .25s ease;">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:18px 36px;align-items:center;justify-content:space-between;border-top:1px solid #E6DBBE;padding-top:22px;">
+      <div style="font-family:'Source Serif 4',serif;font-style:italic;color:#5C544A;font-size:15px;max-width:30ch;">Fifty stays under €250 a night, in places worth the trip.</div>
+      <div style="display:flex;gap:22px;font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5C544A;">
+        <a class="foot-link" href="https://instagram.com" style="color:inherit;text-decoration:none;">Instagram</a>
+        <a class="foot-link" href="/best-time-to-go/" style="color:inherit;text-decoration:none;">Newsletter</a>
+        <a class="foot-link" href="mailto:hello@50fivestarhotels.com" style="color:inherit;text-decoration:none;">hello@50fivestarhotels.com</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => {
-    const open = menu?.classList.toggle('hidden') === false;
-    btn.setAttribute('aria-expanded', String(open));
+  const menu = document.getElementById('fs-overlay-menu');
+  const openBtns = document.querySelectorAll('[data-menu-open]');
+  const closeBtns = document.querySelectorAll('[data-menu-close]');
+
+  function openMenu() {
+    if (!menu) return;
+    menu.hidden = false;
+    document.body.style.overflow = 'hidden';
+    openBtns.forEach((b) => b.setAttribute('aria-expanded', 'true'));
+  }
+  function closeMenu() {
+    if (!menu) return;
+    menu.hidden = true;
+    document.body.style.overflow = '';
+    openBtns.forEach((b) => b.setAttribute('aria-expanded', 'false'));
+  }
+
+  openBtns.forEach((b) => b.addEventListener('click', openMenu));
+  closeBtns.forEach((b) => b.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu && !menu.hidden) closeMenu();
   });
 </script>

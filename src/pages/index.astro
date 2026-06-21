@@ -1,29 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import DreamRouteRibbon from '../components/DreamRouteRibbon.astro';
-import ToolCard from '../components/ToolCard.astro';
+import { exampleHotels } from '../data/exampleHotels';
 import { publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
 
-const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
-allHotels.sort((a, b) => a.data.rank - b.data.rank);
+const featured = exampleHotels.slice(0, 3);
 
-const inspirationTierAmounts = [50, 100, 250];
-const matchesBudgetTier = (budgetTier: string, amount: number) =>
-  new RegExp(`(^|[^0-9])${amount}$`).test(budgetTier);
+const budgetTiles = [
+  { num: '€50', note: '& under', href: '/under-50/' },
+  { num: '€100', note: '& under', href: '/under-100/' },
+  { num: '€200', note: '& under', href: '/under-200/' },
+  { num: '€250', note: 'the ceiling', href: '/under-250/' },
+];
 
-const inspirationEntries = inspirationTierAmounts.flatMap((amount) => {
-  const entry = allHotels.find(({ data }) => matchesBudgetTier(data.budgetTier, amount));
-  return entry ? [entry] : [];
-});
-
-const inspirationHotels = inspirationEntries.map((entry) => {
-  const cardImage = entry.data.generatedGallery?.find((image) => image.type === 'realistic-daylight') ?? entry.data.image;
-  return {
-    ...entry.data,
-    image: cardImage,
-  };
-});
+const budgetChips = [50, 100, 200, 250];
+const styleChips = ['Heritage & history', 'Boutique design', 'Food & markets', 'Beach & resort', 'City base', 'Wellness & spa'];
 
 const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
 ---
@@ -35,84 +25,289 @@ const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
   image="/images/social/default-og.webp"
   jsonLd={jsonLd}
 >
-  <main class="toolkit-shell">
-    <section class="dream-postcard-hero">
-      <div class="dream-postcard-hero-inner">
-        <h1 class="dream-postcard-title">Find your dream hotel</h1>
-        <DreamRouteRibbon />
+  <div class="fs" style="--accent:#B0492B;font-family:'Source Serif 4',Georgia,serif;color:#2A2622;background:#F7EFD7;">
+    <main>
+      <!-- HERO -->
+      <section style="position:relative;overflow:hidden;padding:clamp(36px,6vw,76px) 20px 40px;">
+        <div style="position:absolute;left:max(10px,1.5vw);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;text-orientation:mixed;font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:#A99A78;pointer-events:none;">PALERMO&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;MARRAKECH&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;TBILISI&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;BANGKOK&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;HUE</div>
+        <div style="position:absolute;right:max(10px,1.5vw);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;text-orientation:mixed;font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:#A99A78;pointer-events:none;">RAGUSA&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;YEREVAN&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;ROUEN&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;STRASBOURG&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;SOLO</div>
 
-        <div class="dream-tool-grid">
-          <ToolCard
-            title="Build your hotel search"
-            description="Choose a destination, budget and travel style. Get a prompt designed to uncover good-value luxury hotels, not just cheap rooms."
-            href="/hotel-finder/"
-            cta="Start hotel hunt"
-            variant="gold"
-            stamp="TOOL 1"
-          />
-          <ToolCard
-            title="Find your best month"
-            description="Compare weather, hotel value, crowds and practical risks before you decide when to travel."
-            href="/best-time-to-go/"
-            cta="Compare months"
-            variant="green"
-            stamp="TOOL 2"
-            ariaLabel="Compare months using the Best Time to Go tool"
-          />
+        <div style="max-width:1120px;margin:0 auto;position:relative;text-align:center;">
+          <p style="font-family:'Archivo',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#A0682E;margin:0 0 6px;">Build your own hotel search</p>
+
+          <h1 class="hero-stage" style="margin-top:clamp(6px,1.6vw,22px);">
+            <span class="hw hw-l"><span class="hw-word">Find</span><span class="hw-word">your</span></span>
+            <span class="hero-illus" style="display:block;padding:0 6px;">
+              <svg viewBox="0 0 640 470" width="100%" style="display:block;height:auto;overflow:visible;" aria-label="A hand-drawn grand hotel facade">
+                <g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="118" cy="98" r="20"/>
+                  <path d="M118,74 V64 M135,83 L141,76 M140,98 H150 M135,113 L141,120 M118,122 V132 M101,113 L95,120 M96,98 H86 M101,83 L95,76"/>
+                  <path d="M486,92 q7,-8 14,0 q7,-8 14,0"/>
+                  <path d="M528,76 q6,-7 12,0 q6,-7 12,0"/>
+                </g>
+                <g fill="#EAB92B" stroke="#2A2622" stroke-width="1.2">
+                  <path d="M300,62 l3,7.4 7.4,3 -7.4,3 -3,7.4 -3,-7.4 -7.4,-3 7.4,-3 z"/>
+                  <path d="M566,150 l2.6,6.4 6.4,2.6 -6.4,2.6 -2.6,6.4 -2.6,-6.4 -6.4,-2.6 6.4,-2.6 z"/>
+                  <path d="M74,182 l2.6,6.4 6.4,2.6 -6.4,2.6 -2.6,6.4 -2.6,-6.4 -6.4,-2.6 6.4,-2.6 z"/>
+                  <path d="M470,120 l2.4,5.8 5.8,2.4 -5.8,2.4 -2.4,5.8 -2.4,-5.8 -5.8,-2.4 5.8,-2.4 z"/>
+                </g>
+                <path d="M100,412 C78,360 86,300 100,256 C114,300 122,360 100,412 Z" fill="#F0C23A" stroke="#2A2622" stroke-width="2"/>
+                <path d="M540,412 C518,360 526,300 540,256 C554,300 562,360 540,412 Z" fill="#F0C23A" stroke="#2A2622" stroke-width="2"/>
+                <path d="M150,412 L150,196 L206,196 L206,150 L320,108 L434,150 L434,196 L490,196 L490,412 Z" fill="#F0C23A" stroke="#2A2622" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M320,108 V70" fill="none" stroke="#2A2622" stroke-width="2.4" stroke-linecap="round"/>
+                <path d="M320,73 L350,81 L320,89 Z" fill="#EAB92B" stroke="#2A2622" stroke-width="1.6" stroke-linejoin="round"/>
+                <g fill="none" stroke="#2A2622" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M206,150 H434 M206,158 H434"/>
+                  <path d="M214,146 L320,114 L426,146"/>
+                  <path d="M150,196 H206 M434,196 H490"/>
+                  <path d="M320,124 L323.6,130.4 L330,134 L323.6,137.6 L320,144 L316.4,137.6 L310,134 L316.4,130.4 Z" fill="#EAB92B" stroke-width="1.4"/>
+                  <path d="M209,246 L209,210 A15 15 0 0 1 239,210 L239,246 M206,246 H242 M224,210 V246 M209,228 H239"/>
+                  <path d="M257,246 L257,210 A15 15 0 0 1 287,210 L287,246 M254,246 H290 M272,210 V246 M257,228 H287"/>
+                  <path d="M305,246 L305,210 A15 15 0 0 1 335,210 L335,246 M302,246 H338 M320,210 V246 M305,228 H335"/>
+                  <path d="M353,246 L353,210 A15 15 0 0 1 383,210 L383,246 M350,246 H386 M368,210 V246 M353,228 H383"/>
+                  <path d="M401,246 L401,210 A15 15 0 0 1 431,210 L431,246 M398,246 H434 M416,210 V246 M401,228 H431"/>
+                  <path d="M208,330 L208,292 A16 16 0 0 1 240,292 L240,330 M205,330 H243 M224,292 V330 M208,312 H240"/>
+                  <path d="M256,330 L256,292 A16 16 0 0 1 288,292 L288,330 M253,330 H291 M272,292 V330 M256,312 H288"/>
+                  <path d="M304,330 L304,292 A16 16 0 0 1 336,292 L336,330 M301,330 H339 M320,292 V330 M304,312 H336"/>
+                  <path d="M352,330 L352,292 A16 16 0 0 1 384,292 L384,330 M349,330 H387 M368,292 V330 M352,312 H384"/>
+                  <path d="M400,330 L400,292 A16 16 0 0 1 432,292 L432,330 M397,330 H435 M416,292 V330 M400,312 H432"/>
+                  <path d="M167,250 L167,224 A11 11 0 0 1 189,224 L189,250 M165,250 H191 M178,224 V250"/>
+                  <path d="M167,320 L167,294 A11 11 0 0 1 189,294 L189,320 M165,320 H191 M178,294 V320"/>
+                  <path d="M451,250 L451,224 A11 11 0 0 1 473,224 L473,250 M449,250 H475 M462,224 V250"/>
+                  <path d="M451,320 L451,294 A11 11 0 0 1 473,294 L473,320 M449,320 H475 M462,294 V320"/>
+                </g>
+                <g stroke="#2A2622" stroke-width="2" stroke-linecap="round">
+                  <path d="M270,412 V390" fill="none"/><circle cx="270" cy="385" r="5" fill="#EAB92B"/>
+                  <path d="M370,412 V390" fill="none"/><circle cx="370" cy="385" r="5" fill="#EAB92B"/>
+                </g>
+                <g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M298,412 L298,362 A22 22 0 0 1 342,362 L342,412 M320,362 V412 M298,388 H342"/>
+                  <path d="M294,360 L320,344 L346,360"/>
+                  <path d="M292,412 H348 M286,420 H354 M280,428 H360"/>
+                </g>
+                <g fill="none" stroke="#2A2622" stroke-linecap="round">
+                  <path d="M64,412 H576" stroke-width="2.6"/>
+                  <path d="M150,436 H196 M250,440 H308 M362,436 H404 M452,440 H506" stroke-width="1.6" opacity="0.5"/>
+                </g>
+              </svg>
+            </span>
+            <span class="hw hw-r"><span class="hw-script">dream</span><span class="hw-word">hotel</span></span>
+          </h1>
+
+          <p style="font-family:'Source Serif 4',serif;font-size:clamp(16px,1.6vw,19px);line-height:1.65;color:#5C544A;max-width:60ch;margin:clamp(8px,2vw,22px) auto 0;">Tell us where you're dreaming of, your budget and your style — we'll write you an AI prompt built to uncover good-value luxury, not just cheap rooms.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:24px;">
+            <a href="#tools" class="btn-ink" style="display:inline-flex;align-items:center;gap:9px;background:#2A2622;color:#F7EFD7;padding:15px 26px;border-radius:11px;font-family:'Archivo',sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em;white-space:nowrap;text-decoration:none;">Build my search <span style="color:#EAB92B;">↓</span></a>
+            <a href="/all-hotels/" class="btn-ghost" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:#5C544A;border:1.5px solid #E0D3B0;padding:14px 22px;border-radius:11px;font-family:'Archivo',sans-serif;font-size:14px;font-weight:700;text-decoration:none;">Browse 50 examples →</a>
+          </div>
         </div>
+      </section>
 
-        <p class="dream-hero-trust">
-          No account needed. No booking pressure. Just better prompts for smarter travel research.
-        </p>
-      </div>
-    </section>
+      <!-- TOOL 01 · PROMPT BUILDER -->
+      <section id="tools" style="padding:clamp(36px,5vw,64px) clamp(18px,4vw,40px) clamp(44px,6vw,72px);background:linear-gradient(180deg,#F7EFD7 0%,#F4EACD 100%);border-top:1px solid #ECE0C2;scroll-margin-top:80px;">
+        <div style="max-width:680px;margin:0 auto;">
+          <div style="text-align:center;margin-bottom:24px;">
+            <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#A0682E;margin:0 0 10px;">Tool 01 · The prompt builder</p>
+            <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(28px,3.6vw,40px);letter-spacing:-0.01em;line-height:1.08;margin:0;">Build your <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.1em;">hotel search</span></h2>
+            <p style="font-family:'Source Serif 4',serif;font-size:16px;line-height:1.6;color:#5C544A;margin:12px 0 0;">Choose a destination, budget and travel style. Get a prompt designed to uncover good-value luxury hotels, not just cheap rooms.</p>
+          </div>
 
-    <section class="px-5 pb-16 md:pb-24">
-      <div class="mx-auto max-w-6xl">
-        <div class="mb-8 max-w-3xl">
-          <span class="toolkit-badge">Example hotel ideas</span>
-          <h2 class="mt-4 text-3xl font-semibold leading-tight text-[#1D2433] md:text-4xl">
-            Need inspiration? Browse example five-star bargains
-          </h2>
-          <p class="mt-4 text-base leading-7 text-[#324052]">
-            These hotels show the kind of value the prompts are designed to help you find: atmospheric, comfortable or five-star-adjacent stays where the price can be surprisingly modest for the experience.
-          </p>
+          <div style="text-align:left;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:18px;box-shadow:0 18px 44px -26px rgba(42,38,34,.42);padding:clamp(20px,3vw,30px);">
+            <label for="fs-dest" style="display:block;font-family:'Archivo',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8E847A;margin-bottom:8px;">Where do you want to go?</label>
+            <input id="fs-dest" type="text" placeholder="Palermo, Marrakech, anywhere warm…" style="width:100%;padding:13px 15px;border:1.5px solid #E0D3B0;border-radius:10px;background:#FBF6E9;font-family:'Source Serif 4',serif;font-size:16px;color:#2A2622;outline:none;box-sizing:border-box;" />
+
+            <label style="display:block;font-family:'Archivo',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8E847A;margin:20px 0 9px;">Your nightly budget</label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              {budgetChips.map((value) => (
+                <button type="button" class={`fltchip${value === 200 ? ' on' : ''}`} data-budget={value} aria-pressed={value === 200 ? 'true' : 'false'}>€{value}</button>
+              ))}
+            </div>
+
+            <label style="display:block;font-family:'Archivo',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8E847A;margin:20px 0 9px;">Travel style <span style="color:#B6A98A;text-transform:none;letter-spacing:0;font-weight:600;">— pick any</span></label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              {styleChips.map((label) => (
+                <button type="button" class="fltchip" data-style={label} aria-pressed="false">{label}</button>
+              ))}
+            </div>
+
+            <div style="margin-top:24px;border:1.5px dashed #D8C79A;border-radius:12px;background:#FBF6E9;padding:16px 16px 14px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;">
+                <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#A0682E;">Your AI prompt</span>
+                <button type="button" id="fs-copy" class="btn-ink" style="display:inline-flex;align-items:center;gap:7px;background:#2A2622;color:#F7EFD7;padding:8px 14px;border-radius:8px;font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;white-space:nowrap;border:0;">Copy prompt</button>
+              </div>
+              <p id="fs-prompt" style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.62;color:#3A352F;margin:0;white-space:pre-wrap;"></p>
+            </div>
+            <p style="font-family:'Source Serif 4',serif;font-style:italic;font-size:13.5px;color:#8E847A;margin:12px 0 0;">Paste it into ChatGPT, Claude or Gemini — then check live prices and reviews before booking.</p>
+          </div>
         </div>
+      </section>
 
-        <div class="grid gap-5 md:grid-cols-3">
-          {inspirationHotels.map((hotel) => (
-            <article class="toolkit-card overflow-hidden shadow-[4px_4px_0_rgba(29,36,51,0.08)]">
-              <a href={`/hotels/${hotel.slug}`} class="block no-underline">
-                <div class="aspect-[16/10] overflow-hidden bg-[#EFE3D2]">
-                  <picture>
-                    {hotel.image?.srcSet?.large && <source media="(min-width: 900px)" srcset={hotel.image.srcSet.large} type="image/webp" />}
-                    {hotel.image?.srcSet?.small && <source media="(max-width: 899px)" srcset={hotel.image.srcSet.small} type="image/webp" />}
-                    <img
-                      src={hotel.image?.srcSet?.small ?? hotel.image?.src ?? '/images/placeholders/luxury-hotel-placeholder.svg'}
-                      alt={hotel.image?.alt ?? `${hotel.title} in ${hotel.city}, ${hotel.country}`}
-                      loading="lazy"
-                      decoding="async"
-                      class="h-full w-full object-cover"
-                    />
-                  </picture>
+      <!-- FEATURED -->
+      <section style="padding:clamp(40px,6vw,76px) clamp(18px,4vw,40px);background:linear-gradient(180deg,#F7EFD7 0%,#F1E7CB 100%);border-top:1px solid #ECE0C2;">
+        <div style="max-width:1180px;margin:0 auto;">
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:40px;">
+            <div style="max-width:640px;">
+              <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#A0682E;margin:0 0 10px;">Example hotel ideas</p>
+              <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(28px,3.6vw,42px);letter-spacing:-0.01em;margin:0;line-height:1.16;">Need inspiration? Browse example <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.08em;">five-star bargains</span></h2>
+              <p style="font-family:'Source Serif 4',serif;font-size:16px;line-height:1.6;color:#5C544A;margin:14px 0 0;max-width:60ch;">These show the kind of value the prompts are built to find: atmospheric, five-star-adjacent stays where the price can be surprisingly modest for the experience.</p>
+            </div>
+            <a href="/all-hotels/" class="btn-ghost" style="display:inline-flex;align-items:center;gap:8px;background:#FFFDF6;color:#2A2622;border:1.5px solid #E0D3B0;padding:12px 20px;border-radius:10px;font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;white-space:nowrap;text-decoration:none;">Browse example hotels →</a>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+            {featured.map((item) => (
+              <a href={`/hotels/${item.slug}/`} class="htl-card" style="display:block;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:16px;overflow:hidden;box-shadow:0 12px 28px -20px rgba(42,38,34,.34);text-decoration:none;color:inherit;">
+                <div style="aspect-ratio:16/11;overflow:hidden;background:#EFE3D2;position:relative;">
+                  <img src={item.img} alt={item.title} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                  <span style="position:absolute;top:13px;left:13px;display:inline-flex;align-items:center;gap:6px;background:rgba(247,239,215,.94);backdrop-filter:blur(4px);border:1px solid rgba(42,38,34,.1);border-radius:999px;padding:6px 11px;font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:#A0682E;">{item.tier}</span>
                 </div>
-                <div class="p-4">
-                  <p class="text-xs font-bold uppercase tracking-[0.08em] text-[#B88A44]">{hotel.budgetTier}</p>
-                  <h3 class="mt-2 text-xl font-semibold leading-snug text-[#1D2433]">{hotel.title}</h3>
-                  <p class="mt-2 text-sm font-semibold text-[#58745A]">{hotel.city}, {hotel.country}</p>
-                  <p class="mt-3 text-sm leading-6 text-[#6B7280]">{hotel.typicalPriceRange}</p>
+                <div style="padding:20px 22px 22px;">
+                  <p style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8E847A;margin:0 0 8px;">{item.type}</p>
+                  <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:24px;line-height:1.1;margin:0;letter-spacing:-0.01em;">{item.title}</h3>
+                  <p style="font-family:'Source Serif 4',serif;font-weight:600;color:#5C7355;margin:9px 0 0;font-size:15px;">{item.place}</p>
+                  <div style="height:1px;background:#ECE0C2;margin:15px 0;"></div>
+                  <p style="font-family:'Source Serif 4',serif;color:#6B6256;margin:0;font-size:14.5px;line-height:1.55;">{item.price}</p>
+                  <div style="display:flex;align-items:center;gap:8px;margin-top:13px;">
+                    <span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;background:#2A2622;color:#EAB92B;font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;">{item.score}</span>
+                    <span style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5C7355;">{item.verdict}</span>
+                  </div>
                 </div>
               </a>
-            </article>
-          ))}
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div class="mt-8">
-          <a href="/all-hotels/" class="toolkit-button toolkit-button-secondary">
-            Browse example hotels
-          </a>
+      <!-- BUDGET BAND -->
+      <section style="padding:clamp(40px,5vw,64px) clamp(18px,4vw,40px);">
+        <div style="max-width:1180px;margin:0 auto;">
+          <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#A0682E;margin:0 0 18px;text-align:center;">Browse by what you'll spend a night</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;">
+            {budgetTiles.map((tile) => (
+              <a href={tile.href} class="budget-tile" style="display:block;border:1.5px solid #E0D3B0;border-radius:14px;background:#FFFDF6;padding:26px 22px;text-align:center;color:#2A2622;text-decoration:none;">
+                <div class="bt-num" style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:34px;color:#2A2622;">{tile.num}</div>
+                <div style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;opacity:.7;">{tile.note}</div>
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+
+      <!-- METHOD + TOOLS -->
+      <section id="method" style="padding:clamp(44px,6vw,80px) clamp(18px,4vw,40px);background:#2A2622;color:#F4ECD6;scroll-margin-top:80px;">
+        <div style="max-width:1180px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,5vw,64px);align-items:center;">
+            <div>
+              <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EAB92B;margin:0 0 16px;">How we choose</p>
+              <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.06;letter-spacing:-0.01em;margin:0;color:#FBF6E9;">One test, honestly applied.</h2>
+              <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.7;color:#D6CCB4;margin:20px 0 0;max-width:46ch;">Every candidate must make a seasoned traveller think: <span style="font-style:italic;color:#F4ECD6;">I didn't know I could have that kind of stay at that price.</span> We weigh the hotel and the destination equally, reject 60–70% of what we look at, and never write aspirational filler. Drawbacks are stated plainly.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;">
+                <span style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(244,236,214,.24);border-radius:999px;padding:8px 14px;color:#E6DCC4;">Price vs local 5★</span>
+                <span style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(244,236,214,.24);border-radius:999px;padding:8px 14px;color:#E6DCC4;">Real character</span>
+                <span style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(244,236,214,.24);border-radius:999px;padding:8px 14px;color:#E6DCC4;">Worth the trip</span>
+              </div>
+            </div>
+            <div style="display:grid;gap:16px;">
+              <a href="#tools" style="display:block;background:#33302A;border:1px solid #45413A;border-radius:14px;padding:24px;text-decoration:none;color:inherit;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#EAB92B;">Tool 01</span>
+                  <span style="color:#EAB92B;">↑</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:22px;margin:12px 0 6px;color:#FBF6E9;">Build your hotel search</h3>
+                <p style="font-family:'Source Serif 4',serif;color:#C9BFA8;margin:0;font-size:15px;line-height:1.6;">Our prompt builder, at the top of the page — designed to surface good-value luxury, not just cheap rooms.</p>
+              </a>
+              <a href="/best-time-to-go/" style="display:block;background:#33302A;border:1px solid #45413A;border-radius:14px;padding:24px;text-decoration:none;color:inherit;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#EAB92B;">Tool 02</span>
+                  <span style="color:#EAB92B;">→</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:22px;margin:12px 0 6px;color:#FBF6E9;">Find your best month</h3>
+                <p style="font-family:'Source Serif 4',serif;color:#C9BFA8;margin:0;font-size:15px;line-height:1.6;">Weather, value, crowds and risk, compared before you commit.</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </BaseLayout>
+
+<script>
+  const destInput = document.getElementById('fs-dest') as HTMLInputElement | null;
+  const promptEl = document.getElementById('fs-prompt');
+  const copyBtn = document.getElementById('fs-copy');
+  const budgetBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-budget]'));
+  const styleBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-style]'));
+
+  let budget = 200;
+  const styles = new Set<string>();
+  let copyTimer: ReturnType<typeof setTimeout> | undefined;
+
+  function buildPrompt() {
+    const dest = (destInput?.value || '').trim() || 'a destination of your choice';
+    const styleStr = styles.size ? Array.from(styles).join(', ').toLowerCase() : 'genuine character and atmosphere';
+    return `Act as an expert travel editor specialising in affordable luxury. Find me 5 genuinely good-value five-star (or near-five-star) hotels in ${dest} for under €${budget} a night in shoulder season. Prioritise real character — heritage properties, boutique and design hotels — over generic chains. I'm especially interested in ${styleStr}. For each hotel give the typical shoulder-season price range, why it's good value, the honest drawbacks, and the best nearby food and sights. Reject anything that's cheap because quality has slipped, and skip aspirational filler.`;
+  }
+
+  function render() {
+    if (promptEl) promptEl.textContent = buildPrompt();
+  }
+
+  destInput?.addEventListener('input', render);
+
+  budgetBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      budget = Number(btn.dataset.budget);
+      budgetBtns.forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+      render();
+    });
+  });
+
+  styleBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const label = btn.dataset.style as string;
+      const on = !styles.has(label);
+      if (on) styles.add(label); else styles.delete(label);
+      btn.classList.toggle('on', on);
+      btn.setAttribute('aria-pressed', String(on));
+      render();
+    });
+  });
+
+  function fallbackCopy(text: string) {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) { /* ignore */ }
+  }
+
+  copyBtn?.addEventListener('click', () => {
+    const text = buildPrompt();
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        const p = navigator.clipboard.writeText(text);
+        if (p && p.catch) p.catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    } catch (e) {
+      fallbackCopy(text);
+    }
+    const track = (window as any).ffshTrack;
+    if (typeof track === 'function') track('copy_prompt', { budget });
+    copyBtn.textContent = 'Copied ✓';
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => { copyBtn.textContent = 'Copy prompt'; }, 1800);
+  });
+
+  render();
+</script>

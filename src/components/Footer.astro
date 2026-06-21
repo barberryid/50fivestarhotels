@@ -1,93 +1,73 @@
 ---
-const groups = [
+// Warm editorial footer: dark ink ground, gold top rule, brand lockup and
+// three link columns, then a bottom bar with the price-guide disclaimer.
+const columns = [
   {
-    title: 'Find Hotels',
+    title: 'Browse',
     links: [
-      { href: '/hotel-finder/', label: 'Hotel Finder' },
-    ],
-  },
-  {
-    title: 'Examples',
-    links: [
-      { href: '/all-hotels/', label: 'Example hotel library' },
-      { href: '/cheap-five-star-hotels/', label: 'Cheap five-star hotels' },
-      { href: '/affordable-luxury-hotels/', label: 'Affordable luxury hotels' },
-      { href: '/luxury-hotels-on-a-budget/', label: 'Luxury hotels on a budget' },
-    ],
-  },
-  {
-    title: 'Budget examples',
-    links: [
+      { href: '/all-hotels/', label: 'The Collection' },
       { href: '/under-50/', label: 'Under €50' },
       { href: '/under-100/', label: 'Under €100' },
-      { href: '/under-200/', label: 'Under €200' },
       { href: '/under-250/', label: 'Under €250' },
     ],
   },
   {
-    title: 'Destination examples',
+    title: 'Plan',
     links: [
-      { href: '/affordable-five-star-hotels-asia/', label: 'Asia' },
-      { href: '/affordable-five-star-hotels-europe/', label: 'Europe' },
-      { href: '/regions/americas/', label: 'Americas' },
+      { href: '/hotel-finder/', label: 'Hotel Finder' },
+      { href: '/best-time-to-go/', label: 'Best Time to Go' },
+      { href: '/pre-travel-checklist/', label: 'Pre-travel Checklist' },
+      { href: '/guides/why-some-five-star-hotels-are-so-cheap/', label: 'Guides' },
     ],
   },
   {
-    title: 'Guides',
+    title: 'More',
     links: [
-      { href: '/guides/why-some-five-star-hotels-are-so-cheap/', label: 'Why some five-star hotels are so cheap' },
-      { href: '/guides/when-are-five-star-hotels-cheapest/', label: 'When are they cheapest?' },
-      { href: '/guides/five-star-hotel-ratings-explained/', label: 'Five-star ratings explained' },
-      { href: '/pre-travel-checklist/', label: 'Pre-travel checklist' },
-    ],
-  },
-  {
-    title: 'About',
-    links: [
+      { href: '/about/', label: 'How we choose' },
       { href: '/about/', label: 'About' },
       { href: '/affiliate-disclosure/', label: 'Affiliate disclosure' },
-      { href: '/image-credits/', label: 'Image credits' },
-      { href: '/sitemap/', label: 'Sitemap' },
+      { href: 'mailto:hello@50fivestarhotels.com', label: 'Contact' },
     ],
   },
 ];
+const year = new Date().getFullYear();
 ---
 
-<footer class="bg-[#1F2428] text-white mt-24">
-  <div class="max-w-6xl mx-auto px-5 py-16">
-    <div class="flex flex-col lg:flex-row justify-between gap-12">
-      <div class="max-w-sm">
-        <p class="font-serif text-xl font-bold mb-2">50 Five-Star Hotels</p>
-        <p class="text-[#C4B9A6] text-sm leading-relaxed">
-          50 Five-Star Hotels is a practical hotel-finding assistant for travellers looking for unusually good-value luxury and near-luxury stays — with honest warnings before you book.
-        </p>
+<footer
+  class="fs"
+  style="--accent:#B0492B;background:#211E1A;color:#C9BFA8;border-top:3px solid #EAB92B;font-family:'Source Serif 4',Georgia,serif;"
+>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(18px,4vw,40px) 28px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(28px,4vw,56px);">
+      <div style="max-width:32ch;">
+        <a href="/" style="display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;">
+          <img src="/images/star-logo.svg" alt="" width="28" height="28" style="display:block;" />
+          <span style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:18px;color:#FBF6E9;">50 Five-Star Hotels</span>
+        </a>
+        <p style="font-family:'Source Serif 4',serif;font-style:italic;font-size:15px;line-height:1.6;color:#9A917F;margin:16px 0 0;">Fifty stays under €250 a night, in places worth the trip.</p>
       </div>
 
-      <nav aria-label="Footer navigation" class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-8">
-        {groups.map((group) => (
-          <div>
-            <p class="text-xs font-bold uppercase tracking-widest text-[#8A8073] mb-3">{group.title}</p>
-            <ul class="space-y-2">
-              {group.links.map((link) => (
-                <li>
-                  <a href={link.href} class="text-sm text-[#C4B9A6] hover:text-white transition-colors no-underline">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </nav>
+      {columns.map((col) => (
+        <div>
+          <p style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#8E847A;margin:0 0 14px;">{col.title}</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+            {col.links.map((link) => (
+              <li>
+                <a class="foot-link" href={link.href} style="font-family:'Source Serif 4',serif;font-size:15px;color:#C9BFA8;text-decoration:none;">{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
 
-    <div class="mt-12 pt-8 border-t border-white/10">
-      <p class="text-[#6F685F] text-xs leading-relaxed max-w-2xl">
-        Hotel prices change constantly. Always check current rates, taxes, room type and booking conditions before making any travel decisions. Rates vary by date, season, room category and cancellation policy.
-      </p>
-      <p class="text-[#6F685F] text-xs mt-3">
-        © {new Date().getFullYear()} 50 Five-Star Hotels. Editorial travel content.
-      </p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between;border-top:1px solid #3A352F;margin-top:clamp(32px,4vw,48px);padding-top:22px;">
+      <p style="font-family:'Source Serif 4',serif;font-size:13.5px;color:#8E847A;margin:0;">© {year} 50 Five-Star Hotels. Every price is a guide, not a quote.</p>
+      <div style="display:flex;gap:22px;font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8E847A;">
+        <a class="foot-link" href="https://instagram.com" style="color:inherit;text-decoration:none;">Instagram</a>
+        <a class="foot-link" href="/best-time-to-go/" style="color:inherit;text-decoration:none;">Newsletter</a>
+        <a class="foot-link" href="/rss.xml" style="color:inherit;text-decoration:none;">RSS</a>
+      </div>
     </div>
   </div>
 </footer>
