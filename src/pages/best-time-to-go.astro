@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import DreamRouteRibbon from '../components/DreamRouteRibbon.astro';
 import WhenToGoTool from '../components/WhenToGoTool.astro';
 import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, websiteJsonLd } from '../lib/seo';
 
@@ -12,14 +11,6 @@ const jsonLd = [
     { name: 'Best Time to Go', url: canonicalUrl('/best-time-to-go/') },
   ]),
 ];
-
-const steps = [
-  'Destination',
-  'Months',
-  'Priorities',
-  'Risks',
-  'Copy prompt',
-];
 ---
 
 <BaseLayout
@@ -28,60 +19,192 @@ const steps = [
   canonical="/best-time-to-go/"
   jsonLd={jsonLd}
 >
-  <main class="toolkit-shell">
-    <section class="spark-hero px-5 py-14 md:py-18">
-      <DreamRouteRibbon variant="page" />
-      <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-[minmax(0,1fr)_18rem] md:items-center">
-        <div>
-          <span class="toolkit-badge">Best Time to Go</span>
-          <h1 class="mt-5 text-4xl font-semibold leading-tight text-[#2A2622] md:text-5xl">
-            Find the month that makes your trip work
-          </h1>
-          <p class="mt-5 max-w-3xl text-lg leading-8 text-[#5C544A]">
-            Build a timing prompt that asks your AI to compare hotel value, weather, crowds, air quality and practical travel risks.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#best-time-tool" class="toolkit-button toolkit-button-green">
-              Build my timing prompt
-              <span aria-hidden="true">-&gt;</span>
-            </a>
-            <a href="/hotel-finder/" class="toolkit-button toolkit-button-secondary">
-              Start hotel hunt
-            </a>
+  <div class="fs" style="--accent:#B0492B;font-family:'Source Serif 4',Georgia,serif;color:#2A2622;background:#F7EFD7;">
+    <main>
+      <!-- HERO -->
+      <section style="position:relative;overflow:hidden;padding:clamp(36px,6vw,76px) 20px 44px;">
+        <div style="position:absolute;left:max(10px,1.5vw);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;text-orientation:mixed;font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:#A99A78;pointer-events:none;">JAN&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;FEB&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;MAR&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;APR&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;MAY</div>
+        <div style="position:absolute;right:max(10px,1.5vw);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;text-orientation:mixed;font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:#A99A78;pointer-events:none;">JUN&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;JUL&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;AUG&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;SEP&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;OCT</div>
+
+        <div style="max-width:960px;margin:0 auto;position:relative;text-align:center;">
+          <p style="font-family:'Archivo',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#A0682E;margin:0 0 14px;">Tool 02 · Best time to go</p>
+
+          <!-- Sun-over-calendar illustration -->
+          <svg viewBox="0 0 220 150" width="190" style="display:block;height:auto;overflow:visible;margin:0 auto 6px;" aria-label="A hand-drawn sun rising over a calendar">
+            <g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="110" cy="52" r="20" fill="#F0C23A"/>
+              <path d="M110,20 V8 M110,84 V96 M142,52 H154 M66,52 H78 M133,29 L141,21 M79,75 L87,67 M133,75 L141,83 M79,29 L87,37"/>
+            </g>
+            <g fill="#EAB92B" stroke="#2A2622" stroke-width="1.2">
+              <path d="M40,40 l2.4,5.8 5.8,2.4 -5.8,2.4 -2.4,5.8 -2.4,-5.8 -5.8,-2.4 5.8,-2.4 z"/>
+              <path d="M182,34 l2,5 5,2 -5,2 -2,5 -2,-5 -5,-2 5,-2 z"/>
+            </g>
+            <g fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="58" y="92" width="104" height="46" rx="6" fill="#FFFDF6"/>
+              <path d="M58,104 H162"/>
+              <path d="M74,92 V84 M146,92 V84"/>
+              <path d="M74,116 H88 M98,116 H112 M122,116 H136 M74,128 H88 M98,128 H112" stroke-width="1.6" opacity="0.55"/>
+              <path d="M122,124 l4,4 8,-9" stroke="#5C7355" stroke-width="2.4"/>
+            </g>
+          </svg>
+
+          <h1 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(34px,6vw,68px);line-height:1.02;letter-spacing:-0.018em;margin:6px 0 0;color:#2A2622;">Find the month that<br /><span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.12em;">makes the trip work</span></h1>
+
+          <p style="font-family:'Source Serif 4',serif;font-size:clamp(16px,1.6vw,19px);line-height:1.65;color:#5C544A;max-width:58ch;margin:clamp(10px,2vw,22px) auto 0;">Build a timing prompt that asks ChatGPT, Claude or Gemini to compare hotel value, weather, crowds, air quality and practical travel risks — month by month, before your dates get locked in.</p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:24px;">
+            <a href="#best-time-tool" class="btn-ink" style="display:inline-flex;align-items:center;gap:9px;background:#2A2622;color:#F7EFD7;padding:15px 26px;border-radius:11px;font-family:'Archivo',sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em;white-space:nowrap;text-decoration:none;">Build my timing prompt <span style="color:#EAB92B;">↓</span></a>
+            <a href="/hotel-finder/" class="btn-ghost" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:#5C544A;border:1.5px solid #E0D3B0;padding:14px 22px;border-radius:11px;font-family:'Archivo',sans-serif;font-size:14px;font-weight:700;text-decoration:none;">Start the hotel hunt →</a>
           </div>
-          <ol class="toolkit-progress mt-8" aria-label="Best Time to Go steps">
-            {steps.map((step, index) => (
-              <li><span>{index + 1}</span>{step}</li>
-            ))}
-          </ol>
         </div>
-        <aside class="spark-brief hidden p-5 md:block" aria-label="Timing brief preview">
-          <p class="text-xs font-black uppercase tracking-[0.08em] text-[#5C7355]">Value + comfort</p>
-          <div class="mt-4 grid grid-cols-3 gap-2" aria-hidden="true">
-            <span class="rounded-lg bg-white px-2 py-3 text-center text-xs font-black text-[#A0682E] shadow-[2px_2px_0_rgba(42, 38, 34,0.07)]">Mar</span>
-            <span class="rounded-lg bg-[#E6EBDD] px-2 py-3 text-center text-xs font-black text-[#5C7355] shadow-[2px_2px_0_rgba(42, 38, 34,0.07)]">Apr</span>
-            <span class="rounded-lg bg-white px-2 py-3 text-center text-xs font-black text-[#A0682E] shadow-[2px_2px_0_rgba(42, 38, 34,0.07)]">May</span>
+      </section>
+
+      <!-- FIVE STEPS · NUMBERED EDITORIAL CARDS -->
+      <section style="padding:clamp(34px,5vw,60px) clamp(18px,4vw,40px);background:linear-gradient(180deg,#F7EFD7 0%,#F4EACD 100%);border-top:1px solid #ECE0C2;">
+        <div style="max-width:1180px;margin:0 auto;">
+          <div style="text-align:center;max-width:720px;margin:0 auto 36px;">
+            <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#A0682E;margin:0 0 8px;">The process · five steps</p>
+            <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(24px,3.2vw,38px);letter-spacing:-0.01em;margin:0;color:#2A2622;">From a rough idea to a <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.12em;">month-by-month plan</span></h2>
           </div>
-          <p class="mt-4 text-sm leading-6 text-[#5C544A]">
-            A timing brief weighs hotel value, crowds, weather and travel risk before dates get locked in.
-          </p>
-        </aside>
-      </div>
-    </section>
 
-    <section id="best-time-tool" class="max-w-4xl mx-auto px-5 py-10">
-      <WhenToGoTool />
-    </section>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;">
 
-    <section class="max-w-4xl mx-auto px-5 pb-16">
-      <div class="toolkit-card p-6 md:p-7">
-        <h2 class="font-serif text-2xl font-semibold text-[#2A2622] mb-3">
-          Know when, but not where to stay?
-        </h2>
-        <p class="text-[#5C544A] leading-relaxed">
-          Use the <a href="/hotel-finder/" class="text-[#A0682E] font-semibold hover:underline">Hotel Finder</a> to build a full research brief and compare affordable five-star and near-luxury hotels by value, location, recent reviews and likely compromises.
-        </p>
-      </div>
-    </section>
-  </main>
+            <!-- CARD 01 -->
+            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Destination</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">1</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Name the country or city</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">01.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">A country, region, island or single city. We anchor the whole comparison to a real place.</p>
+              </div>
+              <div style="height:118px;background:#F1E7CB;border-top:1px solid #E6DBBE;display:flex;align-items:center;justify-content:center;">
+                <span style="width:62px;height:62px;border-radius:999px;background:#FBF6E9;border:1px solid #E2D6B4;display:flex;align-items:center;justify-content:center;color:#5C7355;">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- CARD 02 -->
+            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Months</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">2</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Set the months in play</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">02.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">Whole year, a season, or "anything but August". Tell us what's actually possible.</p>
+              </div>
+              <div style="height:118px;background:#F1E7CB;border-top:1px solid #E6DBBE;display:flex;align-items:center;justify-content:center;">
+                <span style="width:62px;height:62px;border-radius:999px;background:#FBF6E9;border:1px solid #E2D6B4;display:flex;align-items:center;justify-content:center;color:#5C7355;">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 3v4M16 3v4"/></svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- CARD 03 -->
+            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Priorities</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">3</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Say what matters most</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">03.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">Best value, comfortable weather, fewer crowds, cleaner air. Weight the trade-offs your way.</p>
+              </div>
+              <div style="height:118px;background:#F1E7CB;border-top:1px solid #E6DBBE;display:flex;align-items:center;justify-content:center;">
+                <span style="width:62px;height:62px;border-radius:999px;background:#FBF6E9;border:1px solid #E2D6B4;display:flex;align-items:center;justify-content:center;color:#5C7355;">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.4"/><circle cx="8" cy="17" r="2.4"/></svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- CARD 04 -->
+            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Risks</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">4</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Flag the risks to check</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">04.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">Extreme heat, monsoon, peak pricing, closures. So a cheap month isn't cheap for a bad reason.</p>
+              </div>
+              <div style="height:118px;background:#F1E7CB;border-top:1px solid #E6DBBE;display:flex;align-items:center;justify-content:center;">
+                <span style="width:62px;height:62px;border-radius:999px;background:#FBF6E9;border:1px solid #E2D6B4;display:flex;align-items:center;justify-content:center;color:#5C7355;">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8.5 15h-17L12 3Z"/><path d="M12 10v4M12 17h0"/></svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- CARD 05 -->
+            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Copy prompt</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">5</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Copy it into your AI</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">05.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">Paste the brief into ChatGPT or Claude and get a clear month-by-month verdict for your trip.</p>
+              </div>
+              <a href="#best-time-tool" style="height:118px;background:#2A2622;border-top:1px solid #45413A;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;">
+                <span style="font-family:'Archivo',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#F7EFD7;">Build the prompt</span>
+                <span style="color:#EAB92B;font-size:18px;line-height:1;">↓</span>
+              </a>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- TOOL · THE TIMING BUILDER -->
+      <section id="best-time-tool" style="padding:clamp(40px,6vw,76px) clamp(18px,4vw,40px);background:linear-gradient(180deg,#F4EACD 0%,#F7EFD7 100%);border-top:1px solid #ECE0C2;scroll-margin-top:80px;">
+        <div style="max-width:880px;margin:0 auto;">
+          <div style="text-align:center;margin-bottom:28px;">
+            <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#A0682E;margin:0 0 10px;">The timing builder</p>
+            <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(28px,3.6vw,40px);letter-spacing:-0.01em;line-height:1.08;margin:0;color:#2A2622;">Build your <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.1em;">timing prompt</span></h2>
+            <p style="font-family:'Source Serif 4',serif;font-size:16px;line-height:1.6;color:#5C544A;margin:12px 0 0;">Five quick steps. Each one sharpens the brief your AI uses to compare months — value first, but never at the cost of a miserable trip.</p>
+          </div>
+
+          <WhenToGoTool />
+        </div>
+      </section>
+
+      <!-- CLOSING CTA · DARK BAND -->
+      <section style="padding:clamp(44px,6vw,80px) clamp(18px,4vw,40px);background:#2A2622;color:#F4ECD6;">
+        <div style="max-width:1180px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,5vw,64px);align-items:center;">
+            <div>
+              <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EAB92B;margin:0 0 16px;">Next step</p>
+              <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.06;letter-spacing:-0.01em;margin:0;color:#FBF6E9;">Know when — but not <span style="font-family:'Dancing Script',cursive;color:#EAB92B;font-size:1.1em;">where to stay?</span></h2>
+              <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.7;color:#D6CCB4;margin:20px 0 0;max-width:48ch;">Use the Hotel Finder to build a full research brief and compare affordable five-star and near-luxury stays by value, location, recent reviews and the compromises worth knowing about.</p>
+            </div>
+            <div style="display:grid;gap:16px;">
+              <a href="/hotel-finder/" style="display:block;background:#33302A;border:1px solid #45413A;border-radius:14px;padding:24px;text-decoration:none;color:inherit;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#EAB92B;">Tool 01</span>
+                  <span style="color:#EAB92B;">→</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:22px;margin:12px 0 6px;color:#FBF6E9;">Build your hotel search</h3>
+                <p style="font-family:'Source Serif 4',serif;color:#C9BFA8;margin:0;font-size:15px;line-height:1.6;">The Hotel Finder — surfaces good-value luxury for your dates, budget and travel style.</p>
+              </a>
+              <a href="/all-hotels/" style="display:block;background:#33302A;border:1px solid #45413A;border-radius:14px;padding:24px;text-decoration:none;color:inherit;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#EAB92B;">The collection</span>
+                  <span style="color:#EAB92B;">→</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:22px;margin:12px 0 6px;color:#FBF6E9;">Browse 50 example stays</h3>
+                <p style="font-family:'Source Serif 4',serif;color:#C9BFA8;margin:0;font-size:15px;line-height:1.6;">Fifty stays under €250 a night, in places genuinely worth the trip.</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </BaseLayout>
