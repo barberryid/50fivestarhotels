@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import DreamRouteRibbon from '../components/DreamRouteRibbon.astro';
 import HotelFinder from '../components/HotelFinder.astro';
 import MethodologyContent from '../components/MethodologyContent.astro';
 import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
@@ -14,14 +13,6 @@ const jsonLd = [
     { name: 'Hotel Finder', url: canonicalUrl('/hotel-finder/') },
   ]),
 ];
-
-const steps = [
-  'Destination',
-  'Budget test',
-  'Travel style',
-  'Prompt style',
-  'Copy prompt',
-];
 ---
 
 <BaseLayout
@@ -30,56 +21,250 @@ const steps = [
   canonical="/hotel-finder/"
   jsonLd={jsonLd}
 >
-  <main class="toolkit-shell">
-    <section class="spark-hero px-5 py-14 md:py-18">
-      <DreamRouteRibbon variant="page" />
-      <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-[minmax(0,1fr)_18rem] md:items-center">
-        <div>
-          <span class="toolkit-badge">Hotel Finder</span>
-          <h1 class="mt-5 text-4xl font-semibold leading-tight text-[#2A2622] md:text-5xl">
-            Build your dream hotel search
-          </h1>
-          <p class="mt-5 max-w-3xl text-lg leading-8 text-[#5C544A]">
-            Answer a few simple questions and create a hotel-finding prompt for ChatGPT, Claude or your preferred AI. The goal is to find unusually good-value luxury stays - and the trade-offs to check before booking.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#hotel-finder" class="toolkit-button toolkit-button-gold">
-              Build my hotel prompt
-              <span aria-hidden="true">-&gt;</span>
-            </a>
-            <a href="/best-time-to-go/" class="toolkit-button toolkit-button-secondary">
-              Find my best month
-            </a>
+  <div class="fs" style="--accent:#B0492B;font-family:'Source Serif 4',Georgia,serif;color:#2A2622;background:#F7EFD7;">
+    <main>
+      <!-- HERO -->
+      <section style="position:relative;overflow:hidden;padding:clamp(36px,6vw,76px) 20px 44px;">
+        <div style="position:absolute;left:max(10px,1.5vw);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;text-orientation:mixed;font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:#A99A78;pointer-events:none;">PALERMO&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;MARRAKECH&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;TBILISI&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;BANGKOK&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;HUE</div>
+        <div style="position:absolute;right:max(10px,1.5vw);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;text-orientation:mixed;font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:#A99A78;pointer-events:none;">RAGUSA&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;YEREVAN&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;ROUEN&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;STRASBOURG&nbsp;&nbsp;<span style="color:#EAB92B;">✦</span>&nbsp;&nbsp;SOLO</div>
+
+        <div style="max-width:960px;margin:0 auto;position:relative;text-align:center;">
+          <p style="font-family:'Archivo',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#A0682E;margin:0 0 14px;">Tool 01 · Hotel Finder</p>
+
+          <!-- Hand-drawn hotel illustration -->
+          <svg viewBox="0 0 200 152" width="186" style="display:block;height:auto;overflow:visible;margin:0 auto 6px;" aria-label="A hand-drawn grand little hotel">
+            <g fill="#EAB92B" stroke="#2A2622" stroke-width="1.2">
+              <path d="M100,8 l3,7.2 7.2,3 -7.2,3 -3,7.2 -3,-7.2 -7.2,-3 7.2,-3 z"/>
+              <path d="M40,40 l2.2,5.4 5.4,2.2 -5.4,2.2 -2.2,5.4 -2.2,-5.4 -5.4,-2.2 5.4,-2.2 z"/>
+              <path d="M168,46 l2,5 5,2 -5,2 -2,5 -2,-5 -5,-2 5,-2 z"/>
+            </g>
+            <g stroke="#2A2622" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M40,140 V70 L100,38 L160,70 V140 Z" fill="#F0C23A"/>
+              <path d="M40,70 H160" fill="none" stroke-width="1.8"/>
+              <path d="M100,38 V24" fill="none" stroke-width="1.8"/>
+              <path d="M100,26 L120,32 L100,38 Z" fill="#EAB92B" stroke-width="1.4"/>
+              <path d="M88,140 V104 a12 12 0 0 1 24,0 V140" fill="#FBF6E9"/>
+              <path d="M100,104 V140" fill="none" stroke-width="1.4"/>
+              <g fill="none" stroke-width="1.6">
+                <rect x="53" y="84" width="17" height="20" rx="3"/>
+                <rect x="130" y="84" width="17" height="20" rx="3"/>
+                <rect x="53" y="112" width="17" height="20" rx="3"/>
+                <rect x="130" y="112" width="17" height="20" rx="3"/>
+              </g>
+              <path d="M26,140 H174" stroke-width="2.6"/>
+            </g>
+          </svg>
+
+          <h1 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(34px,6vw,68px);line-height:1.02;letter-spacing:-0.018em;margin:6px 0 0;color:#2A2622;">Build your dream<br /><span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.12em;">hotel search</span></h1>
+
+          <p style="font-family:'Source Serif 4',serif;font-size:clamp(16px,1.6vw,19px);line-height:1.65;color:#5C544A;max-width:58ch;margin:clamp(10px,2vw,22px) auto 0;">Answer a few simple questions and we'll write you a hotel-finding prompt for ChatGPT, Claude or Gemini — built to uncover unusually good-value luxury stays, and the trade-offs worth checking before you book.</p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:24px;">
+            <a href="#hotel-finder" class="btn-ink" style="display:inline-flex;align-items:center;gap:9px;background:#2A2622;color:#F7EFD7;padding:15px 26px;border-radius:11px;font-family:'Archivo',sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em;white-space:nowrap;text-decoration:none;">Build my hotel prompt <span style="color:#EAB92B;">↓</span></a>
+            <a href="/best-time-to-go/" class="btn-ghost" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:#5C544A;border:1.5px solid #E0D3B0;padding:14px 22px;border-radius:11px;font-family:'Archivo',sans-serif;font-size:14px;font-weight:700;text-decoration:none;">Find my best month →</a>
           </div>
-          <ol class="toolkit-progress mt-8" aria-label="Hotel Finder steps">
-            {steps.map((step, index) => (
-              <li><span>{index + 1}</span>{step}</li>
-            ))}
-          </ol>
         </div>
-        <aside class="spark-brief hidden p-5 md:block" aria-label="Hotel prompt preview">
-          <p class="text-xs font-black uppercase tracking-[0.08em] text-[#5C7355]">Travel brief preview</p>
-          <h2 class="mt-3 font-sans text-lg font-black leading-snug text-[#2A2622]">Your hotel-hunting prompt is ready.</h2>
-          <p class="mt-3 text-sm leading-6 text-[#5C544A]">
-            Paste it into ChatGPT or Claude and let it search with your priorities in mind.
-          </p>
-        </aside>
-      </div>
-    </section>
+      </section>
 
-    <HotelFinder />
+      <!-- FIVE STEPS · STATIC FAN -->
+      <section style="padding:clamp(34px,5vw,60px) clamp(18px,4vw,40px);background:linear-gradient(180deg,#F7EFD7 0%,#F4EACD 100%);border-top:1px solid #ECE0C2;">
+        <div style="max-width:1180px;margin:0 auto;">
+          <div style="text-align:center;max-width:720px;margin:0 auto 36px;">
+            <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#A0682E;margin:0 0 8px;">The process · five steps</p>
+            <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(24px,3.2vw,38px);letter-spacing:-0.01em;margin:0;color:#2A2622;">From a vague idea to a <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.12em;">bookable shortlist</span></h2>
+          </div>
 
-    <section class="max-w-4xl mx-auto px-5 pb-16">
-      <div class="toolkit-card p-6 md:p-7">
-        <h2 class="font-serif text-2xl font-semibold text-[#2A2622] mb-3">
-          Already know the destination? Find the best months.
-        </h2>
-        <p class="text-[#5C544A] leading-relaxed">
-          Use the <a href="/best-time-to-go/" class="text-[#A0682E] font-semibold hover:underline">Best Time to Go</a> tool to compare weather, hotel value, crowds and practical travel risks before choosing your dates.
-        </p>
-      </div>
-    </section>
+          <div class="bt-fan">
 
-    <MethodologyContent />
-  </main>
+            <!-- CARD 01 -->
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Destination</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">1</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Name the place you're dreaming of</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">01.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">A city, a region, or just "somewhere warm in May". We anchor everything to a real destination.</p>
+              </div>
+              <div style="height:118px;background:#F1E7CB;border-top:1px solid #E6DBBE;display:flex;align-items:center;justify-content:center;">
+                <span style="width:62px;height:62px;border-radius:999px;background:#FBF6E9;border:1px solid #E2D6B4;display:flex;align-items:center;justify-content:center;color:#5C7355;">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- CARD 02 -->
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Budget test</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">2</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Set your nightly ceiling</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">02.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">Anything up to €250. We look for five-star value at that price — not rooms that are merely cheap.</p>
+              </div>
+              <div style="height:118px;background:#F1E7CB;border-top:1px solid #E6DBBE;display:flex;align-items:center;justify-content:center;">
+                <span style="width:62px;height:62px;border-radius:999px;background:#FBF6E9;border:1px solid #E2D6B4;display:flex;align-items:center;justify-content:center;color:#5C7355;">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5h0M18 14.5h0"/></svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- CARD 03 -->
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Travel style</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">3</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Tell us how you travel</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">03.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">Heritage, boutique design, food and markets, wellness. Pick the things that actually matter to you.</p>
+              </div>
+              <div style="height:118px;background:#F1E7CB;border-top:1px solid #E6DBBE;display:flex;align-items:center;justify-content:center;">
+                <span style="width:62px;height:62px;border-radius:999px;background:#FBF6E9;border:1px solid #E2D6B4;display:flex;align-items:center;justify-content:center;color:#5C7355;">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 11 11l-2.5 4.5L13 13z"/></svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- CARD 04 -->
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Prompt style</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">4</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Pick the AI you trust</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">04.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">We format the prompt for ChatGPT, Claude or Gemini, so the wording lands the way each model likes.</p>
+              </div>
+              <div style="height:118px;background:#F1E7CB;border-top:1px solid #E6DBBE;display:flex;align-items:center;justify-content:center;">
+                <span style="width:62px;height:62px;border-radius:999px;background:#FBF6E9;border:1px solid #E2D6B4;display:flex;align-items:center;justify-content:center;color:#5C7355;">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l1.6 4.4L18 10l-4.4 1.6L12 16l-1.6-4.4L6 10l4.4-1.6z"/><path d="M18.2 14l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z"/></svg>
+                </span>
+              </div>
+            </article>
+
+            <!-- CARD 05 -->
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
+              <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Copy prompt</span>
+                  <span style="width:30px;height:30px;border-radius:999px;border:1.5px solid #E0D3B0;display:inline-flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#8E847A;">5</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-0.01em;margin:16px 0 0;color:#2A2622;">Copy it, paste it, book better</h3>
+                <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:54px;line-height:1;color:var(--accent);margin:10px 0 0;">05.</div>
+                <p style="font-family:'Source Serif 4',serif;font-size:14.5px;line-height:1.55;color:#5C544A;margin:10px 0 18px;">You get good-value luxury picks and the honest trade-offs to check before you commit.</p>
+              </div>
+              <a href="#hotel-finder" style="height:118px;background:#2A2622;border-top:1px solid #45413A;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;">
+                <span style="font-family:'Archivo',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#F7EFD7;">Open the hotel finder</span>
+                <span style="color:#EAB92B;font-size:18px;line-height:1;">↓</span>
+              </a>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- TOOL · THE HOTEL FINDER -->
+      <section style="padding:clamp(40px,6vw,76px) clamp(18px,4vw,40px) 0;background:linear-gradient(180deg,#F4EACD 0%,#F7EFD7 100%);border-top:1px solid #ECE0C2;">
+        <div style="max-width:880px;margin:0 auto;">
+          <div style="text-align:center;margin-bottom:8px;">
+            <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#A0682E;margin:0 0 10px;">The prompt builder</p>
+            <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(28px,3.6vw,40px);letter-spacing:-0.01em;line-height:1.08;margin:0;color:#2A2622;">Answer five questions, get one <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.1em;">sharp prompt</span></h2>
+            <p style="font-family:'Source Serif 4',serif;font-size:16px;line-height:1.6;color:#5C544A;margin:12px auto 0;max-width:60ch;">Each step sharpens the brief your AI uses — so it surfaces good-value luxury, not just the cheapest rooms it can find.</p>
+          </div>
+        </div>
+      </section>
+
+      <HotelFinder />
+
+      <MethodologyContent />
+
+      <!-- CLOSING CTA · DARK BAND -->
+      <section style="padding:clamp(44px,6vw,80px) clamp(18px,4vw,40px);background:#2A2622;color:#F4ECD6;">
+        <div style="max-width:1180px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,5vw,64px);align-items:center;">
+            <div>
+              <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EAB92B;margin:0 0 16px;">Next step</p>
+              <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.06;letter-spacing:-0.01em;margin:0;color:#FBF6E9;">Know the place — but not <span style="font-family:'Dancing Script',cursive;color:#EAB92B;font-size:1.1em;">when to go?</span></h2>
+              <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.7;color:#D6CCB4;margin:20px 0 0;max-width:48ch;">Use the Best Time to Go tool to compare hotel value, weather, crowds and practical travel risks month by month before you lock in your dates.</p>
+            </div>
+            <div style="display:grid;gap:16px;">
+              <a href="/best-time-to-go/" style="display:block;background:#33302A;border:1px solid #45413A;border-radius:14px;padding:24px;text-decoration:none;color:inherit;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#EAB92B;">Tool 02</span>
+                  <span style="color:#EAB92B;">→</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:22px;margin:12px 0 6px;color:#FBF6E9;">Find your best month</h3>
+                <p style="font-family:'Source Serif 4',serif;color:#C9BFA8;margin:0;font-size:15px;line-height:1.6;">Weather, value, crowds and risk, compared before you commit to dates.</p>
+              </a>
+              <a href="/all-hotels/" style="display:block;background:#33302A;border:1px solid #45413A;border-radius:14px;padding:24px;text-decoration:none;color:inherit;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#EAB92B;">The collection</span>
+                  <span style="color:#EAB92B;">→</span>
+                </div>
+                <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:22px;margin:12px 0 6px;color:#FBF6E9;">Browse 50 example stays</h3>
+                <p style="font-family:'Source Serif 4',serif;color:#C9BFA8;margin:0;font-size:15px;line-height:1.6;">Fifty stays under €250 a night, in places genuinely worth the trip.</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </BaseLayout>
+
+<style>
+  /* Five step cards: static, hand-dealt fan on wide screens; a plain
+     stacked grid on tablet/mobile. No scroll animation — the fan is the
+     resting state, dealt out once. */
+  .bt-fan {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+  }
+
+  @media (min-width: 1180px) {
+    .bt-fan {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      min-height: 660px;
+    }
+    .bt-fan > .bt-card {
+      flex: 0 0 312px;
+      width: 312px;
+      height: 520px;
+      transform-origin: center center;
+      will-change: transform;
+    }
+    .bt-fan > .bt-card:nth-child(1) { transform: rotate(-9deg) translateY(40px); z-index: 10; }
+    .bt-fan > .bt-card:nth-child(2) { margin-left: -116px; transform: rotate(-4deg) translateY(-6px); z-index: 11; }
+    .bt-fan > .bt-card:nth-child(3) { margin-left: -116px; transform: rotate(3deg)  translateY(44px); z-index: 12; }
+    .bt-fan > .bt-card:nth-child(4) { margin-left: -116px; transform: rotate(-6deg) translateY(8px);  z-index: 13; }
+    .bt-fan > .bt-card:nth-child(5) { margin-left: -116px; transform: rotate(4deg)  translateY(50px); z-index: 14; }
+
+    /* Lift a card to the front and straighten it slightly on hover. */
+    .bt-fan > .bt-card {
+      transition: transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .28s ease;
+    }
+    .bt-fan > .bt-card:hover {
+      z-index: 20;
+      box-shadow: 0 40px 70px -30px rgba(42, 38, 34, .6);
+    }
+    .bt-fan > .bt-card:nth-child(1):hover { transform: rotate(-3deg) translateY(8px) scale(1.03); }
+    .bt-fan > .bt-card:nth-child(2):hover { transform: rotate(-1deg) translateY(-26px) scale(1.03); }
+    .bt-fan > .bt-card:nth-child(3):hover { transform: rotate(1deg)  translateY(20px) scale(1.03); }
+    .bt-fan > .bt-card:nth-child(4):hover { transform: rotate(-2deg) translateY(-14px) scale(1.03); }
+    .bt-fan > .bt-card:nth-child(5):hover { transform: rotate(2deg)  translateY(28px) scale(1.03); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bt-fan > .bt-card { transition: none; }
+  }
+</style>
