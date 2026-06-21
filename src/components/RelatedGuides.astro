@@ -14,13 +14,13 @@ const { items, title = 'Explore more affordable luxury ideas' } = Astro.props;
 ---
 
 {items.length > 0 && (
-  <section class="mt-12 border-t border-[#E2D4BF] pt-8" aria-labelledby="related-guides-heading">
-    <h2 id="related-guides-heading" class="font-serif text-2xl font-semibold text-[#1F2428] mb-5">{title}</h2>
+  <section class="mt-12 border-t border-[#E6DBBE] pt-8" aria-labelledby="related-guides-heading">
+    <h2 id="related-guides-heading" class="font-serif text-2xl font-semibold text-[#2A2622] mb-5">{title}</h2>
     <div class="grid sm:grid-cols-2 gap-4">
       {items.map((item) => (
-        <a href={item.href} class="block rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-5 no-underline transition hover:border-[#B88A44]/50 hover:shadow-sm">
-          <h3 class="font-serif text-lg font-semibold text-[#1F2428] leading-snug">{item.title}</h3>
-          {item.description && <p class="mt-2 text-sm leading-relaxed text-[#6F685F]">{item.description}</p>}
+        <a href={item.href} class="block rounded-xl border border-[#E6DBBE] bg-[#FFFDF6] p-5 no-underline transition hover:border-[#A0682E]/50 hover:shadow-sm">
+          <h3 class="font-serif text-lg font-semibold text-[#2A2622] leading-snug">{item.title}</h3>
+          {item.description && <p class="mt-2 text-sm leading-relaxed text-[#5C544A]">{item.description}</p>}
         </a>
       ))}
     </div>

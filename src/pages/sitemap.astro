@@ -53,15 +53,15 @@ const sections = [
   jsonLd={breadcrumbJsonLd([{ name: 'Home', url: canonicalUrl('/') }, { name: 'Sitemap', url: canonicalUrl('/sitemap/') }])}
   maxWidth="max-w-6xl"
 >
-  <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-4">Sitemap</p>
-  <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#1F2428] leading-tight mb-8">Sitemap</h1>
+  <p class="text-[#A0682E] text-xs font-bold uppercase tracking-widest mb-4">Sitemap</p>
+  <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#2A2622] leading-tight mb-8">Sitemap</h1>
   <div class="grid md:grid-cols-2 gap-8">
     {sections.map((section) => (
-      <section class="rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-6">
-        <h2 class="font-serif text-2xl font-semibold text-[#1F2428] mb-4">{section.title}</h2>
+      <section class="rounded-xl border border-[#E6DBBE] bg-[#FFFDF6] p-6">
+        <h2 class="font-serif text-2xl font-semibold text-[#2A2622] mb-4">{section.title}</h2>
         <ul class="space-y-2">
           {section.links.map(([label, href]) => (
-            <li><a href={href} class="text-[#B88A44] no-underline hover:underline">{label}</a></li>
+            <li><a href={href} class="text-[#A0682E] no-underline hover:underline">{label}</a></li>
           ))}
         </ul>
       </section>

@@ -45,20 +45,20 @@ const configData = {
 <section class:list={['py-2', className]}>
   <AccordionCard title={title} number={number}>
   <div data-personalise-section>
-  <p class="text-[#1F2428]/80 leading-relaxed mb-7">
+  <p class="text-[#2A2622]/80 leading-relaxed mb-7">
     {description}
   </p>
 
   <!-- Traveller profile presets -->
   <fieldset class="mb-7 border-0 p-0 m-0">
-    <legend class="text-sm font-semibold text-[#1F2428] mb-3">Quick-start traveller profiles</legend>
+    <legend class="text-sm font-semibold text-[#2A2622] mb-3">Quick-start traveller profiles</legend>
     <div class="flex flex-wrap gap-2" data-preset-row>
       {travellerPresets.map((preset) => (
         <button
           type="button"
           data-preset-button={preset.key}
           aria-pressed="false"
-        class="spark-chip inline-flex min-h-11 items-center rounded-lg border border-[#E2D4BF] bg-white px-4 py-2 text-sm font-semibold text-[#6B7280] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 aria-[pressed=true]:border-[#B88A44] aria-[pressed=true]:bg-[#FBF4E8] aria-[pressed=true]:text-[#1D2433]"
+        class="spark-chip inline-flex min-h-11 items-center rounded-lg border border-[#E6DBBE] bg-white px-4 py-2 text-sm font-semibold text-[#5C544A] transition-colors hover:border-[#A0682E] hover:text-[#A0682E] focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 aria-[pressed=true]:border-[#A0682E] aria-[pressed=true]:bg-[#FBF6E9] aria-[pressed=true]:text-[#2A2622]"
         >
           {preset.label}
         </button>
@@ -69,15 +69,15 @@ const configData = {
   <!-- Preference cards -->
   <div class="grid sm:grid-cols-2 gap-4">
     {preferenceFactors.map((factor) => (
-      <div class="spark-card rounded-lg border border-[#E2D4BF] bg-white p-5 shadow-[3px_3px_0_rgba(29,36,51,0.05)]" data-pref-card>
-        <label for={`pref-${factor.key}`} class="block text-base font-semibold text-[#1F2428] mb-1">
+      <div class="spark-card rounded-lg border border-[#E6DBBE] bg-white p-5 shadow-[3px_3px_0_rgba(42, 38, 34,0.05)]" data-pref-card>
+        <label for={`pref-${factor.key}`} class="block text-base font-semibold text-[#2A2622] mb-1">
           {factor.label}
         </label>
-        <p class="text-sm text-[#6F685F] mb-3">{factor.help}</p>
+        <p class="text-sm text-[#5C544A] mb-3">{factor.help}</p>
         <select
           id={`pref-${factor.key}`}
           data-pref-select={factor.key}
-          class="w-full rounded-xl border border-[#E2D4BF] bg-white px-3 py-2 text-sm text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+          class="w-full rounded-xl border border-[#E6DBBE] bg-white px-3 py-2 text-sm text-[#2A2622] focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
         >
           {importanceScale.map((option) => (
             <option value={option.value}>{option.label}</option>
@@ -87,26 +87,26 @@ const configData = {
     ))}
 
     <!-- Custom priority card -->
-    <div class="spark-card rounded-lg border border-[#E2D4BF] bg-white p-5 shadow-[3px_3px_0_rgba(29,36,51,0.05)]" data-pref-card>
-      <label for="pref-custom-text" class="block text-base font-semibold text-[#1F2428] mb-1">
+    <div class="spark-card rounded-lg border border-[#E6DBBE] bg-white p-5 shadow-[3px_3px_0_rgba(42, 38, 34,0.05)]" data-pref-card>
+      <label for="pref-custom-text" class="block text-base font-semibold text-[#2A2622] mb-1">
         Something else
       </label>
-      <p class="text-sm text-[#6F685F] mb-3">Add one priority of your own, then set how important it is.</p>
+      <p class="text-sm text-[#5C544A] mb-3">Add one priority of your own, then set how important it is.</p>
       <input
         type="text"
         id="pref-custom-text"
         data-pref-custom-text
         placeholder="e.g. Spa quality, sea view, family rooms…"
         maxlength="80"
-        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-3 py-2 text-sm text-[#1F2428] placeholder-[#6F685F]/60 mb-3 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+        class="w-full rounded-xl border border-[#E6DBBE] bg-white px-3 py-2 text-sm text-[#2A2622] placeholder-[#5C544A]/60 mb-3 focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
       />
-      <label for="pref-custom-importance" class="block text-sm font-semibold text-[#1F2428] mb-1">
+      <label for="pref-custom-importance" class="block text-sm font-semibold text-[#2A2622] mb-1">
         Importance of your custom priority
       </label>
       <select
         id="pref-custom-importance"
         data-pref-custom-importance
-        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-3 py-2 text-sm text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+        class="w-full rounded-xl border border-[#E6DBBE] bg-white px-3 py-2 text-sm text-[#2A2622] focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
       >
         {importanceScale.map((option) => (
           <option value={option.value}>{option.label}</option>
@@ -136,7 +136,7 @@ const configData = {
     <button
       type="button"
       data-pref-reset
-      class="inline-flex items-center rounded-full border border-[#E2D4BF] bg-white px-4 py-2 text-xs font-semibold text-[#6F685F] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60"
+      class="inline-flex items-center rounded-full border border-[#E6DBBE] bg-white px-4 py-2 text-xs font-semibold text-[#5C544A] transition-colors hover:border-[#A0682E] hover:text-[#A0682E] focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60"
     >
       Reset preferences
     </button>
@@ -375,28 +375,28 @@ const configData = {
     const renderWeighting = (weights: WeightedPref[]) => {
       if (weights.length === 0) {
         weightingBox.innerHTML =
-          '<p class="text-sm text-[#6F685F]">No personalised weighting selected. The generated prompt will use the standard value scoring only.</p>';
+          '<p class="text-sm text-[#5C544A]">No personalised weighting selected. The generated prompt will use the standard value scoring only.</p>';
         return;
       }
       const rows = weights
         .map(
           (p) =>
-            `<tr class="border-t border-[#E2D4BF]"><td class="py-2 pr-4 text-[#1F2428]">${escapeHtml(p.label)}</td><td class="py-2 text-right font-semibold text-[#1F2428]">${p.weight}</td></tr>`
+            `<tr class="border-t border-[#E6DBBE]"><td class="py-2 pr-4 text-[#2A2622]">${escapeHtml(p.label)}</td><td class="py-2 text-right font-semibold text-[#2A2622]">${p.weight}</td></tr>`
         )
         .join('');
       weightingBox.innerHTML = `
-        <div class="rounded-lg border border-[#E2D4BF] bg-[#FFFDF8] p-5">
-          <h3 class="font-serif text-lg font-semibold text-[#1F2428] mb-3">Your trip-fit weighting</h3>
+        <div class="rounded-lg border border-[#E6DBBE] bg-[#FFFDF6] p-5">
+          <h3 class="font-serif text-lg font-semibold text-[#2A2622] mb-3">Your trip-fit weighting</h3>
           <table class="w-full text-sm">
             <thead>
-              <tr class="text-left text-[#6F685F]">
+              <tr class="text-left text-[#5C544A]">
                 <th class="pb-1 font-semibold">Factor</th>
                 <th class="pb-1 text-right font-semibold">Trip weighting</th>
               </tr>
             </thead>
             <tbody>
               ${rows}
-              <tr class="border-t border-[#B88A44]/40"><td class="py-2 pr-4 font-semibold text-[#1F2428]">Total</td><td class="py-2 text-right font-semibold text-[#1F2428]">100</td></tr>
+              <tr class="border-t border-[#A0682E]/40"><td class="py-2 pr-4 font-semibold text-[#2A2622]">Total</td><td class="py-2 text-right font-semibold text-[#2A2622]">100</td></tr>
             </tbody>
           </table>
         </div>`;

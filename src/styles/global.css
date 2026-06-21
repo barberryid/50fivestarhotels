@@ -3,67 +3,70 @@
 
 @theme {
   /* Warm affordable-luxury editorial palette */
-  --color-luxury-bg: #F8F5EF;
-  --color-luxury-bg-soft: #EFE3D2;
+  --color-luxury-bg: #F7EFD7;
+  --color-luxury-bg-soft: #F1E7CB;
   --color-luxury-card: #FFFFFF;
-  --color-luxury-ink: #1D2433;
-  --color-luxury-muted: #6B7280;
-  --color-luxury-gold: #B88A44;
-  --color-luxury-gold-soft: #D8BD8A;
-  --color-luxury-green: #58745A;
+  --color-luxury-ink: #2A2622;
+  --color-luxury-muted: #5C544A;
+  --color-luxury-gold: #A0682E;
+  --color-luxury-gold-soft: #E0D3B0;
+  --color-luxury-green: #5C7355;
   --color-luxury-green-dark: #344532;
-  --color-luxury-terracotta: #A86645;
-  --color-luxury-border: #E3D6C2;
+  --color-luxury-terracotta: #B0492B;
+  --color-luxury-border: #E6DBBE;
   --color-luxury-warning: #F4DFC5;
   --color-luxury-coral: #D87A5A;
   --color-luxury-sky: #8FB7C9;
 
   /* Aliases (raw CSS-var form of the same palette) */
-  --color-bg: #F8F5EF;
-  --color-bg-soft: #EFE3D2;
+  --color-bg: #F7EFD7;
+  --color-bg-soft: #F1E7CB;
   --color-bg-card: #FFFFFF;
-  --color-text: #1D2433;
-  --color-text-muted: #6B7280;
-  --color-gold: #B88A44;
-  --color-gold-soft: #D8BD8A;
-  --color-green: #58745A;
+  --color-text: #2A2622;
+  --color-text-muted: #5C544A;
+  --color-gold: #A0682E;
+  --color-gold-soft: #E0D3B0;
+  --color-green: #5C7355;
   --color-green-dark: #344532;
-  --color-terracotta: #A86645;
-  --color-border: #E3D6C2;
+  --color-terracotta: #B0492B;
+  --color-border: #E6DBBE;
   --color-warning-bg: #F4DFC5;
-  --color-paper-warm: #FBF4E8;
-  --color-paper-deep: #EFE3D2;
-  --color-ink-soft: #324052;
+  --color-paper-warm: #FBF6E9;
+  --color-paper-deep: #F1E7CB;
+  --color-ink-soft: #5C544A;
   --color-success-soft: #E6EBDD;
   --color-coral: #D87A5A;
   --color-sky: #8FB7C9;
   --color-soft-coral: #D98F73;
   --color-soft-sky: #C8D7F0;
 
-  /* Fraunces for warm editorial headings, Inter for clean UI/body */
-  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-serif: Fraunces, Georgia, "Times New Roman", serif;
+  /* Warm editorial "dream hotel" type system (matches the homepage):
+     Bodoni Moda = display headings, Source Serif 4 = reading copy,
+     Archivo = UI chrome (eyebrows, labels, chips, buttons). */
+  --font-sans: Archivo, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Bodoni Moda", Georgia, "Times New Roman", serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
 
   /* Pre-travel checklist aliases map existing token names onto this palette. */
-  --color-clay: #A86645;
+  --color-clay: #B0492B;
   --color-clay-text: #8A4F33;
-  --color-cream: #F8F5EF;
+  --color-cream: #F7EFD7;
   --color-surface: #FFFFFF;
-  --color-line: #E3D6C2;
-  --color-ink: #1D2433;
-  --color-muted: #6B7280;
-  --color-forest: #58745A;
-  --color-tag-bg: #EFE3D2;
+  --color-line: #E6DBBE;
+  --color-ink: #2A2622;
+  --color-muted: #5C544A;
+  --color-forest: #5C7355;
+  --color-tag-bg: #F1E7CB;
 
-  --shadow-card: 0 3px 18px rgba(29, 36, 51, 0.07);
-  --shadow-print: 5px 5px 0 rgba(184, 138, 68, 0.16);
-  --shadow-print-green: 5px 5px 0 rgba(88, 116, 90, 0.16);
+  --shadow-card: 0 3px 18px rgba(42, 38, 34, 0.07);
+  --shadow-print: 5px 5px 0 rgba(160, 104, 46, 0.16);
+  --shadow-print-green: 5px 5px 0 rgba(92, 115, 85, 0.16);
 }
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -97,14 +100,14 @@ summary:focus-visible {
 
 /* Warm gradient for hero / image overlays: soft, only as deep as text needs. */
 .editorial-overlay {
-  background: linear-gradient(180deg, rgba(29, 36, 51, 0) 45%, rgba(29, 36, 51, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(42, 38, 34, 0) 45%, rgba(42, 38, 34, 0.6) 100%);
 }
 
 .toolkit-shell {
   background:
     radial-gradient(circle at 13% 11%, rgba(216, 122, 90, 0.09), transparent 25rem),
     radial-gradient(circle at 88% 9%, rgba(143, 183, 201, 0.16), transparent 22rem),
-    linear-gradient(180deg, rgba(251, 244, 232, 0.88), rgba(248, 245, 239, 1) 42%),
+    linear-gradient(180deg, rgba(251, 246, 233, 0.88), rgba(247, 239, 215, 1) 42%),
     var(--color-bg);
 }
 
@@ -178,10 +181,10 @@ summary:focus-visible {
   flex-direction: column;
   gap: 1.15rem;
   overflow: hidden;
-  border: 1px solid rgba(29, 36, 51, 0.14);
+  border: 1px solid rgba(42, 38, 34, 0.14);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 8px 8px 0 rgba(184, 138, 68, 0.12);
+  box-shadow: 8px 8px 0 rgba(160, 104, 46, 0.12);
   padding: clamp(1.5rem, 3vw, 2.25rem);
   text-align: left;
   text-decoration: none;
@@ -192,7 +195,7 @@ summary:focus-visible {
 }
 
 .tool-card-green {
-  box-shadow: 8px 8px 0 rgba(88, 116, 90, 0.13);
+  box-shadow: 8px 8px 0 rgba(92, 115, 85, 0.13);
 }
 
 .tool-card:hover {
@@ -200,13 +203,13 @@ summary:focus-visible {
 }
 
 .tool-card-gold:hover {
-  border-color: rgba(184, 138, 68, 0.72);
-  box-shadow: 10px 10px 0 rgba(184, 138, 68, 0.16);
+  border-color: rgba(160, 104, 46, 0.72);
+  box-shadow: 10px 10px 0 rgba(160, 104, 46, 0.16);
 }
 
 .tool-card-green:hover {
-  border-color: rgba(88, 116, 90, 0.72);
-  box-shadow: 10px 10px 0 rgba(88, 116, 90, 0.17);
+  border-color: rgba(92, 115, 85, 0.72);
+  box-shadow: 10px 10px 0 rgba(92, 115, 85, 0.17);
 }
 
 .tool-card-full-link {
@@ -215,7 +218,7 @@ summary:focus-visible {
 }
 
 .tool-card-full-link:focus-visible {
-  outline: 3px solid rgba(88, 116, 90, 0.55);
+  outline: 3px solid rgba(92, 115, 85, 0.55);
   outline-offset: 4px;
 }
 
@@ -227,7 +230,7 @@ summary:focus-visible {
   justify-content: center;
   border-radius: 8px;
   background: var(--color-paper-warm);
-  box-shadow: 2px 2px 0 rgba(29, 36, 51, 0.08);
+  box-shadow: 2px 2px 0 rgba(42, 38, 34, 0.08);
 }
 
 .tool-card-icon svg {
@@ -259,7 +262,7 @@ summary:focus-visible {
 
 .tool-card-stamp {
   align-self: flex-start;
-  border: 1px solid rgba(184, 138, 68, 0.24);
+  border: 1px solid rgba(160, 104, 46, 0.24);
   border-radius: 999px;
   background: var(--color-paper-warm);
   color: var(--color-ink-soft);
@@ -313,7 +316,7 @@ summary:focus-visible {
   border: 1px solid var(--color-border);
   background: var(--color-bg-card);
   color: var(--color-text);
-  box-shadow: 0 3px 0 rgba(29, 36, 51, 0.12);
+  box-shadow: 0 3px 0 rgba(42, 38, 34, 0.12);
 }
 
 .tool-card-link:hover,
@@ -330,7 +333,7 @@ summary:focus-visible {
 .toolkit-badge {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(184, 138, 68, 0.28);
+  border: 1px solid rgba(160, 104, 46, 0.28);
   border-radius: 999px;
   background: var(--color-paper-warm);
   color: var(--color-ink-soft);
@@ -361,7 +364,7 @@ summary:focus-visible {
   color: var(--color-text);
   font-size: 0.82rem;
   font-weight: 700;
-  box-shadow: 3px 3px 0 rgba(29, 36, 51, 0.06);
+  box-shadow: 3px 3px 0 rgba(42, 38, 34, 0.06);
 }
 
 .toolkit-progress span {
@@ -403,7 +406,7 @@ summary:focus-visible {
 }
 
 .dream-route-hero-shadow {
-  stroke: rgba(184, 138, 68, 0.18);
+  stroke: rgba(160, 104, 46, 0.18);
   stroke-width: 18;
 }
 
@@ -514,7 +517,7 @@ summary:focus-visible {
 
 .dream-route-divider span {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(184, 138, 68, 0.32), transparent);
+  background: linear-gradient(90deg, transparent, rgba(160, 104, 46, 0.32), transparent);
 }
 
 .dream-route-divider svg {
@@ -538,7 +541,7 @@ summary:focus-visible {
 
 .paper-prompt-card {
   position: relative;
-  border: 1.5px solid rgba(29, 36, 51, 0.14);
+  border: 1.5px solid rgba(42, 38, 34, 0.14);
   border-radius: 8px;
   background: linear-gradient(135deg, #fff 0%, var(--color-paper-warm) 100%);
   box-shadow: 6px 6px 0 rgba(143, 183, 201, 0.22);
@@ -550,7 +553,7 @@ summary:focus-visible {
   right: 1.2rem;
   width: 3.6rem;
   height: 1.25rem;
-  border: 1px solid rgba(29, 36, 51, 0.12);
+  border: 1px solid rgba(42, 38, 34, 0.12);
   border-radius: 999px;
   background: var(--color-success-soft);
   content: "";
@@ -576,7 +579,7 @@ summary:focus-visible {
 
 .spark-chip {
   min-height: 44px;
-  box-shadow: 2px 2px 0 rgba(29, 36, 51, 0.06);
+  box-shadow: 2px 2px 0 rgba(42, 38, 34, 0.06);
 }
 
 .spark-brief {
@@ -585,7 +588,7 @@ summary:focus-visible {
   background:
     linear-gradient(90deg, rgba(143, 183, 201, 0.18) 0 0.45rem, transparent 0.45rem),
     var(--color-paper-warm);
-  box-shadow: 5px 5px 0 rgba(88, 116, 90, 0.14);
+  box-shadow: 5px 5px 0 rgba(92, 115, 85, 0.14);
 }
 
 @keyframes route-node-pulse {

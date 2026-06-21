@@ -157,7 +157,7 @@ const toolData = {
 
 <div class="space-y-5" data-country-prompt-tool>
   <AccordionCard title="Where are you going?" number={1} open={true}>
-  <p class="mb-6 text-[#1F2428]/80 leading-relaxed">
+  <p class="mb-6 text-[#2A2622]/80 leading-relaxed">
     Start with a country, city, island, region or route. The more real-world context you add, the better the AI can judge value, location and trade-offs.
   </p>
   <!-- Country combobox -->
@@ -176,14 +176,14 @@ const toolData = {
       autocomplete="off"
       spellcheck="false"
       placeholder="Start typing — e.g. Vietnam, Côte d’Ivoire…"
-      class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      class="w-full rounded-xl border border-[#E6DBBE] bg-white px-4 py-3 text-[#2A2622] placeholder-[#5C544A]/60 focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
     />
     <ul
       id="country-listbox"
       role="listbox"
       aria-labelledby="country-label"
       hidden
-      class="absolute z-20 mt-1 w-full max-h-72 overflow-y-auto rounded-xl border border-[#E2D4BF] bg-white shadow-lg py-1"
+      class="absolute z-20 mt-1 w-full max-h-72 overflow-y-auto rounded-xl border border-[#E6DBBE] bg-white shadow-lg py-1"
     >
       {countries.map((c) => (
         <li
@@ -191,20 +191,20 @@ const toolData = {
           role="option"
           aria-selected="false"
           data-name={c.name}
-          class="cursor-pointer px-4 py-2 text-sm text-[#1F2428] aria-selected:bg-[#F4EADC] data-[active]:bg-[#F4EADC]"
+          class="cursor-pointer px-4 py-2 text-sm text-[#2A2622] aria-selected:bg-[#F4EADC] data-[active]:bg-[#F4EADC]"
         >
           {c.name}
         </li>
       ))}
-      <li id="country-no-results" hidden class="px-4 py-2 text-sm text-[#6F685F] italic" role="presentation">
+      <li id="country-no-results" hidden class="px-4 py-2 text-sm text-[#5C544A] italic" role="presentation">
         No matching country or territory
       </li>
     </ul>
   </div>
 
   <!-- City or town (optional, freeform) -->
-  <label for="city-input" class="mt-6 block text-sm font-semibold text-[#1F2428] mb-2">
-    City or town <span class="font-normal text-[#6F685F]">(optional)</span>
+  <label for="city-input" class="mt-6 block text-sm font-semibold text-[#2A2622] mb-2">
+    City or town <span class="font-normal text-[#5C544A]">(optional)</span>
   </label>
   <div class="max-w-md">
     <input
@@ -213,9 +213,9 @@ const toolData = {
       autocomplete="off"
       spellcheck="false"
       placeholder="e.g. Hoi An, Oaxaca, Luang Prabang…"
-      class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      class="w-full rounded-xl border border-[#E6DBBE] bg-white px-4 py-3 text-[#2A2622] placeholder-[#5C544A]/60 focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
     />
-    <p class="mt-2 text-sm text-[#6F685F]">
+    <p class="mt-2 text-sm text-[#5C544A]">
       Leave blank to research the whole country. Enter a city or town to focus the search on it and the destinations within easy reach.
     </p>
   </div>
@@ -223,8 +223,8 @@ const toolData = {
   <!-- Travel timing -->
   <div class="mt-6 grid gap-4 md:grid-cols-[minmax(0,1.5fr)_minmax(0,0.8fr)] max-w-2xl">
     <div>
-      <label for="travel-dates-input" class="block text-sm font-semibold text-[#1F2428] mb-2">
-        Travel dates or month <span class="font-normal text-[#6F685F]">(optional)</span>
+      <label for="travel-dates-input" class="block text-sm font-semibold text-[#2A2622] mb-2">
+        Travel dates or month <span class="font-normal text-[#5C544A]">(optional)</span>
       </label>
       <input
         type="text"
@@ -232,16 +232,16 @@ const toolData = {
         autocomplete="off"
         spellcheck="false"
         placeholder="e.g. March 2026, 12–15 May, shoulder season, flexible..."
-        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+        class="w-full rounded-xl border border-[#E6DBBE] bg-white px-4 py-3 text-[#2A2622] placeholder-[#5C544A]/60 focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
       />
-      <p class="mt-2 text-sm text-[#6F685F]">
+      <p class="mt-2 text-sm text-[#5C544A]">
         Add exact dates, a month, or a flexible season so the prompt can judge price and weather realistically.
       </p>
     </div>
 
     <div>
-      <label for="nights-input" class="block text-sm font-semibold text-[#1F2428] mb-2">
-        Number of nights <span class="font-normal text-[#6F685F]">(optional)</span>
+      <label for="nights-input" class="block text-sm font-semibold text-[#2A2622] mb-2">
+        Number of nights <span class="font-normal text-[#5C544A]">(optional)</span>
       </label>
       <input
         type="number"
@@ -250,17 +250,17 @@ const toolData = {
         max="60"
         inputmode="numeric"
         placeholder="e.g. 2"
-        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+        class="w-full rounded-xl border border-[#E6DBBE] bg-white px-4 py-3 text-[#2A2622] placeholder-[#5C544A]/60 focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
       />
-      <p class="mt-2 text-sm text-[#6F685F]">
+      <p class="mt-2 text-sm text-[#5C544A]">
         Short stopovers and longer stays often need different hotel choices.
       </p>
     </div>
   </div>
 
   <!-- Trip scenario (optional, freeform) -->
-  <label for="trip-scenario-input" class="mt-6 block text-sm font-semibold text-[#1F2428] mb-2">
-    Trip scenario <span class="font-normal text-[#6F685F]">(optional)</span>
+  <label for="trip-scenario-input" class="mt-6 block text-sm font-semibold text-[#2A2622] mb-2">
+    Trip scenario <span class="font-normal text-[#5C544A]">(optional)</span>
   </label>
   <div class="max-w-2xl">
     <textarea
@@ -268,31 +268,31 @@ const toolData = {
       rows="3"
       spellcheck="true"
       placeholder="e.g. 2 nights before a flight, romantic weekend, safe base for sightseeing, quiet hotel near restaurants..."
-      class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+      class="w-full rounded-xl border border-[#E6DBBE] bg-white px-4 py-3 text-[#2A2622] placeholder-[#5C544A]/60 focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
     ></textarea>
-    <p class="mt-2 text-sm text-[#6F685F]">
+    <p class="mt-2 text-sm text-[#5C544A]">
       Add the real context of your trip so the prompt can judge fit, not just price.
     </p>
   </div>
 
   <!-- Deal-breakers -->
   <fieldset class="mt-6 border-0 p-0 m-0 max-w-2xl">
-    <legend class="block text-sm font-semibold text-[#1F2428] mb-2">
-      Deal-breakers <span class="font-normal text-[#6F685F]">(optional)</span>
+    <legend class="block text-sm font-semibold text-[#2A2622] mb-2">
+      Deal-breakers <span class="font-normal text-[#5C544A]">(optional)</span>
     </legend>
-    <p class="mb-3 text-sm text-[#6F685F]">
+    <p class="mb-3 text-sm text-[#5C544A]">
       Tick anything that should strongly affect the shortlist.
     </p>
     <div class="grid gap-2 sm:grid-cols-2">
       {dealBreakerOptions.map((option) => (
-        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#4F6547] has-[:checked]:bg-[#E8F1E6]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E6DBBE] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#5C7355] has-[:checked]:bg-[#E8F1E6]">
           <input
             type="checkbox"
             value={option}
             data-deal-breaker-input
-            class="mt-1 h-4 w-4 shrink-0 rounded border-[#E2D4BF] text-[#4F6547] accent-[#4F6547]"
+            class="mt-1 h-4 w-4 shrink-0 rounded border-[#E6DBBE] text-[#5C7355] accent-[#5C7355]"
           />
-          <span class="text-[#1F2428]">{option}</span>
+          <span class="text-[#2A2622]">{option}</span>
         </label>
       ))}
     </div>
@@ -300,13 +300,13 @@ const toolData = {
   </AccordionCard>
 
   <AccordionCard title="What price level should the AI test?" number={2}>
-    <p class="text-[#1F2428]/80 leading-relaxed mb-7" data-price-level-summary>
+    <p class="text-[#2A2622]/80 leading-relaxed mb-7" data-price-level-summary>
       Choose the price levels you want the AI to test. Lower prices are exciting, but the prompt will also ask the AI to flag weak or misleading five-star claims.
     </p>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {researchPriceLevels.map(({ amount, title, text }) => (
         <label
-          class="spark-chip rounded-lg border border-[#E2D4BF] bg-white p-5 cursor-pointer shadow-[3px_3px_0_rgba(29,36,51,0.05)] transition-colors data-[selected=true]:border-[#B88A44] data-[selected=true]:bg-[#FBF4E8] hover:border-[#B88A44]"
+          class="spark-chip rounded-lg border border-[#E6DBBE] bg-white p-5 cursor-pointer shadow-[3px_3px_0_rgba(42, 38, 34,0.05)] transition-colors data-[selected=true]:border-[#A0682E] data-[selected=true]:bg-[#FBF6E9] hover:border-[#A0682E]"
           data-price-level-card
           data-selected="true"
         >
@@ -316,14 +316,14 @@ const toolData = {
               value={amount}
               checked
               data-price-level-input
-              class="mt-1 h-5 w-5 shrink-0 rounded border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
+              class="mt-1 h-5 w-5 shrink-0 rounded border-[#A0682E] text-[#A0682E] accent-[#A0682E]"
               aria-describedby={`price-level-${amount}-description`}
             />
             <span class="min-w-0">
-              <span class="block text-3xl font-serif font-semibold text-[#1F2428] mb-2">EUR {amount}</span>
-              <span class="block text-sm font-bold uppercase tracking-[0.08em] text-[#B88A44] mb-3">{title}</span>
-              <span id={`price-level-${amount}-description`} class="block text-sm leading-relaxed text-[#6F685F]">{text}</span>
-              <span class="mt-4 inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#4F6547]" data-price-level-state>
+              <span class="block text-3xl font-serif font-semibold text-[#2A2622] mb-2">EUR {amount}</span>
+              <span class="block text-sm font-bold uppercase tracking-[0.08em] text-[#A0682E] mb-3">{title}</span>
+              <span id={`price-level-${amount}-description`} class="block text-sm leading-relaxed text-[#5C544A]">{text}</span>
+              <span class="mt-4 inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#5C7355]" data-price-level-state>
                 Included
               </span>
             </span>
@@ -331,7 +331,7 @@ const toolData = {
         </label>
       ))}
     </div>
-    <p class="mt-4 text-sm text-[#6F685F]" role="status" aria-live="polite" data-price-level-status>
+    <p class="mt-4 text-sm text-[#5C544A]" role="status" aria-live="polite" data-price-level-status>
       Select at least one price level. The prompt below updates automatically.
     </p>
   </AccordionCard>
@@ -341,35 +341,35 @@ const toolData = {
   <AccordionCard title="What kind of answer should the AI give?" number={4}>
     <fieldset class="border-0 p-0 m-0">
       <legend class="sr-only">Output detail level</legend>
-      <p class="mb-3 text-sm leading-relaxed text-[#6F685F]">
+      <p class="mb-3 text-sm leading-relaxed text-[#5C544A]">
         Choose how detailed the output should be, then open and copy your prompt from the box below and paste it into ChatGPT or Claude.
       </p>
       <div class="grid gap-2 sm:grid-cols-2" data-output-mode-group>
-        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E6DBBE] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#A0682E] has-[:checked]:bg-[#F4EADC]">
           <input
             type="radio"
             name="hotel-output-mode"
             value="simple"
             checked
             data-output-mode-input
-            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
+            class="mt-1 h-4 w-4 shrink-0 border-[#A0682E] text-[#A0682E] accent-[#A0682E]"
           />
           <span>
-            <span class="block font-semibold text-[#1F2428]">Simple shortlist</span>
-            <span class="block text-[#6F685F]">Best for travellers planning a trip</span>
+            <span class="block font-semibold text-[#2A2622]">Simple shortlist</span>
+            <span class="block text-[#5C544A]">Best for travellers planning a trip</span>
           </span>
         </label>
-        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#F4EADC]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E6DBBE] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#A0682E] has-[:checked]:bg-[#F4EADC]">
           <input
             type="radio"
             name="hotel-output-mode"
             value="deep"
             data-output-mode-input
-            class="mt-1 h-4 w-4 shrink-0 border-[#B88A44] text-[#B88A44] accent-[#B88A44]"
+            class="mt-1 h-4 w-4 shrink-0 border-[#A0682E] text-[#A0682E] accent-[#A0682E]"
           />
           <span>
-            <span class="block font-semibold text-[#1F2428]">Deep research</span>
-            <span class="block text-[#6F685F]">Best for comparing a full market</span>
+            <span class="block font-semibold text-[#2A2622]">Deep research</span>
+            <span class="block text-[#5C544A]">Best for comparing a full market</span>
           </span>
         </label>
       </div>
@@ -395,30 +395,30 @@ const toolData = {
       <section aria-labelledby="hotel-prompt-heading" data-nosnippet class="prompt-paper overflow-hidden" data-prompt-card data-hotel-prompt-card>
         <button
           type="button"
-          class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-white/60 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
+          class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-white/60 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#5C7355]/50 md:px-5"
           aria-expanded="false"
           aria-controls="hotel-prompt-panel"
           data-prompt-toggle
         >
           <span class="min-w-0">
             <span class="flex flex-wrap items-center gap-2">
-              <span id="hotel-prompt-heading" class="block text-sm font-semibold text-[#1F2428]">
+              <span id="hotel-prompt-heading" class="block text-sm font-semibold text-[#2A2622]">
                 Your hotel-hunting prompt is ready
               </span>
-              <span class="rounded-full bg-[#E6EBDD] px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-[0.08em] text-[#4F6547]">Prompt ready</span>
+              <span class="rounded-full bg-[#E6EBDD] px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-[0.08em] text-[#5C7355]">Prompt ready</span>
             </span>
-            <span class="mt-1 block text-sm leading-relaxed text-[#6F685F]">
+            <span class="mt-1 block text-sm leading-relaxed text-[#5C544A]">
               Paste this into ChatGPT, Claude or another AI tool, then ask follow-up questions before booking.
             </span>
           </span>
-          <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#4F6547] px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_0_#344532] transition-colors group-hover:bg-[#344532]">
+          <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#5C7355] px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_0_#344532] transition-colors group-hover:bg-[#344532]">
             <span data-prompt-toggle-label>Show prompt</span>
             <svg data-prompt-chevron xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform" aria-hidden="true">
               <path d="m6 9 6 6 6-6"></path>
             </svg>
           </span>
         </button>
-        <div id="hotel-prompt-panel" class="border-t border-[#E2D4BF] p-4 md:p-5" data-prompt-panel hidden>
+        <div id="hotel-prompt-panel" class="border-t border-[#E6DBBE] p-4 md:p-5" data-prompt-panel hidden>
           <div class="mb-3 flex flex-wrap items-center justify-end gap-3">
             <button
               type="button"
@@ -440,23 +440,23 @@ const toolData = {
             id="prompt-textarea"
             rows="18"
             spellcheck="false"
-            class="w-full rounded-lg border border-[#E2D4BF] bg-white/80 px-4 py-3 text-sm leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+            class="w-full rounded-lg border border-[#E6DBBE] bg-white/80 px-4 py-3 text-sm leading-relaxed text-[#2A2622] focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
           >{defaultPrompt}</textarea>
-          <p class="mt-3 text-sm font-semibold text-[#58745A]" role="status" aria-live="polite" data-brief-ready-status>
+          <p class="mt-3 text-sm font-semibold text-[#5C7355]" role="status" aria-live="polite" data-brief-ready-status>
             Choose a destination to make the brief copy-ready.
           </p>
-          <div class="mt-4 rounded-xl border border-[#E2D4BF] bg-[#FFFDF8] p-4">
-            <h3 class="text-sm font-semibold text-[#1F2428] mb-2">Suggested manual searches</h3>
-            <p class="text-sm leading-relaxed text-[#6F685F] mb-3">
+          <div class="mt-4 rounded-xl border border-[#E6DBBE] bg-[#FFFDF6] p-4">
+            <h3 class="text-sm font-semibold text-[#2A2622] mb-2">Suggested manual searches</h3>
+            <p class="text-sm leading-relaxed text-[#5C544A] mb-3">
               Use these searches on Booking.com, Google Hotels or your preferred booking site to verify what the prompt finds.
             </p>
-            <ul class="space-y-2 text-sm text-[#1F2428]" data-search-suggestions>
+            <ul class="space-y-2 text-sm text-[#2A2622]" data-search-suggestions>
               <li>Select a destination to generate suggested searches.</li>
             </ul>
           </div>
           <div id="hotel-copy-success" hidden class="spark-brief mt-4 p-4">
-            <p class="text-sm font-semibold text-[#1F2428] mb-1">Prompt copied.</p>
-            <p class="text-sm leading-relaxed text-[#1F2428]/80 mb-3">
+            <p class="text-sm font-semibold text-[#2A2622] mb-1">Prompt copied.</p>
+            <p class="text-sm leading-relaxed text-[#2A2622]/80 mb-3">
               Open ChatGPT or Claude, start a fresh session, and paste the brief there. Verify live prices before booking.
             </p>
             <div class="flex flex-wrap gap-3">
@@ -465,7 +465,7 @@ const toolData = {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-open-chatgpt
-                class="inline-flex items-center gap-2 rounded-full bg-[#1F2428] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#4F6547] no-underline"
+                class="inline-flex items-center gap-2 rounded-full bg-[#2A2622] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#5C7355] no-underline"
               >
                 Open ChatGPT →
               </a>
@@ -474,7 +474,7 @@ const toolData = {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-open-claude
-                class="inline-flex items-center gap-2 rounded-full border border-[#1F2428] px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#1F2428] hover:text-white no-underline"
+                class="inline-flex items-center gap-2 rounded-full border border-[#2A2622] px-5 py-2.5 text-sm font-semibold text-[#2A2622] transition-colors hover:bg-[#2A2622] hover:text-white no-underline"
               >
                 Open Claude →
               </a>
@@ -864,8 +864,8 @@ const toolData = {
       if (state) {
         state.textContent = selected ? 'Included' : 'Skipped';
         state.className = selected
-          ? 'mt-4 inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#4F6547]'
-          : 'mt-4 inline-flex rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-[#6F685F]';
+          ? 'mt-4 inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#5C7355]'
+          : 'mt-4 inline-flex rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-[#5C544A]';
       }
     }
 

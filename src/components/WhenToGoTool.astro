@@ -48,7 +48,7 @@ const riskCheckOptions = [
 
 <div class="space-y-5" data-when-to-go-tool>
   <AccordionCard title="Where are you thinking of going?" number={1} open={true}>
-    <p class="mb-6 text-[#1F2428]/80 leading-relaxed">
+    <p class="mb-6 text-[#2A2622]/80 leading-relaxed">
       Start with the country, region, island or city you are considering. Add a city or town if the timing depends on a specific base.
     </p>
     <!-- Country combobox -->
@@ -67,14 +67,14 @@ const riskCheckOptions = [
         autocomplete="off"
         spellcheck="false"
         placeholder="Start typing — e.g. Vietnam, Côte d’Ivoire…"
-        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+        class="w-full rounded-xl border border-[#E6DBBE] bg-white px-4 py-3 text-[#2A2622] placeholder-[#5C544A]/60 focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
       />
       <ul
         id="country-listbox"
         role="listbox"
         aria-labelledby="country-label"
         hidden
-        class="absolute z-20 mt-1 w-full max-h-72 overflow-y-auto rounded-xl border border-[#E2D4BF] bg-white shadow-lg py-1"
+        class="absolute z-20 mt-1 w-full max-h-72 overflow-y-auto rounded-xl border border-[#E6DBBE] bg-white shadow-lg py-1"
       >
         {countries.map((c) => (
           <li
@@ -82,20 +82,20 @@ const riskCheckOptions = [
             role="option"
             aria-selected="false"
             data-name={c.name}
-            class="cursor-pointer px-4 py-2 text-sm text-[#1F2428] aria-selected:bg-[#F4EADC] data-[active]:bg-[#F4EADC]"
+            class="cursor-pointer px-4 py-2 text-sm text-[#2A2622] aria-selected:bg-[#F4EADC] data-[active]:bg-[#F4EADC]"
           >
             {c.name}
           </li>
         ))}
-        <li id="country-no-results" hidden class="px-4 py-2 text-sm text-[#6F685F] italic" role="presentation">
+        <li id="country-no-results" hidden class="px-4 py-2 text-sm text-[#5C544A] italic" role="presentation">
           No matching country or territory
         </li>
       </ul>
     </div>
 
     <!-- City or town (optional, freeform) -->
-    <label for="city-input" class="mt-6 block text-sm font-semibold text-[#1F2428] mb-2">
-      City or town <span class="font-normal text-[#6F685F]">(optional)</span>
+    <label for="city-input" class="mt-6 block text-sm font-semibold text-[#2A2622] mb-2">
+      City or town <span class="font-normal text-[#5C544A]">(optional)</span>
     </label>
     <div class="max-w-md">
       <input
@@ -104,17 +104,17 @@ const riskCheckOptions = [
         autocomplete="off"
         spellcheck="false"
         placeholder="e.g. Hoi An, Oaxaca, Luang Prabang…"
-        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+        class="w-full rounded-xl border border-[#E6DBBE] bg-white px-4 py-3 text-[#2A2622] placeholder-[#5C544A]/60 focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
       />
-      <p class="mt-2 text-sm text-[#6F685F]">
+      <p class="mt-2 text-sm text-[#5C544A]">
         Leave blank to research the whole country. Enter a city or town to focus the search on it and the destinations within easy reach.
       </p>
     </div>
   </AccordionCard>
 
   <AccordionCard title="What months or seasons are possible?" number={2}>
-    <label for="months-input" class="block text-sm font-semibold text-[#1F2428] mb-2">
-      Possible months or seasons <span class="font-normal text-[#6F685F]">(optional)</span>
+    <label for="months-input" class="block text-sm font-semibold text-[#2A2622] mb-2">
+      Possible months or seasons <span class="font-normal text-[#5C544A]">(optional)</span>
     </label>
     <div class="max-w-2xl">
       <input
@@ -123,47 +123,47 @@ const riskCheckOptions = [
         autocomplete="off"
         spellcheck="false"
         placeholder="e.g. March to June, autumn, any month except August"
-        class="w-full rounded-xl border border-[#E2D4BF] bg-white px-4 py-3 text-[#1F2428] placeholder-[#6F685F]/60 focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+        class="w-full rounded-xl border border-[#E6DBBE] bg-white px-4 py-3 text-[#2A2622] placeholder-[#5C544A]/60 focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
       />
-      <p class="mt-2 text-sm text-[#6F685F]">
+      <p class="mt-2 text-sm text-[#5C544A]">
         Leave this blank if the whole year is possible. Add constraints if school holidays, heat or flight dates already narrow the trip.
       </p>
     </div>
   </AccordionCard>
 
   <AccordionCard title="What matters most: price, weather, quietness or convenience?" number={3}>
-    <p class="mb-4 text-sm leading-relaxed text-[#6F685F]">
+    <p class="mb-4 text-sm leading-relaxed text-[#5C544A]">
       Pick the timing priorities that should shape the month-by-month comparison.
     </p>
     <div class="grid gap-2 sm:grid-cols-2">
       {timingPriorityOptions.map((option) => (
-        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#58745A] has-[:checked]:bg-[#E6EBDD]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E6DBBE] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#5C7355] has-[:checked]:bg-[#E6EBDD]">
           <input
             type="checkbox"
             value={option}
             data-timing-priority-input
-            class="mt-1 h-4 w-4 shrink-0 rounded border-[#E2D4BF] text-[#58745A] accent-[#58745A]"
+            class="mt-1 h-4 w-4 shrink-0 rounded border-[#E6DBBE] text-[#5C7355] accent-[#5C7355]"
           />
-          <span class="text-[#1F2428]">{option}</span>
+          <span class="text-[#2A2622]">{option}</span>
         </label>
       ))}
     </div>
   </AccordionCard>
 
   <AccordionCard title="What risks should the AI check?" number={4}>
-    <p class="mb-4 text-sm leading-relaxed text-[#6F685F]">
+    <p class="mb-4 text-sm leading-relaxed text-[#5C544A]">
       Add practical watch-outs so the prompt does not recommend a month just because hotel prices look low.
     </p>
     <div class="grid gap-2 sm:grid-cols-2">
       {riskCheckOptions.map((option) => (
-        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E2D4BF] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#B88A44] has-[:checked]:bg-[#FBF4E8]">
+        <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E6DBBE] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#A0682E] has-[:checked]:bg-[#FBF6E9]">
           <input
             type="checkbox"
             value={option}
             data-risk-check-input
-            class="mt-1 h-4 w-4 shrink-0 rounded border-[#E2D4BF] text-[#B88A44] accent-[#B88A44]"
+            class="mt-1 h-4 w-4 shrink-0 rounded border-[#E6DBBE] text-[#A0682E] accent-[#A0682E]"
           />
-          <span class="text-[#1F2428]">{option}</span>
+          <span class="text-[#2A2622]">{option}</span>
         </label>
       ))}
     </div>
@@ -188,29 +188,29 @@ const riskCheckOptions = [
       <section aria-labelledby="when-to-go-prompt-heading" data-nosnippet class="prompt-paper overflow-hidden" data-prompt-card>
       <button
         type="button"
-        class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-white/60 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4F6547]/50 md:px-5"
+        class="group flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-white/60 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#5C7355]/50 md:px-5"
         aria-expanded="false"
         aria-controls="when-to-go-prompt-panel"
         data-prompt-toggle
       >
         <span class="min-w-0">
           <span class="flex flex-wrap items-center gap-2">
-            <span id="when-to-go-prompt-heading" class="block text-sm font-semibold text-[#1F2428]">
+            <span id="when-to-go-prompt-heading" class="block text-sm font-semibold text-[#2A2622]">
               Your month-by-month travel prompt is ready
             </span>
           </span>
-          <span class="mt-1 block text-sm leading-relaxed text-[#6F685F]">
+          <span class="mt-1 block text-sm leading-relaxed text-[#5C544A]">
             Paste this into your AI tool to compare months before you start checking live hotel prices.
           </span>
         </span>
-        <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#58745A] px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_0_#344532] transition-colors group-hover:bg-[#344532]">
+        <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#5C7355] px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_0_#344532] transition-colors group-hover:bg-[#344532]">
           <span data-prompt-toggle-label>Show prompt</span>
           <svg data-prompt-chevron xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform" aria-hidden="true">
             <path d="m6 9 6 6 6-6"></path>
           </svg>
         </span>
       </button>
-      <div id="when-to-go-prompt-panel" class="border-t border-[#E2D4BF] p-4 md:p-5" data-prompt-panel hidden>
+      <div id="when-to-go-prompt-panel" class="border-t border-[#E6DBBE] p-4 md:p-5" data-prompt-panel hidden>
         <div class="mb-3 flex flex-wrap items-center justify-end gap-3">
           <button
             type="button"
@@ -232,11 +232,11 @@ const riskCheckOptions = [
           id="when-to-go-textarea"
           rows="18"
           spellcheck="false"
-          class="w-full rounded-lg border border-[#E2D4BF] bg-white/80 px-4 py-3 text-sm leading-relaxed text-[#1F2428] focus:outline-none focus:ring-2 focus:ring-[#B88A44]/60 focus:border-[#B88A44]"
+          class="w-full rounded-lg border border-[#E6DBBE] bg-white/80 px-4 py-3 text-sm leading-relaxed text-[#2A2622] focus:outline-none focus:ring-2 focus:ring-[#A0682E]/60 focus:border-[#A0682E]"
         >{defaultWhenToGoPrompt}</textarea>
         <div id="when-to-go-copy-success" hidden class="spark-brief mt-4 p-4">
-          <p class="text-sm font-semibold text-[#1F2428] mb-1">Timing prompt copied.</p>
-          <p class="text-sm leading-relaxed text-[#1F2428]/80 mb-3">
+          <p class="text-sm font-semibold text-[#2A2622] mb-1">Timing prompt copied.</p>
+          <p class="text-sm leading-relaxed text-[#2A2622]/80 mb-3">
             Open ChatGPT or Claude, start a fresh session, and paste the brief there.
           </p>
           <div class="flex flex-wrap gap-3">
@@ -245,7 +245,7 @@ const riskCheckOptions = [
               target="_blank"
               rel="noopener noreferrer"
               data-open-chatgpt
-              class="inline-flex items-center gap-2 rounded-full bg-[#1F2428] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#4F6547] no-underline"
+              class="inline-flex items-center gap-2 rounded-full bg-[#2A2622] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#5C7355] no-underline"
             >
               Open ChatGPT →
             </a>
@@ -254,7 +254,7 @@ const riskCheckOptions = [
               target="_blank"
               rel="noopener noreferrer"
               data-open-claude
-              class="inline-flex items-center gap-2 rounded-full border border-[#1F2428] px-5 py-2.5 text-sm font-semibold text-[#1F2428] transition-colors hover:bg-[#1F2428] hover:text-white no-underline"
+              class="inline-flex items-center gap-2 rounded-full border border-[#2A2622] px-5 py-2.5 text-sm font-semibold text-[#2A2622] transition-colors hover:bg-[#2A2622] hover:text-white no-underline"
             >
               Open Claude →
             </a>

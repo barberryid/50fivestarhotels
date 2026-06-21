@@ -5,11 +5,11 @@ interface Props {
 const { compact = false } = Astro.props;
 ---
 
-<div class={`bg-[#1F2428]/5 border border-[#1F2428]/10 rounded-xl ${compact ? 'p-4' : 'p-6'}`}>
-  <p class={`text-[#6F685F] ${compact ? 'text-xs' : 'text-sm'} leading-relaxed`}>
-    <strong class="text-[#1F2428] font-semibold">Affiliate disclosure:</strong> Some hotel links are affiliate links.
+<div class={`bg-[#2A2622]/5 border border-[#2A2622]/10 rounded-xl ${compact ? 'p-4' : 'p-6'}`}>
+  <p class={`text-[#5C544A] ${compact ? 'text-xs' : 'text-sm'} leading-relaxed`}>
+    <strong class="text-[#2A2622] font-semibold">Affiliate disclosure:</strong> Some hotel links are affiliate links.
     If you book after clicking, I may earn a commission at no extra cost to you.
     Prices change constantly; always verify the final rate, taxes, room type and cancellation policy before booking.
-    {!compact && <a href="/affiliate-disclosure/" class="text-[#B88A44] hover:underline ml-1">Full disclosure -></a>}
+    {!compact && <a href="/affiliate-disclosure/" class="text-[#A0682E] hover:underline ml-1">Full disclosure -></a>}
   </p>
 </div>

@@ -7,16 +7,16 @@ const root = new URL('../src', import.meta.url).pathname.replace(/^\/([A-Za-z]:)
 
 // Order matters: longer / more specific first is not needed here since keys are distinct.
 const map = {
-  '#F8F5EF': '#F8F2E8', // bg ivory -> warmer ivory
-  '#1D2433': '#1F2428', // ink -> warm charcoal
-  '#58745A': '#4F6547', // value green -> deeper warm green
-  '#6B7280': '#6F685F', // muted -> warm muted
+  '#F7EFD7': '#FBF6E9', // bg ivory -> warmer ivory
+  '#2A2622': '#2A2622', // ink -> warm charcoal
+  '#5C7355': '#5C7355', // value green -> deeper warm green
+  '#5C544A': '#5C544A', // muted -> warm muted
   '#9CA3AF': '#C4B9A6', // footer light gray -> warm gray
-  '#9a7338': '#A8763A', // gold hover -> warm gold hover
+  '#9a7338': '#8E5A33', // gold hover -> warm gold hover
 };
 
 const classMap = {
-  'bg-white': 'bg-[#FFFDF8]', // pure white card -> warm white card
+  'bg-white': 'bg-[#FFFDF6]', // pure white card -> warm white card
 };
 
 function walk(dir) {

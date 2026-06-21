@@ -41,7 +41,7 @@ interface Props {
 }
 
 const { hotel, featured = false } = Astro.props;
-const scoreColor = hotel.valueScore >= 85 ? '#4F6547' : hotel.valueScore >= 75 ? '#B88A44' : '#6F685F';
+const scoreColor = hotel.valueScore >= 85 ? '#5C7355' : hotel.valueScore >= 75 ? '#A0682E' : '#5C544A';
 const bookingAffiliateUrl = getBookingAffiliateUrl(hotel.bookingUrl);
 // Prefer the brighter realistic-daylight render for cards; fall back to the
 // default (editorial-dusk) image, then the placeholder.
@@ -50,9 +50,9 @@ const bestFor = hotel.bestFor?.slice(0, 2) ?? [];
 const notIdealFor = hotel.notIdealFor?.slice(0, 2) ?? hotel.cautions?.slice(0, 1) ?? [];
 ---
 
-<article class={`group bg-[#FFFDF8] rounded-[1.25rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#E2D4BF] flex flex-col ${featured ? 'ring-1 ring-[#B88A44]/25' : ''}`}>
+<article class={`group bg-[#FFFDF6] rounded-[1.25rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#E6DBBE] flex flex-col ${featured ? 'ring-1 ring-[#A0682E]/25' : ''}`}>
   <a href={`/hotels/${hotel.slug}`} class="block no-underline relative">
-    <div class="aspect-[4/3] overflow-hidden bg-[#F8F2E8]">
+    <div class="aspect-[4/3] overflow-hidden bg-[#FBF6E9]">
       <picture>
         {cardImage?.srcSet?.large && <source media="(min-width: 900px)" srcset={cardImage.srcSet.large} type="image/webp" />}
         {cardImage?.srcSet?.small && <source media="(max-width: 899px)" srcset={cardImage.srcSet.small} type="image/webp" />}
@@ -68,7 +68,7 @@ const notIdealFor = hotel.notIdealFor?.slice(0, 2) ?? hotel.cautions?.slice(0, 1
 
     <!-- Tier badge -->
     <div class="absolute top-3 left-3">
-      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#FFFDF8]/95 text-[#1F2428] backdrop-blur shadow-sm">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#FFFDF6]/95 text-[#2A2622] backdrop-blur shadow-sm">
         {hotel.budgetTier}
       </span>
     </div>
@@ -84,9 +84,9 @@ const notIdealFor = hotel.notIdealFor?.slice(0, 2) ?? hotel.cautions?.slice(0, 1
 
   <div class="p-5 flex flex-col flex-1 gap-3">
     <div>
-      <p class="text-[0.7rem] uppercase tracking-widest text-[#B88A44] font-semibold mb-1.5">{hotel.city}, {hotel.country}</p>
+      <p class="text-[0.7rem] uppercase tracking-widest text-[#A0682E] font-semibold mb-1.5">{hotel.city}, {hotel.country}</p>
       <a href={`/hotels/${hotel.slug}`} class="no-underline">
-        <h3 class="font-serif text-xl font-semibold text-[#1F2428] group-hover:text-[#B88A44] transition-colors leading-snug">
+        <h3 class="font-serif text-xl font-semibold text-[#2A2622] group-hover:text-[#A0682E] transition-colors leading-snug">
           {hotel.title}
         </h3>
       </a>
@@ -98,40 +98,40 @@ const notIdealFor = hotel.notIdealFor?.slice(0, 2) ?? hotel.cautions?.slice(0, 1
     </div>
 
     {hotel.highlights[0] && (
-      <p class="text-[#1F2428]/75 text-sm leading-relaxed">{hotel.highlights[0]}</p>
+      <p class="text-[#2A2622]/75 text-sm leading-relaxed">{hotel.highlights[0]}</p>
     )}
 
     {(bestFor.length > 0 || notIdealFor.length > 0) && (
       <div class="space-y-2 text-xs">
         {bestFor.length > 0 && (
           <div>
-            <span class="font-semibold text-[#4F6547]">Best for: </span>
-            <span class="text-[#6F685F]">{bestFor.join(', ')}</span>
+            <span class="font-semibold text-[#5C7355]">Best for: </span>
+            <span class="text-[#5C544A]">{bestFor.join(', ')}</span>
           </div>
         )}
         {notIdealFor.length > 0 && (
           <div>
             <span class="font-semibold text-[#8A5A2B]">Not ideal for: </span>
-            <span class="text-[#6F685F]">{notIdealFor.join(', ')}</span>
+            <span class="text-[#5C544A]">{notIdealFor.join(', ')}</span>
           </div>
         )}
       </div>
     )}
 
-    <p class="text-[#6F685F] text-sm mt-auto pt-1">{hotel.typicalPriceRange}</p>
+    <p class="text-[#5C544A] text-sm mt-auto pt-1">{hotel.typicalPriceRange}</p>
 
     <div class="flex flex-col gap-2 pt-1">
       {bookingAffiliateUrl && (
         <BookingAffiliateLink
           href={bookingAffiliateUrl}
-          class="block text-center bg-[#1F2428] text-white text-sm font-semibold py-3 px-4 rounded-full hover:bg-[#B88A44] transition-colors no-underline"
+          class="block text-center bg-[#2A2622] text-white text-sm font-semibold py-3 px-4 rounded-full hover:bg-[#A0682E] transition-colors no-underline"
         >
           Check current prices on Booking.com
         </BookingAffiliateLink>
       )}
       <a
         href={`/hotels/${hotel.slug}`}
-        class="block text-center text-[#6F685F] text-sm font-medium hover:text-[#B88A44] transition-colors no-underline"
+        class="block text-center text-[#5C544A] text-sm font-medium hover:text-[#A0682E] transition-colors no-underline"
       >
         Read full profile →
       </a>

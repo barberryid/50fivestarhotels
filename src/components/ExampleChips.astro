@@ -21,7 +21,7 @@ const chipHref = ({ city, country }: { city: string; country: string }) =>
 ---
 
 <div data-example-chips>
-  <p class="text-[#6F685F] text-sm font-semibold mb-3">{heading}</p>
+  <p class="text-[#5C544A] text-sm font-semibold mb-3">{heading}</p>
   <div class="flex flex-wrap gap-2">
     {examples.map((example) => (
       <a
@@ -29,7 +29,7 @@ const chipHref = ({ city, country }: { city: string; country: string }) =>
         data-example-chip
         data-city={example.city}
         data-country={example.country}
-        class="inline-flex items-center rounded-full border border-[#E2D4BF] bg-white px-4 py-2 text-sm font-semibold text-[#6F685F] transition-colors hover:border-[#B88A44] hover:text-[#B88A44] no-underline"
+        class="inline-flex items-center rounded-full border border-[#E6DBBE] bg-white px-4 py-2 text-sm font-semibold text-[#5C544A] transition-colors hover:border-[#A0682E] hover:text-[#A0682E] no-underline"
       >
         {example.city}, {example.country}
       </a>

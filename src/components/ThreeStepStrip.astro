@@ -21,17 +21,17 @@ const steps = [
 ];
 ---
 
-<section id={id} class="bg-[#FFFDF8] border-b border-[#E2D4BF] scroll-mt-20">
+<section id={id} class="bg-[#FFFDF6] border-b border-[#E6DBBE] scroll-mt-20">
   <div class="max-w-5xl mx-auto px-5 py-14 md:py-16">
-    <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest mb-8">How it works</p>
+    <p class="text-[#A0682E] text-xs font-bold uppercase tracking-widest mb-8">How it works</p>
     <ol class="grid gap-6 md:grid-cols-3">
       {steps.map((step, index) => (
-        <li class="rounded-2xl border border-[#E2D4BF] bg-white p-6">
-          <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#4F6547] text-base font-bold text-white shadow-[0_8px_20px_rgba(79,101,71,0.28)] mb-4">
+        <li class="rounded-2xl border border-[#E6DBBE] bg-white p-6">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#5C7355] text-base font-bold text-white shadow-[0_8px_20px_rgba(92, 115, 85,0.28)] mb-4">
             {index + 1}
           </span>
-          <h3 class="font-serif text-xl font-semibold text-[#1F2428] mb-2">{step.title}</h3>
-          <p class="text-[#6F685F] text-sm leading-relaxed">{step.text}</p>
+          <h3 class="font-serif text-xl font-semibold text-[#2A2622] mb-2">{step.title}</h3>
+          <p class="text-[#5C544A] text-sm leading-relaxed">{step.text}</p>
         </li>
       ))}
     </ol>

@@ -22,25 +22,25 @@ const sisterSites = [
   maxWidth="max-w-none"
 >
   <section class="mx-auto w-[min(860px,calc(100%_-_40px))] pb-8 pt-[clamp(48px,8vw,96px)]">
-    <p class="mb-3 text-[0.67rem] font-black uppercase tracking-[0.18em] text-[#B88A44]">Other travel websites</p>
-    <h1 class="m-0 font-serif text-[clamp(2.4rem,5vw,4.6rem)] font-semibold leading-[0.98] text-[#1F2428]">More travel projects.</h1>
+    <p class="mb-3 text-[0.67rem] font-black uppercase tracking-[0.18em] text-[#A0682E]">Other travel websites</p>
+    <h1 class="m-0 font-serif text-[clamp(2.4rem,5vw,4.6rem)] font-semibold leading-[0.98] text-[#2A2622]">More travel projects.</h1>
   </section>
 
-  <div class="mx-auto w-[min(860px,calc(100%_-_40px))] border-t border-[#E2D4BF]"></div>
+  <div class="mx-auto w-[min(860px,calc(100%_-_40px))] border-t border-[#E6DBBE]"></div>
 
   <div class="mx-auto w-[min(1180px,calc(100%_-_40px))] pb-[clamp(2rem,5vw,4rem)]">
     {sisterSites.map((site) => (
-      <section class="border-b border-[#E2D4BF] py-[clamp(2rem,5vw,3rem)] last:border-b-0" aria-labelledby={`${site.title.toLowerCase().replaceAll(' ', '-')}-heading`}>
+      <section class="border-b border-[#E6DBBE] py-[clamp(2rem,5vw,3rem)] last:border-b-0" aria-labelledby={`${site.title.toLowerCase().replaceAll(' ', '-')}-heading`}>
         <a
           id={`${site.title.toLowerCase().replaceAll(' ', '-')}-heading`}
-          class="inline-flex font-serif text-[clamp(1.5rem,3vw,2.35rem)] leading-tight text-[#1F2428] underline decoration-[#B88A44]/40 underline-offset-8 transition-colors hover:text-[#B88A44]"
+          class="inline-flex font-serif text-[clamp(1.5rem,3vw,2.35rem)] leading-tight text-[#2A2622] underline decoration-[#A0682E]/40 underline-offset-8 transition-colors hover:text-[#A0682E]"
           href={site.href}
           target="_blank"
           rel="noopener noreferrer"
         >
           {site.title}
         </a>
-        <div class="mt-6 overflow-hidden rounded-xl border border-[#E2D4BF] bg-white shadow-[0_3px_18px_rgba(31,36,40,0.07)]">
+        <div class="mt-6 overflow-hidden rounded-xl border border-[#E6DBBE] bg-white shadow-[0_3px_18px_rgba(42, 38, 34,0.07)]">
           <iframe
             src={site.href}
             title={site.frameTitle}
@@ -57,7 +57,7 @@ const sisterSites = [
     <img
       src="/images/about/about-gary-wilson-50-five-star-hotels.png"
       alt="Illustrated travel infographic about Gary Wilson, his 154-country travel background, and the story behind 50 Five-Star Hotels."
-      class="mx-auto h-auto w-full max-w-[1200px] rounded-2xl border border-[#E2D4BF] bg-[#FFFDF8] object-contain shadow-sm"
+      class="mx-auto h-auto w-full max-w-[1200px] rounded-2xl border border-[#E6DBBE] bg-[#FFFDF6] object-contain shadow-sm"
       width="800"
       height="1200"
       loading="lazy"

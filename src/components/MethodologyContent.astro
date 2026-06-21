@@ -3,15 +3,15 @@
 
 <section id="methodology" class="max-w-4xl mx-auto px-5 py-16 md:py-20 scroll-mt-20">
   <div class="prose prose-lg max-w-none
-    prose-headings:font-serif prose-headings:text-[#1F2428]
+    prose-headings:font-serif prose-headings:text-[#2A2622]
     prose-h1:text-4xl prose-h1:mb-8
     prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
     prose-h3:text-lg prose-h3:mt-8
-    prose-p:text-[#1F2428]/75 prose-p:leading-relaxed
-    prose-strong:text-[#1F2428]
-    prose-a:text-[#B88A44] prose-a:no-underline hover:prose-a:underline">
+    prose-p:text-[#2A2622]/75 prose-p:leading-relaxed
+    prose-strong:text-[#2A2622]
+    prose-a:text-[#A0682E] prose-a:no-underline hover:prose-a:underline">
 
-    <p class="text-[#B88A44] text-xs font-bold uppercase tracking-widest not-prose mb-4">Evaluation framework</p>
+    <p class="text-[#A0682E] text-xs font-bold uppercase tracking-widest not-prose mb-4">Evaluation framework</p>
     <h1>How we choose hotels</h1>
 
     <p>
@@ -34,10 +34,10 @@
 
     <p>Each hotel is assessed against six factors. The final value score is out of 100.</p>
 
-    <div class="not-prose overflow-x-auto rounded-2xl border border-[#1F2428]/8 my-8">
+    <div class="not-prose overflow-x-auto rounded-2xl border border-[#2A2622]/8 my-8">
       <table class="w-full text-sm">
         <thead>
-          <tr class="bg-[#1F2428] text-white text-left">
+          <tr class="bg-[#2A2622] text-white text-left">
             <th class="py-3 px-5 font-semibold">Factor</th>
             <th class="py-3 px-5 font-semibold text-right">Weight</th>
           </tr>
@@ -51,9 +51,9 @@
             ['Nearby sights, food and experiences', '15%'],
             ['Risk level and hidden drawbacks', '10%'],
           ].map(([factor, weight], i) => (
-            <tr class={`border-t border-[#1F2428]/6 ${i % 2 === 0 ? 'bg-[#FFFDF8]' : 'bg-[#F8F2E8]/60'}`}>
-              <td class="py-3 px-5 text-[#1F2428]/80">{factor}</td>
-              <td class="py-3 px-5 text-right font-bold text-[#4F6547]">{weight}</td>
+            <tr class={`border-t border-[#2A2622]/6 ${i % 2 === 0 ? 'bg-[#FFFDF6]' : 'bg-[#FBF6E9]/60'}`}>
+              <td class="py-3 px-5 text-[#2A2622]/80">{factor}</td>
+              <td class="py-3 px-5 text-right font-bold text-[#5C7355]">{weight}</td>
             </tr>
           ))}
         </tbody>
@@ -66,10 +66,10 @@
       We apply a deliberate preference for hotels with genuine character. Generic chain towers — however well-priced — rarely produce the kind of stay this site exists to recommend.
     </p>
 
-    <div class="not-prose overflow-x-auto rounded-2xl border border-[#1F2428]/8 my-8">
+    <div class="not-prose overflow-x-auto rounded-2xl border border-[#2A2622]/8 my-8">
       <table class="w-full text-sm">
         <thead>
-          <tr class="bg-[#1F2428] text-white text-left">
+          <tr class="bg-[#2A2622] text-white text-left">
             <th class="py-3 px-5 font-semibold">Hotel type</th>
             <th class="py-3 px-5 font-semibold text-right">Adjustment</th>
           </tr>
@@ -81,9 +81,9 @@
             ['Interesting independent hotel', '+3 points'],
             ['Generic chain hotel', 'no adjustment'],
           ].map(([type, adj], i) => (
-            <tr class={`border-t border-[#1F2428]/6 ${i % 2 === 0 ? 'bg-[#FFFDF8]' : 'bg-[#F8F2E8]/60'}`}>
-              <td class="py-3 px-5 text-[#1F2428]/80">{type}</td>
-              <td class="py-3 px-5 text-right font-bold text-[#4F6547]">{adj}</td>
+            <tr class={`border-t border-[#2A2622]/6 ${i % 2 === 0 ? 'bg-[#FFFDF6]' : 'bg-[#FBF6E9]/60'}`}>
+              <td class="py-3 px-5 text-[#2A2622]/80">{type}</td>
+              <td class="py-3 px-5 text-right font-bold text-[#5C7355]">{adj}</td>
             </tr>
           ))}
         </tbody>
@@ -104,12 +104,12 @@
         { label: 'Conditional value', score: '55–64', desc: 'Worth considering only if specific conditions apply — the price is right on a specific date, or the destination is a priority regardless.' },
         { label: 'Rejected', score: 'Below 55', desc: 'Excluded from the current list.' },
       ].map(v => (
-        <div class="bg-[#FFFDF8] rounded-xl border border-[#1F2428]/6 p-5">
+        <div class="bg-[#FFFDF6] rounded-xl border border-[#2A2622]/6 p-5">
           <div class="flex items-center gap-3 mb-2">
-            <span class="font-serif font-bold text-[#1F2428]">{v.label}</span>
-            <span class="text-xs text-[#6F685F] bg-[#F8F2E8] px-2.5 py-1 rounded-full font-mono">{v.score}</span>
+            <span class="font-serif font-bold text-[#2A2622]">{v.label}</span>
+            <span class="text-xs text-[#5C544A] bg-[#FBF6E9] px-2.5 py-1 rounded-full font-mono">{v.score}</span>
           </div>
-          <p class="text-[#6F685F] text-sm leading-relaxed">{v.desc}</p>
+          <p class="text-[#5C544A] text-sm leading-relaxed">{v.desc}</p>
         </div>
       ))}
     </div>
@@ -127,9 +127,9 @@
         { cat: 'Near-luxury exception', desc: 'Technically not a five-star, but included because the value case is exceptional and the quality is genuinely close.' },
         { cat: 'Questionable five-star', desc: 'The five-star label requires heavy qualification. Only included if the value case is otherwise very strong.' },
       ].map(item => (
-        <div class="bg-[#F8F2E8] rounded-xl p-5">
-          <h3 class="font-serif font-bold text-[#1F2428] mb-2 text-base">{item.cat}</h3>
-          <p class="text-[#6F685F] text-sm leading-relaxed">{item.desc}</p>
+        <div class="bg-[#FBF6E9] rounded-xl p-5">
+          <h3 class="font-serif font-bold text-[#2A2622] mb-2 text-base">{item.cat}</h3>
+          <p class="text-[#5C544A] text-sm leading-relaxed">{item.desc}</p>
         </div>
       ))}
     </div>

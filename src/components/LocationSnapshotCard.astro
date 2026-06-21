@@ -102,10 +102,10 @@ const ariaLabel = mapPreview?.alt
 <style>
   .location-snapshot-card {
     background: #ffffff;
-    border: 1px solid #e2d4bf;
+    border: 1px solid #E6DBBE;
     border-radius: 8px;
-    box-shadow: 0 12px 34px rgba(31, 36, 40, 0.055);
-    color: #1d2433;
+    box-shadow: 0 12px 34px rgba(42, 38, 34, 0.055);
+    color: #2A2622;
     display: grid;
     gap: 1.1rem;
     grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 0.92fr);
@@ -123,7 +123,7 @@ const ariaLabel = mapPreview?.alt
   }
 
   .location-eyebrow {
-    color: #b88a44;
+    color: #A0682E;
     font-size: 0.68rem;
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -133,7 +133,7 @@ const ariaLabel = mapPreview?.alt
   }
 
   .location-copy h2 {
-    color: #1d2433;
+    color: #2A2622;
     font-family: var(--font-serif);
     font-size: clamp(1.45rem, 2.2vw, 1.9rem);
     font-weight: 750;
@@ -143,7 +143,7 @@ const ariaLabel = mapPreview?.alt
   }
 
   .location-verdict {
-    color: #1d2433;
+    color: #2A2622;
     font-size: 1rem;
     font-weight: 650;
     line-height: 1.55;
@@ -158,10 +158,10 @@ const ariaLabel = mapPreview?.alt
   }
 
   .location-chips span {
-    background: #f8f5ef;
+    background: #F7EFD7;
     border: 1px solid #eadfce;
     border-radius: 999px;
-    color: #58745a;
+    color: #5C7355;
     font-size: 0.76rem;
     font-weight: 800;
     line-height: 1.2;
@@ -169,14 +169,14 @@ const ariaLabel = mapPreview?.alt
   }
 
   .nearby-anchors {
-    background: #fffdf8;
+    background: #FFFDF6;
     border: 1px solid #eee4d5;
     border-radius: 8px;
     padding: 0.85rem;
   }
 
   .nearby-anchors h3 {
-    color: #1d2433;
+    color: #2A2622;
     font-family: var(--font-serif);
     font-size: 0.98rem;
     font-weight: 750;
@@ -193,7 +193,7 @@ const ariaLabel = mapPreview?.alt
   }
 
   .nearby-anchors li {
-    border-left: 3px solid #b88a44;
+    border-left: 3px solid #A0682E;
     display: grid;
     gap: 0.12rem;
     min-width: 0;
@@ -201,21 +201,21 @@ const ariaLabel = mapPreview?.alt
   }
 
   .nearby-anchors span {
-    color: #1d2433;
+    color: #2A2622;
     font-size: 0.9rem;
     font-weight: 800;
     line-height: 1.25;
   }
 
   .nearby-anchors small {
-    color: #6b7280;
+    color: #5C544A;
     font-size: 0.78rem;
     font-weight: 650;
     line-height: 1.35;
   }
 
   .location-address {
-    color: #6b7280;
+    color: #5C544A;
     font-size: 0.84rem;
     font-weight: 650;
     line-height: 1.45;
@@ -224,7 +224,7 @@ const ariaLabel = mapPreview?.alt
 
   .maps-button {
     align-items: center;
-    background: #1d2433;
+    background: #2A2622;
     border-radius: 8px;
     color: #ffffff;
     display: inline-flex;
@@ -242,13 +242,13 @@ const ariaLabel = mapPreview?.alt
 
   .maps-button:hover,
   .maps-button:focus-visible {
-    background: #b88a44;
+    background: #A0682E;
     color: #ffffff;
     text-decoration: none;
   }
 
   .maps-button:focus-visible {
-    outline: 3px solid rgba(184, 138, 68, 0.35);
+    outline: 3px solid rgba(160, 104, 46, 0.35);
     outline-offset: 3px;
   }
 
@@ -277,9 +277,9 @@ const ariaLabel = mapPreview?.alt
 
   .fallback-map {
     background:
-      radial-gradient(circle at 22% 18%, rgba(88, 116, 90, 0.16), transparent 26%),
-      radial-gradient(circle at 84% 82%, rgba(184, 138, 68, 0.16), transparent 30%),
-      linear-gradient(135deg, #f8f5ef 0%, #efe3d1 100%);
+      radial-gradient(circle at 22% 18%, rgba(92, 115, 85, 0.16), transparent 26%),
+      radial-gradient(circle at 84% 82%, rgba(160, 104, 46, 0.16), transparent 30%),
+      linear-gradient(135deg, #F7EFD7 0%, #F1E7CB 100%);
     border: 1px solid #e3d6c5;
     min-height: 100%;
     position: relative;
@@ -301,16 +301,16 @@ const ariaLabel = mapPreview?.alt
 
   .map-lines path:nth-child(2),
   .map-lines path:nth-child(4) {
-    stroke: rgba(184, 138, 68, 0.22);
+    stroke: rgba(160, 104, 46, 0.22);
     stroke-width: 8;
   }
 
   .hotel-pin {
     align-items: center;
-    background: #1d2433;
+    background: #2A2622;
     border: 3px solid #ffffff;
     border-radius: 50% 50% 50% 0;
-    box-shadow: 0 10px 22px rgba(29, 36, 51, 0.24);
+    box-shadow: 0 10px 22px rgba(42, 38, 34, 0.24);
     display: flex;
     height: 2.7rem;
     justify-content: center;
@@ -322,7 +322,7 @@ const ariaLabel = mapPreview?.alt
   }
 
   .hotel-pin span {
-    background: #b88a44;
+    background: #A0682E;
     border-radius: 50%;
     display: block;
     height: 0.9rem;
@@ -334,8 +334,8 @@ const ariaLabel = mapPreview?.alt
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(226, 212, 191, 0.95);
     border-radius: 999px;
-    box-shadow: 0 8px 18px rgba(31, 36, 40, 0.07);
-    color: #1d2433;
+    box-shadow: 0 8px 18px rgba(42, 38, 34, 0.07);
+    color: #2A2622;
     font-size: 0.75rem;
     font-weight: 850;
     line-height: 1.15;
@@ -356,10 +356,10 @@ const ariaLabel = mapPreview?.alt
   }
 
   .map-anchor span {
-    background: #58745a;
+    background: #5C7355;
     border: 2px solid #ffffff;
     border-radius: 999px;
-    box-shadow: 0 0 0 1px rgba(88, 116, 90, 0.28);
+    box-shadow: 0 0 0 1px rgba(92, 115, 85, 0.28);
     display: block;
     height: 0.72rem;
     width: 0.72rem;
@@ -387,7 +387,7 @@ const ariaLabel = mapPreview?.alt
 
   .map-note {
     bottom: 0.75rem;
-    color: #6b7280;
+    color: #5C544A;
     font-size: 0.68rem;
     font-weight: 700;
     left: 0.85rem;
