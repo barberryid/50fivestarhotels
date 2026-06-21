@@ -11,3 +11,6 @@ __pycache__/
 
 # Microsoft Office temporary owner files
 ~$*
+
+# Local working project brief (edited frequently, embeds large screenshots)
+/50fivestarhotels.docx
