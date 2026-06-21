@@ -1,24 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { exampleHotels } from '../data/exampleHotels';
+import { getCollection } from 'astro:content';
+import HotelComparisonTable from '../components/HotelComparisonTable.astro';
 import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../lib/seo';
 
-const hotels = exampleHotels;
-
-const filterChips = [
-  { label: 'All', value: 'All' },
-  { label: 'Under €50', value: '50' },
-  { label: 'Under €100', value: '100' },
-  { label: 'Under €200', value: '200' },
-  { label: 'Under €250', value: '250' },
-];
+// The full published collection — every non-draft hotel — ranked by value.
+const collection = await getCollection('hotels', ({ data }) => !data.draft);
+const tableHotels = collection
+  .map(({ data }) => ({
+    slug: data.slug,
+    rank: data.rank,
+    title: data.title,
+    city: data.city,
+    country: data.country,
+    budgetTier: data.budgetTier,
+    valueScore: data.valueScore,
+    verdict: data.verdict,
+    fiveStarStatus: data.fiveStarStatus,
+    bestFor: data.bestFor,
+    cautions: data.cautions,
+  }))
+  .sort((a, b) => a.rank - b.rank);
 
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: canonicalUrl('/') },
     { name: 'The Collection', url: canonicalUrl('/all-hotels/') },
   ]),
-  itemListJsonLd('Five-star value stays from 50 Five-Star Hotels', hotels),
+  itemListJsonLd('Five-star value stays from 50 Five-Star Hotels', tableHotels),
 ];
 ---
 
@@ -34,73 +43,15 @@ const jsonLd = [
         <div style="max-width:1180px;margin:0 auto;">
           <p style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#A0682E;margin:0 0 14px;">The collection</p>
           <h1 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(36px,6vw,70px);line-height:1;letter-spacing:-0.015em;margin:0;">Every <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.1em;">five-star</span> stay</h1>
-          <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.6;color:#5C544A;max-width:58ch;margin:18px 0 0;">Fifty hotels that pass the test, ranked by value and grouped by what you'll spend. Showing <strong id="fs-count" style="color:#2A2622;">{hotels.length}</strong> published stays.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;">
-            {filterChips.map((chip) => (
-              <button type="button" class={`fltchip${chip.value === 'All' ? ' on' : ''}`} data-filter={chip.value} aria-pressed={chip.value === 'All' ? 'true' : 'false'}>{chip.label}</button>
-            ))}
-          </div>
+          <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.6;color:#5C544A;max-width:62ch;margin:18px 0 0;">Every five-star (and near-five-star) stay we've published — <strong style="color:#2A2622;">{tableHotels.length}</strong> in all, ranked by value and grouped by what you'll spend a night, all under €250 in shoulder season. Tap any hotel for the full profile.</p>
         </div>
       </section>
 
       <section style="padding:clamp(28px,4vw,44px) clamp(18px,4vw,40px) clamp(48px,6vw,80px);">
         <div style="max-width:1180px;margin:0 auto;">
-          <div id="fs-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px;">
-            {hotels.map((item) => (
-              <a
-                href={`/hotels/${item.slug}/`}
-                class="htl-card fs-grid-card"
-                data-tiermax={item.tierMax}
-                style="display:block;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:16px;overflow:hidden;box-shadow:0 12px 28px -20px rgba(42,38,34,.34);text-decoration:none;color:inherit;animation:card-rise .4s ease both;"
-              >
-                <div style="aspect-ratio:16/11;overflow:hidden;background:#F1E7CB;position:relative;">
-                  <img src={item.img} alt={item.title} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;" />
-                  <span style="position:absolute;top:13px;left:13px;display:inline-flex;align-items:center;gap:6px;background:rgba(247,239,215,.94);backdrop-filter:blur(4px);border:1px solid rgba(42,38,34,.1);border-radius:999px;padding:6px 11px;font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:#A0682E;">{item.tier}</span>
-                  <span style="position:absolute;top:13px;right:13px;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;background:#2A2622;color:#EAB92B;font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;">{item.score}</span>
-                </div>
-                <div style="padding:18px 20px 20px;">
-                  <p style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8E847A;margin:0 0 7px;">{item.type}</p>
-                  <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:21px;line-height:1.12;margin:0;letter-spacing:-0.01em;">{item.title}</h3>
-                  <p style="font-family:'Source Serif 4',serif;font-weight:600;color:#5C7355;margin:8px 0 0;font-size:14.5px;">{item.place}</p>
-                  <div style="height:1px;background:#ECE0C2;margin:13px 0;"></div>
-                  <p style="font-family:'Source Serif 4',serif;color:#6B6256;margin:0;font-size:14px;line-height:1.5;">{item.price}</p>
-                </div>
-              </a>
-            ))}
-          </div>
-          <p id="fs-empty" style="display:none;font-family:'Source Serif 4',serif;font-size:16px;color:#5C544A;text-align:center;padding:40px 0;">No published stays in this band yet — try a higher budget.</p>
+          <HotelComparisonTable hotels={tableHotels} title={`All ${tableHotels.length} stays at a glance`} />
         </div>
       </section>
     </main>
   </div>
 </BaseLayout>
-
-<script>
-  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
-  const cards = Array.from(document.querySelectorAll<HTMLElement>('.fs-grid-card'));
-  const countEl = document.getElementById('fs-count');
-  const emptyEl = document.getElementById('fs-empty');
-
-  function applyFilter(value: string) {
-    let shown = 0;
-    cards.forEach((card) => {
-      const max = Number(card.dataset.tiermax);
-      const visible = value === 'All' || max <= Number(value);
-      card.classList.toggle('fs-card-hidden', !visible);
-      if (visible) shown++;
-    });
-    if (countEl) countEl.textContent = String(shown);
-    if (emptyEl) emptyEl.style.display = shown === 0 ? 'block' : 'none';
-  }
-
-  chips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      chips.forEach((c) => {
-        const on = c === chip;
-        c.classList.toggle('on', on);
-        c.setAttribute('aria-pressed', String(on));
-      });
-      applyFilter(chip.dataset.filter as string);
-    });
-  });
-</script>
