@@ -10,6 +10,72 @@ Destination quality and hotel quality carry equal weight. A compelling hotel in 
 
 ---
 
+## Design system & styling (ACTIVE — use this for all new/updated UI)
+
+The site's current design language is the **warm editorial "dream hotel"** design,
+recreated from `design_handoff_50fivestarhotels/` (see its `README.md` for the full
+spec). It is an **independent** design — do **not** pull in the "50 Difficult Places"
+system, and do **not** revert to the older Fraunces/Inter "toolkit" look.
+
+**When building or editing any page/component, match this design.** The global header
+and footer already use it, so every page must visually agree with them.
+
+### Fonts (loaded in `src/components/SeoHead.astro`)
+- **Bodoni Moda** — display: H1/H2/H3, wordmark, card titles, budget numbers. Tight
+  tracking (`-0.01em`…`-0.022em`).
+- **Dancing Script** — the single handwritten accent word per heading, in `--accent`
+  (e.g. *dream*, *hotel search*, *five-star bargains*). Use sparingly.
+- **Source Serif 4** — all reading copy, subtitles, card body, inputs, prompt text.
+- **Archivo** — all UI chrome: UPPERCASE eyebrows (700–800, wide letter-spacing),
+  nav, labels, chips, buttons, badges.
+
+Fraunces/Inter are still loaded for legacy pages — don't rely on them for new work.
+
+### Colour tokens (apply as literal hex inline, matching the handoff)
+Cream ground `#F7EFD7` · paper/card `#FFFDF6` · paper inset `#FBF6E9` · ink text/dark bg
+`#2A2622` · footer ink `#211E1A` · dark panel `#33302A` · muted `#5C544A` · soft label
+`#8E847A` · faint marginalia `#A99A78` · **accent (clay) `#B0492B`** (the `--accent` CSS
+var) · rust eyebrow `#A0682E` · gold `#EAB92B` (illustration mass `#F0C23A`) · green
+(value/positive) `#5C7355` · sand borders `#E6DBBE` / `#E0D3B0` / `#ECE0C2` · dashed
+`#D8C79A`. Shadows are warm ink-tinted, never grey.
+
+### Conventions
+- Wrap each page/section root in a `class="fs"` element and set `--accent:#B0492B`
+  inline on it (the script-word colour, link hovers, overlay arrows read from it).
+- **Apply colours/sizes as inline `style="…"`** on the markup, copying the handoff
+  values — this is the established pattern here and beats `global.css` for headings
+  (which globally forces Fraunces on `h1/h2`). Inline styles win, so headings get
+  Bodoni via inline `font-family`.
+- Reusable hover/keyframe/responsive rules live in `src/styles/global.css` under the
+  "Warm editorial redesign" block: `.fltchip`(+`.on`), `.htl-card`, `.btn-ink`,
+  `.btn-ghost`, `.budget-tile`, `.hero-stage`/`.hw*`, `.ov-link`, `.nav-pill`,
+  `.foot-link`, and `.fs-*` helpers. Reuse these; don't duplicate them.
+  - Gotcha: an inline `display:…` beats a stylesheet class, so responsive show/hide
+    helpers (e.g. `.fs-cta-browse`) use `!important`.
+- Active/selected states = conditional class (`class={on ? 'fltchip on' : 'fltchip'}`),
+  not markup swapping.
+- Interactivity (prompt builder, collection filter, overlay menu) is plain vanilla
+  `<script>` — the site is static Astro, no client framework.
+- Use real routes, never SPA screen-switching.
+
+### Key files
+- Chrome: `src/components/Header.astro` (sticky cream bar + full-screen overlay menu),
+  `src/components/Footer.astro` (dark, gold top rule). Both global via `BaseLayout`.
+- Home `src/pages/index.astro`; Collection `src/pages/all-hotels.astro`.
+- Card / featured / collection data: `src/data/exampleHotels.ts` (fixed 12-item
+  editorial set with exact scores/copy/dusk imagery — kept separate from the `hotels`
+  content collection so the marketing screens stay pixel-faithful). Cards link to
+  `/hotels/<slug>/`. Homepage "Example hotel ideas" shows **one hotel per budget tier**
+  (under €50 / €100 / €250); the €100 slot is The Brown Hotel (`brownHotelLouisville`,
+  pulled from the content collection). The hero palazzo is an inline SVG — reuse as-is.
+- Assets: `public/images/example-hotels/*.webp`, `public/images/star-logo.svg`.
+
+**Migration note:** older pages (guides, region pages, `/under-*`, hotel detail, etc.)
+still use the legacy toolkit/global.css classes. They keep working under the new global
+header/footer, but when you touch one substantially, bring it into this design.
+
+---
+
 ## Research workflow
 
 IMPORTANT: Always follow this sequence. Do not skip steps or reorder them.
