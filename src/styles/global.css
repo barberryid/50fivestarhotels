@@ -718,6 +718,26 @@ summary:focus-visible {
 .fltchip:hover { border-color: #C9B98C; color: #2A2622; }
 .fltchip.on { background: #2A2622; color: #F7EFD7; border-color: #2A2622; }
 
+/* ---- Floating-cards process section (#how) ----
+   Default (mobile / no-JS / reduced-motion) = a readable static column.
+   JS adds .is-fan on wide viewports with motion allowed, switching to the
+   pinned scroll-driven fan; the per-frame transform/opacity are set inline. */
+.how-track { position: relative; background: linear-gradient(180deg,#F7EFD7 0%,#F4EACD 100%); border-top: 1px solid #ECE0C2; }
+.how-vp { padding: 78px 18px 44px; }
+.how-head { text-align: center; margin: 0 auto 26px; max-width: 720px; }
+.how-stage { display: flex; flex-direction: column; align-items: center; gap: 26px; }
+.pcard { position: relative; opacity: 1; }
+.how-cta { text-align: center; margin-top: 30px; }
+.how-cta-btn { transition: background .18s ease, transform .15s ease; }
+.how-cta-btn:hover { background: #000; transform: translateY(-2px); }
+
+.how-track.is-fan { height: 420vh; }
+.how-track.is-fan .how-vp { position: sticky; top: 0; height: 100vh; overflow: hidden; padding: 0; }
+.how-track.is-fan .how-head { position: absolute; left: 0; right: 0; top: 96px; z-index: 42; pointer-events: none; margin: 0; max-width: none; padding: 0 20px; }
+.how-track.is-fan .how-stage { position: absolute; inset: 0; display: block; }
+.how-track.is-fan .pcard { position: absolute; left: 50%; top: 50%; opacity: 0; will-change: transform, opacity; }
+.how-track.is-fan .how-cta { position: absolute; left: 0; right: 0; bottom: 46px; z-index: 48; opacity: 0; pointer-events: none; margin-top: 0; padding: 0 20px; }
+
 /* Desktop inline nav pills appear at wide widths; overlay menu is primary on mobile. */
 .fs-desk-nav { display: none; }
 @media (min-width: 900px) { .fs-desk-nav { display: inline-flex; } }
