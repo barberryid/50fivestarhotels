@@ -67,10 +67,10 @@ const jsonLd = [
             <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(24px,3.2vw,38px);letter-spacing:-0.01em;margin:0;color:#2A2622;">From a rough idea to a <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.12em;">month-by-month plan</span></h2>
           </div>
 
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;">
+          <div class="bt-fan">
 
             <!-- CARD 01 -->
-            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
               <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
                   <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Destination</span>
@@ -88,7 +88,7 @@ const jsonLd = [
             </article>
 
             <!-- CARD 02 -->
-            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
               <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
                   <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Months</span>
@@ -106,7 +106,7 @@ const jsonLd = [
             </article>
 
             <!-- CARD 03 -->
-            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
               <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
                   <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Priorities</span>
@@ -124,7 +124,7 @@ const jsonLd = [
             </article>
 
             <!-- CARD 04 -->
-            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
               <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
                   <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Risks</span>
@@ -142,7 +142,7 @@ const jsonLd = [
             </article>
 
             <!-- CARD 05 -->
-            <article style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 22px 44px -30px rgba(42,38,34,.5);overflow:hidden;">
+            <article class="bt-card" style="display:flex;flex-direction:column;background:#FFFDF6;border:1px solid #E6DBBE;border-radius:20px;box-shadow:0 30px 60px -34px rgba(42,38,34,.55);overflow:hidden;">
               <div style="padding:24px 26px 0;flex:1;display:flex;flex-direction:column;">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
                   <span style="font-family:'Archivo',sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#A0682E;">Copy prompt</span>
@@ -208,3 +208,54 @@ const jsonLd = [
     </main>
   </div>
 </BaseLayout>
+
+<style>
+  /* Five step cards: static, hand-dealt fan on wide screens; a plain
+     stacked grid on tablet/mobile. No scroll animation — the fan is the
+     resting state, dealt out once. */
+  .bt-fan {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+  }
+
+  @media (min-width: 1180px) {
+    .bt-fan {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      min-height: 660px;
+    }
+    .bt-fan > .bt-card {
+      flex: 0 0 312px;
+      width: 312px;
+      height: 520px;
+      transform-origin: center center;
+      will-change: transform;
+    }
+    .bt-fan > .bt-card:nth-child(1) { transform: rotate(-9deg) translateY(40px); z-index: 10; }
+    .bt-fan > .bt-card:nth-child(2) { margin-left: -116px; transform: rotate(-4deg) translateY(-6px); z-index: 11; }
+    .bt-fan > .bt-card:nth-child(3) { margin-left: -116px; transform: rotate(3deg)  translateY(44px); z-index: 12; }
+    .bt-fan > .bt-card:nth-child(4) { margin-left: -116px; transform: rotate(-6deg) translateY(8px);  z-index: 13; }
+    .bt-fan > .bt-card:nth-child(5) { margin-left: -116px; transform: rotate(4deg)  translateY(50px); z-index: 14; }
+
+    /* Lift a card to the front and straighten it slightly on hover. */
+    .bt-fan > .bt-card {
+      transition: transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .28s ease;
+    }
+    .bt-fan > .bt-card:hover {
+      z-index: 20;
+      box-shadow: 0 40px 70px -30px rgba(42, 38, 34, .6);
+    }
+    .bt-fan > .bt-card:nth-child(1):hover { transform: rotate(-3deg) translateY(8px) scale(1.03); }
+    .bt-fan > .bt-card:nth-child(2):hover { transform: rotate(-1deg) translateY(-26px) scale(1.03); }
+    .bt-fan > .bt-card:nth-child(3):hover { transform: rotate(1deg)  translateY(20px) scale(1.03); }
+    .bt-fan > .bt-card:nth-child(4):hover { transform: rotate(-2deg) translateY(-14px) scale(1.03); }
+    .bt-fan > .bt-card:nth-child(5):hover { transform: rotate(2deg)  translateY(28px) scale(1.03); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bt-fan > .bt-card { transition: none; }
+  }
+</style>
