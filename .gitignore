@@ -14,3 +14,6 @@ __pycache__/
 
 # Local working project brief (edited frequently, embeds large screenshots)
 /50fivestarhotels.docx
+
+# Design handoff reference bundle (not site code)
+/Design implementation for about page/
