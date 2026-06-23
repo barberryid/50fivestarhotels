@@ -20,7 +20,7 @@ import BestMonths from '../components/trust/BestMonths.astro';
 import { hotelAirQuality } from '../data/hotelAirQuality';
 import { hotelSeasonality } from '../data/hotelSeasonality';
 import { locationSnapshots } from '../data/locationSnapshots';
-import { absoluteUrl, breadcrumbJsonLd, canonicalUrl, imageUrl, publisherJsonLd } from '../lib/seo';
+import { absoluteUrl, breadcrumbJsonLd, canonicalUrl, imageUrl, publisherJsonLd, webPageJsonLd } from '../lib/seo';
 import { countryRegion, regionSlug } from '../lib/regions';
 import { getBookingAffiliateUrl } from '../utils/affiliateLinks';
 
@@ -100,11 +100,17 @@ const bestWeatherMonths = seasonality?.weather.months.filter(m => m.label === 'B
 const cheapestMonths = seasonality?.price.months.filter(m => m.label === 'Cheapest').map(m => m.month) ?? [];
 const pageUrl = canonicalUrl(`/hotels/${hotel.slug}/`);
 const hotelDescription = hotel.seoDescription;
+const hotelLastUpdated = hotel.lastUpdated ?? '2026-06-23';
 const breadcrumbLd = breadcrumbJsonLd([
   { name: 'Home', url: absoluteUrl('/') },
   { name: 'Hotels', url: absoluteUrl('/all-hotels/') },
   { name: hotel.title, url: pageUrl },
 ]);
+const hotelPageLd = webPageJsonLd({
+  title: hotel.seoTitle,
+  description: hotelDescription,
+  path: `/hotels/${hotel.slug}/`,
+});
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -116,8 +122,12 @@ const articleJsonLd = {
     name: '50 Five-Star Hotels',
   },
   publisher: publisherJsonLd(),
-  mainEntityOfPage: pageUrl,
-  dateModified: hotel.lastUpdated,
+  mainEntityOfPage: {
+    '@id': `${pageUrl}#webpage`,
+  },
+  datePublished: '2026-05-31',
+  dateModified: hotelLastUpdated,
+  inLanguage: 'en',
 };
 const hotelKeywords = [
   hotel.focusKeyword,
@@ -141,6 +151,7 @@ const hotelJsonLd = {
         bestRating: '5',
       }
     : undefined,
+  priceRange: hotel.typicalPriceRange,
   description: hotelDescription,
 };
 const finderHref = `/hotel-finder/?country=${encodeURIComponent(hotel.country)}&city=${encodeURIComponent(hotel.city)}#hotel-finder`;
@@ -163,7 +174,7 @@ const relatedGuides = [
 ];
 ---
 
-<BaseLayout title={`${hotel.seoTitle} | 50fivestarhotels.com`} description={hotel.seoDescription} canonical={`/hotels/${hotel.slug}/`} image={hotel.image?.src} keywords={hotelKeywords} type="article" jsonLd={[breadcrumbLd, articleJsonLd, hotelJsonLd]}>
+<BaseLayout title={`${hotel.seoTitle} | 50 Five-Star Hotels`} description={hotel.seoDescription} canonical={`/hotels/${hotel.slug}/`} image={hotel.image?.src} imageAlt={hotel.image?.alt ?? `${hotel.title} in ${hotel.city}, ${hotel.country}`} keywords={hotelKeywords} type="article" jsonLd={[breadcrumbLd, hotelPageLd, articleJsonLd, hotelJsonLd]} publishedTime="2026-05-31" modifiedTime={hotelLastUpdated}>
   <main class="max-w-6xl mx-auto px-5 py-10">
     <!-- Breadcrumbs -->
     <div class="mb-8">

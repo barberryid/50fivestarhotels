@@ -2,11 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HotelFinder from '../components/HotelFinder.astro';
 import MethodologyContent from '../components/MethodologyContent.astro';
-import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, webApplicationJsonLd, webPageJsonLd, websiteJsonLd } from '../lib/seo';
+
+const title = 'AI Hotel Finder Prompt for Affordable Luxury Hotels | 50 Five-Star Hotels';
+const description = 'Build a ChatGPT hotel prompt or Claude hotel prompt for affordable luxury hotels, best-value hotels and five-star hotels without five-star prices.';
 
 const jsonLd = [
   websiteJsonLd(),
   publisherJsonLd(),
+  webPageJsonLd({ title, description, path: '/hotel-finder/' }),
   webApplicationJsonLd(),
   breadcrumbJsonLd([
     { name: 'Home', url: canonicalUrl('/') },
@@ -16,8 +20,8 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title="AI Hotel Finder Prompt for Affordable Luxury Hotels | 50 Five-Star Hotels"
-  description="Build a ChatGPT hotel prompt or Claude hotel prompt for affordable luxury hotels, best-value hotels and five-star hotels without five-star prices."
+  title={title}
+  description={description}
   canonical="/hotel-finder/"
   jsonLd={jsonLd}
 >

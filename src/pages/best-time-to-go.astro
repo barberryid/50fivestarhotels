@@ -1,11 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhenToGoTool from '../components/WhenToGoTool.astro';
-import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, websiteJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, canonicalUrl, publisherJsonLd, webPageJsonLd, websiteJsonLd } from '../lib/seo';
+
+const title = 'Best Time to Go Prompt for Hotel Value by Month | 50 Five-Star Hotels';
+const description = 'Build a ChatGPT or Claude timing prompt that compares hotel value, weather, crowds, air quality and practical risks month by month.';
 
 const jsonLd = [
   websiteJsonLd(),
   publisherJsonLd(),
+  webPageJsonLd({ title, description, path: '/best-time-to-go/' }),
   breadcrumbJsonLd([
     { name: 'Home', url: canonicalUrl('/') },
     { name: 'Best Time to Go', url: canonicalUrl('/best-time-to-go/') },
@@ -14,8 +18,8 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title="Best Time to Go Prompt for Hotel Value by Month | 50 Five-Star Hotels"
-  description="Build a ChatGPT or Claude timing prompt that compares hotel value, weather, crowds, air quality and practical risks month by month."
+  title={title}
+  description={description}
   canonical="/best-time-to-go/"
   jsonLd={jsonLd}
 >

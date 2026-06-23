@@ -1,6 +1,6 @@
 # 50 Five-Star Hotels
 
-50 Five-Star Hotels is a travel guide to affordable five-star and near-five-star hotels around the world.
+50 Five-Star Hotels is a traveller-facing guide to affordable five-star and near-five-star hotels around the world.
 
 Core positioning: five-star hotels without five-star prices.
 
@@ -9,20 +9,25 @@ The site focuses on:
 - cheap five-star hotels worth considering
 - luxury hotels on a budget
 - best-value five-star hotels
-- how to find elite stays by country
-- honest five-star classification
-- price tiers under €50, under €100, under €200, and under €250
+- honest five-star classification checks
+- hotel timing by month, including weather, value, crowds and practical risks
+- price tiers under EUR50, under EUR100, under EUR200 and under EUR250
 
 Important pages:
 - https://50fivestarhotels.com/
+- https://50fivestarhotels.com/hotel-finder/
+- https://50fivestarhotels.com/best-time-to-go/
+- https://50fivestarhotels.com/all-hotels/
 - https://50fivestarhotels.com/under-50/
 - https://50fivestarhotels.com/under-100/
 - https://50fivestarhotels.com/under-200/
 - https://50fivestarhotels.com/under-250/
 - https://50fivestarhotels.com/cheap-five-star-hotels/
 - https://50fivestarhotels.com/affordable-luxury-hotels/
+- https://50fivestarhotels.com/luxury-hotels-on-a-budget/
 - https://50fivestarhotels.com/affordable-five-star-hotels-asia/
 - https://50fivestarhotels.com/affordable-five-star-hotels-europe/
-- https://50fivestarhotels.com/luxury-hotels-on-a-budget/
-- https://50fivestarhotels.com/destinations/
+- https://50fivestarhotels.com/regions/americas/
+- https://50fivestarhotels.com/regions/asia/
+- https://50fivestarhotels.com/regions/europe/
 - https://50fivestarhotels.com/affiliate-disclosure/

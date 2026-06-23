@@ -6,7 +6,7 @@ import RelatedGuides from './RelatedGuides.astro';
 import LastUpdated from './LastUpdated.astro';
 import PriceAccuracyNote from './PriceAccuracyNote.astro';
 import AffiliateDisclosure from './AffiliateDisclosure.astro';
-import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd, webPageJsonLd } from '../lib/seo';
 
 interface Section {
   heading: string;
@@ -69,6 +69,7 @@ const jsonLd = [
     { name: 'Home', url: canonicalUrl('/') },
     { name: h1, url: canonicalUrl(path) },
   ]),
+  webPageJsonLd({ title, description, path, type: 'CollectionPage' }),
   itemListJsonLd(itemListName, hotels),
 ];
 ---

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { exampleHotels, brownHotelLouisville } from '../data/exampleHotels';
 import type { ExampleHotel } from '../data/exampleHotels';
-import { publisherJsonLd, webApplicationJsonLd, websiteJsonLd } from '../lib/seo';
+import { publisherJsonLd, webApplicationJsonLd, webPageJsonLd, websiteJsonLd } from '../lib/seo';
 
 // One example per budget tier (under €50 / €100 / €250) for a clear spread.
 // €50 and €250 take the best-scoring example from each tier; the €100 slot
@@ -23,12 +23,14 @@ const budgetTiles = [
 const budgetChips = [50, 100, 200, 250];
 const styleChips = ['Heritage & history', 'Boutique design', 'Food & markets', 'Beach & resort', 'City base', 'Wellness & spa'];
 
-const jsonLd = [websiteJsonLd(), publisherJsonLd(), webApplicationJsonLd()];
+const title = '50 Five-Star Hotels - AI Hotel Finder and Best Time to Go Prompts';
+const description = 'Build simple AI travel prompts for affordable luxury hotels, five-star hotels without five-star prices, and month-by-month hotel value research.';
+const jsonLd = [websiteJsonLd(), publisherJsonLd(), webPageJsonLd({ title, description, path: '/' }), webApplicationJsonLd()];
 ---
 
 <BaseLayout
-  title="50 Five-Star Hotels - AI Hotel Finder and Best Time to Go Prompts"
-  description="Build simple AI travel prompts for affordable luxury hotels, five-star hotels without five-star prices, and month-by-month hotel value research."
+  title={title}
+  description={description}
   canonical="/"
   image="/images/social/default-og.webp"
   jsonLd={jsonLd}

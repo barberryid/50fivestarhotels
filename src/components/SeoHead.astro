@@ -9,6 +9,9 @@ interface Props {
   type?: 'website' | 'article';
   noindex?: boolean;
   jsonLd?: Record<string, any> | Record<string, any>[];
+  imageAlt?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 import { canonicalUrl as makeCanonicalUrl, imageUrl, siteName } from '../lib/seo';
@@ -23,10 +26,13 @@ const {
   type = 'website',
   noindex = false,
   jsonLd,
+  imageAlt = siteName,
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 const canonicalHref = canonical ? makeCanonicalUrl(new URL(canonical, 'https://50fivestarhotels.com').pathname) : makeCanonicalUrl(Astro.url.pathname);
 const socialImage = imageUrl(image ?? ogImage);
-const robots = noindex ? 'noindex,nofollow' : 'index,follow';
+const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const keywordContent = Array.isArray(keywords) ? keywords.filter(Boolean).join(', ') : keywords;
 ---
@@ -35,22 +41,31 @@ const keywordContent = Array.isArray(keywords) ? keywords.filter(Boolean).join('
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{title}</title>
 <meta name="description" content={description} />
+<meta name="author" content={siteName} />
+<meta name="theme-color" content="#F7EFD7" />
+<meta name="format-detection" content="telephone=no" />
 {keywordContent && <meta name="keywords" content={keywordContent} />}
 <link rel="canonical" href={canonicalHref} />
 <link rel="icon" type="image/png" href="/Favicon.png" />
 <link rel="apple-touch-icon" href="/Favicon.png" />
 <meta name="robots" content={robots} />
 {googleSiteVerification && <meta name="google-site-verification" content={googleSiteVerification} />}
+<meta property="og:locale" content="en_US" />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalHref} />
 <meta property="og:image" content={socialImage} />
+<meta property="og:image:secure_url" content={socialImage} />
+<meta property="og:image:alt" content={imageAlt} />
+{type === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{type === 'article' && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={socialImage} />
+<meta name="twitter:image:alt" content={imageAlt} />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link

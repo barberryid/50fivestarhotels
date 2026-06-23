@@ -5,7 +5,7 @@ import HotelCard from '../components/HotelCard.astro';
 import HotelComparisonTable from '../components/HotelComparisonTable.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import FinderCta from '../components/FinderCta.astro';
-import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd, webPageJsonLd } from '../lib/seo';
 
 const all = await getCollection('hotels', ({ data }) => !data.draft);
 const hotels = all.filter(h => h.data.budgetTier === 'Under €50').sort((a, b) => a.data.rank - b.data.rank);
@@ -29,6 +29,12 @@ const jsonLd = [
     { name: 'Home', url: canonicalUrl('/') },
     { name: 'Five-Star Hotels Under €50', url: canonicalUrl('/under-50/') },
   ]),
+  webPageJsonLd({
+    title: 'Best Five-Star Hotels Under €50 | 50 Five-Star Hotels',
+    description: 'Rare five-star and near-five-star hotel options that can appear at €50 or below, with careful cautions about snapshot rates, seasonality and local star ratings.',
+    path: '/under-50/',
+    type: 'CollectionPage',
+  }),
   itemListJsonLd('Five-star and near-five-star hotels under €50', hotels),
 ];
 ---

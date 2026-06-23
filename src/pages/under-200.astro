@@ -5,6 +5,7 @@ import HotelCard from '../components/HotelCard.astro';
 import HotelComparisonTable from '../components/HotelComparisonTable.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import FinderCta from '../components/FinderCta.astro';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd, webPageJsonLd } from '../lib/seo';
 
 const all = await getCollection('hotels', ({ data }) => !data.draft);
 const hotels = all.filter(h => h.data.budgetTier === 'Under €200').sort((a, b) => a.data.rank - b.data.rank);
@@ -18,11 +19,24 @@ const tableHotels = hotels.map(h => ({
   valueScore: h.data.valueScore,
   verdict: h.data.verdict,
 }));
+
+const title = 'Best Five-Star Hotels Under €200 | 50 Five-Star Hotels';
+const description = 'Explore strong-value five-star hotels under €200, including heritage hotels, spa hotels, city hotels and destination stays.';
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: canonicalUrl('/') },
+    { name: 'Five-Star Hotels Under €200', url: canonicalUrl('/under-200/') },
+  ]),
+  webPageJsonLd({ title, description, path: '/under-200/', type: 'CollectionPage' }),
+  itemListJsonLd('Five-star and near-five-star hotels under €200', hotels),
+];
 ---
 
 <BaseLayout
-  title="Best Five-Star Hotels Under €200 | 50 Five-Star Hotels"
-  description="Explore strong-value five-star hotels under €200, including heritage hotels, spa hotels, city hotels and destination stays."
+  title={title}
+  description={description}
+  canonical="/under-200/"
+  jsonLd={jsonLd}
 >
   <main>
     <!-- Hero -->

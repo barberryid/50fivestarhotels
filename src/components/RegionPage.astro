@@ -6,7 +6,7 @@ import HotelComparisonTable from './HotelComparisonTable.astro';
 import RelatedGuides from './RelatedGuides.astro';
 import LastUpdated from './LastUpdated.astro';
 import PriceAccuracyNote from './PriceAccuracyNote.astro';
-import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd, webPageJsonLd } from '../lib/seo';
 import { countryRegion } from '../lib/regions';
 
 interface Props {
@@ -39,6 +39,7 @@ const tableHotels = hotels.map((h) => ({
 }));
 const jsonLd = [
   breadcrumbJsonLd([{ name: 'Home', url: canonicalUrl('/') }, { name: regionName, url: canonicalUrl(path) }]),
+  webPageJsonLd({ title, description, path, type: 'CollectionPage' }),
   itemListJsonLd(`Affordable five-star hotels in ${regionName}`, hotels),
 ];
 ---

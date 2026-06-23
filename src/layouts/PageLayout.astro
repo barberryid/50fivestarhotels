@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { webPageJsonLd } from '../lib/seo';
 
 interface Props {
   title: string;
@@ -14,9 +15,13 @@ interface Props {
 }
 
 const { title, description, canonical, ogImage, image, type, noindex, jsonLd, maxWidth = 'max-w-4xl' } = Astro.props;
+const pageJsonLd = canonical ? webPageJsonLd({ title, description, path: canonical }) : undefined;
+const mergedJsonLd = pageJsonLd
+  ? [...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []), pageJsonLd]
+  : jsonLd;
 ---
 
-<BaseLayout title={title} description={description} canonical={canonical} ogImage={ogImage} image={image} type={type} noindex={noindex} jsonLd={jsonLd}>
+<BaseLayout title={title} description={description} canonical={canonical} ogImage={ogImage} image={image} type={type} noindex={noindex} jsonLd={mergedJsonLd}>
   <main class={`${maxWidth} mx-auto px-5 py-16`}>
     <slot />
   </main>

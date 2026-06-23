@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import HotelComparisonTable from '../components/HotelComparisonTable.astro';
-import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, canonicalUrl, itemListJsonLd, webPageJsonLd } from '../lib/seo';
 
 // The full published collection — every non-draft hotel — ranked by value.
 const collection = await getCollection('hotels', ({ data }) => !data.draft);
@@ -27,6 +27,12 @@ const jsonLd = [
     { name: 'Home', url: canonicalUrl('/') },
     { name: 'The Collection', url: canonicalUrl('/all-hotels/') },
   ]),
+  webPageJsonLd({
+    title: 'The Collection | 50 Five-Star Hotels',
+    description: "Every five-star (and near-five-star) stay we've published - ranked by value and grouped by what you'll spend a night, all under EUR250 in shoulder season.",
+    path: '/all-hotels/',
+    type: 'CollectionPage',
+  }),
   itemListJsonLd('Five-star value stays from 50 Five-Star Hotels', tableHotels),
 ];
 ---

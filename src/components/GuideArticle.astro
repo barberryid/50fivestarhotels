@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import RelatedGuides from './RelatedGuides.astro';
 import FinderCta from './FinderCta.astro';
 import LastUpdated from './LastUpdated.astro';
-import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
+import { articleJsonLd, breadcrumbJsonLd, canonicalUrl, webPageJsonLd } from '../lib/seo';
 
 interface Props {
   title: string;
@@ -16,15 +16,20 @@ interface Props {
 }
 
 const { title, description, path, h1, intro, sections, related = [] } = Astro.props;
-const jsonLd = breadcrumbJsonLd([{ name: 'Home', url: canonicalUrl('/') }, { name: h1, url: canonicalUrl(path) }]);
+const lastUpdated = '2026-06-23';
+const jsonLd = [
+  breadcrumbJsonLd([{ name: 'Home', url: canonicalUrl('/') }, { name: h1, url: canonicalUrl(path) }]),
+  webPageJsonLd({ title, description, path }),
+  articleJsonLd({ title: h1, description, path, dateModified: lastUpdated }),
+];
 ---
 
-<BaseLayout title={title} description={description} canonical={path} type="article" jsonLd={jsonLd}>
+<BaseLayout title={title} description={description} canonical={path} type="article" jsonLd={jsonLd} publishedTime="2026-05-31" modifiedTime={lastUpdated}>
   <main class="max-w-4xl mx-auto px-5 py-16">
     <p class="text-[#A0682E] text-xs font-bold uppercase tracking-widest mb-4">Travel-value guide</p>
     <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#2A2622] leading-tight mb-6">{h1}</h1>
     <p class="text-[#5C544A] text-lg leading-relaxed mb-5">{intro}</p>
-    <LastUpdated date="2026-05-31" />
+    <LastUpdated date={lastUpdated} />
     <div class="prose prose-lg max-w-none mt-10 prose-headings:font-serif prose-headings:text-[#2A2622] prose-p:text-[#2A2622]/75 prose-p:leading-relaxed prose-a:text-[#A0682E] prose-a:no-underline hover:prose-a:underline">
       {sections.map((section) => (
         <>
