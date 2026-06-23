@@ -17,3 +17,6 @@ __pycache__/
 
 # Design handoff reference bundle (not site code)
 /Design implementation for about page/
+
+# Source/generated image working folder (not site code)
+/images generated/
