@@ -1,5 +1,14 @@
 # 50 Five-Star Hotels — Project Brief
 
+## About page editorial redesign (23 June 2026)
+
+The `/about/` page (`src/pages/about.astro`) was rebuilt from the `Design implementation for about page/design_handoff_about_page/` bundle. It replaces the previous sister-site-iframe page with a full conversion/trust About page: hero, "What this site helps you do" (6 cards), "Why we built it" origin + notebook quote, "How we judge hotel value" (5 numbered cards + "The standard" box), "Where hotel value hides" (5 cards), "How we travel" (chips + photo), "The story behind the search" (full infographic link), a dark "The promise" band, and a final gradient CTA.
+
+- **Design system:** the handoff ships in the *50 Difficult Places* language (Playfair/Inter, clay `#b85832`, cream `#fdfaf3`). Per `CLAUDE.md`, that system is **not** used here — the layout and copy were recreated but **mapped onto the site's active warm "dream hotel" system**: Bodoni Moda headings, Source Serif 4 body, Archivo eyebrows/chips/buttons, one Dancing Script accent word per major heading, palette `#F7EFD7`/`#FFFDF6`/`#FBF6E9`/`#2A2622`, accent `#B0492B`, rust eyebrow `#A0682E`, green `#5C7355` (handoff forest), gold `#EAB92B`, borders `#E6DBBE`/`#E0D3B0`. Buttons reuse `.btn-ink`/`.btn-ghost`; cards reuse `.htl-card` hover.
+- **Chrome:** uses the global `BaseLayout` Header/Footer — the handoff's own header/footer were intentionally dropped. In-page anchor `#how-we-judge-value` (with `scroll-margin-top:88px`) is targeted by the hero's "See how we choose hotels" button.
+- **Assets:** `public/images/about/hero-gary-isabel.png` and `couple-walking.png` were added from the bundle. The full infographic in §6 reuses the existing `about-gary-wilson-50-five-star-hotels.png` (byte-identical to the bundle's `about-infographic-full.png`, so the duplicate was not committed).
+- Local build check: `npm run build` succeeded (89 pages). Browser verification on desktop + mobile confirmed all sections render with no console errors.
+
 ## Pre-travel checklist page ported from 50difficultplaces (17 June 2026)
 
 The full interactive pre-travel checklist was moved from `50difficultplaces.com/pre-travel-checklist/` to this site at the same path, `/pre-travel-checklist/` (`src/pages/pre-travel-checklist.astro`). It is a 13-section / 171-item checklist with localStorage persistence, trip-type filters, a trip-date picker that generates an `.ics` calendar of reminders, print/copy actions, a progress strip, and a "Do not forget" critical-items sidebar.

@@ -1,67 +1,284 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-const sisterSites = [
+// About page — recreated from design_handoff_about_page/, mapped onto the site's
+// active warm editorial "dream hotel" design system (Bodoni Moda + Source Serif 4
+// + Archivo, accent #B0492B) and the global Header/Footer. The handoff's own
+// header/footer and Playfair/Inter palette are intentionally not reproduced; the
+// layout, copy and structure are.
+
+// Shared inline token strings.
+const eyebrow =
+  "font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.2em;font-size:12px;color:#A0682E;";
+const h2 =
+  "font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(1.9rem,3vw,2.6rem);line-height:1.1;letter-spacing:-0.015em;color:#2A2622;";
+const lead =
+  "font-family:'Source Serif 4',serif;font-size:clamp(1.1rem,1.5vw,1.3125rem);line-height:1.62;color:#5C544A;";
+const section =
+  'max-width:1200px;margin:0 auto;padding:clamp(20px,3vw,32px) clamp(20px,4vw,48px) clamp(40px,6vw,72px);';
+const card =
+  'background:#FFFDF6;border:1px solid #E6DBBE;border-radius:14px;box-shadow:0 2px 14px rgba(42,38,34,.05);';
+
+const helpsCards = [
   {
-    title: '50 Beautiful Places',
-    href: 'https://50beautifulplaces.com/',
-    frameTitle: '50 Beautiful Places',
+    title: 'Build a better hotel shortlist',
+    body: 'Start from a focused brief, not a hundred open tabs.',
+    icon: '<path d="M3 6l1.6 1.6L7.5 4.8"/><path d="M3 14l1.6 1.6L7.5 12.8"/><line x1="11" y1="6" x2="21" y2="6"/><line x1="11" y1="15" x2="21" y2="15"/>',
   },
   {
-    title: '50 Difficult Places',
-    href: 'https://50difficultplaces.com/',
-    frameTitle: '50 Difficult Places',
+    title: 'Compare value, location and five-star reality',
+    body: 'See what the rate really buys before you commit.',
+    icon: '<path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7l-2.4 5.6a3 3 0 0 0 4.8 0L5 7z"/><path d="M19 7l-2.4 5.6a3 3 0 0 0 4.8 0L19 7z"/>',
+  },
+  {
+    title: 'Find the best month to travel',
+    body: 'Line up price, weather and crowds in your favour.',
+    icon: '<rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/>',
+  },
+  {
+    title: 'Avoid expensive hotel mistakes',
+    body: 'Spot dated rooms, weak locations, hidden costs and inflated ratings early.',
+    icon: '<path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9.5" x2="12" y2="13.5"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+  },
+  {
+    title: 'Look beyond obvious luxury hotels',
+    body: 'Find heritage stays, boutiques and local five-stars, not just the big names.',
+    icon: '<path d="M1.6 12S5 5.2 12 5.2 22.4 12 22.4 12 19 18.8 12 18.8 1.6 12 1.6 12z"/><circle cx="12" cy="12" r="3"/>',
+  },
+  {
+    title: 'Find stays that feel better than the price',
+    body: 'Rooms, locations and hotel experiences that punch above what you paid.',
+    icon: '<path d="M12 3l1.9 5L19 9.9l-5 1.9L12 17l-1.9-5.2L5 9.9 10.1 8z"/><path d="M19 15l.7 1.9 1.9.7-1.9.7L19 21l-.7-1.7-1.9-.7 1.9-.7z"/>',
   },
 ];
+
+const judgeCards = [
+  { n: '01', t: 'The hotel', b: 'Does it have comfort, character, service, design, facilities or atmosphere that makes the stay feel special?' },
+  { n: '02', t: 'The price', b: 'Is the rate unusually low for what the traveller receives, especially compared with the local five-star or near-luxury market?' },
+  { n: '03', t: 'The place', b: 'Does the hotel make sense as part of a real trip, with worthwhile sights, food, neighbourhood interest or practical access nearby?' },
+  { n: '04', t: 'The timing', b: 'Is there a better month, season or weekday pattern when the same hotel becomes much better value?' },
+  { n: '05', t: 'The catch', b: 'What should travellers check before booking — location, dated rooms, taxes, breakfast, reviews, seasonality, transport, noise or inflated five-star labels?', accent: true },
+];
+
+const valueCards = [
+  { n: '01', t: 'Heritage hotels outside the obvious capitals', b: 'Older grand hotels can offer atmosphere and space for less than newer luxury brands.' },
+  { n: '02', t: 'Low-season five-star bargains', b: 'Some cities and resorts become dramatically better value outside peak dates.' },
+  { n: '03', t: 'Local five-stars with honest expectations', b: 'Not every five-star is international luxury, but some still offer excellent comfort for the price.' },
+  { n: '04', t: 'Business hotels in underrated cities', b: 'Strong facilities, good service and weak leisure demand can create excellent rates.' },
+  { n: '05', t: 'Destinations people overlook', b: 'Sometimes the best value is not in the hotel alone, but in the combination of hotel, city, food and timing.' },
+];
+
+const travelChips = [
+  '154 countries visited',
+  'Independent travel style',
+  'Hotel-value research systems',
+  'Beautiful and difficult places',
+  'Travel notes, not generic lists',
+];
+
+const infographic = '/images/about/about-gary-wilson-50-five-star-hotels.png';
 ---
 
-<PageLayout
+<BaseLayout
   title="About 50 Five-Star Hotels"
-  description="Explore the sister travel websites from 50 Five-Star Hotels: 50 Beautiful Places and 50 Difficult Places."
+  description="50 Five-Star Hotels is a personal research project by Gary and Isabel Wilson, helping travellers find hotels where the experience feels significantly better than the price."
+  canonical="/about/"
   image="/images/about/about-gary-wilson-50-five-star-hotels.png"
-  maxWidth="max-w-none"
 >
-  <section class="mx-auto w-[min(860px,calc(100%_-_40px))] pb-8 pt-[clamp(48px,8vw,96px)]">
-    <p class="mb-3 text-[0.67rem] font-black uppercase tracking-[0.18em] text-[#A0682E]">Other travel websites</p>
-    <h1 class="m-0 font-serif text-[clamp(2.4rem,5vw,4.6rem)] font-semibold leading-[0.98] text-[#2A2622]">More travel projects.</h1>
-  </section>
+  <div class="fs" style="--accent:#B0492B;font-family:'Source Serif 4',Georgia,serif;color:#2A2622;background:#F7EFD7;overflow-x:hidden;">
 
-  <div class="mx-auto w-[min(860px,calc(100%_-_40px))] border-t border-[#E6DBBE]"></div>
+    <!-- ============ 1 · HERO ============ -->
+    <section style="max-width:1200px;margin:0 auto;padding:clamp(28px,3.5vw,52px) clamp(20px,4vw,48px) clamp(48px,6vw,84px);">
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,72px);align-items:center;">
 
-  <div class="mx-auto w-[min(1180px,calc(100%_-_40px))] pb-[clamp(2rem,5vw,4rem)]">
-    {sisterSites.map((site) => (
-      <section class="border-b border-[#E6DBBE] py-[clamp(2rem,5vw,3rem)] last:border-b-0" aria-labelledby={`${site.title.toLowerCase().replaceAll(' ', '-')}-heading`}>
-        <a
-          id={`${site.title.toLowerCase().replaceAll(' ', '-')}-heading`}
-          class="inline-flex font-serif text-[clamp(1.5rem,3vw,2.35rem)] leading-tight text-[#2A2622] underline decoration-[#A0682E]/40 underline-offset-8 transition-colors hover:text-[#A0682E]"
-          href={site.href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {site.title}
-        </a>
-        <div class="mt-6 overflow-hidden rounded-xl border border-[#E6DBBE] bg-white shadow-[0_3px_18px_rgba(42, 38, 34,0.07)]">
-          <iframe
-            src={site.href}
-            title={site.frameTitle}
-            class="h-[min(72svh,760px)] w-full"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-          ></iframe>
+        <div style="flex:1 1 440px;min-width:300px;">
+          <p style={eyebrow + 'margin:0;'}>About 50 Five-Star Hotels</p>
+          <h1 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(2.4rem,4.6vw,4rem);line-height:1.04;letter-spacing:-0.022em;color:#2A2622;margin:18px 0 0;">Built to help you find your <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.08em;">dream hotel</span> at a sensible price.</h1>
+          <p style={lead + 'margin:24px 0 0;max-width:50ch;text-wrap:pretty;'}>50 Five-Star Hotels is a personal research project by Gary and Isabel Wilson for travellers who want more than the cheapest room. We help you build smarter hotel searches, compare value honestly, and find stays where the experience feels significantly better than the price.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin:32px 0 0;">
+            <a href="/hotel-finder/" class="btn-ink" style="display:inline-flex;align-items:center;gap:8px;background:#2A2622;color:#F7EFD7;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;letter-spacing:.02em;padding:14px 26px;border-radius:11px;text-decoration:none;">Use the Hotel Finder <span style="color:#EAB92B;">→</span></a>
+            <a href="#how-we-judge-value" class="btn-ghost" style="display:inline-flex;align-items:center;gap:8px;border:1.5px solid #E0D3B0;color:#5C544A;background:transparent;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;padding:13px 24px;border-radius:11px;text-decoration:none;">See how we choose hotels</a>
+          </div>
+          <p style="font-family:'Source Serif 4',serif;font-size:13.5px;color:#8E847A;margin:18px 0 0;line-height:1.5;">No account needed. No booking pressure. Just better prompts for smarter travel research.</p>
         </div>
-      </section>
-    ))}
-  </div>
 
-  <figure class="mx-auto w-[min(1180px,calc(100%_-_40px))] pb-[clamp(3rem,6vw,5rem)]">
-    <img
-      src="/images/about/about-gary-wilson-50-five-star-hotels.png"
-      alt="Illustrated travel infographic about Gary Wilson, his 154-country travel background, and the story behind 50 Five-Star Hotels."
-      class="mx-auto h-auto w-full max-w-[1200px] rounded-2xl border border-[#E6DBBE] bg-[#FFFDF6] object-contain shadow-sm"
-      width="800"
-      height="1200"
-      loading="lazy"
-      decoding="async"
-    />
-  </figure>
-</PageLayout>
+        <div style="flex:1 1 460px;min-width:300px;display:flex;justify-content:center;">
+          <div style="position:relative;background:#FFFDF6;padding:16px 16px 18px;border:1px solid #E6DBBE;border-radius:16px;box-shadow:0 18px 50px rgba(42,38,34,.18);transform:rotate(-1.2deg);max-width:530px;width:100%;">
+            <span style="position:absolute;top:-13px;left:24px;transform:rotate(-1.6deg);background:#EAB92B;color:#2A2622;font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.13em;font-size:10.5px;padding:6px 12px;border-radius:6px;box-shadow:0 5px 12px rgba(42,38,34,.2);white-space:nowrap;">Gary &amp; Isabel's travel notes</span>
+            <img src="/images/about/hero-gary-isabel.png" alt="Gary and Isabel Wilson on a mountain trek" width="500" height="375" style="display:block;width:100%;border-radius:9px;" />
+            <p style="font-family:'Source Serif 4',serif;font-style:italic;font-size:14px;line-height:1.45;color:#5C544A;margin:13px 4px 2px;text-align:center;">Gary &amp; Isabel's travel notes became the basis for the Hotel Finder.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 2 · TRUST PANEL ============ -->
+    <section style={section}>
+      <div style="border-top:1px solid #E6DBBE;padding-top:clamp(28px,4vw,44px);margin-bottom:clamp(26px,3.5vw,40px);">
+        <p style={eyebrow + 'margin:0;'}>Why use it</p>
+        <h2 style={h2 + 'margin:12px 0 0;'}>What this site helps you do</h2>
+        <p style="font-family:'Source Serif 4',serif;font-size:17px;line-height:1.6;color:#5C544A;margin:14px 0 0;max-width:56ch;">It exists to make one decision easier: which hotel actually offers good value, and what should you check before you book?</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;">
+        {helpsCards.map((c) => (
+          <div class="htl-card" style={'display:flex;gap:16px;align-items:flex-start;padding:22px;' + card}>
+            <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;height:44px;width:44px;border-radius:999px;background:rgba(92,115,85,.12);color:#5C7355;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" set:html={c.icon}></svg>
+            </span>
+            <div>
+              <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:19px;color:#2A2622;margin:2px 0 0;line-height:1.25;">{c.title}</h3>
+              <p style="font-family:'Source Serif 4',serif;font-size:15px;line-height:1.5;color:#5C544A;margin:7px 0 0;">{c.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============ 3 · WHY WE BUILT IT ============ -->
+    <section id="why-we-built-it" style={section}>
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,64px);align-items:flex-start;">
+
+        <div style="flex:1 1 460px;min-width:300px;">
+          <p style={eyebrow + 'margin:0;'}>The origin</p>
+          <h2 style={h2 + 'margin:12px 0 22px;'}>Why we built 50 Five-Star Hotels</h2>
+          <div style="font-family:'Source Serif 4',serif;font-size:1.1875rem;line-height:1.7;color:#3A352F;">
+            <p style="margin:0 0 1.2rem;">It started with a simple habit: whenever we stayed somewhere that felt much better than the price, we kept a note.</p>
+            <p style="margin:0 0 1.2rem;">Over time, those notes became a pattern. In some places, a standard room costs more than a luxury suite elsewhere. In other places, a heritage hotel, spa resort, stylish city hotel or locally classified five-star property can be surprisingly affordable.</p>
+            <p style="margin:0 0 1.2rem;">We became interested in the question behind the bargain: why does this hotel cost what it does, and what is the traveller really getting for the money?</p>
+            <p style="margin:0;">50 Five-Star Hotels grew out of that question.</p>
+          </div>
+        </div>
+
+        <div style="flex:0 1 360px;min-width:280px;display:flex;justify-content:center;padding-top:18px;">
+          <figure style="margin:0;position:relative;max-width:360px;background:repeating-linear-gradient(#FFFDF6,#FFFDF6 30px,#EFE8D7 30px,#EFE8D7 31px);border:1px solid #E6DBBE;border-radius:12px;box-shadow:0 10px 34px rgba(42,38,34,.1);transform:rotate(1.3deg);padding:30px 28px 26px;">
+            <span style="position:absolute;top:-12px;left:22px;transform:rotate(-2deg);background:#5C7355;color:#FBF6E9;font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.13em;font-size:10px;padding:5px 11px;border-radius:6px;">From the notes</span>
+            <blockquote style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-weight:500;font-size:23px;line-height:1.32;color:#2A2622;">&ldquo;I didn't realise I could stay somewhere like this for that price.&rdquo;</blockquote>
+            <figcaption style="margin:16px 0 0;font-family:'Archivo',sans-serif;font-size:12.5px;color:#8E847A;">The line we kept hearing ourselves say.</figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 4 · HOW WE JUDGE HOTEL VALUE ============ -->
+    <section id="how-we-judge-value" style={section + 'scroll-margin-top:88px;'}>
+      <div style="border-top:1px solid #E6DBBE;padding-top:clamp(28px,4vw,44px);margin-bottom:clamp(28px,4vw,40px);max-width:760px;">
+        <p style={eyebrow + 'margin:0;'}>How we choose</p>
+        <h2 style={h2 + 'margin:12px 0 0;'}>How we judge <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.12em;">hotel value</span></h2>
+        <p style="font-family:'Source Serif 4',serif;font-size:1.1875rem;line-height:1.6;color:#3A352F;margin:16px 0 0;">A cheap five-star is not automatically a good hotel. We look for the point where hotel quality, price, place and timing come together — then we ask what the catch might be.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+        {judgeCards.map((c) => (
+          <div style={'padding:26px;border-radius:16px;background:#FFFDF6;border:1px solid #E6DBBE;box-shadow:0 2px 14px rgba(42,38,34,.05);' + (c.accent ? 'border-top:3px solid #5C7355;' : '')}>
+            <div style={`font-family:'Bodoni Moda',serif;font-weight:600;font-size:2rem;line-height:1;margin-bottom:14px;color:${c.accent ? '#5C7355' : '#B0492B'};`}>{c.n}</div>
+            <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:20px;color:#2A2622;margin:0 0 8px;">{c.t}</h3>
+            <p style="font-family:'Source Serif 4',serif;font-size:15.5px;line-height:1.58;color:#5C544A;margin:0;">{c.b}</p>
+          </div>
+        ))}
+      </div>
+
+      <div style="margin-top:16px;background:#FBF6E9;border:1px solid #E6DBBE;border-radius:14px;padding:26px clamp(24px,3vw,34px);display:flex;flex-wrap:wrap;gap:10px 36px;align-items:baseline;">
+        <p style={eyebrow + 'font-size:11px;flex:none;margin:0;'}>The standard</p>
+        <p style="font-family:'Source Serif 4',serif;font-size:16px;line-height:1.6;color:#3A352F;margin:0;flex:1 1 420px;min-width:280px;">We are not trying to prove that every hotel is perfect. We are trying to help travellers decide whether the value is real.</p>
+      </div>
+    </section>
+
+    <!-- ============ 4b · WHERE HOTEL VALUE HIDES ============ -->
+    <section style={section}>
+      <div style="border-top:1px solid #E6DBBE;padding-top:clamp(28px,4vw,44px);margin-bottom:clamp(28px,4vw,40px);max-width:720px;">
+        <p style={eyebrow + 'margin:0;'}>Value patterns</p>
+        <h2 style={h2 + 'margin:12px 0 0;'}>Where hotel value hides</h2>
+        <p style="font-family:'Source Serif 4',serif;font-size:1.1875rem;line-height:1.6;color:#3A352F;margin:16px 0 0;text-wrap:pretty;">Good hotel value is rarely random. It often appears when place, timing, classification and traveller expectations do not line up neatly.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+        {valueCards.map((c) => (
+          <div style={'padding:24px;' + card}>
+            <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;color:#5C7355;margin-bottom:10px;">{c.n}</div>
+            <h3 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:18px;color:#2A2622;margin:0 0 7px;line-height:1.25;">{c.t}</h3>
+            <p style="font-family:'Source Serif 4',serif;font-size:15px;line-height:1.55;color:#5C544A;margin:0;">{c.b}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============ 5 · HOW WE TRAVEL ============ -->
+    <section id="how-we-travel" style={section}>
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,64px);align-items:center;">
+
+        <div style="flex:1 1 460px;min-width:300px;">
+          <p style={eyebrow + 'margin:0;'}>Who's behind it</p>
+          <h2 style={h2 + 'margin:12px 0 22px;'}>How we travel</h2>
+          <div style="font-family:'Source Serif 4',serif;font-size:1.1875rem;line-height:1.7;color:#3A352F;">
+            <p style="margin:0 0 1.2rem;">We are independent travellers who like beautiful places, difficult places, historic cities, mountains, islands, food, archaeology and the occasional hotel that makes a trip feel special.</p>
+            <p style="margin:0 0 1.2rem;">Most of our trips are not luxury trips. That is exactly why good hotel value matters. A hotel does not need to be the grandest in the city to be worth remembering. It needs to make the trip better for a price that still feels sensible.</p>
+          </div>
+          <p style="font-family:'Source Serif 4',serif;font-size:16px;line-height:1.65;color:#5C544A;margin:0 0 22px;border-left:2px solid #B0492B;padding-left:18px;">Gary has visited 154 of the world's 193 UN member states and has spent years working on systems to find good hotels — especially places where the price, location, timing and hotel quality line up unusually well.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:9px;">
+            {travelChips.map((chip) => (
+              <span style="background:#FBF6E9;border:1px solid #E6DBBE;border-radius:999px;color:#A0682E;font-family:'Archivo',sans-serif;font-size:13px;font-weight:600;padding:7px 15px;">{chip}</span>
+            ))}
+          </div>
+        </div>
+
+        <div style="flex:0 1 320px;min-width:260px;display:flex;justify-content:center;">
+          <div style="position:relative;background:#FFFDF6;padding:13px 13px 15px;border:1px solid #E6DBBE;border-radius:16px;box-shadow:0 14px 40px rgba(42,38,34,.14);transform:rotate(1.4deg);max-width:320px;">
+            <span style="position:absolute;top:-12px;right:20px;transform:rotate(2deg);background:#EAB92B;color:#2A2622;font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.13em;font-size:10px;padding:5px 11px;border-radius:6px;">On the road</span>
+            <img src="/images/about/couple-walking.png" alt="Gary and Isabel Wilson walking through an old town" width="294" height="294" style="display:block;width:100%;border-radius:9px;" />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 6 · THE STORY BEHIND THE SEARCH ============ -->
+    <section style={section}>
+      <div style="border-top:1px solid #E6DBBE;padding-top:clamp(28px,4vw,44px);margin-bottom:clamp(26px,3.5vw,40px);max-width:680px;">
+        <p style={eyebrow + 'margin:0;'}>From the notebooks</p>
+        <h2 style={h2 + 'margin:12px 0 0;'}>The story behind the search</h2>
+        <p style="font-family:'Source Serif 4',serif;font-size:1.1875rem;line-height:1.6;color:#3A352F;margin:16px 0 0;text-wrap:pretty;">The site grew out of years of travel notes: places we stayed, places we almost booked, hotels that looked better than their price, and hotels where the catch only became clear after closer research.</p>
+      </div>
+
+      <figure style="margin:0;display:flex;flex-direction:column;align-items:center;">
+        <a href={infographic} target="_blank" rel="noopener" style="position:relative;display:block;background:#FFFDF6;padding:clamp(14px,2vw,22px);border:1px solid #E6DBBE;border-radius:14px;box-shadow:0 16px 48px rgba(42,38,34,.14);max-width:640px;width:100%;text-decoration:none;">
+          <img src={infographic} alt="Illustrated travel scrapbook showing Gary and Isabel, their hotel-value research notes, travel principles and the story behind 50 Five-Star Hotels." width="800" height="1200" loading="lazy" decoding="async" style="display:block;width:100%;border-radius:6px;" />
+          <span style="position:absolute;bottom:clamp(22px,3vw,30px);left:50%;transform:translateX(-50%);background:rgba(42,38,34,.82);color:#F7EFD7;font-family:'Archivo',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;padding:8px 16px;border-radius:999px;backdrop-filter:blur(2px);white-space:nowrap;">Tap to view large</span>
+        </a>
+        <figcaption style="font-family:'Archivo',sans-serif;font-size:13px;color:#5C544A;margin:18px 0 0;text-align:center;max-width:52ch;line-height:1.5;">Gary's original about-page illustration — the full travel scrapbook behind the hotel-value search.</figcaption>
+        <a href={infographic} target="_blank" rel="noopener" class="btn-ghost" style="display:inline-flex;align-items:center;gap:8px;margin:18px 0 0;border:1.5px solid #E0D3B0;color:#5C544A;background:transparent;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;padding:11px 22px;border-radius:11px;text-decoration:none;">Open full illustration ↗</a>
+      </figure>
+    </section>
+
+    <!-- ============ 7 · THE PROMISE (band) ============ -->
+    <section id="the-promise" style="background:#2A2622;width:100%;">
+      <div style="max-width:880px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(20px,4vw,48px);text-align:center;">
+        <p style="font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.2em;font-size:12px;color:#EAB92B;margin:0;">The promise</p>
+        <p style="font-family:'Source Serif 4',serif;font-size:clamp(1.15rem,1.7vw,1.4rem);line-height:1.55;color:rgba(247,239,215,.86);margin:22px auto 0;max-width:60ch;">We are not trying to find the cheapest hotels. We are trying to find hotels where ordinary travellers can enjoy comfort, character and a sense of occasion without paying normal luxury prices.</p>
+        <div style="width:46px;height:2px;background:#B0492B;margin:34px auto 0;"></div>
+        <p style="font-family:'Archivo',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:#EAB92B;margin:30px 0 0;">The question behind every recommendation</p>
+        <blockquote style="font-family:'Bodoni Moda',serif;font-style:italic;font-weight:500;font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.22;letter-spacing:-0.01em;color:#FBF6E9;margin:18px auto 0;max-width:20ch;">Would a reasonably experienced traveller be pleasantly surprised by what they get for the money?</blockquote>
+      </div>
+    </section>
+
+    <!-- ============ 8 · FINAL CONVERSION ============ -->
+    <section style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,48px) clamp(56px,7vw,96px);">
+      <div style="position:relative;overflow:hidden;border-radius:22px;border:1px solid #ECE0C2;background:linear-gradient(150deg,#FBF4E4 0%,#F6ECD6 52%,#EFE3C7 100%);box-shadow:0 22px 60px rgba(42,38,34,.12);padding:clamp(40px,6vw,72px) clamp(26px,5vw,72px);text-align:center;">
+        <div style="position:absolute;top:-60px;right:-50px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(234,185,43,.22),transparent 70%);pointer-events:none;"></div>
+        <div style="position:relative;">
+          <p style={eyebrow + 'margin:0;'}>Start your search</p>
+          <h2 style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:clamp(2rem,3.4vw,3rem);line-height:1.08;letter-spacing:-0.018em;color:#2A2622;margin:14px 0 0;">Ready to <span style="font-family:'Dancing Script',cursive;color:var(--accent);font-size:1.1em;">search smarter</span>?</h2>
+          <p style="font-family:'Source Serif 4',serif;font-size:clamp(1.1rem,1.5vw,1.25rem);line-height:1.6;color:#3A352F;margin:18px auto 0;max-width:58ch;text-wrap:pretty;">Start with a destination, budget and travel style. The Hotel Finder will help you build a better research prompt — one that looks beyond cheap rooms and checks whether the value is real.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:32px 0 0;">
+            <a href="/hotel-finder/" class="btn-ink" style="display:inline-flex;align-items:center;gap:8px;background:#2A2622;color:#F7EFD7;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;padding:15px 28px;border-radius:11px;text-decoration:none;">Build your hotel search <span style="color:#EAB92B;">→</span></a>
+            <a href="/best-time-to-go/" class="btn-ghost" style="display:inline-flex;align-items:center;gap:8px;border:1.5px solid #B0492B;color:#B0492B;background:transparent;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;padding:14px 26px;border-radius:11px;text-decoration:none;">Find your best month →</a>
+          </div>
+          <p style="font-family:'Source Serif 4',serif;font-size:13.5px;color:#8E847A;margin:22px 0 0;line-height:1.5;">No account needed. No booking pressure. Just better prompts for smarter travel research.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
