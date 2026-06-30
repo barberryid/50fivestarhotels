@@ -25,6 +25,24 @@ const { title, description, canonical, ogImage, image, keywords, type, noindex, 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) - production hostnames only -->
+    <script is:inline>
+      if (
+        window.location.hostname === '50fivestarhotels.com' ||
+        window.location.hostname === 'www.50fivestarhotels.com'
+      ) {
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-PB1W0C70F7';
+        document.head.appendChild(gaScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ window.dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-PB1W0C70F7');
+      }
+    </script>
     <SeoHead title={title} description={description} canonical={canonical} ogImage={ogImage} image={image} keywords={keywords} type={type} noindex={noindex} jsonLd={jsonLd} imageAlt={imageAlt} publishedTime={publishedTime} modifiedTime={modifiedTime} />
     <script is:inline>
       // Provider-agnostic analytics helper. Safe no-op if no provider is loaded.
