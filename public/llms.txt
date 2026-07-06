@@ -10,12 +10,14 @@ The site focuses on:
 - luxury hotels on a budget
 - best-value five-star hotels
 - honest five-star classification checks
+- ordinary but good hotel research for clean, reliable, fairly priced stays
 - hotel timing by month, including weather, value, crowds and practical risks
 - price tiers under EUR50, under EUR100, under EUR200 and under EUR250
 
 Important pages:
 - https://50fivestarhotels.com/
 - https://50fivestarhotels.com/hotel-finder/
+- https://50fivestarhotels.com/ordinary-hotel-finder/
 - https://50fivestarhotels.com/best-time-to-go/
 - https://50fivestarhotels.com/all-hotels/
 - https://50fivestarhotels.com/under-50/

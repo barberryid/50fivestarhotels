@@ -120,12 +120,20 @@ export function articleJsonLd({
   };
 }
 
-export function webApplicationJsonLd() {
+export function webApplicationJsonLd({
+  name = '50 Five-Star Hotels Hotel Finder',
+  path = '/hotel-finder/',
+  description = 'A free hotel-finding assistant that creates a structured research brief for affordable five-star, near-luxury and unusually good-value hotels.',
+}: {
+  name?: string;
+  path?: string;
+  description?: string;
+} = {}) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: '50 Five-Star Hotels Hotel Finder',
-    url: canonicalUrl('/hotel-finder/'),
+    name,
+    url: canonicalUrl(path),
     applicationCategory: 'TravelApplication',
     operatingSystem: 'Web',
     offers: {
@@ -133,8 +141,7 @@ export function webApplicationJsonLd() {
       price: '0',
       priceCurrency: 'EUR',
     },
-    description:
-      'A free hotel-finding assistant that creates a structured research brief for affordable five-star, near-luxury and unusually good-value hotels.',
+    description,
   };
 }
 

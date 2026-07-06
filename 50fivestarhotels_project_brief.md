@@ -1,6 +1,6 @@
 # 50 Five-Star Hotels Project Brief
 
-Last updated: 2026-06-23
+Last updated: 2026-07-06
 
 ## Project
 
@@ -49,6 +49,7 @@ Implemented:
 - Published hotel profile files: 57
 - Core tool pages:
   - `/hotel-finder/`
+  - `/ordinary-hotel-finder/`
   - `/best-time-to-go/`
   - `/pre-travel-checklist/`
 - Core collection pages:
@@ -69,6 +70,19 @@ Implemented:
   - `/regions/europe/`
   - `/regions/middle-east-north-africa/`
   - `/regions/caucasus-central-asia/`
+
+## Ordinary Hotel Finder Update - 2026-07-06
+
+Added `/ordinary-hotel-finder/` as a copied, reoriented version of `/hotel-finder/`.
+
+Implemented:
+
+- New ordinary-hotel page at `src/pages/ordinary-hotel-finder.astro`.
+- New prompt template at `src/data/ordinaryHotelPromptTemplate.ts` focused on ordinary but good hotels: clean rooms, reliable recent reviews, useful locations, fair prices, quiet/sleep risk, and practical booking checks.
+- `src/components/CountryPromptTool.astro` now supports a `variant="ordinary"` mode with ordinary-hotel price-card copy, output-mode instructions, generated prompt text, status messages and suggested manual searches.
+- `src/components/HotelFinder.astro` now supports ordinary final booking checks.
+- New ordinary methodology section at `src/components/OrdinaryMethodologyContent.astro`.
+- Linked the route from header navigation, footer navigation, sitemap and `public/llms.txt`.
 
 ## SEO Rules To Preserve
 

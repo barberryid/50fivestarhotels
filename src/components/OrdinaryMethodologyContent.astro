@@ -1,0 +1,91 @@
+---
+---
+
+<section id="methodology" class="max-w-4xl mx-auto px-5 py-16 md:py-20 scroll-mt-20">
+  <div class="prose prose-lg max-w-none
+    prose-headings:font-serif prose-headings:text-[#2A2622]
+    prose-h1:text-4xl prose-h1:mb-8
+    prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+    prose-h3:text-lg prose-h3:mt-8
+    prose-p:text-[#2A2622]/75 prose-p:leading-relaxed
+    prose-strong:text-[#2A2622]
+    prose-a:text-[#A0682E] prose-a:no-underline hover:prose-a:underline">
+
+    <p class="text-[#A0682E] text-xs font-bold uppercase tracking-widest not-prose mb-4">Evaluation framework</p>
+    <h1>How the ordinary finder judges hotels</h1>
+
+    <p>
+      Ordinary but good hotels are not the same as luxury hotels. The goal is a place that works: clean, fairly priced, well located for the trip, recently reviewed, and free of obvious booking traps.
+    </p>
+
+    <p>
+      The finder is deliberately suspicious of hotels that look impressive but have weak recent evidence. A plain hotel with dependable rooms and a useful location can be a better recommendation than a tired higher-rated property with noisy rooms, awkward transport or recurring complaints.
+    </p>
+
+    <h2>The scoring system</h2>
+
+    <p>Each hotel is assessed against six practical factors. The final value score is out of 100.</p>
+
+    <div class="not-prose overflow-x-auto rounded-2xl border border-[#2A2622]/8 my-8">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-[#2A2622] text-white text-left">
+            <th class="py-3 px-5 font-semibold">Factor</th>
+            <th class="py-3 px-5 font-semibold text-right">Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['Cleanliness, maintenance and recent review consistency', '25%'],
+            ['Location usefulness for the trip', '20%'],
+            ['Price fairness versus comparable ordinary hotels', '20%'],
+            ['Sleep comfort and noise risk', '15%'],
+            ['Room practicality, breakfast and facilities', '10%'],
+            ['Hidden drawbacks, safety and booking risk', '10%'],
+          ].map(([factor, weight], i) => (
+            <tr class={`border-t border-[#2A2622]/6 ${i % 2 === 0 ? 'bg-[#FFFDF6]' : 'bg-[#FBF6E9]/60'}`}>
+              <td class="py-3 px-5 text-[#2A2622]/80">{factor}</td>
+              <td class="py-3 px-5 text-right font-bold text-[#5C7355]">{weight}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>What gets rejected</h2>
+
+    <p>
+      The ordinary finder should reject hotels with repeated recent complaints about dirty rooms, tired bathrooms, noise, poor air conditioning or heating, uncomfortable beds, unsafe surroundings, misleading photos, surprise fees or unreliable service.
+    </p>
+
+    <p>
+      Cheap is not enough. The best ordinary hotel is the one that makes the trip easier, not the one that merely has the lowest visible rate.
+    </p>
+
+    <h2>Verdict labels</h2>
+
+    <div class="not-prose space-y-4 my-8">
+      {[
+        { label: 'Excellent ordinary hotel', score: '85-100', desc: 'A dependable, well-located hotel with strong recent evidence and very few practical compromises.' },
+        { label: 'Very good practical pick', score: '75-84', desc: 'A strong everyday choice for the right traveller, with drawbacks that are knowable and manageable.' },
+        { label: 'Good with caveats', score: '65-74', desc: 'Worth considering when the price, location or room type fits the trip especially well.' },
+        { label: 'Only if unusually useful', score: '55-64', desc: 'A conditional option. Check the drawback carefully before booking.' },
+        { label: 'Reject for now', score: 'Below 55', desc: 'Too risky, weak, inconvenient or inconsistent for an ordinary-but-good recommendation.' },
+      ].map(v => (
+        <div class="bg-[#FFFDF6] rounded-xl border border-[#2A2622]/6 p-5">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="font-serif font-bold text-[#2A2622]">{v.label}</span>
+            <span class="text-xs text-[#5C544A] bg-[#FBF6E9] px-2.5 py-1 rounded-full font-mono">{v.score}</span>
+          </div>
+          <p class="text-[#5C544A] text-sm leading-relaxed">{v.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <h2>What to check before booking</h2>
+
+    <p>
+      Before booking, check the final rate after taxes, exact room type, recent lowest-rated reviews, noise comments, cancellation policy, breakfast cost, map location, arrival logistics and whether the photos match the entry-level room you are actually booking.
+    </p>
+  </div>
+</section>

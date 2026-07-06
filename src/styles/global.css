@@ -750,4 +750,4 @@ summary:focus-visible {
 /* The "Browse all 50" header CTA gives way to the MENU overlay on small screens.
    Uses !important to beat the element's inline display value. */
 .fs-cta-browse { display: none !important; }
-@media (min-width: 600px) { .fs-cta-browse { display: inline-flex !important; } }
+@media (min-width: 1180px) { .fs-cta-browse { display: inline-flex !important; } }

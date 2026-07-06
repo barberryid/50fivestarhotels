@@ -2,7 +2,16 @@
 // Guided Hotel Finder workflow plus final booking checks.
 import CountryPromptTool from './CountryPromptTool.astro';
 
-const bookingChecks = [
+type FinderVariant = 'luxury' | 'ordinary';
+
+interface Props {
+  variant?: FinderVariant;
+}
+
+const { variant = 'luxury' } = Astro.props;
+const isOrdinary = variant === 'ordinary';
+
+const luxuryBookingChecks = [
   'Final price after taxes and fees',
   'Exact room type',
   'Whether breakfast is included or expensive',
@@ -14,19 +23,42 @@ const bookingChecks = [
   'Whether the five-star label is official, local or platform-based',
   'Whether the low price is seasonal, mobile-only, member-only or non-refundable',
 ];
+
+const ordinaryBookingChecks = [
+  'Final price after taxes and fees',
+  'Exact room type and whether photos match it',
+  'Recent lowest-rated reviews',
+  'Recurring noise or cleanliness complaints',
+  'Air conditioning, heating and bed comfort comments',
+  'Breakfast cost and nearby food options',
+  'Cancellation policy',
+  'Location on the map',
+  'Arrival time from airport, station or parking',
+  'Whether the low price is mobile-only, member-only, non-refundable or for a worse room',
+];
+
+const bookingChecks = isOrdinary ? ordinaryBookingChecks : luxuryBookingChecks;
+const eyebrow = isOrdinary ? 'Final ordinary-hotel check' : 'Final booking check';
+const heading = isOrdinary ? 'Before booking, check the basics' : 'Before booking, check';
+const intro = isOrdinary
+  ? 'The finder is designed to produce a practical shortlist, not a final booking decision. Before booking any ordinary hotel, verify the live details yourself.'
+  : 'The finder is designed to produce a strong shortlist, not a final booking decision. Before booking any hotel, verify the live details yourself.';
+const note = isOrdinary
+  ? 'A hotel can be ordinary and still excellent for your trip. Treat the shortlist as a decision aid, then check the live booking page, recent reviews and exact room type carefully.'
+  : 'A hotel can be a strong value option and still be wrong for your trip. Treat the shortlist as a decision aid, then check the live booking page carefully.';
 ---
 
 <div id="hotel-finder" class="scroll-mt-20" data-hotel-finder>
   <section class="max-w-4xl mx-auto px-5 py-10">
-    <CountryPromptTool />
+    <CountryPromptTool variant={variant} />
   </section>
 
   <section class="max-w-4xl mx-auto px-5 py-10">
     <div class="toolkit-card toolkit-card-green p-6 md:p-7">
-      <p class="text-[#A0682E] text-xs font-bold uppercase tracking-[0.08em] mb-4">Final booking check</p>
-      <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#2A2622] mb-4">Before booking, check</h2>
+      <p class="text-[#A0682E] text-xs font-bold uppercase tracking-[0.08em] mb-4">{eyebrow}</p>
+      <h2 class="font-serif text-2xl md:text-3xl font-semibold text-[#2A2622] mb-4">{heading}</h2>
       <p class="text-[#2A2622]/80 leading-relaxed mb-6">
-        The finder is designed to produce a strong shortlist, not a final booking decision. Before booking any hotel, verify the live details yourself.
+        {intro}
       </p>
       <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-3">
         {bookingChecks.map((item) => (
@@ -37,7 +69,7 @@ const bookingChecks = [
         ))}
       </ul>
       <p class="mt-6 rounded-lg bg-[#E6EBDD] px-4 py-3 text-sm leading-relaxed text-[#2A2622]">
-        A hotel can be a strong value option and still be wrong for your trip. Treat the shortlist as a decision aid, then check the live booking page carefully.
+        {note}
       </p>
     </div>
   </section>

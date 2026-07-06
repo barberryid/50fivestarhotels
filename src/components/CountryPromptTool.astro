@@ -12,8 +12,18 @@ import PersonalisePreferences from './PersonalisePreferences.astro';
 import { countries } from '../data/unCountries';
 import { researchPriceLevels } from '../data/researchPriceLevels';
 import { researchPromptTemplate } from '../data/researchPromptTemplate';
+import { ordinaryHotelPromptTemplate } from '../data/ordinaryHotelPromptTemplate';
 
 const allHotels = await getCollection('hotels', ({ data }) => !data.draft);
+
+type FinderVariant = 'luxury' | 'ordinary';
+
+interface Props {
+  variant?: FinderVariant;
+}
+
+const { variant = 'luxury' } = Astro.props;
+const isOrdinary = variant === 'ordinary';
 
 // Frontmatter country names that don't match unCountries display names.
 // Extend this map if a new hotel's `country:` value doesn't appear in the
@@ -55,7 +65,84 @@ const coverage = Object.keys(hotelsByCountry)
   .sort((a, b) => a.localeCompare(b, 'en'))
   .join(', ');
 
-const defaultPriceLevels = researchPriceLevels.map(({ amount }) => amount);
+const ordinaryPriceLevels = [
+  {
+    amount: 50,
+    title: 'Basic bargain',
+    text: 'Only worth using when recent reviews, location and basic comfort still look dependable.',
+  },
+  {
+    amount: 100,
+    title: 'Good everyday value',
+    text: 'A useful ceiling for clean, central-enough hotels in lower-cost destinations or quiet seasons.',
+  },
+  {
+    amount: 200,
+    title: 'Comfortable mid-range',
+    text: 'Allows better locations, quieter rooms and fewer compromises in many cities.',
+  },
+  {
+    amount: 250,
+    title: 'Flexible comfort ceiling',
+    text: 'Useful for expensive cities, awkward dates or hotels that solve the practical trip especially well.',
+  },
+];
+
+const priceLevelOptions = isOrdinary ? ordinaryPriceLevels : researchPriceLevels;
+const promptTemplate = isOrdinary ? ordinaryHotelPromptTemplate : researchPromptTemplate;
+const defaultPriceLevels = priceLevelOptions.map(({ amount }) => amount);
+
+const finderCopy = isOrdinary
+  ? {
+      firstStepDescription:
+        'Start with a country, city, island, region or route. The more real-world context you add, the better the AI can judge comfort, location, recent reviews and practical trade-offs.',
+      priceStepTitle: 'What nightly price should the AI test?',
+      priceStepDescription:
+        'Choose the price levels you want the AI to test. Lower prices are useful, but the prompt will still reject hotels with weak recent reviews, poor locations or unreliable basics.',
+      preferenceTitle: 'What would make the stay work well?',
+      preferenceDescription:
+        'Tell the AI which practical details matter most. Good choices here help filter out hotels that look fine on paper but would be annoying for your actual trip.',
+      outputModeDescription:
+        'Choose how detailed the output should be, then open and copy your prompt from the box below and paste it into ChatGPT or Claude.',
+      simpleModeLabel: 'Simple shortlist',
+      simpleModeDescription: 'Best for choosing a dependable place to stay',
+      deepModeLabel: 'Deep research',
+      deepModeDescription: 'Best for comparing a full ordinary-hotel market',
+      generateTitle: 'Generate your ordinary-hotel prompt',
+      promptReadyHeading: 'Your ordinary-hotel prompt is ready',
+      promptReadyDescription:
+        'Paste this into ChatGPT, Claude or another AI tool, then ask follow-up questions before booking.',
+      textareaLabel: 'Ordinary hotel-finding brief text',
+      manualSearchDescription:
+        'Use these searches on Booking.com, Google Hotels or your preferred booking site to verify the ordinary-but-good hotels the prompt finds.',
+      copySuccessDescription:
+        'Open ChatGPT or Claude, start a fresh session, and paste the brief there. Verify live prices, room photos and recent reviews before booking.',
+    }
+  : {
+      firstStepDescription:
+        'Start with a country, city, island, region or route. The more real-world context you add, the better the AI can judge value, location and trade-offs.',
+      priceStepTitle: 'What price level should the AI test?',
+      priceStepDescription:
+        'Choose the price levels you want the AI to test. Lower prices are exciting, but the prompt will also ask the AI to flag weak or misleading five-star claims.',
+      preferenceTitle: 'What kind of stay would feel special?',
+      preferenceDescription:
+        'Tell the AI what would make the stay feel worth booking. Good choices here help filter out generic hotels that look fine on paper but do not fit your trip.',
+      outputModeDescription:
+        'Choose how detailed the output should be, then open and copy your prompt from the box below and paste it into ChatGPT or Claude.',
+      simpleModeLabel: 'Simple shortlist',
+      simpleModeDescription: 'Best for travellers planning a trip',
+      deepModeLabel: 'Deep research',
+      deepModeDescription: 'Best for comparing a full market',
+      generateTitle: 'Generate your hotel-hunting prompt',
+      promptReadyHeading: 'Your hotel-hunting prompt is ready',
+      promptReadyDescription:
+        'Paste this into ChatGPT, Claude or another AI tool, then ask follow-up questions before booking.',
+      textareaLabel: 'Hotel-finding brief text',
+      manualSearchDescription:
+        'Use these searches on Booking.com, Google Hotels or your preferred booking site to verify what the prompt finds.',
+      copySuccessDescription:
+        'Open ChatGPT or Claude, start a fresh session, and paste the brief there. Verify live prices before booking.',
+    };
 
 const dealBreakerOptions = [
   'Avoid poor recent reviews',
@@ -68,7 +155,9 @@ const dealBreakerOptions = [
   'Free cancellation preferred',
   'Walkable location preferred',
 ];
-const outputModeStorageKey = '50fivestarhotels:hotelFinderOutputMode';
+const outputModeStorageKey = isOrdinary
+  ? '50fivestarhotels:ordinaryHotelFinderOutputMode'
+  : '50fivestarhotels:hotelFinderOutputMode';
 const defaultOutputMode = 'simple';
 const outputModes = {
   simple: `### Output mode — Simple shortlist
@@ -103,6 +192,41 @@ Also include:
 If useful for website research, add a secondary note on affiliate suitability: Good / Moderate / Weak. Do not let affiliate suitability override traveller value, safety, hotel quality or honesty.`,
 };
 
+const ordinaryOutputModes = {
+  simple: `### Output mode - Simple shortlist
+
+Use this output mode as the main shape of the answer. Keep it traveller-first and practical.
+
+Give me the 5-8 strongest ordinary-but-good hotel options only. Do not produce a long market scan unless it is needed to explain why the destination has very few dependable choices.
+
+For each hotel, include:
+- Why it fits my trip
+- Value score and trip-fit score
+- Typical price range
+- What kind of ordinary hotel it really is
+- Best for
+- Not ideal for
+- Main drawback
+- What to verify before booking
+
+After the shortlist, give me one clear recommendation: the hotel you would check first, and why.`,
+  deep: `### Output mode - Deep research
+
+Use this output mode as the main shape of the answer.
+
+Give me the full destination scan, longlist, value scores and trip-fit scores, rejected hotels, fallback results and final shortlist.
+
+Also include:
+- Hotels rejected and why
+- Any dependable aparthotel, guesthouse, airport/station hotel or simple chain option clearly marked by type
+- Notes on recurring recent complaints, especially cleanliness, noise, maintenance, beds, air conditioning, service and location
+- Best 3-5 hotels for a practical traveller shortlist
+
+Keep the answer focused on whether I would be glad I booked the hotel, not whether it sounds impressive.`,
+};
+
+const activeOutputModes = isOrdinary ? ordinaryOutputModes : outputModes;
+
 const buildPriceLevelPromptParts = (amounts: readonly number[]) => {
   const sorted = [...amounts].sort((a, b) => a - b);
   const highest = sorted[sorted.length - 1] ?? defaultPriceLevels[defaultPriceLevels.length - 1];
@@ -136,20 +260,21 @@ const applyPriceLevelTokens = (text: string, amounts: readonly number[]) => {
 // [EXISTING HOTELS] stay literal until a country is selected. The personal
 // traveller-fit tokens default to empty (no preferences active yet); the
 // client refills them when PersonalisePreferences emits a change.
-const defaultPrompt = applyPriceLevelTokens(researchPromptTemplate, defaultPriceLevels)
+const defaultPrompt = applyPriceLevelTokens(promptTemplate, defaultPriceLevels)
   .split('[COVERAGE]').join(coverage)
   .split('[CITY_FOCUS_SECTION]').join('')
   .split('[TRIP_SCENARIO_SECTION]').join('')
   .split('[PERSONAL_WEIGHTING_SECTION]').join('')
   .split('[PERSONAL_OUTPUT_NOTES]').join('')
-  .split('[OUTPUT_MODE_SECTION]').join(outputModes[defaultOutputMode]);
+  .split('[OUTPUT_MODE_SECTION]').join(activeOutputModes[defaultOutputMode]);
 
 const toolData = {
-  template: researchPromptTemplate,
+  template: promptTemplate,
+  variant,
   coverage,
   hotelsByCountry,
   priceLevels: defaultPriceLevels,
-  outputModes,
+  outputModes: activeOutputModes,
   defaultOutputMode,
   outputModeStorageKey,
 };
@@ -158,7 +283,7 @@ const toolData = {
 <div class="space-y-5" data-country-prompt-tool>
   <AccordionCard title="Where are you going?" number={1} open={true}>
   <p class="mb-6 text-[#2A2622]/80 leading-relaxed">
-    Start with a country, city, island, region or route. The more real-world context you add, the better the AI can judge value, location and trade-offs.
+    {finderCopy.firstStepDescription}
   </p>
   <!-- Country combobox -->
   <label id="country-label" for="country-input" class="sr-only">
@@ -299,12 +424,12 @@ const toolData = {
   </fieldset>
   </AccordionCard>
 
-  <AccordionCard title="What price level should the AI test?" number={2}>
+  <AccordionCard title={finderCopy.priceStepTitle} number={2}>
     <p class="text-[#2A2622]/80 leading-relaxed mb-7" data-price-level-summary>
-      Choose the price levels you want the AI to test. Lower prices are exciting, but the prompt will also ask the AI to flag weak or misleading five-star claims.
+      {finderCopy.priceStepDescription}
     </p>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {researchPriceLevels.map(({ amount, title, text }) => (
+      {priceLevelOptions.map(({ amount, title, text }) => (
         <label
           class="spark-chip rounded-lg border border-[#E6DBBE] bg-white p-5 cursor-pointer shadow-[3px_3px_0_rgba(42, 38, 34,0.05)] transition-colors data-[selected=true]:border-[#A0682E] data-[selected=true]:bg-[#FBF6E9] hover:border-[#A0682E]"
           data-price-level-card
@@ -336,13 +461,17 @@ const toolData = {
     </p>
   </AccordionCard>
 
-  <PersonalisePreferences number={3} />
+  <PersonalisePreferences
+    number={3}
+    title={finderCopy.preferenceTitle}
+    description={finderCopy.preferenceDescription}
+  />
 
   <AccordionCard title="What kind of answer should the AI give?" number={4}>
     <fieldset class="border-0 p-0 m-0">
       <legend class="sr-only">Output detail level</legend>
       <p class="mb-3 text-sm leading-relaxed text-[#5C544A]">
-        Choose how detailed the output should be, then open and copy your prompt from the box below and paste it into ChatGPT or Claude.
+        {finderCopy.outputModeDescription}
       </p>
       <div class="grid gap-2 sm:grid-cols-2" data-output-mode-group>
         <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E6DBBE] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#A0682E] has-[:checked]:bg-[#F4EADC]">
@@ -355,8 +484,8 @@ const toolData = {
             class="mt-1 h-4 w-4 shrink-0 border-[#A0682E] text-[#A0682E] accent-[#A0682E]"
           />
           <span>
-            <span class="block font-semibold text-[#2A2622]">Simple shortlist</span>
-            <span class="block text-[#5C544A]">Best for travellers planning a trip</span>
+            <span class="block font-semibold text-[#2A2622]">{finderCopy.simpleModeLabel}</span>
+            <span class="block text-[#5C544A]">{finderCopy.simpleModeDescription}</span>
           </span>
         </label>
         <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E6DBBE] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#A0682E] has-[:checked]:bg-[#F4EADC]">
@@ -368,15 +497,15 @@ const toolData = {
             class="mt-1 h-4 w-4 shrink-0 border-[#A0682E] text-[#A0682E] accent-[#A0682E]"
           />
           <span>
-            <span class="block font-semibold text-[#2A2622]">Deep research</span>
-            <span class="block text-[#5C544A]">Best for comparing a full market</span>
+            <span class="block font-semibold text-[#2A2622]">{finderCopy.deepModeLabel}</span>
+            <span class="block text-[#5C544A]">{finderCopy.deepModeDescription}</span>
           </span>
         </label>
       </div>
     </fieldset>
   </AccordionCard>
 
-  <AccordionCard title="Generate your hotel-hunting prompt" number={5}>
+  <AccordionCard title={finderCopy.generateTitle} number={5}>
     <button
       slot="actions"
       type="button"
@@ -403,12 +532,12 @@ const toolData = {
           <span class="min-w-0">
             <span class="flex flex-wrap items-center gap-2">
               <span id="hotel-prompt-heading" class="block text-sm font-semibold text-[#2A2622]">
-                Your hotel-hunting prompt is ready
+                {finderCopy.promptReadyHeading}
               </span>
               <span class="rounded-full bg-[#E6EBDD] px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-[0.08em] text-[#5C7355]">Prompt ready</span>
             </span>
             <span class="mt-1 block text-sm leading-relaxed text-[#5C544A]">
-              Paste this into ChatGPT, Claude or another AI tool, then ask follow-up questions before booking.
+              {finderCopy.promptReadyDescription}
             </span>
           </span>
           <span class="mt-0.5 inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#5C7355] px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_0_#344532] transition-colors group-hover:bg-[#344532]">
@@ -435,7 +564,7 @@ const toolData = {
             </button>
             <span id="copy-prompt-status" data-copy-prompt-status class="sr-only" role="status" aria-live="polite"></span>
           </div>
-          <label for="prompt-textarea" class="sr-only">Hotel-finding brief text</label>
+          <label for="prompt-textarea" class="sr-only">{finderCopy.textareaLabel}</label>
           <textarea
             id="prompt-textarea"
             rows="18"
@@ -448,7 +577,7 @@ const toolData = {
           <div class="mt-4 rounded-xl border border-[#E6DBBE] bg-[#FFFDF6] p-4">
             <h3 class="text-sm font-semibold text-[#2A2622] mb-2">Suggested manual searches</h3>
             <p class="text-sm leading-relaxed text-[#5C544A] mb-3">
-              Use these searches on Booking.com, Google Hotels or your preferred booking site to verify what the prompt finds.
+              {finderCopy.manualSearchDescription}
             </p>
             <ul class="space-y-2 text-sm text-[#2A2622]" data-search-suggestions>
               <li>Select a destination to generate suggested searches.</li>
@@ -457,7 +586,7 @@ const toolData = {
           <div id="hotel-copy-success" hidden class="spark-brief mt-4 p-4">
             <p class="text-sm font-semibold text-[#2A2622] mb-1">Prompt copied.</p>
             <p class="text-sm leading-relaxed text-[#2A2622]/80 mb-3">
-              Open ChatGPT or Claude, start a fresh session, and paste the brief there. Verify live prices before booking.
+              {finderCopy.copySuccessDescription}
             </p>
             <div class="flex flex-wrap gap-3">
               <a
@@ -502,6 +631,7 @@ const toolData = {
 <script>
   const data = JSON.parse(document.getElementById('country-prompt-data')!.textContent!) as {
     template: string;
+    variant: 'luxury' | 'ordinary';
     coverage: string;
     hotelsByCountry: Record<string, { name: string; score: number }[]>;
     priceLevels: number[];
@@ -509,6 +639,7 @@ const toolData = {
     defaultOutputMode: string;
     outputModeStorageKey: string;
   };
+  const isOrdinaryFinder = data.variant === 'ordinary';
 
   const input = document.getElementById('country-input') as HTMLInputElement;
   const cityInput = document.getElementById('city-input') as HTMLInputElement;
@@ -761,12 +892,19 @@ const toolData = {
       return;
     }
 
-    const queries = [
-      `Booking.com five-star hotels ${destination}${dateSuffix}`,
-      `Google Hotels ${destination} 5 star under €${maxPrice}${dateSuffix}`,
-      `best hotels ${destination} recent reviews`,
-      `luxury hotel ${destination} good value`,
-    ];
+    const queries = isOrdinaryFinder
+      ? [
+          `Booking.com hotels ${destination} 8+ review score${dateSuffix}`,
+          `Google Hotels ${destination} hotel under €${maxPrice} good reviews${dateSuffix}`,
+          `best affordable hotels ${destination} recent reviews`,
+          `where to stay ${destination} safe central good value hotel`,
+        ]
+      : [
+          `Booking.com five-star hotels ${destination}${dateSuffix}`,
+          `Google Hotels ${destination} 5 star under €${maxPrice}${dateSuffix}`,
+          `best hotels ${destination} recent reviews`,
+          `luxury hotel ${destination} good value`,
+        ];
 
     searchSuggestions.innerHTML = queries
       .map((query) => `<li><code class="rounded bg-white px-2 py-1 text-xs">${escapeForHtml(query)}</code></li>`)
@@ -873,9 +1011,13 @@ const toolData = {
     const selectedText = formatEuroSeries(selectedAmounts);
     const fallbackLabels = selectedAmounts.map((amount) => `“Fallback above €${amount}”`).join(', ');
     if (priceLevelSummary) {
-      priceLevelSummary.textContent = selectedAmounts.length === data.priceLevels.length
-        ? 'The generated prompt searches all four nightly levels in order: €50, €100, €200 and €250. If no credible option appears at €50 or below, it displays “No credible hotel option found under €50” and marks the next best three hotels above that level as “Fallback above €50”.'
-        : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no credible hotel, it displays “No credible hotel option found under that level” and uses ${fallbackLabels} for the next best three hotels above it.`;
+      priceLevelSummary.textContent = isOrdinaryFinder
+        ? selectedAmounts.length === data.priceLevels.length
+          ? 'The generated prompt searches all four nightly levels in order: €50, €100, €200 and €250. If no dependable option appears at €50 or below, it displays “No credible hotel option found under €50” and marks the next best three hotels above that level as “Fallback above €50”.'
+          : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no dependable hotel, it displays “No credible hotel option found under that level” and uses ${fallbackLabels} for the next best three hotels above it.`
+        : selectedAmounts.length === data.priceLevels.length
+          ? 'The generated prompt searches all four nightly levels in order: €50, €100, €200 and €250. If no credible option appears at €50 or below, it displays “No credible hotel option found under €50” and marks the next best three hotels above that level as “Fallback above €50”.'
+          : `The generated prompt will search ${selectedText} only, in ascending order. If a selected level has no credible hotel, it displays “No credible hotel option found under that level” and uses ${fallbackLabels} for the next best three hotels above it.`;
     }
     if (priceLevelStatus) {
       priceLevelStatus.textContent = `Using ${selectedText} in the prompt. Select at least one price level.`;
@@ -887,11 +1029,15 @@ const toolData = {
   const setCopyEnabled = (enabled: boolean) => {
     clearTimeout(copiedTimer);
     for (const btn of copyButtons) btn.disabled = !enabled;
-    for (const label of copyLabels) label.textContent = enabled ? 'Copy my prompt ->' : 'Select a destination before copying';
+    for (const label of copyLabels) {
+      label.textContent = enabled
+        ? isOrdinaryFinder ? 'Copy ordinary hotel prompt ->' : 'Copy my prompt ->'
+        : 'Select a destination before copying';
+    }
     for (const status of copyStatuses) status.textContent = '';
     if (briefReadyStatus) {
       briefReadyStatus.textContent = enabled
-        ? 'Your hotel-finding brief is ready to copy.'
+        ? isOrdinaryFinder ? 'Your ordinary hotel brief is ready to copy.' : 'Your hotel-finding brief is ready to copy.'
         : 'Choose a destination to make the brief copy-ready.';
     }
   };
@@ -1026,12 +1172,18 @@ const toolData = {
     event.stopPropagation();
     await copyTextareaText(textarea);
     for (const label of copyLabels) label.textContent = 'Copied';
-    for (const status of copyStatuses) status.textContent = 'Hotel prompt copied to clipboard';
+    for (const status of copyStatuses) {
+      status.textContent = isOrdinaryFinder
+        ? 'Ordinary hotel prompt copied to clipboard'
+        : 'Hotel prompt copied to clipboard';
+    }
     if (hotelCopySuccess) hotelCopySuccess.hidden = false;
     track('hotel_prompt_copied', { country: selectedCountry ?? '' });
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
-      for (const label of copyLabels) label.textContent = 'Copy my prompt ->';
+      for (const label of copyLabels) {
+        label.textContent = isOrdinaryFinder ? 'Copy ordinary hotel prompt ->' : 'Copy my prompt ->';
+      }
       for (const status of copyStatuses) status.textContent = '';
     }, 2000);
   };

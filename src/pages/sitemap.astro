@@ -6,7 +6,7 @@ import { breadcrumbJsonLd, canonicalUrl } from '../lib/seo';
 const hotels = (await getCollection('hotels', ({ data }) => !data.draft)).sort((a, b) => a.data.rank - b.data.rank);
 const sections = [
   { title: 'Main pages', links: [
-    ['Home', '/'], ['Hotel Finder', '/hotel-finder/'], ['Best Time to Go', '/best-time-to-go/'], ['Pre-Travel Checklist', '/pre-travel-checklist/'], ['Examples', '/all-hotels/'], ['About', '/about/'],
+    ['Home', '/'], ['Hotel Finder', '/hotel-finder/'], ['Ordinary Hotel Finder', '/ordinary-hotel-finder/'], ['Best Time to Go', '/best-time-to-go/'], ['Pre-Travel Checklist', '/pre-travel-checklist/'], ['Examples', '/all-hotels/'], ['About', '/about/'],
   ] },
   { title: 'Price guides', links: [
     ['Five-Star Hotels Under €50', '/under-50/'],
