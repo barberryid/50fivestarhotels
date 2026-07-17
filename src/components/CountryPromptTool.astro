@@ -345,6 +345,25 @@ const toolData = {
     </p>
   </div>
 
+  <!-- Transport-radius search (optional, needs a city) -->
+  <div class="mt-4 max-w-2xl">
+    <label class="spark-chip flex cursor-pointer items-start gap-3 rounded-lg border border-[#E6DBBE] bg-white px-4 py-3 text-sm transition-colors has-[:checked]:border-[#5C7355] has-[:checked]:bg-[#E8F1E6]">
+      <input
+        type="checkbox"
+        id="transport-radius-input"
+        class="mt-1 h-4 w-4 shrink-0 rounded border-[#E6DBBE] text-[#5C7355] accent-[#5C7355]"
+        aria-describedby="transport-radius-description"
+      />
+      <span class="text-[#2A2622]">
+        <span class="block font-semibold">Search nearby towns by transport instead</span>
+        <span class="block text-[#5C544A]">Include every town within 60 minutes by public transport (train preferred) of the city above, and don&rsquo;t favour famous towns or tourist centres.</span>
+      </span>
+    </label>
+    <p id="transport-radius-description" class="mt-2 text-sm text-[#5C544A]">
+      Great for finding better-value bases near expensive destinations — a quiet town one train stop away often beats the famous name. Needs a city or town above.
+    </p>
+  </div>
+
   <!-- Travel timing -->
   <div class="mt-6 grid gap-4 md:grid-cols-[minmax(0,1.5fr)_minmax(0,0.8fr)] max-w-2xl">
     <div>
@@ -643,6 +662,7 @@ const toolData = {
 
   const input = document.getElementById('country-input') as HTMLInputElement;
   const cityInput = document.getElementById('city-input') as HTMLInputElement;
+  const transportRadiusInput = document.getElementById('transport-radius-input') as HTMLInputElement;
   const travelDatesInput = document.getElementById('travel-dates-input') as HTMLInputElement;
   const nightsInput = document.getElementById('nights-input') as HTMLInputElement;
   const tripScenarioInput = document.getElementById('trip-scenario-input') as HTMLTextAreaElement;
@@ -843,6 +863,18 @@ const toolData = {
     if (!city) return '';
     const place = country ? `${city}, ${country}` : city;
     const regionName = country ?? 'the wider region';
+    if (transportRadiusInput?.checked) {
+      // Transport-radius mode: the named city is an anchor point, not the
+      // assumed base. This replaces the day-trip city focus entirely.
+      return (
+        `**Where I want to stay:** Search all towns within **60 minutes by public transport (train preferred)** of **${place}**. ` +
+        `Treat ${city} as the anchor point for the search, not the place I must stay: a smaller or less famous town with a fast, reliable connection is just as valid as ${city} itself. ` +
+        `Do not favour famous towns or tourist centres simply because they are well known. ` +
+        `Rank locations by value, review quality, quietness and transport convenience to ${city}. ` +
+        `When you score location usefulness, judge it by that transport convenience — award no points for fame, prestige or being the classic tourist base. ` +
+        `This transport rule overrides the wider country search.\n\n`
+      );
+    }
     return (
       `**Where I want to stay:** Focus on **${place}** and the places within easy reach of it — roughly a day trip from ${city}. ` +
       `Treat ${city} as my base rather than ranging across the whole of ${regionName}; this city focus overrides the wider country search. ` +
@@ -956,6 +988,11 @@ const toolData = {
   cityInput.addEventListener('input', () => {
     refreshPrompts();
     updateSearchSuggestions();
+  });
+
+  transportRadiusInput?.addEventListener('change', () => {
+    refreshPrompts();
+    track('finder_transport_radius_toggled', { enabled: transportRadiusInput.checked });
   });
 
   tripScenarioInput.addEventListener('input', () => {
@@ -1193,6 +1230,7 @@ const toolData = {
     selectedCountry = null;
     input.value = '';
     cityInput.value = '';
+    if (transportRadiusInput) transportRadiusInput.checked = false;
     travelDatesInput.value = '';
     nightsInput.value = '';
     tripScenarioInput.value = '';

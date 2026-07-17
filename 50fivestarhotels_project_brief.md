@@ -84,6 +84,18 @@ Implemented:
 - New ordinary methodology section at `src/components/OrdinaryMethodologyContent.astro`.
 - Linked the route from header navigation, footer navigation, sitemap and `public/llms.txt`.
 
+## Transport-Radius Search Option - 2026-07-17
+
+Added a transport-constraint option to the "Where are you going?" step of the prompt builder, shared by `/hotel-finder/` and `/ordinary-hotel-finder/`.
+
+Implemented in `src/components/CountryPromptTool.astro`:
+
+- New "Search nearby towns by transport instead" checkbox under the city field. It needs a city or town to take effect.
+- When ticked, the generated prompt replaces the day-trip city-focus section with a transport constraint: search all towns within 60 minutes by public transport (train preferred) of the named city, treat the city as an anchor point rather than the assumed base, do not favour famous towns or tourist centres, and rank locations by value, review quality, quietness and transport convenience.
+- The location line of the 100-point value score is judged by transport convenience to the anchor, with no points for fame or prestige, so the output format stays consistent.
+- The "Try another destination" reset clears the checkbox; toggling it off restores the original day-trip wording.
+- Rationale: anchoring on a famous destination (e.g. Lauterbrunnen) biases the AI toward the most expensive town; a transport radius encourages it to discover better-value nearby towns instead.
+
 ## SEO Rules To Preserve
 
 - Keep `https://50fivestarhotels.com` as the canonical URL in Astro config and generated tags.
