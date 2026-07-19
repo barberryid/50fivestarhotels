@@ -4,7 +4,7 @@ Two AI-generated hero images for Bar Peepal Resort in Pokhara, Nepal. Match the 
 
 Final destination:
 
-`C:\Users\Gary\code\50fivestarhotels\public\images\hotels\`
+`C:\Users\Gary\OneDrive\All Steviafinca data\Gary\50fivestarhotels\public\images\hotels\`
 
 ## Image 1 - Editorial dusk
 
