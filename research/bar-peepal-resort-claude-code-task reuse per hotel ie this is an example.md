@@ -1,7 +1,7 @@
 # Claude Code Task: Add Bar Peepal Resort — Pokhara, Nepal
 
 **Project:** 50fivestarhotels.com  
-**Repo:** `C:\Users\Gary\code\50fivestarhotels`  
+**Repo:** `C:\Users\Gary\OneDrive\All Steviafinca data\Gary\50fivestarhotels`  
 **Stack:** Astro, Tailwind CSS v4, Cloudflare Pages  
 **Git remote:** https://github.com/barberryid/50fivestarhotels  
 
@@ -45,7 +45,7 @@ When Gary runs `/resume` in a new session, read `RESUME.md` first, then continue
 
 ## Before you start
 
-1. `cd "/c/Users/Gary/code/50fivestarhotels"`
+1. `cd "/c/Users/Gary/OneDrive/All Steviafinca data/Gary/50fivestarhotels"`
 2. Run `git status` — confirm you are on `main` and the working tree is clean.
 3. Read one existing hotel `.astro` file (e.g. `src/pages/hotels/angkor-aurora-siem-reap.astro`) to understand the exact component structure, frontmatter schema, and image conventions used. Follow that pattern precisely for all new files.
 4. Read the project brief at `50fivestarhotels_project_brief.md` for any site-wide conventions you should follow.
@@ -76,7 +76,7 @@ Include:
 
 Write two ChatGPT image generation prompts for the hero images. Match the editorial style of existing hotel images on the site (AI-generated, realistic, architectural, high-quality travel photography style). Both images should be saved by Gary to:
 
-`C:\Users\Gary\code\50fivestarhotels\images generated\`
+`C:\Users\Gary\OneDrive\All Steviafinca data\Gary\50fivestarhotels\images generated\`
 
 Then Gary will move/rename them to the correct paths (see Sub-task 3).
 
@@ -327,7 +327,7 @@ Add Bar Peepal Resort to the hotel list. Note Nepal as a new country/region now 
 
 ## Sub-task 9 — Build and verify
 
-1. Run `npm run build` from `cd "/c/Users/Gary/code/50fivestarhotels"`
+1. Run `npm run build` from `cd "/c/Users/Gary/OneDrive/All Steviafinca data/Gary/50fivestarhotels"`
 2. Fix any build errors before proceeding.
 3. Verify these routes exist in the `dist/` output:
    - `dist/hotels/bar-peepal-resort-pokhara/index.html`
@@ -342,7 +342,7 @@ Add Bar Peepal Resort to the hotel list. Note Nepal as a new country/region now 
 Only run this after Sub-task 9 passes with no errors.
 
 ```bash
-cd "/c/Users/Gary/code/50fivestarhotels"
+cd "/c/Users/Gary/OneDrive/All Steviafinca data/Gary/50fivestarhotels"
 git status
 git add .
 git commit -m "Add Bar Peepal Resort, Pokhara, Nepal — hotel page, destination page, index updates"
